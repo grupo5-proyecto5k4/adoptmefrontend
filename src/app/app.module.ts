@@ -12,6 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { PagInicioComponent } from './pag-inicio/pag-inicio.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PagInicioComponent } from './pag-inicio/pag-inicio.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
