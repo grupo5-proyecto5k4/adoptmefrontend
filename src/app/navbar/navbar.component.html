@@ -1,6 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [ngClass]="{ hidden: !(isHandset$ | async) }"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <!-- mat-toolbar referencia al contenido del boton hamburguesa -->  
@@ -9,7 +10,7 @@
       <a mat-list-item href="#">Adoptar</a>
       <a mat-list-item href="#">Brindar provisorio</a>
       <a mat-list-item href="#">Donar</a>
-      <a mat-list-item href="#">Sobre nosotros</a>
+      <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -24,9 +25,10 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>AdoptMe</span>
-      <a href="#" id="navtitle">Adoptar</a>
-      <a href="#" id="navtitle">Brindar provisorio</a>
+      <a href="#" class="adoptme-title">AdoptMe</a>
+      <a href="#" class="nav-titles">Adoptar</a>
+      <a href="#" class="nav-titles">Brindar provisorio</a>
+      <a href="#" class="nav-titles">Donar</a>
       <span class="spacer"></span>
       <a mat-raised-button color="accent" href="#" id="btncuenta">Crear cuenta</a>
     </mat-toolbar>
