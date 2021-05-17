@@ -1,0 +1,61 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$adoptme-lila-principal: (
+    50: #F6ECF2,
+    100: #E8C0E0,
+    200: #D996CC,
+    300: #CA6B88,
+    400: #BE49AA,
+    500: #B2269D,
+    600: #A52198,
+    700: #931A90,
+    800: #841489,
+    900: #68097C,
+    contrast: (
+        50: #383333,
+        100: #383333,
+        200: #383333,
+        300: #383333,
+        400: #383333,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+    )
+);
+
+$adoptme-lila-acento: (
+    50: #F8E2F1,
+    100: #ECB7DD,
+    200: #E085C6,
+    300: #D14FB0,
+    400: #C50FA1,
+    500: #B80092,
+    600: #AA008E,
+    700: #990089,
+    800: #890083,
+    900: #6B0079,
+    contrast: (
+        50: #383333,
+        100: #383333,
+        200: #383333,
+        300: #383333,
+        400: #383333,
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+    )
+);
+
+$my-theme-primary: mat-palette($adoptme-lila-principal, 200);
+$my-theme-accent: mat-palette($adoptme-lila-acento, 400);
+$my-theme-warn: mat-palette($mat-red);
+
+$my-theme: mat-light-theme($my-theme-primary, $my-theme-accent, $my-theme-warn);
+
+@include angular-material-theme($my-theme);
+
