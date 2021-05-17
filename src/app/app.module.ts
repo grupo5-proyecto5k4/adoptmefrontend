@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +11,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { PagInicioComponent } from './pag-inicio/pag-inicio.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,11 @@ import { PagInicioComponent } from './pag-inicio/pag-inicio.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule
+    MatDialogModule,
+    BrowserAnimationsModule,
+    ComponentsModule,
+    ReactiveFormsModule, 
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
