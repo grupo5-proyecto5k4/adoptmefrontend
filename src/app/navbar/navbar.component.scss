@@ -25,13 +25,17 @@
 }
 
 #btncuenta{
-  color: white;
+  color: #EBEEF1;
 }
 
 .nav-titles{
   display: inline-block;
-  margin: 0 10px;
+  margin: 0 0.8rem;
   color: #383333;
+}
+
+.nav-titles:hover{
+  color: white;
 }
 
 @media (max-width: 600px){
@@ -45,6 +49,8 @@
   font-weight: 600;
   color: black;
   font-size: 150%;
+  margin-left: 1rem;
+  margin-right: 2rem;
 }
 
 /* Side NavBar*/
@@ -55,12 +61,12 @@
 
 .paw-icon{
   color: "accent";
-  margin-left: 90px;
-  size: 5px;
+  margin-left: 5.5rem;
+  size: 1rem;
 
 }
 
-/* efecto de subrayado en items*/
+/*efecto de subrayado en items del Side NavBar*/
 
 mat-list-item { 
   display: table-cell; 
