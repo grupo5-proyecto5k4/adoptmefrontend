@@ -31,17 +31,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-<<<<<<< HEAD
+    FontAwesomeModule,
     MatListModule,
-    FontAwesomeModule
-=======
-    MatListModule
     MatDialogModule,
     BrowserAnimationsModule,
     ComponentsModule,
     ReactiveFormsModule, 
-    FormsModule,
->>>>>>> develop
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
