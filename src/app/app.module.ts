@@ -10,9 +10,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { PagInicioComponent } from './pag-inicio/pag-inicio.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
 import { MatDialogModule } from '@angular/material/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
@@ -20,7 +19,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   declarations: [
     AppComponent,
     NavbarComponent,
-    PagInicioComponent
   ],
   imports: [
     BrowserModule,
@@ -31,12 +29,13 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    FontAwesomeModule,
+    MatListModule,
     MatDialogModule,
     BrowserAnimationsModule,
     ComponentsModule,
     ReactiveFormsModule, 
-    FormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
