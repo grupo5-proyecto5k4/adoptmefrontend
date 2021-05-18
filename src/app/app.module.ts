@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { PagInicioComponent } from './pag-inicio/pag-inicio.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
+import { MatDialogModule } from '@angular/material/dialog';
+import { ComponentsModule } from 'src/app/components/components.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,17 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
+<<<<<<< HEAD
     MatListModule,
     FontAwesomeModule
+=======
+    MatListModule
+    MatDialogModule,
+    BrowserAnimationsModule,
+    ComponentsModule,
+    ReactiveFormsModule, 
+    FormsModule,
+>>>>>>> develop
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+//import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'adoptmefrontend';
+constructor(private router: Router) { }
+
+  ngOnInit() {
+
+  }
+
+  goToSignUpOptions(){
+    this.router.navigate(['/signup-options']);
+    window.scrollTo(0, 0);
+  }
+
 }
