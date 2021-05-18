@@ -3,6 +3,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { faPaw } from '@fortawesome/free-solid-svg-icons'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -19,6 +20,11 @@ export class NavbarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
+  
+  goToSignUpOptions(){
+    this.router.navigate(['/signup-options']);
+    window.scrollTo(0, 0);
+  }
 
 }

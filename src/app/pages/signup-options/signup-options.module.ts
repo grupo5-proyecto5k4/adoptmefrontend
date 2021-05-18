@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SignupOptionsComponent } from './signup-options.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { VisualizacionSolicitudRoutingModule } from './signup-options-routing.module';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatRadioModule} from '@angular/material/radio';
@@ -9,7 +8,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import { ComponentsModule } from 'src/app/components/components.module';
-
+import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
 
 
 
@@ -19,7 +18,7 @@ import { ComponentsModule } from 'src/app/components/components.module';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    VisualizacionSolicitudRoutingModule,
+    SignUpOptionsRoutingModule,
     MatDialogModule,
     MatRadioModule,
     MatTableModule,
