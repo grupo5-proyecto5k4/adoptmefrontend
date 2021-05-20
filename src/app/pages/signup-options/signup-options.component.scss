@@ -9,28 +9,28 @@
     text-align: center;
   }
 
+ 
   .regParticualr{
     max-width: 600px;
     max-height:600px ;
     margin-top: 2rem;
     margin-right: 2rem;
+    margin-left: 3rem;
     background-color:#F8E2F1;
-    //top: 50%;
-    //width: 50%;
-     float:left;
+    
   }
 
   .regCentroRescatista{
     max-width: 600px;
     max-height:600px ;
     margin-top: 2rem;
-    margin-right: 2rem;
+    margin-right:2rem;
+    margin-left: 3rem;
     background-color:#F8E2F1;
-    //position:unset;
-    //top: 50%;
-   //width: 100%;
-  // right: 0px;
-   float: right;
+    
+     position: sticky;
+     top: 0;
+     z-index: 1;
   }
 
 #titCentro{
