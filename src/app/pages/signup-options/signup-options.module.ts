@@ -9,7 +9,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
-
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
     MatTableModule,
     MatTooltipModule,
     MatIconModule,
-    ComponentsModule
+    ComponentsModule, 
+    MatCardModule
   ],
   entryComponents: [
   ],
@@ -34,7 +35,8 @@ import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
     MatRadioModule,
     MatTableModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ]
 })
 export class SignupOptionsModule {}

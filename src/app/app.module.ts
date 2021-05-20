@@ -14,11 +14,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import{SignupOptionsModule} from './pages/signup-options/signup-options.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +36,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     ComponentsModule,
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
+    SignupOptionsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
