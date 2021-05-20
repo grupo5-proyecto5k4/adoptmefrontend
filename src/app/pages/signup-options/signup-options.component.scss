@@ -15,7 +15,9 @@
     margin-top: 2rem;
     margin-right: 2rem;
     background-color:#F8E2F1;
-    
+    //top: 50%;
+    //width: 50%;
+     float:left;
   }
 
   .regCentroRescatista{
@@ -24,7 +26,13 @@
     margin-top: 2rem;
     margin-right: 2rem;
     background-color:#F8E2F1;
+    //position:unset;
+    //top: 50%;
+   //width: 100%;
+  // right: 0px;
+   float: right;
   }
+
 #titCentro{
     font-weight:bold;
     
