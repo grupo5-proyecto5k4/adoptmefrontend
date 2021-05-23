@@ -26,5 +26,8 @@ export class NavbarComponent {
     this.router.navigate(['/signup-options']);
     window.scrollTo(0, 0);
   }
+  isSignupOptions(){
+    return (this.router.url != '/signup-options');
+  }
 
 }
