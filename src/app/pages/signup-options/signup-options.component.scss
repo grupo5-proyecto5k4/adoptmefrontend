@@ -12,25 +12,64 @@
 
  
   .regParticualr{
-    max-width: 600px;
-    max-height:600px ;
+    max-width: 43%;
+    max-height:40%;
     margin-top: 2rem;
     margin-left: 2rem;
-    margin-right: 2rem;
+    //margin-right: 2rem;
     background-color:#F8E2F1;
-    //float: left;
+    float: left;
+    padding-bottom:1.5rem;
     
   }
 
   .regCentroRescatista{
-    max-width: 600px;
-    max-height:600px ;
+    max-width: 43%;
+    max-height:50%;
     margin-top: 2rem;
-    margin-left: 2rem;
+    //margin-left: 2rem;
     margin-right: 2rem;
+    padding-bottom:1.5rem;
     background-color:#F8E2F1;
-    //float: right;
+    float: right;
   }
+
+  
+@media(max-width: 600px){
+  .regCentroRescatista{
+     max-width: 80%;
+     float: none; 
+     margin-right: auto;
+     margin-left: auto;
+
+  }
+  .regParticualr{
+    max-width: 80%;
+    float: none;  
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1084px)
+{
+
+  .regCentroRescatista{
+    max-width: 80%;
+    float: none; 
+    margin-right: auto;
+    margin-left: auto;
+
+ }
+ .regParticualr{
+   max-width: 80%;
+   float: none;  
+   margin-right: auto;
+   margin-left: auto;
+ }
+
+}
+
 
 #titCentro{
     font-weight:bold;
