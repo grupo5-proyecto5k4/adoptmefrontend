@@ -13,7 +13,7 @@ import { SignupParticularComponent } from 'src/app/components/signup-particular/
 
 
 export class SignupOptionsComponent {
-    Titulo = "Opciones de registro";
+    Titulo = "¿Cómo querés registrarte?";
     
     constructor(private dialog: MatDialog) { }
 
