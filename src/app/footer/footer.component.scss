@@ -1,0 +1,11 @@
+#piePag{
+    width: 2000px;
+    text-align: center;
+}
+
+
+@media (max-width: 600px){
+    .nav-titles{
+      display: none;
+    }
+  }
