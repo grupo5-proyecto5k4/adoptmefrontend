@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  activeProffessionalRol: boolean = false;
+  activeProffessionalRol: boolean = true;
   isAdminRol: boolean = false;
 
   constructor(public router: Router,public dialog: MatDialog) { }
