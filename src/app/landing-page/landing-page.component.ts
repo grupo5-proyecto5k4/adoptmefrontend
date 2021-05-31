@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faBullhorn, faFileContract, faDesktop} from '@fortawesome/free-solid-svg-icons';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'landing',
@@ -13,9 +13,14 @@ export class LandingPageComponent implements OnInit {
   faFileContract = faFileContract;
   faDesktop = faDesktop;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goToSignUpOptions(){
+    this.router.navigate(['/signup-options']);
+    window.scrollTo(0, 0);
   }
 
 }
