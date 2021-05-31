@@ -31,7 +31,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
     MatDialogModule,
     BrowserAnimationsModule,
     ComponentsModule,
