@@ -1,4 +1,12 @@
-<app-pag-inicio>
-  
-</app-pag-inicio>
+<app-navbar>
+<body>
+        <!-- NAVBAR -->
+        <landing *ngIf="isLandingPage()"></landing>
 
+        <!-- ROUTER OUTLET -->
+        <router-outlet></router-outlet>
+        
+        <!-- FOOTER -->
+        <!-- <app-footer></app-footer> -->
+</body>
+</app-navbar>
