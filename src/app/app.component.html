@@ -1,7 +1,7 @@
 <app-navbar>
 <body>
         <!-- NAVBAR -->
-        <landing></landing>
+        <landing *ngIf="isLandingPage()"></landing>
 
         <!-- ROUTER OUTLET -->
         <router-outlet></router-outlet>
