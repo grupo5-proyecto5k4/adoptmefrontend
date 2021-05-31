@@ -1,9 +1,9 @@
 /* Generados por el componente */
 
-/*.sidenav-container {
+.sidenav-container {
   height: 100%;
 }
-*/
+
 .sidenav {
   width: 200px;
 }
@@ -26,19 +26,21 @@
 
 #btncuenta{
   color: #EBEEF1;
+  font-size: 16px;
 }
 
 .nav-titles{
   display: inline-block;
   margin: 0 0.8rem;
   color: #383333;
+  font-size: 18px;
 }
 
 .nav-titles:hover{
   color: white;
 }
 
-@media (max-width: 600px){
+@media (max-width: 960px){
   .nav-titles{
     display: none;
   }
@@ -50,7 +52,7 @@
   color: black;
   font-size: 150%;
   margin-left: 1rem;
-  margin-right: 2rem;
+  margin-right: 1rem;
 }
 
 /* Side NavBar*/
