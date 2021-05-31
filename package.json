@@ -2,11 +2,9 @@
   "name": "adoptmefrontend",
   "version": "0.0.0",
   "scripts": {
-    "preinstall": "npm link @angular/cli ",
-    "heroku-postbuild": "ng build --prod",
-    "postinstall": "",
+    "postinstall": "ng build --aot -prod",
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
