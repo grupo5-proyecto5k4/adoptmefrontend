@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -31,8 +30,3 @@ const forceSSL = function() {
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/adoptmefrontend/index.html'));
   });
-=======
-app.listen(process.env.PORT || 3000, function(){
-  console.log("Node app is running at localhost:" + app.get('port'));
-});
->>>>>>> develop
