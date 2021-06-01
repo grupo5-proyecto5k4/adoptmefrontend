@@ -31,6 +31,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
+    FontAwesomeModule,
     MatListModule,
     MatDialogModule,
     ComponentsModule,
