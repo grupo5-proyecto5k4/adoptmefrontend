@@ -353,6 +353,11 @@
     font-size: 18px;
     width: 400px;
     text-align: center;
+    line-height: 120%;
+}
+
+.section5-email{
+    font-weight: 500;
 }
 
 @media (max-width:900px){
@@ -368,11 +373,9 @@
         display: block;
         font-size: 18px;
         width: 80vw;
-        text-align: center;
         background-color: #F0DDF1;
         padding: 30px 10px 30px 0px;
         font-size: calc(0.7em + 1vw);
-        line-height: 120%;
         margin-top: 20px;
         border-radius: 8px;
     }   
