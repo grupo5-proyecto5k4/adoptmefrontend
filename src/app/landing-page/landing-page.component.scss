@@ -95,7 +95,8 @@
 .section3-container{
     display: flex;
     flex-flow: row wrap;
-    height: calc(4em + 80vh);
+    height: calc(4em + 80vw);
+    max-height: 600px;
     background-color: #f3d5ed;
     align-content:center;
     justify-content: space-evenly;
@@ -150,21 +151,23 @@
 
 @media (max-width: 600px){
 .section3-container{
-    height: calc(4em + 160vh);
+    height: calc(4em + 280vw);
+    max-height: 1000px;
     flex-direction: column wrap;
     justify-content: space-evenly;
     align-content: flex-start;
 }}
 
-@media (min-width: 600px) and (max-width:901px){
+@media (min-width: 600px) and (max-width:899px){
     .section3-container{
-        height: calc(4em + 110vh); 
+        height: calc(4em + 110vw); 
+        max-height: 750px;
         flex-direction: column wrap;
         justify-content: space-evenly;
         align-content: flex-start;
     }}
 
-@media (min-width: 903px){
+@media (min-width: 900px){
     .section3-title{
         font-size: 20px;
         margin-bottom: 30px;
@@ -182,7 +185,8 @@
 .section4-container{
     display: flex;
     flex-flow: row nowrap;
-    height: calc(4em + 80vh);
+    height: calc(4em + 80vw);
+    max-height: 600px;
     background-color: #FFE7E7;
     align-items:center;
     padding-left: 20px;
@@ -269,7 +273,7 @@
 @media (min-width:478px) and (max-width:689px){
     .section4-container{
         flex-flow: row wrap;
-        height: calc(9em + 80vh);
+        height: calc(9em + 120vw);
         justify-content: center;
     }
 
@@ -282,10 +286,11 @@
     .section4-container{
         display: inline-block;
         flex-flow: column wrap;
-        height: calc(9em + 110vh);
+        height: calc(9em + 220vw);
         justify-content: center;
         padding: auto;
         padding-right: 20px;
+        max-height: 800px;
     }
 
     .section4-item1{
@@ -326,6 +331,7 @@
     }
 }
 
+/* SECTION 5 */
 
 .section5-container{
     display: flex;
@@ -354,7 +360,7 @@
         background-image: unset;
         align-items: flex-start;
         align-content: flex-start;
-        height: calc(4em + 30vh);
+        height: calc(4em + 60vw);
 
     }
 
