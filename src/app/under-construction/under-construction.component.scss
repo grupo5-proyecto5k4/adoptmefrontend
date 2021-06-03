@@ -1,0 +1,36 @@
+.container-construction{
+    background-color: #FCF6FD;
+}
+
+.txt-construction{
+    background-color: #E085C6;
+    text-align: center;
+    width: 100%;
+    padding: 40px 2px 40px 2px;
+    margin-top: 40px;
+    font-size: calc(0.7em + 1vw);
+    line-height: 120%;
+}
+
+.title-bold{
+    font-weight: 500;
+    font-size: calc(0.7em + 1vw);
+    padding-bottom: 2%;
+}
+
+
+.img-construction{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+@media (max-width:600px){
+    .img-construction{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+    }
+}
