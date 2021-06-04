@@ -1,0 +1,99 @@
+
+
+.titulo{
+    font-weight: 800;
+    color: black;
+    font-size: 200%;
+    font-style: italic;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    text-align: center;
+  }
+
+ 
+  .regParticualr{
+    max-width: 43%;
+    max-height:40%;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    //margin-right: 2rem;
+    background-color:#F8E2F1;
+    float: left;
+    padding-bottom:1.5rem;
+    
+  }
+
+  .regCentroRescatista{
+    max-width: 43%;
+    max-height:50%;
+    margin-top: 2rem;
+    //margin-left: 2rem;
+    margin-right: 2rem;
+    padding-bottom:1.5rem;
+    background-color:#F8E2F1;
+    float: right;
+  }
+
+  
+@media(max-width: 600px){
+  .regCentroRescatista{
+     max-width: 80%;
+     float: none; 
+     margin-right: auto;
+     margin-left: auto;
+
+  }
+  .regParticualr{
+    max-width: 80%;
+    float: none;  
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1084px)
+{
+
+  .regCentroRescatista{
+    max-width: 80%;
+    float: none; 
+    margin-right: auto;
+    margin-left: auto;
+
+ }
+ .regParticualr{
+   max-width: 80%;
+   float: none;  
+   margin-right: auto;
+   margin-left: auto;
+ }
+
+}
+
+
+#titCentro{
+    font-weight:bold;
+    
+}
+#parraf{
+    font-style: italic;
+}
+.btnCentro{
+    color:#B80092;
+    font-weight:bold;
+    border:#F8E2F1;
+    background-color:#F8E2F1;
+}
+
+.btnParticular{
+    font-weight:bold;
+    color:#B80092;
+    font-weight:bold;
+    border:#F8E2F1;
+    background-color:#F8E2F1;
+
+}
+
+.perfiles{
+  display:inline-block;
+  }

@@ -8,18 +8,16 @@ import { SignupParticularComponent } from 'src/app/components/signup-particular/
 @Component({
     selector: 'app-signup-options',
     templateUrl: './signup-options.component.html',
-    styleUrls: ['./signup-options.component.scss'],
+    styleUrls: ['./signup-options.component.scss']
 })
 
 
-export class SignupOptionsComponent implements OnInit {
-    Titulo = "Opciones de registro";
+export class SignupOptionsComponent {
+    Titulo = "¿Cómo querés registrarte?"; 
     
     constructor(private dialog: MatDialog) { }
 
-    ngOnInit() {
-        
-    }
+    ngOnInit() { }
 
     signupParticular(){
         this.dialog.open(SignupParticularComponent)
