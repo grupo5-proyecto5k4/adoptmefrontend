@@ -7,9 +7,8 @@
     <!-- mat-toolbar referencia al contenido del boton hamburguesa -->  
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Adoptar</a>
-      <a mat-list-item href="#">Brindar provisorio</a>
-      <a mat-list-item href="#">Donar</a>
+      <a mat-list-item routerLink="/adoptar" (click)="drawer.toggle()">Adoptar</a>
+      <a mat-list-item routerLink="/provisorio" (click)="drawer.toggle()">Brindar provisorio</a>
       <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
     </mat-nav-list>
   </mat-sidenav>
@@ -26,9 +25,8 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <a href="#" class="adoptme-title">AdoptMe</a>
-      <a href="#" class="nav-titles">Adoptar</a>
-      <a href="#" class="nav-titles">Brindar provisorio</a>
-      <a href="#" class="nav-titles">Donar</a>
+      <a routerLink="/adoptar" class="nav-titles">Adoptar</a>
+      <a routerLink="/provisorio" class="nav-titles">Brindar provisorio</a>
       <span class="spacer"></span>
       <a mat-raised-button color="accent" id="btncuenta" *ngIf="isSignupOptions()" (click)="goToSignUpOptions()">Crear cuenta</a>
     </mat-toolbar>
