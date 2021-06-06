@@ -14,6 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,10 +33,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     FontAwesomeModule,
     MatListModule,
     MatDialogModule,
-    BrowserAnimationsModule,
     ComponentsModule,
     ReactiveFormsModule, 
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

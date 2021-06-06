@@ -315,17 +315,6 @@ display: inline-block;
 background: rgba(255, 245, 237, 0.85);
 }
 
-.upper-container{
-height: 150px;
-background: #000746be;
-}
-
-.titulo-container{
-  float: none;;
-  margin-left: 42%;
-  position: fixed;
-}
-
 
 .lower-container{
 height: 100%;
@@ -370,10 +359,6 @@ select {
 }
 
 
-.disabledAddressLink:hover{
-   cursor: not-allowed;
-   color: chocolate;
-}
 
 #btncuenta{
   color: #EBEEF1;
@@ -402,4 +387,3 @@ select {
   margin-top: -10%;
   margin-bottom: -7%;
 }
-

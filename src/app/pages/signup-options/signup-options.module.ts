@@ -9,6 +9,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -24,7 +26,7 @@ import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
     MatTableModule,
     MatTooltipModule,
     MatIconModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   entryComponents: [
   ],
