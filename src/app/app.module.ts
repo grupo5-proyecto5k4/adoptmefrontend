@@ -16,12 +16,15 @@ import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import{SignupOptionsModule} from './pages/signup-options/signup-options.module';
 import {FooterComponent} from 'src/app/footer/footer.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
