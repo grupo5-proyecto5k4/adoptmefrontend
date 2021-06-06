@@ -14,14 +14,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
 import{SignupOptionsModule} from './pages/signup-options/signup-options.module';
 import {FooterComponent} from 'src/app/footer/footer.component';
-
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { HttpClientModule } from '@angular/common/http';
+import{SignupOptionsModule} from './pages/signup-options/signup-options.module';
+import {FooterComponent} from 'src/app/footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
-
 
 
 @NgModule({
@@ -47,11 +47,8 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     ComponentsModule,
     ReactiveFormsModule, 
     FormsModule,
-<<<<<<< HEAD
-    HttpClientModule
-=======
+    HttpClientModule,
     SignupOptionsModule
->>>>>>> af56e04228b3df7eaf79f26035d6305cc51e3ea9
   ],
   providers: [],
   bootstrap: [AppComponent]
