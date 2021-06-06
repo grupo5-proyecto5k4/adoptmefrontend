@@ -24,7 +24,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a href="#" class="adoptme-title">AdoptMe</a>
+      <a href="#" class="adoptme-title"(click)="isSignupOptions()">AdoptMe</a>
       <a routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adoptar</a>
       <a routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Brindar provisorio</a>
       <span class="spacer"></span>
