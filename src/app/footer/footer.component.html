@@ -1,0 +1,25 @@
+<footer id="gtco-footer" role="contentinfo">
+    <div class="container" style="padding-bottom: 0px">
+        <div class="row copyright" id="piePag">
+            <div class="col-md-12">
+                <p class="pull-left">
+                    <small class="block" id="letras">grupo5.proyecto5k4@gmail.com </small>
+                    <small class="block"id="letras" >   </small>
+                    <small class="block"id="letras" >Córdoba, Argentina</small>
+                    <small class="block"id="letras">&copy; UTN FRC - ServWeb 2021</small>
+                </p>
+                <br />
+                <p class="pull-right">
+                <ul class="gtco-social-icons pull-right">
+                    <li><a  *ngIf="!isAdminRol" name="gtco-practice-areas1" (click)="goToHome($event)" class="footerPointer">¿Quiénes somos?</a></li>
+                    <li><a  *ngIf="!isAdminRol"name="gtco-about" (click)="goToHome($event)" class="footerPointer">¿Cómo funciona?</a></li>
+                    <li><a  *ngIf="!activeProffessionalRol && !isAdminRol" name="gtco-our-team" (click)="goToHome($event)" class="footerPointer">Servicios ofrecidos</a></li>
+                    <li><a *ngIf="!isAdminRol" (click)="openFaqs()" style="cursor: pointer;">Preguntas frecuentes</a></li>
+                    <li><a *ngIf="!isAdminRol" name="gtco-contact" (click)="goToHome($event)" class="footerPointer">Contáctanos</a></li>
+                    <li><a *ngIf="!isAdminRol" (click)="openTermsAndConditions()" class="footerPointer">Términos y condiciones</a></li>
+                </ul>
+            </div>
+        </div>
+        <br />
+    </div>
+</footer>

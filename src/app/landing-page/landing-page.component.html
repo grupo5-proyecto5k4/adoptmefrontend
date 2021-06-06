@@ -1,0 +1,79 @@
+<div class=section1-container>
+    <div class=section1-item1>
+        <img class=logo src="./assets/landing-images/section1-logo.png">
+    </div>  
+    <div class=section1-item2>
+        <h1 class=section1-title>AdoptMe</h1>
+        <h2 class=section1-quote>El puente entre vos y la mascota que buscás</h2>
+        <a mat-raised-button class=btn color="accent" routerLink="/adoptar" (click)="scrollTop()">Adoptar</a>
+    </div>
+</div>
+
+<div class=section2-container>
+    <div class=section2-item1>
+        <h1 class=section2-title>Quiénes somos</h1>
+        <p class=section2-quote>Buscamos acercarte a aquél animalito que te espera para que le des un nuevo hogar.</p>
+        <p class=section2-quote>A la vez colaboramos con los Centros de Rescate de Córdoba para ayudarlos en su gran misión.</p>
+    </div>
+    <div class=section2-item2>
+        <img src="./assets/landing-images/section2-background.png" alt="" class=img-paws>
+    </div>
+</div>
+
+<div class=section3-container>
+    <h1 class=section3-title>En AdoptMe vas a poder...</h1>
+    <div class="section3-item1">
+        <img class=section3-images src="./assets/landing-images/section3-girl-dog.png">
+        <h3 class="section3-titles">Adoptar</h3>
+        <p class="section3-p">Encontrá a tu nueva mascota y adoptalo para que sea parte de tu familia.</p>
+    </div>
+    <div class="section3-item2">
+        <img class=section3-images src="./assets/landing-images/section3-boy-cat.png">
+        <h3 class="section3-titles">Ser provisorio</h3>
+        <p class="section3-p">Brinda un hogar transitorio a un animalito hasta que encuentre su casa definitiva.</p>
+    </div>
+    <div class="section3-item3">
+        <img class=section3-images src="./assets/landing-images/section3-dog-vet.png">
+        <h3 class="section3-titles">Colaborar</h3>
+        <p class="section3-p">Conoce los Centros de Rescate y doná para que puedan seguir ayudando a más animales a estar sanos y alimentados.</p>
+    </div>
+</div>
+
+<div class=section4-container>
+    <div class=section4-item1>
+        <h1 class=section4-title>¿Sos parte de un Centro de Rescate?</h1>
+        <a mat-raised-button class=btn color="accent" (click)="goToSignUpOptions(); scrollTop()">Registrarme</a>
+    </div>
+    <div class=section4-item2>
+        <div class=item2-visibilidad>
+            <fa-icon [icon]="faBullhorn" class="section4-icon"></fa-icon>
+            <div class=centro-txt>
+                <h3 class=section4-titles>AUMENTA LA VISIBILIDAD DE LOS ANIMALES</h3>
+                <p>Registrá tus animales para que puedan ser visualizados en nuestro sitio. Podes incorporar toda la información que creas necesaria</p>
+            </div>
+        </div>
+        <div class=item2-adopcion>
+            <fa-icon [icon]="faDesktop" class="section4-icon"></fa-icon>
+            <div class=centro-txt>
+                <h1 class=section4-titles>GESTIONA ADOPCIONES Y PROVISORIOS</h1>
+                <p>Seleccioná los animales que están buscando adopción y/o provisorio. Cuando haya interesados en ellos, recibirás automáticamente la información que necesite para decidir sobre el dueño perfecto.</p>
+            </div>   
+        </div>
+        <div class=item2-seguimiento>
+            <fa-icon [icon]="faFileContract" class="section4-icondoc"></fa-icon>
+            <div class=centro-txt>
+                <h1 class=section4-titles>REALIZA SEGUIMIENTOS</h1>
+                <p>Tenés la opción de realizarle seguimiento a tus mascotas. Decidí la frecuencia, solicitá imgenes, comprobantes de vacunación, castración y más.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class=section5-container>
+    <div class=section5-txt>
+        <h1>Contactanos</h1>
+        <p>¿Tenés consultas o sugerencias?</p>
+        <p> ¡Nos encantaría escucharlas!</p>
+        <p class=section5-email>Escribinos a adoptmecordoba@gmail.com</p>
+    </div>
+</div>

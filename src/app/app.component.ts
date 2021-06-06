@@ -16,6 +16,10 @@ constructor(private router: Router) { }
 
   }
 
+  isLandingPage(){
+    return (this.router.url == '/');
+  }
+
   goToSignUpOptions(){
     this.router.navigate(['/signup-options']);
     window.scrollTo(0, 0);

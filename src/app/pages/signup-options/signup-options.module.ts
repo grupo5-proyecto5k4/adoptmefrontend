@@ -9,9 +9,13 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
+<<<<<<< HEAD
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
+=======
+import {MatCardModule} from '@angular/material/card';
+>>>>>>> af56e04228b3df7eaf79f26035d6305cc51e3ea9
 
 
 @NgModule({
@@ -26,7 +30,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatTableModule,
     MatTooltipModule,
     MatIconModule,
+<<<<<<< HEAD
     ComponentsModule,
+=======
+    ComponentsModule, 
+    MatCardModule
+>>>>>>> af56e04228b3df7eaf79f26035d6305cc51e3ea9
   ],
   entryComponents: [
   ],
@@ -36,7 +45,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatRadioModule,
     MatTableModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ]
 })
 export class SignupOptionsModule {}
