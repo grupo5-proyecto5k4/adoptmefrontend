@@ -5,7 +5,7 @@
     <div class=section1-item2>
         <h1 class=section1-title>AdoptMe</h1>
         <h2 class=section1-quote>El puente entre vos y la mascota que buscás</h2>
-        <a mat-raised-button class=btn color="accent">Adoptar</a>
+        <a mat-raised-button class=btn color="accent" routerLink="/adoptar" (click)="scrollTop()">Adoptar</a>
     </div>
 </div>
 
@@ -42,7 +42,7 @@
 <div class=section4-container>
     <div class=section4-item1>
         <h1 class=section4-title>¿Sos parte de un Centro de Rescate?</h1>
-        <a mat-raised-button class=btn color="accent" (click)="goToSignUpOptions()">Registrarme</a>
+        <a mat-raised-button class=btn color="accent" (click)="goToSignUpOptions(); scrollTop()">Registrarme</a>
     </div>
     <div class=section4-item2>
         <div class=item2-visibilidad>
