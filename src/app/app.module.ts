@@ -14,9 +14,19 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+<<<<<<< HEAD
 import{SignupOptionsModule} from './pages/signup-options/signup-options.module';
 import {FooterComponent} from 'src/app/footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+=======
+
+import{SignupOptionsModule} from './pages/signup-options/signup-options.module';
+import {FooterComponent} from 'src/app/footer/footer.component';
+
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { UnderConstructionComponent } from './under-construction/under-construction.component';
+
+>>>>>>> 94364b9db2491f4d3c183fa45ee205b120def06c
 
 
 @NgModule({
@@ -25,6 +35,10 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     NavbarComponent,
     FooterComponent,
     LandingPageComponent,
+<<<<<<< HEAD
+=======
+    UnderConstructionComponent,
+>>>>>>> 94364b9db2491f4d3c183fa45ee205b120def06c
   ],
   imports: [
     BrowserModule,
@@ -38,7 +52,6 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     FontAwesomeModule,
     MatListModule,
     MatDialogModule,
-    BrowserAnimationsModule,
     ComponentsModule,
     ReactiveFormsModule, 
     FormsModule,
