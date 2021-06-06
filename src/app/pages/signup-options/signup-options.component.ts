@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SignupParticularComponent } from 'src/app/components/signup-particular/signup-particular.component';
+import { SignupRescatistComponent } from 'src/app/components/signup-rescatist/signup-rescatist.component';
 
 
 
@@ -23,7 +24,7 @@ export class SignupOptionsComponent {
         this.dialog.open(SignupParticularComponent)
       }
       signupRescatist(){
-    
+        this.dialog.open(SignupRescatistComponent)
       }
 
       
