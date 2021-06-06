@@ -9,7 +9,7 @@ import { SignupRescatistComponent } from 'src/app/components/signup-rescatist/si
 @Component({
     selector: 'app-signup-options',
     templateUrl: './signup-options.component.html',
-    styleUrls: ['./signup-options.component.scss']
+    styleUrls: ['./signup-options.component.scss'],
 })
 
 

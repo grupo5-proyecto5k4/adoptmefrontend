@@ -24,11 +24,11 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a href="#" class="adoptme-title"(click)="isSignupOptions()">AdoptMe</a>
+      <a href="#" class="adoptme-title">AdoptMe</a>
       <a routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adoptar</a>
       <a routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Brindar provisorio</a>
       <span class="spacer"></span>
-      <a mat-raised-button color="accent" id="btncuenta" *ngIf="isSignupOptions()" (click)="goToSignUpOptions()">Crear cuenta</a>
+      <a mat-raised-button routerLink="/signup-options" color="accent" id="btncuenta" *ngIf="isSignupOptions()">Crear cuenta</a>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>
