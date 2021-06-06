@@ -1,15 +1,15 @@
-<div class=section1-container>
+<div class=section1-container >
     <div class=section1-item1>
         <img class=logo src="./assets/landing-images/section1-logo.png">
     </div>  
     <div class=section1-item2>
         <h1 class=section1-title>AdoptMe</h1>
         <h2 class=section1-quote>El puente entre vos y la mascota que buscás</h2>
-        <a mat-raised-button class=btn color="accent">Adoptar</a>
+        <a mat-raised-button class=btn color="accent" routerLink="/adoptar" (click)="scrollTop()">Adoptar</a>
     </div>
 </div>
 
-<div class=section2-container>
+<div class=section2-container  >
     <div class=section2-item1>
         <h1 class=section2-title>Quiénes somos</h1>
         <p class=section2-quote>Buscamos acercarte a aquél animalito que te espera para que le des un nuevo hogar.</p>
@@ -42,7 +42,7 @@
 <div class=section4-container>
     <div class=section4-item1>
         <h1 class=section4-title>¿Sos parte de un Centro de Rescate?</h1>
-        <a mat-raised-button class=btn color="accent" (click)="goToSignUpOptions()">Registrarme</a>
+        <a mat-raised-button class=btn color="accent" (click)="goToSignUpOptions(); scrollTop()">Registrarme</a>
     </div>
     <div class=section4-item2>
         <div class=item2-visibilidad>

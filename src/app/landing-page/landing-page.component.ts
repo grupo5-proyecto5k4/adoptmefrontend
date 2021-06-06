@@ -23,4 +23,12 @@ export class LandingPageComponent implements OnInit {
     window.scrollTo(0, 0);
   }
 
+  scrollTop(){
+    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
+  }
+
+  isSignupOptions(){
+    return (this.router.url != '/signup-options');
+  }
+
 }
