@@ -17,6 +17,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import{SignupOptionsModule} from './pages/signup-options/signup-options.module';
 import {FooterComponent} from 'src/app/footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { HttpClientModule } from '@angular/common/http';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 
 
@@ -43,6 +44,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     ComponentsModule,
     ReactiveFormsModule, 
     FormsModule,
+    HttpClientModule,
     SignupOptionsModule
   ],
   providers: [],
