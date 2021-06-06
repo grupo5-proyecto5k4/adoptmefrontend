@@ -22,10 +22,6 @@ export class NavbarComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
   
-  goToSignUpOptions(){
-    this.router.navigate(['/signup-options']);
-    window.scrollTo(0, 0);
-  }
   isSignupOptions(){
     return (this.router.url != '/signup-options');
   }
