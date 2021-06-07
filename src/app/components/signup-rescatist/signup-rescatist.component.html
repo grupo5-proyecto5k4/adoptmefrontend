@@ -12,13 +12,12 @@
                     <h2 class="subtitulo">{{Titulo}}</h2>
                   </div>
                   <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm">
-
                     <table class="example-full-width" cellspacing="0">
                       <tr>
                         <td>
                           <mat-form-field class="example-full-width" id="BoxNombre">
-                            <mat-label>*Nombre</mat-label>
-                            <input matInput type="text" formControlName="name" maxlength="35">
+                            <mat-label>*Nombre del centro rescatista</mat-label>
+                            <input matInput type="text" formControlName="name" maxlength="65">
                           </mat-form-field>
                           <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
                       SignupForm.get('name').dirty) &&
@@ -31,39 +30,6 @@
                             </span>
                             <span *ngIf="SignupForm.get('name').errors.pattern">
                               <h6 class="helpError">Formato del nombre no válido</h6>
-                            </span>
-                          </span>
-                          <span class="help-block" *ngIf="(validateLastname() && !validateName())">
-                            <span>
-                              <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                                -
-                              </h6>
-                            </span>
-                          </span>
-                        </td>
-                        <td>
-                          <mat-form-field class="example-full-width" id="BoxApellido">
-                            <mat-label>*Apellido</mat-label>
-                            <input matInput type="text" formControlName="lastname" maxlength="35" />
-                          </mat-form-field>
-                          <span class="help-block" *ngIf="((SignupForm.get('lastname').touched ||
-                      SignupForm.get('lastname').dirty) &&
-                      SignupForm.get('lastname').errors)">
-                            <span *ngIf="SignupForm.get('lastname').errors.required">
-                              <h6 class="helpError">Campo requerido</h6>
-                            </span>
-                            <span *ngIf="SignupForm.get('lastname').errors.maxlength">
-                              <h6 class="helpError">Ingrese como máximo 30 caracteres</h6>
-                            </span>
-                            <span *ngIf="SignupForm.get('lastname').errors.pattern">
-                              <h6 class="helpError">Formato del apellido no válido</h6>
-                            </span>
-                          </span>
-                          <span class="help-block" *ngIf="(!validateLastname() && validateName())">
-                            <span>
-                              <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                                -
-                              </h6>
                             </span>
                           </span>
                         </td>
@@ -85,55 +51,47 @@
                         <h6 class="helpError">Formato del correo no válido</h6>
                       </span>
                     </span>
+                    <table class="example-full-width" cellspacing="0"><tr>
+                      <td><mat-form-field class="example-full-width">
+                        <mat-label>*Calle</mat-label>
+                        <input matInput formControlName="street" class="form-control"
+                        maxlength="50">
+                      </mat-form-field></td>
+                      <td><mat-form-field class="example-full-width" formControlName="calle" class="form-control"
+                        maxlength="50">
+                        <mat-label>*Altura</mat-label>
+                        <input matInput placeholder="1234" formControlName="altura" class="form-control"
+                        maxlength="4">
+                      </mat-form-field></td>
+                    </tr></table>
+                    <table class="example-full-width" cellspacing="0"><tr>
+                      <td><mat-form-field class="example-full-width">
+                        <mat-label>Localidad</mat-label>
+                        <input matInput formControlName="localidad" disabled value="Córdoba Capital">
+                      </mat-form-field></td>
+                      <td><mat-form-field class="example-full-width">
+                        <mat-label>*Barrio</mat-label>
+                        <input matInput formControlName="barrio" class="form-control"
+                        maxlength="50">
+                      </mat-form-field></td>
+                    </tr></table>
 
-                    <table class="example-full-width" cellspacing="0">
-                      <tr>
-                        <td>
-                          <mat-form-field class="example-full-width">
-                            <mat-label>*DNI</mat-label>
-                            <input matInput type="tel" formControlName="dni" class="form-control" id="dni">
-                          </mat-form-field>
-                          <span class="help-block" *ngIf="((SignupForm.get('dni').touched ||
-                      SignupForm.get('dni').dirty) &&
-                      SignupForm.get('dni').errors)">
-                            <span *ngIf="SignupForm.get('dni').errors.required">
+
+                      <mat-form-field class="example-full-width">
+                        <mat-label>*Referencia</mat-label>
+                        <textarea matInput type="text" formControlName="reference" maxlength="150"></textarea>
+                      </mat-form-field>
+
+                      <span class="help-block" *ngIf="((SignupForm.get('reference').touched ||
+                      SignupForm.get('reference').dirty) &&
+                      SignupForm.get('reference').errors)">
+                            <span *ngIf="SignupForm.get('reference').errors.required">
                               <h6 class="helpError">Campo requerido</h6>
                             </span>
-                            <span *ngIf="SignupForm.get('dni').errors.pattern">
-                              <h6 class="helpError">Formato no válido</h6>
+                            <span *ngIf="SignupForm.get('reference').errors.maxlength">
+                              <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
                             </span>
                           </span>
-                          <span class="help-block" *ngIf="(!validateDNI() && validateBirthdate())">
-                            <span>
-                              <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                                -
-                              </h6>
-                            </span>
-                          </span>
-                        </td>
-                        <td>
-                          <mat-form-field class="example-full-width">
-                            <mat-label>*Fecha de nacimiento</mat-label>
-                            <input matInput type="date" name="initial" formControlName="birthDate" class="form-control">
-                          </mat-form-field>
-                          <span class="help-block" *ngIf="validateInitialDate()">
-                            <span *ngIf="validateInitialDate">
-                              <h6 class="helpError">Campo requerido</h6>
-                            </span>
-                            <span *ngIf="CalculateAge">
-                              <h6 class="helpError">Debe ser mayor a 18 años</h6>
-                            </span>
-                          </span>
-                          <span class="help-block" *ngIf="(validateDNI() && !validateBirthdate())">
-                            <span>
-                              <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                                -
-                              </h6>
-                            </span>
-                          </span>
-                        </td>
-                      </tr>
-                    </table>
 
                     <table class="example-full-width" cellspacing="0">
                       <tr>
@@ -201,9 +159,9 @@
                           </span>
                         </td>
                         <td> <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
-                    Entre 8 y 15 caracteres,
-                    al menos una mayúscula,
-                    una misúscula y un número" aria-label="Button that displays a tooltip when focused or hovered over">
+                          Entre 8 y 15 caracteres,
+                          al menos una mayúscula,
+                          una misúscula y un número" aria-label="Button that displays a tooltip when focused or hovered over">
                             ℹ
                           </label>
                           <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">

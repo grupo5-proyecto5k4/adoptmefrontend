@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { SignupParticularComponent } from 'src/app/components/signup-particular/signup-particular.component';
+import { SignupRescatistComponent } from 'src/app/components/signup-rescatist/signup-rescatist.component';
 
 
 
@@ -12,20 +13,20 @@ import { SignupParticularComponent } from 'src/app/components/signup-particular/
 })
 
 
-export class SignupOptionsComponent implements OnInit {
-    Titulo = "Opciones de registro";
+export class SignupOptionsComponent {
+    Titulo = "¿Cómo querés registrarte?"; 
     
     constructor(private dialog: MatDialog) { }
 
-    ngOnInit() {
-        
-    }
+    ngOnInit() { }
 
     signupParticular(){
         this.dialog.open(SignupParticularComponent)
       }
       signupRescatist(){
-    
+        this.dialog.open(SignupRescatistComponent)
       }
+
+      
 
 }

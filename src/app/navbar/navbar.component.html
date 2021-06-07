@@ -28,7 +28,7 @@
       <a routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adoptar</a>
       <a routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Brindar provisorio</a>
       <span class="spacer"></span>
-      <a mat-raised-button color="accent" id="btncuenta" (click)="goToSignUpOptions(); scrollTop()">Crear cuenta</a>
+      <a mat-raised-button routerLink="/signup-options" color="accent" id="btncuenta" *ngIf="isSignupOptions()" (click)="scrollTop()">Crear cuenta</a>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

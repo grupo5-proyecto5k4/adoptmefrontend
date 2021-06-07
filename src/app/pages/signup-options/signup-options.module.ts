@@ -8,8 +8,10 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
 import { ComponentsModule } from 'src/app/components/components.module';
-import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
-
+//import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
+import {MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -18,13 +20,15 @@ import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
     ReactiveFormsModule,
     FormsModule,
     CommonModule,
-    SignUpOptionsRoutingModule,
+    //SignUpOptionsRoutingModule,
     MatDialogModule,
     MatRadioModule,
     MatTableModule,
     MatTooltipModule,
     MatIconModule,
-    ComponentsModule
+    ComponentsModule,
+    ComponentsModule, 
+    MatCardModule,
   ],
   entryComponents: [
   ],
@@ -34,7 +38,8 @@ import { SignUpOptionsRoutingModule } from './signup-options-routing.module';
     MatRadioModule,
     MatTableModule,
     MatTooltipModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ]
 })
 export class SignupOptionsModule {}

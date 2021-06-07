@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
+  templateUrl:'./navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
@@ -26,6 +26,9 @@ export class NavbarComponent {
     this.router.navigate(['/signup-options']);
   }
   
+  isSignupOptions(){
+    return (this.router.url != '/signup-options');
+  }
   isSignupOptions(){
     return (this.router.url != '/signup-options');
   }
