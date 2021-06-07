@@ -22,6 +22,7 @@ export class NavbarComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
   
+
   isSignupOptions(){
     return (this.router.url != '/signup-options');
   }

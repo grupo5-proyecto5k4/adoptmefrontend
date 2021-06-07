@@ -4,6 +4,7 @@
   "scripts": {
     "postinstall": "ng build --prod",
     "ng": "ng",
+    "npm": "npm update",
     "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
