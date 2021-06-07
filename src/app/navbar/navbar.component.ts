@@ -24,7 +24,10 @@ export class NavbarComponent {
   
   goToSignUpOptions(){
     this.router.navigate(['/signup-options']);
-    window.scrollTo(0, 0);
+  }
+  
+  isSignupOptions(){
+    return (this.router.url != '/signup-options');
   }
   isSignupOptions(){
     return (this.router.url != '/signup-options');
