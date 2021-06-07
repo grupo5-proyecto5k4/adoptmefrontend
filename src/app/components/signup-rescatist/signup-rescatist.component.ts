@@ -30,7 +30,7 @@ export class SignupRescatistComponent implements OnInit {
       barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       facebook: new FormControl(''),
       instagram: new FormControl(''),
-      localidad: new FormControl(''),
+      localidad: new FormControl({value: 'Córdoba Capital', disabled: true}),
   });
   }
 
@@ -48,7 +48,6 @@ export class SignupRescatistComponent implements OnInit {
 
 
   signup(){
-    debugger;
     if (this.SignupForm.valid) {
       this.alertsService.confirmMessage("Su cuenta ha sido registrada");
     }
