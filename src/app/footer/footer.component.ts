@@ -20,7 +20,6 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  goToHome() {  }
 
   openTermsAndConditions(): void { }
 
