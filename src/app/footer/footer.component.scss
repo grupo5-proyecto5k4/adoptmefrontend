@@ -1,6 +1,28 @@
 
-#piePag{ 
-    text-align: center;
+.Pie{
+    background-color:hsl(312, 22%, 95%);
+    height:fit-content;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    }
+
+#letras{
+    margin-top: 1rem;
+    margin-bottom:1rem;
+    font-style: italic;
+    margin-left: 0.5rem;
+    margin-right:1rem;
+    float: left;
+}
+
+#PieP{ 
+    margin-top: 0rem;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    float:right;
     
 }
 
