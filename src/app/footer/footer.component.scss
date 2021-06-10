@@ -1,16 +1,17 @@
 
 .Pie{
     background-color:hsl(312, 22%, 95%);
-    height:fit-content;
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+    position: relative;
+    left:0;
+    bottom:0;
+    width:100%;
+    text-align:center;
+  
     }
 
 #letras{
     margin-top: 1rem;
-    margin-bottom:1rem;
+    margin-bottom:1rem; 
     font-style: italic;
     margin-left: 0.5rem;
     margin-right:1rem;
