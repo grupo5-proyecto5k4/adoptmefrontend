@@ -19,6 +19,7 @@ import {FooterComponent} from 'src/app/footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
+import { FaqsComponent } from './faqs/faqs.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
     FooterComponent,
     LandingPageComponent,
     UnderConstructionComponent,
+    FaqsComponent,
   ],
   imports: [
     BrowserModule,

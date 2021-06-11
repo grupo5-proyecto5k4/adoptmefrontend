@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 //import { LocalStorageService } from 'src/shared/services/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 //import { TermsAndConditionsComponent } from '../terms-and-conditions/terms-and-conditions.component';
-//import { FaqsComponent } from '../faqs/faqs.component';
+import { FaqsComponent } from '../faqs/faqs.component';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -24,6 +24,6 @@ export class FooterComponent {
   openTermsAndConditions(): void { }
 
   openFaqs() {
-
+    this.dialog.open(FaqsComponent)
   }
 }
