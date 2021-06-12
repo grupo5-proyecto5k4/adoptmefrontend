@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignupOptionsComponent } from './pages/signup-options/signup-options.component';
 import {UnderConstructionComponent} from './under-construction/under-construction.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
   { 
@@ -17,7 +18,12 @@ const routes: Routes = [
   {
     path:'landing',
     component: LandingPageComponent },
-    
+  {
+    path:'', redirectTo: '/landing', pathMatch: 'full'},
+  //La ruta comodín '**' siempre debe ser la última del listado.
+  {
+    path: '**',
+    component: NotFoundComponent},
 ];
 
 @NgModule({
