@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
     UnderConstructionComponent,
     FaqsComponent,
     TermsAndConditionsComponent,
+    NotFoundComponent,
+
   ],
   imports: [
     BrowserModule,

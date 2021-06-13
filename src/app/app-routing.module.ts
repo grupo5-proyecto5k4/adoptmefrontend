@@ -4,6 +4,9 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignupOptionsComponent } from './pages/signup-options/signup-options.component';
 import {UnderConstructionComponent} from './under-construction/under-construction.component';
 import{ FaqsComponent } from './faqs/faqs.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
+
 const routes: Routes = [
   { 
     path: 'adoptar', 
@@ -17,11 +20,19 @@ const routes: Routes = [
   {
     path:'landing',
     component: LandingPageComponent },
+
     {
       path:'faqs',
       component:FaqsComponent
     }
     
+  {
+    path:'', redirectTo: '/landing', pathMatch: 'full'},
+  //La ruta comodín '**' siempre debe ser la última del listado.
+  {
+    path: '**',
+    component: NotFoundComponent},
+
 ];
 
 @NgModule({
