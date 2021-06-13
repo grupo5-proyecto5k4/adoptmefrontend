@@ -1,12 +1,14 @@
 .container-construction{
-    background-color: #FCF6FD;
+    background-color:#f1d4eb;
+    width: 100%;
+    padding: 40px 1px 0px 1px;
 }
 
 .txt-construction{
     background-color: #E085C6;
     text-align: center;
     width: 100%;
-    padding: 40px 2px 40px 2px;
+    padding: 30px 1px 30px 1px;
     margin-top: 40px;
     font-size: calc(0.7em + 1vw);
     line-height: 120%;
@@ -33,6 +35,9 @@
         margin-right: auto;
         width: 20%;
     }
+
+   
+    
 }
 
 @media (min-width: 601px) and (max-width: 1700px)
@@ -43,4 +48,5 @@
         margin-right: auto;
         width: 20%;
     }
+    
 }
