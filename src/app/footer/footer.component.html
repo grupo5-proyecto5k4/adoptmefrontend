@@ -2,17 +2,17 @@
     <div class="container">
         <div class="row copyright">
             <div>             
-                    <a *ngIf="!isAdminRol" name="gtco-practice-areas1"  class="footerPointer" (click)="goToHome()">¿Quiénes somos? |</a>
-                    <a *ngIf="!isAdminRol"name="gtco-about" (click)="goToHome($event)" class="footerPointer"> ¿Cómo funciona? |</a>
-                    <a *ngIf="!activeProffessionalRol && !isAdminRol" name="gtco-our-team" (click)="goToHome($event)" class="footerPointer"> Servicios ofrecidos |</a>
-                    <a *ngIf="!isAdminRol" (click)="openFaqs()" style="cursor: pointer;"> Preguntas frecuentes |</a>
-                    <a *ngIf="!isAdminRol" name="gtco-contact" (click)="goToHome($event)" class="footerPointer"> Contáctanos |</a>
-                    <a *ngIf="!isAdminRol" (click)="openTermsAndConditions()" class="footerPointer"> Términos y condiciones </a>
+                    <a *ngIf="!isAdminRol" name="gtco-practice-areas1"  class="footerPointer" (click)="goToHome()" id="letras">¿Quiénes somos? |</a>
+                    <a *ngIf="!isAdminRol"name="gtco-about" (click)="goToHome()" class="footerPointer" id="letras"> ¿Cómo funciona? |</a>
+                    <a *ngIf="!activeProffessionalRol && !isAdminRol" name="gtco-our-team" (click)="goToHome()" class="footerPointer" id="letras"> Servicios ofrecidos |</a>
+                    <a *ngIf="!isAdminRol" (click)="openFaqs()" style="cursor: pointer;" class="footerPointer" id="letras"> Preguntas frecuentes |</a>
+                    <a *ngIf="!isAdminRol" name="gtco-contact" (click)="goToHome()" class="footerPointer" id="letras"> Contáctanos |</a>
+                    <a *ngIf="!isAdminRol" (click)="openTermsAndConditions()" class="footerPointer" id="letras"> Términos y condiciones </a>
                   <br>
                   <br>  
                     <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
-                    <small class="block"> Córdoba, Argentina </small>
-                    <small class="block">&copy; UTN FRC - ServWeb 2021</small>
+                    <small class="block" id="Pie"> Córdoba, Argentina</small>
+                    <small class="block" id="Pie">&copy; UTN FRC - ServWeb 2021</small>
             </div>
         </div>
         <br />

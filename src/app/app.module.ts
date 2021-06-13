@@ -20,6 +20,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { FaqsComponent } from './faqs/faqs.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { FaqsComponent } from './faqs/faqs.component';
     LandingPageComponent,
     UnderConstructionComponent,
     FaqsComponent,
+    TermsAndConditionsComponent,
   ],
   imports: [
     BrowserModule,
