@@ -3,7 +3,6 @@
         <div class="row copyright">
             <div>             
                     <a *ngIf="!isAdminRol" name="gtco-practice-areas1"  class="footerPointer" (click)="goToHome()" id="letras">¿Quiénes somos? |</a>
-                    <a *ngIf="!isAdminRol"name="gtco-about" (click)="goToHome()" class="footerPointer" id="letras"> ¿Cómo funciona? |</a>
                     <a *ngIf="!activeProffessionalRol && !isAdminRol" name="gtco-our-team" (click)="goToHome()" class="footerPointer" id="letras"> Servicios ofrecidos |</a>
                     <a *ngIf="!isAdminRol" (click)="openFaqs()" style="cursor: pointer;" class="footerPointer" id="letras"> Preguntas frecuentes |</a>
                     <a *ngIf="!isAdminRol" name="gtco-contact" (click)="goToHome()" class="footerPointer" id="letras"> Contáctanos |</a>
@@ -12,7 +11,7 @@
                   <br>  
                     <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
                     <small class="block" id="Pie"> Córdoba, Argentina</small>
-                    <small class="block" id="Pie">&copy; UTN FRC - ServWeb 2021</small>
+                    <small class="block" id="Pie"> UTN FRC - AdoptMe 2021 &copy;</small>
             </div>
         </div>
         <br />
