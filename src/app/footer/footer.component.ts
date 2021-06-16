@@ -26,11 +26,7 @@ export class FooterComponent {
   
 
   goToHome(){
-    if(this.dialog.open(LandingPageComponent)){
-     // window.scrollBy(0,100);
-      document.getElementById('quienesSm').scrollBy(0,10);
-
-    }
+    this.dialog.open(LandingPageComponent).updatePosition({ bottom:'627px'})    
   
   }
 
