@@ -22,6 +22,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
 import { FaqsComponent } from './faqs/faqs.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -55,7 +56,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ReactiveFormsModule, 
     FormsModule,
     HttpClientModule,
-    SignupOptionsModule
+    SignupOptionsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
