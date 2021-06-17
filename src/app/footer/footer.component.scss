@@ -17,6 +17,16 @@
     color:black;
 }
 
+#letras1{
+    font-family:Roboto;
+    text-transform: uppercase;
+    font-weight:450;
+    font-size: 110%;
+    color:black;
+}
+
+
+
 #Pie{
     font-weight:450;
 }
@@ -28,6 +38,13 @@
   
   }
   
+  
+  
+@media (max-width:903px){
+    #letras1{
+    bottom:100px;
+}
+}
 
 
 
