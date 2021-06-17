@@ -58,12 +58,12 @@
 
 .img-paws{
     height: calc(4em + 38vw);
-    max-height: 400px;
 }
 
 .section2-item1{
     text-align: center;
     margin-left: 20px;
+    margin-top: 5%;
 }
 
 .section2-title{
@@ -96,6 +96,7 @@
     display: flex;
     flex-flow: row wrap;
     height: calc(4em + 80vw);
+    max-height: 600px;
     background-color: #f3d5ed;
     align-content:center;
     justify-content: space-evenly;
@@ -385,8 +386,3 @@
     color: white;
     font-size: 16px;
 }
-
-@media (min-width:900px){
-    .landing-container > div{
-        max-height: 470px;}
-    }
