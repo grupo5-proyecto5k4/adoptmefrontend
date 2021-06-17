@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import{ TermsAndConditionsComponent } from '../terms-and-conditions/terms-and-conditions.component';
 import { FaqsComponent } from '../faqs/faqs.component';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
-
+import {LandingPageComponent} from '../landing-page/landing-page.component';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -23,10 +23,13 @@ export class FooterComponent {
   openFaqs() {
     this.dialog.open(FaqsComponent)
   }
-  goToHome()
-  {
-    this.dialog.open(FaqsComponent)
+  
+
+  goToHome(){
+    this.dialog.open(LandingPageComponent).updatePosition({ bottom:'627px'})    
+  
   }
+
   openTermsAndConditions(){
     this.dialog.open(TermsAndConditionsComponent)
   }
