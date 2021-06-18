@@ -11,10 +11,5 @@ export class FaqsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  scrollTop(){
-    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0);
-    document.getElementsByClassName('')
-  }
-
+  
 }

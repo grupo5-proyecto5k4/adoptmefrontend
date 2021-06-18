@@ -19,7 +19,12 @@ import {FooterComponent} from 'src/app/footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
 
 
 @NgModule({
@@ -29,7 +34,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     FooterComponent,
     LandingPageComponent,
     UnderConstructionComponent,
+    FaqsComponent,
+    TermsAndConditionsComponent,
     NotFoundComponent,
+  
+
   ],
   imports: [
     BrowserModule,
@@ -47,7 +56,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ReactiveFormsModule, 
     FormsModule,
     HttpClientModule,
-    SignupOptionsModule
+    SignupOptionsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
