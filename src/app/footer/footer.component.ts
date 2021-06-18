@@ -4,10 +4,10 @@ import { Router } from '@angular/router';
 //import { DataService } from 'src/app/pages/home/services/data.service';
 //import { LocalStorageService } from 'src/shared/services/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
-//import { TermsAndConditionsComponent } from '../terms-and-conditions/terms-and-conditions.component';
-//import { FaqsComponent } from '../faqs/faqs.component';
+import{ TermsAndConditionsComponent } from '../terms-and-conditions/terms-and-conditions.component';
+import { FaqsComponent } from '../faqs/faqs.component';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
-
+import {LandingPageComponent} from '../landing-page/landing-page.component';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -20,10 +20,18 @@ export class FooterComponent {
 
   constructor(public router: Router,public dialog: MatDialog) { }
 
- 
-  openTermsAndConditions(): void { }
-
   openFaqs() {
-
+    this.dialog.open(FaqsComponent)
   }
+  
+
+  goToHome(){
+    this.dialog.open(LandingPageComponent).updatePosition({ bottom:'627px'})    
+  
+  }
+
+  openTermsAndConditions(){
+    this.dialog.open(TermsAndConditionsComponent)
+  }
+
 }
