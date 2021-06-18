@@ -11,5 +11,5 @@ export class FaqsComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
 }
