@@ -3,7 +3,7 @@
 .section1-container {
     display:flex;
     flex-flow: row;
-    justify-content: flex-start;
+    justify-content: center;
     background-color:white;
     height: calc(4em + 40vw);
     align-items: center;
@@ -62,8 +62,8 @@
 
 .section2-item1{
     text-align: center;
-    margin-top: 5%;
     margin-left: 20px;
+    margin-top: 5%;
 }
 
 .section2-title{
@@ -348,7 +348,7 @@
 }
 
 .section5-txt{
-    margin-top: 80px;
+    padding-top: 70px;
     display: block;
     font-size: 18px;
     width: 400px;
@@ -363,7 +363,7 @@
 @media (max-width:900px){
     .section5-container{
         background-image: unset;
-        align-items: flex-start;
+        align-items: center;
         align-content: flex-start;
         height: calc(4em + 60vw);
 
@@ -376,7 +376,6 @@
         background-color: #F0DDF1;
         padding: 30px 10px 30px 0px;
         font-size: calc(0.7em + 1vw);
-        margin-top: 20px;
         border-radius: 8px;
     }   
 }
