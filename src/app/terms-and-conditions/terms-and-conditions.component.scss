@@ -26,21 +26,19 @@
 .img-item{
     display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: 9px;
     align-items: center;
-    justify-content: center;
-    width: 40%;
+    width: 62%;
 }
 
 @media (max-width:600px){
     .img-item{
         display: block;
         margin-left: auto;
-        margin-right: auto;
+        margin-right: 10px;
         align-items: center;
-        justify-content: center;
-        width: 90%;
-        height: 60%;
+        width: 80%;
+        height: 50%;
     }
 
     
@@ -55,11 +53,10 @@
 {
     .img-item{
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+        margin-left:auto;
+        margin-right:9px;
         align-items: center;
-        justify-content: center;
-        width: 40%;
+        width: 62%;
     }
 
     .txt-construction{
