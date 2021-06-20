@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormGroupDirective, NgForm, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { SignupParticularService } from 'src/services/signup-particular.service';
-import { ParticularUser } from 'src/models/IParticularUser';
+import { User } from 'src/models/IUser';
 import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {ErrorStateMatcher} from '@angular/material/core';
@@ -91,7 +91,7 @@ validatePassword() {
   this.SignupForm.get('password').errors));
 }
 
-
+/*
 signup(){
   debugger;
   if (this.SignupForm.valid) {
@@ -100,15 +100,15 @@ signup(){
   else{
     this.alertsService.infoMessage("Por favor complete los campos requeridos","Atención")
   }
-}
-  /*
+}*/
+  
   signup() {
       if (this.SignupForm.valid) {
-        let particularUser: ParticularUser = new ParticularUser();
-        particularUser.name = this.SignupForm.controls.name.value;
-        particularUser.lastname = this.SignupForm.controls.lastname.value;
-        particularUser.email = this.SignupForm.controls.email.value;
-        particularUser.contactNumber = this.SignupForm.controls.contactNumber.value;
+        let particularUser: User = new User();
+        particularUser.nombres = this.SignupForm.controls.name.value;
+        particularUser.apellidos = this.SignupForm.controls.lastname.value;
+        particularUser.correoElectronico = this.SignupForm.controls.email.value;
+        particularUser.numeroContacto = this.SignupForm.controls.contactNumber.value;
         if (this.SignupForm.controls.facebook.value !== "") {
           particularUser.facebook = this.SignupForm.controls.facebook.value;
         }
@@ -116,10 +116,10 @@ signup(){
           particularUser.instagram = this.SignupForm.controls.instagram.value;
         }
 
-        particularUser.password = this.SignupForm.controls.password.value;
+        particularUser.contrasenia = this.SignupForm.controls.password.value;
       }
     }
-    */
+    
   async init() {
    
   }
