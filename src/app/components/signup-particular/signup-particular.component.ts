@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, FormGroupDirective, NgForm, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormGroupDirective, NgForm, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { SignupParticularService } from 'src/services/signup-particular.service';
 import { ParticularUser } from 'src/models/IParticularUser';
@@ -16,9 +16,14 @@ import { AlertsService } from 'src/utils/alerts.service';
 export class SignupParticularComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo = "Registrar cuenta";
+  floatLabelControl = new FormControl('auto');
   
   
-  constructor(private SignupParticularService: SignupParticularService, private alertsService: AlertsService) { }
+  constructor(private SignupParticularService: SignupParticularService, private alertsService: AlertsService, fb: FormBuilder) { 
+    this.SignupForm = fb.group({
+      floatLabel: this.floatLabelControl,
+    });
+  }
   
   ngOnInit() {
     this.SignupForm = new FormGroup({

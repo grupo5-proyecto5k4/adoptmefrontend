@@ -15,11 +15,12 @@
 
                     <table class="example-full-width" cellspacing="0">
                       <tr>
-                        <td>
-                          <mat-form-field class="example-full-width" id="BoxNombre">
-                            <mat-label>*Nombre</mat-label>
-                            <input matInput type="text" formControlName="name" maxlength="35">
-                          </mat-form-field>
+                        <mat-form-field class="example-full-width sharedSpace" id="BoxNombre"
+                          [floatLabel]="floatLabelControl.value">
+                          <mat-label>*Nombre</mat-label>
+                          <input matInput type="text" formControlName="name" maxlength="35">
+                        </mat-form-field>
+                        <div  class="sharedSpace">
                           <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
                       SignupForm.get('name').dirty) &&
                       SignupForm.get('name').errors)">
@@ -33,19 +34,20 @@
                               <h6 class="helpError">Formato del nombre no válido</h6>
                             </span>
                           </span>
-                          <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                          <span class="help-block sharedSpace" *ngIf="(validateLastname() && !validateName())">
                             <span>
                               <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
                                 -
                               </h6>
                             </span>
                           </span>
-                        </td>
-                        <td>
-                          <mat-form-field class="example-full-width" id="BoxApellido">
-                            <mat-label>*Apellido</mat-label>
-                            <input matInput type="text" formControlName="lastname" maxlength="35" />
-                          </mat-form-field>
+                        </div>
+                        <mat-form-field class="example-full-width sharedSpace" id="BoxApellido"
+                          [floatLabel]="floatLabelControl.value">
+                          <mat-label>*Apellido</mat-label>
+                          <input matInput type="text" formControlName="lastname" maxlength="35" />
+                        </mat-form-field>
+                        <div class="sharedSpace">
                           <span class="help-block" *ngIf="((SignupForm.get('lastname').touched ||
                       SignupForm.get('lastname').dirty) &&
                       SignupForm.get('lastname').errors)">
@@ -66,7 +68,7 @@
                               </h6>
                             </span>
                           </span>
-                        </td>
+                        </div>
                       </tr>
                     </table>
 
@@ -203,7 +205,8 @@
                         <td> <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
                     Entre 8 y 15 caracteres,
                     al menos una mayúscula,
-                    una misúscula y un número" aria-label="Button that displays a tooltip when focused or hovered over">
+                    una misúscula y un número"
+                            aria-label="Button that displays a tooltip when focused or hovered over">
                             ℹ
                           </label>
                           <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">
@@ -212,7 +215,8 @@
                                 -
                               </h6>
                             </span>
-                          </span></td>
+                          </span>
+                        </td>
                       </tr>
                     </table>
                     <div id="passwordRequirement">

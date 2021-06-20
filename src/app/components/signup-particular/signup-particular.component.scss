@@ -50,6 +50,7 @@ form{
   margin-left: auto;
   margin-right: auto;
 }
+
 textarea {
   resize: none;
   font-size: 15px;
@@ -299,6 +300,30 @@ h3 {
   font-weight: bold;
   font-weight: 400 !important;
   color: rgb(34, 34, 34) !important;
+}
+
+.lower-container .mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.lower-container .sharedSpace {
+  width: 220px;
+}
+
+.lower-container form {
+  margin-bottom: 20px;
+}
+
+.lower-containerform > * {
+  margin: 5px 0;
+}
+
+.lower-container .mat-radio-button {
+  margin: 0 12px;
+}
+
+::help-block {
+  margin-left: 8px;
 }
 
 .card-container{
