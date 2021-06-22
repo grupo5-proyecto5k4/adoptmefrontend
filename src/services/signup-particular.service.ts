@@ -1,7 +1,7 @@
 import { Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment.prod';
 import {catchError, map} from 'rxjs/operators';
 import { User } from 'src/models/IUser';
 
@@ -14,7 +14,7 @@ export class SignupParticularService {
  
   registerParticularUser(request: User): Observable<User> {
       //const url = `${environment.base_url}${environment.user.base_url}`;
-      const url = `${environment.prod.base_url}${environment.user.base_url}`;
+      const url = `${environment.base_url}${environment.user.base_url}`;
       return this.httpClient.post<User>(url, request);
     }
   }
