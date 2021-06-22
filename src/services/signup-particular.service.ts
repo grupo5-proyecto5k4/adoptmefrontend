@@ -13,7 +13,8 @@ export class SignupParticularService {
   constructor(private httpClient: HttpClient) {}
  
   registerParticularUser(request: User): Observable<User> {
-      const url = `${environment.base_url}${environment.user.base_url}`;
+      //const url = `${environment.base_url}${environment.user.base_url}`;
+      const url = `${environment.prod.base_url}${environment.user.base_url}`;
       return this.httpClient.post<User>(url, request);
     }
   }
