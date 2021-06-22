@@ -117,6 +117,14 @@ signup(){
         }
 
         particularUser.contrasenia = this.SignupForm.controls.password.value;
+        this.SignupParticularService.registerParticularUser(particularUser).subscribe({
+          complete: () => {
+            this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
+          },
+          error: (err: any) => {
+            this.alertsService.errorMessage(err)
+          }
+        })
       }
     }
     
