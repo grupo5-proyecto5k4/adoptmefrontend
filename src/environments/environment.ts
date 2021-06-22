@@ -6,7 +6,7 @@ export const environment = {
   //production: false
   production: true,
   //base_url: '/api',
-  base_url: '/',
+  base_url: '',
   //user: {base_url: '/user'}, 
   user: {base_url: '/registro'},
   host: 'adoptmebackend.herokuapp.com'
