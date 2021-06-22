@@ -4,5 +4,5 @@ export const environment = {
   base_url: '',
   //user: {base_url: '/user'}, 
   user: {base_url: '/registro'},
-  host: 'adoptmebackend.herokuapp.com'
+  host: 'https://adoptmebackend.herokuapp.com'
 };
