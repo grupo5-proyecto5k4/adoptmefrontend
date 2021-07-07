@@ -25,8 +25,9 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <a href="#" class="adoptme-title">AdoptMe</a>
-      <a routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adoptar</a>
-      <a routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Brindar provisorio</a>
+      <a routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adopciones</a>
+      <a routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Provisorios</a>
+      <a *ngIf="isParticular()" routerLink="/mascotas" class="nav-titles" (click)="scrollTop()">Mis Mascotas</a>
       <span class="spacer"></span>
       <a mat-raised-button routerLink="/signup-options" color="accent" id="btncuenta" *ngIf="isSignupOptions()" (click)="scrollTop()">Crear cuenta</a>
     </mat-toolbar>
