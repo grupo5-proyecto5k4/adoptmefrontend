@@ -21,6 +21,10 @@ const routes: Routes = [
     component: UnderConstructionComponent
   },
   {
+    path: 'donaciones',
+    component: UnderConstructionComponent
+  },
+  {
     path: 'signup-options',
     component: SignupOptionsComponent
   },
