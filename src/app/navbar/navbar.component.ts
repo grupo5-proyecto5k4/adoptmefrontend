@@ -24,13 +24,18 @@ export class NavbarComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private localStorageService: LocalStorageService) {
-    this.localStorageService.setProfile(2); //ESTO UNA VEZ QUE SE LOGUEEN LOS USUARIOS HAY QUE SETEARLO DESDE EL LOGIN
+    debugger;
+    this.localStorageService.setProfile(1); //ESTO UNA VEZ QUE SE LOGUEEN LOS USUARIOS HAY QUE SETEARLO DESDE EL LOGIN
     this.profile = this.localStorageService.getProfile();
   }
   
 
   isSignupOptions(){
-    return (this.router.url != '/signup-options');
+    return (this.router.url == '/signup-options');
+  }
+
+  isLogued(){
+    return (this.profile != null || this.profile != undefined)
   }
 
   scrollTop(){

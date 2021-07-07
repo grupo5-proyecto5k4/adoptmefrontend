@@ -25,6 +25,14 @@ const routes: Routes = [
     component: UnderConstructionComponent
   },
   {
+    path: 'configuraciones',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'reportes',
+    component: UnderConstructionComponent
+  },
+  {
     path: 'signup-options',
     component: SignupOptionsComponent
   },
