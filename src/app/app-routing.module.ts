@@ -5,6 +5,7 @@ import { SignupOptionsComponent } from './pages/signup-options/signup-options.co
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,26 @@ const routes: Routes = [
   },
   {
     path: 'configuraciones',
+    component: AdminConfigurationsComponent
+  },
+  {
+    path: 'gestionar-usuarios',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'gestionar-mascotas',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'visualizar-adopciones',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'visualizar-provisorios',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'habilitar-centros-rescatistas',
     component: UnderConstructionComponent
   },
   {
