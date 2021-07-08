@@ -23,6 +23,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { AdminConfigurationsModule } from './pages/admin-configurations/admin-configurations.module';
 
 
 
@@ -57,6 +58,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     FormsModule,
     HttpClientModule,
     SignupOptionsModule,
+    AdminConfigurationsModule,
     MatExpansionModule
   ],
   providers: [],
