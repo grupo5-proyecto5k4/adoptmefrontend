@@ -5,6 +5,7 @@ import { SignupOptionsComponent } from './pages/signup-options/signup-options.co
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import {InicioSesionComponent} from './inicio-sesion/inicio-sesion.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,8 @@ const routes: Routes = [
     path: 'provisorio',
     component: UnderConstructionComponent
   },
+  {path: 'iniSesion',
+component: InicioSesionComponent},
   {
     path: 'mascotas',
     component: UnderConstructionComponent

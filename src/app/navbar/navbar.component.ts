@@ -34,6 +34,10 @@ export class NavbarComponent {
     return (this.router.url == '/signup-options');
   }
 
+  isInicioSesion(){
+    return (this.router.url == '/iniSesion');
+  }
+
   isLogued(){
     return (this.profile != null || this.profile != undefined)
   }

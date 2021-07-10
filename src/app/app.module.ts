@@ -24,6 +24,7 @@ import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-co
 import { NotFoundComponent } from './not-found/not-found.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
+import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 
 
 
@@ -39,6 +40,7 @@ import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
     TermsAndConditionsComponent,
     NotFoundComponent,
     QuienesSomosComponent,
+    InicioSesionComponent,
   
 
   ],
