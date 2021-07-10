@@ -23,6 +23,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 
 
 
@@ -37,6 +38,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     FaqsComponent,
     TermsAndConditionsComponent,
     NotFoundComponent,
+    QuienesSomosComponent,
   
 
   ],
