@@ -25,8 +25,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
-
-
+import { AdminConfigurationsModule } from './pages/admin-configurations/admin-configurations.module';
 
 
 @NgModule({
@@ -61,6 +60,7 @@ import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
     FormsModule,
     HttpClientModule,
     SignupOptionsModule,
+    AdminConfigurationsModule,
     MatExpansionModule
   ],
   providers: [],

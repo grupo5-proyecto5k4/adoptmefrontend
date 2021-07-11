@@ -6,7 +6,7 @@ import { UnderConstructionComponent } from './under-construction/under-construct
 import { FaqsComponent } from './faqs/faqs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {InicioSesionComponent} from './inicio-sesion/inicio-sesion.component';
-
+import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 
 const routes: Routes = [
   {
@@ -29,6 +29,26 @@ component: InicioSesionComponent},
   },
   {
     path: 'configuraciones',
+    component: AdminConfigurationsComponent
+  },
+  {
+    path: 'gestionar-usuarios',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'gestionar-mascotas',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'visualizar-adopciones',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'visualizar-provisorios',
+    component: UnderConstructionComponent
+  },
+  {
+    path: 'habilitar-centros-rescatistas',
     component: UnderConstructionComponent
   },
   {

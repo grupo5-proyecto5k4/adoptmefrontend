@@ -25,7 +25,7 @@ export class NavbarComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router, private localStorageService: LocalStorageService) {
     debugger;
-    this.localStorageService.setProfile(1); //ESTO UNA VEZ QUE SE LOGUEEN LOS USUARIOS HAY QUE SETEARLO DESDE EL LOGIN
+    this.localStorageService.setProfile(0); //ESTO UNA VEZ QUE SE LOGUEEN LOS USUARIOS HAY QUE SETEARLO DESDE EL LOGIN
     this.profile = this.localStorageService.getProfile();
   }
   
@@ -47,7 +47,7 @@ export class NavbarComponent {
   }
 
   isParticular(){
-    return (this.profile == '3')
+    return (this.profile == '1')
   }
 
   isRescatist(){
@@ -55,6 +55,6 @@ export class NavbarComponent {
   }
 
   isAdmin(){
-    return (this.profile == '1')
+    return (this.profile == '0')
   }
 }
