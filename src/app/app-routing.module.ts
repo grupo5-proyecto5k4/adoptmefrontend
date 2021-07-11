@@ -7,11 +7,12 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {InicioSesionComponent} from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
+import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 
 const routes: Routes = [
   {
     path: 'adoptar',
-    component: UnderConstructionComponent
+    component: PublicacionesAdopComponent
   },
   {
     path: 'provisorio',
