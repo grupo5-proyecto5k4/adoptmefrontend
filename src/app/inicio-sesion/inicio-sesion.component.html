@@ -1,1 +1,25 @@
-<p>inicio-sesion works!</p>
+<body>
+<div class=container-construction>
+    <div class="login">
+        <form class="custom-form" method="post">
+          <h1>Iniciar Sesión</h1>
+          <input
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="Email"
+            required="required"
+          />
+          <input
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Contraseña"
+            required="required"
+          />
+          <button type="submit" (click)="login()" color="accent">Ingresar</button>
+        </form>
+      </div>
+</div>
+</body>
+

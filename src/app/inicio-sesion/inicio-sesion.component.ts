@@ -5,11 +5,16 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './inicio-sesion.component.html',
   styleUrls: ['./inicio-sesion.component.scss']
 })
-export class InicioSesionComponent implements OnInit {
+export class InicioSesionComponent {
 
-  constructor() { }
+  email: string;
+  password: string;
 
-  ngOnInit(): void {
+  constructor() {}
+
+  login() {
+    console.log(this.email);
+    console.log(this.password);
   }
 
 }
