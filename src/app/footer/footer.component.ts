@@ -23,8 +23,9 @@ export class FooterComponent {
   
 
   goToHome(){
-    this.dialog.open(LandingPageComponent).updatePosition({ bottom:'627px'})    
+    //this.dialog.open(LandingPageComponent).updatePosition({ bottom:'627px'})    
      //document.getElementById("quienesomos").scrollTo(0, 0);
+     document.getElementById("quienesomos").scrollIntoView();
   }
 
   openTermsAndConditions(){
