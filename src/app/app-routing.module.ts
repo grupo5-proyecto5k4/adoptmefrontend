@@ -8,6 +8,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {InicioSesionComponent} from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
+import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
+
 
 const routes: Routes = [
   {
@@ -15,6 +17,7 @@ const routes: Routes = [
     component: PublicacionesAdopComponent
   },
   {
+    
     path: 'provisorio',
     component: UnderConstructionComponent
   },
@@ -64,13 +67,16 @@ component: InicioSesionComponent},
     path: 'landing',
     component: LandingPageComponent
   },
+  {
+    path: 'mapas',
+    component: LeaftletPathComponent
+  },
 
   {
     path: 'faqs',
     component: FaqsComponent
-  }
-
-  , {
+  },
+  {
     path: '', redirectTo: '/landing', pathMatch: 'full'
   },
   //La ruta comodín '**' siempre debe ser la última del listado.
