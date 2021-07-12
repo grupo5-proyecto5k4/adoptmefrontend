@@ -29,7 +29,6 @@ import { AdminConfigurationsModule } from './pages/admin-configurations/admin-co
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
-
 @NgModule({
   declarations: [
     AppComponent,
