@@ -1,9 +1,10 @@
 
 .Pie{
     background-color:hsl(312, 22%, 95%);
-    position: relative;
+    position:relative;
     left:0;
     bottom:0;
+    top: 6rem;
     width:100%;
     text-align:center;
     padding: 15px 0 0;
@@ -29,21 +30,23 @@
 
 #Pie{
     font-weight:450;
+    text-align: center;
 }
 
 .paw-icon{
     color: "accent";
-    margin-left: 5.5rem;
     size: 1rem;
-  
+    align-content: center;
+   
   }
   
   
   
 @media (max-width:903px){
     #letras1{
-    bottom:100px;
+        bottom:100px;
 }
+
 }
 
 @media(max-width:600px){
@@ -55,6 +58,11 @@
     text-align:center;
 }
 }
+
+
+
+
+
 
 
 
