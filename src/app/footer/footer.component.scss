@@ -1,9 +1,10 @@
 
 .Pie{
     background-color:hsl(312, 22%, 95%);
-    position: relative;
+    position:relative;
     left:0;
     bottom:0;
+    top: 6rem;
     width:100%;
     text-align:center;
     padding: 15px 0 0;
@@ -43,9 +44,15 @@
   
 @media (max-width:903px){
     #letras1{
-    bottom:100px;
+        bottom:100px;
 }
+
 }
+
+
+
+
+
 
 
 
