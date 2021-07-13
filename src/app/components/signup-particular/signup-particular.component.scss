@@ -12,6 +12,7 @@
 #btncuenta{
   color: #EBEEF1;
   background-color: #c50fa1;
+  cursor: pointer;
 }
 
 input{
@@ -330,7 +331,8 @@ padding-bottom: 150% !important;
 }
 
 input:disabled {
-  background: #f3f3f3e8;
+  background: rgb(255, 245, 237);
+  cursor: not-allowed;
 }
 
 h3 {

@@ -8,12 +8,11 @@ import { User } from 'src/models/IUser';
 @Injectable({
   providedIn: 'root'
 })
-export class SignupParticularService {
+export class SignupService {
  
   constructor(private httpClient: HttpClient) {}
  
-  registerParticularUser(request: User): Observable<User> {
-      //const url = `${environment.base_url}${environment.user.base_url}`;
+  registerUser(request: User): Observable<User> {
       const url = `${environment.base_url}${environment.user.base_url}`;
       return this.httpClient.post<User>(url, request);
     }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormGroupDirective, NgForm, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { SignupParticularService } from 'src/services/signup-particular.service';
+import { SignupService } from 'src/services/signup.service';
 import { User } from 'src/models/IUser';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,12 +19,12 @@ export class SignupParticularComponent implements OnInit {
   menorDeEdad: Boolean = false;
 
 
-  constructor(private SignupParticularService: SignupParticularService, private alertsService: AlertsService) { }
+  constructor(private SignupService: SignupService, private alertsService: AlertsService) { }
 
   ngOnInit() {
     this.SignupForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑ ]*$')]),
-      lastname: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑ ]*$')]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
+      lastname: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
       contactNumber: new FormControl('', [Validators.pattern('[0-9]{10,13}')]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
@@ -117,7 +117,7 @@ export class SignupParticularComponent implements OnInit {
       }
 
       particularUser.contrasenia = this.SignupForm.controls.password.value;
-      this.SignupParticularService.registerParticularUser(particularUser).subscribe({
+      this.SignupService.registerUser(particularUser).subscribe({
         complete: () => {
           this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
         },
