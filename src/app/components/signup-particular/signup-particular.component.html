@@ -169,48 +169,48 @@
                       </span>
                     </div>
                     <div class="derecha">
-                    <div class="password">
-                      <mat-form-field class="example-full-width">
-                        <mat-label>*Contraseña</mat-label>
-                        <input matInput type="password" formControlName="password" class="form-control" id="password"
-                          maxlength="17">
-                      </mat-form-field>
-                      <span class="help-block" *ngIf="((SignupForm.get('password').touched ||
+                      <div class="password">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>*Contraseña</mat-label>
+                          <input matInput type="password" formControlName="password" class="form-control" id="password"
+                            maxlength="17">
+                        </mat-form-field>
+                        <span class="help-block" *ngIf="((SignupForm.get('password').touched ||
                       SignupForm.get('password').dirty) &&
                       SignupForm.get('password').errors)">
-                        <span *ngIf="SignupForm.get('password').errors.required">
-                          <h6 class="helpError">Campo requerido</h6>
+                          <span *ngIf="SignupForm.get('password').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="SignupForm.get('password').errors.pattern">
+                            <h6 class="helpError">La contraseña no cumple con los requisitos</h6>
+                          </span>
                         </span>
-                        <span *ngIf="SignupForm.get('password').errors.pattern">
-                          <h6 class="helpError">La contraseña no cumple con los requisitos</h6>
+                        <span class="help-block blank" *ngIf="(validateContactNumber() && !validatePassword())">
+                          <span>
+                            <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                              -
+                            </h6>
+                          </span>
                         </span>
-                      </span>
-                      <span class="help-block blank" *ngIf="(validateContactNumber() && !validatePassword())">
-                        <span>
-                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                            -
-                          </h6>
-                        </span>
-                      </span>
-                    </div>
-                    
-                    <div class="tooldiv">
-                    <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+                      </div>
+
+                      <div class="tooldiv">
+                        <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
                     Entre 8 y 15 caracteres,
                     al menos una mayúscula,
                     una minúscula y un número"
-                      aria-label="Button that displays a tooltip when focused or hovered over">
-                      ℹ
-                    </label>
-                    <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">
-                      <span>
-                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                          -
-                        </h6>
-                      </span>
-                    </span>
-                  </div>
-                </div>
+                          aria-label="Button that displays a tooltip when focused or hovered over">
+                          ℹ
+                        </label>
+                        <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">
+                          <span>
+                            <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                              -
+                            </h6>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
 
                     <div id="passwordRequirement">
                       <div>
