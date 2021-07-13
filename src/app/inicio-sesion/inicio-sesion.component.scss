@@ -44,12 +44,19 @@
     color:white;
     background-color:#BE49AA;
     font-weight: bold;
-    width: 100%;
+    width: 49%;
     display: block;
     padding: 0.875rem 1rem;
     border-radius: 1.5rem;
-    box-shadow: 3px 3px 8px #b1b1b1, -3px -3px 8px #E8C0E0;
     cursor: pointer;
+    margin-left: auto;
+    margin-right:auto;
+  }
+
+  @media(max-width:600px){
+    .custom-form button{
+      font-size:70%;
+    }
   }
 
 
