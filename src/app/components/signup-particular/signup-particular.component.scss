@@ -12,9 +12,22 @@
 #btncuenta{
   color: #EBEEF1;
   background-color: #c50fa1;
+  cursor: pointer;
 }
 
+input{
+  width: 98% !important;
+}
 
+.password{
+  width: 90%;
+  float: left;
+}
+
+.tooldiv{
+  width: 10%;
+  float:right;
+}
 
 a [type="button"]:disabled {
   background-color: #F8E2F1;
@@ -35,6 +48,10 @@ a [type="button"]:disabled {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(255, 245, 237) inset;
 }
 
 .example-full-width {
@@ -90,7 +107,7 @@ input {
   float: right;
   padding-left: 7px;
   padding-right: 7px;
-  margin-top: 6px;
+  margin-top: 18px;
   margin-left: 5px;
   border-style: solid;
   border-color: rgb(43, 41, 41);
@@ -173,6 +190,12 @@ input {
   padding-bottom: 60% ;
       }
 
+
+.derecha,.izquierda {
+  width: 40%;
+  margin-bottom: 0px !important;
+}
+
 .RegistroBoxBtnCancelar {
   width: 10%;
   }
@@ -208,6 +231,20 @@ input {
 
 @media (min-width: 992px) and (max-width: 1600px){
   
+
+  .derecha,.izquierda {
+    width: 49%;
+  }
+
+  .derecha{
+    float: right;
+  }
+
+  .izquierda{
+    float: left;
+  }
+
+
 .container {
   padding-bottom: 71% ;
       }
@@ -254,6 +291,10 @@ input {
 padding-bottom: 150% !important;
   }
 
+  .blank{
+    font-size: 0px !important;
+  }
+
 .card-container{
   width: 80% !important;
   height: 60% !important;
@@ -290,7 +331,8 @@ padding-bottom: 150% !important;
 }
 
 input:disabled {
-  background: #f3f3f3e8;
+  background: rgb(255, 245, 237);
+  cursor: not-allowed;
 }
 
 h3 {

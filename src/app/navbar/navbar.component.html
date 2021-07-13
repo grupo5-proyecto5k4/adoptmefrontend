@@ -7,8 +7,12 @@
     <!-- mat-toolbar referencia al contenido del boton hamburguesa -->  
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/adoptar" (click)="drawer.toggle(); scrollTop()">Adoptar</a>
-      <a mat-list-item routerLink="/provisorio" (click)="drawer.toggle(); scrollTop()">Brindar provisorio</a>
+      <a mat-list-item *ngIf="!isAdmin()" routerLink="/adoptar" (click)="drawer.toggle(); scrollTop()">Adopciones</a>
+      <a mat-list-item *ngIf="!isAdmin()" routerLink="/provisorio" (click)="drawer.toggle(); scrollTop()">Provisorios</a>
+      <a mat-list-item *ngIf="isParticular()||isRescatist()" routerLink="/mascotas" (click)="drawer.toggle(); scrollTop()">Mis Mascotas</a>
+      <a mat-list-item *ngIf="isRescatist()" routerLink="/donaciones" (click)="drawer.toggle(); scrollTop()">Donaciones</a>
+      <a mat-list-item *ngIf="isAdmin()" routerLink="/configuraciones"  (click)="drawer.toggle(); scrollTop()">Configuraciones</a>
+      <a mat-list-item *ngIf="isAdmin()" routerLink="/reportes"  (click)="drawer.toggle(); scrollTop()">Reportes</a>
       <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
     </mat-nav-list>
   </mat-sidenav>
@@ -33,7 +37,7 @@
       <a *ngIf="isAdmin()" routerLink="/reportes" class="nav-titles" (click)="scrollTop()">Reportes</a>
       <span class="spacer"></span>
       <a mat-raised-button routerLink="/iniSesion" color="accent" id="btncuenta" *ngIf="!isInicioSesion()&&!isLogued()" (click)="scrollTop()">Iniciar sesión</a>
-      <a mat-raised-button routerLink="/signup-options" color="accent" id="btncuenta" *ngIf="!isSignupOptions()&&!isLogued()" (click)="scrollTop()">Crear cuenta</a>
+      <a mat-raised-button routerLink="/signup-options" color="accent" id="btncuenta" *ngIf="!isSignupOptions()&&!isLogued()&&!isInicioSesion()" (click)="scrollTop()">Crear cuenta</a>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

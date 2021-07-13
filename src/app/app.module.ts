@@ -23,10 +23,11 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { TermsAndConditionsComponent } from './terms-and-conditions/terms-and-conditions.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsModule } from './pages/admin-configurations/admin-configurations.module';
-
+import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -38,8 +39,8 @@ import { AdminConfigurationsModule } from './pages/admin-configurations/admin-co
     FaqsComponent,
     TermsAndConditionsComponent,
     NotFoundComponent,
-    QuienesSomosComponent,
     InicioSesionComponent,
+    PublicacionesAdopComponent
   
 
   ],
@@ -61,7 +62,9 @@ import { AdminConfigurationsModule } from './pages/admin-configurations/admin-co
     HttpClientModule,
     SignupOptionsModule,
     AdminConfigurationsModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatCardModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
