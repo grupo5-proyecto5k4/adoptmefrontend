@@ -30,3 +30,5 @@ const forceSSL = function() {
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/adoptmefrontend/index.html'));
   });
+
+  const jwt = require('jsonwebtoken');
