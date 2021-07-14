@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {AlertsService} from '../utils/alerts.service';
+import { AnyCnameRecord } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,11 @@ export class AuthService {
   login(email: string, password: string) {
     debugger;
     this.http.post(this.api + '/login', {correoElectronico: email,contrasenia: password})
-    .subscribe((resp: any) => {
+    .subscribe((resp:any) => {
+      this.router.navigate(['landing']);
+      localStorage.setItem('auth_token', resp.token);
+      this.alertsService.confirmMessage("Inicio de sesión exitoso");
+    },
       error => {
         if (error.error.error.code == 400) {
           this.alertsService.errorMessage("Email y/o contraseña incorrectos")
@@ -26,16 +31,12 @@ export class AuthService {
           this.alertsService.errorMessage("Usuario bloqueado, comuníquese con el administrador desde la sección contáctenos.")
           return;
         }
-        this.alertsService.errorMessage("Email y/o contraseña incorrectos");
-      };
-      
-      this.router.navigate(['landing']);
-      localStorage.setItem('auth_token', resp.token);
-      this.alertsService.confirmMessage("Inicio de sesión exitoso");
+        this.alertsService.errorMessage("Email y/o contraseña incorrectos");     
   
       }
       );
     }
+    
 
     logout() {
       localStorage.removeItem('token');
