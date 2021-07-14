@@ -17,7 +17,7 @@
     background: rgba(255, 255, 255, 0.15);
     padding: 2rem 3rem;
     margin: auto;
-    border-radius: 2.5rem;
+    line-height: 36px;
     background-color:#E8C0E0;
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
     color: black;
@@ -28,8 +28,9 @@
     display: block;
     margin: 2rem 0;
     width: 100%;
-    border-radius: 0.5rem;
+    line-height: 36px;
     padding: 1rem;
+    font-weight: bold;
     border: none;
     box-shadow: inset -5px -5px 15px rgba(255, 255, 255, 0.8), inset 5px 5px 10px
         rgba(0, 0, 0, 0.1);
@@ -40,14 +41,16 @@
     text-transform: uppercase;
     letter-spacing: 0.15em;
     border: none;
-    font-size: 0.875rem;
     color:white;
-    background-color:#BE49AA;
+    background-color: #c50fa1;
     font-weight: bold;
+    line-height: 36px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
     width: 49%;
     display: block;
     padding: 0.875rem 1rem;
-    border-radius: 1.5rem;
     cursor: pointer;
     margin-left: auto;
     margin-right:auto;

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import{AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -7,14 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InicioSesionComponent {
 
-  email: string;
-  password: string;
+  email: '';
+  password: '';
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
   login() {
-    console.log(this.email);
-    console.log(this.password);
+    this.authService.login(this.email, this.password)
   }
 
 }
