@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient,private router: Router, private alertsService: AlertsService) {   }
 
   login(email: string, password: string) {
-    debugger;
+    
     this.http.post(this.api + '/login', {correoElectronico: email,contrasenia: password})
     .subscribe((resp:Data) => {
       this.router.navigate(['landing']);
