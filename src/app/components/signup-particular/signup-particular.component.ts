@@ -125,6 +125,7 @@ export class SignupParticularComponent implements OnInit {
       particularUser.correoElectronico = this.SignupForm.controls.email.value;
       particularUser.numeroContacto = this.SignupForm.controls.contactNumber.value;
       particularUser.dni = this.SignupForm.controls.dni.value;
+      particularUser.fechaNacimiento = (this.SignupForm.controls.birthDate.value).toLocaleString();;
       if (this.SignupForm.controls.facebook.value !== "") {
         particularUser.facebook = this.SignupForm.controls.facebook.value;
       }
@@ -138,7 +139,8 @@ export class SignupParticularComponent implements OnInit {
           this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
         },
         error: (err: any) => {
-          this.alertsService.errorMessage(err).then((result) => {
+          debugger;
+          this.alertsService.errorMessage(err.error.error).then((result) => {
             this.isLoading = false;
           }
         )
