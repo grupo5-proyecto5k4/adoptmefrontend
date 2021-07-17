@@ -100,7 +100,7 @@ export class SignupRescatistComponent implements OnInit {
           this.alertsService.confirmMessage("Su cuenta ha sido registrada y será verificada a la brevedad").then((result) => window.location.href = '/');
         },
         error: (err: any) => {
-          this.alertsService.errorMessage(err).then((result) => {
+          this.alertsService.errorMessage(err.error.error).then((result) => {
             this.isLoading = false;
           }
         )
