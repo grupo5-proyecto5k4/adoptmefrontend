@@ -16,8 +16,9 @@ import { Address } from 'src/models/IAddress';
 export class SignupRescatistComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo = "Registrar cuenta";
+  isLoading: Boolean = false;
 
-  constructor(private SignupService: SignupService, private alertsService: AlertsService) { }
+  constructor(private SignupService: SignupService, private alertsService: AlertsService, private dialogref: MatDialogRef<SignupRescatistComponent>) { }
 
   ngOnInit() {
     this.SignupForm = new FormGroup({
@@ -26,15 +27,17 @@ export class SignupRescatistComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
       street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      altura:  new FormControl('', [Validators.required, Validators.pattern('[0-9]')]),
-      reference: new FormControl('', [Validators.required, Validators.maxLength(150)]),
+      altura:  new FormControl('', [Validators.pattern('[0-9]')]),
+      reference: new FormControl('', [Validators.maxLength(150)]),
       barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       facebook: new FormControl(''),
       instagram: new FormControl(''),
       localidad: new FormControl({value: 'Córdoba Capital', disabled: true}),
   });
-  }
+  this.dialogref.disableClose = true;
+}
 
+  
   validateCalle() {
     return (((this.SignupForm.get('street').touched ||
       this.SignupForm.get('street').dirty) &&
@@ -69,7 +72,7 @@ export class SignupRescatistComponent implements OnInit {
 
   signup() {
       if (this.SignupForm.valid) {
-
+        this.isLoading = true;
         //Acá seteamos los valores de la dirección
         let userAddress: Address = new Address();
         userAddress.calle = this.SignupForm.controls.street.value;
@@ -94,10 +97,13 @@ export class SignupRescatistComponent implements OnInit {
         particularUser.Direccion = userAddress;
               this.SignupService.registerUser(particularUser).subscribe({
         complete: () => {
-          this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
+          this.alertsService.confirmMessage("Su cuenta ha sido registrada y será verificada a la brevedad").then((result) => window.location.href = '/');
         },
         error: (err: any) => {
-          this.alertsService.errorMessage(err)
+          this.alertsService.errorMessage(err).then((result) => {
+            this.isLoading = false;
+          }
+        )
         }
       })
       }

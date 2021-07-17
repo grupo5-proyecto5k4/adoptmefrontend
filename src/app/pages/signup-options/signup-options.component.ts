@@ -27,6 +27,4 @@ export class SignupOptionsComponent {
         this.dialog.open(SignupRescatistComponent)
       }
 
-      
-
 }

@@ -76,15 +76,12 @@
 
                     <div class="derecha">
                       <mat-form-field class="example-full-width">
-                        <mat-label>*Altura</mat-label>
+                        <mat-label>Altura</mat-label>
                         <input matInput placeholder="1234" formControlName="altura" class="form-control" maxlength="4">
                       </mat-form-field>
                       <span class="help-block" *ngIf="((SignupForm.get('altura').touched ||
                       SignupForm.get('altura').dirty) &&
                       SignupForm.get('altura').errors)">
-                        <span *ngIf="SignupForm.get('altura').errors.required">
-                          <h6 class="helpError">Campo requerido</h6>
-                        </span>
                         <span *ngIf="SignupForm.get('altura').errors.pattern">
                           <mat-error class="helpError">Formato de la altura no válido</mat-error>
                         </span>
@@ -96,6 +93,7 @@
                       </span>
                     </div>
 
+                    <div class="direccion">
                     <div class="izquierda">
                       <mat-form-field class="example-full-width">
                         <mat-label>Localidad</mat-label>
@@ -125,10 +123,10 @@
                       </span>
 
                     </div>
-
+                  </div>
                     <div>
                       <mat-form-field class="example-full-width">
-                        <mat-label>*Referencia</mat-label>
+                        <mat-label>Referencia</mat-label>
                         <textarea matInput type="text" formControlName="reference" maxlength="150"></textarea>
                       </mat-form-field>
                     </div>
@@ -136,9 +134,6 @@
                     <span class="help-block" *ngIf="((SignupForm.get('reference').touched ||
                       SignupForm.get('reference').dirty) &&
                       SignupForm.get('reference').errors)">
-                      <span *ngIf="SignupForm.get('reference').errors.required">
-                        <h6 class="helpError">Campo requerido</h6>
-                      </span>
                       <span *ngIf="SignupForm.get('reference').errors.maxlength">
                         <mat-error class="helpError">Ingrese como máximo 150 caracteres</mat-error>
                       </span>
@@ -229,8 +224,12 @@
                       </div>
                     </div>
                     <div id="botones">
-                      <a mat-raised-button color="accent" class="button" type="button" id="btncuenta"
-                        [disabled]="SignupForm.invalid" (click)="signup()">Crear cuenta</a>
+                      <a mat-raised-button *ngIf="!isLoading" color="accent" class="button cancelar" type="button" id="btncuenta"
+                       mat-dialog-close>Cancelar</a>
+                      <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button" id="btncuenta"
+                      (click)="signup()">Crear cuenta</a>
+                      <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button" id="btncuenta">
+                        <img class=logo src="../../../assets/images/loading.gif"/></a>
                     </div>
                   </form>
                 </div>
