@@ -16,10 +16,13 @@ import { AlertsService } from 'src/utils/alerts.service';
 export class SignupParticularComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo = "Registrar cuenta";
-  menorDeEdad: Boolean = false;
+  edadInvalida: Boolean = false;
+  mensajeEdad: string = "";
+  isLoading: Boolean = false;
 
 
-  constructor(private SignupService: SignupService, private alertsService: AlertsService) { }
+
+  constructor(private SignupService: SignupService, private alertsService: AlertsService, private dialogref: MatDialogRef<SignupParticularComponent>) { }
 
   ngOnInit() {
     this.SignupForm = new FormGroup({
@@ -33,6 +36,11 @@ export class SignupParticularComponent implements OnInit {
       facebook: new FormControl(''),
       instagram: new FormControl(''),
     });
+    this.dialogref.disableClose = true;
+  }
+
+  close(){
+    this.dialogref.close();
   }
 
   validateInitialDate() {
@@ -48,11 +56,26 @@ export class SignupParticularComponent implements OnInit {
         age--;
       }
       if (age < 18) {
-        return true;
+        this.edadInvalida = true;
+        this.mensajeEdad = "Debe ser mayor a 18 años";
+      }
+      else if (age > 100){
+        this.edadInvalida = true;
+        this.mensajeEdad = "Edad no válida";
       }
       else {
-        return false;
+        this.edadInvalida = false;
       }
+  }
+
+
+  validarCampos() {
+    if (this.SignupForm.valid && !this.SignupForm.pristine) {
+      document.getElementById("changePassword").classList.remove('disabledBtnPassword');
+    }
+    else{
+      document.getElementById("changePassword").classList.add('disabledBtnPassword');
+  }
   }
 
   validateName() {
@@ -91,24 +114,17 @@ export class SignupParticularComponent implements OnInit {
       this.SignupForm.get('password').errors));
   }
 
-  /*
-  signup(){
-    debugger;
-    if (this.SignupForm.valid) {
-      this.alertsService.confirmMessage("Su cuenta ha sido registrada");
-    }
-    else{
-      this.alertsService.infoMessage("Por favor complete los campos requeridos","Atención")
-    }
-  }*/
 
   signup() {
     if (this.SignupForm.valid) {
+      this.isLoading = true;
+
       let particularUser: User = new User();
       particularUser.nombres = this.SignupForm.controls.name.value;
       particularUser.apellidos = this.SignupForm.controls.lastname.value;
       particularUser.correoElectronico = this.SignupForm.controls.email.value;
       particularUser.numeroContacto = this.SignupForm.controls.contactNumber.value;
+      particularUser.dni = this.SignupForm.controls.dni.value;
       if (this.SignupForm.controls.facebook.value !== "") {
         particularUser.facebook = this.SignupForm.controls.facebook.value;
       }
@@ -122,10 +138,12 @@ export class SignupParticularComponent implements OnInit {
           this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
         },
         error: (err: any) => {
+          this.isLoading = false;
           this.alertsService.errorMessage(err)
         }
       })
     }
+    
   }
 
   async init() {
