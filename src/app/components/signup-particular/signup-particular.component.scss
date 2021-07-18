@@ -10,7 +10,7 @@
   line-height: 150px !important;
 }
 
-#btncuenta{
+#btncuenta, #confirmar{
   color: #EBEEF1;
   background-color: #c50fa1;
   cursor: pointer;
@@ -20,6 +20,9 @@ input{
   width: 98% !important;
 }
 
+.buttonDisabled{
+  cursor: not-allowed !important;
+}
 
 .password{
   width: 90%;
@@ -98,7 +101,7 @@ input {
   border-color: rgba(85, 85, 85, 0.596) !important;
 }
 
-#btncuenta{
+#btncuenta, #confirmar{
   color: #EBEEF1;
   background-color: #c50fa1;
   min-width: 64px;
@@ -452,7 +455,7 @@ select {
 }
 
 
-#btncuenta{
+#btncuenta, #confirmar{
   color: #EBEEF1;
   background-color: #c50fa1;
   line-height: 36px;
