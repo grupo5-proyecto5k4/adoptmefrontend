@@ -28,7 +28,7 @@ export class SignupParticularComponent implements OnInit {
     this.SignupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
       lastname: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
-      contactNumber: new FormControl('', [Validators.pattern('[0-9]{10,13}')]),
+      contactNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10,13}')]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
       dni: new FormControl('', [Validators.required, Validators.pattern('[0-9]{7,8}')]),
@@ -45,6 +45,14 @@ export class SignupParticularComponent implements OnInit {
 
   validateInitialDate() {
     return (this.SignupForm.get('birthDate').touched && (this.SignupForm.controls.birthDate.value == ""));
+  }
+
+  validateButton() {
+    if (this.SignupForm.valid && !this.edadInvalida) {
+      document.getElementById("confirmar").classList.remove("buttonDisabled");
+    } else {
+      document.getElementById("confirmar").classList.add("buttonDisabled");
+    }
   }
 
   CalculateAge() {
@@ -116,9 +124,8 @@ export class SignupParticularComponent implements OnInit {
 
 
   signup() {
-    if (this.SignupForm.valid) {
+    if (this.SignupForm.valid && !this.edadInvalida) {
       this.isLoading = true;
-
       let particularUser: User = new User();
       particularUser.nombres = this.SignupForm.controls.name.value;
       particularUser.apellidos = this.SignupForm.controls.lastname.value;
@@ -146,8 +153,7 @@ export class SignupParticularComponent implements OnInit {
         )
         }
       })
-    }
-    
+    } 
   }
 
   async init() {

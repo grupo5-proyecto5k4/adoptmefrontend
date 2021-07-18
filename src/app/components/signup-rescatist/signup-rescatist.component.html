@@ -94,36 +94,36 @@
                     </div>
 
                     <div class="direccion">
-                    <div class="izquierda">
-                      <mat-form-field class="example-full-width">
-                        <mat-label>Localidad</mat-label>
-                        <input matInput formControlName="localidad">
-                      </mat-form-field>
-                      <span class="help-block" *ngIf="(validateBarrio())">
-                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                          -
-                        </h6>
-                      </span>
-                    </div>
+                      <div class="izquierda">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Localidad</mat-label>
+                          <input matInput formControlName="localidad">
+                        </mat-form-field>
+                        <span class="help-block" *ngIf="(validateBarrio())">
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </div>
 
-                    <div class="derecha">
-                      <mat-form-field class="example-full-width">
-                        <mat-label>*Barrio</mat-label>
-                        <input matInput formControlName="barrio" class="form-control" maxlength="50">
-                      </mat-form-field>
-                      <span class="help-block" *ngIf="((SignupForm.get('barrio').touched ||
+                      <div class="derecha">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>*Barrio</mat-label>
+                          <input matInput formControlName="barrio" class="form-control" maxlength="50">
+                        </mat-form-field>
+                        <span class="help-block" *ngIf="((SignupForm.get('barrio').touched ||
                       SignupForm.get('barrio').dirty) &&
                       SignupForm.get('barrio').errors)">
-                        <span *ngIf="SignupForm.get('barrio').errors.required">
-                          <h6 class="helpError">Campo requerido</h6>
+                          <span *ngIf="SignupForm.get('barrio').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="SignupForm.get('barrio').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 50 caracteres</mat-error>
+                          </span>
                         </span>
-                        <span *ngIf="SignupForm.get('barrio').errors.maxlength">
-                          <mat-error class="helpError">Ingrese como máximo 50 caracteres</mat-error>
-                        </span>
-                      </span>
 
+                      </div>
                     </div>
-                  </div>
                     <div>
                       <mat-form-field class="example-full-width">
                         <mat-label>Referencia</mat-label>
@@ -162,6 +162,9 @@
                       <span class="help-block" *ngIf="((SignupForm.get('contactNumber').touched ||
                       SignupForm.get('contactNumber').dirty) &&
                       SignupForm.get('contactNumber').errors)">
+                        <span *ngIf="SignupForm.get('contactNumber').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
                         <span *ngIf="SignupForm.get('contactNumber').errors.pattern">
                           <h6 class="helpError">Ingrese valor numérico entre 10 y 13 dígitos</h6>
                         </span>
@@ -224,12 +227,13 @@
                       </div>
                     </div>
                     <div id="botones">
-                      <a mat-raised-button *ngIf="!isLoading" color="accent" class="button cancelar" type="button" id="btncuenta"
-                       mat-dialog-close>Cancelar</a>
-                      <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button" id="btncuenta"
-                      (click)="signup()">Crear cuenta</a>
-                      <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button" id="btncuenta">
-                        <img class=logo src="../../../assets/images/loading.gif"/></a>
+                      <a mat-raised-button *ngIf="!isLoading" color="accent" class="button cancelar" type="button"
+                        id="btncuenta" mat-dialog-close>Cancelar</a>
+                        <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button"
+                        id="confirmar" (mouseover)="validateButton()" (click)="signup()">Crear cuenta</a>
+                      <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button"
+                        id="btncuenta">
+                        <img class=logo src="../../../assets/images/loading.gif" /></a>
                     </div>
                   </form>
                 </div>

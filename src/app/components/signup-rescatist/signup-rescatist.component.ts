@@ -23,7 +23,7 @@ export class SignupRescatistComponent implements OnInit {
   ngOnInit() {
     this.SignupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(60), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      contactNumber: new FormControl('', [Validators.pattern('[0-9]{10,13}')]),
+      contactNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10,13}')]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
       street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -37,7 +37,15 @@ export class SignupRescatistComponent implements OnInit {
   this.dialogref.disableClose = true;
 }
 
-  
+
+validateButton() {
+  if (this.SignupForm.valid) {
+    document.getElementById("confirmar").classList.remove("buttonDisabled");
+  } else {
+    document.getElementById("confirmar").classList.add("buttonDisabled");
+  }
+}
+
   validateCalle() {
     return (((this.SignupForm.get('street').touched ||
       this.SignupForm.get('street').dirty) &&
