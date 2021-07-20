@@ -19,7 +19,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   goToSignUpOptions(){
-    this.router.navigate(['/signup-options']);
+    this.router.navigate(['/opciones-de-registro']);
     window.scrollTo(0, 0);
   }
 

@@ -16,16 +16,19 @@ import { AlertsService } from 'src/utils/alerts.service';
 export class SignupParticularComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo = "Registrar cuenta";
-  menorDeEdad: Boolean = false;
+  edadInvalida: Boolean = false;
+  mensajeEdad: string = "";
+  isLoading: Boolean = false;
 
 
-  constructor(private SignupService: SignupService, private alertsService: AlertsService) { }
+
+  constructor(private SignupService: SignupService, private alertsService: AlertsService, private dialogref: MatDialogRef<SignupParticularComponent>) { }
 
   ngOnInit() {
     this.SignupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
       lastname: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
-      contactNumber: new FormControl('', [Validators.pattern('[0-9]{10,13}')]),
+      contactNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10,13}')]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
       dni: new FormControl('', [Validators.required, Validators.pattern('[0-9]{7,8}')]),
@@ -33,10 +36,23 @@ export class SignupParticularComponent implements OnInit {
       facebook: new FormControl(''),
       instagram: new FormControl(''),
     });
+    this.dialogref.disableClose = true;
+  }
+
+  close(){
+    this.dialogref.close();
   }
 
   validateInitialDate() {
     return (this.SignupForm.get('birthDate').touched && (this.SignupForm.controls.birthDate.value == ""));
+  }
+
+  validateButton() {
+    if (this.SignupForm.valid && !this.edadInvalida) {
+      document.getElementById("confirmar").classList.remove("buttonDisabled");
+    } else {
+      document.getElementById("confirmar").classList.add("buttonDisabled");
+    }
   }
 
   CalculateAge() {
@@ -48,11 +64,26 @@ export class SignupParticularComponent implements OnInit {
         age--;
       }
       if (age < 18) {
-        return true;
+        this.edadInvalida = true;
+        this.mensajeEdad = "Debe ser mayor a 18 años";
+      }
+      else if (age > 100){
+        this.edadInvalida = true;
+        this.mensajeEdad = "Edad no válida";
       }
       else {
-        return false;
+        this.edadInvalida = false;
       }
+  }
+
+
+  validarCampos() {
+    if (this.SignupForm.valid && !this.SignupForm.pristine) {
+      document.getElementById("changePassword").classList.remove('disabledBtnPassword');
+    }
+    else{
+      document.getElementById("changePassword").classList.add('disabledBtnPassword');
+  }
   }
 
   validateName() {
@@ -91,24 +122,17 @@ export class SignupParticularComponent implements OnInit {
       this.SignupForm.get('password').errors));
   }
 
-  /*
-  signup(){
-    debugger;
-    if (this.SignupForm.valid) {
-      this.alertsService.confirmMessage("Su cuenta ha sido registrada");
-    }
-    else{
-      this.alertsService.infoMessage("Por favor complete los campos requeridos","Atención")
-    }
-  }*/
 
   signup() {
-    if (this.SignupForm.valid) {
+    if (this.SignupForm.valid && !this.edadInvalida) {
+      this.isLoading = true;
       let particularUser: User = new User();
       particularUser.nombres = this.SignupForm.controls.name.value;
       particularUser.apellidos = this.SignupForm.controls.lastname.value;
       particularUser.correoElectronico = this.SignupForm.controls.email.value;
       particularUser.numeroContacto = this.SignupForm.controls.contactNumber.value;
+      particularUser.dni = this.SignupForm.controls.dni.value;
+      particularUser.fechaNacimiento = (this.SignupForm.controls.birthDate.value).toLocaleString();;
       if (this.SignupForm.controls.facebook.value !== "") {
         particularUser.facebook = this.SignupForm.controls.facebook.value;
       }
@@ -122,10 +146,14 @@ export class SignupParticularComponent implements OnInit {
           this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
         },
         error: (err: any) => {
-          this.alertsService.errorMessage(err)
+          debugger;
+          this.alertsService.errorMessage(err.error.error).then((result) => {
+            this.isLoading = false;
+          }
+        )
         }
       })
-    }
+    } 
   }
 
   async init() {

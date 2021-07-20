@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import {MatInputModule} from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AlertsService } from 'src/utils/alerts.service';
 import { SignupService } from 'src/services/signup.service';
@@ -16,24 +16,35 @@ import { Address } from 'src/models/IAddress';
 export class SignupRescatistComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo = "Registrar cuenta";
+  isLoading: Boolean = false;
 
-  constructor(private SignupService: SignupService, private alertsService: AlertsService) { }
+  constructor(private SignupService: SignupService, private alertsService: AlertsService, private dialogref: MatDialogRef<SignupRescatistComponent>) { }
 
   ngOnInit() {
     this.SignupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(60), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      contactNumber: new FormControl('', [Validators.pattern('[0-9]{10,13}')]),
+      contactNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10,13}')]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
       street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      altura:  new FormControl('', [Validators.required, Validators.pattern('[0-9]')]),
-      reference: new FormControl('', [Validators.required, Validators.maxLength(150)]),
+      altura:  new FormControl('', [Validators.pattern('[0-9]{3,4}')]),
+      reference: new FormControl('', [Validators.maxLength(150)]),
       barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       facebook: new FormControl(''),
       instagram: new FormControl(''),
       localidad: new FormControl({value: 'Córdoba Capital', disabled: true}),
   });
+  this.dialogref.disableClose = true;
+}
+
+
+validateButton() {
+  if (this.SignupForm.valid) {
+    document.getElementById("confirmar").classList.remove("buttonDisabled");
+  } else {
+    document.getElementById("confirmar").classList.add("buttonDisabled");
   }
+}
 
   validateCalle() {
     return (((this.SignupForm.get('street').touched ||
@@ -69,7 +80,7 @@ export class SignupRescatistComponent implements OnInit {
 
   signup() {
       if (this.SignupForm.valid) {
-
+        this.isLoading = true;
         //Acá seteamos los valores de la dirección
         let userAddress: Address = new Address();
         userAddress.calle = this.SignupForm.controls.street.value;
@@ -94,10 +105,13 @@ export class SignupRescatistComponent implements OnInit {
         particularUser.Direccion = userAddress;
               this.SignupService.registerUser(particularUser).subscribe({
         complete: () => {
-          this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
+          this.alertsService.confirmMessage("Su cuenta ha sido registrada y será verificada a la brevedad").then((result) => window.location.href = '/');
         },
         error: (err: any) => {
-          this.alertsService.errorMessage(err)
+          this.alertsService.errorMessage(err.error.error).then((result) => {
+            this.isLoading = false;
+          }
+        )
         }
       })
       }

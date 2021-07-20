@@ -13,6 +13,7 @@ export class SignupService {
   constructor(private httpClient: HttpClient) {}
  
   registerUser(request: User): Observable<User> {
+    debugger;
       const url = `${environment.base_url}${environment.user.base_url}`;
       return this.httpClient.post<User>(url, request);
     }
