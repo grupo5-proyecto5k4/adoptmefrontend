@@ -1,27 +1,98 @@
-<body>
-<div class=container-construction>
-    <div class="login">
-        <form class="custom-form" method="post">
-          <h1>Iniciar Sesión</h1>
-          <input
-            type="email"
-            [(ngModel)]="email"
-            name="email"
-            placeholder="Email"
-            required="required"
-          />
-          <input
-            type="password"
-            [(ngModel)]="password"
-            name="password"
-            placeholder="Contraseña"
-            required="required"
-          />
-          <button  routerLink="/landing" style="float: left" color="accent">Cancelar</button>
-          <button type="submit" (click)="login()" color="accent">Ingresar</button>
-          
-        </form>
-      </div>
-</div>
-</body>
+<mat-dialog-content class="dialog-content">
+
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <section id="cta4">
+        <div class="container">
+          <header>
+            <div class="card-container">
+              <div class="lower-container">
+                <div>
+                  <div>
+                    <h2 class="subtitulo">{{Titulo}}</h2>
+                  </div>
+                  <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm">                  
+              
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>*Correo</mat-label>
+                        <input matInput placeholder="direccion@dominio.com" formControlName="email" class="form-control"
+                          maxlength="60">
+                      </mat-form-field>
+                      <span class="help-block" *ngIf="((SignupForm.get('email').touched ||
+                        SignupForm.get('email').dirty) &&
+                        SignupForm.get('email').errors)">
+                        <span *ngIf="SignupForm.get('email').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('email').errors.email || SignupForm.get('email').errors.pattern">
+                          <h6 class="helpError">Formato del correo no válido</h6>
+                        </span>
+                      </span>
+                    </div>
+                    
+                      <div class="password">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>*Contraseña</mat-label>
+                          <input matInput type="password" formControlName="password" class="form-control" id="password"
+                            maxlength="17">
+                        </mat-form-field>
+                        <span class="help-block" *ngIf="((SignupForm.get('password').touched ||
+                      SignupForm.get('password').dirty) &&
+                      SignupForm.get('password').errors)">
+                          <span *ngIf="SignupForm.get('password').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="SignupForm.get('password').errors.pattern">
+                            <h6 class="helpError">La contraseña no cumple con los requisitos</h6>
+                          </span>
+                        </span>
+                        <span class="help-block blank" *ngIf="(validateContactNumber() && !validatePassword())">
+                          <span>
+                            <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                              -
+                            </h6>
+                          </span>
+                        </span>
+                      </div>
+
+                      <div class="tooldiv">
+                        <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+                    Entre 8 y 15 caracteres,
+                    al menos una mayúscula,
+                    una minúscula y un número"
+                          aria-label="Button that displays a tooltip when focused or hovered over">
+                          ℹ
+                        </label>
+                        <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">
+                          <span>
+                            <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                              -
+                            </h6>
+                          </span>
+                        </span>
+                      </div>
+                   
+
+                    <div id="passwordRequirement">
+                      <div>
+                        <p id="requer">(*)Campos obligatorios</p>
+                      </div>
+                    </div>
+                    <div id="botones">
+                      <a mat-raised-button routerLink= "/landing" color="accent" class="button" type="button" id="btncuenta"
+                           >Cancelar</a>
+                      <a mat-raised-button color="accent" class="button" type="button" id="btncuenta"
+                        [disabled]="SignupForm.invalid" style="margin-left: 10px" (click)="login()">Ingresar</a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+    </div>
+  </body>
+</mat-dialog-content>
 
