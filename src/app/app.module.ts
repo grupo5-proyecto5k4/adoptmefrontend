@@ -28,6 +28,7 @@ import { AdminConfigurationsModule } from './pages/admin-configurations/admin-co
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { JwtModule } from "@auth0/angular-jwt";
 
 @NgModule({
   declarations: [
@@ -40,8 +41,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     TermsAndConditionsComponent,
     NotFoundComponent,
     InicioSesionComponent,
-    PublicacionesAdopComponent
-  
+    PublicacionesAdopComponent  
 
   ],
   imports: [
@@ -64,8 +64,14 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AdminConfigurationsModule,
     MatExpansionModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter:  () => localStorage.getItem('access_token')
+      }
+    })
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })
