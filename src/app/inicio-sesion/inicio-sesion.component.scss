@@ -225,18 +225,33 @@ margin-right: 11.7%;
 }
 
 
-@media (min-width: 992px) and (max-width: 1600px){
+@media (min-width: 800px) and (max-width: 1600px){
 
 
 .derecha,.izquierda {
   width: 49%;
 }
 
-
+.form{
+    width: 80%;
+}
 
 .container {
 padding-bottom: 71% ;
+height:auto;
+}
+
+.lower-container{
+    height: 30%;
+    overflow-y: auto !important;
     }
+    
+    .card-container{
+    overflow-y: auto !important;
+    max-height: 50%;
+    margin-top: 6%;
+    }
+    
 
 .RegistroBoxBtnCancelar {
 width: 13.5%;
@@ -274,7 +289,7 @@ top: 43.5% !important;
 
 
 
-@media (max-width: 599px){
+@media (max-width: 799px){
 
 .container {
 padding-bottom: 150% !important;
@@ -286,7 +301,7 @@ padding-bottom: 150% !important;
 
 .card-container{
 width: 80% !important;
-height: 60% !important;
+height: 50% !important;
 top: 40% !important;
 }
 }
