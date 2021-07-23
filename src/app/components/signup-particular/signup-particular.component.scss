@@ -9,7 +9,8 @@
   color:white !important;
   line-height: 150px !important;
 }
-#btncuenta{
+
+#btncuenta, #confirmar{
   color: #EBEEF1;
   background-color: #c50fa1;
   cursor: pointer;
@@ -17,6 +18,10 @@
 
 input{
   width: 98% !important;
+}
+
+.buttonDisabled{
+  cursor: not-allowed !important;
 }
 
 .password{
@@ -35,7 +40,7 @@ a [type="button"]:disabled {
 }
 
 #botones{
-  margin-top: 4%;
+  margin-top: 6%;
 }
 
 .label{
@@ -54,12 +59,26 @@ input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px rgb(255, 245, 237) inset;
 }
 
+.helpError {
+  color: #f44336; 
+  font-size: 10px;
+}
+
 .example-full-width {
   width: 100%;
 }
 
 td {
   padding-right: 8px;
+}
+
+button:disabled{
+  cursor: not-allowed;
+}
+
+.direccion{
+  width: 100%;
+  float: clear;
 }
 
 form{
@@ -82,7 +101,7 @@ input {
   border-color: rgba(85, 85, 85, 0.596) !important;
 }
 
-#btncuenta{
+#btncuenta, #confirmar{
   color: #EBEEF1;
   background-color: #c50fa1;
   min-width: 64px;
@@ -90,6 +109,29 @@ input {
   padding: 10px;
   border-radius: 4px;
   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.logo{
+  margin-bottom: -15px;
+  width: 40px;
+  height: 40px;
+}
+
+.confirmar, .loading{
+  margin-left: 2px;
+}
+
+.loading{
+  background-color: #d996cc !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  cursor: none !important;
+}
+
+.cancelar{
+  margin-right: 2px;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
 }
 
 ::ng-deep .tool{
@@ -226,7 +268,15 @@ input {
       margin-right: -73% !important;
   }
 
+  .direccion{
+    width: 100%;
+    float: clear;
+    margin-top: 100px !important;
   }
+
+  }
+
+  
 
 
 @media (min-width: 992px) and (max-width: 1600px){
@@ -240,6 +290,12 @@ input {
     float: right;
   }
 
+  .direccion{
+    width: 100%;
+    float: clear;
+    margin-top: 100px !important;
+  }
+  
   .izquierda{
     float: left;
   }
@@ -318,6 +374,8 @@ padding-bottom: 150% !important;
   color: rgb(31, 31, 31);
 }
 
+
+
 #requer{
   text-align: left;
   font-size: 12px;
@@ -328,6 +386,7 @@ padding-bottom: 150% !important;
   float: left;
   float: clear;
   text-align: left;
+  margin-bottom: 3%;
 }
 
 input:disabled {
@@ -388,21 +447,15 @@ select {
 
 
 .links{
-  color: chocolate; 
+  color: #c50fa1; 
   font-size: 14px; 
   margin-left: 10px; 
   cursor: pointer; 
   font-weight: bold
 }
 
-.helpError {
-  color: #f44336; 
-  font-size: 10px;
-}
 
-
-
-#btncuenta{
+#btncuenta, #confirmar{
   color: #EBEEF1;
   background-color: #c50fa1;
   line-height: 36px;
@@ -411,22 +464,4 @@ select {
   font-weight: 500;
 }
 
-
-.professionalModal {
-  background-color: rgba(255, 251, 251); 
-  margin: 3%; 
-  border-radius: 15px; 
-  border-style: double;
-}
-
-
-.solitario1{
-  float: clear;
-  width: 82%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-left: 60%;
-  margin-top: -10%;
-  margin-bottom: -7%;
-}
 

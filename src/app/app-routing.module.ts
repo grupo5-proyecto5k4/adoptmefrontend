@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'provisorio',
     component: UnderConstructionComponent
   },
-  {path: 'iniSesion',
+  {path: 'iniciarSesion',
 component: InicioSesionComponent},
   {
     path: 'mascotas',
@@ -57,7 +57,7 @@ component: InicioSesionComponent},
     component: UnderConstructionComponent
   },
   {
-    path: 'signup-options',
+    path: 'opciones-de-registro',
     component: SignupOptionsComponent
   },
   {

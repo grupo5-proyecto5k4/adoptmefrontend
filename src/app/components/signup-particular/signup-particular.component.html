@@ -15,7 +15,7 @@
 
 
                     <div class="izquierda">
-                      <mat-form-field class="example-full-width" id="BoxNombre">
+                      <mat-form-field class="example-full-width errorColor" id="BoxNombre">
                         <mat-label>*Nombre</mat-label>
                         <input matInput type="text" formControlName="name" maxlength="35">
                       </mat-form-field>
@@ -80,7 +80,7 @@
                           <h6 class="helpError">Campo requerido</h6>
                         </span>
                         <span *ngIf="SignupForm.get('dni').errors.pattern">
-                          <h6 class="helpError">Formato no válido</h6>
+                          <h6 class="helpError">Formato del DNI no válido</h6>
                         </span>
                       </span>
                       <span class="help-block" *ngIf="(!validateDNI() && validateBirthdate())">
@@ -95,15 +95,15 @@
                     <div class="derecha">
                       <mat-form-field class="example-full-width">
                         <mat-label>*Fecha de nacimiento</mat-label>
-                        <input matInput type="date" name="birthDate" formControlName="birthDate" class="form-control">
+                        <input matInput type="date" name="birthDate" (change)="CalculateAge()" formControlName="birthDate" class="form-control">
                       </mat-form-field>
                       <span class="help-block" *ngIf="validateInitialDate()">
                         <span *ngIf="validateInitialDate">
                           <h6 class="helpError">Campo requerido</h6>
                         </span>
-                        <span *ngIf="CalculateAge()">
-                          <h6 class="helpError">Debe ser mayor a 18 años</h6>
-                        </span>
+                      </span>
+                      <span *ngIf="edadInvalida">
+                        <h6 class="helpError">{{mensajeEdad}}</h6>
                       </span>
                       <span class="help-block" *ngIf="(validateDNI() && !validateBirthdate())">
                         <span>
@@ -218,8 +218,12 @@
                       </div>
                     </div>
                     <div id="botones">
-                      <a mat-raised-button color="accent" class="button" type="button" id="btncuenta"
-                        [disabled]="SignupForm.invalid" (click)="signup()">Crear cuenta</a>
+                      <a mat-raised-button *ngIf="!isLoading" color="accent" class="button cancelar" type="button" id="btncuenta"
+                       mat-dialog-close>Cancelar</a>
+                      <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button" id="confirmar"
+                      (mouseover)="validateButton()" (click)="signup()">Crear cuenta</a>
+                      <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button" id="btncuenta">
+                        <img class=logo src="../../../assets/images/loading.gif"/></a>
                     </div>
                   </form>
                 </div>
