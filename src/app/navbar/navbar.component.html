@@ -36,7 +36,7 @@
       <a *ngIf="isAdmin()" routerLink="/configuraciones" class="nav-titles" (click)="scrollTop()">Configuraciones</a>
       <a *ngIf="isAdmin()" routerLink="/reportes" class="nav-titles" (click)="scrollTop()">Reportes</a>
       <span class="spacer"></span>
-      <a mat-raised-button routerLink="/iniciarSesion" color="accent" id="btncuenta" *ngIf="!isInicioSesion()&&!isLogued()" (click)="scrollTop()">Iniciar sesión</a>
+      <a mat-raised-button routerLink="/inicio-sesion" color="accent" id="btncuenta" *ngIf="!isInicioSesion()&&!isLogued()" (click)="scrollTop()">Iniciar sesión</a>
       <a mat-raised-button routerLink="/opciones-de-registro" color="accent" id="btncuenta" *ngIf="!isSignupOptions()&&!isLogued()" (click)="scrollTop()">Crear cuenta</a>
     </mat-toolbar>
     <ng-content></ng-content>

@@ -29,6 +29,8 @@ import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-a
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { JwtModule } from "@auth0/angular-jwt";
+import { MatFormField } from '@angular/material/form-field';
+
 
 @NgModule({
   declarations: [
@@ -40,9 +42,8 @@ import { JwtModule } from "@auth0/angular-jwt";
     FaqsComponent,
     TermsAndConditionsComponent,
     NotFoundComponent,
-    InicioSesionComponent,
-    PublicacionesAdopComponent  
-
+    PublicacionesAdopComponent,
+    InicioSesionComponent 
   ],
   imports: [
     BrowserModule,
@@ -64,6 +65,7 @@ import { JwtModule } from "@auth0/angular-jwt";
     AdminConfigurationsModule,
     MatExpansionModule,
     MatCardModule,
+    MatFormField,
     MatPaginatorModule,
     JwtModule.forRoot({
       config: {

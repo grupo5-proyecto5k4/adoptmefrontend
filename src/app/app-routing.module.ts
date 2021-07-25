@@ -18,8 +18,8 @@ const routes: Routes = [
     path: 'provisorio',
     component: UnderConstructionComponent
   },
-  {path: 'iniciarSesion',
-component: InicioSesionComponent},
+  {path: 'inicio-sesion',
+component:InicioSesionComponent},
   {
     path: 'mascotas',
     component: UnderConstructionComponent

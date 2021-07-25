@@ -23,7 +23,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     providers:[],
     exports: [
       SignupParticularComponent,
-      SignupRescatistComponent,
+      SignupRescatistComponent
      ]
   })
 export class ComponentsModule{}
