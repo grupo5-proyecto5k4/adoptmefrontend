@@ -7,7 +7,6 @@ import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AlertsService } from 'src/utils/alerts.service';
 import { User } from 'src/models/IUser';
-import { JwtModule } from "@auth0/angular-jwt";
 import {ErrorStateMatcher} from "@angular/material/core";
 
 @Component({
@@ -19,11 +18,9 @@ import {ErrorStateMatcher} from "@angular/material/core";
 export class InicioSesionComponent implements OnInit{
   SignupForm: FormGroup;
   Titulo = "Iniciar Sesión"; 
-  
-  
+    
   constructor(private authService: AuthService,private alertsService: AlertsService,private dialogref: MatDialogRef<InicioSesionComponent>) {}
-  
-  
+    
   ngOnInit() {
     this.SignupForm = new FormGroup({
       

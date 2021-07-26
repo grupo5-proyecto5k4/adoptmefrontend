@@ -28,7 +28,6 @@ import { AdminConfigurationsModule } from './pages/admin-configurations/admin-co
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { JwtModule } from "@auth0/angular-jwt";
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
@@ -65,12 +64,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
-    MatPaginatorModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter:  () => localStorage.getItem('access_token')
-      }
-    })
+    MatPaginatorModule
   ],
   
   providers: [],

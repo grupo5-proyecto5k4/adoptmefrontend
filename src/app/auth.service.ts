@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Data, Router } from '@angular/router';
 import {AlertsService} from '../utils/alerts.service';
-import {JwtHelperService} from '@auth0/angular-jwt';
 import {catchError, map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -13,7 +12,7 @@ export class AuthService {
   //token;
   api='https://adoptmebackend.herokuapp.com';
     
-  constructor(private jwtHelper: JwtHelperService, private http: HttpClient,private router: Router, private alertsService: AlertsService) {   }
+  constructor(private http: HttpClient,private router: Router, private alertsService: AlertsService) {   }
 
   login(email: string, password: string) {
     this.http.post(this.api + '/login', {correoElectronico: email,contrasenia: password})
