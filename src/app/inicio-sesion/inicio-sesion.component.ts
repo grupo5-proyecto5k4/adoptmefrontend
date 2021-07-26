@@ -1,5 +1,5 @@
 import { Component, OnInit,Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators,NgForm,FormGroupDirective} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import{AuthService} from '../auth.service';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -7,7 +7,8 @@ import {MatInputModule} from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AlertsService } from 'src/utils/alerts.service';
 import { User } from 'src/models/IUser';
-
+import { JwtModule } from "@auth0/angular-jwt";
+import {ErrorStateMatcher} from "@angular/material/core";
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -15,12 +16,12 @@ import { User } from 'src/models/IUser';
   styleUrls: ['./inicio-sesion.component.scss']
 })
 
-export class InicioSesionComponent{
+export class InicioSesionComponent implements OnInit{
   SignupForm: FormGroup;
   Titulo = "Iniciar Sesión"; 
   
   
-  constructor(private authService: AuthService,private alertsService: AlertsService,private dialogref: MatDialogRef<InicioSesionComponent> ) {}
+  constructor(private authService: AuthService,private alertsService: AlertsService,private dialogref: MatDialogRef<InicioSesionComponent>) {}
   
   
   ngOnInit() {
@@ -51,7 +52,8 @@ export class InicioSesionComponent{
     }
     
   }
-
-  async init() {  }
+  async init() {
+   
+  }
 
 }

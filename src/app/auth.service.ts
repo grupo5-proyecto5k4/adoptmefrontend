@@ -3,6 +3,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Data, Router } from '@angular/router';
 import {AlertsService} from '../utils/alerts.service';
 import {JwtHelperService} from '@auth0/angular-jwt';
+import {catchError, map} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +19,8 @@ export class AuthService {
     this.http.post(this.api + '/login', {correoElectronico: email,contrasenia: password})
     .subscribe((resp:Data) => {
       this.router.navigate(['landing']);
-      this.jwtHelper.decodeToken(localStorage.getItem('access_token'));
-      //localStorage.setItem('auth_token', resp.token);
+      //this.jwtHelper.decodeToken(localStorage.getItem('access_token'));
+      localStorage.setItem('auth_token', resp.token);
   
       this.alertsService.confirmMessage("Inicio de sesión exitoso");
     },
