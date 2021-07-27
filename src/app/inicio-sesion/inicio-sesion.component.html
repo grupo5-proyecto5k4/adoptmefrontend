@@ -12,6 +12,8 @@
                 <input matInput placeholder="direccion@dominio.com" formControlName="email"
                 class="form-control" maxlength="60">
                </mat-form-field>
+
+               
              </div>
 
              <div>
@@ -32,7 +34,7 @@
 
            </div> 
              <a mat-raised-button routerLink="/landing" color="accent" class="button" type="button" id="btncuenta"> Cancelar</a>
-            <a mat-raised-button color="accent" class="button" type="button" id="btncuenta" style="margin-left:10px;">Ingresar</a>
+            <a mat-raised-button color="accent" class="button" type="button" id="btncuenta" style="margin-left:10px;" (click)="login()">Ingresar</a>
             </form>
       
          </div>
