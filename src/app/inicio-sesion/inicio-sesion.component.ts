@@ -27,13 +27,16 @@ export class InicioSesionComponent implements OnInit {
     })
   }
 
+  validatePassword(){
+    return(((this.SignUpForm.get('password').touched || this.SignUpForm.get('password').dirty) && this.SignUpForm.get('password').errors));
+  }
+
   login(){
     if(this.SignUpForm.valid){
       let loginUser: User= new User;
       loginUser.correoElectronico= this.SignUpForm.controls.email.value;
       loginUser.contrasenia=this.SignUpForm.controls.password.value;
       this.authservice.login(loginUser.correoElectronico,loginUser.contrasenia);
-
     }
   }
   

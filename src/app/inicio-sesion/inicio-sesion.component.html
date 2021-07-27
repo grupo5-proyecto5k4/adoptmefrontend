@@ -12,16 +12,41 @@
                 <input matInput placeholder="direccion@dominio.com" formControlName="email"
                 class="form-control" maxlength="60">
                </mat-form-field>
-
-               
+               <span class="help-block" *ngIf="((SignUpForm.get('email').touched ||
+                 SignUpForm.get('email').dirty) && SignUpForm.get('email').errors)">
+                 <span *ngIf="SignUpForm.get('email').errors.required"><h6 class="helpError">Campo Requerido</h6></span>
+                 <span *ngIf="SignUpForm.get('email').errors.email || SignUpForm.get('email').errors.pattern"><h6 class="helpError">Formato del correo no válido</h6></span>
+               </span>               
              </div>
 
-             <div>
+             <div class="password">
                <mat-form-field class=example-full-width>
                  <mat-label>*Contraseña</mat-label>
                  <input matInput type="password" formControlName="password"
                 class="form-control" id="password" maxlength="17">
                </mat-form-field>
+               <span class="help-block" *ngIf="((SignUpForm.get('password').touched ||
+               SignUpForm.get('password').dirty) && SignUpForm.get('password').errors)">
+                <span *ngIf="SignUpForm.get('password').errors.required"><h6 class="helpError">Campo requerido</h6></span>
+                <span *ngIf="SignUpForm.get('password').errors.pattern"><h6 class="helpError">La contraseña no cumple con los requisitos</h6></span>
+               </span>
+             </div>
+
+             <div class="tooldiv">
+              <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+              Entre 8 y 15 caracteres,
+              al menos una mayúscula,
+              una minúscula y un número"
+                    aria-label="Button that displays a tooltip when focused or hovered over">
+                    ℹ
+                  </label>
+                  <span class="help-block" *ngIf="(validatePassword())">
+                    <span>
+                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                        -
+                      </h6>
+                    </span>
+                  </span>
              </div>
 
              <div id="passwordRequirement">
