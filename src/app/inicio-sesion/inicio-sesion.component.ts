@@ -17,7 +17,7 @@ import {ErrorStateMatcher} from '@angular/material/core';
 export class InicioSesionComponent implements OnInit {
      titulo="Iniciar Sesión";
      SignUpForm: FormGroup;
-
+    
   constructor(private dialog: MatDialog, private authservice: AuthService, private alertService: AlertsService) {}
     
   ngOnInit() { 
