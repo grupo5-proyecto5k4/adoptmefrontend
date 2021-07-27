@@ -9,16 +9,15 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  //token;
+  token;
   api='https://adoptmebackend.herokuapp.com';
     
   constructor(private http: HttpClient,private router: Router, private alertsService: AlertsService) {   }
 
-  login(email: string, password: string) {
-    this.http.post(this.api + '/login', {correoElectronico: email,contrasenia: password})
+  login(correoElectronico: string, contrasenia: string) {
+    this.http.post(this.api + '/login', {correoElectronico: correoElectronico,contrasenia: contrasenia})
     .subscribe((resp:Data) => {
       this.router.navigate(['landing']);
-      //this.jwtHelper.decodeToken(localStorage.getItem('access_token'));
       localStorage.setItem('auth_token', resp.token);
   
       this.alertsService.confirmMessage("Inicio de sesión exitoso");
