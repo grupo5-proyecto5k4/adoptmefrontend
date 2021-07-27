@@ -29,6 +29,7 @@ import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-a
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
+    MatInputModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,

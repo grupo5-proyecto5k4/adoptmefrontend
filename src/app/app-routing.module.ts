@@ -19,7 +19,7 @@ const routes: Routes = [
     component: UnderConstructionComponent
   },
   {path: 'inicio-sesion',
-component:InicioSesionComponent},
+    component:InicioSesionComponent},
   {
     path: 'mascotas',
     component: UnderConstructionComponent

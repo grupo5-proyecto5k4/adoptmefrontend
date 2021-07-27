@@ -1,13 +1,8 @@
 import { Component, OnInit,Inject } from '@angular/core';
-import { FormControl, FormGroup, Validators,NgForm,FormGroupDirective} from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import{AuthService} from '../auth.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import{MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog'; 
+import {FormControl,NgForm, FormGroup,Validators, FormGroupDirective} from '@angular/forms';
+//import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { AlertsService } from 'src/utils/alerts.service';
-import { User } from 'src/models/IUser';
-import {ErrorStateMatcher} from "@angular/material/core";
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -15,42 +10,23 @@ import {ErrorStateMatcher} from "@angular/material/core";
   styleUrls: ['./inicio-sesion.component.scss']
 })
 
-export class InicioSesionComponent implements OnInit{
-  SignupForm: FormGroup;
-  Titulo = "Iniciar Sesión"; 
+export class InicioSesionComponent implements OnInit {
+     titulo="Iniciar Sesión";
+     SignUpForm: FormGroup;
+
+  constructor(private dialog: MatDialog) {}
     
-  constructor(private authService: AuthService,private alertsService: AlertsService,private dialogref: MatDialogRef<InicioSesionComponent>) {}
-    
-  ngOnInit() {
-    this.SignupForm = new FormGroup({
-      
-      email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
-      password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
-     });
-
-   this.dialogref.disableClose =true;
-
-  }
-
-  validatePassword() {
-    return (((this.SignupForm.get('password').touched ||
-    this.SignupForm.get('password').dirty) &&
-    this.SignupForm.get('password').errors));
-  }
-
-
-  login() {
-
-    if (this.SignupForm.valid) {
-      let loginUser: User = new User();
-      loginUser.correoElectronico= this.SignupForm.controls.email.value;
-      loginUser.contrasenia=this.SignupForm.controls.password.value;
-      this.authService.login(loginUser.correoElectronico, loginUser.contrasenia); 
+  ngOnInit() { 
+    this.SignUpForm= new FormGroup({
+      email: new FormControl('',Validators.required)
     }
-    
+
+    )
   }
-  async init() {
-   
-  }
+   open(){
+     const dialogConf= new MatDialogConfig();
+     this.dialog.open(InicioSesionComponent,dialogConf);
+   }
+
 
 }
