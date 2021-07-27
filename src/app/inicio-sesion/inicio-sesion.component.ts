@@ -1,45 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
-import{AuthService} from '../auth.service';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { Component, OnInit,Inject } from '@angular/core';
+import{MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog'; 
+import {FormControl,NgForm, FormGroup,Validators, FormGroupDirective} from '@angular/forms';
+//import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { AlertsService } from 'src/utils/alerts.service';
 
 @Component({
   selector: 'app-inicio-sesion',
-  templateUrl: './inicio-sesion.component.html',
+  templateUrl:'./inicio-sesion.component.html',
   styleUrls: ['./inicio-sesion.component.scss']
 })
-export class InicioSesionComponent {
-  SignupForm: FormGroup;
-  Titulo = "Iniciar Sesión"; 
-  
-  email: '';
-  password: '';
 
-  constructor(private authService: AuthService,private alertsService: AlertsService) {}
-  
-  
-  ngOnInit() {
-    this.SignupForm = new FormGroup({
-      
-      email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
-      password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
-     });
+export class InicioSesionComponent implements OnInit {
+     titulo="Iniciar Sesión";
+     SignUpForm: FormGroup;
+
+  constructor(private dialog: MatDialog) {}
+    
+  ngOnInit() { 
+    this.SignUpForm= new FormGroup({
+      email: new FormControl('',Validators.required)
+    }
+
+    )
   }
+   open(){
+     const dialogConf= new MatDialogConfig();
+     this.dialog.open(InicioSesionComponent,dialogConf);
+   }
 
-  validatePassword() {
-    return (((this.SignupForm.get('password').touched ||
-    this.SignupForm.get('password').dirty) &&
-    this.SignupForm.get('password').errors));
-  }
-
-
-
-  login() {
-    this.authService.login(this.email, this.password)
-  }
 
 }

@@ -146,7 +146,6 @@ export class SignupParticularComponent implements OnInit {
           this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
         },
         error: (err: any) => {
-          debugger;
           this.alertsService.errorMessage(err.error.error).then((result) => {
             this.isLoading = false;
           }

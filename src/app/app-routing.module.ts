@@ -18,8 +18,8 @@ const routes: Routes = [
     path: 'provisorio',
     component: UnderConstructionComponent
   },
-  {path: 'iniciarSesion',
-component: InicioSesionComponent},
+  {path: 'inicio-sesion',
+    component:InicioSesionComponent},
   {
     path: 'mascotas',
     component: UnderConstructionComponent
@@ -82,7 +82,7 @@ component: InicioSesionComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

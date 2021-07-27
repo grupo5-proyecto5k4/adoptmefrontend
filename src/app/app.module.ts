@@ -28,6 +28,8 @@ import { AdminConfigurationsModule } from './pages/admin-configurations/admin-co
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -39,16 +41,15 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FaqsComponent,
     TermsAndConditionsComponent,
     NotFoundComponent,
-    InicioSesionComponent,
-    PublicacionesAdopComponent
-  
-
+    PublicacionesAdopComponent,
+    InicioSesionComponent 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     LayoutModule,
+    MatInputModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
@@ -64,8 +65,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AdminConfigurationsModule,
     MatExpansionModule,
     MatCardModule,
+    MatFormFieldModule,
     MatPaginatorModule
   ],
+  
   providers: [],
   bootstrap: [AppComponent]
 })
