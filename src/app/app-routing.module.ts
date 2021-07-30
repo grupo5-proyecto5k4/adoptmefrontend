@@ -5,9 +5,10 @@ import { SignupOptionsComponent } from './pages/signup-options/signup-options.co
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {InicioSesionComponent} from './inicio-sesion/inicio-sesion.component';
+import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
+import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,7 @@ component: InicioSesionComponent},
   },
   {
     path: 'habilitar-centros-rescatistas',
-    component: UnderConstructionComponent
+    component: HabilitarCentroRescatistaComponent
   },
   {
     path: 'reportes',
