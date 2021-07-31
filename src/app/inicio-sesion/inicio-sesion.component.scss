@@ -1,5 +1,5 @@
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 0px;
 }
 
 .titulo{
@@ -48,7 +48,7 @@ font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .example-form {
-min-width: 150px;
+min-width: 120px;
 max-width: 500px;
 width: 100%;
 }
@@ -113,7 +113,7 @@ text-align: center;
 float: right;
 padding-left: 7px;
 padding-right: 7px;
-margin-top: 18px;
+margin-top: 12px;
 margin-left: 5px;
 border-style: solid;
 border-color: rgb(43, 41, 41);
@@ -149,14 +149,17 @@ margin: 3%;
 .lower-container{
 height: auto !important;
 overflow-y: auto !important;
+
 }
 
 .card-container{
 overflow-y: auto !important;
-max-height: 53%;
-margin-top: 6%;
+max-height: 100%;
+padding-bottom: 20px;
 }
-
+.container{
+    height: 200%;
+}
 
 .mat-tab-label .mat-tab-label-content {
 display: inline-flex !important;

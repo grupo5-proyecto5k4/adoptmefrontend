@@ -4,6 +4,7 @@ import { Data, Router } from '@angular/router';
 import {AlertsService} from '../utils/alerts.service';
 import {catchError, map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import{User} from 'src/models/IUser';
 
 @Injectable({
   providedIn: 'root'
@@ -45,11 +46,14 @@ export class AuthService {
 
     public get logIn(): boolean {
     
+      
       return (localStorage.getItem('token') !== null);
     }
-
     
-
+    getCurrentUser(): Observable<User[]>{
+     return this.http.get<User[]>(this.api + '/login'); 
+    }
+    
 
 }
 
