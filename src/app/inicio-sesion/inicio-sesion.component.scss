@@ -149,15 +149,17 @@ margin: 3%;
 .lower-container{
 height: auto !important;
 overflow-y: auto !important;
+
 }
 
 .card-container{
 overflow-y: auto !important;
-max-height: 70%;
-margin-top: 6%;
-margin-bottom: auto;
+max-height: 100%;
+padding-bottom: 20px;
 }
-
+.container{
+    height: 200%;
+}
 
 .mat-tab-label .mat-tab-label-content {
 display: inline-flex !important;
