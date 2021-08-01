@@ -8,7 +8,8 @@ export const environment = {
   //base_url: '/api',
   base_url: 'https://adoptmebackend.herokuapp.com',
   //user: {base_url: '/user'}, 
-  user: {base_url: '/registro'}
+  user: {base_url: '/registro'},
+  animales: {base_url: '/animales/idAnimal'}
 };
 
 /*
