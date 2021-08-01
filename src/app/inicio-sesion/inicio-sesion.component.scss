@@ -2,6 +2,17 @@
   width: 0px;
 }
 
+html {
+    min-height: 100%;
+    position: relative;
+  }
+
+  body {
+    margin: 0;
+    margin-bottom: 150px;
+  }
+
+
 .titulo{
 font-size: 400%;
 font-weight: bolder;
@@ -157,9 +168,7 @@ overflow-y: auto !important;
 max-height: 100%;
 padding-bottom: 20px;
 }
-.container{
-    height: 200%;
-}
+
 
 .mat-tab-label .mat-tab-label-content {
 display: inline-flex !important;
@@ -295,10 +304,17 @@ top: 43.5% !important;
 
 @media (max-width: 799px){
 
-.container {
-padding-bottom: 150% !important;
-}
+    html {
+        min-height: 100%;
+        position: relative;
+      }
+    
+      body {
+        margin: 0;
+        margin-bottom: 500px;
+      }
 
+   
 .blank{
   font-size: 0px !important;
 }
