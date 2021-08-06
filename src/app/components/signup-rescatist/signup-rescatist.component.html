@@ -228,10 +228,10 @@
                     </div>
                     <div id="botones">
                       <a mat-raised-button *ngIf="!isLoading" color="accent" class="button cancelar" type="button"
-                        id="btncuenta" mat-dialog-close>Cancelar</a>
+                        id="btncuenta" style="padding: 10px;" mat-dialog-close>Cancelar</a>
                         <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button"
-                        id="confirmar" (mouseover)="validateButton()" (click)="signup()">Crear cuenta</a>
-                      <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button"
+                        id="confirmar" style="padding: 10px;" (mouseover)="validateButton()" (click)="signup()">Crear cuenta</a>
+                      <a mat-raised-button *ngIf="isLoading" style="padding: 10px;" color="accent" class="button loading" type="button"
                         id="btncuenta">
                         <img class=logo src="../../../assets/images/loading.gif" /></a>
                     </div>
