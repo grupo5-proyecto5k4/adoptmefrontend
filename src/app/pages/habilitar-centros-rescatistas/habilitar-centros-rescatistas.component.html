@@ -75,6 +75,39 @@
                         </div>
                       </td>
                       <td class="requestActions">
+                        <div class="actionButton">
+                      <ng-container matColumnDef="Visualizar">
+                        <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Visualizar </th>
+                        <td mat-cell style="padding: 2px;">
+                            <button mat-raised-button color="accent" style="height: 32px; border-radius: 10px;"
+                                >
+                                <mat-icon>remove_red_eye</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Rechazar">
+                        <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Rechazar
+                        </th>
+                        <td mat-cell style="border-radius: 20px; padding-left: 2px;">
+                            <button mat-raised-button color="warn" style="height: 32px; border-radius: 10px;">
+                                <mat-icon>block</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="Habilitar">
+                        <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Habilitar
+                        </th>
+                        <td mat-cell style="border-radius: 20px; padding-left: 2px;">
+                            <button mat-raised-button color="primary" style="height: 32px; border-radius: 10px;">
+                                <mat-icon>how_to_reg</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+                        </div>
+                      </td>
+                      <td class="requestActions">
                         <!--Este contenedor tiene las acciones de la solicitud-->
                         <div class="actionButton">
                           <mat-card-actions>
