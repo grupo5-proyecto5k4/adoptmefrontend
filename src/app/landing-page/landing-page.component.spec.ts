@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {MatButtonModule} from '@angular/material/button';
-import { PagInicioComponent } from './pag-inicio.component';
 
-describe('PagInicioComponent', () => {
-  let component: PagInicioComponent;
-  let fixture: ComponentFixture<PagInicioComponent>;
+import { LandingPageComponent } from './landing-page.component';
+
+describe('LandingPageComponent', () => {
+  let component: LandingPageComponent;
+  let fixture: ComponentFixture<LandingPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PagInicioComponent ]
+      declarations: [ LandingPageComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PagInicioComponent);
+    fixture = TestBed.createComponent(LandingPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

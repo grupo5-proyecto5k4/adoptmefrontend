@@ -1,0 +1,18 @@
+<footer id="gtco-footer" class="Pie" role="contentinfo">
+    <div class="container">
+        <div class="row copyright">
+            <div>             
+                    <a *ngIf="!isAdminRol" routerLink="/landing" name="gtco-practice-areas1"  class="footerPointer" (click)="goToHome()" id="letras1" style="text-decoration:none">¿Quiénes somos? |</a>
+                    <a *ngIf="!isAdminRol" (click)="openFaqs()" style="cursor: pointer;" class="footerPointer" id="letras"> Preguntas frecuentes |</a>
+                    <a *ngIf="!isAdminRol" routerLink="/" name="gtco-contact" class="footerPointer" id="letras" style="text-decoration:none"> Contáctanos |</a>
+                    <a *ngIf="!isAdminRol" (click)="openTermsAndConditions()" class="footerPointer" id="letras"> Términos y condiciones </a>
+                  <br>
+                  <br>  
+                    <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
+                    <small class="block" id="Pie"> Córdoba, Argentina -</small>
+                    <small class="block" id="Pie"> UTN FRC - AdoptMe 2021 &copy;</small>
+            </div>
+        </div>
+        <br />
+    </div>
+</footer>

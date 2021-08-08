@@ -1,0 +1,74 @@
+
+.Pie{
+    background-color:hsl(312, 22%, 95%);
+    position:relative;
+    left:0;
+    bottom:0;
+    top: 6rem;
+    width:100%;
+    text-align:center;
+    padding: 15px 0 0;
+}
+
+.footerPointer{
+    cursor: pointer;
+}
+
+#letras{
+    font-family:Roboto;
+    text-transform: uppercase;
+    font-weight:450;
+    font-size: 110%;
+    color:black;
+}
+
+#letras1{
+    font-family:Roboto;
+    text-transform: uppercase;
+    font-weight:450;
+    font-size: 110%;
+    color:black;
+}
+
+
+
+#Pie{
+    font-weight:450;
+    text-align: center;
+}
+
+.paw-icon{
+    color: "accent";
+    size: 1rem;
+    align-content: center;
+   
+  }
+  
+  
+  
+@media (max-width:903px){
+    #letras1{
+        bottom:100px;
+}
+
+}
+
+@media(max-width:600px){
+.pie{
+    position: relative;
+    //left:0;
+    bottom:0;
+    width:100%;
+    text-align:center;
+}
+}
+
+
+
+
+
+
+
+
+
+
