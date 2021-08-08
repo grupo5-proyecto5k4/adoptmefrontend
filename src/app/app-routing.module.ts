@@ -21,8 +21,8 @@ const routes: Routes = [
     path: 'provisorio',
     component: UnderConstructionComponent
   },
-  {path: 'iniSesion',
-component: InicioSesionComponent},
+  {path: 'inicio-sesion',
+    component:InicioSesionComponent},
   {
     path: 'mascotas',
     component: UnderConstructionComponent
@@ -60,7 +60,7 @@ component: InicioSesionComponent},
     component: UnderConstructionComponent
   },
   {
-    path: 'signup-options',
+    path: 'opciones-de-registro',
     component: SignupOptionsComponent
   },
   {
@@ -88,7 +88,7 @@ component: InicioSesionComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

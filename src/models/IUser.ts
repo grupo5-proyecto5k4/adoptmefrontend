@@ -1,6 +1,6 @@
-import { JsonpClientBackend } from "@angular/common/http";
+import { Address } from './IAddress';
 
-export interface IUser {
+interface IUser {
     id?: number;
     nombres?: string;
     apellidos?: string;
@@ -15,7 +15,7 @@ export interface IUser {
     fechaModificacion?: Date;
     tipoUsuario?: number;
     contrasenia: string;
-    direccion: string;   
+    Direccion: Address;   
     }
   
     export class User implements IUser {
@@ -33,7 +33,7 @@ export interface IUser {
       fechaModificacion?: Date;
       tipoUsuario?: number;
       contrasenia: string;
-      direccion: string;
+      Direccion: Address; 
     
       constructor() {
         };

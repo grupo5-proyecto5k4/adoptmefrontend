@@ -34,7 +34,7 @@ export class NavbarComponent {
   }
 
   isInicioSesion(){
-    return (this.router.url == '/iniSesion');
+    return (this.router.url == '/inicio-sesion');
   }
 
   isLogued(){
