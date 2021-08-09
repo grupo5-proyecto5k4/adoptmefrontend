@@ -7,6 +7,8 @@ import{AuthService} from '../auth.service';
 import {AlertsService} from 'src/utils/alerts.service';
 import{User} from 'src/models/IUser';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { LocalStorageService } from 'src/services/local-storage.service';
+
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -19,7 +21,7 @@ export class InicioSesionComponent implements OnInit {
      SignUpForm: FormGroup;
      isLoading: Boolean = false;
     
-  constructor(private dialog: MatDialog, private authservice: AuthService, private router: Router, private alertsService: AlertsService) {}
+  constructor(private dialog: MatDialog, private authservice: AuthService,private localStorageService: LocalStorageService, private router: Router, private alertsService: AlertsService) {}
     
   ngOnInit() { 
     this.SignUpForm= new FormGroup({
@@ -44,12 +46,14 @@ export class InicioSesionComponent implements OnInit {
       loginUser.correoElectronico= this.SignUpForm.controls.email.value;
       loginUser.contrasenia=this.SignUpForm.controls.password.value;
       this.authservice.login(loginUser.correoElectronico,loginUser.contrasenia).subscribe((resp:Data) => {
-        this.router.navigate(['landing']);
         
         localStorage.setItem('auth_token', resp.token);
-        let currentUser = this.authservice.getUser(resp.token).then((r) => console.log(r));
-    
-        this.alertsService.confirmMessage("Inicio de sesión exitoso");
+        let currentUser = this.authservice.getUser(resp.token).then((r) => {
+          this.authservice.setUser(r);
+          console.log(r);
+          this.localStorageService.setProfile(r.tipoUsuario);  
+          this.alertsService.confirmMessage("Inicio de sesión exitoso").then(() => window.location.href = "/landing");
+        });        
       },
         error => {
           this.isLoading = false;
