@@ -30,6 +30,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MatInputModule } from '@angular/material/input';
     TermsAndConditionsComponent,
     NotFoundComponent,
     PublicacionesAdopComponent,
-    InicioSesionComponent 
+    InicioSesionComponent,
+    RegistroMascotaComponent 
   ],
   imports: [
     BrowserModule,

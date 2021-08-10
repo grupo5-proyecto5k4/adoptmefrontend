@@ -8,6 +8,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {InicioSesionComponent} from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
+import {RegistroMascotaComponent} from '../app/registro-mascota/registro-mascota.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
     component:InicioSesionComponent},
   {
     path: 'mascotas',
-    component: UnderConstructionComponent
+    component: RegistroMascotaComponent
   },
   {
     path: 'donaciones',
