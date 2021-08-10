@@ -19,17 +19,16 @@ export class AuthService {
     return this.http.post(this.api + '/login', {correoElectronico: correoElectronico,contrasenia: contrasenia})
     }
     
-    async getUser(token: string): Promise<User>
+    async getUser(token: string): Promise<any>
     {
-      //token = 'eyJ1c2VyIjp7Il9pZCI6IjYxMGFkM2ExMWM1ZGRjMDAxNWZiY2Y2ZSIsIm5vbWJyZXMiOiJNaWNhIiwiYXBlbGxpZG9zIjoiRmxvcmVhbm8iLCJkbmkiOjQwODE1NDk2LCJmZWNoYU5hY2ltaWVudG8iOiIxOTk4LTAxLTAzVDAwOjAwOjAwLjAwMFoiLCJjb3JyZW9FbGVjdHJvbmljbyI6Im1pY2FAZ21haWwuY29tIiwiY29udHJhc2VuaWEiOiIkMmIkMTAkUVhiVTBKd2drSFVWWC5Cd0JycnNUZWgwMUJScE1nd0U1ZlByZGRTTWRyZnJhNmFBeUVnU2kiLCJ0aXBvVXN1YXJpbyI6MSwibnVtZXJvQ29udGFjdG8iOjM1MTYzNjI1MDksImlkRXN0YWRvIjoxLCJmZWNoYUNyZWFjaW9uIjoiMjAyMS0wOC0wNFQxNzo1MToyOS42MTVaIiwiZmVjaGFNb2RpZmljYWNpb24iOiIyMDIxLTA4LTA0VDE3OjUxOjI5LjYxNVoiLCJfX3YiOjB9LCJpYXQiOjE2MjgyMjIzMDR9.2IHcWlS17sd'
-      return this.http.get<User>(this.api + '/login', { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise()
+      return this.http.get<any>(this.api + '/login', { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise()
     }
 
     logout() {
       localStorage.removeItem('token');
     }
 
-    public get logIn(): boolean {     
+    getToken(): boolean {     
       return (localStorage.getItem('token') !== null);
     }
 
@@ -43,9 +42,15 @@ export class AuthService {
       }
     }
 
-    setUser(user: User): void {
+    setUser(user: any): void {
       let user_string = JSON.stringify(user);
       localStorage.setItem("currentUser", user_string);
+    }
+
+    cerrarSesion(){
+      localStorage.removeItem("auth_token");
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("Profile");
     }
 
 }
