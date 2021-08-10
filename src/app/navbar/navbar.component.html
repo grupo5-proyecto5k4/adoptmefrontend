@@ -31,6 +31,7 @@
       <a href="#" class="adoptme-title">AdoptMe</a>
       <a *ngIf="!isAdmin()" routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adopciones</a>
       <a *ngIf="!isAdmin()" routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Provisorios</a>
+      <a mat-list-item *ngIf="!isAdmin()" routerLink="/mapas" (click)="drawer.toggle(); scrollTop()">Recomendaciones</a>
       <a *ngIf="isParticular()||isRescatist()" routerLink="/mascotas" class="nav-titles" (click)="scrollTop()">Mis Mascotas</a>
       <a *ngIf="isRescatist()" routerLink="/donaciones" class="nav-titles" (click)="scrollTop()">Donaciones</a>
       <a *ngIf="isAdmin()" routerLink="/configuraciones" class="nav-titles" (click)="scrollTop()">Configuraciones</a>
