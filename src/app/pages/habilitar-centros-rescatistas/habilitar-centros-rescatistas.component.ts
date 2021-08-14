@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { UserService } from 'src/services/user.service';
+import { AlertsService } from 'src/utils/alerts.service';
 
 
 
@@ -22,15 +24,17 @@ export class HabilitarCentroRescatistaComponent {
     private pageIndex: number = 0;
     private activePageIndex: boolean = false;
 
-    constructor(private dialog: MatDialog) { }
+    constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService,) { }
 
     ngOnInit() { }
 
-    signupParticular() {
 
-    }
-    signupRescatist() {
+      /*1 - Activo (Usuario)
+        2 - Pendiente (Usuario)
+        3 - Bloqueado (Usuario) */
 
+    habilitarCentro() {
+      //this.userService.getCentrosRescatistasPendientes(estado,)
     }
 
     getPaginatorData(event) {

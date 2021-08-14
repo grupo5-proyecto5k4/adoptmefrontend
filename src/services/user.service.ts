@@ -13,8 +13,17 @@ export class UserService {
  
   constructor(private httpClient: HttpClient,  private errorHandler: HttpErrorHandlerService) {}
  
-  getCentrosRescatistasPendientes(token: string): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${environment.base_url}${environment.user.base_url}` + '/', { headers: new HttpHeaders().set('Authorization', `${token}`) })
+  /*
+  getCentrosRescatistasPendientes(user: User, token: string): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${environment.base_url}${environment.user.base_url}` + '/centros/', { headers: new HttpHeaders().set('Authorization', `${token}`) })
+      .pipe(catchError(this.errorHandler.handleError))
+      .pipe(
+        map((res: any) => {
+          return res.payload.users;
+        }));
+  }*/
+  getCentrosRescatistasPendientes(estado: string, token:string): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${environment.base_url}${environment.user.base_url}` + '/centros/' + estado, { headers: new HttpHeaders().set('Authorization', `${token}`) })
       .pipe(catchError(this.errorHandler.handleError))
       .pipe(
         map((res: any) => {
