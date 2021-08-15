@@ -31,6 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
+import { FormularioPerroComponent } from './formulario-perro/formulario-perro.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.co
     NotFoundComponent,
     PublicacionesAdopComponent,
     InicioSesionComponent,
-    RegistroMascotaComponent 
+    RegistroMascotaComponent,
+    FormularioPerroComponent 
   ],
   imports: [
     BrowserModule,

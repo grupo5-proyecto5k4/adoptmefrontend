@@ -1,0 +1,266 @@
+<mat-dialog-content class="dialog-content">
+
+   <body class class="is-preload">
+       <div id="page-wrapper">
+           <section id="cta4">
+               <div class="container">
+                   <header>
+                      <div class="card-container">
+                          <div class="lower-container">
+                            <div>
+                                <h2 class="subtitulo">{{Titulo}}</h2>
+                            </div>
+                            <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm">
+                                <div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>*Nombre mascota</mat-label>
+                                    <input matInput placeholder="nombre" formControlName="nombre" class="form-control"
+                          maxlength="60">
+                                    </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                                </div>
+
+                                <div class="inset" ng-controller="SwitchDemoCtrl" ng-cloak>
+                                    <md-switch ng-model="data.cb1" aria-label="Es cachorro">
+                                      Es cachorro: {{ data.cb1 }}
+                                    </md-switch> </div>
+
+                                <div class="inset" ng-controller="SwitchDemoCtrl" ng-cloak>
+                                    <md-switch ng-model="data.cb1" aria-label="Es cachorro">
+                                         </md-switch>
+                                </div> 
+
+                                <div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>*Tamaño final</mat-label>
+                                    <input matInput placeholder="tamaño" formControlName="tamaño" class="form-control"
+                          maxlength="60">
+                                    </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                                </div>
+
+                                <div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>*Raza padre</mat-label>
+                                    <input matInput placeholder="raza padre" formControlName="razaPadre" class="form-control"
+                          maxlength="60">
+                                    </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                                </div>
+
+                                <div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>*Raza madre</mat-label>
+                                    <input matInput placeholder="raza madre" formControlName="nombre" class="form-control"
+                          maxlength="60">
+                                    </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                                </div>
+
+                                <div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>*Conducta niños</mat-label>
+                                    <input matInput placeholder="conducta niños" formControlName="nombre" class="form-control"
+                          maxlength="60">
+                                    </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                                </div>
+
+                                <div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>*Conducta perros</mat-label>
+                                    <input matInput placeholder="conducta perros" formControlName="nombre" class="form-control"
+                          maxlength="60">
+                                    </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                                </div>
+
+                                <div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>*Conducta gatos</mat-label>
+                                    <input matInput placeholder="conducta gatos" formControlName="nombre" class="form-control"
+                          maxlength="60">
+                                    </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                                </div>
+
+                                <div>
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>*Descripción</mat-label>
+                                    <input matInput placeholder="descripción" formControlName="nombre" class="form-control"
+                          maxlength="60">
+                                    </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                                </div>
+                                
+                                <div id="botones">
+                                    <a mat-raised-button *ngIf="!isLoading" color="accent" class="button cancelar" type="button" id="btncuenta"
+                                     mat-dialog-close>Cancelar</a>
+                                    <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button" id="confirmar"
+                                    (mouseover)="validateButton()" (click)="signup()">Registrar</a>
+                                    <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button" id="btncuenta">
+                                      <img class=logo src="../../../assets/images/loading.gif"/></a>
+                                  </div>
+
+                            </form>
+                          </div>
+                      </div> 
+                   </header>
+               </div>
+           </section>
+
+       </div> 
+   </body> 
+</mat-dialog-content>
