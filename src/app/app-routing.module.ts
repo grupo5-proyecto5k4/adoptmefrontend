@@ -5,10 +5,12 @@ import { SignupOptionsComponent } from './pages/signup-options/signup-options.co
 import { UnderConstructionComponent } from './under-construction/under-construction.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import {InicioSesionComponent} from './inicio-sesion/inicio-sesion.component';
+import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import {RegistroMascotaComponent} from '../app/registro-mascota/registro-mascota.component';
+import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
+import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,7 @@ const routes: Routes = [
     component: PublicacionesAdopComponent
   },
   {
+    
     path: 'provisorio',
     component: UnderConstructionComponent
   },
@@ -51,7 +54,7 @@ const routes: Routes = [
   },
   {
     path: 'habilitar-centros-rescatistas',
-    component: UnderConstructionComponent
+    component: HabilitarCentroRescatistaComponent
   },
   {
     path: 'reportes',
@@ -65,13 +68,16 @@ const routes: Routes = [
     path: 'landing',
     component: LandingPageComponent
   },
+  {
+    path: 'mapas',
+    component: LeaftletPathComponent
+  },
 
   {
     path: 'faqs',
     component: FaqsComponent
-  }
-
-  , {
+  },
+  {
     path: '', redirectTo: '/landing', pathMatch: 'full'
   },
   //La ruta comodín '**' siempre debe ser la última del listado.

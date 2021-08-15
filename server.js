@@ -21,6 +21,7 @@ const forceSSL = function() {
       next();
     }
   }
+  
   // Instruct the app
   // to use the forceSSL
   // middleware

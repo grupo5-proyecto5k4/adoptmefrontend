@@ -14,7 +14,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ComponentsModule } from 'src/app/components/components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import{SignupOptionsModule} from './pages/signup-options/signup-options.module';
+import { SignupOptionsModule } from './pages/signup-options/signup-options.module';
 import {FooterComponent} from 'src/app/footer/footer.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,11 +26,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsModule } from './pages/admin-configurations/admin-configurations.module';
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,9 @@ import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.co
     NotFoundComponent,
     PublicacionesAdopComponent,
     InicioSesionComponent,
-    RegistroMascotaComponent 
+    RegistroMascotaComponent,
+    PublicacionesAdopComponent
+
   ],
   imports: [
     BrowserModule,
@@ -65,6 +68,7 @@ import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.co
     HttpClientModule,
     SignupOptionsModule,
     AdminConfigurationsModule,
+    HabilitarCentroRescatistaModule,
     MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
