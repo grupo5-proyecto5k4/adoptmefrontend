@@ -28,6 +28,7 @@ import { AdminConfigurationsModule } from './pages/admin-configurations/admin-co
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.module';
@@ -44,7 +45,9 @@ import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-resca
     NotFoundComponent,
     PublicacionesAdopComponent,
     InicioSesionComponent,
-    PublicacionesAdopComponent,
+    RegistroMascotaComponent,
+    PublicacionesAdopComponent
+
   ],
   imports: [
     BrowserModule,
