@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import {FormularioPerroComponent} from '../formulario-perro/formulario-perro.component';
+import {FormularioGatoComponent} from '../formulario-gato/formulario-gato.component';
 
 @Component({
   selector: 'app-registro-mascota',
@@ -8,13 +11,19 @@ import { Component, OnInit } from '@angular/core';
 export class RegistroMascotaComponent implements OnInit {
   Titulo="Registro de Mascota";
 
-  constructor() { }
+  constructor(private dialog: MatDialog) {}
 
   ngOnInit(): void {
   }
 
-  signupGato(){}
+  signupGato(){
+    this.dialog.open(FormularioGatoComponent)
+  }
 
-  signupPerro(){}
+  signupPerro(){
+    this.dialog.open(FormularioPerroComponent)
+  }
 
 }
+
+

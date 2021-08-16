@@ -29,6 +29,9 @@ import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-a
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
+import { FormularioPerroComponent } from './formulario-perro/formulario-perro.component';
+import {MatSelectModule} from '@angular/material/select';
+import { FormularioGatoComponent } from './formulario-gato/formulario-gato.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.module';
@@ -46,6 +49,8 @@ import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-resca
     PublicacionesAdopComponent,
     InicioSesionComponent,
     RegistroMascotaComponent,
+    FormularioPerroComponent,
+    FormularioGatoComponent, 
     PublicacionesAdopComponent
 
   ],
@@ -72,7 +77,8 @@ import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-resca
     MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
   ],
   
   providers: [],
