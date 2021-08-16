@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AlertsService } from 'src/utils/alerts.service';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-formulario-perro',
@@ -14,9 +15,9 @@ import { AlertsService } from 'src/utils/alerts.service';
 })
 export class FormularioPerroComponent implements OnInit {
   SignupForm: FormGroup;
-  Titulo = "Registrar perro";
+  Titulo = "Registrar Perro";
 
-  constructor( private alertsService: AlertsService) { }
+  constructor(private matdialog: MatDialog ,private alertsService: AlertsService) { }
 
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
