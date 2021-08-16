@@ -26,6 +26,7 @@ export class NavbarComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private authservice: AuthService, private router: Router, private localStorageService: LocalStorageService) {
+
     this.profile = this.localStorageService.getProfile();
   }
   
