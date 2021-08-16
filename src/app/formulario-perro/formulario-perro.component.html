@@ -1,6 +1,6 @@
 <mat-dialog-content class="dialog-content">
 
-   <body class class="is-preload">
+   <body class="is-preload">
        <div id="page-wrapper">
            <section id="cta4">
                <div class="container">
@@ -20,6 +20,116 @@
                          
                                 </div>
 
+                            <div id="cachorro" class="izquierda">
+                                <mat-form-field class="example-form">
+                                    <mat-label>*Es cachorro</mat-label>
+                                    <mat-select>
+                                        <mat-option value="1">Si</mat-option>
+                                        <mat-option value="2">No</mat-option>
+                                    </mat-select>
+                        
+                                </mat-form-field>
+                            </div>
+
+                            <div class="derecha">
+                               <mat-form-field class="example-full-width">
+                                  <mat-label>*Tamaño final</mat-label> 
+                                <input matInput placeholder="tamaño final" formControlName="tamaño" class="form-control" maxlength="60">
+                               </mat-form-field> 
+                            </div>
+
+                           <div class="derecha">
+                               <mat-form-field class="example-form">
+                                   <mat-label>*Edad</mat-label>
+                                   <mat-select>
+                                       <mat-option value="1">1</mat-option>
+                                       <mat-option value="2">2</mat-option>
+                                       <mat-option value="3">3</mat-option>
+                                       <mat-option value="4">4</mat-option>
+                                       <mat-option value="5">5</mat-option>
+                                       <mat-option value="6">6</mat-option>
+                                       <mat-option value="7">7</mat-option>
+                                       <mat-option value="8">8</mat-option>
+                                       <mat-option value="9">9</mat-option>
+                                       <mat-option value="10">10</mat-option>
+                                       <mat-option value="11">11</mat-option>
+                                       <mat-option value="12">12</mat-option>
+                                       <mat-option value="13">13</mat-option>
+                                       <mat-option value="14">14</mat-option>
+                                       <mat-option value="15">15</mat-option>
+                                       <mat-option value="16">16</mat-option>
+                                       <mat-option value="17">17</mat-option>
+                                       <mat-option value="18">18</mat-option>
+                                       <mat-option value="19">19</mat-option>
+                                       <mat-option value="20">20</mat-option>
+                                   </mat-select>
+                               </mat-form-field>
+                           </div> 
+
+                          <div class="izquierda">
+                              <mat-form-field class="example-form">
+                                  <mat-label>*Sexo</mat-label>
+                                  <mat-select>
+                                      <mat-option value="1">Hembra</mat-option>
+                                      <mat-option value="2">Macho</mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </div> 
+
+                                                 
+                            <div class="derecha">
+                                <mat-form-field class="example-form">
+                                    <mat-label>*Raza Padre</mat-label>
+                                    <input matInput placeholder="raza padre" formControlName="razaPadre" class="form-control" maxlength="60">
+                                </mat-form-field>
+                            </div>
+
+                           <div class="izquierda">
+                               <mat-form-field class="example-form">
+                                   <mat-label>*Raza Madre</mat-label>
+                                   <input matInput placeholder="raza madre" formControlName="razaMadre" class="form-control" maxlength="60">
+                               </mat-form-field>
+                           </div> 
+
+                           <div class="derecha">
+                               <mat-form-field class="example-form">
+                                   <mat-label>*Castrado</mat-label>
+                                   <mat-select>
+                                       <mat-option value="1">Si</mat-option>
+                                       <mat-option value="2">No</mat-option>
+                                   </mat-select> 
+                               </mat-form-field>
+                           </div>
+
+                          <div class="izquierda">
+                              <mat-form-field class="example-form">
+                                  <mat-label>*Fecha de alta</mat-label>
+                                  <input matInput type="date" formControlName="fechaAlta" class="form-control">
+                              </mat-form-field>
+                          </div> 
+
+                          <div>
+                              <mat-form-field class="example-full-width">
+                                  <mat-label>*Conducta con niños</mat-label>
+                                  <input matInput placeholder="conducta con niños" formControlName="conductaNiños" class="form-control" maxlength="200">
+                              </mat-form-field>
+                          </div>
+
+                          <div>
+                              <mat-form-field class="example-full-width">
+                                  <mat-label>*Conducta con otros perros</mat-label>
+                                  <input matInput placeholder="conducta con otros perros" formControlName="conductaPerros" class="form-control" maxlength="200">
+                              </mat-form-field>
+                          </div>
+
+                          <div>
+                              <mat-form-field class="example-full-width">
+                                  <mat-label>*Conducta con gatos</mat-label>
+                                  <input matInput placeholder="conducta con gatos" formControlName="conductaGatos" class="form-control" maxlength="200">
+                              </mat-form-field>
+                          </div>
+
+                            
                             <div>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>*Descripción</mat-label>
@@ -28,13 +138,22 @@
                             </div> 
 
                             <div>
-                                <a mat-raised-button (click)="dialog.closeAll()" color="accent" class="button" id="btnRegistro" type="button">Cancelar</a>
-                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button">Aceptar</a>
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>Agrega fotografias</mat-label>
+                                    <input matInput maxlength="60"> 
+                                </mat-form-field>
                             </div>
 
-                               
+                            <div>
+                                <p id="requer">(*)Campos obligatorios</p>
+                            </div>
+                                                     
+                            <div>
+                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" mat-dialog-close>Cancelar</a>
+                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button">Aceptar</a>
+                            </div>
                               
-
+                              
                             </form>
                           </div>
                       </div> 

@@ -6,7 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AlertsService } from 'src/utils/alerts.service';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {Router, ActivatedRoute} from '@angular/router';
+
 
 @Component({
   selector: 'app-formulario-perro',
@@ -17,14 +18,17 @@ export class FormularioPerroComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo = "Registrar Perro";
 
-  constructor(private matdialog: MatDialog ,private alertsService: AlertsService) { }
+  constructor(private matdialog: MatDialog ,private alertsService: AlertsService, private dialogref: MatDialogRef<FormularioPerroComponent>) { }
 
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
-      tamaño: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
-      razaPadre:new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(60), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
+      tamaño: new FormControl('', [Validators.required, Validators.maxLength(60), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
+      razaPadre:new FormControl('', [Validators.required, Validators.maxLength(60), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
     })
+
+  this.dialogref.disableClose=true;
+
   }
 
 }

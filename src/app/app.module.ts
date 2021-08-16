@@ -32,6 +32,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 import { FormularioPerroComponent } from './formulario-perro/formulario-perro.component';
+import {MatSelectModule} from '@angular/material/select';
+import { FormularioGatoComponent } from './formulario-gato/formulario-gato.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { FormularioPerroComponent } from './formulario-perro/formulario-perro.co
     PublicacionesAdopComponent,
     InicioSesionComponent,
     RegistroMascotaComponent,
-    FormularioPerroComponent 
+    FormularioPerroComponent,
+    FormularioGatoComponent 
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { FormularioPerroComponent } from './formulario-perro/formulario-perro.co
     MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSelectModule
   ],
   
   providers: [],
