@@ -9,13 +9,20 @@
     text-align: center;
   }
 
+  .btnRegistro{
+  color:#B80092;
+  font-weight: bold;
+  border:#F8E2F1;
+  background-color: #F8E2F1;
+  cursor: pointer;
+  outline: none;
+  }
  
   .registroPerro{
     max-width: 43%;
     max-height:40%;
     margin-top: 2rem;
     margin-left: 2rem;
-    //margin-right: 2rem;
     background-color:#F8E2F1;
     float: left;
     padding-bottom:1.5rem;
@@ -91,28 +98,17 @@
 #parraf{
     font-style: italic;
 }
-.btnGato{
-    font-weight:bold;
-    color:#B80092;
-    font-weight:bold;
-    border:#F8E2F1;
-    background-color:#F8E2F1;
-}
 
-.btnPerro{
-    font-weight:bold;
-    color:#B80092;
-    font-weight:bold;
-    border:#F8E2F1;
-    background-color:#F8E2F1;
-    
-}
+
+
 
 .perfiles{
   display:inline-block;
   }
 
   .footer{
-    position:absolute;
+    position:relative;
     bottom:0;
+    //margin-top: 10rem;
+    margin-bottom: 0;
   }
