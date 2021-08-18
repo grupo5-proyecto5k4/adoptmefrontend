@@ -14,6 +14,7 @@ export class FooterComponent {
   activeProffessionalRol: boolean = true;
   isAdminRol: boolean = false;
   faPaw = faPaw;
+  e;
 
   constructor(public router: Router,public dialog: MatDialog) { }
 
@@ -23,8 +24,11 @@ export class FooterComponent {
   
 
   goToHome(){
-     document.getElementById("quienesomos").scrollIntoView();
-  }
+     
+       document.getElementById("quienesomos").scrollIntoView(true);
+      
+     }
+     
 
   openTermsAndConditions(){
     this.dialog.open(TermsAndConditionsComponent)
