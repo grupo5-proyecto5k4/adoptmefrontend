@@ -11,6 +11,8 @@ import { HttpErrorHandlerService } from 'src/utils/ErrorHandler';
 })
 export class UserService {
  
+  api='https://adoptmebackend.herokuapp.com';
+
   constructor(private httpClient: HttpClient,  private errorHandler: HttpErrorHandlerService) {}
  
   /*
@@ -21,14 +23,21 @@ export class UserService {
         map((res: any) => {
           return res.payload.users;
         }));
+
+
+    async getUser(token: string): Promise<any>
+    {
+      return this.http.get<any>(this.api + '/login', { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise()
+    }
   }*/
-  getCentrosRescatistasPendientes(estado: string, token:string): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${environment.base_url}${environment.user.base_url}` + '/centros/' + estado, { headers: new HttpHeaders().set('Authorization', `${token}`) })
-      .pipe(catchError(this.errorHandler.handleError))
-      .pipe(
-        map((res: any) => {
-          return res.payload.users;
-        }));
+
+  async getCentrosRescatistasPendientes(estado: string, token:string): Promise <any[]> {
+    return this.httpClient.get<any[]>(this.api + '/centros/' + estado, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
+
+  updateAccount(user: User, token:string): Observable <any> {
+    debugger;
+    return this.httpClient.put<any>(this.api + '/centros/' + user.id, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
   }
