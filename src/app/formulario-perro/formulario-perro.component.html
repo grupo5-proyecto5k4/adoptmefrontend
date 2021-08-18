@@ -76,6 +76,7 @@
                                    <mat-select>
                                        <mat-option value="1">Si</mat-option>
                                        <mat-option value="2">No</mat-option>
+                                       <mat-option value="3">Con compromiso</mat-option> 
                                    </mat-select> 
                                </mat-form-field>
                            </div>
@@ -118,8 +119,8 @@
 
                             <div>
                                 <mat-form-field class="example-full-width">
-                                    <mat-label>Agrega fotografias</mat-label>
-                                    <input matInput maxlength="60"> 
+                                    <input matInput type="file" color="accent" placeholder="imagen de mascota" class="button" (change)="selecArchivo($event)" formControlName="imagenMascota"> 
+                                    
                                 </mat-form-field>
                             </div>
 

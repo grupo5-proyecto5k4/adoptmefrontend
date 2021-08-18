@@ -114,8 +114,7 @@
 
                             <div>
                                 <mat-form-field class="example-full-width">
-                                    <mat-label>Agrega una fotografia</mat-label>
-                                    <input matInput maxlength="60">
+                                    <input matInput type="file" color="accent" placeholder="imagen de mascota" class="button" (change)="selecArchivo($event)" formControlName="imagenMascota">
                                 </mat-form-field>
                             </div> 
 
@@ -124,7 +123,7 @@
                             </div>
 
                             <div>
-                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" mat-dialog-close>Cancelar</a>
+                                <a mat-raised-button color="accent" class="button" id="btnRegistro" style="padding: 10px;" type="button" mat-dialog-close>Cancelar</a>
                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button">Aceptar</a>
                             </div> 
 
