@@ -6,6 +6,7 @@ import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/services/local-storage.service';
 import{AuthService} from '../auth.service';
+import { stringify } from '@angular/compiler/src/util';
 
 
 
@@ -18,6 +19,8 @@ export class NavbarComponent {
 
   faPaw = faPaw;
   profile: string;
+  iniciales: string = "";
+  currentUser: any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -26,8 +29,17 @@ export class NavbarComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver, private authservice: AuthService, private router: Router, private localStorageService: LocalStorageService) {
-
     this.profile = this.localStorageService.getProfile();
+    if (this.isLogued){
+      this.currentUser = this.authservice.getCurrentUser();
+      if (this.profile == '0' || this.profile == '1'){
+        this.iniciales = ((this.currentUser.nombres).split("", 1)+(this.currentUser.apellidos).split("", 1)); 
+      }
+      else if (this.profile == '2'){
+        let nombre = (this.currentUser.nombres).split(""); 
+        this.iniciales = nombre[0]+nombre[1];
+      }
+    }
   }
   
 
