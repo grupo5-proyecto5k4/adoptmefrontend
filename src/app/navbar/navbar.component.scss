@@ -1,3 +1,5 @@
+/* Generados por el componente */
+
 .sidenav-container {
   height: 100%;
 }
@@ -16,33 +18,113 @@
   z-index: 1;
 }
 
-@media (min-width: 400px){
-  .sidenav{
-  display: none;
-  }
-}
-
-mat-toolbar a {
-  display: inline-block;
-  margin: 0 10px;
-  color: white;
-  text-decoration: none;
-}
+/* NavBar */
 
 .spacer{
   flex: 1 1 auto;
 }
 
-@media (max-width: 400px){
-  #navtitle{
-  display: none;
+#btncuenta{
+  color: #EBEEF1;
+  font-size: 16px;
+  margin:2px;
+}
+
+.nav-titles{
+  display: inline-block;
+  margin: 0 0.8rem;
+  color: #383333;
+  font-size: 18px;
+}
+
+.nav-titles:hover{
+  color: white;
+}
+
+@media (max-width: 960px){
+  .nav-titles{
+    display: none;
   }
 }
 
-/*Preguntar a las chicas porque no me anda con clase*/ 
-@media (max-width: 600px){
-  #navtitle{
-  display: none;
+@media(max-width:700px){
+  #btncuenta{
+    font-size: 50%;
+    padding: 0 0 0;
   }
 }
 
+.adoptme-title{
+  font-family: DancingScript;
+  font-weight: 600;
+  color: black;
+  font-size: 150%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.user-icon{
+  float: right;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  color: #EBEEF1;
+  background-color: #c50fa1;
+  cursor: pointer;
+  font-weight: bold;
+  outline: none;
+}
+
+/* Side NavBar*/
+
+.hidden{
+  display: none;
+}
+
+.paw-icon{
+  color: "accent";
+  margin-left: 5.5rem;
+  size: 1rem;
+
+}
+
+/*efecto de subrayado en items del Side NavBar*/
+
+mat-list-item { 
+  display: table-cell; 
+  position: relative; 
+  padding: 15px 0;
+}
+
+mat-list-item a {
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  
+  display: inline-block;
+  padding: 15px 20px;
+  position: relative;
+}
+
+mat-nav-list a:after {    
+  background: none repeat scroll 0 0 transparent;
+  bottom: 0;
+  content: "";
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  background: black;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  width: 0
+}
+mat-nav-list a:hover:after { 
+  width: 100%; 
+  left: 0
+}
+
+/*Generales */
+
+a{
+  text-decoration: none;
+}

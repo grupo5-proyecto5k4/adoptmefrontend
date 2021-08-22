@@ -1,0 +1,247 @@
+<mat-dialog-content class="dialog-content">
+
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <section id="cta4">
+        <div class="container">
+          <header>
+            <div class="card-container">
+              <div class="lower-container">
+                <div>
+                  <div>
+                    <h2 class="subtitulo">{{Titulo}}</h2>
+                  </div>
+                  <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm">
+
+                    <div>
+                      <mat-form-field class="example-full-width" id="BoxNombre">
+                        <mat-label>*Nombre del centro rescatista</mat-label>
+                        <input matInput type="text" formControlName="name" maxlength="65">
+                      </mat-form-field>
+                      <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                      SignupForm.get('name').dirty) &&
+                      SignupForm.get('name').errors)">
+                        <span *ngIf="SignupForm.get('name').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="SignupForm.get('name').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                    </div>
+
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>*Correo</mat-label>
+                        <input matInput placeholder="direccion@dominio.com" formControlName="email" class="form-control"
+                          maxlength="60">
+                      </mat-form-field>
+                      <span class="help-block" *ngIf="((SignupForm.get('email').touched ||
+                        SignupForm.get('email').dirty) &&
+                        SignupForm.get('email').errors)">
+                        <span *ngIf="SignupForm.get('email').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('email').errors.email || SignupForm.get('email').errors.pattern">
+                          <h6 class="helpError">Formato del correo no válido</h6>
+                        </span>
+                      </span>
+                    </div>
+
+
+                    <div class="izquierda">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>*Calle</mat-label>
+                        <input matInput formControlName="street" class="form-control" maxlength="50">
+                      </mat-form-field>
+                      <span class="help-block" *ngIf="((SignupForm.get('street').touched ||
+                      SignupForm.get('street').dirty) &&
+                      SignupForm.get('street').errors)">
+                        <span *ngIf="SignupForm.get('street').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('street').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateCalle() && validateAltura())">
+                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                          -
+                        </h6>
+                      </span>
+                    </div>
+
+                    <div class="derecha">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Altura</mat-label>
+                        <input matInput placeholder="1234" formControlName="altura" class="form-control" maxlength="4">
+                      </mat-form-field>
+                      <span class="help-block" *ngIf="((SignupForm.get('altura').touched ||
+                      SignupForm.get('altura').dirty) &&
+                      SignupForm.get('altura').errors)">
+                        <span *ngIf="SignupForm.get('altura').errors.pattern">
+                          <mat-error class="helpError">Formato de la altura no válido</mat-error>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateAltura() && validateCalle())">
+                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                          -
+                        </h6>
+                      </span>
+                    </div>
+
+                    <div class="direccion">
+                      <div class="izquierda">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>Localidad</mat-label>
+                          <input matInput formControlName="localidad">
+                        </mat-form-field>
+                        <span class="help-block" *ngIf="(validateBarrio())">
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </div>
+
+                      <div class="derecha">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>*Barrio</mat-label>
+                          <input matInput formControlName="barrio" class="form-control" maxlength="50">
+                        </mat-form-field>
+                        <span class="help-block" *ngIf="((SignupForm.get('barrio').touched ||
+                      SignupForm.get('barrio').dirty) &&
+                      SignupForm.get('barrio').errors)">
+                          <span *ngIf="SignupForm.get('barrio').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="SignupForm.get('barrio').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 50 caracteres</mat-error>
+                          </span>
+                        </span>
+
+                      </div>
+                    </div>
+                    <div>
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Referencia</mat-label>
+                        <textarea matInput type="text" formControlName="reference" maxlength="150"></textarea>
+                      </mat-form-field>
+                    </div>
+
+                    <span class="help-block" *ngIf="((SignupForm.get('reference').touched ||
+                      SignupForm.get('reference').dirty) &&
+                      SignupForm.get('reference').errors)">
+                      <span *ngIf="SignupForm.get('reference').errors.maxlength">
+                        <mat-error class="helpError">Ingrese como máximo 150 caracteres</mat-error>
+                      </span>
+                    </span>
+
+                    <div class="izquierda">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Link de Facebook</mat-label>
+                        <input matInput placeholder="www.facebook.com/usuario" type="text" formControlName="facebook"
+                          maxlength="70">
+                      </mat-form-field>
+                    </div>
+                    <div class="derecha">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Usuario de Instagram</mat-label>
+                        <input matInput formControlName="instagram" maxlength="30">
+                      </mat-form-field>
+                    </div>
+
+                    <div class="izquierda">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>*Número de contacto</mat-label>
+                        <input matInput type="tel" formControlName="contactNumber" class="form-control" id="phone"
+                          maxlength="15">
+                      </mat-form-field>
+                      <span class="help-block" *ngIf="((SignupForm.get('contactNumber').touched ||
+                      SignupForm.get('contactNumber').dirty) &&
+                      SignupForm.get('contactNumber').errors)">
+                        <span *ngIf="SignupForm.get('contactNumber').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('contactNumber').errors.pattern">
+                          <h6 class="helpError">Ingrese valor numérico entre 10 y 13 dígitos</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateContactNumber() && validatePassword())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
+                    </div>
+
+                    <div class="derecha">
+                      <div class="password">
+                        <mat-form-field class="example-full-width">
+                          <mat-label>*Contraseña</mat-label>
+                          <input matInput type="password" formControlName="password" class="form-control" id="password"
+                            maxlength="17">
+                        </mat-form-field>
+                        <span class="help-block" *ngIf="((SignupForm.get('password').touched ||
+                      SignupForm.get('password').dirty) &&
+                      SignupForm.get('password').errors)">
+                          <span *ngIf="SignupForm.get('password').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="SignupForm.get('password').errors.pattern">
+                            <h6 class="helpError">La contraseña no cumple con los requisitos</h6>
+                          </span>
+                        </span>
+                        <span class="help-block blank" *ngIf="(validateContactNumber() && !validatePassword())">
+                          <span>
+                            <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                              -
+                            </h6>
+                          </span>
+                        </span>
+                      </div>
+
+                      <div class="tooldiv">
+                        <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+                    Entre 8 y 15 caracteres,
+                    al menos una mayúscula,
+                    una minúscula y un número"
+                          aria-label="Button that displays a tooltip when focused or hovered over">
+                          ℹ
+                        </label>
+                        <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">
+                          <span>
+                            <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                              -
+                            </h6>
+                          </span>
+                        </span>
+                      </div>
+                    </div>
+                    <div id="passwordRequirement">
+                      <div>
+                        <p id="requer">(*)Campos obligatorios</p>
+                      </div>
+                    </div>
+                    <div id="botones">
+                      <a mat-raised-button *ngIf="!isLoading" color="accent" class="button cancelar" type="button"
+                        id="btncuenta" style="padding: 10px;" mat-dialog-close>Cancelar</a>
+                        <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button"
+                        id="confirmar" style="padding: 10px;" (mouseover)="validateButton()" (click)="signup()">Crear cuenta</a>
+                      <a mat-raised-button *ngIf="isLoading" style="padding: 10px;" color="accent" class="button loading" type="button"
+                        id="btncuenta">
+                        <img class=logo src="../../../assets/images/loading.gif" /></a>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+    </div>
+  </body>
+</mat-dialog-content>

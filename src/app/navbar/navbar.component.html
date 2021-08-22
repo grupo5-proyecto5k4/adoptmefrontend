@@ -1,15 +1,20 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [ngClass]="{ hidden: !(isHandset$ | async) }"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <!-- mat-toolbar referencia al contenido del boton hamburguesa -->  
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Adoptar</a>
-      <a mat-list-item href="#">Brindar provisorio</a>
-      <a mat-list-item href="#">Donar</a>
-      <a mat-list-item href="#">Sobre nosotros</a>
+      <a mat-list-item *ngIf="!isAdmin()" routerLink="/adoptar" (click)="drawer.toggle(); scrollTop()">Adopciones</a>
+      <a mat-list-item *ngIf="!isAdmin()" routerLink="/provisorio" (click)="drawer.toggle(); scrollTop()">Provisorios</a>
+      <a mat-list-item *ngIf="!isAdmin()" routerLink="/mascotas" (click)="drawer.toggle(); scrollTop()">Mis Mascotas</a>
+      <a mat-list-item *ngIf="isRescatist()" routerLink="/donaciones" (click)="drawer.toggle(); scrollTop()">Donaciones</a>
+      <a mat-list-item *ngIf="isAdmin()" routerLink="/configuraciones"  (click)="drawer.toggle(); scrollTop()">Configuraciones</a>
+      <a mat-list-item *ngIf="isAdmin()" routerLink="/reportes"  (click)="drawer.toggle(); scrollTop()">Reportes</a>
+      <a mat-list-item *ngIf="!isAdmin()" routerLink="/mapas" (click)="drawer.toggle(); scrollTop()">Recomendaciones</a>
+      <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -24,11 +29,19 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>AdoptMe</span>
-      <a href="#" id="navtitle">Adoptar</a>
-      <a href="#" id="navtitle">Brindar provisorio</a>
+      <a href="#" class="adoptme-title">AdoptMe</a>
+      <a *ngIf="!isAdmin()" routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adopciones</a>
+      <a *ngIf="!isAdmin()" routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Provisorios</a>
+      <a *ngIf="!isAdmin()" routerLink="/mascotas" class="nav-titles" (click)="scrollTop()">Mis Mascotas</a>
+      <a *ngIf="isRescatist()" routerLink="/donaciones" class="nav-titles" (click)="scrollTop()">Donaciones</a>
+      <a *ngIf="isAdmin()" routerLink="/configuraciones" class="nav-titles" (click)="scrollTop()">Configuraciones</a>
+      <a *ngIf="isAdmin()" routerLink="/reportes" class="nav-titles" (click)="scrollTop()">Reportes</a>
+      <a *ngIf="!isAdmin()" routerLink="/mapas" class="nav-titles" (click)="scrollTop()">Recomendaciones</a>
+
       <span class="spacer"></span>
-      <a mat-raised-button color="accent" href="#" id="btncuenta">Crear cuenta</a>
+      <a mat-raised-button routerLink="/inicio-sesion" color="accent" id="btncuenta" *ngIf="!isInicioSesion()&&!isLogued()" (click)="scrollTop()">Iniciar sesión</a>
+      <a mat-raised-button routerLink="/opciones-de-registro" color="accent" id="btncuenta" *ngIf="!isSignupOptions()&&!isLogued()" (click)="scrollTop()">Crear cuenta</a>
+      <button type="button" *ngIf="isLogued()" href="#" color="accent" class="user-icon" (click)="logOut()">{{iniciales | uppercase}}</button>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

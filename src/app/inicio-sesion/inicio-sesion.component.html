@@ -1,0 +1,78 @@
+<body class="is-preload">
+  <mat-dialog-content>
+
+    <body>
+      <div class="container">
+        <header>
+          <div class="card-container">
+            <div class="lower-container">
+              <h2 class="subtitulo">{{titulo}}</h2>
+              <form class="example-form" [formGroup]="SignUpForm" *ngIf="SignUpForm">
+                <div>
+                  <mat-form-field class="example-full-width">
+                    <mat-label>*Correo</mat-label>
+                    <input matInput placeholder="direccion@dominio.com" formControlName="email" class="form-control"
+                      maxlength="60">
+                  </mat-form-field>
+                  <span class="help-block" *ngIf="((SignUpForm.get('email').touched ||
+                 SignUpForm.get('email').dirty) && SignUpForm.get('email').errors)">
+                    <span *ngIf="SignUpForm.get('email').errors.required">
+                      <h6 class="helpError">Campo Requerido</h6>
+                    </span>
+                    <span *ngIf="SignUpForm.get('email').errors.email || SignUpForm.get('email').errors.pattern">
+                      <h6 class="helpError">Formato del correo no válido</h6>
+                    </span>
+                  </span>
+                </div>
+
+                <div class="password">
+                  <mat-form-field class=example-full-width>
+                    <mat-label>*Contraseña</mat-label>
+                    <input matInput type="password" formControlName="password" class="form-control" id="password"
+                      maxlength="17">
+                  </mat-form-field>
+                  <span class="help-block" *ngIf="((SignUpForm.get('password').touched ||
+               SignUpForm.get('password').dirty) && SignUpForm.get('password').errors)">
+                    <span *ngIf="SignUpForm.get('password').errors.required">
+                      <h6 class="helpError">Campo requerido</h6>
+                    </span>
+                  </span>
+                </div>
+
+                <div class="tooldiv">
+                  <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+              Entre 8 y 15 caracteres,
+              al menos una mayúscula,
+              una minúscula y un número" aria-label="Button that displays a tooltip when focused or hovered over">
+                    ℹ
+                  </label>
+                </div>
+
+                <div id="passwordRequirement">
+                  <div>
+                    <p id="requer">(*)Campos obligatorios</p>
+                  </div>
+                </div>
+
+                <div>
+
+                </div>
+                <a mat-raised-button *ngIf="!isLoading" style="padding: -10px !important;" routerLink="/landing"
+                  color="accent" class="button cancelar" type="button" id="btncuenta">Cancelar</a>
+                <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button"
+                  id="confirmar" (mouseover)="validateButton()" (click)="login()">Ingresar</a>
+                <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button"
+                  id="btncuenta">
+                  <img class=logo src="../../assets/images/loading.gif" /></a>
+              </form>
+
+            </div>
+          </div>
+          <div class=section2-item2>
+            <img src="./assets/landing-images/section2-background.png" alt="" class=img-paws>
+        </div>
+        </header>
+      </div>
+    </body>
+  </mat-dialog-content>
+</body>
