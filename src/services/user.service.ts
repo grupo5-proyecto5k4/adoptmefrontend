@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment.prod';
 import {catchError, map} from 'rxjs/operators';
 import { User } from 'src/models/IUser';
 import { HttpErrorHandlerService } from 'src/utils/ErrorHandler';
-import { AlertsService } from 'src/utils/alerts.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,16 +14,15 @@ export class UserService {
  
   api='https://adoptmebackend.herokuapp.com';
 
-  constructor(private httpClient: HttpClient,  private errorHandler: HttpErrorHandlerService, private alert: AlertsService) {}
+  constructor(private httpClient: HttpClient,  private errorHandler: HttpErrorHandlerService) {}
  
 
   async getCentrosRescatistasPendientes(estado: string, token:string): Promise <any[]> {
     return this.httpClient.get<any[]>(this.api + '/centros/' + estado, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
-  async updateAccount(user: User, token:string): Promise <any> {
-    this.alert.infoMessage(token, "token");
-    return this.httpClient.put<any>(this.api + '/centros/' + user._id, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  updateAccount(user: User, token:string): Observable <any> {
+    return this.httpClient.put<any>(this.api + '/centros/' + user._id, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
   
 
