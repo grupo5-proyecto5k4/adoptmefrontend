@@ -54,14 +54,8 @@ export class HabilitarCentroRescatistaComponent {
     
     cambiarEstado(user: any, estado: number) {
       let centro: User = { _id: user._id, nombres: user.nombres, correoElectronico: user.correoElectronico , idEstado: estado, dni: user.dni, numeroContacto: user.numeroContacto, fechaNacimiento: user.fechaNacimiento, facebook: user.facebook, instagram: user.instagram, fechaCreacion: user.fechaCreacion, fechaModificacion: user.fechaCreacion, tipoUsuario: user.tipoUsuario, contrasenia: '', Direccion: user.Direccion  };
-      
-      //this.alertsService.infoMessage((""+user._id+""),'Centros rescatistas');debugger;
-      //let centro: User;
-      //centro._id = user._id;
-     //centro.idEstado = estado;
-      this.userService.updateAccount(centro, this.authService.getToken()).subscribe({
-        complete: () => {
-          if (estado == 1){
+      this.userService.updateAccount(centro, this.authService.getToken()).then((r) => {
+        if (estado == 1){
           this.alertsService.confirmMessage("El centro rescatista ha sido habilitado")
             .then((result) => {
               this.obtenerCentros();
@@ -73,11 +67,7 @@ export class HabilitarCentroRescatistaComponent {
               this.obtenerCentros();
             });
           }
-        },
-        error: (err: any) => {
-          this.alertsService.errorMessage("Se ha producido un error, vuelva a intentar más tarde")
-        }
-      });
+      });  
     }
 
     getPaginatorData(event) {
