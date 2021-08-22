@@ -33,10 +33,10 @@ export class NavbarComponent {
     this.profile = this.localStorageService.getProfile();
     if (this.isLogued){
       this.currentUser = this.authservice.getCurrentUser();
-      if (this.profile == '0' || this.profile == '1'){
+      if (this.currentUser.nombres !== undefined && this.currentUser.apellidos !== undefined){
         this.iniciales = ((this.currentUser.nombres).split("", 1)+(this.currentUser.apellidos).split("", 1)); 
       }
-      else if (this.profile == '2'){
+      else {
         let nombre = (this.currentUser.nombres).split(""); 
         this.iniciales = nombre[0]+nombre[1];
       }
