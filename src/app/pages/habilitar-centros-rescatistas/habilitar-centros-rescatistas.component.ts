@@ -52,13 +52,13 @@ export class HabilitarCentroRescatistaComponent {
       this.alertsService.infoMessage('La visualización del centro rescatista aún no se encuentra disponible','Información')
     }
     
-    cambiarEstado(userId: number, estado: number) {
-      //let centro: User = { id: user.id, nombres: user.nombres, correoElectronico: user.correoElectronico , idEstado: estado, dni: user.dni, numeroContacto: user.numeroContacto, fechaNacimiento: user.fechaNacimiento, facebook: user.facebook, instagram: user.instagram, fechaCreacion: user.fechaCreacion, fechaModificacion: user.fechaCreacion, tipoUsuario: user.tipoUsuario, contrasenia: '', Direccion: user.Direccion  };
-      let centro: User;
-      centro.id = userId;
-      centro.idEstado = estado;
-      this.alertsService.infoMessage((""+(userId)+""+(estado)+""),'Centros rescatistas');
-      //this.alertsService.infoMessage(this.authService.getToken(),'Centros rescatistas');
+    cambiarEstado(user: any, estado: number) {
+      let centro: User = { _id: user._id, nombres: user.nombres, correoElectronico: user.correoElectronico , idEstado: estado, dni: user.dni, numeroContacto: user.numeroContacto, fechaNacimiento: user.fechaNacimiento, facebook: user.facebook, instagram: user.instagram, fechaCreacion: user.fechaCreacion, fechaModificacion: user.fechaCreacion, tipoUsuario: user.tipoUsuario, contrasenia: '', Direccion: user.Direccion  };
+      
+      //this.alertsService.infoMessage((""+user._id+""),'Centros rescatistas');debugger;
+      //let centro: User;
+      //centro._id = user._id;
+     //centro.idEstado = estado;
       this.userService.updateAccount(centro, this.authService.getToken()).subscribe({
         complete: () => {
           if (estado == 1){

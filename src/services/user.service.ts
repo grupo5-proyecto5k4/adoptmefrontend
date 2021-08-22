@@ -36,8 +36,7 @@ export class UserService {
   }
 
   updateAccount(user: User, token:string): Observable <any> {
-    debugger;
-    return this.httpClient.put<any>(this.api + '/centros/' + user.id, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+    return this.httpClient.put<any>(this.api + '/centros/' + user._id, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
   }
