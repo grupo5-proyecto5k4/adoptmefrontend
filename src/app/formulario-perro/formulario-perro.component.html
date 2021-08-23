@@ -1,146 +1,259 @@
 <mat-dialog-content class="dialog-content">
-
-   <body class="is-preload">
-       <div id="page-wrapper">
-           <section id="cta4">
-               <div class="container">
-                   <header>
-                      <div class="card-container">
-                          <div class="lower-container">
-                            <div>
-                                <h2 class="subtitulo">{{Titulo}}</h2>
-                            </div>
-                            <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm">
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <section id="cta4">
+                <div class="container">
+                    <header>
+                        <div class="card-container">
+                            <div class="lower-container">
                                 <div>
-                                    <mat-form-field class="example-full-width">
-                                        <mat-label>*Nombre de mascota</mat-label>
-                                    <input matInput placeholder="nombre" formControlName="nombre" class="form-control"
-                          maxlength="60">
-                                    </mat-form-field>
-                         
+                                    <h2 class="subtitulo">{{Titulo}}</h2>
                                 </div>
+                                <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm" (submit)="uploadPhoto(titulo,descripcion)">
+                                    <div>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>*Nombre de mascota</mat-label>
+                                            <input matInput placeholder="nombre de mascota" formControlName="nombre" class="form-control" maxlength="30" #titulo>
+                                        </mat-form-field>
+                                        <span class="help-block" *ngIf="((SignupForm.get('nombre').touched ||
+                                        SignupForm.get('nombre').dirty) && SignupForm.get('nombre').errors)">
+                                        <span *ngIf="SignupForm.get('nombre').errors.required">
+                                           <h6 class="helpError">Campo requerido</h6> 
+                                        </span>
+                                        <span *ngIf="SignupForm.get('nombre').errors.maxlength">
+                                           <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error> 
+                                        </span>
+                                       <span *ngIf="SignupForm.get('nombre').errors.pattern">
+                                            <h6 class="helpError">Formato del nombre no válido</h6>
+                                       </span> 
+                                    </span>
+                                    </div>
 
-                            <div id="cachorro" class="izquierda">
-                                <mat-form-field class="example-form">
-                                    <mat-label>*Es cachorro</mat-label>
-                                    <mat-select>
-                                        <mat-option value="1">Si</mat-option>
-                                        <mat-option value="2">No</mat-option>
-                                    </mat-select>
-                        
-                                </mat-form-field>
+                                    <div id="cachorro" class="izquierda">
+                                        <mat-form-field class="example-form">
+                                           <mat-label>*Es cachorro</mat-label>
+                                           <mat-select formControlName="cachorro">
+                                               <mat-option value="1">Si</mat-option>
+                                               <mat-option value="2">No</mat-option>
+                                           </mat-select> 
+                                        </mat-form-field>
+                                        <span class="help-block" *ngIf="((SignupForm.get('cachorro').touched ||
+                                        SignupForm.get('cachorro').dirty) && SignupForm.get('cachorro').errors)">
+                                        <span *ngIf="SignupForm.get('cachorro').errors.required">
+                                            <h6 class="helpError">Campo requerido</h6>
+                                        </span>
+                                    </span>
+                                    </div>
+
+                                    <div class="derecha">
+                                        <mat-form-field class="example-form">
+                                            <mat-label>*Tamaño final</mat-label>
+                                            <input matInput placeholder="tamaño final" formControlName="tamaño" class="form-control" maxlength="30">
+                                        </mat-form-field>
+                                        <span class="help-block" *ngIf="((SignupForm.get('tamaño').touched ||
+                                        SignupForm.get('tamaño').dirty) && SignupForm.get('tamaño').errors)">
+                                       <span *ngIf="SingupForm.get('tamaño').errors.required">
+                                           <h6 class="helpError">Campo requerido</h6>
+                                       </span> 
+                                       <span *ngIf="SignupForm.get('tamaño').errors.maxlength">
+                                           <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                                       </span>
+                                       <span *ngIf="SignupForm.get('tamaño').errors.pattern">
+                                           <h6 class="helpError">Formato de tamaño no válido</h6>
+                                       </span>
+                                    </span>
+                                    </div>
+
+                                    <div class="derecha">
+                                        <mat-form-field class="example-form">
+                                            <mat-label>*Sexo</mat-label>
+                                            <mat-select formControlName="sexo">
+                                                <mat-option value="1">Hembra</mat-option>
+                                                <mat-option value="2">Macho</mat-option>
+                                            </mat-select> 
+                                        </mat-form-field>
+                                      <span class="help-block" *ngIf="((SignupForm.get('sexo').touched ||
+                                      SignupForm.get('sexo').dirty) && SignupForm.get('sexo').errors)">
+                                        <span *ngIf="SignupForm.get('sexo').errors.required">
+                                            <h6 class="helpError">Campo requerido</h6>
+                                        </span>
+                                    </span>
+                                    </div>
+
+                                    <div class="izquierda">
+                                      <mat-form-field class="example-form">
+                                         <mat-label>*Edad(año,mes)</mat-label>
+                                         <input matInput type="number" formControlName="edad" class="form-control" step="0.1">
+                                      </mat-form-field>  
+                                     <span class="help-block" *ngIf="((SignupForm.get('edad').touched ||
+                                     SignupForm.get('edad').dirty) && SignupForm.get('edad').errors)">
+                                      <span *ngIf="SignupForm.get('edad').errors.required">
+                                          <h6 class="helpError">Campo requerido</h6>
+                                      </span>
+                                    </span>
+                                    </div>
+
+                                   <div class="derecha">
+                                       <mat-form-field class="example-form">
+                                           <mat-label>*Raza Padre</mat-label>
+                                           <input matInput placeholder="raza padre" formControlName="razaPadre" class="form-control" maxlength="30">
+                                       </mat-form-field>
+                                  <span class="help-block" *ngIf="((SignupForm.get('razaPadre').touched ||
+                                  SignupForm.get('razaPadre').dirty) && SignupForm.get('razaPadre').errors)">
+                                       <span *ngIf="SignupForm.get('razaPadre').errors.required">
+                                           <h6 class="helpError">Campo requerido</h6>
+                                       </span>
+                                      <span *ngIf="SignupForm.get('razaPadre').errors.maxlength">
+                                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                                      </span> 
+                                      <span *ngIf="SignupForm.get('razaPadre').errors.pattern">
+                                          <h6 class="helpError">Formato no válido</h6>
+                                      </span>
+                                </span>
+                                   </div> 
+
+                                   <div class="izquierda">
+                                       <mat-form-field class="example-form">
+                                           <mat-label>*Raza Madre</mat-label>
+                                           <input matInput placeholder="raza madre" formControlName="razaMadre" class="form-control" maxlength="30">
+                                       </mat-form-field>
+                                  <span class="help-block" *ngIf="((SignupForm.get('razaMadre').touched ||
+                                  SignupForm.get('razaMadre').dirty) && SignupForm.get('razaMadre').errors)">
+                                       <span *ngIf="SignupForm.get('razaMadre').errors.required">
+                                           <h6 class="helpError">Campo requerido</h6>
+                                       </span>
+                                       <span *ngIf="SignupForm.get('razaMadre').errors.maxlength">
+                                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error> 
+                                       </span>
+                                       <span *ngIf="SignupForm.get('razaMadre').errors.pattern">
+                                           <h6 class="helpError">Formato no válido</h6>
+                                       </span>
+                                </span>
+                                   </div>
+
+                                  <div class="derecha">
+                                      <mat-form-field class="example-form">
+                                          <mat-label>*Castrado</mat-label>
+                                          <mat-select formControlName="castrado">
+                                              <mat-option value="1">Si</mat-option>
+                                              <mat-option value="2">No</mat-option>
+                                              <mat-option value="3">Con compromiso</mat-option>
+                                          </mat-select>
+                                      </mat-form-field>
+                                     <span class="help-error" *ngIf="((SignupForm.get('castrado').touched ||
+                                     SignupForm.get('castrado').dirty) && SignupForm.get('castrado').errors)">
+                                      <span *ngIf="SignupForm.get('castrado').errors.required">
+                                          <h6 class="helpError">Campo requerido</h6>
+                                      </span>
+                                    </span>
+                                  </div> 
+
+                                 <div class="izquierda">
+                                     <mat-form-field class="example-form">
+                                         <mat-label>*Fecha de alta</mat-label>
+                                         <input matInput type="date" formControlName="fechaAlta" class="form-control">
+                                     </mat-form-field>
+                                     <span class="help-block" *ngIf="((SignupForm.get('fechaAlta').touched ||
+                                     SignupForm.get('fechaAlta').dirty) && SignupForm.get('fechaAlta').errors)">
+                                     <span *ngIf="SignupForm.get('fechaAlta').errors.required">
+                                         <h6 class="helpError">Campo requerido</h6>
+                                     </span>
+                                    </span>
+                                 </div> 
+
+                                 <div>
+                                     <mat-form-field class="example-full-width">
+                                         <mat-label>*Conducta con niños</mat-label>
+                                         <input matInput placeholder="conducta con niños" formControlName="conductaNiños" class="form-control" maxlength="150">
+                                     </mat-form-field>
+                                   <span class="help-block" *ngIf="((SignupForm.get('conductaNiños').touched ||
+                                   SignupForm.get('conductaNiños').dirty) && SignupForm.get('conductaNiños').errors)">
+                                <span *ngIf="SignupForm.get('conductaNiños').errors.required">
+                                    <h6 class="helpError">Campo requerido</h6>
+                                </span>
+                                <span *ngIf="SignupForm.get('conductaNiños').errors.maxlength">
+                                    <mat-error class="helpError">Ingrese como máximo 150 caracteres</mat-error>
+                                </span>
+                                <span *ngIf="SignupForm.get('conductaNiños').errors.pattern">
+                                    <h6 class="helpError">Formato no válido</h6>
+                                </span>
+                                </span>
+                                 </div>
+
+                                 <div>
+                                     <mat-form-field class="example-full-width">
+                                         <mat-label>*Conducta con otros perros</mat-label>
+                                         <input matInput placeholder="conducta con perros" formControlName="conductaPerros" class="form-control" maxlength="150">
+                                     </mat-form-field>
+                                    <span class="help-block" *ngIf="((SignupForm.get('conductaPerros').touched ||
+                                    SignupForm.get('conductaPerros').dirty) && SignupForm.get('conductaPerros').errors)">
+                                     <span *ngIf="SignupForm.get('conductaPerros').errrors.required">
+                                         <h6 class="helpError">Campo requerido</h6>
+                                     </span>
+                                     <span *ngIf="SignupForm.get('conductaPerros').errors.maxlength">
+                                         <mat-error class="helpError">Ingrese como máximo 150 caracteres</mat-error>
+                                     </span>
+                                     <span *ngIf="SignupForm.get('conductaPerros').errors.pattern">
+                                         <h6 class="helpError">Formato no válido</h6>
+                                     </span>
+                                </span>                                    
+                                 </div>
+
+                                 <div>
+                                     <mat-form-field class="example-full-width">
+                                         <mat-label>*Conducta con gatos</mat-label>
+                                         <input matInput placeholder="conducta con gatos" formControlName="conductaGatos" class="form-control" maxlength="150">
+                                     </mat-form-field>
+                                     <span class="help-error" *ngIf="((SignupForm.get('conductaGatos').touched ||
+                                     SignupForm.get('conductaGatos').dirty) && SignupForm.get('conductaGatos').errors)">
+                                     <span *ngIf="SignupForm.get('conductaGatos').errors.required">
+                                         <h6 class="helpError">Campo requerido</h6>
+                                     </span>
+                                     <span *ngIf="SignupForm.get('conductaGatos').errors.maxlength">
+                                         <mat-error class="helpError">Ingrese como máximo 150 caracteres</mat-error>
+                                     </span>
+                                     <span *ngIf="SignupForm.get('conductaGatos').errors.pattern">
+                                         <h6 class="helpError">Formato no válido</h6>
+                                     </span>
+                                    </span>
+                                 </div>
+
+                                 <div>
+                                     <mat-form-field class="example-full-width">
+                                         <mat-label>*Descripción</mat-label>
+                                         <input matInput placeholder="descripcion" formControlName="descripcion" class="form-control" maxlength="150" #descripcion>
+                                     </mat-form-field>
+                                  <span class="help-block" *ngIf="((SignupForm.get('descripcion').touched ||
+                                  SignupForm.get('descripcion').dirty) && SignupForm.get('descripcion').errors)">
+                                <span *ngIf="SignupForm.get('descripcion').errors.required">
+                                    <h6 class="helpError">Campo requerido</h6>
+                                </span>
+                                <span *ngIf="SignupForm.get('descripcion').errors.maxlength">
+                                    <mat-error class="helpError">Ingrese como máximo 150 caracteres</mat-error>
+                                </span>
+                                <span *ngIf="SignupForm.get('descripcion').errors.pattern">
+                                    <h6 class="helpError">Formato no válido</h6>
+                                </span>
+                                </span>
+                                 </div>
+
+                                 <input type="file" style="visibility: hidden;" class="d-none" (change)="onPhotoSelected($event)" #photoInput>
+                                 <img src="photoSelected || '../../assets/under-construction-images/icono.png'" width="200" height="200" alt="no image" class="img-fluid" (click)="photoInput.click()">
+                                
+                                <div>
+                                     <p id="requer">(*)Campos obligatorios</p>
+                                 </div>
+
+                                 <div>
+                                     <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
+                                     <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
+                                 </div>
+                                </form>
                             </div>
-
-                            <div class="derecha">
-                               <mat-form-field class="example-full-width">
-                                  <mat-label>*Tamaño final</mat-label> 
-                                <input matInput placeholder="tamaño final" formControlName="tamaño" class="form-control" maxlength="60">
-                               </mat-form-field> 
-                            </div>
-
-                           <div class="derecha">
-                               <mat-form-field class="example-form">
-                                   <mat-label>*Edad(año,mes)</mat-label>
-                                   <input matInput type="number" class="form-control" step="0.1">
-                               </mat-form-field>
-                           </div> 
-
-                          <div class="izquierda">
-                              <mat-form-field class="example-form">
-                                  <mat-label>*Sexo</mat-label>
-                                  <mat-select>
-                                      <mat-option value="1">Hembra</mat-option>
-                                      <mat-option value="2">Macho</mat-option>
-                                  </mat-select>
-                              </mat-form-field>
-                          </div> 
-
-                                                 
-                            <div class="derecha">
-                                <mat-form-field class="example-form">
-                                    <mat-label>*Raza Padre</mat-label>
-                                    <input matInput placeholder="raza padre" formControlName="razaPadre" class="form-control" maxlength="60">
-                                </mat-form-field>
-                            </div>
-
-                           <div class="izquierda">
-                               <mat-form-field class="example-form">
-                                   <mat-label>*Raza Madre</mat-label>
-                                   <input matInput placeholder="raza madre" formControlName="razaMadre" class="form-control" maxlength="60">
-                               </mat-form-field>
-                           </div> 
-
-                           <div class="derecha">
-                               <mat-form-field class="example-form">
-                                   <mat-label>*Castrado</mat-label>
-                                   <mat-select>
-                                       <mat-option value="1">Si</mat-option>
-                                       <mat-option value="2">No</mat-option>
-                                       <mat-option value="3">Con compromiso</mat-option> 
-                                   </mat-select> 
-                               </mat-form-field>
-                           </div>
-
-                          <div class="izquierda">
-                              <mat-form-field class="example-form">
-                                  <mat-label>*Fecha de alta</mat-label>
-                                  <input matInput type="date" formControlName="fechaAlta" class="form-control">
-                              </mat-form-field>
-                          </div> 
-
-                          <div>
-                              <mat-form-field class="example-full-width">
-                                  <mat-label>*Conducta con niños</mat-label>
-                                  <input matInput placeholder="conducta con niños" formControlName="conductaNiños" class="form-control" maxlength="200">
-                              </mat-form-field>
-                          </div>
-
-                          <div>
-                              <mat-form-field class="example-full-width">
-                                  <mat-label>*Conducta con otros perros</mat-label>
-                                  <input matInput placeholder="conducta con otros perros" formControlName="conductaPerros" class="form-control" maxlength="200">
-                              </mat-form-field>
-                          </div>
-
-                          <div>
-                              <mat-form-field class="example-full-width">
-                                  <mat-label>*Conducta con gatos</mat-label>
-                                  <input matInput placeholder="conducta con gatos" formControlName="conductaGatos" class="form-control" maxlength="200">
-                              </mat-form-field>
-                          </div>
-
-                            
-                            <div>
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>*Descripción</mat-label>
-                                    <input matInput placeholder="descripcion" formControlName="descripcion" class="form-control" maxlength="300">
-                                </mat-form-field>
-                            </div> 
-
-                            <div>
-                                <mat-form-field class="example-full-width">
-                                    <input matInput type="file" color="accent" placeholder="imagen de mascota" class="button" (change)="selecArchivo($event)" formControlName="imagenMascota"> 
-                                    
-                                </mat-form-field>
-                            </div>
-
-                            <div>
-                                <p id="requer">(*)Campos obligatorios</p>
-                            </div>
-                                                     
-                            <div>
-                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" mat-dialog-close>Cancelar</a>
-                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button">Aceptar</a>
-                            </div>
-                              
-                              
-                            </form>
-                          </div>
-                      </div> 
-                   </header>
-               </div>
-           </section>
-
-       </div> 
-   </body> 
+                        </div>
+                    </header>
+                </div>
+            </section>
+        </div>
+    </body>
 </mat-dialog-content>

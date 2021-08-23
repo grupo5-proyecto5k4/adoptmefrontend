@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const morgan= require('morgan');
+const multer= require('multer');
+const cloudinary= require('cloudinary');
+
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist/adoptmefrontend'));
@@ -31,5 +35,20 @@ const forceSSL = function() {
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/adoptmefrontend/index.html'));
   });
+  
+  const storage= multer.diskStorage({
+    destination: path.join(__dirname,'public/uploads'),
+    filename:(req,file,cb) =>{
+      cb(null,new Date().getTime() + path.extname(file.originalname));
+    }
+  });
+
+  app.use(multer({storage}).single('image'));
+
+  cloudinary.config({
+    cloud_name:'dsfz7jmoi',
+    api_key:'281974651216952',
+    api_secret:'RKGzfGl_WhyjnoOevR6MZTLl-mc',
+  })
 
   
