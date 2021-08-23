@@ -6,6 +6,8 @@ import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/services/local-storage.service';
 import{AuthService} from '../auth.service';
+import { stringify } from '@angular/compiler/src/util';
+import { AlertsService } from 'src/utils/alerts.service';
 
 
 
@@ -18,6 +20,8 @@ export class NavbarComponent {
 
   faPaw = faPaw;
   profile: string;
+  iniciales: string = "";
+  currentUser: any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -25,9 +29,18 @@ export class NavbarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private authservice: AuthService, private router: Router, private localStorageService: LocalStorageService) {
-
+  constructor(private breakpointObserver: BreakpointObserver, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
     this.profile = this.localStorageService.getProfile();
+    if (this.isLogued()){
+      this.currentUser = this.authservice.getCurrentUser();
+      if (this.currentUser.apellidos !== undefined && this.currentUser.apellidos !== null){
+        this.iniciales = ((this.currentUser.nombres).split("", 1)+(this.currentUser.apellidos).split("", 1)); 
+      }
+      else {
+        let nombre = (this.currentUser.nombres).split(""); 
+        this.iniciales = nombre[0]+nombre[1];
+      }
+    }
   }
   
 
@@ -40,7 +53,7 @@ export class NavbarComponent {
   }
 
   isLogued(){
-    return (this.profile != null || this.profile != undefined)
+    return (this.profile !== null && this.profile !== undefined)
   }
 
   scrollTop(){
@@ -59,9 +72,15 @@ export class NavbarComponent {
     return (this.profile == '0')
   }
 
-  logOut(){
-    this.authservice.cerrarSesion();
-    window.location.href = "/landing";
+  logOut() {
+    this.alertsService.questionMessage("¿Desea cerrar la sesión?", "Cerrar sesión", "Salir", "Cancelar")
+      .then((result) => {
+        if (result.value) {
+          this.authservice.cerrarSesion();
+          window.location.href = "/landing";
+        }
+      });
   }
+
 
 }

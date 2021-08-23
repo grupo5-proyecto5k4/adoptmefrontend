@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { AuthService } from 'src/app/auth.service';
+import { User } from 'src/models/IUser';
 import { UserService } from 'src/services/user.service';
 import { AlertsService } from 'src/utils/alerts.service';
 
@@ -23,18 +25,51 @@ export class HabilitarCentroRescatistaComponent {
     public highValue: number = 10;
     private pageIndex: number = 0;
     private activePageIndex: boolean = false;
+    centrosPendientes: any;
 
-    constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService,) { }
+    constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService) { }
 
-    ngOnInit() { }
+    async ngOnInit() { 
+      await this.obtenerCentros();
+    }
 
 
       /*1 - Activo (Usuario)
         2 - Pendiente (Usuario)
         3 - Bloqueado (Usuario) */
 
-    habilitarCentro() {
-      //this.userService.getCentrosRescatistasPendientes(estado,)
+
+    async obtenerCentros(){    
+      this.userService.getCentrosRescatistasPendientes('Pendiente', this.authService.getToken()).then((r) => {
+        this.centrosPendientes = r;
+      });        
+    } 
+
+    proximamente(){
+      this.alertsService.infoMessage('La visualización del centro rescatista aún no se encuentra disponible','Información')
+    }
+    
+    cambiarEstado(user: any, estado: number) {
+      let centro: User = { _id: user._id, nombres: user.nombres, correoElectronico: user.correoElectronico , idEstado: estado, dni: user.dni, numeroContacto: user.numeroContacto, fechaNacimiento: user.fechaNacimiento, facebook: user.facebook, instagram: user.instagram, fechaCreacion: user.fechaCreacion, fechaModificacion: user.fechaCreacion, tipoUsuario: user.tipoUsuario, contrasenia: '', Direccion: user.Direccion  };
+      this.userService.updateAccount(centro, this.authService.getToken()).subscribe({
+        complete: () => {
+          if (estado == 1){
+          this.alertsService.confirmMessage("El centro rescatista ha sido habilitado")
+            .then((result) => {
+              this.obtenerCentros();
+            });
+          }
+          else if (estado == 3){
+            this.alertsService.confirmMessage("El centro rescatista ha sido rechazado")
+            .then((result) => {
+              this.obtenerCentros();
+            });
+          }
+        },
+        error: (err: any) => {
+          this.alertsService.errorMessage("Se ha producido un error, vuelva a intentar más tarde")
+        }
+      });
     }
 
     getPaginatorData(event) {

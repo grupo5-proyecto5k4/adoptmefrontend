@@ -133,7 +133,7 @@ input {
 }
 
 .tool{
-  background-color: rgb(124, 124, 145);
+  background-color: rgb(173, 173, 175);
   line-height: 20px;
   border-radius: 0px;
   margin: 0px;
@@ -147,6 +147,7 @@ input {
   border-style: solid;
   border-color: rgb(43, 41, 41);
   border-width: 0.7px;
+  border-radius: 2px;
 }
 
 .tool:active{
@@ -345,6 +346,12 @@ padding-bottom: 150% !important;
   width: 80% !important;
   height: 60% !important;
   top: 40% !important;
+  }
+
+  .tool{
+    background-color: transparent;
+    border-style: none;
+    border-color: transparent;
   }
 }
 
