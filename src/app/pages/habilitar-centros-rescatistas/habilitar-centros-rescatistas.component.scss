@@ -42,7 +42,9 @@ dialog-content{
 
 
 #RequestContainer{
-    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    padding-right: 4%;
 }
 
 ::ng-deep .mat-paginator{
@@ -173,6 +175,10 @@ table{
 
     ::ng-deep .mat-card-title{
        width: 70% !important;
+    }
+
+    #RequestContainer{
+        padding-right: 7%;
     }
 
 }
