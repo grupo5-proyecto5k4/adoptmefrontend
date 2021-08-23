@@ -46,7 +46,6 @@ export class InicioSesionComponent implements OnInit {
       loginUser.correoElectronico= this.SignUpForm.controls.email.value;
       loginUser.contrasenia=this.SignUpForm.controls.password.value;
       this.authservice.login(loginUser.correoElectronico,loginUser.contrasenia).subscribe((resp:Data) => {
-        
         localStorage.setItem('auth_token', resp.token);
         let currentUser = this.authservice.getUser(resp.token).then((r) => {
           this.authservice.setUser(r);
@@ -56,19 +55,12 @@ export class InicioSesionComponent implements OnInit {
       },
         error => {
           this.isLoading = false;
-          if (error.error.error.code == 400) {
-            this.alertsService.errorMessage("Email y/o contraseña incorrectos")
-  
-            return;
-          }
-          if (error.error.error.code == 401) {
-            this.alertsService.errorMessage("Usuario bloqueado, comuníquese con el administrador desde la sección contáctenos.")
-            return;
-          }
-          this.alertsService.errorMessage("Email y/o contraseña incorrectos");     
+          this.alertsService.errorMessage(error.error.error).then((result) => {
+            this.isLoading = false;  
+          });  
     
         }
-        );;
+        );
     }
   }
   
