@@ -38,3 +38,25 @@ form{
     width: 35px;
     height: 35px;
   }
+
+  
+    @media (min-width: 1600px){
+  
+    }
+      
+    
+    @media (min-width: 600px) and (max-width: 1599px){
+        .card-container{
+            min-width: 476px !important;
+            }
+
+    }
+    
+    
+    @media (max-width: 944px){
+        .img-paws{
+            height: calc(0em + 0vw);
+        }
+    }
+    
+    

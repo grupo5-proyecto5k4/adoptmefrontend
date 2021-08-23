@@ -31,9 +31,9 @@ export class NavbarComponent {
 
   constructor(private breakpointObserver: BreakpointObserver, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
     this.profile = this.localStorageService.getProfile();
-    if (this.isLogued){
+    if (this.isLogued()){
       this.currentUser = this.authservice.getCurrentUser();
-      if (this.currentUser.nombres !== undefined && this.currentUser.apellidos !== undefined){
+      if (this.currentUser.apellidos !== undefined && this.currentUser.apellidos !== null){
         this.iniciales = ((this.currentUser.nombres).split("", 1)+(this.currentUser.apellidos).split("", 1)); 
       }
       else {
@@ -53,7 +53,7 @@ export class NavbarComponent {
   }
 
   isLogued(){
-    return (this.profile != null || this.profile != undefined)
+    return (this.profile !== null && this.profile !== undefined)
   }
 
   scrollTop(){
@@ -73,7 +73,7 @@ export class NavbarComponent {
   }
 
   logOut() {
-    this.alertsService.questionMessage("¿Desea cerrar la sesión?", "Cerrar sesión", "Cerrar Sesión", "Cancelar")
+    this.alertsService.questionMessage("¿Desea cerrar la sesión?", "Cerrar sesión", "Salir", "Cancelar")
       .then((result) => {
         if (result.value) {
           this.authservice.cerrarSesion();
