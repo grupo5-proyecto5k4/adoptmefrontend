@@ -99,6 +99,7 @@ table{
     overflow: hidden;
 }
 
+
 p{
     text-align: justify;
     margin-left: 15px;
@@ -124,6 +125,7 @@ table{
 
 ::ng-deep .mat-card-title{
     font-size: 120% !important;
+    width: 100% !important;
 }
 
 ::ng-deep .mat-card-subtitle{
@@ -168,6 +170,11 @@ table{
         width: 40px;
         height: 0.2px;
     }
+
+    ::ng-deep .mat-card-title{
+       width: 70% !important;
+    }
+
 }
 
 @media (min-width: 601px) and (max-width: 1084px)
@@ -189,5 +196,10 @@ table{
 .requestActions, .requestContent{
     margin-top: 15px !important;
 }
+
+::ng-deep .mat-card-title{
+   width: 93% !important;
+}
+
 
 }
