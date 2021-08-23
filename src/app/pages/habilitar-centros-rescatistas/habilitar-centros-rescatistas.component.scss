@@ -63,6 +63,9 @@ table{
     float: right;
 }
 
+.requestActions{
+    margin-top: 20px !important;
+}
 
 #RequestContainer{
     width: 85%;
@@ -77,9 +80,10 @@ table{
 }
 
 .requestContent{
-    width: 100%;
+    width: 70%;
     float: left;
     padding-left: 10px;
+    margin-top: 20px !important;
 }
 
 ::ng-deep .mat-card-title, .mat-card-subtitle{
@@ -95,6 +99,7 @@ table{
     overflow: hidden;
 }
 
+
 p{
     text-align: justify;
     margin-left: 15px;
@@ -107,7 +112,7 @@ p{
 
 
 .description{
-    width: 80%;
+    width: 50%;
 }
 
 table{
@@ -119,11 +124,12 @@ table{
 
 
 ::ng-deep .mat-card-title{
-    font-size: 90% !important;
+    font-size: 120% !important;
+    width: 100% !important;
 }
 
 ::ng-deep .mat-card-subtitle{
-    font-size: 67% !important;
+    font-size: 100% !important;
 }
 
 
@@ -144,6 +150,31 @@ table{
     margin-right:2rem;
     margin-left:2rem;
   }
+  .requestContent{
+    width: 30%;
+    float: left;
+    padding-left: 10px;
+}
+
+  .requestActions, .requestContent{
+    margin-top: 15px !important;
+}
+
+.requestContent{
+    width: 30%;
+    float: left;
+    padding-left: 10px;
+}
+
+    .accion{
+        width: 40px;
+        height: 0.2px;
+    }
+
+    ::ng-deep .mat-card-title{
+       width: 70% !important;
+    }
+
 }
 
 @media (min-width: 601px) and (max-width: 1084px)
@@ -155,5 +186,20 @@ table{
   margin-right: 2rem;
   margin-left:2rem;
 }
+
+.requestContent{
+    width: 50%;
+    float: left;
+    padding-left: 10px;
+}
+
+.requestActions, .requestContent{
+    margin-top: 15px !important;
+}
+
+::ng-deep .mat-card-title{
+   width: 93% !important;
+}
+
 
 }
