@@ -55,18 +55,8 @@ export class InicioSesionComponent implements OnInit {
         });        
       },
         error => {
-          this.isLoading = false;
-          if (error.error.error.code == 400) {
-            this.alertsService.errorMessage("Email y/o contraseña incorrectos")
-  
-            return;
-          }
-          if (error.error.error.code == 401) {
-            this.alertsService.errorMessage("Usuario bloqueado, comuníquese con el administrador desde la sección contáctenos.")
-            return;
-          }
-          this.alertsService.errorMessage("Email y/o contraseña incorrectos");     
-    
+          this.alertsService.errorMessage(error.error.error).then((result) => {
+            this.isLoading = false;  })
         }
         );;
     }
