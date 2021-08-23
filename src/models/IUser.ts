@@ -1,7 +1,7 @@
 import { Address } from './IAddress';
 
 interface IUser {
-    id?: number;
+    _id?: number;
     nombres?: string;
     apellidos?: string;
     correoElectronico: string;
@@ -19,7 +19,7 @@ interface IUser {
     }
   
     export class User implements IUser {
-      id?: number;
+      _id?: number;
       nombres?: string;
       apellidos?: string;
       correoElectronico: string;
