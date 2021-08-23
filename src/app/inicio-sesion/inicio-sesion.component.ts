@@ -50,7 +50,6 @@ export class InicioSesionComponent implements OnInit {
         localStorage.setItem('auth_token', resp.token);
         let currentUser = this.authservice.getUser(resp.token).then((r) => {
           this.authservice.setUser(r);
-          console.log(r);
           this.localStorageService.setProfile(r.tipoUsuario);  
           this.alertsService.confirmMessage("Inicio de sesión exitoso").then(() => window.location.href = "/landing");
         });        
