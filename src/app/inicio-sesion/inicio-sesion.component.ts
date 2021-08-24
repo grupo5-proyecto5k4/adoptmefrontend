@@ -54,11 +54,8 @@ export class InicioSesionComponent implements OnInit {
         });        
       },
         error => {
-          this.isLoading = false;
           this.alertsService.errorMessage(error.error.error).then((result) => {
-            this.isLoading = false;  
-          });  
-    
+            this.isLoading = false;  })
         }
         );
     }
