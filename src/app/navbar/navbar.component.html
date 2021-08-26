@@ -41,7 +41,7 @@
       <span class="spacer"></span>
       <a mat-raised-button routerLink="/inicio-sesion" color="accent" id="btncuenta" *ngIf="!isInicioSesion()&&!isLogued()" (click)="scrollTop()">Iniciar sesión</a>
       <a mat-raised-button routerLink="/opciones-de-registro" color="accent" id="btncuenta" *ngIf="!isSignupOptions()&&!isLogued()" (click)="scrollTop()">Crear cuenta</a>
-      <button type="button" *ngIf="isLogued()" href="#" color="accent" class="user-icon" (click)="logOut()">{{iniciales | uppercase}}</button>
+      <button type="button" routerLink="/miperfil" *ngIf="isLogued()" href="#" color="accent" class="user-icon">{{iniciales | uppercase}}</button>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

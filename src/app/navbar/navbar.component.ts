@@ -72,15 +72,7 @@ export class NavbarComponent {
     return (this.profile == '0')
   }
 
-  logOut() {
-    this.alertsService.questionMessage("¿Desea cerrar la sesión?", "Cerrar sesión", "Salir", "Cancelar")
-      .then((result) => {
-        if (result.value) {
-          this.authservice.cerrarSesion();
-          window.location.href = "/landing";
-        }
-      });
-  }
+
 
 
 }

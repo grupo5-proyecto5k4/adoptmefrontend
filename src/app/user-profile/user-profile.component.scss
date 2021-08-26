@@ -1,0 +1,21 @@
+.btnLogout{
+    color:#B80092;
+    font-weight:bold;
+    border: #fafafa;
+    background-color: #fafafa;
+}
+
+.logout-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.titulo{
+    font-weight: 800;
+    color: black;
+    font-size: 200%;
+    font-style: italic;
+    margin-top: 2rem;
+    text-align: center;
+  }

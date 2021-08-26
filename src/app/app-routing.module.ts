@@ -11,14 +11,13 @@ import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-a
 import {RegistroMascotaComponent} from '../app/registro-mascota/registro-mascota.component';
 import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
 import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
-
+import { UserProfileComponent } from './user-profile/user-profile.component';
 const routes: Routes = [
   {
     path: 'adoptar',
     component: PublicacionesAdopComponent
   },
   {
-    
     path: 'provisorio',
     component: UnderConstructionComponent
   },
@@ -49,6 +48,10 @@ const routes: Routes = [
     component: UnderConstructionComponent
   },
   {
+    path: 'miperfil',
+    component: UserProfileComponent
+  },
+  {
     path: 'visualizar-provisorios',
     component: UnderConstructionComponent
   },
@@ -72,7 +75,6 @@ const routes: Routes = [
     path: 'mapas',
     component: LeaftletPathComponent
   },
-
   {
     path: 'faqs',
     component: FaqsComponent
