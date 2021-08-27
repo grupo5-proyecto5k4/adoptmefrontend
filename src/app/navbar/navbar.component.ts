@@ -22,6 +22,7 @@ export class NavbarComponent {
   profile: string;
   iniciales: string = "";
   currentUser: any;
+  vista: string;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -34,7 +35,7 @@ export class NavbarComponent {
     if (this.isLogued()){
       this.currentUser = this.authservice.getCurrentUser();
       if (this.currentUser.apellidos !== undefined && this.currentUser.apellidos !== null){
-        this.iniciales = ((this.currentUser.nombres).split("", 1)+(this.currentUser.apellidos).split("", 1)); 
+        this.iniciales = ((this.currentUser.nombres).split("", 1)+(this.currentUser.apellidos).split("", 1));
       }
       else {
         let nombre = (this.currentUser.nombres).split(""); 
@@ -73,13 +74,13 @@ export class NavbarComponent {
   }
 
   goToProfile(){
-    if (this.isParticular()){
-      this.router.navigate(["/miperfil"]);
-    } else if (this.isRescatist()) {
-      this.router.navigate(["/micentro"]);
+    console.log(this.vista)
+    if (this.currentUser.tipoUsuario == "1"){
+      this.router.navigate(['/miperfil']);
+    } else if (this.currentUser.tipoUsuario == "2") {
+      this.router.navigate(['/micentro']);
+    } else {
+      console.log("COMPLETAR PANTALLA ADMIN");
     }
-
   }
-
-
 }

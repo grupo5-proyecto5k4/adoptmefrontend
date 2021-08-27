@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import{AuthService} from '../auth.service';
 import { AlertsService } from 'src/utils/alerts.service';
 import { LocalStorageService } from 'src/services/local-storage.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { formatDate } from '@angular/common';
-
+import { FormGroup, FormControl} from '@angular/forms';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -31,6 +29,8 @@ export class UserProfileComponent implements OnInit {
     var [yyyy, mm, dd] = date.split("-");
     var revdate = `${dd}-${mm}-${yyyy}`;
     this.currentUser.fechaNacimiento = revdate;
+
+    this.currentUser.pwd = "********";
   }
 }
 
@@ -44,13 +44,10 @@ ngOnInit() {
     numeroContacto: new FormControl({value: this.currentUser.numeroContacto, disabled:true}),
     fechaNacimiento: new FormControl({value: this.currentUser.fechaNacimiento, disabled:true}),
     facebook: new FormControl({value: this.currentUser.facebook, disabled:true}),
-    instagram: new FormControl({value: this.currentUser.instagram, disabled:true})
-});
+    instagram: new FormControl({value: this.currentUser.instagram, disabled:true}),
+    contrasenia: new FormControl({value: this.currentUser.pwd, disabled:true})
+  });
 }
-
-
-
-  // El logout tiene que pasarse a otro boton dentro del  nuevo componente
   logOut() {
     this.alertsService.questionMessage("¿Desea cerrar la sesión?", "Cerrar sesión", "Salir", "Cancelar")
     .then((result) => {
