@@ -61,12 +61,7 @@ export class FormularioPerroComponent implements OnInit {
     }
   }
 
-  uploadPhoto(titulo:HTMLInputElement, descripcion: HTMLInputElement){
-    this.photo.createPhoto(titulo.value,descripcion.value,this.file).subscribe(res =>{
-      this.route.navigate(['/photos']);
-    },
-    err => console.log(err))
-  }
+
 
   registrarAnimal(){
     if(this.SignupForm.valid){

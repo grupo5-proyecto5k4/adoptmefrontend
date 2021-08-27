@@ -10,11 +10,11 @@
                                   <h2 class="subtitulo">{{Titulo}}</h2>
                               </div>
 
-                              <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm" (submit)="uploadPhoto(titulo,descripcion)" enctype="multipart/form-data">
+                              <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm" enctype="multipart/form-data">
                                  <div>
                                      <mat-form-field class="example-full-width">
                                          <mat-label>*Nombre de mascota</mat-label>
-                                         <input matInput placeholder="nombre" formControlName="nombre" class="form-control" maxlength="30" #titulo>
+                                         <input matInput placeholder="nombre" formControlName="nombre" class="form-control" maxlength="30">
                                      </mat-form-field>
                                      <span class="help-block" *ngIf="((SignupForm.get('nombre').touched || 
                                      SignupForm.get('nombre').dirty) && SignupForm.get('nombre').errors)">
@@ -222,7 +222,7 @@
                              <div>
                                  <mat-form-field class="example-full-width">
                                      <mat-label>*Descripción</mat-label>
-                                     <input matInput placeholder="descripcion" formControlName="descripcion" class="form-control" maxlength="150" #descripcion>
+                                     <input matInput placeholder="descripcion" formControlName="descripcion" class="form-control" maxlength="150">
                                  </mat-form-field>
                                  <span class="help-block" *ngIf="((SignupForm.get('descripcion').touched ||
                                  SignupForm.get('descripcion').dirty) && SignupForm.get('descripcion').errors)">
@@ -237,10 +237,14 @@
                                  </span>
                                 </span>
                              </div>
-                                 
-                                    <input type="file" style="visibility: hidden;" class="d-none" (change)="onPhotoSelected($event)" #photoInput>
-                                    <img [src]="photoSelected || '../../assets/under-construction-images/icono.png'" width="200" height="200" class="img-fluid" alt="no image" (click)="photoInput.click()">
-                               
+
+                             <div class="input-group">
+                               <mat-form-field class="example-form">
+                                   <input matInput type="file" id="image" name="image" accept="image/png, image/jpeg" ng2FileSelect [uploader]="uploader">  
+                                </mat-form-field> 
+                                
+                            </div>
+                                                               
 
                             <div>
                                 <p id="requer">(*)Campos obligatorios</p>
@@ -248,7 +252,7 @@
 
                             <div>
                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
-                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
+                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()&&uploader.uploadAll()">Aceptar</a>
                             </div> 
 
                               </form>

@@ -35,6 +35,10 @@ import { FormularioGatoComponent } from './formulario-gato/formulario-gato.compo
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.module';
+import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
+import {FileUploadModule} from 'ng2-file-upload';
+
 
 @NgModule({
   declarations: [
@@ -78,7 +82,9 @@ import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-resca
     MatCardModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSelectModule
+    CloudinaryModule,
+    MatSelectModule,
+    FileUploadModule
   ],
   
   providers: [],

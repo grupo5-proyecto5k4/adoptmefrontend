@@ -11,6 +11,9 @@ import { R3TargetBinder } from '@angular/compiler';
 import {photoService} from '../../services/photo.service';
 import {Mascota} from '../../models/IMascota';
 import { validateVerticalPosition } from '@angular/cdk/overlay';
+import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
+import {FileItem, FileUploader,FileUploaderOptions,ParsedResponseHeaders} from 'ng2-file-upload';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -25,11 +28,12 @@ export class FormularioGatoComponent implements OnInit {
 
   SignupForm: FormGroup;
   Titulo="Registrar Gato";
-  file: File;
+  image: File;
   photoSelected: string | ArrayBuffer;
-  
-  constructor(private alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
+  public uploader: FileUploader;
 
+  constructor( private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
+    
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
       nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
@@ -49,26 +53,55 @@ export class FormularioGatoComponent implements OnInit {
     });
 
     this.dialogRef.disableClose=true;
+
+    const uploaderOptions: FileUploaderOptions = {
+      url:`https://api.cloudinary.com/v1_1/${'dsfz7jmoi'}/image/upload`,
+      autoUpload: false,
+      isHTML5: true,
+      headers: [
+        {name: 'X-Requested-With',
+      value:'XMLHttpRequest'}
+      ]
+    };
+
+    const upsertResponse= fileItem =>{
+      if (fileItem.status !==200){
+        console.log('upload to cloudinary failed!');
+        console.log(fileItem);
+        return false;
+      }
+      console.log(fileItem);
+      console.log(fileItem.data.url);
+    
+    }
+    
+     this.uploader= new FileUploader(uploaderOptions);
+  
+    
+        this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
+          // Agregue el preajuste de carga sin firmar de Cloudinary al formulario de carga
+          form.append("file",fileItem);
+          form.append("upload_preset","fotos_mascotas");
+          // Usar el valor predeterminado "withCredentials" para las solicitudes CORS
+          fileItem.withCredentials = false;
+          return { fileItem, form };
+        }
+    
+     
   }
+
 
   onPhotoSelected(event: HtmlInputEvent):void{
      if(event.target.files && event.target.files[0]){
-        this.file=<File>event.target.files[0];
+        this.image=<File>event.target.files[0];
 
         const reader= new FileReader();
         reader.onload = e => this.photoSelected = reader.result;
-        reader.readAsDataURL(this.file);
+        reader.readAsDataURL(this.image);
      }
 
   } 
-  
-  uploadPhoto(titulo: HTMLInputElement, descripcion: HTMLInputElement){
-       this.photo.createPhoto(titulo.value,descripcion.value,this.file)
-       .subscribe(res =>{
-        this.route.navigate(['/photos']);
-       }, 
-         err => console.log(err))
-     }
+    
 
      registrarAnimal(){
        if(this.SignupForm.valid){

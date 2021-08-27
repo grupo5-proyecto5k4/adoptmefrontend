@@ -12,22 +12,11 @@ import {catchError,map} from 'rxjs/operators';
 export class photoService{
 
     uri='https://adoptmebackend.herokuapp.com/animales/animal';
-    url='';
-
+   
+     
     constructor(private http:HttpClient){}
 
-    createPhoto(titulo:string, descripcion: string, foto:File){
-        const fd= new FormData();
-        fd.append('titulo',titulo);
-        fd.append('descripcion',descripcion);
-        fd.append('imagenURL', foto);
-        return this.http.post(this.url,fd); //deberia ser la url de fotos 
-    }
-
-    getPhotos(){
-        return this.http.get<Ifoto[]>(this.url);
-    }
-
+  
     registroAnimal(request: Mascota): Observable<Mascota>{
 
         return this.http.post<Mascota>(this.uri,request);
