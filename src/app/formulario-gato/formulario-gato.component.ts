@@ -56,7 +56,7 @@ export class FormularioGatoComponent implements OnInit {
 
     const uploaderOptions: FileUploaderOptions = {
       url:`https://api.cloudinary.com/v1_1/${'dsfz7jmoi'}/image/upload`,
-      autoUpload: false,
+      autoUpload: true,
       isHTML5: true,
       headers: [
         {name: 'X-Requested-With',

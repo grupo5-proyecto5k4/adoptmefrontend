@@ -10,8 +10,9 @@ import {R3TargetBinder} from '@angular/compiler';
 import {photoService} from '../../services/photo.service';
 import {Mascota} from '../../models/IMascota';
 import {validateVerticalPosition} from '@angular/cdk/overlay';
-
-
+import {CloudinaryModule, CloudinaryConfiguration} from '@cloudinary/angular-5.x';
+import * as Cloudinary from 'cloudinary-core';
+import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -26,8 +27,9 @@ export class FormularioPerroComponent implements OnInit {
   
   SignupForm: FormGroup;
   Titulo="Registrar Perro";
-  file: File;
+  image: File;
   photoSelected: string | ArrayBuffer;
+  public uploader: FileUploader;
 
   constructor(private alerts: AlertsService, private photo: photoService,private route: Router, private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioPerroComponent>) { }
 
@@ -49,15 +51,43 @@ export class FormularioPerroComponent implements OnInit {
     });
 
     this.dialogRef.disableClose=true;
-  }
+
+    const uploaderOptions: FileUploaderOptions ={
+      url:`https://api.cloudinary.com/v1_1/${'dsfz7jmoi'}/image/upload`,
+      autoUpload:true,
+      isHTML5: true,
+      headers:[{name: 'X-Requested-With',
+    value: 'XMLHttpRequest'}]
+    }
+
+    const upsertResponse = FileItem =>{
+      if(FileItem.status!==200){
+        console.log('upload to cloudinary failed!');
+        console.log(FileItem);
+        return false;
+      }
+      console.log(FileItem);
+      console.log(FileItem.data.url);
+    }
+
+    this.uploader= new FileUploader(uploaderOptions);
+
+    this.uploader.onBuildItemForm=(FileItem:any, form:FormData):any =>{
+      form.append("file",FileItem);
+      form.append("upload_preset","fotos_mascotas");
+      FileItem.withCredentials =false;
+      return {FileItem,form};
+    } 
+  };
+
 
   onPhotoSelected(event: HtmlInputEvent): void{
     if(event.target.files && event.target.files[0]){
-      this.file=<File>event.target.files[0];
+      this.image=<File>event.target.files[0];
 
       const reader=new FileReader();
       reader.onload= e => this.photoSelected=reader.result;
-      reader.readAsDataURL(this.file);
+      reader.readAsDataURL(this.image);
     }
   }
 

@@ -9,7 +9,7 @@
                                 <div>
                                     <h2 class="subtitulo">{{Titulo}}</h2>
                                 </div>
-                                <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm" (submit)="uploadPhoto(titulo,descripcion)">
+                                <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm" enctype="multipart/form-data">
                                     <div>
                                         <mat-form-field class="example-full-width">
                                             <mat-label>*Nombre de mascota</mat-label>
@@ -238,7 +238,7 @@
                                  </div>
 
                                  <input type="file" style="visibility: hidden;" class="d-none" (change)="onPhotoSelected($event)" #photoInput>
-                                 <img src="photoSelected || '../../assets/under-construction-images/icono.png'" width="200" height="200" alt="no image" class="img-fluid" (click)="photoInput.click()">
+                                 <img [src]="photoSelected || '../../assets/under-construction-images/icono.png'" width="200" height="200" alt="no image" class="img-fluid" (click)="photoInput.click()">
                                 
                                 <div>
                                      <p id="requer">(*)Campos obligatorios</p>

@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const cloudinary = require('cloudinary');
+const cloudinary = require('cloudinary').v2;
 
 // Run the app by serving the static files
 // in the dist directory
@@ -34,11 +34,6 @@ app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/adoptmefrontend/index.html'));
   });
   
-cloudinary.config({
-  cloud_name:'dsfz7jmoi',
-  api_key: '281974651216952',
-  api_secret: 'RKGzfGl_WhyjnoOevR6MZTLl-mc'
-});
 
 
 
