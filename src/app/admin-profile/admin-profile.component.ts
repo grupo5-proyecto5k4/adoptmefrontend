@@ -19,16 +19,35 @@ export class AdminProfileComponent implements OnInit {
     this.profile = this.localStorageService.getProfile();
     if (this.isLogued()){
       this.currentUser = this.authservice.getCurrentUser();
+    if (this.currentUser.facebook == null){
+      this.currentUser.facebook = "No especificado"
+      };
+    if (this.currentUser.instagram == null){
+      this.currentUser.instagram = "No especificado"
+      };
     // Formato fecha   
+    var date = this.currentUser.fechaNacimiento.substring(0,10);
+    var [yyyy, mm, dd] = date.split("-");
+    var revdate = `${dd}-${mm}-${yyyy}`;
+    this.currentUser.fechaNacimiento = revdate;
+
     this.currentUser.pwd = "********";
   }
 }
 
 ngOnInit() {
   this.ProfileForm = new FormGroup({
+
+    nombres: new FormControl({value: this.currentUser.nombres, disabled:true}),
+    apellidos: new FormControl({value: this.currentUser.apellidos, disabled:true}),
     correoElectronico: new FormControl({value: this.currentUser.correoElectronico, disabled:true}),
+    dni: new FormControl({value: this.currentUser.dni, disabled:true}),
+    numeroContacto: new FormControl({value: this.currentUser.numeroContacto, disabled:true}),
+    fechaNacimiento: new FormControl({value: this.currentUser.fechaNacimiento, disabled:true}),
+    facebook: new FormControl({value: this.currentUser.facebook, disabled:true}),
+    instagram: new FormControl({value: this.currentUser.instagram, disabled:true}),
     contrasenia: new FormControl({value: this.currentUser.pwd, disabled:true})
-});
+  });
 }
   logOut() {
     this.alertsService.questionMessage("¿Desea cerrar la sesión?", "Cerrar sesión", "Salir", "Cancelar")
