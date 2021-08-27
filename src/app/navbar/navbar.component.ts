@@ -72,7 +72,14 @@ export class NavbarComponent {
     return (this.profile == '0')
   }
 
+  goToProfile(){
+    if (this.isParticular()){
+      this.router.navigate(["/miperfil"]);
+    } else if (this.isRescatist()) {
+      this.router.navigate(["/micentro"]);
+    }
 
+  }
 
 
 }

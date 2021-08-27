@@ -12,6 +12,7 @@ import {RegistroMascotaComponent} from '../app/registro-mascota/registro-mascota
 import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
 import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CenterProfileComponent } from './center-profile/center-profile.component';
 const routes: Routes = [
   {
     path: 'adoptar',
@@ -50,6 +51,10 @@ const routes: Routes = [
   {
     path: 'miperfil',
     component: UserProfileComponent
+  },
+  {
+    path: 'micentro',
+    component: CenterProfileComponent
   },
   {
     path: 'visualizar-provisorios',
