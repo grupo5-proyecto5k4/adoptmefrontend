@@ -1,0 +1,27 @@
+<div class="logout-container">
+    <button mat-button type="button" color="accent" class="btnLogout" (click)="logOut()">Cerrar sesión</button>
+</div>
+<h1 class="titulo">Mi Perfil</h1>
+<br>
+<br>
+
+<div class="centrado">
+    <form [formGroup]="ProfileForm" class="example-form" *ngIf="currentUser">
+
+        <div class="container-row1">
+            <div class="izquierda">
+                <mat-form-field>
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput formControlName="correoElectronico">
+                </mat-form-field>
+            </div>
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="contrasenia">
+                </mat-form-field>
+            </div>
+        </div>
+
+    </form>
+</div>

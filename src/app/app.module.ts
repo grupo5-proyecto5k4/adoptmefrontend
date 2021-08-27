@@ -37,6 +37,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { CenterProfileComponent } from './center-profile/center-profile.componen
     RegistroMascotaComponent,
     FormularioPerroComponent,
     FormularioGatoComponent, 
-    PublicacionesAdopComponent, UserProfileComponent, CenterProfileComponent
+    PublicacionesAdopComponent, UserProfileComponent, CenterProfileComponent, AdminProfileComponent
 
   ],
   imports: [

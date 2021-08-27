@@ -74,13 +74,13 @@ export class NavbarComponent {
   }
 
   goToProfile(){
-    console.log(this.vista)
+    console.log(this.vista);
     if (this.currentUser.tipoUsuario == "1"){
       this.router.navigate(['/miperfil']);
     } else if (this.currentUser.tipoUsuario == "2") {
       this.router.navigate(['/micentro']);
     } else {
-      console.log("COMPLETAR PANTALLA ADMIN");
+      this.router.navigate(['/perfiladmin']);
     }
   }
 }
