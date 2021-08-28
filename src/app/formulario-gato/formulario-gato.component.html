@@ -69,8 +69,8 @@
                                   <mat-form-field class="example-form">
                                       <mat-label>*Sexo</mat-label>
                                       <mat-select formControlName="sexo">
-                                          <mat-option value="1">Hembra</mat-option>
-                                          <mat-option value="2">Macho</mat-option>
+                                          <mat-option value="Hembra">Hembra</mat-option>
+                                          <mat-option value="Macho">Macho</mat-option>
                                       </mat-select>
                                   </mat-form-field>
                                   <span class="help-block" *ngIf="((SignupForm.get('sexo').touched ||
@@ -239,10 +239,11 @@
                              </div>
 
                              <div class="input-group">
-                               <mat-form-field class="example-form">
-                                   <input matInput type="file" id="image" name="image" accept="image/png, image/jpeg" ng2FileSelect [uploader]="uploader">  
-                                </mat-form-field> 
-                                
+                                <label type="button" color="accent" class="button" id="btnRegistro">
+                                    Seleccionar imagenes<input type="file" ng2FileSelect [uploader]="uploader" style="display: none;" multiple>
+                                <span class="fa fa-folder-open-o" aria-hidden="true"></span> 
+                                </label>
+                                <p>imagenes a subir: {{ uploader?.queue?.length }}</p>
                             </div>
                                                                
 

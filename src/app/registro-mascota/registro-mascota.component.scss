@@ -75,10 +75,10 @@
 
 
 .btRegistrar{
-    color:#B80092;
+    color:#b80092;
     font-weight: bold;
-    border:#F8E2F1;
-    background-color: #F8E2F1;
+    border:#f8e2f1;
+    background-color: #f8e2f1;
     cursor: pointer;
 }
 
@@ -101,4 +101,10 @@
     padding-bottom: 1.5rem;
     background-color: #F8E2F1;
     float: right;
+}
+
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

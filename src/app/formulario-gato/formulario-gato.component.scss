@@ -11,8 +11,10 @@
 }
 
 #btnRegistro{
-  color: #EBEEF1;
-  background-color: #c50fa1;
+  color: #c50fa1;
+  font-weight: bold;
+  background-color:#F8E2F1;
+  border:#F8E2F1;
   cursor: pointer;
 }
 
@@ -467,3 +469,9 @@ select {
   font-weight: 500;
 }
 
+
+.footer{
+  position: absolute;
+  bottom:0;
+  width: 100%;
+}
