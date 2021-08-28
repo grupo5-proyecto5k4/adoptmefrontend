@@ -35,9 +35,14 @@ import { FormularioGatoComponent } from './formulario-gato/formulario-gato.compo
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.module';
+import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
+import * as  Cloudinary from 'cloudinary-core';
+import {FileUploadModule} from 'ng2-file-upload';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+
 
 @NgModule({
   declarations: [
@@ -61,6 +66,7 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatProgressBarModule,
     LayoutModule,
     MatInputModule,
     MatToolbarModule,
@@ -81,7 +87,9 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
     MatCardModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSelectModule
+    CloudinaryModule,
+    MatSelectModule,
+    FileUploadModule
   ],
   
   providers: [],

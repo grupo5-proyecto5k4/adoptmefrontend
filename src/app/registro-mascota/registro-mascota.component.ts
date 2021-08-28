@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import {FormularioPerroComponent} from '../formulario-perro/formulario-perro.component';
+import {MatDialog} from '@angular/material/dialog';
 import {FormularioGatoComponent} from '../formulario-gato/formulario-gato.component';
+import {FormularioPerroComponent} from '../formulario-perro/formulario-perro.component';
 
 @Component({
   selector: 'app-registro-mascota',
@@ -9,9 +9,9 @@ import {FormularioGatoComponent} from '../formulario-gato/formulario-gato.compon
   styleUrls: ['./registro-mascota.component.scss']
 })
 export class RegistroMascotaComponent implements OnInit {
-  Titulo="Registro de Mascota";
+Titulo="Registro de mascota";
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog:MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -25,5 +25,3 @@ export class RegistroMascotaComponent implements OnInit {
   }
 
 }
-
-

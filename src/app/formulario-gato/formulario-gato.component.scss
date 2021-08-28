@@ -458,7 +458,7 @@ select {
 }
 
 
-#btncuenta, #confirmar{
+#btRegistro{
   color: #EBEEF1;
   background-color: #c50fa1;
   line-height: 36px;
@@ -467,3 +467,9 @@ select {
   font-weight: 500;
 }
 
+
+.footer{
+  position: absolute;
+  bottom:0;
+  width: 100%;
+}
