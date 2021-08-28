@@ -38,6 +38,7 @@ import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-resca
 import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
 import {FileUploadModule} from 'ng2-file-upload';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 
 @NgModule({
@@ -62,6 +63,7 @@ import {FileUploadModule} from 'ng2-file-upload';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MatProgressBarModule,
     LayoutModule,
     MatInputModule,
     MatToolbarModule,

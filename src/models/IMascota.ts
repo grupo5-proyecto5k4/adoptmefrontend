@@ -9,7 +9,7 @@
     razaPadre: string;
     razaMadre: string;
     castrado: number;
-    fechaAlta: Date;
+    fechaAlta?: Date;
     fechaModificacion?:Date;
     estado?:string;
     responsableCategoria?:number;
@@ -32,7 +32,7 @@ export class Mascota implements IMascota{
     razaPadre: string;
     razaMadre:string;
     castrado:number;
-    fechaAlta:Date;
+    fechaAlta?:Date;
     fechaModificacion?:Date;
     estado?:string;
     responsableCategoria?:number;

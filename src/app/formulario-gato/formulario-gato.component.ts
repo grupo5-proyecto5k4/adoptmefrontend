@@ -14,6 +14,8 @@ import { validateVerticalPosition } from '@angular/cdk/overlay';
 import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
 import * as  Cloudinary from 'cloudinary-core';
 import {FileItem, FileUploader,FileUploaderOptions,ParsedResponseHeaders} from 'ng2-file-upload';
+import { faBullseye } from '@fortawesome/free-solid-svg-icons';
+import {MatProgressBar} from '@angular/material/progress-bar';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -27,7 +29,7 @@ interface HtmlInputEvent extends Event{
 export class FormularioGatoComponent implements OnInit {
 
   SignupForm: FormGroup;
-  Titulo="Registrar Gato";
+  Titulo="Registro de Mascota";
   image: File;
   photoSelected: string | ArrayBuffer;
   public uploader: FileUploader;
@@ -44,10 +46,9 @@ export class FormularioGatoComponent implements OnInit {
       razaPadre: new FormControl('',[Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       razaMadre: new FormControl('',[Validators.required,Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       castrado: new FormControl('',Validators.required),
-      fechaAlta: new FormControl('', Validators.required),
-      conductaNiños: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      conductaGatos: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      conductaPerros: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      conductaNiños: new FormControl('',Validators.required),
+      conductaGatos: new FormControl('',Validators.required),
+      conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
     
     });
@@ -56,7 +57,7 @@ export class FormularioGatoComponent implements OnInit {
 
     const uploaderOptions: FileUploaderOptions = {
       url:`https://api.cloudinary.com/v1_1/${'dsfz7jmoi'}/image/upload`,
-      autoUpload: true,
+      autoUpload: false,
       isHTML5: true,
       headers: [
         {name: 'X-Requested-With',
@@ -79,33 +80,20 @@ export class FormularioGatoComponent implements OnInit {
   
     
         this.uploader.onBuildItemForm = (fileItem: any, form: FormData): any => {
-          // Agregue el preajuste de carga sin firmar de Cloudinary al formulario de carga
           form.append("file",fileItem);
           form.append("upload_preset","fotos_mascotas");
-          // Usar el valor predeterminado "withCredentials" para las solicitudes CORS
           fileItem.withCredentials = false;
           return { fileItem, form };
         }
     
      
   }
-
-
-  onPhotoSelected(event: HtmlInputEvent):void{
-     if(event.target.files && event.target.files[0]){
-        this.image=<File>event.target.files[0];
-
-        const reader= new FileReader();
-        reader.onload = e => this.photoSelected = reader.result;
-        reader.readAsDataURL(this.image);
-     }
-
-  } 
-    
+   
 
      registrarAnimal(){
        if(this.SignupForm.valid){
          let mascota: Mascota = new Mascota();
+       //mascota.tipoMascota=1;
        mascota.nombreMascota= this.SignupForm.controls.nombre.value;
        mascota.esCachorro=this.SignupForm.controls.cachorro.value;
        mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;
@@ -114,7 +102,6 @@ export class FormularioGatoComponent implements OnInit {
        mascota.razaPadre=this.SignupForm.controls.razaPadre.value;
        mascota.razaMadre=this.SignupForm.controls.razaMadre.value;
        mascota.castrado=this.SignupForm.controls.castrado.value;
-       mascota.fechaAlta=this.SignupForm.controls.fechaAlta.value;
        mascota.conductaNiños=this.SignupForm.controls.conductaNiños.value;
        mascota.conductaGatos=this.SignupForm.controls.conductaGatos.value;
        mascota.conductaPerros=this.SignupForm.controls.conductaPerros.value;

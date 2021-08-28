@@ -84,23 +84,25 @@
 
 .registroPerro{
     max-width: 43%;
-    max-height: 40%;
+    max-height: 50%;
     margin-top: 2rem;
     margin-left: 2rem;
     background-color: #F8E2F1;
     float: left;
     padding-bottom: 1.5rem;
     align-items: center;
+    border-radius: 10px;
 }
 
 .registroGato{
     max-width: 43%;
-    max-height: 40%;
+    max-height: 50%;
     margin-top: 2rem;
     margin-right: 2rem;
     padding-bottom: 1.5rem;
     background-color: #F8E2F1;
     float: right;
+    border-radius: 10px;
 }
 
 .footer{
