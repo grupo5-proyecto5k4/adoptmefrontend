@@ -39,6 +39,9 @@ import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@c
 import * as  Cloudinary from 'cloudinary-core';
 import {FileUploadModule} from 'ng2-file-upload';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CenterProfileComponent } from './center-profile/center-profile.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 
 
 @NgModule({
@@ -56,7 +59,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     RegistroMascotaComponent,
     FormularioPerroComponent,
     FormularioGatoComponent, 
-    PublicacionesAdopComponent
+    PublicacionesAdopComponent, UserProfileComponent, CenterProfileComponent, AdminProfileComponent
 
   ],
   imports: [

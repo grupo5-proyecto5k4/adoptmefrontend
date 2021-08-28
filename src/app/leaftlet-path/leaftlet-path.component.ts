@@ -24,8 +24,9 @@ var centrosCastracion = [
 ]
 
 var veterinaria = [
-  ["<strong>Veterinaria Alem</strong><br>Blvd. San Juan 125<br><a href='https://www.veterinariaalem.com/'>Sitio Web</a>",-31.424622, -64.182666],
-  ["<strong>Medicina Felina</strong><br>Lopez de Vega 408",-31.382872, -64.179952]
+  ["<strong>Veterinaria Alem</strong><br>Blvd. San Juan 125<br><a target='_blank' href='https://www.veterinariaalem.com/'>Sitio Web</a>",-31.424622, -64.182666],
+  ["<strong>Medicina Felina</strong><br>Lopez de Vega 408",-31.382872, -64.179952],
+  ["<strong>Clínica Veterinaria Eva Inguerman</strong><br>Av. Colón 6200<br><u>Abierto las 24hs.</u>", -31.394014, -64.262933]
   ];
 @Component({
   selector: 'app-leaftlet-path',
@@ -37,7 +38,7 @@ export class LeaftletPathComponent implements OnInit, OnDestroy {
   map: Leaflet.Map;
 
   ngOnInit(): void {
-    this.map = Leaflet.map('map').setView([-31.411156, -64.191211], 13);
+    this.map = Leaflet.map('map').setView([-31.411156, -64.191211], 12);
 
 
     Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -57,10 +58,6 @@ export class LeaftletPathComponent implements OnInit, OnDestroy {
     var marker = new Leaflet.marker([centrosCastracion[i][1], centrosCastracion[i][2]], {icon: redIcon}).bindPopup(centrosCastracion[i][0])
       .addTo(this.map);
   }
-    //var marker = Leaflet.marker([-31.41666919552361, -64.1879917385005], {icon: greenIcon}).addTo(this.map).bindPopup('Veterinaria Martinez<br>').openPopup();
-
-    //var marker2 = Leaflet.marker([-31.41666919552362, -64.1879917385001], {icon: greenIcon}).addTo(this.map).bindPopup('Veterinaria Martinez<br>').openPopup();
-
   }
 
   ngOnDestroy(): void {
