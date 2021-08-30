@@ -9,14 +9,17 @@
     <form [formGroup]="ProfileForm" class="example-form" *ngIf="currentUser">
 
         <div class="container-row1">
-            <div class="izquierda">
-                <mat-form-field>
+            <div>
+                <mat-form-field class="ref">
                     <mat-label>Nombre</mat-label>
                     <input matInput formControlName="nombres">
                 </mat-form-field>
             </div>
-            <div class="derecha">
-                <mat-form-field>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field class="ref">
                     <mat-label>Correo electrónico</mat-label>
                     <input matInput formControlName="correoElectronico">
                 </mat-form-field>
@@ -24,7 +27,7 @@
         </div>
 
         <div class="container-row1">
-            <div class="izquierda">
+            <div>
                 <mat-form-field>
                     <mat-label>Calle</mat-label>
                     <input matInput formControlName="calle">
@@ -57,7 +60,7 @@
             <div>
                 <mat-form-field class="ref">
                     <mat-label>Referencia</mat-label>
-                    <input matInput formControlName="instagram">
+                    <textarea matInput formControlName="referencia" maxlength="150"></textarea>
                 </mat-form-field>
             </div>
         </div>
