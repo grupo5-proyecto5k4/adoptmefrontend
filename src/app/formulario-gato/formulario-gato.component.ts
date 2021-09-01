@@ -17,6 +17,7 @@ import {FileItem, FileUploader,FileUploaderOptions,ParsedResponseHeaders} from '
 import { faBullseye } from '@fortawesome/free-solid-svg-icons';
 import {MatProgressBar} from '@angular/material/progress-bar';
 
+
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
 }
@@ -63,7 +64,7 @@ export class FormularioGatoComponent implements OnInit {
         {name: 'X-Requested-With',
       value:'XMLHttpRequest'}
       ]
-    };
+    }
 
     const upsertResponse= fileItem =>{
       if (fileItem.status !==200){
@@ -93,7 +94,7 @@ export class FormularioGatoComponent implements OnInit {
      registrarAnimal(){
        if(this.SignupForm.valid){
          let mascota: Mascota = new Mascota();
-       //mascota.tipoMascota=1;
+       mascota.tipoMascota=1; //gato si es perro es 0 
        mascota.nombreMascota= this.SignupForm.controls.nombre.value;
        mascota.esCachorro=this.SignupForm.controls.cachorro.value;
        mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;

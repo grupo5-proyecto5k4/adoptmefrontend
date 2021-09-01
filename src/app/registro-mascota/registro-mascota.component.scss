@@ -8,6 +8,28 @@
     text-align: center;
 }
 
+.registroPerro{
+    max-width: 43%;
+    max-height: 50%;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    background-color: #F8E2F1;
+    float: left;
+    padding-bottom: 1.5rem;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.registroGato{
+    max-width: 43%;
+    max-height: 50%;
+    margin-top: 2rem;
+    margin-right: 2rem;
+    padding-bottom: 1.5rem;
+    background-color: #F8E2F1;
+    float: right;
+    border-radius: 10px;
+}
 
 @media(max-width: 600px){
     .registroGato{
@@ -15,6 +37,7 @@
        float: none; 
        margin-right: auto;
        margin-left: auto;
+       margin-bottom: auto;
   
     }
     .registroPerro{
@@ -32,7 +55,7 @@
     }
   }
   
-  @media (min-width: 601px) and (max-width: 1084px)
+  @media (min-width: 641px) and (max-width: 1084px)
   {
   
     .registroGato{
@@ -76,34 +99,13 @@
 
 .btRegistrar{
     color:#b80092;
-    font-weight: bold;
+    font-weight: 500;
     border:#f8e2f1;
     background-color: #f8e2f1;
     cursor: pointer;
 }
 
-.registroPerro{
-    max-width: 43%;
-    max-height: 50%;
-    margin-top: 2rem;
-    margin-left: 2rem;
-    background-color: #F8E2F1;
-    float: left;
-    padding-bottom: 1.5rem;
-    align-items: center;
-    border-radius: 10px;
-}
 
-.registroGato{
-    max-width: 43%;
-    max-height: 50%;
-    margin-top: 2rem;
-    margin-right: 2rem;
-    padding-bottom: 1.5rem;
-    background-color: #F8E2F1;
-    float: right;
-    border-radius: 10px;
-}
 
 .footer{
   position: absolute;
