@@ -11,7 +11,7 @@ import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-a
 import {RegistroMascotaComponent} from '../app/registro-mascota/registro-mascota.component';
 import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
 import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
-
+import {FormularioGatoComponent} from '../app/formulario-gato/formulario-gato.component';
 const routes: Routes = [
   {
     path: 'adoptar',
@@ -76,6 +76,10 @@ const routes: Routes = [
   {
     path: 'faqs',
     component: FaqsComponent
+  },
+  {
+    path: 'formularioGatos',
+    component: FormularioGatoComponent
   },
   {
     path: '', redirectTo: '/landing', pathMatch: 'full'

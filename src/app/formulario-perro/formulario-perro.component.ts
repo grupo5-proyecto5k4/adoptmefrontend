@@ -75,6 +75,7 @@ export class FormularioPerroComponent implements OnInit {
     this.uploader.onBuildItemForm=(FileItem:any, form:FormData):any =>{
       form.append("file",FileItem);
       form.append("upload_preset","fotos_mascotas");
+      
       FileItem.withCredentials =false;
       return {FileItem,form};
     } 
@@ -88,6 +89,7 @@ export class FormularioPerroComponent implements OnInit {
       const reader=new FileReader();
       reader.onload= e => this.photoSelected=reader.result;
       reader.readAsDataURL(this.image);
+      
     }
   }
 

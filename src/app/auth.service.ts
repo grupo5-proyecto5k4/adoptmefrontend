@@ -28,8 +28,8 @@ export class AuthService {
       localStorage.removeItem('token');
     }
 
-    getToken(): boolean {     
-      return (localStorage.getItem('token') !== null);
+    getToken() {     
+      return localStorage.getItem('auth_token');
     }
 
     getCurrentUser(): User {

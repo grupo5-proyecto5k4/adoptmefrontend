@@ -10,9 +10,9 @@
                                   <h2 class="subtitulo">{{Titulo}}</h2>
                               </div>
 
-                              <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm" enctype="multipart/form-data">
-                                 <div>
-                                     <mat-form-field class="example-full-width">
+                              <form class="example-form"  [formGroup]="SignupForm" *ngIf="SignupForm" enctype="multipart/form-data">
+                                 <div class="izquierda">
+                                     <mat-form-field class="example-form">
                                          <mat-label>*Nombre de mascota</mat-label>
                                          <input matInput placeholder="nombre" formControlName="nombre" class="form-control" maxlength="30">
                                      </mat-form-field>
@@ -30,12 +30,14 @@
                                     </span>
                                  </div> 
 
+                                 
+
                                 <div id="cachorro" class="izquierda">
                                     <mat-form-field class="example-form">
                                         <mat-label>*Es cachorro</mat-label>
                                         <mat-select formControlName="cachorro">
-                                            <mat-option value="1">Si</mat-option>
-                                            <mat-option value="2">No</mat-option>
+                                            <mat-option value="0">Si</mat-option>
+                                            <mat-option value="1">No</mat-option>
                                         </mat-select> 
                                     </mat-form-field>
                                     <span class="help-block" *ngIf="((SignupForm.get('cachorro').touched ||
@@ -70,7 +72,7 @@
                                       <mat-label>*Sexo</mat-label>
                                       <mat-select formControlName="sexo">
                                           <mat-option value="1">Hembra</mat-option>
-                                          <mat-option value="2">Macho</mat-option>
+                                          <mat-option value="0">Macho</mat-option>
                                       </mat-select>
                                   </mat-form-field>
                                   <span class="help-block" *ngIf="((SignupForm.get('sexo').touched ||
@@ -229,57 +231,28 @@
                                 </span>
                              </div>
 
-                             <div class="input-group">
-                                <label mat-raised-button type="button" color="accent" class="button" id="btnRegistro">
-                                    Seleccionar imagenes<input type="file" ng2FileSelect [uploader]="uploader" style="display: none;" multiple>
-                                <span class="fa fa-folder-open-o" aria-hidden="true"></span> 
-                                </label>
-                                <p>imagenes a subir: {{ uploader?.queue?.length }}</p>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-1"></div>
-                                <div class="col-md-10">
-                                    <table class="table" *ngIf="uploader.queue.length>=1">
-                                        <thead>
-                                            <tr>
-                                                <th>Nombre</th>
-                                                <th >Tamaño</th>
-                                                <th >Progreso</th>
-                                                <th >Acciones</th>
-                                            </tr>
-                                        </thead>
-                                       <tbody>
-                                          <tr *ngFor="let item of uploader.queue">
-                                              <td>{{ item?.file?.name }}</td>
-                                              <td>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-                                              <td>
-                                                    <mat-progress-bar color="accent" [ngStyle]="{'width':item.progress + '%'}"></mat-progress-bar>
-                                                
-                                              </td>
-                                              <td>
-                                                  <a mat-raised-button id="btnRegistro" style="margin-bottom: 3px;" type="button" class="button" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-                                                      <span class="fa fa-upload"></span> Aceptar
-                                                  </a>
-                                                  <a mat-raised-button id="btnRegistro" type="button" class="button" (click)="item.remove()">
-                                                      <span class="fa fa-trash"></span> Cancelar
-                                                  </a>
-                                              </td> 
-                                            </tr> 
-                                       </tbody> 
-                                    </table>
-
-                                    <div style="text-align: center;" *ngIf="uploader.queue.length>=1">
-                                   <a mat-raised-button type="button" id="btnRegistro" style="margin-right: 4px;" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                                       <span class="fa fa-upload"></span> Cargar todo
-                                   </a> 
-                                   <a mat-raised-button type="button" id="btnRegistro" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                                       <span class="fa fa-trash"></span> Eliminar todo
-                                   </a>
+                             <div class="wrapper">
+                                <div class="position-relative">
+                                    
+                                    <input class="input-file" name="imagen" (change)="capturarFile($event)" type="file">
+                                    <div class="preview-img" *ngIf="previsualizacion">
+                                        <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
+                                        <img  [src]="previsualizacion" alt="">
                                     </div>
+                                  
+                                    <div class="p-1">
+                                        <small>Se aceptan archivos imágenes de tipo .png</small>
+                                    </div>
+                                    <div class="wrapper-button" *ngIf="previsualizacion">
+                                        <button type="button" class="button" [disabled]="loading">
+                                            {{(loading) ? 'Cargando.....'}}
+                                        </button>
+                                    </div>
+                              
                                 </div>
+                               
                             </div>
-                                                               
+                                                              
 
                             <div>
                                 <p id="requer">(*)Campos obligatorios</p>
@@ -287,7 +260,7 @@
 
                             <div>
                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
-                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
+                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()&&subirArchivo()">Aceptar</a>
                             </div> 
 
                               </form>
