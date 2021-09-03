@@ -23,6 +23,7 @@ export class NavbarComponent {
   iniciales: string = "";
   currentUser: any;
   vista: string;
+  notificacionesNuevas: Boolean = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
