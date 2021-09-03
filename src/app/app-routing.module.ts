@@ -88,10 +88,6 @@ const routes: Routes = [
     component: LeaftletPathComponent
   },
   {
-    path: 'faqs',
-    component: FaqsComponent
-  },
-  {
     path: '', redirectTo: '/landing', pathMatch: 'full'
   },
   //La ruta comodín '**' siempre debe ser la última del listado.
