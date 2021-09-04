@@ -1,5 +1,5 @@
  interface IMascota{
-    _id?:number;
+    _id?:string;
     tipoMascota?:number;
     nombreMascota: string;
     esCachorro: number;
@@ -13,7 +13,7 @@
     fechaModificacion?:Date;
     estado?:string;
     responsableCategoria?:number;
-    responsableId?:number;
+    responsableId?:string;
     conductaNiños: string;
     conductaPerros: string;
     conductaGatos: string;
@@ -22,7 +22,7 @@
 }
 
 export class Mascota implements IMascota{
-    _id?:number;
+    _id?:string;
     tipoMascota?:number;
     nombreMascota: string;
     esCachorro: number;
@@ -36,7 +36,7 @@ export class Mascota implements IMascota{
     fechaModificacion?:Date;
     estado?:string;
     responsableCategoria?:number;
-    responsableId?:number;
+    responsableId?:string;
     conductaNiños:string;
     conductaPerros:string;
     conductaGatos:string;

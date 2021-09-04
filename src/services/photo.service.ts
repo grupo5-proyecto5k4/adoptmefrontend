@@ -10,26 +10,17 @@ import {catchError,map} from 'rxjs/operators';
 
 export class photoService{
 
-    uri='https://adoptmebackend.herokuapp.com/animales/animal';
-    urlFoto='https://adoptmebackend.herokuapp.com/fotos/imagen/add';
-   
+    uri='https://adoptmebackend.herokuapp.com/animales/animal';   
      
     constructor(private http:HttpClient){}
 
   
-    registroAnimal(request: Mascota, token: string): Observable<any>{
+    registroAnimal(request: Mascota, token:string): Observable<any>{
 
-        return this.http.post<any>(this.uri,{request,token});
+        return this.http.post<Mascota>(this.uri,request,{ headers: new HttpHeaders().set('auth-token', `${token}`)});
 
     }
-
-    registroFoto(request: any): Observable<any>{
-      
-        const formData = new FormData();
-        formData.append('image',request);
-        request.withCredentials=false;
-        return this.http.post<any>(this.urlFoto,formData);
-    }
-
+     
+   
     
 }

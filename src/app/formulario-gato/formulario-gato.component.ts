@@ -59,7 +59,7 @@ export class FormularioGatoComponent implements OnInit {
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      imagen: new FormControl('',Validators.required),
+      
     });
 
     this.dialogRef.disableClose=true;
@@ -175,11 +175,10 @@ export class FormularioGatoComponent implements OnInit {
       return true;
     }
   }
-   
   
      registrarAnimal(){
-            
-       if(this.SignupForm.valid){
+      
+      if(this.SignupForm.valid){        
          let mascota: Mascota = new Mascota();
        mascota.tipoMascota=1; //gato si es perro es 0 
        mascota.nombreMascota= this.SignupForm.controls.nombre.value;
@@ -194,10 +193,34 @@ export class FormularioGatoComponent implements OnInit {
        mascota.conductaGatos=this.SignupForm.controls.conductaGatos.value;
        mascota.conductaPerros=this.SignupForm.controls.conductaPerros.value;
        mascota.descripcion=this.SignupForm.controls.descripcion.value;
-      
+       
+       
      
        this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe({
          complete: () => {
+          try {
+            this.loading = true;
+            const formularioDeDatos = new FormData();
+            this.archivos.forEach(archivo => {
+              formularioDeDatos.append('imagen', archivo)
+              formularioDeDatos.append('id_Animal',mascota._id) //ESTE ES EL DATO DEL ID QUE DEBERIA OBTENER DESDE EL BACK PARA ENVIAR CON LA FOT0
+              console.log(mascota._id)
+            })
+            
+            this.http.post(`https://adoptmebackend.herokuapp.com/fotos/imagen/add`, formularioDeDatos)
+              .subscribe(res => {
+                this.loading = false;
+                console.log('Respuesta del servidor', res);
+      
+              }, () => {
+                this.loading = false;
+                alert('Error 1 ');
+              })
+          } catch (e) {
+            this.loading = false;
+            console.log('ERROR 2', e);
+      
+          }
            
           this.alerts.confirmMessage("Su mascota ha sido registrada").then((result)=> window.location.href='/mascotas')
          },

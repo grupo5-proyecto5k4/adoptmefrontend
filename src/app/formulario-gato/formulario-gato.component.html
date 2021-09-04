@@ -233,8 +233,8 @@
 
                              <div class="wrapper">
                                 <div class="position-relative">
-                                    
-                                    <input class="input-file" name="imagen" (change)="capturarFile($event)" type="file">
+                                 <mat-from-field>
+                                     <input class="input-file" name="imagen" fromControlName="imagen" (change)="capturarFile($event)" type="file">
                                     <div class="preview-img" *ngIf="previsualizacion">
                                         <button class="clear-image" type="button" (click)="clearImage()">Clear</button>
                                         <img  [src]="previsualizacion" alt="">
@@ -244,11 +244,10 @@
                                         <small>Se aceptan archivos imágenes de tipo .png</small>
                                     </div>
                                     <div class="wrapper-button" *ngIf="previsualizacion">
-                                        <button type="button" class="button" [disabled]="loading">
-                                            {{(loading) ? 'Cargando.....'}}
+                                        <button type="button" class="button" [disabled]="loading">                                           
                                         </button>
                                     </div>
-                              
+                                 </mat-from-field>                               
                                 </div>
                                
                             </div>
@@ -260,7 +259,7 @@
 
                             <div>
                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
-                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()&&subirArchivo()">Aceptar</a>
+                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
                             </div> 
 
                               </form>

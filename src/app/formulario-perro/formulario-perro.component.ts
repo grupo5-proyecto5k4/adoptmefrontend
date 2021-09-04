@@ -113,14 +113,7 @@ export class FormularioPerroComponent implements OnInit {
       mascota.conductaGatos=this.SignupForm.controls.conductaGatos.value;
       mascota.descripcion=this.SignupForm.controls.descripcion.value;
 
-      this.photo.registroAnimal(mascota).subscribe({
-        complete: () => {
-          this.alerts.confirmMessage("Su mascota ha sido registrada").then((result) => window.location.href='/mascotas')
-        },
-        error: (err:any) => {
-          this.alerts.errorMessage(err.error.error);
-        }
-      })
+      
     }
   }
 
