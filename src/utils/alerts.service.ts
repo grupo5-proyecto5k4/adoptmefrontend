@@ -49,7 +49,7 @@ export class AlertsService {
             html: '<h3 style="color: #333333 !important">' + message + '</h3>',
             icon: 'warning',
             showCancelButton: true,
-            cancelButtonColor: '#d33',
+            cancelButtonColor: '#666666',
             cancelButtonText: cancelText,
             confirmButtonText: confirmText,
             confirmButtonColor: '#c50fa1',
@@ -83,7 +83,7 @@ export class AlertsService {
         title: '<h2 style="color: #333333 !important">'+alertTitle+'</h2>',
         html: '<h3 style="color: #333333 !important">'+message+'</h3>',
         icon: 'info',
-        confirmButtonColor: '#d996cc',
+        confirmButtonColor: '#c50fa1',
         confirmButtonText: 'Aceptar',
         allowOutsideClick: false,
       });
