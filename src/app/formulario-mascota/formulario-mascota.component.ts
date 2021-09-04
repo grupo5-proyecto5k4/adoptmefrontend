@@ -11,16 +11,13 @@ import { R3TargetBinder } from '@angular/compiler';
 import {photoService} from '../../services/photo.service';
 import {Mascota} from '../../models/IMascota';
 import { validateVerticalPosition } from '@angular/cdk/overlay';
-import { CloudinaryModule, CloudinaryConfiguration } from '@cloudinary/angular-5.x';
-import * as  Cloudinary from 'cloudinary-core';
 import {FileItem, FileUploader,FileUploaderOptions,ParsedResponseHeaders} from 'ng2-file-upload';
 import { faBullseye } from '@fortawesome/free-solid-svg-icons';
 import {MatProgressBar} from '@angular/material/progress-bar';
-import { Foto } from 'src/models/IFoto';
 import {AuthService} from '../auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
-
+import {Data} from '@angular/router';
 
 
 interface HtmlInputEvent extends Event{
@@ -101,47 +98,11 @@ export class FormularioGatoComponent implements OnInit {
     }
   })
 
-
-  /**
-   * Limpiar imagen
-   */
-
   clearImage(): any {
     this.previsualizacion = '';
     this.archivos = [];
   }
 
-
-
-  /**
-   * Subir archivo
-   */
-
-  subirArchivo(): any {
-    try {
-      this.loading = true;
-      const formularioDeDatos = new FormData();
-      this.archivos.forEach(archivo => {
-        formularioDeDatos.append('imagen', archivo)
-      })
-      
-      this.http.post(`https://adoptmebackend.herokuapp.com/fotos/imagen/add`, formularioDeDatos)
-        .subscribe(res => {
-          this.loading = false;
-          console.log('Respuesta del servidor', res);
-
-        }, () => {
-          this.loading = false;
-          alert('Error 1 ');
-        })
-    } catch (e) {
-      this.loading = false;
-      console.log('ERROR 2', e);
-
-    }
-  }
-
- 
 
   fileTypeValidator() {
 
@@ -160,6 +121,7 @@ export class FormularioGatoComponent implements OnInit {
     }
   }
 
+
   fileSizeValidator() {
     if (this.fileToUpload) {
       let fileSize = this.fileToUpload.size;
@@ -176,59 +138,57 @@ export class FormularioGatoComponent implements OnInit {
     }
   }
   
-     registrarAnimal(){
+    registrarAnimal(){
       
       if(this.SignupForm.valid){        
-         let mascota: Mascota = new Mascota();
-       mascota.tipoMascota=1; //gato si es perro es 0 
-       mascota.nombreMascota= this.SignupForm.controls.nombre.value;
-       mascota.esCachorro=this.SignupForm.controls.cachorro.value;
-       mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;
-       mascota.sexo=this.SignupForm.controls.sexo.value;
-       mascota.edad=this.SignupForm.controls.edad.value;
-       mascota.razaPadre=this.SignupForm.controls.razaPadre.value;
-       mascota.razaMadre=this.SignupForm.controls.razaMadre.value;
-       mascota.castrado=this.SignupForm.controls.castrado.value;
-       mascota.conductaNiños=this.SignupForm.controls.conductaNiños.value;
-       mascota.conductaGatos=this.SignupForm.controls.conductaGatos.value;
-       mascota.conductaPerros=this.SignupForm.controls.conductaPerros.value;
-       mascota.descripcion=this.SignupForm.controls.descripcion.value;
-       
-       
-     
-       this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe({
-         complete: () => {
+        let mascota: Mascota = new Mascota();
+        mascota.tipoMascota=1; //gato si es perro es 0 
+        mascota.nombreMascota= this.SignupForm.controls.nombre.value;
+        mascota.esCachorro=this.SignupForm.controls.cachorro.value;
+        mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;
+        mascota.sexo=this.SignupForm.controls.sexo.value;
+        mascota.edad=this.SignupForm.controls.edad.value;
+        mascota.razaPadre=this.SignupForm.controls.razaPadre.value;
+        mascota.razaMadre=this.SignupForm.controls.razaMadre.value;
+        mascota.castrado=this.SignupForm.controls.castrado.value;
+        mascota.conductaNiños=this.SignupForm.controls.conductaNiños.value;
+        mascota.conductaGatos=this.SignupForm.controls.conductaGatos.value;
+        mascota.conductaPerros=this.SignupForm.controls.conductaPerros.value;
+        mascota.descripcion=this.SignupForm.controls.descripcion.value;
+            
+       this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
+         (resp: Data) => {
           try {
             this.loading = true;
             const formularioDeDatos = new FormData();
             this.archivos.forEach(archivo => {
               formularioDeDatos.append('imagen', archivo)
-              formularioDeDatos.append('id_Animal',mascota._id) //ESTE ES EL DATO DEL ID QUE DEBERIA OBTENER DESDE EL BACK PARA ENVIAR CON LA FOT0
-              console.log(mascota._id)
+              formularioDeDatos.append('id_Animal',resp.id_Animal)
+            
             })
             
             this.http.post(`https://adoptmebackend.herokuapp.com/fotos/imagen/add`, formularioDeDatos)
-              .subscribe(res => {
+              .subscribe(() => {
                 this.loading = false;
-                console.log('Respuesta del servidor', res);
+                
       
               }, () => {
                 this.loading = false;
-                alert('Error 1 ');
+                alert('Error');
               })
           } catch (e) {
             this.loading = false;
-            console.log('ERROR 2', e);
+            console.log('ERROR', e);
       
           }
            
           this.alerts.confirmMessage("Su mascota ha sido registrada").then((result)=> window.location.href='/mascotas')
          },
-         error: (err:any) => {
-           this.alerts.errorMessage(err.error.error);
+         () => {
+           this.alerts.errorMessage("No se ha podido registrar su mascota");
            
          }
-       })
+       )
 
        }
        

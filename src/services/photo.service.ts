@@ -13,7 +13,6 @@ export class photoService{
     uri='https://adoptmebackend.herokuapp.com/animales/animal';   
      
     constructor(private http:HttpClient){}
-
   
     registroAnimal(request: Mascota, token:string): Observable<any>{
 

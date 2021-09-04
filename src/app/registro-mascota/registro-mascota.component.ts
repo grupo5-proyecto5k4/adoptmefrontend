@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import {FormularioGatoComponent} from '../formulario-gato/formulario-gato.component';
-import {FormularioPerroComponent} from '../formulario-perro/formulario-perro.component';
+import {FormularioGatoComponent} from '../formulario-mascota/formulario-mascota.component';
 
 @Component({
   selector: 'app-registro-mascota',
@@ -21,7 +20,7 @@ Titulo="Registro de mascota";
   }
 
   signupPerro(){
-    this.dialog.open(FormularioPerroComponent)
+    this.dialog.open(FormularioGatoComponent)
   }
 
 }
