@@ -8,6 +8,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import {InicioSesionComponent} from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
+import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: 'provisorio',
-    component: UnderConstructionComponent
+    component: PublicacionesProvComponent
   },
   {path: 'iniSesion',
 component: InicioSesionComponent},
