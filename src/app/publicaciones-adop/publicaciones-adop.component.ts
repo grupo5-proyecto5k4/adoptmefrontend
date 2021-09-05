@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angu
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { RegistroMascotasService} from 'src/services/registro-mascotas.service';
 
 export interface Pet {
   name: string;
@@ -9,6 +10,7 @@ export interface Pet {
   esCachorro: string;
   sexo: string;
 }
+
 
 const DATA: Pet[] = [
   {name: "Pepe", age: 3, esCachorro: "Adulto", sexo: "Hembra"},
@@ -31,11 +33,13 @@ const DATA: Pet[] = [
 
 export class PublicacionesAdopComponent implements OnInit {
 
+  mascotasPubAdopcion: any;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) {
+  constructor(public registroMascotasService:RegistroMascotasService, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -43,8 +47,17 @@ export class PublicacionesAdopComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
-  }
 
+    this.registroMascotasService.getMascotasPubAdopcion().subscribe(data => {
+      this.mascotasPubAdopcion = data;
+      console.log(data);
+    },
+    err => {
+      console.log('VER SMS ERROR')
+    }
+    )
+  }
+  
   ngOnDestroy() {
     if (this.dataSource) { 
       this.dataSource.disconnect(); 

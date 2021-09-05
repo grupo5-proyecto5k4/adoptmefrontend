@@ -42,6 +42,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+//import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 
 
 @NgModule({
@@ -59,7 +60,11 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
     RegistroMascotaComponent,
     FormularioPerroComponent,
     FormularioGatoComponent, 
-    PublicacionesAdopComponent, UserProfileComponent, CenterProfileComponent, AdminProfileComponent
+    PublicacionesAdopComponent,
+    UserProfileComponent,
+    CenterProfileComponent,
+    AdminProfileComponent,
+    //PublicacionesProvComponent
 
   ],
   imports: [
