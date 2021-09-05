@@ -14,6 +14,7 @@ import { CenterProfileComponent } from './center-profile/center-profile.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
+//import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 
 const routes: Routes = [
   {
