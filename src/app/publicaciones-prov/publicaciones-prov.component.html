@@ -1,0 +1,16 @@
+<div class="margenes container-publicaciones">
+    <mat-card class="card-publicacion" *ngFor=" let pet of mascotasPubProvisorio">
+        <mat-card-header>
+            <mat-card-title class="card-title sin-overflow">{{pet.nombreMascota}}</mat-card-title>
+            <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content class="card-description">
+            <div class="sin-overflow-description">{{pet.descripcion}}</div> 
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-button>VER MÁS</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+<mat-paginator [pageSizeOptions]="[4, 8, 16, 32]"></mat-paginator>
