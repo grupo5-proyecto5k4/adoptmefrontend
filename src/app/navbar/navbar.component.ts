@@ -19,7 +19,7 @@ import { AlertsService } from 'src/utils/alerts.service';
 export class NavbarComponent {
 
   faPaw = faPaw;
-  profile: string;
+  profile: any;
   iniciales: string = "";
   currentUser: any;
   vista: string;
@@ -74,7 +74,6 @@ export class NavbarComponent {
   }
 
   goToProfile(){
-    console.log(this.vista);
     if (this.currentUser.tipoUsuario == "1"){
       this.router.navigate(['/miperfil']);
     } else if (this.currentUser.tipoUsuario == "2") {
