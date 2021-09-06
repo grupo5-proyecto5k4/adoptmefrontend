@@ -11,9 +11,7 @@ import { R3TargetBinder } from '@angular/compiler';
 import {photoService} from '../../services/photo.service';
 import {Mascota} from '../../models/IMascota';
 import { validateVerticalPosition } from '@angular/cdk/overlay';
-import {FileItem, FileUploader,FileUploaderOptions,ParsedResponseHeaders} from 'ng2-file-upload';
 import { faBullseye } from '@fortawesome/free-solid-svg-icons';
-import {MatProgressBar} from '@angular/material/progress-bar';
 import {AuthService} from '../auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
@@ -34,7 +32,6 @@ export class FormularioGatoComponent implements OnInit {
   Titulo="Registro de Gato";
   public archivos: any = [];
   private fileToUpload: File = null;
- 
   public previsualizacion: string;
   public loading: boolean;
 
@@ -81,8 +78,6 @@ export class FormularioGatoComponent implements OnInit {
       else {
         return true;
       }       
-     
-
     })
     this.archivos.push(archivoCapturado)
     

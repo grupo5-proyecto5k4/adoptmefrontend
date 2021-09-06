@@ -269,8 +269,10 @@
                              </div>
  
                              <div>
-                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
-                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
+                                 <a mat-raised-button color="accent" class="button" *ngIf="!isLoading" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
+                                 <a mat-raised-button color="accent" class="button" *ngIf="!isLoading" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
+                                 <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button" id="btncuenta">
+                                 <img class=logo src="../../assets/images/loading.gif" /></a>
                              </div> 
  
                                </form>

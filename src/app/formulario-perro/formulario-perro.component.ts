@@ -10,11 +10,9 @@ import {R3TargetBinder} from '@angular/compiler';
 import {photoService} from '../../services/photo.service';
 import {Mascota} from '../../models/IMascota';
 import {validateVerticalPosition} from '@angular/cdk/overlay';
-import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '../auth.service';
-import { FormularioGatoComponent } from '../formulario-gato/formulario-gato.component';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -34,7 +32,7 @@ export class FormularioPerroComponent implements OnInit {
   public previsualizacion: string;
   public loading: boolean;
 
-  constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
+  constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioPerroComponent>) { }
     
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
