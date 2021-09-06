@@ -38,6 +38,7 @@ export class FormularioGatoComponent implements OnInit {
 
   constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
     
+  
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
       nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
@@ -53,10 +54,11 @@ export class FormularioGatoComponent implements OnInit {
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      
+    
     });
 
     this.dialogRef.disableClose=true;
+
     
   }
 
@@ -78,6 +80,8 @@ export class FormularioGatoComponent implements OnInit {
       else {
         return true;
       }       
+     
+
     })
     this.archivos.push(archivoCapturado)
     
@@ -111,24 +115,6 @@ export class FormularioGatoComponent implements OnInit {
     this.archivos = [];
   }
 
-
-  fileTypeValidator() {
-
-    if (this.SignupForm.controls.imagen.dirty && this.SignupForm.controls.imagen.value != '') {
-      let fileInput = this.SignupForm.controls.imagen.value;
-      let allowedExtensions = /(\.jpg|\.png)$/i;
-      if (!allowedExtensions.exec(fileInput)) {
-        return false;
-      }
-      else {
-        return true;
-      }
-    }
-    else {
-      return true;
-    }
-  }
- 
   
     registrarAnimal(){
       
@@ -189,3 +175,7 @@ export class FormularioGatoComponent implements OnInit {
      }
 
 }
+
+
+
+
