@@ -10,11 +10,12 @@ import { AdminConfigurationsComponent } from './pages/admin-configurations/admin
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
 import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
-import {FormularioGatoComponent} from '../app/formulario-gato/formulario-gato.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
+import { FormularioGatoComponent } from './formulario-gato/formulario-gato.component';
+import { FormularioPerroComponent } from './formulario-perro/formulario-perro.component';
 
 const routes: Routes = [
   {

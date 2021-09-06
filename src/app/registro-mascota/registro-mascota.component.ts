@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
-import {FormularioGatoComponent} from '../formulario-mascota/formulario-mascota.component';
+import {MatDialogModule,MatDialog} from '@angular/material/dialog';
+import {FormularioGatoComponent} from '../formulario-gato/formulario-gato.component';
+import {FormularioPerroComponent} from '../formulario-perro/formulario-perro.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro-mascota',
@@ -20,7 +22,7 @@ Titulo="Registro de mascota";
   }
 
   signupPerro(){
-    this.dialog.open(FormularioGatoComponent)
+    this.dialog.open(FormularioPerroComponent)
   }
 
 }

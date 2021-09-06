@@ -32,19 +32,20 @@ interface HtmlInputEvent extends Event{
 export class FormularioGatoComponent implements OnInit {
 
   SignupForm: FormGroup;
-  Titulo="Registro de Mascota";
+  Titulo="Registro de Gato";
   public archivos: any = [];
   private fileToUpload: File = null;
  
   public previsualizacion: string;
   public loading: boolean;
-  
+
 
   constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
     
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
       nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      estado: new FormControl('', Validators.required),
       cachorro: new FormControl('', Validators.required),
       tamaño: new FormControl('', [Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       sexo: new FormControl('', Validators.required),
@@ -60,7 +61,6 @@ export class FormularioGatoComponent implements OnInit {
     });
 
     this.dialogRef.disableClose=true;
-
     
   }
 
@@ -142,8 +142,9 @@ export class FormularioGatoComponent implements OnInit {
       
       if(this.SignupForm.valid){        
         let mascota: Mascota = new Mascota();
-        mascota.tipoMascota=1; //gato si es perro es 0 
+        mascota.tipoMascota=1; 
         mascota.nombreMascota= this.SignupForm.controls.nombre.value;
+        mascota.estado=this.SignupForm.controls.estado.value;
         mascota.esCachorro=this.SignupForm.controls.cachorro.value;
         mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;
         mascota.sexo=this.SignupForm.controls.sexo.value;

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormularioGatoComponent } from './formulario-mascota.component';
+import { FormularioGatoComponent } from './formulario-gato.component';
 
 describe('FormularioGatoComponent', () => {
   let component: FormularioGatoComponent;

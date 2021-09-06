@@ -11,7 +11,7 @@
     castrado: number;
     fechaAlta?: Date;
     fechaModificacion?:Date;
-    estado?:string;
+    estado:string;
     responsableCategoria?:number;
     responsableId?:string;
     conductaNiños: string;
@@ -34,7 +34,7 @@ export class Mascota implements IMascota{
     castrado:number;
     fechaAlta?:Date;
     fechaModificacion?:Date;
-    estado?:string;
+    estado:string;
     responsableCategoria?:number;
     responsableId?:string;
     conductaNiños:string;
