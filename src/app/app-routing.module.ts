@@ -16,6 +16,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 import { FormularioGatoComponent } from './formulario-gato/formulario-gato.component';
 import { FormularioPerroComponent } from './formulario-perro/formulario-perro.component';
+import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+
 
 const routes: Routes = [
   {
@@ -24,7 +26,7 @@ const routes: Routes = [
   },
   {
     path: 'provisorio',
-    component: UnderConstructionComponent
+    component: PublicacionesProvComponent
   },
   {path: 'inicio-sesion',
     component: InicioSesionComponent
@@ -90,6 +92,7 @@ const routes: Routes = [
     component: LeaftletPathComponent
   },
   {
+
     path: 'faqs',
     component: FaqsComponent
   },

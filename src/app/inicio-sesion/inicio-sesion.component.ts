@@ -24,10 +24,16 @@ export class InicioSesionComponent implements OnInit {
   constructor(private dialog: MatDialog, private authservice: AuthService,private localStorageService: LocalStorageService, private router: Router, private alertsService: AlertsService) {}
     
   ngOnInit() { 
-    this.SignUpForm= new FormGroup({
-      email: new FormControl('',[Validators.required,Validators.email,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
-      password: new FormControl('',[Validators.required])
-    })
+    if(!this.authservice.isLogued()){
+      this.SignUpForm= new FormGroup({
+        email: new FormControl('',[Validators.required,Validators.email,Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
+        password: new FormControl('',[Validators.required])
+      })
+    }
+    else{
+      window.scrollTo(0, 0);
+      this.router.navigate(['/']);
+    }
   }
 
 

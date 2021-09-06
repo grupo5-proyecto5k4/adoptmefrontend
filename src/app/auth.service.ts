@@ -5,6 +5,7 @@ import {AlertsService} from '../utils/alerts.service';
 import {catchError, map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import{User} from 'src/models/IUser';
+import { LocalStorageService } from 'src/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class AuthService {
   token;
   api='https://adoptmebackend.herokuapp.com';
     
-  constructor(private http: HttpClient,private router: Router, private alertsService: AlertsService) {   }
+  constructor(private http: HttpClient,private router: Router, private alertsService: AlertsService, private localStorageService: LocalStorageService) {   }
 
   login(correoElectronico: string, contrasenia: string): Observable<any> {
     return this.http.post(this.api + '/login', {correoElectronico: correoElectronico,contrasenia: contrasenia})
@@ -40,6 +41,15 @@ export class AuthService {
       } else {
         return null;
       }
+    }
+
+    isLogued(){
+      let profile =  this.localStorageService.getProfile();
+      return (profile !== null && profile !== undefined)
+    }
+
+    getProfile(){
+      return this.localStorageService.getProfile();
     }
 
     setUser(user: any): void {

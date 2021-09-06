@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { User } from 'src/models/IUser';
 import { UserService } from 'src/services/user.service';
@@ -26,11 +27,19 @@ export class HabilitarCentroRescatistaComponent {
     private pageIndex: number = 0;
     private activePageIndex: boolean = false;
     centrosPendientes: any;
+    profile: any;
 
-    constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService) { }
+    constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService, private router: Router) { }
 
-    async ngOnInit() { 
-      await this.obtenerCentros();
+    async ngOnInit() {
+      this.profile = this.authService.getProfile();
+      if(this.profile == '0'){
+        await this.obtenerCentros();
+      }
+      else{
+        window.scrollTo(0, 0);
+        this.router.navigate(['/']);
+      }
     }
 
 

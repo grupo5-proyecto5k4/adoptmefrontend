@@ -1,3 +1,4 @@
+
 import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,15 +26,16 @@ const DATA: Pet[] = [
   {name: "Osiris", age: 2,  esCachorro: "Cachorro", sexo: "Macho"},
   {name: "Jack", age: 5,  esCachorro: "Cachorro", sexo: "Macho"}
 ]
+
 @Component({
-  selector: 'app-publicaciones-adop',
-  templateUrl: './publicaciones-adop.component.html',
-  styleUrls: ['./publicaciones-adop.component.scss']
+  selector: 'app-publicaciones-prov',
+  templateUrl: './publicaciones-prov.component.html',
+  styleUrls: ['./publicaciones-prov.component.scss']
 })
 
-export class PublicacionesAdopComponent implements OnInit {
 
-  mascotasPubAdopcion: any;
+export class PublicacionesProvComponent implements OnInit {
+  mascotasPubProvisorio: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
@@ -48,8 +50,8 @@ export class PublicacionesAdopComponent implements OnInit {
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
 
-    this.registroMascotasService.getMascotasPubAdopcion().subscribe(data => {
-      this.mascotasPubAdopcion = data;
+    this.registroMascotasService.getMascotasPubProvisorio().subscribe(data => {
+      this.mascotasPubProvisorio = data;
       console.log(data);
     },
     err => {

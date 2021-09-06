@@ -32,30 +32,36 @@
 // MEDIAS QUERIES
 
 @media (min-width: 451px){ 
-.container-row1{
-    display:flex;
-    flex-direction:row;
-    text-align: center;
-    justify-content: space-between;
-}
-
-.derecha{
-    margin-left: 20px;
-}
-
-.ref{
-    width: 400px;
-}
-}
-
+    .container-row1{
+        display:flex;
+        flex-direction:row;
+        text-align: center;
+        justify-content: space-between;
+    }
+    
+    .derecha{
+        margin-left: 20px;
+    }
+    
+    .ref{
+        width: 510px;
+    }
+    
+    mat-form-field{
+        width: 245px;
+    }
+    
+    textarea{
+        width: 510px;
+    }
+    }
+    
 @media (max-width: 450px){
     .container-row1{
-    flex-direction: column;}
+        flex-direction: column;}
 
     .derecha{
-        margin-left: 0px;
-    }
+        margin-left: 0px;}
 }
-
 
 
