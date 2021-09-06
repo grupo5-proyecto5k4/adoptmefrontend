@@ -251,15 +251,16 @@
  
                                 <div>
                                         <mat-from-field class="example-full-width">
-                                            <label id="btnRegistro" color="accent" class="button"> Seleccionar Imagen
-                                            <input type="file" name="imagen" style="display: none;" (change)="capturarFile($event)">
+                                            <label id="btnRegistro" color="accent" class="button"> *Seleccionar Imagen
+                                            <input type="file" name="imagen" required accept="image/jpeg,image/jpg,image/png" style="display: none;" (change)="capturarFile($event)">
                                             </label> 
                                         </mat-from-field>  
                             
                                             <div class="preview-img" *ngIf="previsualizacion">
                                                 <a mat-raised-button id="btnRegistro" color="accent" type="button" (click)="clearImage()">Eliminar</a>
                                                 <img  [src]="previsualizacion" alt="">
-                                            </div>                                   
+                                            </div>    
+                                           <h5>Solo se aceptan imagenes con extensión jpeg,jpg y png</h5>                                
                                 </div>
                                                                
  
@@ -268,8 +269,10 @@
                              </div>
  
                              <div>
-                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
-                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
+                                 <a mat-raised-button color="accent" class="button" *ngIf="!isLoading" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
+                                 <a mat-raised-button color="accent" class="button" *ngIf="!isLoading" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
+                                 <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading" type="button" id="btncuenta">
+                                 <img class=logo src="../../assets/images/loading.gif" /></a>
                              </div> 
  
                                </form>

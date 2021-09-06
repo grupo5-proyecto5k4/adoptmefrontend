@@ -10,11 +10,9 @@ import {R3TargetBinder} from '@angular/compiler';
 import {photoService} from '../../services/photo.service';
 import {Mascota} from '../../models/IMascota';
 import {validateVerticalPosition} from '@angular/cdk/overlay';
-import {FileItem, FileUploader, FileUploaderOptions, ParsedResponseHeaders} from 'ng2-file-upload';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '../auth.service';
-import { FormularioGatoComponent } from '../formulario-gato/formulario-gato.component';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -34,7 +32,7 @@ export class FormularioPerroComponent implements OnInit {
   public previsualizacion: string;
   public loading: boolean;
 
-  constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
+  constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioPerroComponent>) { }
     
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
@@ -62,8 +60,22 @@ export class FormularioPerroComponent implements OnInit {
   capturarFile(event): any {
     const archivoCapturado = event.target.files[0]
     this.extraerBase64(archivoCapturado).then((imagen: any) => {
-      this.previsualizacion = imagen.base;
-      console.log(imagen);
+      if (archivoCapturado) {
+        let fileSize = archivoCapturado.size;
+        let fileSizeKb = Math.round(fileSize / 1024);
+        if (fileSizeKb > 5120) {
+          this.alerts.errorMessage('El tamaño máximo de la imagen permitida es de 5MB.')
+          return false;
+        }
+        else {
+          this.previsualizacion = imagen.base;
+          return true;
+        }
+      }
+      else {
+        return true;
+      }       
+     
 
     })
     this.archivos.push(archivoCapturado)
@@ -98,40 +110,6 @@ export class FormularioPerroComponent implements OnInit {
     this.archivos = [];
   }
 
-
-  fileTypeValidator() {
-
-    if (this.SignupForm.get('imagen').dirty && this.SignupForm.controls.imagen.value != '') {
-      let fileInput = this.SignupForm.controls.imagen.value;
-      let allowedExtensions = /(\.jpg|\.png)$/i;
-      if (!allowedExtensions.exec(fileInput)) {
-        return false;
-      }
-      else {
-        return true;
-      }
-    }
-    else {
-      return true;
-    }
-  }
-
-
-  fileSizeValidator() {
-    if (this.fileToUpload) {
-      let fileSize = this.fileToUpload.size;
-      let fileSizeKb = Math.round(fileSize / 1024);
-      if (fileSizeKb > 5120) {
-        return false;
-      }
-      else {
-        return true;
-      }
-    }
-    else {
-      return true;
-    }
-  }
   
     registrarAnimal(){
       
