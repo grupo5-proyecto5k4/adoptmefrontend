@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-faqs',
-  templateUrl: './faqs.component.html',
+  templateUrl:'./faqs.component.html',
   styleUrls: ['./faqs.component.scss']
 })
 export class FaqsComponent implements OnInit {

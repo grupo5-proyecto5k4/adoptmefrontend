@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialogModule,MatDialog} from '@angular/material/dialog';
 import {FormularioGatoComponent} from '../formulario-gato/formulario-gato.component';
 import {FormularioPerroComponent} from '../formulario-perro/formulario-perro.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-registro-mascota',

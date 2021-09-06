@@ -25,6 +25,10 @@ export class AuthService {
       return this.http.get<any>(this.api + '/login', { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise()
     }
 
+    logout() {
+      localStorage.removeItem('token');
+    }
+
     getToken() {     
       return localStorage.getItem('auth_token');
     }
