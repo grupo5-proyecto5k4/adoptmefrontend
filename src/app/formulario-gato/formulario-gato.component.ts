@@ -19,7 +19,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import {Data} from '@angular/router';
 
-
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
 }
@@ -67,8 +66,22 @@ export class FormularioGatoComponent implements OnInit {
   capturarFile(event): any {
     const archivoCapturado = event.target.files[0]
     this.extraerBase64(archivoCapturado).then((imagen: any) => {
-      this.previsualizacion = imagen.base;
-      console.log(imagen);
+      if (archivoCapturado) {
+        let fileSize = archivoCapturado.size;
+        let fileSizeKb = Math.round(fileSize / 1024);
+        if (fileSizeKb > 5120) {
+          this.alerts.errorMessage('El tamaño máximo de la imagen permitida es de 5MB.')
+          return false;
+        }
+        else {
+          this.previsualizacion = imagen.base;
+          return true;
+        }
+      }
+      else {
+        return true;
+      }       
+     
 
     })
     this.archivos.push(archivoCapturado)
@@ -120,23 +133,7 @@ export class FormularioGatoComponent implements OnInit {
       return true;
     }
   }
-
-
-  fileSizeValidator() {
-    if (this.fileToUpload) {
-      let fileSize = this.fileToUpload.size;
-      let fileSizeKb = Math.round(fileSize / 1024);
-      if (fileSizeKb > 5120) {
-        return false;
-      }
-      else {
-        return true;
-      }
-    }
-    else {
-      return true;
-    }
-  }
+ 
   
     registrarAnimal(){
       

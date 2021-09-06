@@ -62,8 +62,22 @@ export class FormularioPerroComponent implements OnInit {
   capturarFile(event): any {
     const archivoCapturado = event.target.files[0]
     this.extraerBase64(archivoCapturado).then((imagen: any) => {
-      this.previsualizacion = imagen.base;
-      console.log(imagen);
+      if (archivoCapturado) {
+        let fileSize = archivoCapturado.size;
+        let fileSizeKb = Math.round(fileSize / 1024);
+        if (fileSizeKb > 5120) {
+          this.alerts.errorMessage('El tamaño máximo de la imagen permitida es de 5MB.')
+          return false;
+        }
+        else {
+          this.previsualizacion = imagen.base;
+          return true;
+        }
+      }
+      else {
+        return true;
+      }       
+     
 
     })
     this.archivos.push(archivoCapturado)
@@ -98,40 +112,6 @@ export class FormularioPerroComponent implements OnInit {
     this.archivos = [];
   }
 
-
-  fileTypeValidator() {
-
-    if (this.SignupForm.get('imagen').dirty && this.SignupForm.controls.imagen.value != '') {
-      let fileInput = this.SignupForm.controls.imagen.value;
-      let allowedExtensions = /(\.jpg|\.png)$/i;
-      if (!allowedExtensions.exec(fileInput)) {
-        return false;
-      }
-      else {
-        return true;
-      }
-    }
-    else {
-      return true;
-    }
-  }
-
-
-  fileSizeValidator() {
-    if (this.fileToUpload) {
-      let fileSize = this.fileToUpload.size;
-      let fileSizeKb = Math.round(fileSize / 1024);
-      if (fileSizeKb > 5120) {
-        return false;
-      }
-      else {
-        return true;
-      }
-    }
-    else {
-      return true;
-    }
-  }
   
     registrarAnimal(){
       
