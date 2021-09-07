@@ -67,7 +67,7 @@ export class PublicacionesAdopComponent implements OnInit {
   }
 
   openUserForm(){
-    this.dialog.open(UserFormComponent)
+    //this.dialog.open(UserFormComponent) DESCOMENTAR DESPUES DE LA DEMO
   }
 
 }
