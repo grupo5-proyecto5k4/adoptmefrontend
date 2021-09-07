@@ -3,6 +3,8 @@ import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { RegistroMascotasService} from 'src/services/registro-mascotas.service';
+import { MatDialog } from '@angular/material/dialog';
+import { UserFormComponent } from '../components/user-form/user-form.component';
 
 export interface Pet {
   name: string;
@@ -39,7 +41,7 @@ export class PublicacionesAdopComponent implements OnInit {
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
 
-  constructor(public registroMascotasService:RegistroMascotasService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(public registroMascotasService:RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -62,6 +64,10 @@ export class PublicacionesAdopComponent implements OnInit {
     if (this.dataSource) { 
       this.dataSource.disconnect(); 
     }
+  }
+
+  openUserForm(){
+    this.dialog.open(UserFormComponent)
   }
 
 }
