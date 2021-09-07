@@ -34,7 +34,7 @@ export class FormularioGatoComponent implements OnInit {
   private fileToUpload: File = null;
   public previsualizacion: string;
   public loading: boolean;
-
+  estadoMascota: string[] = ['Disponible Adopción', 'Disponible Provisorio', 'Disponible Adopción y Provisorio'];
 
   constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
     

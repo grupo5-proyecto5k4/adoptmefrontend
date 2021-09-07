@@ -30,22 +30,20 @@
                                      </span>
                                     </div> 
                                   
-                                  <div>
-                                    <mat-form-field class="example-full-width">
+                                    <div class="example-full-width">
                                         <mat-label>*Publicar para:</mat-label>
-                                        <mat-select formControlName="estado">
-                                            <mat-option value="disponible adopcion">Adopción</mat-option>
-                                            <mat-option value="disponible provisorio">Provisorio</mat-option>
-                                            <mat-option value="disponible adopcion y provisorio">Ambos</mat-option>
-                                        </mat-select> 
-                                    </mat-form-field>
-                                    <span class="help-block" *ngIf="((SignupForm.get('estado').touched ||
-                                    SignupForm.get('estado').dirty) && SignupForm.get('estado').errors)">
-                                <span *ngIf="SignupForm.get('estado').errors.required">
-                                    <h6 class="helpError">Campo requerido</h6>
-                                </span>
-                                </span>
-                                  </div>                                   
+                                        <mat-radio-group class="example-radio-group" formControlName="estado">
+                                            <mat-radio-button class="example-radio-button" *ngFor="let estado of estadoMascota" [value]="estado">
+                                              {{estado}}
+                                            </mat-radio-button>
+                                        </mat-radio-group>                                
+                                        <span class="help-block" *ngIf="((SignupForm.get('estado').touched ||
+                                        SignupForm.get('estado').dirty) && SignupForm.get('estado').errors)">
+                                        <span *ngIf="SignupForm.get('estado').errors.required">
+                                            <h6 class="helpError">Campo requerido</h6>
+                                        </span>
+                                        </span>
+                                    </div>                                    
  
                                 <div id="cachorro" class="izquierda">
                                      <mat-form-field class="example-form">
@@ -260,7 +258,7 @@
                                                 <a mat-raised-button id="btnRegistro" color="accent" type="button" (click)="clearImage()">Eliminar</a>
                                                 <img  [src]="previsualizacion" alt="">
                                             </div>    
-                                           <h5>Solo se aceptan imagenes con extensión jpeg,jpg y png</h5>                                
+                                           <h5>Solo se aceptan imagenes con extensión jpeg, jpg y png</h5>                                
                                 </div>
                                                                
  
