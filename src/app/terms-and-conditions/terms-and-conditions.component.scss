@@ -1,9 +1,53 @@
-.container-construction{
-    width: 100%;
-    padding: 40px 1px 0px 1px;
-    
+
+
+.card-container{
+    width: 50%;
+    height: 85%;
+    border-radius: 15px;
+    position: absolute;
+    top: 46.5%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 1px 10px 1px #000;
+    overflow: hidden;
+    display: inline-block;
+    background: rgb(255, 245, 237);
+    overflow-y: auto !important;
+    max-height: 83%;
+    margin-top: 5%;
+    }
+
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 15px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    margin:3px;
+}
+  
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(255, 245, 237) inset;
+  }
+
+.titulo{
+    font-weight: 800;
+    color: black;
+    font-size: 200%;
+    font-style: italic;
+    margin: 0px 0px 10px 0px;
+    text-align: center;
+  }
+  
 #btncuenta{
     color:#B80092;
     cursor: pointer;
@@ -17,23 +61,14 @@
     line-height: 36px;
     width: 36px;
     font-size: 150%;
-    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 26%);
   }
 
 .txt-construction{
+    margin-top: 25px;
     text-align: justify;
     width: 91%;
-    padding: 30px 1px 2px 40px;
-    font-size: calc(0.7em + 1vw);
+    padding: 40px 1px 1px 40px;
     line-height: 200%;
-    color: #B80092,
-}
-
-.title-bold{
-    font-weight: 500;
-    text-align:center;
-    font-size: calc(0.7em + 1vw);
-    padding-bottom: 2%;
 }
 
 
@@ -41,17 +76,40 @@
 @media (max-width:600px){
       
     .txt-construction{
-        padding: 20px 1px 2px 10px;
+        padding: 20px 1px 1px 20px;
+    }
+
+    
+.card-container{
+    width: 80% !important;
+    height: 60% !important;
+    top: 40% !important;
+    margin-top: 2% !important;
     }
    
     
 }
 
-@media (min-width: 601px) and (max-width: 1700px)
+@media (min-width: 601px) and (max-width: 1599px)
 {
     
     .txt-construction{
-        padding: 30px 1px 2px 34px;
+        padding: 30px 1px 1px 30px;
     }
+
+    .card-container{
+        top: 43.5% !important;
+        }
     
+}
+
+
+@media (min-width: 1600px){
+    .txt-construction{
+        padding: 30px 1px 1px 30px;
+    }
+
+    .card-container{
+        top: 40% !important;
+        }
 }

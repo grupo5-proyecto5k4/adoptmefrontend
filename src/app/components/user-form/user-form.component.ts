@@ -23,6 +23,7 @@ export class UserFormComponent implements OnInit {
   tiempoSolo: string[] = ['1-3hs', '4-8hs', 'más de 8hs'];
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
   opcionesPatioBalcon: string[] = ['Patio', 'Balcón', 'Ambos', 'Ninguno'];
+  opcionesCompromiso: string[] = ['Vacunación', 'Vacunación y castración'];
   isLoading: Boolean = false;
   otrasMascotasSelected: number;
   tiempoSoloSelected: number;
@@ -113,7 +114,18 @@ export class UserFormComponent implements OnInit {
   }
 
   radioVacunacionChange(value: string) {
-    this.vacunacionSelected = this.siNoFuncion(value);
+    let answer: number;
+    switch (value) {
+      case this.opcionesCompromiso[0]: { //vacunación
+        answer = 0;
+        break;
+      }
+      case this.opcionesCompromiso[1]: { //vacunación y castración
+        answer = 1;
+        break;
+      }
+    }
+    this.vacunacionSelected = answer;    
   }
 
   radioPermisoEdificioChange(value: string) {

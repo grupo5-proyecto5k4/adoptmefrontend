@@ -116,6 +116,7 @@
                         </span>
                       </span>
   
+                   
                       <div class="margin">
                         <section>
                           <mat-label>*¿Se permite el ingreso de animales a la vivienda y todos los integrantes de la familia están de acuerdo con la adopción del nuevo integrante?
@@ -217,11 +218,11 @@
   
                       <div class="margin">
                         <section>
-                          <mat-label>*¿Asumes el compromiso de castración?:</mat-label>
+                          <mat-label>*¿Asumes el compromiso de vacunación y castración?:</mat-label>
                           <label class="example-margin"></label>
                           <div class="centrado">
                             <mat-radio-group>
-                              <mat-radio-button class="example-margin" *ngFor="let opcion of siNo" [value]="opcion"
+                              <mat-radio-button class="example-margin" *ngFor="let opcion of opcionesCompromiso" [value]="opcion"
                                 (change)="radioVacunacionChange(opcion)" style="font-size: 15px;">
                                 {{opcion}}
                               </mat-radio-button>
