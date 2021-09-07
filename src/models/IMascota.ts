@@ -4,7 +4,7 @@
     nombreMascota: string;
     esCachorro: number;
     tamañoFinal: string;
-    sexo: number;
+    sexo: string;
     edad:number;
     razaPadre: string;
     razaMadre: string;
@@ -27,7 +27,7 @@ export class Mascota implements IMascota{
     nombreMascota: string;
     esCachorro: number;
     tamañoFinal: string;
-    sexo: number;
+    sexo: string;
     edad: number;
     razaPadre: string;
     razaMadre:string;
