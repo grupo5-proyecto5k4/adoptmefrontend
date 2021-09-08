@@ -31,7 +31,7 @@
 
 // MEDIAS QUERIES
 
-@media (min-width: 451px){ 
+@media (min-width: 540px){ 
     .container-row1{
         display:flex;
         flex-direction:row;
@@ -56,7 +56,7 @@
     }
     }
     
-@media (max-width: 450px){
+@media (max-width: 540px){
     .container-row1{
         flex-direction: column;}
 
