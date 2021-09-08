@@ -46,7 +46,7 @@ export class NavbarComponent {
   
 
   isSignupOptions(){
-    return (this.router.url == '/signup-options');
+    return (this.router.url == '/opciones-de-registro');
   }
 
   isInicioSesion(){
