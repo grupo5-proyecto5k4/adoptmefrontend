@@ -27,7 +27,7 @@ export class SignupRescatistComponent implements OnInit {
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
       street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      altura:  new FormControl('', [Validators.pattern('[0-9]{3,4}')]),
+      altura:  new FormControl('', [Validators.pattern('[0-9]{0,4}')]),
       reference: new FormControl('', [Validators.maxLength(150)]),
       barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       facebook: new FormControl(''),

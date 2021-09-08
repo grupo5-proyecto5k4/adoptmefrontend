@@ -52,7 +52,7 @@ export class UserFormComponent implements OnInit {
       composicionFamilia: new FormControl('', [Validators.required]),
 
       street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      altura:  new FormControl('', [Validators.pattern('[0-9]{3,4}')]),
+      altura:  new FormControl('', [Validators.pattern('[0-9]{0,4}')]),
       reference: new FormControl('', [Validators.maxLength(150)]),
       barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     });
