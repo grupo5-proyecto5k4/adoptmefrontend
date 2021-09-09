@@ -42,6 +42,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -89,7 +90,8 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
     MatPaginatorModule,
     CloudinaryModule,
     MatSelectModule,
-    FileUploadModule
+    FileUploadModule,
+    MatBadgeModule,
   ],
   
   providers: [],
