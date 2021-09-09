@@ -50,7 +50,7 @@ export class PublicacionesAdopComponent implements OnInit {
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
 
-    this.registroMascotasService.getMascotasPubAdopcion().subscribe(data => {
+    this.registroMascotasService.getMascotas(1).subscribe(data => {
       this.mascotasPubAdopcion = data;
       console.log(data);
     },
