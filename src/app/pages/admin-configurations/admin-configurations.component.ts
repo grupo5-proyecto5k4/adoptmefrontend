@@ -21,18 +21,18 @@ export class AdminConfigurationsComponent {
 
   constructor(private dialog: MatDialog, private router: Router, private authService: AuthService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.profile = this.authService.getProfile();
-    if(this.profile == '0'){
+    if (this.profile == '0') {
 
     }
-    else{
+    else {
       window.scrollTo(0, 0);
       this.router.navigate(['/']);
     }
   }
 
-  
+
   gestionarUsuarios() {
     window.scrollTo(0, 0);
     this.router.navigate(['/gestionar-usuarios']);
@@ -41,7 +41,7 @@ export class AdminConfigurationsComponent {
   gestionarMascotas() {
     window.scrollTo(0, 0);
     this.router.navigate(['/gestionar-mascotas']);
-}
+  }
 
   visualizarAdopciones() {
     window.scrollTo(0, 0);
@@ -49,14 +49,18 @@ export class AdminConfigurationsComponent {
   }
 
   visualizarProvisorios() {
-        window.scrollTo(0, 0);
-        this.router.navigate(['/visualizar-provisorios']);
+    window.scrollTo(0, 0);
+    this.router.navigate(['/visualizar-provisorios']);
   }
 
   habilitarCentros() {
     window.scrollTo(0, 0);
     this.router.navigate(['/habilitar-centros-rescatistas']);
-}
+  }
 
+  administrarRecomendaciones(){
+    window.scrollTo(0, 0);
+    this.router.navigate(['/administrar-recomendaciones']);
+  }
 
 }
