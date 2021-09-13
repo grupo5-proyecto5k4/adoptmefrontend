@@ -37,14 +37,45 @@
 
                                                 
                             <div class="derecha">
-                                <mat-form-field class="example-form">
-                                    <mat-label>*Proxima Dosis</mat-label>
-                                    <input matInput placeholder="proxima dosis" formControlName="razaPadre" class="form-control" maxlength="30">
-                                </mat-form-field>
+                                <div class="example-form">
+                                    <mat-form-field class="example-form">
+                                        <mat-label>*Próxima Dosis</mat-label>
+                                        <input matInput type="date">
+                                    </mat-form-field>
+                                    
+                               </div> 
                                 
                             </div> 
 
-                            <div>
+                            <div class="example-full-width">
+                                <mat-table #table>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="name">
+                                      <mat-header-cell *matHeaderCellDef> Nombre Vacuna </mat-header-cell>
+                                      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                                    </ng-container>
+                                
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="fecha">
+                                      <mat-header-cell *matHeaderCellDef> Fecha Vacunación </mat-header-cell>
+                                      <mat-cell *matCellDef="let element"> {{element.fecha}} </mat-cell>
+                                    </ng-container>
+                                
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="dosis">
+                                      <mat-header-cell *matHeaderCellDef> Dosis Aplicada </mat-header-cell>
+                                      <mat-cell *matCellDef="let element"> {{element.dosis}} </mat-cell>
+                                    </ng-container>
+                                
+                                   
+                                    <ng-container matColumnDef="ProximaDosis">
+                                      <mat-header-cell *matHeaderCellDef> Próxima Dosis </mat-header-cell>
+                                      <mat-cell *matCellDef="let element"> {{element.ProximaDosis}} </mat-cell>
+                                    </ng-container>
+                                
+                                  </mat-table>
+
                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button">Eliminar</a>
                                 <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" >Agregar</a>
                             </div> 

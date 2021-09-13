@@ -44,7 +44,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
-
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -72,6 +72,7 @@ import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
   ],
   imports: [
     BrowserModule,
+    MatTableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressBarModule,

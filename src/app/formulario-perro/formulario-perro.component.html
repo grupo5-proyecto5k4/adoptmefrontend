@@ -247,24 +247,29 @@
                                  </span>
                               </div>
  
-                                <div>
-                                        <mat-from-field class="example-full-width">
-                                            <label id="btnRegistro" color="accent" class="button"> *Seleccionar Imagen
-                                            <input type="file" name="imagen" required accept="image/jpeg,image/jpg,image/png" style="display: none;" (change)="capturarFile($event)">
-                                            </label> 
-                                        </mat-from-field>  
+                              <div>
+                                <mat-from-field class="example-full-width">
+                                    <label id="btnRegistro" color="accent" class="button"> Seleccionar Imagen
+                                    <input type="file" name="imagen" required accept="image/jpeg,image/jpg,image/png" style="display: none;" (change)="capturarFile($event)">
+                                    </label> 
+                                </mat-from-field>  
+                                
+                                    <div class="preview-img" style="align-items: center;" *ngIf="previsualizacion">
+                                        <br>
+                                        <img  [src]="previsualizacion" alt="" height="400" width="400">
+                                        <br>
+                                        <a mat-raised-button id="btnRegistro" color="accent" type="button" (click)="clearImage()">Eliminar</a>
+                                    </div>      
+                                    <h5>Solo se aceptan imagenes con extensión jpeg, jpg y png</h5>                              
+                        </div>
+                        
+                        <div class="example-full-width">
+                            <label id="btnRegistro" color="accent" type="button" (click)="agregarVacunacion()"  class="button">Añadir Vacunaciones
+                            </label>
                             
-                                            <div class="preview-img" *ngIf="previsualizacion">
-                                                <a mat-raised-button id="btnRegistro" color="accent" type="button" (click)="clearImage()">Eliminar</a>
-                                                <img  [src]="previsualizacion" alt="">
-                                            </div>    
-                                           <h5>Solo se aceptan imagenes con extensión jpeg, jpg y png</h5>                                
-                                </div>
+                        </div> 
 
-                               <div class="example-full-width">
-                                <a mat-raised-button color="accent" (click)="agregarVacunacion()" class="button" id="btnRegistro" type="button">Añadir Vacunaciones</a>
-                               </div> 
-                                                               
+                                      
  
                              <div>
                                  <p id="requer">(*)Campos obligatorios</p>
