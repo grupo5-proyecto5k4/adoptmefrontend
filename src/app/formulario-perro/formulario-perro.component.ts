@@ -51,7 +51,7 @@ export class FormularioPerroComponent implements OnInit {
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,:;]*$')]),
-    
+
     });
 
     this.dialogRef.disableClose=true;
