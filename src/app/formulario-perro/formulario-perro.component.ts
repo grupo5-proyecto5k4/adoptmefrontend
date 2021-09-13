@@ -13,6 +13,7 @@ import {validateVerticalPosition} from '@angular/cdk/overlay';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '../auth.service';
+import {VacunacionesComponent} from '../vacunaciones/vacunaciones.component';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -32,7 +33,7 @@ export class FormularioPerroComponent implements OnInit {
   public previsualizacion: string;
   public loading: boolean;
   estadoMascota: string[] = ['Disponible Adopción', 'Disponible Provisorio', 'Disponible Adopción y Provisorio'];
-  
+
   constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioPerroComponent>) { }
     
   ngOnInit(): void {
@@ -109,6 +110,10 @@ export class FormularioPerroComponent implements OnInit {
   clearImage(): any {
     this.previsualizacion = '';
     this.archivos = [];
+  }
+
+  agregarVacunacion(){
+    this.matdialog.open(VacunacionesComponent);
   }
 
   

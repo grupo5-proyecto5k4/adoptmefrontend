@@ -1,0 +1,74 @@
+<mat-dialog-content>
+    <body class="is-preload">
+    <div id="page-wrapper">
+        <section id="cta4">
+            <div class="container">
+                <header>
+                    <div class="card-container">
+                        <div class="lower-container">
+                            <div>
+                                <h2 class="subtitulo">{{Titulo}}</h2>
+                            </div>
+
+                            <form class="example-form"  [formGroup]="SignupForm" >
+                                 <div>
+                                   <mat-form-field class="example-full-width">
+                                       <mat-label>*Nombre de Vacuna</mat-label>
+                                       <input matInput placeholder="nombre de vacuna" formControlName="nombre" class="form-control" maxlength="30">
+                                   </mat-form-field>
+                                 </div> 
+                                             
+
+                             <div class="example-full-width">
+                                  <mat-form-field class="example-form">
+                                      <mat-label>*Fecha de Vacunación</mat-label>
+                                      <input matInput type="date">
+                                  </mat-form-field>
+                                  
+                             </div> 
+
+                             <div class="izquierda">
+                                 <mat-form-field class="example-form">
+                                     <mat-label>*Dosis Aplicada</mat-label>
+                                     <input matInput placeholder="dosis aplicada" formControlName="tamaño" class="form-control" maxlength="30">
+                                 </mat-form-field>
+                                 
+                             </div> 
+
+                                                
+                            <div class="derecha">
+                                <mat-form-field class="example-form">
+                                    <mat-label>*Proxima Dosis</mat-label>
+                                    <input matInput placeholder="proxima dosis" formControlName="razaPadre" class="form-control" maxlength="30">
+                                </mat-form-field>
+                                
+                            </div> 
+
+                            <div>
+                                <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button">Eliminar</a>
+                                <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" >Agregar</a>
+                            </div> 
+                            
+                           <div>
+                               <table>
+                                   
+                               </table>
+                           </div>                                    
+
+                          <div>
+                              <a mat-raised-button color="accent" class="button" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>
+                              <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" >Aceptar</a>
+                          </div> 
+
+                            </form>
+                        </div>
+                    </div>
+                </header>
+            </div>
+        </section>
+
+    </div> 
+ </body> 
+
+</mat-dialog-content>
+

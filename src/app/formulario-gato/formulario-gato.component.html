@@ -256,11 +256,14 @@
                                         
                                             <div class="preview-img" *ngIf="previsualizacion">
                                                 <a mat-raised-button id="btnRegistro" color="accent" type="button" (click)="clearImage()">Eliminar</a>
-                                                <img  [src]="previsualizacion" alt="">
+                                                <img  [src]="previsualizacion" alt="" maxwidth="200" maxheight="200">
                                             </div>      
                                             <h5>Solo se aceptan imagenes con extensión jpeg, jpg y png</h5>                              
                                 </div>
-                                                               
+                                
+                                <div class="example-full-width">
+                                    <a mat-raised-button (click)="agregarVacunacion()" color="accent" class="button" id="btnRegistro" type="button">Añadir Vacunaciones</a>
+                                   </div> 
  
                              <div>
                                  <p id="requer">(*)Campos obligatorios</p>

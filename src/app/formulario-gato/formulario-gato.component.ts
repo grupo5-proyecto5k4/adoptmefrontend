@@ -16,6 +16,7 @@ import {AuthService} from '../auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import {Data} from '@angular/router';
+import { VacunacionesComponent } from '../vacunaciones/vacunaciones.component';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -115,6 +116,10 @@ export class FormularioGatoComponent implements OnInit {
     this.archivos = [];
   }
 
+
+  agregarVacunacion(){
+    this.matdialog.open(VacunacionesComponent);
+  }
   
     registrarAnimal(){
       
