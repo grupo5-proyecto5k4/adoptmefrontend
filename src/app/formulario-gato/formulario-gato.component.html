@@ -154,7 +154,7 @@
                                        <mat-select formControlName="castrado">
                                            <mat-option value="1">Si</mat-option>
                                            <mat-option value="2">No</mat-option>
-                                           <mat-option value="3">Con compromiso</mat-option>
+                                           
                                        </mat-select>
                                    </mat-form-field>
                                    <span class="help-block" *ngIf="((SignupForm.get('castrado').touched ||
@@ -257,7 +257,7 @@
                                         
                                             <div class="preview-img" style="align-items: center;" *ngIf="previsualizacion">
                                                 <br>
-                                                <img  [src]="previsualizacion" alt="" height="400" width="400">
+                                                <img  [src]="previsualizacion" alt="" height="500" width="500">
                                                 <br>
                                                 <a mat-raised-button id="btnRegistro" color="accent" type="button" (click)="clearImage()">Eliminar</a>
                                             </div>      

@@ -11,6 +11,17 @@
   margin: 5px;
 }
 
+#tabla{
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+
 .titulo{
     font-size: 400%;
     font-weight: bolder;
@@ -216,6 +227,8 @@ input{
     width: 40%;
     margin-bottom: 0px !important;
   }
+
+  
   
   .RegistroBoxBtnCancelar {
     width: 10%;
