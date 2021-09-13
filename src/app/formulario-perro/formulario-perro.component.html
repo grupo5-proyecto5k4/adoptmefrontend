@@ -34,7 +34,7 @@
                                         <mat-label>*Publicar para:</mat-label>
                                         <mat-radio-group class="example-radio-group" formControlName="estado">
                                             <mat-radio-button class="example-radio-button" *ngFor="let estado of estadoMascota" [value]="estado">
-                                              {{estado}}
+                                              {{estado}} 
                                             </mat-radio-button>
                                         </mat-radio-group>                                
                                         <span class="help-block" *ngIf="((SignupForm.get('estado').touched ||
@@ -44,7 +44,7 @@
                                         </span>
                                         </span>
                                     </div> 
-                                                                       
+
  
                                 <div id="cachorro" class="izquierda">
                                      <mat-form-field class="example-form">
