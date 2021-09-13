@@ -36,7 +36,8 @@
                                         <mat-radio-button class="example-radio-button" *ngFor="let estado of estadoMascota" [value]="estado">
                                           {{estado}}
                                         </mat-radio-button>
-                                    </mat-radio-group>                                
+                                    </mat-radio-group>  
+                                                                  
                                     <span class="help-block" *ngIf="((SignupForm.get('estado').touched ||
                                     SignupForm.get('estado').dirty) && SignupForm.get('estado').errors)">
                                     <span *ngIf="SignupForm.get('estado').errors.required">
@@ -153,7 +154,7 @@
                                        <mat-select formControlName="castrado">
                                            <mat-option value="1">Si</mat-option>
                                            <mat-option value="2">No</mat-option>
-                                           <mat-option value="3">Con compromiso</mat-option>
+                                           
                                        </mat-select>
                                    </mat-form-field>
                                    <span class="help-block" *ngIf="((SignupForm.get('castrado').touched ||
@@ -251,13 +252,20 @@
                                             </label> 
                                         </mat-from-field>  
                                         
-                                            <div class="preview-img" *ngIf="previsualizacion">
+                                            <div class="preview-img" style="align-items: center;" *ngIf="previsualizacion">
+                                                <br>
+                                                <img  [src]="previsualizacion" alt="" height="500" width="500">
+                                                <br>
                                                 <a mat-raised-button id="btnRegistro" color="accent" type="button" (click)="clearImage()">Eliminar</a>
-                                                <img  [src]="previsualizacion" alt="">
                                             </div>      
                                             <h5>Solo se aceptan imagenes con extensión jpeg, jpg y png</h5>                              
                                 </div>
-                                                               
+                                
+                                <div class="example-full-width">
+                                    <label id="btnRegistro" color="accent" type="button" (click)="agregarVacunacion()"  class="button">Añadir Vacunaciones
+                                    </label>
+                                    
+                                </div> 
  
                              <div>
                                  <p id="requer">(*)Campos obligatorios</p>

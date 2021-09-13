@@ -16,6 +16,7 @@ import {AuthService} from '../auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import {Data} from '@angular/router';
+import { VacunacionesComponent } from '../vacunaciones/vacunaciones.component';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -44,7 +45,7 @@ export class FormularioGatoComponent implements OnInit {
       nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       estado: new FormControl('', Validators.required),
       cachorro: new FormControl('', Validators.required),
-      tamaño: new FormControl('', [Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      tamaño: new FormControl({value: 'No aplica', disabled: true}),
       sexo: new FormControl('', Validators.required),
       edad: new FormControl('',Validators.required),
       razaPadre: new FormControl('',[Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
@@ -53,7 +54,7 @@ export class FormularioGatoComponent implements OnInit {
       conductaNiños: new FormControl('',Validators.required),
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
-      descripcion: new FormControl('',[Validators.required,Validators.maxLength(150)]),
+      descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
     
     });
 
@@ -115,6 +116,10 @@ export class FormularioGatoComponent implements OnInit {
     this.archivos = [];
   }
 
+
+  agregarVacunacion(){
+    this.matdialog.open(VacunacionesComponent);
+  }
   
     registrarAnimal(){
       
@@ -124,7 +129,7 @@ export class FormularioGatoComponent implements OnInit {
         mascota.nombreMascota= this.SignupForm.controls.nombre.value;
         mascota.estado=this.SignupForm.controls.estado.value;
         mascota.esCachorro=this.SignupForm.controls.cachorro.value;
-        mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;
+        mascota.tamañoFinal="No aplica";
         mascota.sexo=this.SignupForm.controls.sexo.value;
         mascota.edad=this.SignupForm.controls.edad.value;
         mascota.razaPadre=this.SignupForm.controls.razaPadre.value;

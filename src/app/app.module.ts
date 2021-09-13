@@ -42,8 +42,9 @@ import { CenterProfileComponent } from './center-profile/center-profile.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
-
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -65,11 +66,13 @@ import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-p
     CenterProfileComponent,
     AdminProfileComponent,
     PublicacionesProvComponent,
+    VacunacionesComponent,
     //PublicacionesProvComponent
 
   ],
   imports: [
     BrowserModule,
+    MatTableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
