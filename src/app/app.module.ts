@@ -42,6 +42,8 @@ import { CenterProfileComponent } from './center-profile/center-profile.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import { AdministrarRecomendacionesModule } from './pages/administrar-recomendaciones/administrar-recomendaciones.module';
+
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 
 
@@ -89,6 +91,7 @@ import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-p
     SignupOptionsModule,
     AdminConfigurationsModule,
     HabilitarCentroRescatistaModule,
+    AdministrarRecomendacionesModule,
     MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,

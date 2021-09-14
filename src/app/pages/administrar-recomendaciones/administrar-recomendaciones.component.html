@@ -1,19 +1,137 @@
+<h1 class="titulo">{{Titulo}}</h1>
+<div class="textos">
+    <div class="referencia">
+        <img src="assets/images/leaflet/blue-icon.png" alt="" class="pines">
+        <p class="subtitulo">VETERINARIAS:&ensp;</p>
+        <p>Selecciona las que estén cerca tuyo para ver su información de contacto, ¡todas están recomendadas por la
+            comunidad!</p>
+    </div>
+    <div class="referencia">
+        <img src="assets/images/leaflet/red-icon.png" alt="" class="pines">
+        <p class="subtitulo">CENTROS DE CASTRACIÓN:&ensp;</p>
+        <p>Ofrecen castración segura y gratuita para perros y gatos, ¡contactate con ellos para solicitar un turno y
+            más información!</p>
+    </div>
+</div>
+<div class="card-container">
+    <div class="lower-container">
+        <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm">
+
+            <div>
+                <mat-form-field class="example-full-width" id="BoxNombre">
+                    <mat-label>*Nombre del establecimiento</mat-label>
+                    <input matInput type="text" formControlName="name" maxlength="65">
+                </mat-form-field>
+                <span class="help-block" *ngIf="((SignupForm.get('name').touched ||
+                SignupForm.get('name').dirty) &&
+                SignupForm.get('name').errors)">
+                    <span *ngIf="SignupForm.get('name').errors.required">
+                        <h6 class="helpError">Campo requerido</h6>
+                    </span>
+                    <span *ngIf="SignupForm.get('name').errors.maxlength">
+                        <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                    </span>
+                    <span *ngIf="SignupForm.get('name').errors.pattern">
+                        <h6 class="helpError">Formato del nombre no válido</h6>
+                    </span>
+                </span>
+            </div>
+
+
+
+            <div class="izquierda">
+                <mat-form-field class="example-full-width">
+                    <mat-label>*Calle</mat-label>
+                    <input matInput formControlName="street" class="form-control" maxlength="50">
+                </mat-form-field>
+                <span class="help-block" *ngIf="((SignupForm.get('street').touched ||
+                SignupForm.get('street').dirty) &&
+                SignupForm.get('street').errors)">
+                    <span *ngIf="SignupForm.get('street').errors.required">
+                        <h6 class="helpError">Campo requerido</h6>
+                    </span>
+                    <span *ngIf="SignupForm.get('street').errors.maxlength">
+                        <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                    </span>
+                </span>
+                <span class="help-block" *ngIf="(!validateCalle() && validateAltura())">
+                    <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                        -
+                    </h6>
+                </span>
+            </div>
+
+            <div class="derecha">
+                <div class="password">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>*Altura</mat-label>
+                        <input matInput placeholder="1234" formControlName="altura" class="form-control" maxlength="4">
+                    </mat-form-field>
+                    <span class="help-block" *ngIf="((SignupForm.get('altura').touched ||
+                    SignupForm.get('altura').dirty) &&
+                    SignupForm.get('altura').errors)">
+                        <span *ngIf="SignupForm.get('altura').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="SignupForm.get('altura').errors.pattern">
+                            <mat-error class="helpError">Formato de la altura no válido</mat-error>
+                        </span>
+                    </span>
+                    <span class="help-block" *ngIf="(!validateAltura() && validateCalle())">
+                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                        </h6>
+                    </span>
+                </div>
+            </div>
+
+            <div class="tooldiv">
+                <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+            Entre 8 y 15 caracteres,
+            al menos una mayúscula,
+            una minúscula y un número" aria-label="Button that displays a tooltip when focused or hovered over">
+                    ℹ
+                </label>
+                <span class="help-block" *ngIf="(validateAltura() || validateCalle())">
+                    <span>
+                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                        </h6>
+                    </span>
+                </span>
+            </div>
+
+
+
+
+            <div class="example-full-width">
+                <mat-form-field class="example-full-width">
+                    <mat-label>Sitio Web</mat-label>
+                    <input matInput placeholder="www.adoptme2021.herokuapp.com" type="text" formControlName="facebook"
+                        maxlength="70">
+                </mat-form-field>
+            </div>
+
+            <div id="passwordRequirement">
+                <div>
+                    <p id="requer">(*)Campos obligatorios</p>
+                </div>
+            </div>
+            <div id="botones">
+                <a mat-raised-button *ngIf="!isLoading" color="accent" style="padding: 10px;" class="button cancelar"
+                    type="button" id="btncuenta" mat-dialog-close>Cancelar</a>
+                <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button"
+                    id="confirmar" (mouseover)="validateButton()" style="padding: 10px;"
+                    (click)="registrarRecomendacion()">Registrar</a>
+                <a mat-raised-button *ngIf="isLoading" style="padding: 10px;" color="accent" class="button loading"
+                    type="button" id="btncuenta">
+                    <img class=logo src="../../../assets/images/loading.gif" /></a>
+            </div>
+
+        </form>
+    </div>
+</div>
 <div class="mapa-container">
-    <h1 class="titulo">Nuestras recomendaciones</h1>
-    <div class="textos">
-        <div class="referencia">
-            <img src="assets/images/leaflet/blue-icon.png" alt="" class="pines">
-            <p class="subtitulo">VETERINARIAS:&ensp;</p>
-            <p>Selecciona las que estén cerca tuyo para ver su información de contacto, ¡todas están recomendadas por la comunidad!</p>
-        </div>
-        <div class="referencia">
-            <img src="assets/images/leaflet/red-icon.png" alt="" class="pines">
-            <p class="subtitulo">CENTROS DE CASTRACIÓN:&ensp;</p>
-            <p>Ofrecen castración segura y gratuita para perros y gatos, ¡contactate con ellos para solicitar un turno y más información!</p>
-        </div>
-    </div>
-    <div id="map"></div> 
-    <div>
-        
-    </div>
+    <div id="map"></div>
+
 </div>
