@@ -8,6 +8,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
@@ -42,6 +43,7 @@ import { CenterProfileComponent } from './center-profile/center-profile.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 
 
@@ -65,6 +67,7 @@ import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-p
     CenterProfileComponent,
     AdminProfileComponent,
     PublicacionesProvComponent,
+    NuevaMascotaComponent,
     //PublicacionesProvComponent
 
   ],
@@ -95,7 +98,8 @@ import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-p
     MatPaginatorModule,
     MatSelectModule,
     FileUploadModule,
-    MatRadioModule
+    MatRadioModule,
+    MatSlideToggleModule
   ],
   
   providers: [],

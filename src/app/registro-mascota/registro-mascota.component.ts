@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialogModule,MatDialog} from '@angular/material/dialog';
-import {FormularioGatoComponent} from '../formulario-gato/formulario-gato.component';
-import {FormularioPerroComponent} from '../formulario-perro/formulario-perro.component';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog }  from '@angular/material/dialog';
+
+import { RegistroMascotasService } from 'src/services/registro-mascotas.service';
+
 
 @Component({
   selector: 'app-registro-mascota',
@@ -10,19 +10,24 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registro-mascota.component.scss']
 })
 export class RegistroMascotaComponent implements OnInit {
+
 Titulo="Registro de mascota";
+mascotasPubAdopcion: any;
 
-  constructor(private dialog:MatDialog) { }
+  
+constructor(public registroMascotasService:RegistroMascotasService, private dialog: MatDialog) {
+}
 
-  ngOnInit(): void {
+ngOnInit() {
+
+  this.registroMascotasService.getMascotas(1).subscribe(data => {
+    this.mascotasPubAdopcion = data;
+    console.log(data);
+  },
+  err => {
+    console.log('VER SMS ERROR')
   }
-
-  signupGato(){
-    this.dialog.open(FormularioGatoComponent)
-  }
-
-  signupPerro(){
-    this.dialog.open(FormularioPerroComponent)
-  }
+  )
+}
 
 }

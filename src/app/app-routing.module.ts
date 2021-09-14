@@ -17,7 +17,7 @@ import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.co
 import { FormularioGatoComponent } from './formulario-gato/formulario-gato.component';
 import { FormularioPerroComponent } from './formulario-perro/formulario-perro.component';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
-
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 
 const routes: Routes = [
   {
@@ -35,6 +35,11 @@ const routes: Routes = [
     path: 'mascotas',
     component: RegistroMascotaComponent
   },
+  {
+    path: 'registrar-mascota',
+    component: NuevaMascotaComponent
+  },
+
   {
     path: 'donaciones',
     component: UnderConstructionComponent
