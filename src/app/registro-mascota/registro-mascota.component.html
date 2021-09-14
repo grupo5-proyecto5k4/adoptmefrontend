@@ -10,9 +10,9 @@
                 <div class="margenes container-publicaciones">
                     <mat-card class="card-publicacion" *ngFor=" let pet of mascotasPubAdopcion">
                         <mat-card-header>
-                            <mat-card-title class="card-title sin-overflow">
+                            <mat-card-title class="card-title">
                                 <div class=primer-renglon>
-                                    <div>{{pet.nombreMascota}}</div>
+                                    <div class="sin-overflow">{{pet.nombreMascota}}</div>
                                     <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>
                                 </div> 
                             </mat-card-title>
