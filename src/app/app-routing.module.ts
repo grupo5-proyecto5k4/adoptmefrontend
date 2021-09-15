@@ -16,6 +16,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
+import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,7 @@ const routes: Routes = [
   },
   {
     path: 'gestionar-usuarios',
-    component: UnderConstructionComponent
+    component: GestionarUsuariosComponent
   },
   {
     path: 'gestionar-mascotas',
