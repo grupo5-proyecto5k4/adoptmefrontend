@@ -2,14 +2,6 @@
     width: 12px;
 }
 
-.example-radio-group {
-  display: inline-flex;
-  flex-direction: column;
-}
-
-.example-radio-button {
-  margin: 5px;
-}
 
 table {
   width: 100%;
@@ -187,7 +179,7 @@ input{
   
   .card-container{
     overflow-y: auto !important;
-    max-height: 83%;
+    max-height: 60%;
     margin-top: 6%;
   }
   
