@@ -12,11 +12,30 @@
         <p>Ofrecen castración segura y gratuita para perros y gatos, ¡contactate con ellos para solicitar un turno y
             más información!</p>
     </div>
+    <div class="referencia">
+        <img src="assets/images/leaflet/green-icon.png" alt="" class="pines">
+        <p class="subtitulo">VISTA PREVIA:&ensp;</p>
+        <p>Se muestra la vista previa de la recomendación a registrar</p>
+    </div>
 </div>
 <div class="card-container">
     <div class="lower-container">
         <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm">
-
+            <div class="margin">
+                <section>
+                  <mat-label>*Indique el tipo de recomendación 
+                  </mat-label>
+                  <label class="example-margin"></label>
+                  <div class="centrado">
+                    <mat-radio-group>
+                      <mat-radio-button class="example-margin" *ngFor="let opcion of tiposRecomendacion" [value]="opcion"
+                      (change)="radioTipoChange(opcion)" style="font-size: 15px;" selected>
+                        {{opcion}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </section>
+              </div>
             <div>
                 <mat-form-field class="example-full-width" id="BoxNombre">
                     <mat-label>*Nombre del establecimiento</mat-label>
@@ -86,11 +105,8 @@
             </div>
 
             <div class="tooldiv">
-                <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
-            Entre 8 y 15 caracteres,
-            al menos una mayúscula,
-            una minúscula y un número" aria-label="Button that displays a tooltip when focused or hovered over">
-                    ℹ
+                <label class="tool" mat-raised-button matTooltip="Ubicar dirección en el mapa" aria-label="Button that displays a tooltip when focused or hovered over">
+            📍
                 </label>
                 <span class="help-block" *ngIf="(validateAltura() || validateCalle())">
                     <span>
@@ -111,6 +127,14 @@
                         maxlength="70">
                 </mat-form-field>
             </div>
+            
+            <div class="margin" *ngIf="this.tiposRecomendacionSelected == 0">
+                <section>
+                  <div style="margin-bottom: 15px;" class="leftLabel">
+                    <mat-checkbox (change)="abierto24hsChange()"></mat-checkbox><a ><u class="example-margin">Abierto las 24hs</u></a>
+                  </div>
+                </section>
+              </div>
 
             <div id="passwordRequirement">
                 <div>
@@ -119,7 +143,7 @@
             </div>
             <div id="botones">
                 <a mat-raised-button *ngIf="!isLoading" color="accent" style="padding: 10px;" class="button cancelar"
-                    type="button" id="btncuenta" mat-dialog-close>Cancelar</a>
+                    type="button" id="btncuenta" (click)=" iniciateForm()">Cancelar</a>
                 <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button"
                     id="confirmar" (mouseover)="validateButton()" style="padding: 10px;"
                     (click)="registrarRecomendacion()">Registrar</a>
@@ -127,6 +151,7 @@
                     type="button" id="btncuenta">
                     <img class=logo src="../../../assets/images/loading.gif" /></a>
             </div>
+
 
         </form>
     </div>

@@ -28,9 +28,12 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
   private pageIndex: number = 0;
   private activePageIndex: boolean = false;
   isLoading: Boolean = false;
-  private veterinaria: any;
-  private centro_castracion: any;
+  private veterinaria = [[]];
+  private centro_castracion = [[]];
   profile: any;
+  tiposRecomendacion: string[] = ['Veterinaria', 'Centro de castración'];
+  tiposRecomendacionSelected: number = 0;
+  abierto24hsSelected: number = 0;
 
   constructor(private dialog: MatDialog, private alertsService: AlertsService, private recomendacionService: RecomendacionService, private authService: AuthService, private router: Router) { }
 
@@ -41,12 +44,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       await this.obtenerRecomendacionesCentrosCastracion();
 
 
-      this.SignupForm = new FormGroup({
-        name: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
-        street: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-        altura: new FormControl('', [Validators.required, Validators.pattern('[0-9]{0,4}')]),
-        facebook: new FormControl(''),
-      });
+      this.iniciateForm();
 
 
       let redIcon = Leaflet.icon({
@@ -64,7 +62,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       });
 
       let greenIcon = Leaflet.icon({ //para mostrar direccion a guardar
-        iconUrl: 'assets/images/leaflet/blue-icon.png',
+        iconUrl: 'assets/images/leaflet/green-icon.png',
         iconSize: [25, 41], // size of the icon
         iconAnchor: [12.5, 41], // point of the icon which will correspond to marker's locatio
         popupAnchor: [0, -35] // point from which the popup should open relative to the iconAnchor
@@ -86,13 +84,13 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
         accessToken: 'pk.eyJ1IjoibWlsaW1vcmUxNjE2IiwiYSI6ImNrcmlpdTRsNDB2aXozMW80MTQwa3YxemwifQ.bzPgST4tdgMA5loxAX-eew'
       }).addTo(this.map);
 
-      console.log("this.veterinaria: "+this.veterinaria.length);
+      console.log("this.veterinaria marker: "+this.veterinaria.length);
       for (var i = 0; i < this.veterinaria.length; i++) {
         var marker = new Leaflet.marker([this.veterinaria[i][1], this.veterinaria[i][2]], { icon: blueIcon }).bindPopup(this.veterinaria[i][0])
           .addTo(this.map);
       }
 
-      console.log("this.centro_castracion: "+this.centro_castracion.length);
+      console.log("this.centro_castracion marker: "+this.centro_castracion.length);
       for (var i = 0; i < this.centro_castracion.length; i++) {
         var marker = new Leaflet.marker([this.centro_castracion[i][1], this.centro_castracion[i][2]], { icon: redIcon }).bindPopup(this.centro_castracion[i][0])
           .addTo(this.map);
@@ -104,6 +102,15 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
     }
 
 
+  }
+
+  iniciateForm(){
+    this.SignupForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
+      street: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      altura: new FormControl('', [Validators.required, Validators.pattern('[0-9]{0,4}')]),
+      facebook: new FormControl(''),
+    });
   }
 
   async obtenerRecomendacionesVeterinaria() {
@@ -120,10 +127,23 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
           vete += "<br><u>Abierto las 24hs.</u>";
         }
 
-        this.veterinaria[i] = [vete, r[i].latitud, r[i].longitud];
+        console.log("latitud: "+r[i].latitud+"");
+        console.log("longitud: "+r[i].longitud+"");
+
+        const object1 = [
+          vete,
+          parseFloat(""+r[i].latitud+""),
+          (""+r[i].longitud+""),
+        ];
+
+        this.veterinaria.push(
+          [object1]
+        );
+
+        console.log("veterinarias: "+this.veterinaria)
       }
 
-      this.alertsService.infoMessage("" + this.veterinaria + "", "vetes");
+      //this.alertsService.infoMessage("" + this.veterinaria + "", "vetes");
 
       let centrosCastracion = [
         ["<strong>Centro de Castración Municipal</strong><br>Dr. Francisco Muñiz 60<br>", -31.407387, -64.209818]
@@ -136,27 +156,61 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
         ["<strong>Clínica Veterinaria Eva Inguerman</strong><br>Av. Colón 6200<br><u>Abierto las 24hs.</u>", -31.394014, -64.262933]
       ];
 
-
     });
   }
 
+  radioTipoChange(value: string) {
+    let answer: number;
+    switch (value) {
+      case this.tiposRecomendacion[0]: { //veterinaria
+        answer = 0;
+        break;
+      }
+      case this.tiposRecomendacion[1]: { //centro de castración
+        answer = 1;
+        break;
+      }
+    }
+    this.tiposRecomendacionSelected = answer;    
+  }
+
+
+abierto24hsChange(){
+  if (this.abierto24hsSelected == 0){
+    this.abierto24hsSelected = 1;
+  }
+  else{
+    this.abierto24hsSelected = 0;
+  }
+
+}
+
   async obtenerRecomendacionesCentrosCastracion() {
     this.recomendacionService.getRecomendacionesCentrosCastracion().then((r) => {
-      console.log("r: "+r.length);
       for (var i = 0; i < r.length; i++) {
         let vete: string;
         vete = "<strong>" + r[i].nombre + "</strong><br>" + r[i].calle + " " + r[i].numero + "";
 
-        if (r[i].sitioWeb !== null) {
+        if (r[i].sitioWeb !== undefined) {
           vete += "<br><a target='_blank' href='" + r[i].sitioWeb + "'>Sitio Web</a>";
         }
         if (r[i].abierto24hs == 1) {
           vete += "<br><u>Abierto las 24hs.</u>";
         }
 
-        this.centro_castracion += [
-          [vete, r[i].latitud, r[i].longitud],
+        const object1 = [
+          vete,
+          parseFloat(""+r[i].latitud+""),
+          parseFloat(""+r[i].longitud+""),
         ];
+
+        this.centro_castracion.push(
+          [object1]
+        );
+
+        console.log("Centros: "+this.centro_castracion)
+        this.alertsService.infoMessage("" + this.centro_castracion + "", "centros");
+        console.log("centro castracion: "+this.centro_castracion)
 
       }
     });
@@ -164,10 +218,6 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
 
   proximamente() {
     this.alertsService.infoMessage('La visualización del centro rescatista aún no se encuentra disponible', 'Información')
-  }
-
-  close() {
-    //this.dialogref.close();
   }
 
   validateInitialDate() {
@@ -192,6 +242,10 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
     return (((this.SignupForm.get('altura').touched ||
       this.SignupForm.get('altura').dirty) &&
       this.SignupForm.get('altura').errors));
+  }
+
+  cambiarCheckbox(){
+
   }
 
 
