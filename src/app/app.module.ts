@@ -45,6 +45,7 @@ import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-p
 import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {MatTableModule} from '@angular/material/table';
+import { GestionarUsuariosComponent } from './gestionar-usuarios/gestionar-usuarios.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import {MatTableModule} from '@angular/material/table';
     AdminProfileComponent,
     PublicacionesProvComponent,
     VacunacionesComponent,
+    GestionarUsuariosComponent,
     //PublicacionesProvComponent
 
   ],
