@@ -16,6 +16,18 @@
                                        <mat-label>*Nombre de Vacuna</mat-label>
                                        <input matInput placeholder="nombre de vacuna" [(ngModel)]="vac.nombre" formControlName="nombre" class="form-control" maxlength="30">
                                    </mat-form-field>
+                                   <span class="help-block" *ngIf="((SignupForm.get('nombre').touched || 
+                                      SignupForm.get('nombre').dirty) && SignupForm.get('nombre').errors)">
+                                      <span *ngIf="SignupForm.get('nombre').errors.required">
+                                         <h6 class="helpError">Campo requerido</h6> 
+                                      </span>
+                                      <span *ngIf="SignupForm.get('nombre').errors.maxlength">
+                                         <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error> 
+                                      </span>
+                                      <span *ngIf="SignupForm.get('nombre').errors.pattern">
+                                         <h6 class="helpError">Formato del nombre no válido</h6>
+                                      </span>
+                                     </span>
                                  </div> 
                                              
 
@@ -25,7 +37,12 @@
                                       <input matInput type="number" [(ngModel)]="vac.cantidadDosis" formControlName="cantidadDosis" class="form-control"
                                                 min="0" max="10">
                                   </mat-form-field>
-                                  
+                                  <span class="help-block" *ngIf="((SignupForm.get('cantidadDosis').touched ||
+                                   SignupForm.get('cantidadDosis').dirty) && SignupForm.get('cantidadDosis').errors)">
+                                            <span *ngIf="SignupForm.get('cantidadDosis').errors.required">
+                                                <h6 class="helpError">Campo requerido</h6>
+                                            </span>
+                                        </span>
                              </div> 
 
                             <div>

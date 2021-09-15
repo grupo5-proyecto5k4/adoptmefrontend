@@ -3,7 +3,7 @@ import {HttpClient,HttpHeaders} from '@angular/common/http';
 import {Mascota} from '../models/IMascota';
 import { Observable } from 'rxjs';
 import {catchError,map} from 'rxjs/operators';
-import {vacuna} from '../models/IVacuna';
+import {NuevaVacuna} from '../models/INuevaVacuna';
 
 @Injectable({
     providedIn: 'root'
@@ -22,8 +22,8 @@ export class photoService{
 
     }
 
-    registrarVacuna(request:vacuna): Observable<any>{
-        return this.http.post<vacuna>(this.urlVacuna,request)
+    registrarVacuna(request:NuevaVacuna): Observable<any>{
+        return this.http.post<NuevaVacuna>(this.urlVacuna,request)
     }
      
    
