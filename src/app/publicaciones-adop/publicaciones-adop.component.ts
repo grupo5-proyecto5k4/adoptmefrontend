@@ -1,13 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { RegistroMascotasService} from 'src/services/registro-mascotas.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UserFormComponent } from '../components/user-form/user-form.component';
-import { Data } from '@angular/router';
-import { MaxLengthValidator } from '@angular/forms';
-
 export interface Pet {
   name: string;
   age: number;
