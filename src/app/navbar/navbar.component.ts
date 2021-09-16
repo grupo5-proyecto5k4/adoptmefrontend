@@ -5,15 +5,18 @@ import { map, shareReplay } from 'rxjs/operators';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/services/local-storage.service';
-import{AuthService} from '../auth.service';
+import { AuthService } from '../auth.service';
 import { stringify } from '@angular/compiler/src/util';
 import { AlertsService } from 'src/utils/alerts.service';
+import { NotificacionService } from 'src/services/notificacion.service';
+import { Notificacion } from 'src/models/INotificacion';
+
 
 
 
 @Component({
   selector: 'app-navbar',
-  templateUrl:'./navbar.component.html',
+  templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
@@ -23,6 +26,9 @@ export class NavbarComponent {
   iniciales: string = "";
   currentUser: any;
   vista: string;
+  cantNotifNoLeidas: number = 0;
+  mostrarNotificaciones: Boolean = false;
+  notificaciones = [];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -30,56 +36,111 @@ export class NavbarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
+  constructor(private breakpointObserver: BreakpointObserver, private notificacionService: NotificacionService, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
     this.profile = this.localStorageService.getProfile();
-    if (this.isLogued()){
+    if (this.isLogued()) {
       this.currentUser = this.authservice.getCurrentUser();
-      if (this.currentUser.apellidos !== undefined && this.currentUser.apellidos !== null){
-        this.iniciales = ((this.currentUser.nombres).split("", 1)+(this.currentUser.apellidos).split("", 1));
+      if (this.currentUser.apellidos !== undefined && this.currentUser.apellidos !== null) {
+        this.iniciales = ((this.currentUser.nombres).split("", 1) + (this.currentUser.apellidos).split("", 1));
       }
       else {
-        let nombre = (this.currentUser.nombres).split(""); 
-        this.iniciales = nombre[0]+nombre[1];
+        let nombre = (this.currentUser.nombres).split("");
+        this.iniciales = nombre[0] + nombre[1];
       }
     }
   }
-  
+
+
+  async ngOnInit() {
+    // Danger slow the server
+    if (this.isLogued()) {
+      this.consultarNotificaciones();
+ 
+    setInterval(() => {
+        this.consultarNotificaciones();
+      }, 5000);
+    }
 
   isSignupOptions(){
     return (this.router.url == '/opciones-de-registro');
+
   }
 
-  isInicioSesion(){
-    return (this.router.url == '/inicio-sesion');
-  }
 
-  isLogued(){
-    return (this.profile !== null && this.profile !== undefined)
-  }
-
-  scrollTop(){
-    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0)
-  }
-
-  isParticular(){
-    return (this.profile == '1')
-  }
-
-  isRescatist(){
-    return (this.profile == '2')
-  }
-
-  isAdmin(){
-    return (this.profile == '0')
-  }
-
-  goToProfile(){
-    if (this.currentUser.tipoUsuario == "1"){
-      this.router.navigate(['/miperfil']);
-    } else if (this.currentUser.tipoUsuario == "2") {
-      this.router.navigate(['/micentro']);
-    } else {
-      this.router.navigate(['/perfiladmin']);
+  async consultarNotificaciones(){
+  let nuevasNotificaciones = await this.notificacionService.getNotificaciones(this.authservice.getToken())
+  if (nuevasNotificaciones.length > this.notificaciones.length) {
+    this.notificaciones = nuevasNotificaciones;
+    let cantNotifNoLeidas = 0;
+    for (let i = 0; i < this.notificaciones.length; i++) {
+      if (nuevasNotificaciones[i].leida == 0) {
+        cantNotifNoLeidas ++;
+      }
     }
+    console.log("Cant Notif No leídas:" + cantNotifNoLeidas)
+    this.cantNotifNoLeidas = cantNotifNoLeidas;
   }
+  console.log("total notificaciones: " + this.notificaciones.length)
+  // }
+}
+
+showNotifications(){
+  if (this.mostrarNotificaciones) {
+    this.mostrarNotificaciones = false;
+  }
+  else {
+    this.mostrarNotificaciones = true;
+  }
+
+}
+
+
+async marcarLeida(notificacion: Notificacion){
+  if (notificacion.leida == 0) {
+    notificacion.leida = 1;
+    this.cantNotifNoLeidas --;
+    let notificacionLeida: Notificacion = { _id: notificacion._id, leida: 1, nombreNotificacion: notificacion.nombreNotificacion, descripcion: notificacion.descripcion };
+    await this.notificacionService.updateNotificacion(notificacionLeida, this.authservice.getToken())
+    this.alertsService.infoMessage("Hola!! hiciste click en la notificación, como la leíste fijate que ahora no te aparece el puntito rosa! Saludos!", "Notificación")
+  }
+  //acá va el código o la llamada a la función que abra el modal o página en base al tipo de objeto que se esté abriendo
+}
+
+isSignupOptions(){
+  return (this.router.url == '/signup-options');
+}
+
+isInicioSesion(){
+  return (this.router.url == '/inicio-sesion');
+}
+
+isLogued(){
+  return (this.profile !== null && this.profile !== undefined)
+}
+
+scrollTop(){
+  document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0)
+}
+
+isParticular(){
+  return (this.profile == '1')
+}
+
+isRescatist(){
+  return (this.profile == '2')
+}
+
+isAdmin(){
+  return (this.profile == '0')
+}
+
+goToProfile(){
+  if (this.currentUser.tipoUsuario == "1") {
+    this.router.navigate(['/miperfil']);
+  } else if (this.currentUser.tipoUsuario == "2") {
+    this.router.navigate(['/micentro']);
+  } else {
+    this.router.navigate(['/perfiladmin']);
+  }
+}
 }
