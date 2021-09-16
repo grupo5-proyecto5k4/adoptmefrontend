@@ -55,16 +55,15 @@ export class NavbarComponent {
     // Danger slow the server
     if (this.isLogued()) {
       this.consultarNotificaciones();
- 
+    }
     setInterval(() => {
         this.consultarNotificaciones();
       }, 5000);
     }
 
-  isSignupOptions(){
-    return (this.router.url == '/opciones-de-registro');
+  
 
-  }
+
 
 
   async consultarNotificaciones(){
@@ -82,6 +81,11 @@ export class NavbarComponent {
   }
   console.log("total notificaciones: " + this.notificaciones.length)
   // }
+}
+
+isSignupOptions(){
+  return (this.router.url == '/opciones-de-registro');
+
 }
 
 showNotifications(){
@@ -106,9 +110,6 @@ async marcarLeida(notificacion: Notificacion){
   //acá va el código o la llamada a la función que abra el modal o página en base al tipo de objeto que se esté abriendo
 }
 
-isSignupOptions(){
-  return (this.router.url == '/signup-options');
-}
 
 isInicioSesion(){
   return (this.router.url == '/inicio-sesion');
