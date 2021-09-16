@@ -12,6 +12,70 @@
   background: inherit;
 }
 
+.notificaciones-container{
+  position: fixed;
+  transition: width 0.3s ease 0s, left 0.3s ease 0s;
+  right: 0px;
+  width: 360px;
+  height: 91%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  background-color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-y: none;
+  float: right;
+  border-radius: 0px 0px 0px 10px;
+  box-shadow: 0px 2px 5px 2px #d8d6d6;
+  z-index: 1;
+}
+
+.titleNotificacion{
+  width: 360px;
+  height: 35px;
+  margin: 10px 0px 0px 10px;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #d8d6d6;
+}
+
+.notificacion-box{
+  width: 360px;
+  height: 80px;
+  cursor: pointer;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #d8d6d6;
+}
+
+.notificacion-box:hover{
+  background-color: #d8d6d6;
+}
+
+.notificationContent{
+  float: left;
+  width: 310px;
+  padding: 10px;
+  margin-top: 2.1%;
+}
+
+.boxNoLeida{
+  float: right;
+  width: 30px;
+  align-items: center;
+}
+
+.noLeida{
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #c50fa1;
+  margin-top: 112%;
+
+}
+
+
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
