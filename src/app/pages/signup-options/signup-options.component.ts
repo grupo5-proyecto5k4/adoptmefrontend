@@ -21,9 +21,10 @@ export class SignupOptionsComponent {
   constructor(private dialog: MatDialog, private authService: AuthService, private router: Router) { }
 
   ngOnInit() { 
-    if(this.authService.isLogued()){}
+    if(this.authService.isLogued()){
       window.scrollTo(0, 0);
       this.router.navigate(['/']);
+    }
   }
 
   signupParticular() {

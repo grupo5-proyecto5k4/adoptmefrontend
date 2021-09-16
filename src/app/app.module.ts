@@ -35,14 +35,18 @@ import { FormularioGatoComponent } from './formulario-gato/formulario-gato.compo
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HabilitarCentroRescatistaModule } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.module';
-import { CloudinaryModule, CloudinaryConfiguration, provideCloudinary } from '@cloudinary/angular-5.x';
-import * as  Cloudinary from 'cloudinary-core';
 import {FileUploadModule} from 'ng2-file-upload';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatRadioModule} from '@angular/material/radio';
+import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
+//import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import {MatTableModule} from '@angular/material/table';
+import { GestionarUsuariosComponent } from './gestionar-usuarios/gestionar-usuarios.component';
 
 
 @NgModule({
@@ -60,11 +64,19 @@ import {MatBadgeModule} from '@angular/material/badge';
     RegistroMascotaComponent,
     FormularioPerroComponent,
     FormularioGatoComponent, 
-    PublicacionesAdopComponent, UserProfileComponent, CenterProfileComponent, AdminProfileComponent
+    PublicacionesAdopComponent,
+    UserProfileComponent,
+    CenterProfileComponent,
+    AdminProfileComponent,
+    PublicacionesProvComponent,
+    VacunacionesComponent,
+    GestionarUsuariosComponent,
+    //PublicacionesProvComponent
 
   ],
   imports: [
     BrowserModule,
+    MatTableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
@@ -88,10 +100,10 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatCardModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    CloudinaryModule,
     MatSelectModule,
     FileUploadModule,
     MatBadgeModule,
+    MatRadioModule
   ],
   
   providers: [],

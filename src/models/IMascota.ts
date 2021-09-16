@@ -1,19 +1,19 @@
  interface IMascota{
-    _id?:number;
+    _id?:string;
     tipoMascota?:number;
     nombreMascota: string;
     esCachorro: number;
     tamañoFinal: string;
-    sexo: number;
+    sexo: string;
     edad:number;
     razaPadre: string;
     razaMadre: string;
     castrado: number;
     fechaAlta?: Date;
     fechaModificacion?:Date;
-    estado?:string;
+    estado:string;
     responsableCategoria?:number;
-    responsableId?:number;
+    responsableId?:string;
     conductaNiños: string;
     conductaPerros: string;
     conductaGatos: string;
@@ -22,21 +22,21 @@
 }
 
 export class Mascota implements IMascota{
-    _id?:number;
+    _id?:string;
     tipoMascota?:number;
     nombreMascota: string;
     esCachorro: number;
     tamañoFinal: string;
-    sexo: number;
+    sexo: string;
     edad: number;
     razaPadre: string;
     razaMadre:string;
     castrado:number;
     fechaAlta?:Date;
     fechaModificacion?:Date;
-    estado?:string;
+    estado:string;
     responsableCategoria?:number;
-    responsableId?:number;
+    responsableId?:string;
     conductaNiños:string;
     conductaPerros:string;
     conductaGatos:string;

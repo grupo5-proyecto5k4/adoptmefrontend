@@ -14,6 +14,9 @@ import { CenterProfileComponent } from './center-profile/center-profile.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
+import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
+import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
 
 const routes: Routes = [
   {
@@ -22,7 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'provisorio',
-    component: UnderConstructionComponent
+    component: PublicacionesProvComponent
   },
   {path: 'inicio-sesion',
     component: InicioSesionComponent
@@ -41,7 +44,7 @@ const routes: Routes = [
   },
   {
     path: 'gestionar-usuarios',
-    component: UnderConstructionComponent
+    component: GestionarUsuariosComponent
   },
   {
     path: 'gestionar-mascotas',
@@ -86,6 +89,15 @@ const routes: Routes = [
   {
     path: 'mapas',
     component: LeaftletPathComponent
+  },
+  {
+
+    path: 'faqs',
+    component: FaqsComponent
+  },
+  {
+    path: 'vacunaciones',
+    component: VacunacionesComponent
   },
   {
     path: '', redirectTo: '/landing', pathMatch: 'full'

@@ -1,38 +1,20 @@
+@import url("../../components/signup-particular/signup-particular.component.scss");
+
+
 ::-webkit-scrollbar {
     width: 12px;
 }
-.example-radio-group {
-  display: inline-flex;
-  flex-direction: column;
-}
-
-.example-radio-button {
-  margin: 5px;
-  width: 10%;
-  height: 10%;
-}
 
 
-.titulo{
-  font-size: 400%;
-  font-weight: bolder;
-  font-family: 'Times New Roman';
-  color:white !important;
-  line-height: 150px !important;
-}
-
-#btnRegistro{
+#btncuenta, #confirmar{
   color: #EBEEF1;
   background-color: #c50fa1;
   cursor: pointer;
 }
 
-#cachorro{
-  outline: none;
-  background-color: transparent;
-  line-height: 36px;
+.margin{
+  margin-top: 5% !important;
 }
-
 
 input{
   width: 98% !important;
@@ -40,6 +22,11 @@ input{
 
 .buttonDisabled{
   cursor: not-allowed !important;
+}
+
+.password{
+  width: 90%;
+  float: left;
 }
 
 
@@ -57,10 +44,16 @@ a [type="button"]:disabled {
   margin-top: 6%;
 }
 
+.example-margin {
+  margin: 10px 10px;
+  margin-top: 0px;
+  font-size: 16px;
+}
+
 .label{
   text-align: left;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  
+
 }
 
 .example-form {
@@ -82,6 +75,11 @@ input:-webkit-autofill {
   width: 100%;
 }
 
+#confirmar{
+  padding-left: 26px !important;
+  padding-right: 26px !important;
+}
+
 td {
   padding-right: 8px;
 }
@@ -100,6 +98,7 @@ form{
   margin-left: auto;
   margin-right: auto;
 }
+
 textarea {
   resize: none;
   font-size: 15px;
@@ -120,7 +119,7 @@ input {
   background-color: #c50fa1;
   min-width: 64px;
   line-height: 36px;
-  padding: 10px;
+  //padding: 10px;
   border-radius: 4px;
   box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
@@ -154,7 +153,7 @@ input {
 }
 
 .tool{
-  background-color: rgb(124, 124, 145);
+  background-color: rgb(173, 173, 175);
   line-height: 20px;
   border-radius: 0px;
   margin: 0px;
@@ -168,6 +167,7 @@ input {
   border-style: solid;
   border-color: rgb(43, 41, 41);
   border-width: 0.7px;
+  border-radius: 2px;
 }
 
 .tool:active{
@@ -194,7 +194,7 @@ input {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
     margin:3px;
 }
-  
+
 
 .lower-container{
   height: auto !important;
@@ -241,7 +241,7 @@ input {
 
 
 @media (min-width: 1600px){
-  
+
 .container {
   padding-bottom: 60% ;
       }
@@ -290,11 +290,11 @@ input {
 
   }
 
-  
+
 
 
 @media (min-width: 992px) and (max-width: 1600px){
-  
+
 
   .derecha,.izquierda {
     width: 49%;
@@ -309,7 +309,7 @@ input {
     float: clear;
     margin-top: 100px !important;
   }
-  
+
   .izquierda{
     float: left;
   }
@@ -327,7 +327,7 @@ input {
   width: 13%;
   margin-right: 12%;
   }
-  
+
   .RegistroBoxlbl {
       width: 49.4%;
   }
@@ -344,9 +344,6 @@ input {
       top: 49% !important;
   }
 
-  .solitario1 {
-      margin-left: 80% !important ;
-  }
 
   .RegistroBoxBtnGuardar1{
       margin-right: -63% !important;
@@ -356,7 +353,7 @@ input {
 
 
 @media (max-width: 599px){
- 
+
   .container {
 padding-bottom: 150% !important;
   }
@@ -370,11 +367,14 @@ padding-bottom: 150% !important;
   height: 60% !important;
   top: 40% !important;
   }
+
+  .tool{
+    background-color: transparent;
+    border-style: none;
+    border-color: transparent;
+  }
 }
 
-.upper-container {
-  background: #000746 !important;
-}
 
 .btn {
   width: 120px;
@@ -451,15 +451,6 @@ select {
   border-color: rgba(85, 85, 85, 0.596) !important;
 }
 
-.titulo{
-  font-size: 200%;
-  font-weight: bolder;
-  font-family: 'Times New Roman';
-  color:white !important;
-  line-height: 150px !important;
-}
-
-
 .links{
   color: #c50fa1; 
   font-size: 14px; 
@@ -469,18 +460,12 @@ select {
 }
 
 
-#btRegistro{
+
+#btncuenta, #confirmar{
   color: #EBEEF1;
   background-color: #c50fa1;
-  line-height: 36px;
+  //line-height: 36px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;
   font-weight: 500;
-}
-
-
-.footer{
-  position: absolute;
-  bottom:0;
-  width: 100%;
 }

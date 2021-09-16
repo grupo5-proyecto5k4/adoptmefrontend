@@ -50,6 +50,7 @@ export class NavbarComponent {
     }
   }
 
+
   async ngOnInit() {
     // Danger slow the server
     if (this.isLogued()) {
@@ -59,6 +60,10 @@ export class NavbarComponent {
         this.consultarNotificaciones();
       }, 5000);
     }
+
+  isSignupOptions(){
+    return (this.router.url == '/opciones-de-registro');
+
   }
 
 
