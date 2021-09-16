@@ -73,8 +73,6 @@ export class PublicacionesProvComponent implements OnInit {
                 }
               }
             }
-            console.log("HOLA", data);  
-            console.log("PUB", this.mascotasPubProvisorio)
           }
           )
           
