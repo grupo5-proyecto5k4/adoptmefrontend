@@ -21,13 +21,16 @@ mascotasUsuarioAdop:any;
 
 mascotasPrueba:any;
 color:any;
+mascotasUsuarioEnProvi:any;
+mascotasUsuarioAdoptado:any;
+mascotasUsuarioNoDisponibles;
 
 constructor(public registroMascotasService:RegistroMascotasService, private dialog: MatDialog, private auth: AuthService) {
 }
 
 ngOnInit() {
 
-  // EN ESPERA - SE NECESITA CAMBIO DEL BACK DEL 404 NOT FOUND A UN ARRAY VACIO 
+  // EN ESPERA - ARRAY VACIO - ahora tiene adentro un mensaje?
   // Borrador para armar card
   this.registroMascotasService.getMascotas(0).subscribe( prueba => {
     this.mascotasPrueba = prueba;
@@ -46,6 +49,35 @@ ngOnInit() {
           }
         }  
   })
+
+  // SECCIÓN NO DISPONIBLES: Adoptado y En Provisorio
+  this.registroMascotasService.getMascotasUser(4, this.auth.getToken()).subscribe(dataEnProvi => {
+    this.mascotasUsuarioEnProvi = dataEnProvi;
+
+    this.registroMascotasService.getMascotasUser(3, this.auth.getToken()).subscribe(dataAdoptado => {
+      this.mascotasUsuarioAdoptado = dataAdoptado;
+
+      var dato = [].concat(dataEnProvi, dataAdoptado); 
+      this.mascotasUsuarioNoDisponibles = dato;
+      console.log(dato);
+              //Recorro mascotas
+              for (let x = 0; x < (dato.length); x++){
+                if (dato[x].Foto.length != 0){
+                  //Recorro imágenes
+                  for (let i = 0; i < dato[x].Foto.length; i++){
+                    // Foto Principal
+                    if (dato[x].Foto[i].esPrincipal){
+                      this.mascotasUsuario[x].imagenCard = dato[x].Foto[i].foto;
+                    }
+                  }
+                }
+              }   
+    
+    },
+  err => {
+    console.log('ERROR...')
+  }
+  );
 
   // Sección DISPONIBLES: Disponible Adopción, Disponible Provisorio y Disponible Adopción y Provisorio
   // Disponible Provisorio
@@ -82,6 +114,4 @@ ngOnInit() {
   err => {
     console.log('ERROR...')
   }
-  )
-}
-}
+  )})}}
