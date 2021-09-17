@@ -6,9 +6,10 @@
 
     <div class="container-principal">
         <mat-tab-group>
+
             <mat-tab label="Disponibles">
                 <div class="margenes container-publicaciones">
-                    <mat-card class="card-publicacion" *ngFor=" let pet of mascotasPubAdopcion">
+                    <mat-card class="card-publicacion" *ngFor=" let pet of mascotasUsuario">
                         <mat-card-header>
                             <mat-card-title class="card-title">
                                 <div class=primer-renglon>
@@ -18,9 +19,14 @@
                             </mat-card-title>
                             <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
                         </mat-card-header>
-                        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                        <div class="contenedor-imagen">
+                            <img mat-card-image src={{pet.imagenCard}} alt="Imagen de la mascota" class="imagen">
+                        </div>
                         <mat-card-content class="card-description">
                             <div class="sin-overflow-description">{{pet.descripcion}}</div> 
+                            <div class="estado-container">
+                                <p class="estado">{{pet.estado}}</p>
+                            </div>
                         </mat-card-content>
                         <mat-card-actions>
                             <button mat-button>EDITAR</button>
@@ -28,6 +34,35 @@
                     </mat-card>
                 </div>
             </mat-tab>
-            <mat-tab label="No disponibles"> Content 2 </mat-tab>
+
+
+
+            <mat-tab label="No disponibles">
+            <div class="margenes container-publicaciones">
+                <mat-card class="card-publicacion" *ngFor=" let pet of mascotasPrueba">
+                    <mat-card-header>
+                        <mat-card-title class="card-title">
+                            <div class=primer-renglon>
+                                <div class="sin-overflow">{{pet.nombreMascota}}</div>
+                                <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>
+                            </div> 
+                        </mat-card-title>
+                        <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="contenedor-imagen">
+                        <img mat-card-image src={{pet.imagenCard}} alt="Imagen de la mascota" class="imagen">
+                    </div>
+                    <mat-card-content class="card-description">
+                        <div class="sin-overflow-description">{{pet.descripcion}}</div> 
+                        <div class="estado-container">
+                            <p class="estado">{{pet.estado}}</p>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button>EDITAR</button>
+                    </mat-card-actions>
+                </mat-card>
+            </div>
+        </mat-tab>
         </mat-tab-group>
     </div>
