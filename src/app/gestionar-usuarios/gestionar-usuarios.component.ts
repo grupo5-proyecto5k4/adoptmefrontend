@@ -45,7 +45,6 @@ export class GestionarUsuariosComponent {
       2 - Pendiente (Usuario)
       3 - Bloqueado (Usuario) */
 
-
   async obtenerUsuarios(){    
     this.userService.getUsuarios('Activo',this.authService.getToken()).then((r) => {
       this.Usuarios = r;
