@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {FormGroup, FormGroupDirective, NgForm,FormControl, Validators} from '@angular/forms';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
@@ -13,7 +13,10 @@ import {validateVerticalPosition} from '@angular/cdk/overlay';
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '../auth.service';
-import {VacunacionesComponent} from '../vacunaciones/vacunaciones.component';
+import {vacuna} from '../../models/IVacuna';
+import { MatTable } from '@angular/material/table';
+import {NuevaVacuna} from '../../models/INuevaVacuna';
+
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -28,14 +31,26 @@ export class FormularioPerroComponent implements OnInit {
   
   SignupForm: FormGroup;
   Titulo="Registro de Perro";
+  TituloVacuna="Registro de Vacunaciones"
   public archivos: any = [];
   private fileToUpload: File = null;
   public previsualizacion: string;
   public loading: boolean;
   estadoMascota: string[] = ['Disponible Adopción', 'Disponible Provisorio', 'Disponible Adopción y Provisorio'];
+  listaVacunas:any[]=[]; //aca se guardaran todas las vacunas 
+  SignupFormVac: FormGroup;
+  vacunas: vacuna []= [];
+  columnas = ['nombre', 'cantidadDosis','borrar'];
+  vac: any= {};
+  nuevaVacuna:any= {};
+  nombreVac: string;
+  cantDosis:number;
+  verTabla=false;
+  mensajeB= 'Agregar Vacunación';
 
   constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioPerroComponent>) { }
-    
+  @ViewChild(MatTable) tabla1: MatTable<vacuna>;
+
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
       nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
@@ -54,9 +69,13 @@ export class FormularioPerroComponent implements OnInit {
 
     });
 
+    this.SignupFormVac= new FormGroup({
+      nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      cantidadDosis: new FormControl('',Validators.required),
+    });
+
     this.dialogRef.disableClose=true;
 
-    
   }
 
   capturarFile(event): any {
@@ -84,6 +103,20 @@ export class FormularioPerroComponent implements OnInit {
     
   }
 
+  borrarFila(cantD: number) {
+    if (this.alerts.errorMessage("Realmente quiere borrarlo?")) {
+      this.vacunas.splice(cantD,1);
+      this.tabla1.renderRows();
+    }
+  }
+
+  agregar() {
+    this.vacunas.push(this.vac);
+    this.nombreVac=this.vac.nombre;
+    this.cantDosis=this.vac.cantidadDosis;
+    this.tabla1.renderRows();
+    this.vac={};
+  } 
 
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
@@ -112,9 +145,12 @@ export class FormularioPerroComponent implements OnInit {
     this.archivos = [];
   }
 
-  agregarVacunacion(){
-    this.matdialog.open(VacunacionesComponent);
-  }
+  
+  mostrarVacunas(){
+    this.mensajeB= this.verTabla? 'Agregar Vacunación': 'Cancelar Vacunación';
+    this.verTabla=!this.verTabla;
+   
+ }
 
   
     registrarAnimal(){
@@ -142,10 +178,33 @@ export class FormularioPerroComponent implements OnInit {
             this.loading = true;
             const formularioDeDatos = new FormData();
             this.archivos.forEach(archivo => {
-              formularioDeDatos.append('imagen', archivo)
-              formularioDeDatos.append('id_Animal',resp.id_Animal)
-            
+            formularioDeDatos.append('imagen', archivo)
+            formularioDeDatos.append('id_Animal',resp.id_Animal)
             })
+            console.log(formularioDeDatos);
+            let nuevaVac: NuevaVacuna=new NuevaVacuna();
+            nuevaVac.nombreVacuna=this.nombreVac;
+            nuevaVac.cantidadDosis=this.cantDosis;
+            
+           //const formVacuna= new FormData();
+           //formVacuna.append('nombreVacuna',nuevaVac.nombreVacuna);
+           //formVacuna.append('cantidadDosis',nuevaVac.cantidadDosis);
+           //formVacuna.append('id_Animal',resp.id_Animal);
+            this.listaVacunas.push( nuevaVac,resp.id_Animal);
+            //this.listaVacunas.push(resp.id_Animal)
+            
+            console.log(this.listaVacunas);
+
+            this.http.post(`https://adoptmebackend.herokuapp.com/vacunas/vacuna`,this.listaVacunas)
+              .subscribe(() => {
+                this.loading = false;
+                console.log("se registro vacuna!");
+                
+      
+              }, () => {
+                this.loading = false;
+                alert('Error de vacuna');
+              })
             
             this.http.post(`https://adoptmebackend.herokuapp.com/fotos/imagen/add`, formularioDeDatos)
               .subscribe(() => {
@@ -154,14 +213,16 @@ export class FormularioPerroComponent implements OnInit {
       
               }, () => {
                 this.loading = false;
-                alert('Error');
+                alert('Error de foto');
               })
+  
+
           } catch (e) {
             this.loading = false;
             console.log('ERROR', e);
       
           }
-           
+
           this.alerts.confirmMessage("Su mascota ha sido registrada").then((result)=> window.location.href='/mascotas')
          },
          () => {

@@ -12,7 +12,7 @@ import {NuevaVacuna} from '../models/INuevaVacuna';
 export class photoService{
 
     uri='https://adoptmebackend.herokuapp.com/animales/animal';  
-    urlVacuna='https://adoptmebackend.herokuapp.com/vacunas/vacuna '; 
+    urlVacuna='https://adoptmebackend.herokuapp.com/vacunas/vacuna'; 
      
     constructor(private http:HttpClient){}
   
