@@ -40,12 +40,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import {MatBadgeModule} from '@angular/material/badge';
 import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {MatTableModule} from '@angular/material/table';
 import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
+
 
 @NgModule({
   declarations: [
@@ -99,8 +101,9 @@ import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios
     MatPaginatorModule,
     MatSelectModule,
     FileUploadModule,
-    MatRadioModule,
-    GestionarUsuariosModule
+    GestionarUsuariosModule,
+    MatBadgeModule,
+    MatRadioModule
   ],
   
   providers: [],

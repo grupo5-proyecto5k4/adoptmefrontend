@@ -11,7 +11,6 @@ export class RegistroMascotasService {
 
     constructor(private http: HttpClient) {}
 
-    // Falta filtro de tami - parametrizar
     getMascotas(statusCode: number): Observable<any> {
         let status = "";
         // Si cambia algun estado no hay que ir buscandolo en todas los typescript files.
@@ -31,7 +30,6 @@ export class RegistroMascotasService {
             status = "En Provisorio";
         }
         let ruta = this.api + status;
-        console.log("Ruta", ruta);
         return this.http.get(this.api + status);
     }
 }
