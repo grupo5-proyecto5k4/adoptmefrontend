@@ -10,7 +10,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {vacuna} from '../../models/IVacuna';
 import {photoService} from '../../services/photo.service';
 import { MatTable } from '@angular/material/table';
-
+import {NuevaVacuna} from '../../models/INuevaVacuna';
 
 @Component({
   selector: 'app-vacunaciones',
@@ -23,7 +23,9 @@ export class VacunacionesComponent implements OnInit {
   vacunas: vacuna []= [];
   columnas = ['nombre', 'cantidadDosis','borrar'];
   vac: any= {};
-
+  nuevaVacuna:any= {};
+  nombreVac: string;
+  cantDosis:number;
 
   constructor(private dialog:MatDialog, private servVacuna: photoService, private alertsService:AlertsService) {}
   @ViewChild(MatTable) tabla1: MatTable<vacuna>;
@@ -35,10 +37,9 @@ export class VacunacionesComponent implements OnInit {
     }
   }
   
-  ngOnInit() {
-
+  ngOnInit():void {
     this.SignupForm= new FormGroup({
-      nombre:new FormControl('',Validators.required),
+      nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       cantidadDosis: new FormControl('',Validators.required),
     });
        
@@ -46,17 +47,23 @@ export class VacunacionesComponent implements OnInit {
 
 agregar() {
     this.vacunas.push(this.vac);
-    console.log(this.vac);
+    this.nombreVac=this.vac.nombre;
+    this.cantDosis=this.vac.cantidadDosis;
     this.tabla1.renderRows();
     this.vac={};
   } 
  
   registrarVacuna(){
-    let vac:vacuna= new vacuna(this.SignupForm.controls.nombre.value,this.SignupForm.controls.cantidadDosis.value);
+    
+    let nuevaVac: NuevaVacuna=new NuevaVacuna();
+    nuevaVac.nombreVacuna=this.nombreVac;
+    nuevaVac.cantidadDosis=this.cantDosis;
+    //nuevaVac.id_Animal="idnuevo";
+    console.log(nuevaVac);
 
-    this.servVacuna.registrarVacuna(vac).subscribe({
+    this.servVacuna.registrarVacuna(nuevaVac).subscribe({
       complete: () => {
-        this.alertsService.confirmMessage("Datos de vacunación han sido registrados").then((result) => window.location.href = '/');
+        this.alertsService.confirmMessage("Datos de vacunación han sido registrados").then((result) => this.dialog.closeAll());
       },
       error: (err: any) => {
         this.alertsService.errorMessage(err.error.error).then((result) => {

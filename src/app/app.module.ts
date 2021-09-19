@@ -46,7 +46,7 @@ import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-p
 import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {MatTableModule} from '@angular/material/table';
-import { GestionarUsuariosComponent } from './gestionar-usuarios/gestionar-usuarios.component';
+import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
 
 
 @NgModule({
@@ -70,7 +70,6 @@ import { GestionarUsuariosComponent } from './gestionar-usuarios/gestionar-usuar
     AdminProfileComponent,
     PublicacionesProvComponent,
     VacunacionesComponent,
-    GestionarUsuariosComponent,
     //PublicacionesProvComponent
 
   ],
@@ -102,6 +101,7 @@ import { GestionarUsuariosComponent } from './gestionar-usuarios/gestionar-usuar
     MatPaginatorModule,
     MatSelectModule,
     FileUploadModule,
+    GestionarUsuariosModule,
     MatBadgeModule,
     MatRadioModule
   ],
