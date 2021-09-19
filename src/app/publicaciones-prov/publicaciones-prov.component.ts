@@ -36,6 +36,7 @@ const DATA: Pet[] = [
 
 export class PublicacionesProvComponent implements OnInit {
   mascotasPubProvisorio: any;
+  mascotasPub:any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
@@ -50,12 +51,34 @@ export class PublicacionesProvComponent implements OnInit {
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
 
-    this.registroMascotasService.getMascotas(2).subscribe(data => {
-      this.mascotasPubProvisorio = data;
-      console.log(data);
+    // En provisorio
+    this.registroMascotasService.getMascotas(2).subscribe(dataOne => {
+      this.mascotasPub = dataOne;
+
+      // "En adopcion y en provisorio"
+      this.registroMascotasService.getMascotas(0).subscribe(dataBoth => {
+        
+        // Junto los de "En provisorio" con los de "En adopción y en provisorio"
+            var data = [].concat(dataBoth, dataOne);
+            this.mascotasPubProvisorio = data;
+            //Recorro mascotas
+            for (let x = 0; x < (data.length); x++){
+              if (data[x].Foto.length != 0){
+                //Recorro imágenes
+                for (let i = 0; i < data[x].Foto.length; i++){
+                  // Foto Principal
+                  if (data[x].Foto[i].esPrincipal){
+                    this.mascotasPubProvisorio[x].imagenCard = data[x].Foto[i].foto;
+                  }
+                }
+              }
+            }
+          }
+          )
+          
     },
     err => {
-      console.log('VER SMS ERROR')
+      console.log('ERROR...')
     }
     )
   }
