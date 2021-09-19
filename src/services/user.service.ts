@@ -27,9 +27,6 @@ export class UserService {
     return this.httpClient.put<any>(this.api + '/centros/' + user._id, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
-  updateParticular(user: User, token:string): Observable <any> {
-    return this.httpClient.put<any>(this.api + '/particular/' + user._id, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
-  }
   
 
   async getUsuarios(estado: string, token:string): Promise <any[]> {
