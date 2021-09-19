@@ -2,14 +2,6 @@
     width: 12px;
 }
 
-.example-radio-group {
-  display: inline-flex;
-  flex-direction: column;
-}
-
-.example-radio-button {
-  margin: 5px;
-}
 
 table {
   width: 100%;
@@ -23,6 +15,11 @@ th{
   color: rgb(49, 49, 49);
   font-size: 90%;
   
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .titulo{
@@ -182,7 +179,7 @@ input{
   
   .card-container{
     overflow-y: auto !important;
-    max-height: 83%;
+    max-height: 60%;
     margin-top: 6%;
   }
   
@@ -230,6 +227,8 @@ input{
     width: 40%;
     margin-bottom: 0px !important;
   }
+
+  
   
   .RegistroBoxBtnCancelar {
     width: 10%;

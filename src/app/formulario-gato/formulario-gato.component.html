@@ -36,7 +36,8 @@
                                         <mat-radio-button class="example-radio-button" *ngFor="let estado of estadoMascota" [value]="estado">
                                           {{estado}}
                                         </mat-radio-button>
-                                    </mat-radio-group>                                
+                                    </mat-radio-group>  
+                                                                  
                                     <span class="help-block" *ngIf="((SignupForm.get('estado').touched ||
                                     SignupForm.get('estado').dirty) && SignupForm.get('estado').errors)">
                                     <span *ngIf="SignupForm.get('estado').errors.required">
@@ -153,7 +154,7 @@
                                        <mat-select formControlName="castrado">
                                            <mat-option value="1">Si</mat-option>
                                            <mat-option value="2">No</mat-option>
-                                           <mat-option value="3">Con compromiso</mat-option>
+                                           
                                        </mat-select>
                                    </mat-form-field>
                                    <span class="help-block" *ngIf="((SignupForm.get('castrado').touched ||
@@ -251,17 +252,102 @@
                                             </label> 
                                         </mat-from-field>  
                                         
-                                            <div class="preview-img" *ngIf="previsualizacion">
+                                            <div class="preview-img" style="align-items: center;" *ngIf="previsualizacion">
+                                                <br>
+                                                <img  [src]="previsualizacion" alt="" height="500" width="500">
+                                                <br>
                                                 <a mat-raised-button id="btnRegistro" color="accent" type="button" (click)="clearImage()">Eliminar</a>
-                                                <img  [src]="previsualizacion" alt="">
                                             </div>      
                                             <h5>Solo se aceptan imagenes con extensión jpeg, jpg y png</h5>                              
                                 </div>
-                                                               
+                                
+                                <div>
+                                    <input id="btnRegistro" color="accent" type="button" (click)="mostrarVacunas()" [value]="mensajeB" class="button">
+                                    
+                                </div> 
  
                              <div>
                                  <p id="requer">(*)Campos obligatorios</p>
-                             </div>
+                             </div> 
+
+                             <div *ngIf="verTabla">
+                                <div class="lower-container">
+                                    <div>
+                                        <h2 class="subtitulo">{{TituloVacuna}}</h2>
+                                    </div>
+        
+                                    <form class="example-form"  [formGroup]="SignupFormVac" >
+                                         <div class="izquierda">
+                                           <mat-form-field class="example-form">
+                                               <mat-label>*Nombre de Vacuna</mat-label>
+                                               <input matInput placeholder="nombre de vacuna" [(ngModel)]="vac.nombre" formControlName="nombre" class="form-control" maxlength="30">
+                                           </mat-form-field>
+                                           <span class="help-block" *ngIf="((SignupFormVac.get('nombre').touched || 
+                                           SignupFormVac.get('nombre').dirty) && SignupFormVac.get('nombre').errors)">
+                                              <span *ngIf="SignupFormVac.get('nombre').errors.required">
+                                                 <h6 class="helpError">Campo requerido</h6> 
+                                              </span>
+                                              <span *ngIf="SignupFormVac.get('nombre').errors.maxlength">
+                                                 <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error> 
+                                              </span>
+                                              <span *ngIf="SignupFormVac.get('nombre').errors.pattern">
+                                                 <h6 class="helpError">Formato del nombre no válido</h6>
+                                              </span>
+                                             </span>
+                                         </div> 
+                                                     
+        
+                                     <div class="derecha">
+                                          <mat-form-field class="example-form">
+                                              <mat-label>*Cantidad de Dosis</mat-label>
+                                              <input matInput type="number" [(ngModel)]="vac.cantidadDosis" formControlName="cantidadDosis" class="form-control"
+                                                        min="0" max="10">
+                                          </mat-form-field>
+                                          <span class="help-block" *ngIf="((SignupFormVac.get('cantidadDosis').touched ||
+                                          SignupFormVac.get('cantidadDosis').dirty) && SignupFormVac.get('cantidadDosis').errors)">
+                                                    <span *ngIf="SignupFormVac.get('cantidadDosis').errors.required">
+                                                        <h6 class="helpError">Campo requerido</h6>
+                                                    </span>
+                                                </span>
+                                     </div> 
+        
+                                    <div>
+                                        <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="agregar()">Agregar</a>
+                                    </div> 
+                                                     
+        
+                                    <div class="example-full-width">                                    
+                                          <div>
+                                            <table mat-table [dataSource]="vacunas" #tabla1>
+                                              <ng-container matColumnDef="nombre">
+                                                <th mat-header-cell *matHeaderCellDef> Nombre Vacuna </th>
+                                                <td mat-cell *matCellDef="let vac"> {{vac.nombre}} </td>
+                                              </ng-container>                                                                      
+                                             
+                                              <ng-container matColumnDef="cantidadDosis">
+                                                <th mat-header-cell *matHeaderCellDef> Cantidad de Dosis </th>
+                                                <td mat-cell *matCellDef="let vac"> {{vac.cantidadDosis}} </td>
+                                              </ng-container>
+        
+                                              <ng-container matColumnDef="borrar">
+                                                <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+                                                <td mat-cell *matCellDef="let j = index;">
+                                                  <button mat-raised-button color="accent" id="btnRegistro" (click)="borrarFila(j)">Borrar
+                                                  </button>
+                                                </td>
+                                              </ng-container>
+        
+                                              <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+                                              <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+                                            </table>
+                                          </div>                                
+                                        
+                                   </div>   
+                                                                    
+                                    </form>
+                                </div>
+                            </div>
+
  
                              <div>
                                  <a mat-raised-button color="accent" *ngIf="!isLoading" class="button" id="btnRegistro" style="margin-right: 3px;" type="button" mat-dialog-close>Cancelar</a>

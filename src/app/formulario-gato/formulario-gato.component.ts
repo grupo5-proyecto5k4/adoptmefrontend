@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormGroupDirective, NgForm, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -16,6 +16,9 @@ import {AuthService} from '../auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import {Data} from '@angular/router';
+import {vacuna} from '../../models/IVacuna';
+import { MatTable } from '@angular/material/table';
+import {NuevaVacuna} from '../../models/INuevaVacuna';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -30,21 +33,34 @@ export class FormularioGatoComponent implements OnInit {
 
   SignupForm: FormGroup;
   Titulo="Registro de Gato";
+  TituloVacuna="Registro de Vacunaciones"
   public archivos: any = [];
   private fileToUpload: File = null;
   public previsualizacion: string;
   public loading: boolean;
   estadoMascota: string[] = ['Disponible Adopción', 'Disponible Provisorio', 'Disponible Adopción y Provisorio'];
+  listaVacunas:any[]=[]; //aca se guardaran todas las vacunas 
+  SignupFormVac: FormGroup;
+  vacunas: vacuna []= [];
+  columnas = ['nombre', 'cantidadDosis','borrar'];
+  vac: any= {};
+  nuevaVacuna:any= {};
+  nombreVac: string;
+  cantDosis:number;
+  verTabla=false;
+  mensajeB= 'Agregar Vacunación';
+
+
 
   constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
-    
+  @ViewChild(MatTable) tabla1: MatTable<vacuna>;
   
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
       nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       estado: new FormControl('', Validators.required),
       cachorro: new FormControl('', Validators.required),
-      tamaño: new FormControl('', [Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      tamaño: new FormControl({value: 'No aplica', disabled: true}),
       sexo: new FormControl('', Validators.required),
       edad: new FormControl('',Validators.required),
       razaPadre: new FormControl('',[Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
@@ -53,12 +69,16 @@ export class FormularioGatoComponent implements OnInit {
       conductaNiños: new FormControl('',Validators.required),
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
-      descripcion: new FormControl('',[Validators.required,Validators.maxLength(150)]),
+      descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
     
     });
 
-    this.dialogRef.disableClose=true;
+    this.SignupFormVac= new FormGroup({
+      nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      cantidadDosis: new FormControl('',Validators.required),
+    });
 
+    this.dialogRef.disableClose=true;
     
   }
 
@@ -86,6 +106,27 @@ export class FormularioGatoComponent implements OnInit {
     this.archivos.push(archivoCapturado)
     
   }
+
+  borrarFila(cantD: number) {
+    if (this.alerts.errorMessage("Realmente quiere borrarlo?")) {
+      this.vacunas.splice(cantD,1);
+      this.tabla1.renderRows();
+    }
+  }
+
+  agregar() {
+    this.vacunas.push(this.vac);
+    this.nombreVac=this.vac.nombre;
+    this.cantDosis=this.vac.cantidadDosis;
+    this.tabla1.renderRows();
+    this.vac={};
+  } 
+
+  mostrarVacunas(){
+    this.mensajeB= this.verTabla? 'Agregar Vacunación': 'Cancelar Vacunación';
+    this.verTabla=!this.verTabla;
+   
+ }
 
 
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
@@ -124,7 +165,7 @@ export class FormularioGatoComponent implements OnInit {
         mascota.nombreMascota= this.SignupForm.controls.nombre.value;
         mascota.estado=this.SignupForm.controls.estado.value;
         mascota.esCachorro=this.SignupForm.controls.cachorro.value;
-        mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;
+        mascota.tamañoFinal="No aplica";
         mascota.sexo=this.SignupForm.controls.sexo.value;
         mascota.edad=this.SignupForm.controls.edad.value;
         mascota.razaPadre=this.SignupForm.controls.razaPadre.value;
@@ -145,7 +186,28 @@ export class FormularioGatoComponent implements OnInit {
               formularioDeDatos.append('id_Animal',resp.id_Animal)
             
             })
+
+            console.log(formularioDeDatos);
+            let nuevaVac: NuevaVacuna=new NuevaVacuna();
+            nuevaVac.nombreVacuna=this.nombreVac;
+            nuevaVac.cantidadDosis=this.cantDosis;
+
+            this.listaVacunas.push( nuevaVac,resp.id_Animal);
+            //this.listaVacunas.push(resp.id_Animal)
             
+            console.log(this.listaVacunas);
+            
+            this.http.post(`https://adoptmebackend.herokuapp.com/vacunas/vacuna`,this.listaVacunas)
+              .subscribe(() => {
+                this.loading = false;
+                console.log("se registro vacuna!");
+                
+      
+              }, () => {
+                this.loading = false;
+                alert('Error de vacuna');
+              })
+
             this.http.post(`https://adoptmebackend.herokuapp.com/fotos/imagen/add`, formularioDeDatos)
               .subscribe(() => {
                 this.loading = false;

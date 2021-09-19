@@ -40,11 +40,14 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import {MatBadgeModule} from '@angular/material/badge';
 import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import { AdministrarRecomendacionesModule } from './pages/administrar-recomendaciones/administrar-recomendaciones.module';
-
+import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import {MatTableModule} from '@angular/material/table';
+import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
 
 
 @NgModule({
@@ -67,11 +70,13 @@ import { AdministrarRecomendacionesModule } from './pages/administrar-recomendac
     CenterProfileComponent,
     AdminProfileComponent,
     PublicacionesProvComponent,
+    VacunacionesComponent,
     //PublicacionesProvComponent
 
   ],
   imports: [
     BrowserModule,
+    MatTableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
@@ -98,6 +103,8 @@ import { AdministrarRecomendacionesModule } from './pages/administrar-recomendac
     MatPaginatorModule,
     MatSelectModule,
     FileUploadModule,
+    GestionarUsuariosModule,
+    MatBadgeModule,
     MatRadioModule
   ],
   
