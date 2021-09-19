@@ -263,7 +263,7 @@
                               <div>
                                 <mat-from-field class="example-full-width">
                                     <label id="btnRegistro" color="accent" class="button"> Seleccionar Imagen
-                                    <input type="file" name="imagen" required accept="image/jpeg,image/jpg,image/png" style="display: none;" (change)="capturarFile($event)">
+                                    <input type="file" name="imagen" formControlName="foto" accept="image/jpeg,image/jpg,image/png" style="display: none;" (change)="capturarFile($event)">
                                     </label> 
                                 </mat-from-field>  
                                 

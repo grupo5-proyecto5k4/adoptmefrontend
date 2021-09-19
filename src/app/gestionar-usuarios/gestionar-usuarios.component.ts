@@ -24,7 +24,8 @@ export class GestionarUsuariosComponent {
   public highValue: number = 10;
   private pageIndex: number = 0;
   private activePageIndex: boolean = false;
-  Usuarios: any;
+  UsuariosActivos:any=[];
+  UsuariosBloq:any=[];
   profile: any;
 
   constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService, private router: Router) { }
@@ -33,6 +34,7 @@ export class GestionarUsuariosComponent {
     this.profile = this.authService.getProfile();
     if(this.profile == '0'){
       await this.obtenerUsuarios();
+
     }
     else{
       window.scrollTo(0, 0);
@@ -46,19 +48,35 @@ export class GestionarUsuariosComponent {
       3 - Bloqueado (Usuario) */
 
   async obtenerUsuarios(){    
+  
     this.userService.getUsuarios('Activo',this.authService.getToken()).then((r) => {
-      this.Usuarios = r;
-    });        
+      this.UsuariosActivos=r;
+    });    
+
+    this.userService.getUsuarios('Bloqueado',this.authService.getToken()).then((r) => {
+      this.UsuariosBloq=r;
+    }); 
+    
+   
   } 
 
   proximamente(){
     this.alertsService.infoMessage('La visualización de los datos aún no se encuentra disponible','Información')
   }
+
+  obtenerNombre(user:User){
+    if (user.apellidos !== undefined && user.apellidos!==null){
+      return (user.nombres)+ ' ' +(user.apellidos);
+    }
+    else {
+      return (user.nombres)
+    }
+  }
   
   cambiarEstado(user: any, estado:number ) {
     if(user.tipoUsuario==1){
       let particular: User = { _id: user._id, nombres: user.nombres,apellidos: user.apellidos, correoElectronico: user.correoElectronico , idEstado: estado, dni: user.dni, numeroContacto: user.numeroContacto, fechaNacimiento: user.fechaNacimiento, facebook: user.facebook, instagram: user.instagram, fechaCreacion: user.fechaCreacion, fechaModificacion: user.fechaCreacion, tipoUsuario: user.tipoUsuario, contrasenia: '' };      
-      this.userService.updateParticular(particular, this.authService.getToken()).subscribe({
+      this.userService.updateAccount(particular, this.authService.getToken()).subscribe({
       complete: () => {
         if (estado == 1){
         this.alertsService.confirmMessage("El usuario ha sido activado")
@@ -104,6 +122,17 @@ export class GestionarUsuariosComponent {
     }
 
     
+  }
+
+  obtenerTipoUsuario(tipo:number){
+   if(tipo==1){
+     return "Particular"
+   }else if(tipo==2){
+     return "Centro Rescatista"
+   }
+   else{
+     return "Administrador"
+   }
   }
 
   getPaginatorData(event) {

@@ -37,7 +37,7 @@ export class FormularioPerroComponent implements OnInit {
   public previsualizacion: string;
   public loading: boolean;
   estadoMascota: string[] = ['Disponible Adopción', 'Disponible Provisorio', 'Disponible Adopción y Provisorio'];
-  listaVacunas:any[]=[]; //aca se guardaran todas las vacunas 
+  listaVacunas=[]; //aca se guardaran todas las vacunas 
   SignupFormVac: FormGroup;
   vacunas: vacuna []= [];
   columnas = ['nombre', 'cantidadDosis','borrar'];
@@ -66,7 +66,7 @@ export class FormularioPerroComponent implements OnInit {
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,:; ]*$')]),
-
+      foto: new FormControl('',Validators.required),
     });
 
     this.SignupFormVac= new FormGroup({
@@ -181,21 +181,25 @@ export class FormularioPerroComponent implements OnInit {
             formularioDeDatos.append('imagen', archivo)
             formularioDeDatos.append('id_Animal',resp.id_Animal)
             })
-            console.log(formularioDeDatos);
+           // console.log(formularioDeDatos);
+            const vacuna=[ 
+              this.nombreVac, this.cantDosis, resp.id_Animal
+            ]
             let nuevaVac: NuevaVacuna=new NuevaVacuna();
             nuevaVac.nombreVacuna=this.nombreVac;
             nuevaVac.cantidadDosis=this.cantDosis;
+            nuevaVac.id_Animal=resp.id_Animal;
             
            //const formVacuna= new FormData();
            //formVacuna.append('nombreVacuna',nuevaVac.nombreVacuna);
            //formVacuna.append('cantidadDosis',nuevaVac.cantidadDosis);
            //formVacuna.append('id_Animal',resp.id_Animal);
-            this.listaVacunas.push( nuevaVac,resp.id_Animal);
-            //this.listaVacunas.push(resp.id_Animal)
+            this.listaVacunas.push(vacuna);
+            //this.listaVacunas.push( resp.id_Animal);
             
-            console.log(this.listaVacunas);
+            console.log(vacuna);
 
-            this.http.post(`https://adoptmebackend.herokuapp.com/vacunas/vacuna`,this.listaVacunas)
+            this.http.post<NuevaVacuna>(`https://adoptmebackend.herokuapp.com/vacunas/vacuna`,vacuna)
               .subscribe(() => {
                 this.loading = false;
                 console.log("se registro vacuna!");
