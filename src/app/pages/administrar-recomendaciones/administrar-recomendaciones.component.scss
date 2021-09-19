@@ -1,26 +1,56 @@
 
 #map {
+    float: left;
     height: 500px;
-    width: 1000px;
-    margin-left: 30px;
-    margin: auto;
-    margin-bottom: 10px;
+    width: 590px;
+    margin: 30px auto 10px 150px;
     z-index: 0;
   }
 
 #mapa-container{
-  float: left;
   height: 1000px;
   margin: auto;
 }
 .confirmar, .loading{
   margin-left: 2px;
 }
+.subtitulo1{
+  font-size: 200% !important;
+  font-family: 'Times New Roman';
+  font-style: bold;
+  margin: 4%;
+
+}
+
+.leftLabel{
+  text-align: left;
+}
+
+#btncuenta, #confirmar{
+  color: #EBEEF1;
+  background-color: #c50fa1;
+  min-width: 64px;
+  line-height: 36px;
+  //padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+#confirmar{
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+}
 
 .logo{
   margin-bottom: -15px;
   width: 40px;
   height: 40px;
+}
+
+.footer{
+  position:absolute;
+  bottom: 0;
+  margin-top: 70%;
 }
 
 .loading{
@@ -64,11 +94,10 @@
   float: left;
 }
 .card-container{
-  margin-top: 100% !important;
+  float: right;
   overflow-y: auto !important;
   float: right;
   max-height: 83%;
-  margin-top: 6%;
 }
 
 input:-webkit-autofill {
@@ -141,10 +170,19 @@ input:-webkit-autofill {
   
   
   .derecha,.izquierda {
-    width: 40%;
+    width: 47%;
     margin-bottom: 0px !important;
   }
+
+  .derecha{
+    float: right;
+  }
   
+  .izquierda{
+    float: left;
+    margin-right: 1%;
+  }
+
   .RegistroBoxBtnCancelar {
     width: 10%;
     }
@@ -157,10 +195,6 @@ input:-webkit-autofill {
     .RegistroBoxlbl {
         width: 56%;
     }
-  
-    .card-container{
-        top: 40% !important;
-        }
   
     .professionalContainer {
         padding-bottom: 141% !important;
@@ -180,6 +214,15 @@ input:-webkit-autofill {
       float: clear;
       margin-top: 100px !important;
     }
+
+    .mapa-container{
+      float: left;
+      height: 500px;
+      width: 40%;
+      margin-top: 30px;
+      margin-left: 15%;
+      z-index: 0;
+    }
   
     }
   
@@ -188,12 +231,11 @@ input:-webkit-autofill {
   
   @media (min-width: 992px) and (max-width: 1600px){
     
+
     #map {
-      height: 300px;
+      height: 400px;
       width: 590px;
-      margin-left: 30px;
-      margin: auto;
-      margin-bottom: 10px;
+      margin: 20px auto 10px 90px !important;
     }
 
     .derecha,.izquierda {
@@ -232,7 +274,11 @@ input:-webkit-autofill {
         width: 49.4%;
     }
     .card-container{
-    top: 43.5% !important;
+    top: 33.5% !important;
+    width: 45%;
+    height: auto;
+    overflow: hidden;
+    display: inline-block;
     }
   
     .professionalContainer {
@@ -255,10 +301,9 @@ input:-webkit-autofill {
   @media (max-width: 599px){
     #map {
       height: 500px;
-      width: 300px;
-      margin-left: 30px;
-      margin: auto;
-      margin-bottom: 10px;
+      width: 90%;
+      margin: 10px auto 10px 30px!important;
+      float: none;
     }
     .subtitulo{
       margin-left: 1%;
@@ -273,9 +318,9 @@ input:-webkit-autofill {
     }
   
   .card-container{
-    width: 80% !important;
-    height: 60% !important;
-    top: 40% !important;
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
     }
   
     .tool{
@@ -344,9 +389,6 @@ input:-webkit-autofill {
   width: 50%;
   height: 85%;
   position: absolute;
-  top: 46.5%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   overflow: hidden;
   display: inline-block;
   }
