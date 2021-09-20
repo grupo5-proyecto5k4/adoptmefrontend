@@ -2,10 +2,9 @@
     _id?:string;
     tipoMascota?:number;
     nombreMascota: string;
-    esCachorro: number;
     tamañoFinal: string;
     sexo: string;
-    edad:number;
+    fechaNacimiento:Date;
     razaPadre: string;
     razaMadre: string;
     castrado: number;
@@ -25,10 +24,9 @@ export class Mascota implements IMascota{
     _id?:string;
     tipoMascota?:number;
     nombreMascota: string;
-    esCachorro: number;
     tamañoFinal: string;
     sexo: string;
-    edad: number;
+    fechaNacimiento:Date;
     razaPadre: string;
     razaMadre:string;
     castrado:number;

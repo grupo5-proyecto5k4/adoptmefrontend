@@ -49,8 +49,8 @@ export class FormularioGatoComponent implements OnInit {
   cantDosis:number;
   verTabla=false;
   mensajeB= 'Agregar Vacunación';
-
-
+  edadInvalida: Boolean = false;
+  mensajeEdad: string = "";
 
   constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
   @ViewChild(MatTable) tabla1: MatTable<vacuna>;
@@ -59,10 +59,9 @@ export class FormularioGatoComponent implements OnInit {
     this.SignupForm= new FormGroup({
       nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       estado: new FormControl('', Validators.required),
-      cachorro: new FormControl('', Validators.required),
       tamaño: new FormControl({value: 'No aplica', disabled: true}),
       sexo: new FormControl('', Validators.required),
-      edad: new FormControl('',Validators.required),
+      fechaNacimiento: new FormControl('',[Validators.required]),
       razaPadre: new FormControl('',[Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       razaMadre: new FormControl('',[Validators.required,Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       castrado: new FormControl('',Validators.required),
@@ -70,7 +69,7 @@ export class FormularioGatoComponent implements OnInit {
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
-    
+      foto: new FormControl('',Validators.required),
     });
 
     this.SignupFormVac= new FormGroup({
@@ -128,6 +127,27 @@ export class FormularioGatoComponent implements OnInit {
    
  }
 
+ CalculateAge() {
+  const today: Date = new Date();
+  const fechaNacimiento: Date = new Date(this.SignupForm.controls.fechaNacimiento.value);
+  let age: number = today.getFullYear() - fechaNacimiento.getFullYear();
+  const month: number = today.getMonth() - fechaNacimiento.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < fechaNacimiento.getDate())) {
+    age--;
+  }
+  if (age < 1) {
+    this.edadInvalida = true;
+    this.mensajeEdad = "La mascota es cachorro y tiene " + month + " mes/es";
+  }
+  else if (age > 100){
+    this.edadInvalida = true;
+    this.mensajeEdad = "Fecha de nacimiento no válida";
+  }
+  else if(age >= 1){
+    this.edadInvalida = true;
+    this.mensajeEdad = "La mascota es adulto y tiene "+ age + " año/s";
+  }
+}
 
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
@@ -164,10 +184,9 @@ export class FormularioGatoComponent implements OnInit {
         mascota.tipoMascota=1; 
         mascota.nombreMascota= this.SignupForm.controls.nombre.value;
         mascota.estado=this.SignupForm.controls.estado.value;
-        mascota.esCachorro=this.SignupForm.controls.cachorro.value;
+        mascota.fechaNacimiento=(this.SignupForm.controls.fechaNacimiento.value).toLocaleString();;
         mascota.tamañoFinal="No aplica";
         mascota.sexo=this.SignupForm.controls.sexo.value;
-        mascota.edad=this.SignupForm.controls.edad.value;
         mascota.razaPadre=this.SignupForm.controls.razaPadre.value;
         mascota.razaMadre=this.SignupForm.controls.razaMadre.value;
         mascota.castrado=this.SignupForm.controls.castrado.value;
@@ -176,6 +195,7 @@ export class FormularioGatoComponent implements OnInit {
         mascota.conductaPerros=this.SignupForm.controls.conductaPerros.value;
         mascota.descripcion=this.SignupForm.controls.descripcion.value;
             
+        console.log(mascota); 
        this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
          (resp: Data) => {
           try {
