@@ -105,7 +105,7 @@ export class GestionarUsuariosComponent {
         if (estado == 1){
         this.alertsService.confirmMessage("El usuario ha sido activado")
           .then((result) => {
-            this.obtenerUsuarios;
+            this.obtenerUsuarios();
           });
         }
         else if (estado == 3){

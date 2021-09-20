@@ -59,18 +59,6 @@
                                 </button>
                               </td>
                             </ng-container>
-  
-                            <ng-container matColumnDef="Habilitar">
-                              <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;">
-                                Activar
-                              </th>
-                              <td mat-cell style="padding: 2px;">
-                                <button mat-raised-button class="accion" color="primary" *ngIf="usuarios.idEstado==3" (click)="cambiarEstado(usuarios,1)"
-                                  style="height: 32px; border-radius: 10px;">
-                                  <mat-icon>how_to_reg</mat-icon>
-                                </button>
-                              </td>
-                            </ng-container>
                           </div>
                         </td>
                       </mat-card>
@@ -111,17 +99,6 @@
                                 <button mat-raised-button color="accent" class="accion" (click)="proximamente()"
                                   style="height: 32px; border-radius: 10px;">
                                   <mat-icon>remove_red_eye</mat-icon>
-                                </button>
-                              </td>
-                            </ng-container>
-  
-                            <ng-container matColumnDef="Rechazar">
-                              <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Bloquear
-                              </th>
-                              <td mat-cell style="padding: 2px;">
-                                <button mat-raised-button color="warn" class="accion" *ngIf="usuarios.idEstado==1" (click)="cambiarEstado(usuarios,3)"
-                                  style="height: 32px; border-radius: 10px;">
-                                  <mat-icon>block</mat-icon>
                                 </button>
                               </td>
                             </ng-container>
