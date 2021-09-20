@@ -46,23 +46,9 @@
                                     </span>
                                   </div>                                   
  
-                                <div id="cachorro" class="izquierda">
-                                     <mat-form-field class="example-form">
-                                         <mat-label>*Es cachorro</mat-label>
-                                         <mat-select formControlName="cachorro">
-                                             <mat-option value="0">Si</mat-option>
-                                             <mat-option value="1">No</mat-option>
-                                         </mat-select> 
-                                     </mat-form-field>
-                                     <span class="help-block" *ngIf="((SignupForm.get('cachorro').touched ||
-                                     SignupForm.get('cachorro').dirty) && SignupForm.get('cachorro').errors)">
-                                 <span *ngIf="SignupForm.get('cachorro').errors.required">
-                                     <h6 class="helpError">Campo requerido</h6>
-                                 </span>
-                                 </span>
-                                </div> 
+                                
  
-                                <div class="derecha">
+                                <div class="izquierda">
                                     <mat-form-field class="example-form">
                                         <mat-label>*Tamaño final</mat-label>
                                         <input matInput placeholder="tamaño" formControlName="tamaño" class="form-control" maxlength="30">
@@ -97,20 +83,22 @@
                                  </span>
                                </div> 
  
-                               <div class="izquierda">
-                                   <mat-form-field class="example-form">
-                                       <mat-label>*Edad(año,mes)</mat-label>
-                                      <input matInput type="number" formControlName="edad" class="form-control" min="0" max="20" step="0.1">                                    
-                                   </mat-form-field>
-                                   <span class="help-block" *ngIf="((SignupForm.get('edad').touched ||
-                                   SignupForm.get('edad').dirty) && SignupForm.get('edad').errors)">
-                                 <span *ngIf="SignupForm.get('edad').errors.required">
-                                     <h6 class="helpError">Campo requerido</h6>
-                                 </span>
-                                 </span>
-                               </div>
+                               <div> 
+                                <mat-form-field class="example-full-width">
+                                    <mat-label>*Fecha de nacimiento estimada</mat-label>
+                                    <input matInput type="date" name="fechaNacimiento" (change)="CalculateAge()" formControlName="fechaNacimiento" class="form-control">
+                                </mat-form-field>
+                                <a *ngIf="edadInvalida">{{mensajeEdad}}</a>
+                                  <span class="help-block" *ngIf="((SignupForm.get('fechaNacimiento').touched ||
+                                     SignupForm.get('fechaNacimiento').dirty) && SignupForm.get('fechaNacimiento').errors)">
+                                <span *ngIf="SignupForm.get('fechaNacimiento').errors.required">
+                                    <h6 class="helpError">Campo requerido</h6>
+                                </span>
+                            </span>  
+                            
+                        </div>
  
-                               <div class="derecha">
+                               <div class="izquierda">
                                    <mat-form-field class="example-form">
                                        <mat-label>*Raza Padre</mat-label>
                                        <input matInput placeholder="raza padre" formControlName="razaPadre" class="form-control" maxlength="30">
@@ -129,7 +117,7 @@
                                  </span>
                                </div>
  
-                               <div class="izquierda">
+                               <div class="derecha">
                                    <mat-form-field class="example-form">
                                        <mat-label>*Raza Madre</mat-label>
                                        <input matInput placeholder="raza madre" formControlName="razaMadre" class="form-control" maxlength="30">
@@ -148,7 +136,7 @@
                                  </span>
                                </div>
  
-                               <div class="derecha">
+                               <div class="izquierda">
                                    <mat-form-field class="example-form">
                                        <mat-label>*Castrado</mat-label>
                                        <mat-select formControlName="castrado">
@@ -166,7 +154,7 @@
                                </div>
  
                                
-                               <div class="izquierda">
+                               <div class="derecha">
                                    <mat-form-field class="example-form">
                                        <mat-label>*Conducta con niños</mat-label>
                                        <mat-select formControlName="conductaNiños">
@@ -187,7 +175,7 @@
                                  </span>
                                </div>
  
-                               <div class="derecha">
+                               <div class="izquierda">
                                    <mat-form-field class="example-form">
                                        <mat-label>*Conducta con gatos</mat-label>
                                       <mat-select formControlName="conductaGatos">
@@ -208,7 +196,7 @@
                                  </span>
                                </div>
  
-                              <div class="izquierda">
+                              <div class="derecha">
                                   <mat-form-field class="example-form">
                                       <mat-label>*Conducta con perros</mat-label>
                                       <mat-select formControlName="conductaPerros">
@@ -248,10 +236,10 @@
                                 <div>
                                         <mat-from-field class="example-full-width">
                                             <label id="btnRegistro" color="accent" class="button"> Seleccionar Imagen
-                                            <input type="file" name="imagen" required accept="image/jpeg,image/jpg,image/png" style="display: none;" (change)="capturarFile($event)">
+                                            <input type="file" name="imagen" formControlName="foto" accept="image/jpeg,image/jpg,image/png" style="display: none;" (change)="capturarFile($event)">
                                             </label> 
                                         </mat-from-field>  
-                                        
+                                                                
                                             <div class="preview-img" style="align-items: center;" *ngIf="previsualizacion">
                                                 <br>
                                                 <img  [src]="previsualizacion" alt="" height="500" width="500">
