@@ -43,8 +43,8 @@ export class FormularioPerroComponent implements OnInit {
   columnas = ['nombre', 'cantidadDosis','borrar'];
   vac: any= {};
   nuevaVacuna:any= {};
-  nombreVac: string;
-  cantDosis:number;
+  nombreVacuna: string;
+  cantidadDosis:number;
   verTabla=false;
   mensajeB= 'Agregar Vacunación';
 
@@ -112,8 +112,8 @@ export class FormularioPerroComponent implements OnInit {
 
   agregar() {
     this.vacunas.push(this.vac);
-    this.nombreVac=this.vac.nombre;
-    this.cantDosis=this.vac.cantidadDosis;
+    this.nombreVacuna=this.vac.nombre;
+    this.cantidadDosis=this.vac.cantidadDosis;
     this.tabla1.renderRows();
     this.vac={};
   } 
@@ -181,13 +181,14 @@ export class FormularioPerroComponent implements OnInit {
             formularioDeDatos.append('imagen', archivo)
             formularioDeDatos.append('id_Animal',resp.id_Animal)
             })
-           // console.log(formularioDeDatos);
+           
             const vacuna=[ 
-              this.nombreVac, this.cantDosis, resp.id_Animal
+              this.nombreVacuna, this.cantidadDosis, resp.id_Animal
             ]
+
             let nuevaVac: NuevaVacuna=new NuevaVacuna();
-            nuevaVac.nombreVacuna=this.nombreVac;
-            nuevaVac.cantidadDosis=this.cantDosis;
+            //nuevaVac.nombreVacuna=this.nombreVac;
+            //nuevaVac.cantidadDosis=this.cantDosis;
             nuevaVac.id_Animal=resp.id_Animal;
             
            //const formVacuna= new FormData();
@@ -199,7 +200,7 @@ export class FormularioPerroComponent implements OnInit {
             
             console.log(vacuna);
 
-            this.http.post<NuevaVacuna>(`https://adoptmebackend.herokuapp.com/vacunas/vacuna`,vacuna)
+            this.http.post<vacuna>('https://adoptmebackend.herokuapp.com/vacunas/vacuna',vacuna)
               .subscribe(() => {
                 this.loading = false;
                 console.log("se registro vacuna!");

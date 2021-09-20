@@ -67,32 +67,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       
       this.iniciateForm();
 
-    
-      this.map = Leaflet.map('map').setView([-31.411156, -64.191211], 12);
-
-
-      Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 18,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'pk.eyJ1IjoibWlsaW1vcmUxNjE2IiwiYSI6ImNrcmlpdTRsNDB2aXozMW80MTQwa3YxemwifQ.bzPgST4tdgMA5loxAX-eew'
-      }).addTo(this.map);
-
-      for (var i = 0; i < this.veterinaria.length; i++) {
-        console.log("Console this.veterinaria[i]");
-        console.log(this.veterinaria[i]);
-        var marker = new Leaflet.marker([this.veterinaria[i][1], this.veterinaria[i][2]], { icon: this.blueIcon }).bindPopup(this.veterinaria[i][0])
-          .addTo(this.map);
-      }
-
-      for (var i = 0; i < this.centro_castracion.length; i++) {
-        console.log("Console this.centro")
-        console.log(this.centro_castracion[i])
-        var marker = new Leaflet.marker([this.centro_castracion[i][1], this.centro_castracion[i][2]], { icon: this.redIcon }).bindPopup(this.centro_castracion[i][0])
-          .addTo(this.map);
-      }
+      this.renderMap();
     }
     else {
       window.scrollTo(0, 0);
@@ -139,6 +114,35 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
 
     }
     console.log("finaliza recomendaciones veterinaria");
+  }
+
+  async renderMap(){
+    
+    this.map = Leaflet.map('map').setView([-31.411156, -64.191211], 12);
+
+
+    Leaflet.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox/streets-v11',
+      tileSize: 512,
+      zoomOffset: -1,
+      accessToken: 'pk.eyJ1IjoibWlsaW1vcmUxNjE2IiwiYSI6ImNrcmlpdTRsNDB2aXozMW80MTQwa3YxemwifQ.bzPgST4tdgMA5loxAX-eew'
+    }).addTo(this.map);
+
+    for (var i = 0; i < this.veterinaria.length; i++) {
+      console.log("Console this.veterinaria[i]");
+      console.log(this.veterinaria[i]);
+      var marker = new Leaflet.marker([this.veterinaria[i][1], this.veterinaria[i][2]], { icon: this.blueIcon }).bindPopup(this.veterinaria[i][0])
+        .addTo(this.map);
+    }
+
+    for (var i = 0; i < this.centro_castracion.length; i++) {
+      console.log("Console this.centro")
+      console.log(this.centro_castracion[i])
+      var marker = new Leaflet.marker([this.centro_castracion[i][1], this.centro_castracion[i][2]], { icon: this.redIcon }).bindPopup(this.centro_castracion[i][0])
+        .addTo(this.map);
+    }
   }
 
   radioTipoChange(value: string) {
@@ -203,8 +207,8 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       let vete: string;
       vete = "<strong>" + this.SignupForm.controls.name.value + "</strong><br>" + this.SignupForm.controls.street.value + " " + this.SignupForm.controls.altura.value + "";
 
-      if (this.SignupForm.controls.facebook.value !== undefined) {
-        vete += "<br><a target='_blank' href='https://" + this.SignupForm.controls.facebook.value + "'>Sitio Web</a>";
+      if (this.SignupForm.controls.facebook.value !== undefined && this.SignupForm.controls.facebook.value !== "") {
+        vete += "<br><a target='_blank' href='" + this.SignupForm.controls.facebook.value + "'>Sitio Web</a>";
       }
       if (this.abierto24hsSelected == 1) {
         vete += "<br><u>Abierto las 24hs.</u>";
@@ -217,6 +221,9 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       ];
 
       this.vista_previa = object1;
+
+      await this.map.remove();
+      await this.renderMap();
 
       new Leaflet.marker([this.vista_previa[1], this.vista_previa[2]], { icon: this.greenIcon }).bindPopup(this.vista_previa[0])
           .addTo(this.map);
