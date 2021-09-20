@@ -95,7 +95,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       vete = "<strong>" + r[i].nombre + "</strong><br>" + r[i].calle + " " + r[i].numero + "";
 
       if (r[i].sitioWeb !== undefined) {
-        vete += "<br><a target='_blank' href='" + r[i].sitioWeb + "'>Sitio Web</a>";
+        vete += "<br><a target='_blank' href='https://" + r[i].sitioWeb + "'>Sitio Web</a>";
       }
       if (r[i].abierto24hs == 1) {
         vete += "<br><u>Abierto las 24hs.</u>";
@@ -180,7 +180,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       vete = "<strong>" + r[i].nombre + "</strong><br>" + r[i].calle + " " + r[i].numero + "";
 
       if (r[i].sitioWeb !== undefined) {
-        vete += "<br><a target='_blank' href='" + r[i].sitioWeb + "'>Sitio Web</a>";
+        vete += "<br><a target='_blank' href='https://" + r[i].sitioWeb + "'>Sitio Web</a>";
       }
       if (r[i].abierto24hs == 1) {
         vete += "<br><u>Abierto las 24hs.</u>";
