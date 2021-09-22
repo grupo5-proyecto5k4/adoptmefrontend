@@ -38,19 +38,21 @@ export class PublicacionesProvComponent implements OnInit {
   mascotasPubProvisorio: any;
   mascotasPub:any;
 
+  /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
-
+  */
   constructor(public registroMascotasService:RegistroMascotasService, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    /*
     this.changeDetectorRef.detectChanges();
     this.dataSource.paginator = this.paginator;
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
-
+    */
     // En provisorio
     this.registroMascotasService.getMascotas(2).subscribe(dataOne => {
       this.mascotasPub = dataOne;
@@ -84,12 +86,13 @@ export class PublicacionesProvComponent implements OnInit {
     }
     )
   }
-  
+  /*
   ngOnDestroy() {
     if (this.dataSource) { 
       this.dataSource.disconnect(); 
     }
   }
+  */
   calculateAge(fechaNacimiento) {
     var today = new Date();
     var fechaNacimientoFormato = new Date(fechaNacimiento);

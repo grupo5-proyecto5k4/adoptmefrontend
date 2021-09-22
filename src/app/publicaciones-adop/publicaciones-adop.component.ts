@@ -36,19 +36,21 @@ export class PublicacionesAdopComponent implements OnInit {
   mascotasPubAdopcion: any;
   mascotasPub: any;
 
+  /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
-
+*/
   constructor(public registroMascotasService:RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    /*
     this.changeDetectorRef.detectChanges();
     this.dataSource.paginator = this.paginator;
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
-
+    */ 
     // "En adopcion"
     this.registroMascotasService.getMascotas(1).subscribe(dataOne => {
       this.mascotasPub = dataOne;
@@ -80,12 +82,13 @@ export class PublicacionesAdopComponent implements OnInit {
     }
     )
   }
-  
+  /*
   ngOnDestroy() {
     if (this.dataSource) { 
       this.dataSource.disconnect(); 
     }
   }
+  */
 
   openUserForm(){
     //this.dialog.open(UserFormComponent) DESCOMENTAR DESPUES DE LA DEMO
