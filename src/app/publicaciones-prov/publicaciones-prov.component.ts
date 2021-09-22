@@ -63,6 +63,8 @@ export class PublicacionesProvComponent implements OnInit {
             this.mascotasPubProvisorio = data;
             //Recorro mascotas
             for (let x = 0; x < (data.length); x++){
+              // Edad 
+              this.mascotasPubProvisorio[x].edad = this.calculateAge(data[x].fechaNacimiento);
               if (data[x].Foto.length != 0){
                 //Recorro imágenes
                 for (let i = 0; i < data[x].Foto.length; i++){
@@ -88,5 +90,16 @@ export class PublicacionesProvComponent implements OnInit {
       this.dataSource.disconnect(); 
     }
   }
-
+  calculateAge(fechaNacimiento) {
+    var today = new Date();
+    var fechaNacimientoFormato = new Date(fechaNacimiento);
+    var difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
+    var sms: String;
+    if (difference < 365){
+      sms = "Cachorro"
+    } else {
+      sms = "Adulto"
+    }
+    return sms
+}
 }
