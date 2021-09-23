@@ -32,11 +32,11 @@
                       <label class="example-margin"></label>
                       <div class="centrado">
                         <mat-radio-group>
-                          <mat-radio-button class="example-margin" [value]="tiposRecomendacion[0]"
+                          <mat-radio-button class="example-margin" id="veterinaria" [value]="tiposRecomendacion[0]"
                           (change)="radioTipoChange(tiposRecomendacion[0])" style="font-size: 15px;" checked>
                             {{tiposRecomendacion[0]}}
                           </mat-radio-button>
-                          <mat-radio-button class="example-margin" [value]="tiposRecomendacion[1]"
+                          <mat-radio-button class="example-margin" id="centro" [value]="tiposRecomendacion[1]"
                           (change)="radioTipoChange(tiposRecomendacion[1])" style="font-size: 15px;">
                             {{tiposRecomendacion[1]}}
                           </mat-radio-button>
@@ -124,7 +124,7 @@
                 <div class="margin" *ngIf="this.tiposRecomendacionSelected == 0">
                     <section>
                       <div style="margin-bottom: 15px;" class="leftLabel">
-                        <mat-checkbox (change)="abierto24hsChange()"></mat-checkbox><a ><u class="example-margin">Abierto las 24hs</u></a>
+                        <mat-checkbox (change)="abierto24hsChange()" id="abierto24hs"></mat-checkbox><a ><u class="example-margin">Abierto las 24hs</u></a>
                       </div>
                     </section>
                   </div>
