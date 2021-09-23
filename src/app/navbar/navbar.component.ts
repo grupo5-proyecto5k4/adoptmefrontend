@@ -56,9 +56,9 @@ export class NavbarComponent {
     if (this.isLogued()) {
       this.consultarNotificaciones();
     }
-    setInterval(() => {
-        this.consultarNotificaciones();
-      }, 5000);
+   // setInterval(() => {    DESCOMENTAR ESTAS DOS LINEAS PARA QUE FUNCIONEN LAS NOTIFICACIONES DE NUEVO
+   //     this.consultarNotificaciones();
+   // }, 5000);
     }
 
   
