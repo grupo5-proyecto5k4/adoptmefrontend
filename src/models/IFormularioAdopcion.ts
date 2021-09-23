@@ -5,7 +5,7 @@ interface IFormularioAdopcion {
     otraMascota?: number;
     descripcionOtraMascota?: string;
     tiempoPresupuesto: number;
-    idEstado?: number;
+    estadoId?: number;
     accionViaje?: string;
     vacunacionCastracion: number;
     seguimiento?: number;
@@ -25,7 +25,7 @@ interface IFormularioAdopcion {
         otraMascota?: number;
         descripcionOtraMascota?: string;
         tiempoPresupuesto: number;
-        idEstado?: number;
+        estadoId?: number;
         accionViaje?: string;
         vacunacionCastracion: number;
         seguimiento?: number;
@@ -38,6 +38,7 @@ interface IFormularioAdopcion {
         descripcionCercamiento: string;
         Direccion?: Address; 
         mascotaID: string;
+        //SolitanteId: string;
     
       constructor() {
         };
