@@ -19,6 +19,17 @@ table {
  
 }
 
+.confirmar, .loading{
+  margin-left: 2px;
+}
+
+.loading{
+  background-color: #d996cc !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  cursor: none !important;
+}
+
 th{
   font-weight: bold;
   color: rgb(49, 49, 49);
@@ -405,6 +416,7 @@ padding-bottom: 150% !important;
 #requer{
   text-align: left;
   font-size: 12px;
+  margin-top: 30px;
 }
 
 #passwordRequirement{
@@ -418,6 +430,28 @@ padding-bottom: 150% !important;
 input:disabled {
   background: rgb(255, 245, 237);
   cursor: not-allowed;
+}
+.btnRegistrar{
+  color:#B80092;
+  font-weight:bold;
+  border:#F8E2F1;
+  background-color: transparent;
+  cursor: pointer;
+}
+.subirImagen{
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  background-color: #f8e2f1;
+  box-shadow: 0 2px 1px -1px #0003, 0 1px 1px 0 #00000024, 0 1px 3px 0 #0000001f;
+}
+
+
+.subirImagen:hover{
+  background-color: #f0b2e3;
 }
 
 h3 {
