@@ -5,8 +5,7 @@
     tamañoFinal: string;
     sexo: string;
     fechaNacimiento:Date;
-    razaPadre: string;
-    razaMadre: string;
+    raza: string;
     castrado: number;
     fechaAlta?: Date;
     fechaModificacion?:Date;
@@ -27,8 +26,7 @@ export class Mascota implements IMascota{
     tamañoFinal: string;
     sexo: string;
     fechaNacimiento:Date;
-    razaPadre: string;
-    razaMadre:string;
+    raza: string;
     castrado:number;
     fechaAlta?:Date;
     fechaModificacion?:Date;
