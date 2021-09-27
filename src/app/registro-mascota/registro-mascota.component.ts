@@ -58,7 +58,7 @@ ngOnInit() {
                   for (let i = 0; i < dato[x].Foto.length; i++){
                     // Foto Principal
                     if (dato[x].Foto[i].esPrincipal){
-                      this.mascotasUsuario[x].imagenCard = dato[x].Foto[i].foto;
+                      this.mascotasUsuarioNoDisponibles[x].imagenCard = dato[x].Foto[i].foto;
                     }
                   }
                 }

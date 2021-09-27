@@ -32,6 +32,9 @@
                             <button mat-button>EDITAR</button>
                         </mat-card-actions>
                     </mat-card>
+                    <div *ngIf="mascotasUsuario.length == 0">
+                        <h2>Por el momento no tienes mascotas que estén buscando adopción u hogar provisorio...</h2>
+                    </div>
                 </div>
             </mat-tab>
 
@@ -62,6 +65,9 @@
                         <button mat-button>EDITAR</button>
                     </mat-card-actions>
                 </mat-card>
+                <div *ngIf="mascotasUsuarioNoDisponibles.length == 0">
+                    <h2>Por el momento no tienes mascotas que hayan sido adoptadas o estén en provisorio...</h2>
+                </div>
             </div>
         </mat-tab>
         </mat-tab-group>
