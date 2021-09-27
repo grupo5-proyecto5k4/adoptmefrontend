@@ -41,6 +41,7 @@
 #btncuenta{
   color:white;
   margin-right: 10%;
+  margin-bottom: 10px;
 }
 
 .new-container{
@@ -50,7 +51,7 @@
 }
 
 .espacio{
-  margin-top: 10px;
+  margin-bottom: 15px;
 }
 /*CARDS DISTRIBUTION */
 
@@ -133,11 +134,25 @@
 @media (max-width: 849px){
   .new-container{
     justify-content:center;
+    margin-left: 0px;
   }
+
 
   #btncuenta{
     margin-right: 0px;
   }
+
+  .mat-tab-group{
+    width: 95%;
+    margin-left: 0px;
+  }
+
+  .card-publicacion {
+    margin-left: 0px;
+    margin-right: 0px;
+
+  }
+
 }
 
 .imagen{
