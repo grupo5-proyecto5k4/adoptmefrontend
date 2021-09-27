@@ -1,0 +1,33 @@
+.btn-return{
+    color:#B80092;
+    font-weight:bold;
+    border: #fafafa;
+    background-color: #fafafa;
+}
+
+.return-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.titulo{
+    font-weight: 800;
+    color: black;
+    font-size: 200%;
+    font-style: italic;
+    margin-top: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.container-principal{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    justify-content: space-evenly;
+    align-content: space-around;
+    z-index: 0;
+}
+

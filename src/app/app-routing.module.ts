@@ -19,7 +19,7 @@ import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
 import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
 import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
-
+import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 const routes: Routes = [
   {
     path: 'adoptar',
@@ -109,6 +109,10 @@ const routes: Routes = [
   {
     path: 'vacunaciones',
     component: VacunacionesComponent
+  },
+  {
+    path: 'solicitudes',
+    component: ListadoSolicitudesComponent
   },
   {
     path: '', redirectTo: '/landing', pathMatch: 'full'
