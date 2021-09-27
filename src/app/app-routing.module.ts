@@ -15,6 +15,7 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
 import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
 import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
@@ -35,6 +36,11 @@ const routes: Routes = [
     path: 'mascotas',
     component: RegistroMascotaComponent
   },
+  {
+    path: 'registrar-mascota',
+    component: NuevaMascotaComponent
+  },
+
   {
     path: 'donaciones',
     component: UnderConstructionComponent
