@@ -14,10 +14,11 @@ import { CenterProfileComponent } from './center-profile/center-profile.componen
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
-import { FormularioGatoComponent } from './formulario-gato/formulario-gato.component';
-import { FormularioPerroComponent } from './formulario-perro/formulario-perro.component';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
+import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
+import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
+import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: 'gestionar-usuarios',
-    component: UnderConstructionComponent
+    component: GestionarUsuariosComponent
   },
   {
     path: 'gestionar-mascotas',
@@ -75,6 +76,10 @@ const routes: Routes = [
   {
     path: 'visualizar-provisorios',
     component: UnderConstructionComponent
+  },
+  {
+    path: 'administrar-recomendaciones',
+    component: AdministrarRecomendacionesComponent
   },
   {
     path: 'habilitar-centros-rescatistas',
@@ -102,8 +107,8 @@ const routes: Routes = [
     component: FaqsComponent
   },
   {
-    path: 'formularioGatos',
-    component: FormularioGatoComponent
+    path: 'vacunaciones',
+    component: VacunacionesComponent
   },
   {
     path: '', redirectTo: '/landing', pathMatch: 'full'

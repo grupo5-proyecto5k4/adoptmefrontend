@@ -1,11 +1,9 @@
-import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { RegistroMascotasService} from 'src/services/registro-mascotas.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UserFormComponent } from '../components/user-form/user-form.component';
-
 export interface Pet {
   name: string;
   age: number;
@@ -36,38 +34,76 @@ const DATA: Pet[] = [
 export class PublicacionesAdopComponent implements OnInit {
 
   mascotasPubAdopcion: any;
+  mascotasPub: any;
 
+  /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
-
+*/
   constructor(public registroMascotasService:RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    /*
     this.changeDetectorRef.detectChanges();
     this.dataSource.paginator = this.paginator;
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
+    */ 
+    // "En adopcion"
+    this.registroMascotasService.getMascotas(1).subscribe(dataOne => {
+      this.mascotasPub = dataOne;
 
-    this.registroMascotasService.getMascotas(1).subscribe(data => {
-      this.mascotasPubAdopcion = data;
-      console.log(data);
+      // "En adopcion y en provisorio"
+      this.registroMascotasService.getMascotas(0).subscribe(dataBoth => {
+
+        // Junto los de "En adopción" con los de "En adopción y en provisorio"
+        var data = [].concat(dataBoth, dataOne);
+        this.mascotasPubAdopcion = data;
+        //Recorro mascotas
+        for (let x = 0; x < (data.length); x++){
+          // Edad 
+          this.mascotasPubAdopcion[x].edad = this.calculateAge(data[x].fechaNacimiento);
+          if (data[x].Foto.length != 0){
+            //Recorro imágenes
+            for (let i = 0; i < data[x].Foto.length; i++){
+              // Foto Principal
+              if (data[x].Foto[i].esPrincipal){
+                this.mascotasPubAdopcion[x].imagenCard = data[x].Foto[i].foto;
+              }
+            }
+          }
+        }
+      })
     },
     err => {
-      console.log('VER SMS ERROR')
+      console.log('ERROR...')
     }
     )
   }
-  
+  /*
   ngOnDestroy() {
     if (this.dataSource) { 
       this.dataSource.disconnect(); 
     }
   }
+  */
 
   openUserForm(){
     //this.dialog.open(UserFormComponent) DESCOMENTAR DESPUES DE LA DEMO
   }
 
+  calculateAge(fechaNacimiento) {
+    var today = new Date();
+    var fechaNacimientoFormato = new Date(fechaNacimiento);
+    var difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
+    var sms: String;
+    if (difference < 365){
+      sms = "Cachorro"
+    } else {
+      sms = "Adulto"
+    }
+    return sms
+}
 }

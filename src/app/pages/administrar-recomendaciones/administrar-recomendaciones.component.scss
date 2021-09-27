@@ -1,0 +1,434 @@
+
+#map {
+    float: left;
+    height: 500px;
+    width: 590px;
+    margin: 30px auto 10px 150px;
+    z-index: 0;
+  }
+
+#mapa-container{
+  height: 1000px;
+  margin: auto;
+}
+.confirmar, .loading{
+  margin-left: 2px;
+}
+.subtitulo1{
+  font-size: 200% !important;
+  font-family: 'Times New Roman';
+  font-style: bold;
+  margin: 4%;
+
+}
+
+.leftLabel{
+  text-align: left;
+}
+
+#btncuenta, #confirmar{
+  color: #EBEEF1;
+  background-color: #c50fa1;
+  min-width: 64px;
+  line-height: 36px;
+  //padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+#confirmar{
+  padding-left: 18px !important;
+  padding-right: 18px !important;
+}
+
+.logo{
+  margin-bottom: -15px;
+  width: 40px;
+  height: 40px;
+}
+
+.footer{
+  position:absolute;
+  bottom: 0;
+  margin-top: 70%;
+}
+
+.loading{
+  background-color: #d996cc !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  cursor: none !important;
+}
+
+.cancelar{
+  margin-right: 2px;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+.textos{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#btncuenta, #confirmar{
+  color: #EBEEF1;
+  background-color: #c50fa1;
+  cursor: pointer;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.lower-container{
+  height: auto !important;
+}
+
+.helpError {
+  color: #f44336; 
+  font-size: 10px;
+}
+.password{
+  width: 90%;
+  float: left;
+}
+.card-container{
+  float: right;
+  float: right;
+  max-height: 83%;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(255, 245, 237) inset;
+}
+
+.tooldiv{
+  width: 10%;
+  float:right;
+}
+
+.buttonDisabled{
+  cursor: not-allowed !important;
+}
+
+.tool{
+  background-color: rgb(173, 173, 175);
+  line-height: 20px;
+  border-radius: 0px;
+  margin: 0px;
+  max-width: 25px !important;
+  text-align: center;
+  float: right;
+  padding-left: 7px;
+  padding-right: 7px;
+  margin-top: 18px;
+  margin-left: 5px;
+  border-style: solid;
+  border-color: rgb(43, 41, 41);
+  border-width: 0.7px;
+  border-radius: 2px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.titulo{
+  font-weight: 800;
+  color: black;
+  font-size: 200%;
+  font-style: italic;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.pines{
+  height: 25px;
+}
+
+.referencia{
+  display:flex;
+  flex-flow: row wrap;
+  justify-content: center;  
+  text-align: center;
+}
+
+.subtitulo{
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+
+@media (min-width: 1600px){
+  
+  .container {
+    padding-bottom: 60% ;
+        }
+  
+  
+  .derecha,.izquierda {
+    width: 47%;
+    margin-bottom: 0px !important;
+  }
+
+  .derecha{
+    float: right;
+  }
+  
+  .izquierda{
+    float: left;
+    margin-right: 1%;
+  }
+
+  .RegistroBoxBtnCancelar {
+    width: 10%;
+    }
+  
+    .RegistroBoxBtnGuardar {
+    width: 10%;
+    margin-right: 11.7%;
+    }
+  
+    .RegistroBoxlbl {
+        width: 56%;
+    }
+  
+    .professionalContainer {
+        padding-bottom: 141% !important;
+    }
+  
+    .professionalCardContainer {
+        height: 89.5% !important;
+        top: 49.5% !important;
+    }
+  
+    .RegistroBoxBtnGuardar1{
+        margin-right: -73% !important;
+    }
+  
+    .direccion{
+      width: 100%;
+      float: clear;
+      margin-top: 100px !important;
+    }
+
+    .mapa-container{
+      float: left;
+      height: 500px;
+      width: 40%;
+      margin-top: 30px;
+      margin-left: 15%;
+      z-index: 0;
+    }
+  
+    }
+  
+    
+  
+  
+  @media (min-width: 1300px) and (max-width: 1600px){
+    
+
+    #map {
+      height: 400px;
+      width: 590px;
+      margin: 20px auto 10px 90px !important;
+    }
+
+    .derecha,.izquierda {
+      width: 49%;
+    }
+  
+    .derecha{
+      float: right;
+    }
+  
+    .direccion{
+      width: 100%;
+      float: clear;
+      margin-top: 100px !important;
+    }
+    
+    .izquierda{
+      float: left;
+    }
+  
+  
+  .container {
+    padding-bottom: 71% ;
+        }
+  
+  .RegistroBoxBtnCancelar {
+    width: 13.5%;
+    }
+  
+    .RegistroBoxBtnGuardar {
+    width: 13%;
+    margin-right: 12%;
+    }
+    
+    .RegistroBoxlbl {
+        width: 49.4%;
+    }
+    .card-container{
+    top: 33.5% !important;
+    width: 45%;
+    height: auto;
+    overflow: hidden;
+    display: inline-block;
+    }
+  
+    .professionalContainer {
+        padding-bottom: 165% !important;
+    }
+  
+    .professionalCardContainer {
+        height: 89% !important;
+        top: 49% !important;
+    }
+  
+  
+    .RegistroBoxBtnGuardar1{
+        margin-right: -63% !important;
+    }
+  }
+  
+  
+  
+  @media (max-width: 1299px){
+    #map {
+      height: 500px;
+      width: 90%;
+      margin: 10px auto 10px 5% !important;
+      float: none;
+    }
+    .subtitulo{
+      margin-left: 1%;
+    }
+   
+    .container {
+  padding-bottom: 150% !important;
+    }
+  
+    .blank{
+      font-size: 0px !important;
+    }
+  
+  .card-container{
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    }
+  
+    .tool{
+      background-color: transparent;
+      border-style: none;
+      border-color: transparent;
+    }
+  }
+  
+  
+  .btn {
+    width: 120px;
+    margin-top: 3px;
+    margin-right: 20px;
+  }
+  
+  .RegistroLabel {
+    text-align: left;
+    font-size: 12px;
+    color: rgb(31, 31, 31);
+  }
+  
+  
+  
+  #requer{
+    text-align: left;
+    font-size: 12px;
+  }
+  
+
+  mat-label{
+    float: left !important;
+    text-align: left !important;
+    color: gray !important;
+  }
+
+
+  #passwordRequirement{
+    width: 100%;
+    float: left;
+    float: clear;
+    text-align: left;
+    margin-bottom: 3%;
+  }
+
+  .example-margin {
+    margin: 10px 10px;
+    margin-top: 0px;
+    font-size: 16px;
+  }
+  
+  input:disabled {
+    background: rgb(255, 245, 237);
+    cursor: not-allowed;
+  }
+  
+  h3 {
+    font-size: 1.5em;
+    letter-spacing: -0.02em;
+    font-weight: bold;
+    font-weight: 400 !important;
+    color: rgb(34, 34, 34) !important;
+  }
+  
+  .card-container{
+  width: 50%;
+  height: 85%;
+  position: absolute;
+  overflow: hidden;
+  display: inline-block;
+  }
+  
+  
+  .lower-container{
+  height: 100%;
+  padding: 20px;
+  padding-top: 40px;
+  text-align: center;
+  }
+  .lower-container h3, h4{
+  box-sizing: border-box;
+  line-height: .6;
+  font-weight: lighter;
+  }
+  
+  
+  select {
+    width: 95%;
+    border-radius: 10px;
+    font-size: 15px;
+    border-color: rgba(85, 85, 85, 0.596) !important;
+  }
+  
+  .links{
+    color: #c50fa1; 
+    font-size: 14px; 
+    margin-left: 10px; 
+    cursor: pointer; 
+    font-weight: bold
+  }
+  
+  
+  #btncuenta, #confirmar{
+    color: #EBEEF1;
+    background-color: #c50fa1;
+    //line-height: 36px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  
+  

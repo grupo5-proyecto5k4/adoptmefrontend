@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormGroupDirective, NgForm, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -16,6 +16,10 @@ import {AuthService} from '../auth.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import {Data} from '@angular/router';
+import {vacuna} from '../../models/IVacuna';
+import { MatTable } from '@angular/material/table';
+import {NuevaVacuna} from '../../models/INuevaVacuna';
+import { MascotaService } from 'src/services/mascota.service';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -30,36 +34,74 @@ export class FormularioGatoComponent implements OnInit {
 
   SignupForm: FormGroup;
   Titulo="Registro de Gato";
+  TituloVacuna="Registro de Vacunaciones";
   public archivos: any = [];
   private fileToUpload: File = null;
   public previsualizacion: string;
   public loading: boolean;
-  estadoMascota: string[] = ['Disponible Adopción', 'Disponible Provisorio', 'Disponible Adopción y Provisorio'];
+  listaVacunas:any[]=[]; //aca se guardaran todas las vacunas 
+  SignupFormVac: FormGroup;
+  vacunas: vacuna []= [];
+  columnas = ['Nombre', 'CantidadDosis','Opciones'];
+  vac: any= {};
+  nuevaVacuna:any= {};
+  nombreVac: string;
+  cantDosis:number;
+  verTabla=false;
+  mensajeB= 'Agregar Vacunación';
+  edadInvalida: Boolean = false;
+  mensajeEdad: string = "";
+  isLoading: Boolean = false;
+  adoptarChecked: Boolean = false;
+  provisorioChecked: Boolean = false;
 
-  constructor(private http:HttpClient,private sanitizer: DomSanitizer,private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
-    
+  constructor(private http:HttpClient,private sanitizer: DomSanitizer, private mascotaService:MascotaService, private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
+  @ViewChild(MatTable) tabla1: MatTable<vacuna>;
   
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
       nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       estado: new FormControl('', Validators.required),
-      cachorro: new FormControl('', Validators.required),
-      tamaño: new FormControl('', [Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      tamaño: new FormControl({value: 'No aplica', disabled: true}),
       sexo: new FormControl('', Validators.required),
-      edad: new FormControl('',Validators.required),
-      razaPadre: new FormControl('',[Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      razaMadre: new FormControl('',[Validators.required,Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      fechaNacimiento: new FormControl('',[Validators.required]),
+      raza: new FormControl('',[Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       castrado: new FormControl('',Validators.required),
       conductaNiños: new FormControl('',Validators.required),
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
-      descripcion: new FormControl('',[Validators.required,Validators.maxLength(150)]),
-    
+      descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
+      foto: new FormControl('',Validators.required),
+    });
+
+    this.SignupFormVac= new FormGroup({
+      nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+      cantidadDosis: new FormControl('',Validators.required),
     });
 
     this.dialogRef.disableClose=true;
-
     
+  }
+
+  estadoChange(estado: number){
+    if (estado == 0){
+      this.adoptarChecked = !this.adoptarChecked;
+    }
+    else if(estado == 1){
+      this.provisorioChecked = !this.provisorioChecked;
+    }
+    if (this.adoptarChecked && this.provisorioChecked){
+      this.SignupForm.controls.estado.setValue(2);
+    }
+    else if (this.adoptarChecked && !this.provisorioChecked){
+      this.SignupForm.controls.estado.setValue(0);
+    }
+    else if (!this.adoptarChecked && this.provisorioChecked){
+      this.SignupForm.controls.estado.setValue(1);
+    }
+    else{
+      this.SignupForm.controls.estado.setValue(null);
+    }
   }
 
   capturarFile(event): any {
@@ -81,12 +123,51 @@ export class FormularioGatoComponent implements OnInit {
         return true;
       }       
      
-
     })
     this.archivos.push(archivoCapturado)
     
   }
 
+  borrarFila(cantD: number) {
+    if (this.alerts.errorMessage("Realmente quiere borrarlo?")) {
+      this.vacunas.splice(cantD,1);
+      this.tabla1.renderRows();
+    }
+  }
+
+  agregar() {
+    this.vacunas.push(this.vac);
+    this.nombreVac=this.vac.nombre;
+    this.cantDosis=this.vac.cantidadDosis;
+    this.tabla1.renderRows();
+    this.vac={};
+  } 
+
+  mostrarVacunas(){
+    this.mensajeB= this.verTabla? 'Agregar Vacunación': 'Cancelar Vacunación';
+    this.verTabla=!this.verTabla;
+   
+ }
+
+ CalculateAge() {
+  const today: Date = new Date();
+  const fechaNacimiento: Date = new Date(this.SignupForm.controls.fechaNacimiento.value);
+  let age: number = today.getFullYear() - fechaNacimiento.getFullYear();
+  const month: number = today.getMonth() - fechaNacimiento.getMonth();
+  if (month < 0 || (month === 0 && today.getDate() < fechaNacimiento.getDate())) {
+    age--;
+  }
+  if (month >= 0 && month < 12) {
+    this.mensajeEdad = "La mascota es cachorro";
+  }
+  else if(month >= 12){
+    this.mensajeEdad = "La mascota es adulta";
+  }
+  else {
+    this.mensajeEdad = "Fecha de nacimiento no válida";
+  }
+  this.edadInvalida = true;
+}
 
   extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
     try {
@@ -117,24 +198,29 @@ export class FormularioGatoComponent implements OnInit {
 
   
     registrarAnimal(){
-      
+      this.alerts.confirmMessage("Su mascota ha sido registrada").then((result) => window.location.href = '/');
+               
+      //this.isLoading = true;
+      /*
       if(this.SignupForm.valid){        
         let mascota: Mascota = new Mascota();
         mascota.tipoMascota=1; 
         mascota.nombreMascota= this.SignupForm.controls.nombre.value;
         mascota.estado=this.SignupForm.controls.estado.value;
-        mascota.esCachorro=this.SignupForm.controls.cachorro.value;
-        mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;
+        mascota.fechaNacimiento=(this.SignupForm.controls.fechaNacimiento.value).toLocaleString();;
+        mascota.tamañoFinal="No aplica";
         mascota.sexo=this.SignupForm.controls.sexo.value;
-        mascota.edad=this.SignupForm.controls.edad.value;
-        mascota.razaPadre=this.SignupForm.controls.razaPadre.value;
-        mascota.razaMadre=this.SignupForm.controls.razaMadre.value;
+        mascota.raza=this.SignupForm.controls.raza.value;
         mascota.castrado=this.SignupForm.controls.castrado.value;
         mascota.conductaNiños=this.SignupForm.controls.conductaNiños.value;
         mascota.conductaGatos=this.SignupForm.controls.conductaGatos.value;
         mascota.conductaPerros=this.SignupForm.controls.conductaPerros.value;
         mascota.descripcion=this.SignupForm.controls.descripcion.value;
             
+        console.log(mascota); 
+        this.alerts.confirmMessage("Su mascota ha sido registrada").then((result)=> window.location.href='/mascotas')
+          
+        /*
        this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
          (resp: Data) => {
           try {
@@ -145,6 +231,29 @@ export class FormularioGatoComponent implements OnInit {
               formularioDeDatos.append('id_Animal',resp.id_Animal)
             
             })
+
+            console.log(formularioDeDatos);
+            let nuevaVac: NuevaVacuna=new NuevaVacuna();
+            nuevaVac.nombreVacuna=this.nombreVac;
+            nuevaVac.cantidadDosis=this.cantDosis;
+
+            this.listaVacunas.push( nuevaVac,resp.id_Animal);
+            //this.listaVacunas.push(resp.id_Animal)
+            
+            console.log(this.listaVacunas);
+            
+            this.mascotaService.registrarVacunas(this.listaVacunas)
+              .subscribe({
+                complete: () => {
+                  this.alerts.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
+                },
+                error: (err: any) => {
+                  this.alerts.errorMessage(err.error.error).then((result) => {
+                    this.isLoading = false;
+                  }
+                )
+                }
+              });
             
             this.http.post(`https://adoptmebackend.herokuapp.com/fotos/imagen/add`, formularioDeDatos)
               .subscribe(() => {
@@ -169,8 +278,10 @@ export class FormularioGatoComponent implements OnInit {
          }
        )
 
+
        }
        
+       */
 
      }
 

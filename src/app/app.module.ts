@@ -41,10 +41,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import {MatBadgeModule} from '@angular/material/badge';
 import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
+import { AdministrarRecomendacionesModule } from './pages/administrar-recomendaciones/administrar-recomendaciones.module';
+import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import {MatTableModule} from '@angular/material/table';
+import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -68,11 +74,13 @@ import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
     AdminProfileComponent,
     PublicacionesProvComponent,
     NuevaMascotaComponent,
+    VacunacionesComponent,
     //PublicacionesProvComponent
 
   ],
   imports: [
     BrowserModule,
+    MatTableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
@@ -92,6 +100,7 @@ import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
     SignupOptionsModule,
     AdminConfigurationsModule,
     HabilitarCentroRescatistaModule,
+    AdministrarRecomendacionesModule,
     MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
@@ -100,6 +109,10 @@ import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
     FileUploadModule,
     MatRadioModule,
     MatSlideToggleModule
+    GestionarUsuariosModule,
+    MatBadgeModule,
+    MatRadioModule,
+    MatCheckboxModule
   ],
   
   providers: [],

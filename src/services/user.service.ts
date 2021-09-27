@@ -13,6 +13,7 @@ import { HttpErrorHandlerService } from 'src/utils/ErrorHandler';
 export class UserService {
  
   api='https://adoptmebackend.herokuapp.com';
+ 
 
   constructor(private httpClient: HttpClient,  private errorHandler: HttpErrorHandlerService) {}
  
@@ -21,10 +22,16 @@ export class UserService {
     return this.httpClient.get<any[]>(this.api + '/centros/' + estado, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
+
   updateAccount(user: User, token:string): Observable <any> {
     return this.httpClient.put<any>(this.api + '/centros/' + user._id, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
+
   
+
+  async getUsuarios(estado: string, token:string): Promise <any[]> {
+    return this.httpClient.get<any[]>(this.api + '/usuarios/' + estado, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
 
   /*
   updateAccount(user: User, token:string): Observable <any> {
