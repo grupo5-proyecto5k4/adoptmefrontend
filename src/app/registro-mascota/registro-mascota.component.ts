@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog }  from '@angular/material/dialog';
 
@@ -30,36 +29,28 @@ constructor(public registroMascotasService:RegistroMascotasService, private dial
 
 ngOnInit() {
 
-  // EN ESPERA - ARRAY VACIO - ahora tiene adentro un mensaje?
-  // Borrador para armar card
-  this.registroMascotasService.getMascotas(0).subscribe( prueba => {
-    this.mascotasPrueba = prueba;
-    console.log(this.mascotasPrueba);
-    
-        //Recorro mascotas
-        for (let x = 0; x < (prueba.length); x++){
-          if (prueba[x].Foto.length != 0){
-            //Recorro imágenes
-            for (let i = 0; i < prueba[x].Foto.length; i++){
-              // Foto Principal
-              if (prueba[x].Foto[i].esPrincipal){
-                this.mascotasPrueba[x].imagenCard = prueba[x].Foto[i].foto;
-              }
-            }
-          }
-        }  
-  })
-
-  // SECCIÓN NO DISPONIBLES: Adoptado y En Provisorio
+  // SECCIÓN NO DISPONIBLES: Adoptado (3) y En Provisorio (4)
+  //
   this.registroMascotasService.getMascotasUser(4, this.auth.getToken()).subscribe(dataEnProvi => {
+    if (dataEnProvi.mesage === "[]"){
+      dataEnProvi = [];
+    }
     this.mascotasUsuarioEnProvi = dataEnProvi;
 
     this.registroMascotasService.getMascotasUser(3, this.auth.getToken()).subscribe(dataAdoptado => {
+      if (dataAdoptado.mesage === "[]"){
+        dataAdoptado = [];
+      }
+      console.log("Data en provi", dataEnProvi);
+      console.log("Data adoptado", dataAdoptado);
+        
       this.mascotasUsuarioAdoptado = dataAdoptado;
 
       var dato = [].concat(dataEnProvi, dataAdoptado); 
       this.mascotasUsuarioNoDisponibles = dato;
-      console.log(dato);
+      console.log("Mascotas vacias", dato);
+
+      if (dato.length > 0){
               //Recorro mascotas
               for (let x = 0; x < (dato.length); x++){
                 if (dato[x].Foto.length != 0){
@@ -72,6 +63,7 @@ ngOnInit() {
                   }
                 }
               }   
+            } else { console.log("No hay mascotas para visualizar") }
     
     },
   err => {
@@ -82,32 +74,45 @@ ngOnInit() {
   // Sección DISPONIBLES: Disponible Adopción, Disponible Provisorio y Disponible Adopción y Provisorio
   // Disponible Provisorio
   this.registroMascotasService.getMascotasUser(2, this.auth.getToken()).subscribe(dataProvi => {
+    if (dataProvi.mesage === "[]"){
+      dataProvi = [];
+    }
     this.mascotasUsuarioProvi = dataProvi;
 
     // Provisorio y Adopcion 
     this.registroMascotasService.getMascotasUser(0, this.auth.getToken()).subscribe(dataProAdop => {
+      if (dataProAdop.mesage === "[]"){
+        dataProAdop = [];
+      }
       this.mascotasUsuarioProAdop = dataProAdop;
 
       // Disponible Adopción
       this.registroMascotasService.getMascotasUser(1, this.auth.getToken()).subscribe(dataAdop => {
+        if (dataAdop.mesage === "[]"){
+          dataAdop = [];
+        }
         this.mascotasUsuarioAdop = dataAdop;
 
         //Junto los de "D.provisorio", "D.Adopción" y "D.Adopción y provisorio"
         var data = [].concat(dataProvi, dataAdop, dataProAdop); 
         this.mascotasUsuario = data;
 
-        //Recorro mascotas
-        for (let x = 0; x < (data.length); x++){
-          if (data[x].Foto.length != 0){
-            //Recorro imágenes
-            for (let i = 0; i < data[x].Foto.length; i++){
-              // Foto Principal
-              if (data[x].Foto[i].esPrincipal){
-                this.mascotasUsuario[x].imagenCard = data[x].Foto[i].foto;
+        if (data.length > 0){
+          //Recorro mascotas
+          for (let x = 0; x < (data.length); x++){
+            if (data[x].Foto.length != 0){
+              //Recorro imágenes
+              for (let i = 0; i < data[x].Foto.length; i++){
+                // Foto Principal
+                if (data[x].Foto[i].esPrincipal){
+                  this.mascotasUsuario[x].imagenCard = data[x].Foto[i].foto;
+                }
               }
             }
           }
-        }       
+        } else { console.log("No hay mascotas para visualizar") }
+        
+
       }) 
     })
   },
