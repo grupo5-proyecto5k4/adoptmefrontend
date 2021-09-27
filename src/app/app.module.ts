@@ -108,7 +108,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatSelectModule,
     FileUploadModule,
     MatRadioModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
     GestionarUsuariosModule,
     MatBadgeModule,
     MatRadioModule,
