@@ -34,27 +34,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="example-full-width" style="text-align: left;">
-                                        <mat-label style="width: 100%;">*Publicar para:</mat-label>
-
-                                        <div class="passwordRequirement" style="margin-left: 30px;">
-                                            <mat-checkbox (change)="estadoChange(0)">Adopción</mat-checkbox>
-                                        </div>
-                                        <div class="passwordRequirement" style="margin-bottom: 15px;margin-left: 30px;">
-                                            <mat-checkbox (change)="estadoChange(1)">Provisorio</mat-checkbox>
-                                        </div>
-
-                                        <span class="help-block" *ngIf="((SignupForm.get('estado').touched ||
-                                    SignupForm.get('estado').dirty) && SignupForm.get('estado').errors)">
-                                            <span *ngIf="SignupForm.get('estado').errors.required">
-                                                <h6 class="helpError">Campo requerido</h6>
-                                            </span>
-                                        </span>
-
-                                    </div>
-
-
-
+                                   
                                     <div class="izquierda">
                                         <mat-form-field class="example-form">
                                             <mat-label>*Tamaño final</mat-label>
@@ -259,6 +239,25 @@
 
                                     -->
 
+                                    <div class="example-full-width" style="text-align: left;">
+                                        <mat-label style="width: 100%;">*Publicar para:</mat-label>
+
+                                        <div class="passwordRequirement" style="margin-left: 30px;">
+                                            <mat-checkbox (change)="estadoChange(0)">Adopción</mat-checkbox>
+                                        </div>
+                                        <div class="passwordRequirement" style="margin-bottom: 15px;margin-left: 30px;">
+                                            <mat-checkbox (change)="estadoChange(1)">Provisorio</mat-checkbox>
+                                        </div>
+
+                                        <span class="help-block" *ngIf="((SignupForm.get('estado').touched ||
+                                    SignupForm.get('estado').dirty) && SignupForm.get('estado').errors)">
+                                            <span *ngIf="SignupForm.get('estado').errors.required">
+                                                <h6 class="helpError">Campo requerido</h6>
+                                            </span>
+                                        </span>
+
+                                    </div>
+                                    
                                     <div>
                                         <p id="requer">(*)Campos obligatorios</p>
                                     </div>
