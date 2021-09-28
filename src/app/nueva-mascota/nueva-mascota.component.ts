@@ -54,7 +54,7 @@ ngOnInit() {
   this.changeDetectorRef.detectChanges();
   this.dataSource.paginator = this.paginator;
   this.obs = this.dataSource.connect();
-  this.paginator._intl.itemsPerPageLabel = "Animales por página";
+  //this.paginator._intl.itemsPerPageLabel = "Animales por página";
 
   this.registroMascotasService.getMascotas(1).subscribe(data => {
     this.mascotasPubAdopcion = data;
