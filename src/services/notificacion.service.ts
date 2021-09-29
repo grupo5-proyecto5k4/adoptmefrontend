@@ -26,22 +26,24 @@ export class NotificacionService {
     return this.httpClient.put(this.api + '/notificacion/' + notificacion._id, notificacion ,{ headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
   
-  notificarSolicitudAdopcion(coleccion: String, nombreMascota:String, objetoId: string, token:string): Observable <any>{
-    let notificacion: Notificacion;
+  notificarSolicitudAdopcion(nombreMascota:string, remitente:string, objetoId: string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Solicitud de adopción";
     notificacion.descripcion = nombreMascota+" ha recibido una nueva solicitud de adopción";
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
-    return this.httpClient.post<Notificacion>(this.api + '/notificacion/', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();;
   }
 
-  notificarSolicitudProvisorio(nombreMascota:String, objetoId: string, token:string): Observable <any>{
-    let notificacion: Notificacion;
+  notificarSolicitudProvisorio(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Solicitud de provisorio";
     notificacion.descripcion = nombreMascota+" ha recibido una solicitud de provisorio";
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
-    return this.httpClient.post<Notificacion>(this.api + '/notificacion/', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();;
   }
 
   /*
