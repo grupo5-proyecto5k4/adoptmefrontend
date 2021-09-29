@@ -1,44 +1,51 @@
 import { Address } from './IAddress';
 
 interface IFormularioAdopcion {
-    _id?: number;
-    otraMascota?: number;
+    _id?: string;
+    otraMascota: number;
     descripcionOtraMascota?: string;
     tiempoPresupuesto: number;
-    estadoId?: number;
-    accionViaje?: string;
+    estadoId?: string;
+    accionViaje: string;
     vacunacionCastracion: number;
-    seguimiento?: number;
-    vivienda?: number;
+    seguimiento: number;
+    vivienda: number;
     fotoVivienda?: string;
-    fechaCreacion: Date;
+    fechaCreacion?: Date;
     fechaModificacion?: Date;
-    permiso?: number;
+    permiso: number;
     espacioAbierto: number;
-    descripcionCercamiento: string;
-    Direccion?: Address;   
-    mascotaID: string;
+    descripcionCercamiento?: string;
+    Direccion: Address;   
+    mascotaId: string;
+    solitanteId: string;
+    tiempoSolo: number;
+    accionImpedimento: string;
+    composicionFamilia: string;
     }
   
     export class FormularioAdopcion implements IFormularioAdopcion {
-        _id?: number;
-        otraMascota?: number;
-        descripcionOtraMascota?: string;
-        tiempoPresupuesto: number;
-        estadoId?: number;
-        accionViaje?: string;
-        vacunacionCastracion: number;
-        seguimiento?: number;
-        vivienda?: number;
-        fotoVivienda?: string;
-        fechaCreacion: Date;
-        fechaModificacion?: Date;
-        permiso?: number;
-        espacioAbierto: number;
-        descripcionCercamiento: string;
-        Direccion?: Address; 
-        mascotaID: string;
-        //SolitanteId: string;
+      _id?: string;
+      otraMascota: number;
+      descripcionOtraMascota?: string;
+      tiempoPresupuesto: number;
+      estadoId?: string;
+      accionViaje: string;
+      vacunacionCastracion: number;
+      seguimiento: number;
+      vivienda: number;
+      fotoVivienda?: string;
+      fechaCreacion?: Date;
+      fechaModificacion?: Date;
+      permiso: number;
+      espacioAbierto: number;
+      descripcionCercamiento?: string;
+      Direccion: Address;   
+      mascotaId: string;
+      solitanteId: string;
+      tiempoSolo: number;
+      accionImpedimento: string;
+      composicionFamilia: string;
     
       constructor() {
         };

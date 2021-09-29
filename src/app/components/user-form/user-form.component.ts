@@ -3,6 +3,7 @@ import { FormGroup, FormGroupDirective, NgForm, FormControl, Validators } from '
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { SignupService } from 'src/services/signup.service';
 import { User } from 'src/models/IUser';
+import { Data, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -12,6 +13,7 @@ import { UserService } from 'src/services/user.service';
 import { FormularioAdopcion } from 'src/models/IFormularioAdopcion';
 import { Address } from 'src/models/IAddress';
 import { AuthService } from 'src/app/auth.service';
+import { NotificacionService } from 'src/services/notificacion.service';
 
 
 @Component({
@@ -40,13 +42,12 @@ export class UserFormComponent implements OnInit {
   tiempoPresupuestoSelected: number;
 
 
-  constructor(private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private dialog: MatDialog,private userService: UserService, private dialogref: MatDialogRef<UserFormComponent>) { }
+  constructor(private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private notificacionService: NotificacionService, private dialog: MatDialog,private userService: UserService, private dialogref: MatDialogRef<UserFormComponent>) { }
 
   ngOnInit() {
     this.UserForm = new FormGroup({
       descripcionOtraMascota: new FormControl('', [Validators.maxLength(250)]),
       accionViaje: new FormControl('', [Validators.required, Validators.maxLength(250)]),
-      //accionImpedimento no está en el back
       accionImpedimento: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       descripcionCercamiento: new FormControl(''),
       composicionFamilia: new FormControl('', [Validators.required]),
@@ -225,7 +226,7 @@ export class UserFormComponent implements OnInit {
     return (this.viviendaSelected !== null && this.otrasMascotasSelected !== null && this.permisoEdificioSelected !== null && this.balconSelected != null && this.seguimientoSelected !== null && this.vacunacionSelected != null && this.tiempoSoloSelected !== null && this.TerminosChecked)
   }
 
-  signup() {
+  async signup() {
     if (this.UserForm.valid && this.allRadioSelected()) {
       this.isLoading = true;
 
@@ -246,7 +247,7 @@ export class UserFormComponent implements OnInit {
       if (this.UserForm.controls.descripcionCercamiento.value !== "") {
         formulario.descripcionCercamiento = this.UserForm.controls.descripcionCercamiento.value;
       }
-      //formulario.tiempoSolo = this.tiempoSoloSelected; Falta en el back
+      formulario.tiempoSolo = this.tiempoSoloSelected;
       formulario.tiempoPresupuesto = this.tiempoPresupuestoSelected;
       formulario.accionViaje = this.UserForm.controls.accionViaje.value;
       formulario.vacunacionCastracion = this.vacunacionSelected;
@@ -255,22 +256,20 @@ export class UserFormComponent implements OnInit {
       formulario.permiso = this.permisoEdificioSelected;
       formulario.espacioAbierto = this.balconSelected;
       formulario.Direccion = userAddress;
-      formulario.mascotaID = this.data.mascota._id;
+      formulario.mascotaId = this.data.mascota._id;
+      formulario.accionImpedimento = this.UserForm.controls.accionImpedimento.value;
+      formulario.composicionFamilia = this.UserForm.controls.composicionFamilia.value;
       
       
-
-
-      this.userService.registrarFormularioAdopcion(formulario, this.authService.getToken()).subscribe({
-        complete: () => {
-          this.alertsService.confirmMessage("Su solicitud de adopción ha sido registrada").then((result) => window.location.href = '/');
-        },
-        error: (err: any) => {
-          this.alertsService.errorMessage(err.error.error).then((result) => {
-            this.isLoading = false;
-          }
-        )
+      this.userService.registrarFormularioAdopcion(formulario, this.authService.getToken()).subscribe((resp:Data) => {
+        this.notificacionService.notificarSolicitudAdopcion(this.data.mascota.nombreMascota,this.data.mascota.responsableId, resp._id,this.authService.getToken())
+        this.alertsService.confirmMessage("Su solicitud de adopción ha sido registrada").then((result) => window.location.href = '/');        
+      },
+        error => {
+          this.alertsService.errorMessage(error.error.error).then((result) => {
+            this.isLoading = false;  })
         }
-      }) 
+        );
     } 
   }
 

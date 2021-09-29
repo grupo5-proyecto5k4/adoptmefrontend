@@ -46,8 +46,9 @@ export class UserService {
   */
 
   registrarFormularioAdopcion(formulario: FormularioAdopcion, token: string): Observable<FormularioAdopcion> {
-    const url = `${environment.base_url}` + "/formulario/adopcion/";
-    return this.httpClient.post<FormularioAdopcion>(url, formulario, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+    console.log('ruta: '+this.api + '/formulario/adopcion');
+    console.log(formulario);
+    return this.httpClient.post<FormularioAdopcion>(this.api + '/formulario/adopcion', formulario, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
   }
