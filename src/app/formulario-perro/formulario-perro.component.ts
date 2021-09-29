@@ -169,11 +169,11 @@ clearImage(url:number){
       
       if(this.SignupForm.valid){        
         let mascota: Mascota = new Mascota();
-        mascota.tipoMascota=1; 
+        mascota.tipoMascota=0; 
         mascota.nombreMascota= this.SignupForm.controls.nombre.value;
         mascota.estado=this.SignupForm.controls.estado.value;
         mascota.fechaNacimiento=(this.SignupForm.controls.fechaNacimiento.value).toLocaleString();;
-        mascota.tamañoFinal="No aplica";
+        mascota.tamañoFinal=this.SignupForm.controls.tamaño.value;
         mascota.sexo=this.SignupForm.controls.sexo.value;
         mascota.raza=this.SignupForm.controls.raza.value;
         mascota.castrado=this.SignupForm.controls.castrado.value;
@@ -187,8 +187,6 @@ clearImage(url:number){
         
        this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
          (resp: Data) => {
-
-        
 
           for (let i = 0; i < this.selectedFiles.length; i++) {
            this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
