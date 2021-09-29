@@ -231,16 +231,39 @@
                                         <mat-from-field class="example-full-width">
                                             <div class="subirImagen">
                                                 <label style="cursor: pointer;">📎 Seleccionar imagen
-                                                  <button mat-raised-button accept="image/jpeg,image/jpg,image/png" (click)="fileInput.click()" style="display: none;"></button>
+                                                  <button mat-raised-button accept="image/jpeg,image/jpg,image/png" formControlName="foto" (click)="fileInput.click()" style="display: none;"></button>
                                                   
                                                </label> 
                                                
-                                            </div>
+                                            </div >
                                             <input #fileInput type="file" hidden multiple (change)="selectFiles($event)" />
-                                            <span *ngIf="fileName">{{fileName}}</span>
-                                            <h5 style="margin-bottom: 15px;">Sólo se aceptan imágenes con extensión
-                                                jpeg,
-                                                jpg y png</h5>
+                                            <span *ngIf="fileName"></span>
+                                            <br>
+
+                                            <div class="margenes" *ngIf="fileName">
+                                                <mat-card class="card-publicacion container-publicaciones" *ngFor="let url of urls">
+                                                    <mat-card-header>
+                                                        <mat-card-title class="card-title sin-overflow"></mat-card-title>
+                                                        <mat-card-subtitle></mat-card-subtitle>
+                                                    </mat-card-header>
+                                                    <div class="contenedor-imagen">
+                                                        <img mat-card-image  [src]="url" class="imagen">
+                                                    </div>
+                                                    <mat-card-content class="card-description">
+                                                        <div class="sin-overflow-description">Marcar como principal 
+                                                            <mat-checkbox (change)="marcarPrincipal(0)"></mat-checkbox>
+                                                        </div> 
+                                                    </mat-card-content>
+                                                    <mat-card-actions>
+                                                        <button mat-button  color="accent" class="btnRegistrar" (click)="clearImage(url)">Eliminar imagen</button>
+                                                    </mat-card-actions>
+                                                </mat-card>
+                                            </div>
+                                            
+                                            
+                                            <h5 style="margin-bottom: 15px;">Sólo se aceptan imágenes con extensión jpeg,jpg y png</h5>
+                                                <h5 style="margin-bottom: 15px;">Sólo se puede subir 5 imágenes como máximo y elegir una de ellas como principal</h5>
+                                                    
                                         </mat-from-field>
                                         
                                     </div>

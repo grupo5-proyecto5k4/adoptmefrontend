@@ -22,6 +22,7 @@ import {NuevaVacuna} from '../../models/INuevaVacuna';
 import { MascotaService } from 'src/services/mascota.service';
 import { Observable } from 'rxjs';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
+import {Foto} from '../../models/IFoto';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -40,21 +41,14 @@ export class FormularioGatoComponent implements OnInit {
   
 
   public loading: boolean;
-  listaVacunas:any[]=[]; //aca se guardaran todas las vacunas 
   SignupFormVac: FormGroup;
-  vacunas: vacuna []= [];
-  columnas = ['Nombre', 'CantidadDosis','Opciones'];
-  vac: any= {};
-  nuevaVacuna:any= {};
-  nombreVac: string;
-  cantDosis:number;
   verTabla=false;
-  mensajeB= 'Agregar Vacunación';
   edadInvalida: Boolean = false;
   mensajeEdad: string = "";
   isLoading: Boolean = false;
   adoptarChecked: Boolean = false;
   provisorioChecked: Boolean = false;
+  marcaPrincipal: Boolean=false;
 
   //Lista de archivos seleccionados
   selectedFiles: FileList;
@@ -65,9 +59,11 @@ export class FormularioGatoComponent implements OnInit {
   //Nombre del archivo para usarlo posteriormente en la vista html
   fileName = "";
   fileInfos: Observable<any>;
-
+  urls = new Array<string>();
+  previsualizacion: any;
+  
   constructor(private http:HttpClient,private sanitizer: DomSanitizer, private mascotaService:MascotaService, private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
-  @ViewChild(MatTable) tabla1: MatTable<vacuna>;
+  @ViewChild(MatTable) tabla1: MatTable<Foto>;
   
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
@@ -82,14 +78,10 @@ export class FormularioGatoComponent implements OnInit {
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
-      
+      foto: new FormControl('',Validators.required),
     });
 
-    this.SignupFormVac= new FormGroup({
-      nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      cantidadDosis: new FormControl('',Validators.required),
-    });
-
+    
     this.dialogRef.disableClose=true;
     
   }
@@ -115,28 +107,12 @@ export class FormularioGatoComponent implements OnInit {
     }
   }
 
-  
-
-  borrarFila(cantD: number) {
-    if (this.alerts.errorMessage("Realmente quiere borrarlo?")) {
-      this.vacunas.splice(cantD,1);
-      this.tabla1.renderRows();
+  marcarPrincipal(principal: number){
+    if (principal == 0){
+      this.marcaPrincipal = !this.marcaPrincipal;
     }
   }
-
-  agregar() {
-    this.vacunas.push(this.vac);
-    this.nombreVac=this.vac.nombre;
-    this.cantDosis=this.vac.cantidadDosis;
-    this.tabla1.renderRows();
-    this.vac={};
-  } 
-
-  mostrarVacunas(){
-    this.mensajeB= this.verTabla? 'Agregar Vacunación': 'Cancelar Vacunación';
-    this.verTabla=!this.verTabla;
-   
- }
+  
 
  CalculateAge() {
   const today: Date = new Date();
@@ -163,11 +139,28 @@ selectFiles(event) {
   this.progressInfo = [];
   //Validación para obtener el nombre del archivo si es uno solo
   //En caso de que sea >1 asigna a fileName length
-  event.target.files.length == 1 ? this.fileName = event.target.files[0].name : this.fileName = event.target.files.length + " archivos";
+  event.target.files.length == 1 ? this.fileName = event.target.files[0].name : this.fileName = event.target.files.length + " imagenes a subir";
   this.selectedFiles = event.target.files;
+  let files = event.target.files;
+  this.urls = [];
+    
+    if (files) {
+      for (let file of files) {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.urls.push(e.target.result);
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+  
+  
 }
 
-
+clearImage(url:number){  
+  this.urls.splice(url,1);
+}
+ 
   
     registrarAnimal(){
                      
@@ -194,9 +187,14 @@ selectFiles(event) {
        this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
          (resp: Data) => {
 
+        
+
           for (let i = 0; i < this.selectedFiles.length; i++) {
-            this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
-            console.log(this.selectFiles[i]);
+           this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
+              let foto: Foto=new Foto();
+              foto.foto=this.selectedFiles.item(i);
+              foto.esPrincipal=this.marcaPrincipal;
+
             this.photo.upload(this.selectedFiles[i],resp.id_Animal).subscribe(
               event => {
                 console.log('llego la foto');

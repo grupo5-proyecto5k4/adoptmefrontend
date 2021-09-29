@@ -454,6 +454,18 @@ box-shadow: 0 2px 1px -1px #0003, 0 1px 1px 0 #00000024, 0 1px 3px 0 #0000001f;
 background-color: #f0b2e3;
 }
 
+.container-publicaciones{
+background-color:#f8e2f1;
+justify-content: space-evenly;
+align-content: space-around;
+//display: flex;
+//flex-flow: row wrap;
+}
+
+.card-publicacion {
+margin-bottom: 20px;
+}
+
 h3 {
 font-size: 1.5em;
 letter-spacing: -0.02em;
@@ -530,9 +542,3 @@ position: absolute;
 bottom:0;
 width: 100%;
 }
-
-  
-  
-  
-    
-  
