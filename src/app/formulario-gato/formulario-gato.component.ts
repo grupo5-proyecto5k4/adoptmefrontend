@@ -78,7 +78,7 @@ export class FormularioGatoComponent implements OnInit {
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
-      foto: new FormControl('',Validators.required),
+      //foto: new FormControl('',Validators.required),
     });
 
     
@@ -141,11 +141,11 @@ selectFiles(event) {
   //En caso de que sea >1 asigna a fileName length
   event.target.files.length == 1 ? this.fileName = event.target.files[0].name : this.fileName = event.target.files.length + " imagenes a subir";
   this.selectedFiles = event.target.files;
-  let files = event.target.files;
+  
   this.urls = [];
     
-    if (files) {
-      for (let file of files) {
+    if (event.target.files) {
+      for (let file of event.target.files) {
         let reader = new FileReader();
         reader.onload = (e: any) => {
           this.urls.push(e.target.result);
