@@ -80,7 +80,7 @@ input:-webkit-autofill {
 
 // MEDIAS QUERIES
 
-@media (min-width: 541px){ 
+
   .container-row1{
       display:flex;
       flex-direction:row;
@@ -103,18 +103,24 @@ input:-webkit-autofill {
   textarea{
       width: 510px;
   }
-  }
+
   
-  @media (max-width: 540px){
+  @media (max-width: 1099px){
       .container-row1{
       flex-direction: column;}
   
       .derecha{
           margin-left: 0px;
       }
+
+      .ref, textarea{
+        width: 245px;
+    }
+
   }
 
-  
+ 
+  /*
 @media (max-width:540px){
     
 .card-container{
@@ -132,7 +138,7 @@ input:-webkit-autofill {
     }
     
 }
-
+*/
 
 @media (min-width: 541px) and (max-width: 1599px)
 {
