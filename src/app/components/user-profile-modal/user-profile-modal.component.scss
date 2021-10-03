@@ -105,7 +105,7 @@ input:-webkit-autofill {
   }
 
   
-  @media (max-width: 1099px){
+  @media (max-width: 599px){
       .container-row1{
       flex-direction: column;}
   
@@ -116,6 +116,10 @@ input:-webkit-autofill {
       .ref, textarea{
         width: 245px;
     }
+
+    .card-container{
+        width: 95% !important;
+        }
 
   }
 
@@ -140,20 +144,22 @@ input:-webkit-autofill {
 }
 */
 
-@media (min-width: 541px) and (max-width: 1599px)
+@media (min-width: 600px) and (max-width: 1099px)
 {
     
     .card-container{
         top: 43.5% !important;
+        width: 90% !important;
         }
     
 }
 
 
-@media (min-width: 1600px){
+@media (min-width: 1100px){
 
     .card-container{
         top: 40% !important;
+        width: 50% !important;
         }
 }
 
