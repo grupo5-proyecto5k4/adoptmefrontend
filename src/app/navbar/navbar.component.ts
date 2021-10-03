@@ -76,11 +76,8 @@ export class NavbarComponent {
         cantNotifNoLeidas ++;
       }
     }
-    console.log("Cant Notif No leídas:" + cantNotifNoLeidas)
     this.cantNotifNoLeidas = cantNotifNoLeidas;
   }
-  console.log("total notificaciones: " + this.notificaciones.length)
-  // }
 }
 
 isSignupOptions(){

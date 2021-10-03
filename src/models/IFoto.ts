@@ -1,18 +1,16 @@
 
 interface Ifoto{
     _id?: string;
-    titulo: string;
-    descripcion?: string;
-    imagenURL?: string;
-   
+    foto:File;
+    esPrincipal:Boolean;
 }
+    
 
 export class Foto implements Ifoto{
-    _id?:string;
-    titulo:string;
-    descripcion?:string;
-    imagenURL?:string;
-    
+    _id?: string;
+    foto:File;
+    esPrincipal:Boolean;
+        
     constructor(){};
 }
 

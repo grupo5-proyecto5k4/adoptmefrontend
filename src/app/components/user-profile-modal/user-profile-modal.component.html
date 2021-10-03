@@ -1,0 +1,145 @@
+<mat-dialog-content class="dialog-content">
+
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <section id="cta4">
+        <div class="container">
+          <header>
+            <div class="card-container">
+              <input type=button id="btncuenta" style="margin: 10px;" name=boton value=X matDialogClose>
+              <div class="lower-container">
+                <div>
+                  <div>
+                    <h2 class="subtitulo">{{Titulo}}</h2>
+                  </div>
+                  <div class="centrado">
+                    <form [formGroup]="ProfileForm" class="example-form" *ngIf="currentUser">
+
+                      <div class="container-row1"*ngIf="currentUser.tipoUsuario == 2">
+                        <div>
+                          <mat-form-field class="ref">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombres">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario !== 2">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombres">
+                          </mat-form-field>
+                        </div>
+
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Apellido</mat-label>
+                            <input matInput formControlName="apellidos">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario !== 2">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>DNI</mat-label>
+                            <input matInput formControlName="dni">
+                          </mat-form-field>
+                        </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Fecha de nacimiento</mat-label>
+                            <input matInput formControlName="fechaNacimiento">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field class="ref">
+                            <mat-label>Correo electrónico</mat-label>
+                            <input matInput formControlName="correoElectronico">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div *ngIf="currentUser.tipoUsuario == 2">
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Calle</mat-label>
+                              <input matInput formControlName="calle">
+                            </mat-form-field>
+                          </div>
+                          <div class="derecha">
+                            <mat-form-field>
+                              <mat-label>Altura</mat-label>
+                              <input matInput formControlName="altura">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Localidad</mat-label>
+                              <input matInput formControlName="localidad">
+                            </mat-form-field>
+                          </div>
+                          <div class="derecha">
+                            <mat-form-field>
+                              <mat-label>Barrio</mat-label>
+                              <input matInput formControlName="barrio">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field class="ref">
+                              <mat-label>Referencia</mat-label>
+                              <textarea matInput formControlName="referencia" maxlength="150"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Instagram</mat-label>
+                            <input matInput formControlName="instagram">
+                          </mat-form-field>
+                        </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Facebook</mat-label>
+                            <input matInput formControlName="facebook">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Número de Contacto</mat-label>
+                            <input matInput formControlName="numeroContacto">
+                          </mat-form-field>
+                        </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput formControlName="contrasenia">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+    </div>
+  </body>
+</mat-dialog-content>

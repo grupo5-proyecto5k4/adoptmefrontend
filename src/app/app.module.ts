@@ -53,7 +53,7 @@ import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 import { VisualizacionSolicitudComponent } from './visualizacion-solicitud/visualizacion-solicitud.component';
-
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [

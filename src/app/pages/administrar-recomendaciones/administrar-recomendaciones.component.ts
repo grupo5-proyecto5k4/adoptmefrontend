@@ -87,7 +87,6 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
   }
 
   async obtenerRecomendacionesVeterinaria() {
-    console.log("empieza recomendaciones veterinaria");
     const r = await this.recomendacionService.getRecomendacionesVeterinaria();
 
     for (let i = 0; i < r.length; i++) {
@@ -113,7 +112,6 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       );
 
     }
-    console.log("finaliza recomendaciones veterinaria");
   }
 
   async renderMap(){
@@ -131,15 +129,11 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
     }).addTo(this.map);
 
     for (var i = 0; i < this.veterinaria.length; i++) {
-      console.log("Console this.veterinaria[i]");
-      console.log(this.veterinaria[i]);
       var marker = new Leaflet.marker([this.veterinaria[i][1], this.veterinaria[i][2]], { icon: this.blueIcon }).bindPopup(this.veterinaria[i][0])
         .addTo(this.map);
     }
 
     for (var i = 0; i < this.centro_castracion.length; i++) {
-      console.log("Console this.centro")
-      console.log(this.centro_castracion[i])
       var marker = new Leaflet.marker([this.centro_castracion[i][1], this.centro_castracion[i][2]], { icon: this.redIcon }).bindPopup(this.centro_castracion[i][0])
         .addTo(this.map);
     }
@@ -172,7 +166,6 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
   }
 
   async obtenerRecomendacionesCentrosCastracion() {
-    console.log("empieza recomendaciones centros");
     const r = await this.recomendacionService.getRecomendacionesCentrosCastracion();
 
     for (var i = 0; i < r.length; i++) {
@@ -197,13 +190,11 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       );
 
     }
-    console.log("finaliza recomendaciones centros");
   }
 
   async ubicarEnMapa() {
     const ubicacion = await this.recomendacionService.buscarCoordenadas(this.SignupForm.controls.street.value, this.SignupForm.controls.altura.value);
     if (this.SignupForm.valid && this.tiposRecomendacionSelected != undefined && ubicacion != undefined) {
-      console.log("Ingresó en validación")
       let vete: string;
       vete = "<strong>" + this.SignupForm.controls.name.value + "</strong><br>" + this.SignupForm.controls.street.value + " " + this.SignupForm.controls.altura.value + "";
 
