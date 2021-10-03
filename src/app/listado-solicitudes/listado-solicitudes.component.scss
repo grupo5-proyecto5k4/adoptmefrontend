@@ -1,3 +1,4 @@
+/* BOTONES  -------------------------- */
 .btn-return{
     color:#B80092;
     font-weight:bold;
@@ -5,10 +6,26 @@
     background-color: #fafafa;
 }
 
+.btncuenta{
+    color:white;
+    margin-right: 10%;
+    margin-bottom: 10px;
+}
+
+.btnrechazar{
+    color: red;
+}
+
 .return-container{
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.new-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
 }
 
 .titulo{
@@ -31,3 +48,70 @@
     z-index: 0;
 }
 
+.margenes{
+    margin-bottom: 30px;
+}
+
+.card-description{
+    margin-left:15px;
+}
+
+.card-title{
+    margin-top: 5px;
+}
+/* CARDS SOLICITUD ----------------------------------------------  */
+
+.card-solicitud {
+    background-color: #F8E2F1;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+.container-publicaciones{
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    align-content: space-around;
+}
+
+.primer-renglon{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contenido-card{
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+}
+
+.columna2{
+    margin-left: 200px;
+}
+
+/* Medias Query ----------------------------------------------  */
+
+// Tamaño card: 706, media 750
+
+@media (min-width: 520px) and (max-width:759px){
+    .columna2{
+        margin-left: 10px;
+    }
+}
+
+
+@media (max-width:520px){
+    .contenido-card{
+        width: 270px;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .columna2{
+        margin-left: 10px;
+    }
+}
