@@ -19,6 +19,42 @@ background-color: #f8e2f1;
 
 }
 
+table.my-table {
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+}
+
+thead.my-table.headers tr th {
+      border: 1px solid #000000de;
+      background-color: #d996cc;
+      color: #000000de;
+      height: 25px;
+}
+
+tbody.my-table.body tr td {
+  border: 1px solid #000000de;
+  border-left: none;
+  height: 25px;
+}
+
+tbody.my-table.body tr td.last {
+  border-right: none;
+}
+
+tbody.my-table.body tr.active {
+  background-color: gainsboro;
+  cursor: pointer;
+}
+
+div.pag-space {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+
+
 .confirmar, .loading{
 margin-left: 2px;
 }
@@ -143,7 +179,6 @@ color: #EBEEF1;
 background-color: #c50fa1;
 min-width: 64px;
 line-height: 36px;
-padding: 10px;
 border-radius: 4px;
 box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
@@ -263,60 +298,10 @@ margin-left: -25px;
 }
 
 
-@media (min-width: 1600px){
-
-.container {
-padding-bottom: 60% ;
-    }
-
-
-.derecha,.izquierda {
-width: 40%;
-margin-bottom: 0px !important;
-}
-
-.RegistroBoxBtnCancelar {
-width: 10%;
-}
-
-.RegistroBoxBtnGuardar {
-width: 10%;
-margin-right: 11.7%;
-}
-
-.RegistroBoxlbl {
-    width: 56%;
-}
-
-.card-container{
-    top: 40% !important;
-    }
-
-.professionalContainer {
-    padding-bottom: 141% !important;
-}
-
-.professionalCardContainer {
-    height: 89.5% !important;
-    top: 49.5% !important;
-}
-
-.RegistroBoxBtnGuardar1{
-    margin-right: -73% !important;
-}
-
-.direccion{
-  width: 100%;
-  float: clear;
-  margin-top: 100px !important;
-}
-
-}
 
 
 
-
-@media (min-width: 992px) and (max-width: 1600px){
+@media (min-width: 992px){
 
 
 .derecha,.izquierda {
@@ -331,10 +316,6 @@ margin-right: 11.7%;
   width: 100%;
   float: clear;
   margin-top: 100px !important;
-}
-
-.izquierda{
-  float: left;
 }
 
 
