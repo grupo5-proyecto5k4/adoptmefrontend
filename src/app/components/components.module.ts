@@ -10,10 +10,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { UserFormComponent } from './user-form/user-form.component';
+import { UserProfileModalComponent } from './user-profile-modal/user-profile-modal.component';
+
 
 
 @NgModule({
-    declarations: [SignupParticularComponent, SignupRescatistComponent, UserFormComponent],
+    declarations: [SignupParticularComponent, SignupRescatistComponent, UserFormComponent, UserProfileModalComponent],
     imports: [
       ReactiveFormsModule,
       FormsModule,
@@ -30,6 +32,7 @@ import { UserFormComponent } from './user-form/user-form.component';
       SignupParticularComponent,
       SignupRescatistComponent,
       UserFormComponent,
+      UserProfileModalComponent
      ]
   })
 export class ComponentsModule{}
