@@ -19,7 +19,7 @@ export class photoService{
     constructor(private http:HttpClient){}
   
     registroAnimal(request: Mascota, token:string): Observable<any>{
-
+        console.log("llgue")
         return this.http.post<Mascota>(this.uri,request,{ headers: new HttpHeaders().set('auth-token', `${token}`)});
 
     }
