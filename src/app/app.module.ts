@@ -52,6 +52,7 @@ import {MatTableModule} from '@angular/material/table';
 import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
+import { VisualizacionSolicitudComponent } from './visualizacion-solicitud/visualizacion-solicitud.component';
 
 
 @NgModule({
@@ -77,6 +78,7 @@ import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solic
     NuevaMascotaComponent,
     VacunacionesComponent,
     ListadoSolicitudesComponent,
+    VisualizacionSolicitudComponent,
     //PublicacionesProvComponent
 
   ],
