@@ -15,7 +15,15 @@
                   <div class="centrado">
                     <form [formGroup]="ProfileForm" class="example-form" *ngIf="currentUser">
 
-                      <div class="container-row1">
+                      <div class="container-row1"*ngIf="currentUser.tipoUsuario == 2">
+                        <div>
+                          <mat-form-field class="ref">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombres">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario !== 2">
                         <div>
                           <mat-form-field>
                             <mat-label>Nombre</mat-label>
@@ -31,7 +39,7 @@
                         </div>
                       </div>
 
-                      <div class="container-row1" *ngIf="currentUser.dni !== null">
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario !== 2">
                         <div>
                           <mat-form-field>
                             <mat-label>DNI</mat-label>
@@ -54,45 +62,45 @@
                           </mat-form-field>
                         </div>
                       </div>
-                      <div *ngIf="currentUser.Direccion !== null">
+                      <div *ngIf="currentUser.tipoUsuario == 2">
                         <div class="container-row1">
                           <div>
-                              <mat-form-field>
-                                  <mat-label>Calle</mat-label>
-                                  <input matInput formControlName="calle">
-                              </mat-form-field>
+                            <mat-form-field>
+                              <mat-label>Calle</mat-label>
+                              <input matInput formControlName="calle">
+                            </mat-form-field>
                           </div>
                           <div class="derecha">
-                              <mat-form-field>
-                                  <mat-label>Altura</mat-label>
-                                  <input matInput formControlName="altura">
-                              </mat-form-field>
+                            <mat-form-field>
+                              <mat-label>Altura</mat-label>
+                              <input matInput formControlName="altura">
+                            </mat-form-field>
                           </div>
-                      </div>
-              
-                      <div class="container-row1">
-                      <div>
-                          <mat-form-field>
+                        </div>
+
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field>
                               <mat-label>Localidad</mat-label>
                               <input matInput formControlName="localidad">
-                          </mat-form-field>
-                      </div>
-                      <div class="derecha">
-                          <mat-form-field>
+                            </mat-form-field>
+                          </div>
+                          <div class="derecha">
+                            <mat-form-field>
                               <mat-label>Barrio</mat-label>
                               <input matInput formControlName="barrio">
-                          </mat-form-field>
-                      </div>
-                      </div>
-              
-                      <div class="container-row1">
-                          <div>
-                              <mat-form-field class="ref">
-                                  <mat-label>Referencia</mat-label>
-                                  <textarea matInput formControlName="referencia" maxlength="150"></textarea>
-                              </mat-form-field>
+                            </mat-form-field>
                           </div>
-                      </div>
+                        </div>
+
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field class="ref">
+                              <mat-label>Referencia</mat-label>
+                              <textarea matInput formControlName="referencia" maxlength="150"></textarea>
+                            </mat-form-field>
+                          </div>
+                        </div>
                       </div>
                       <div class="container-row1">
                         <div>

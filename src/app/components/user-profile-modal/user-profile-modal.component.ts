@@ -57,7 +57,7 @@ export class UserProfileModalComponent implements OnInit {
     this.ProfileForm = new FormGroup({
       nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
       apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
-      dni: new FormControl({ disabled: true }),
+      dni: new FormControl({ value: '', disabled: true }),
       fechaNacimiento: new FormControl({ value: '', disabled: true }),
       correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
       calle: new FormControl({ value: '', disabled: true }),
@@ -72,16 +72,22 @@ export class UserProfileModalComponent implements OnInit {
     });
 
     if (this.currentUser.Direccion !== undefined){
-      this.ProfileForm.controls.calle.value.set(this.currentUser.Direccion.calle);
-      this.ProfileForm.controls.altura.value.set(this.currentUser.Direccion.numero);
-      this.ProfileForm.controls.localidad.value.set(this.currentUser.Direccion.localidad);
-      this.ProfileForm.controls.barrio.value.set(this.currentUser.Direccion.barrio);
-      this.ProfileForm.controls.referencia.value.set(this.currentUser.Direccion.referencia);
+      this.ProfileForm.controls['calle'].setValue(this.currentUser.Direccion.calle);
+      if (this.currentUser.Direccion.numero == undefined){
+        this.currentUser.Direccion.numero = "s/n";
+      }
+      this.ProfileForm.controls['altura'].setValue(this.currentUser.Direccion.numero);
+      this.ProfileForm.controls['localidad'].setValue(this.currentUser.Direccion.localidad);
+      this.ProfileForm.controls['barrio'].setValue(this.currentUser.Direccion.barrio);
+      if (this.currentUser.Direccion.referencia == undefined){
+        this.currentUser.Direccion.referencia = "No especificado";
+      }
+      this.ProfileForm.controls['referencia'].setValue(this.currentUser.Direccion.referencia);
     }
 
-    if (this.currentUser.dni !== null && this.currentUser.dni !== undefined) {
-      this.ProfileForm.controls.dni.value.set(this.currentUser.dni);
-      this.ProfileForm.controls.fechaNacimiento.value.set(this.currentUser.fechaNacimiento);
+    if (this.currentUser.dni !== "No especificado") {
+      this.ProfileForm.controls['dni'].setValue(this.currentUser.dni);
+      this.ProfileForm.controls['fechaNacimiento'].setValue(this.currentUser.fechaNacimiento);
       }
 
 

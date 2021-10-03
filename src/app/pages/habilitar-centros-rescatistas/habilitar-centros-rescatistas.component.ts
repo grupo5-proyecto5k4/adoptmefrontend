@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { UserProfileModalComponent } from 'src/app/components/user-profile-modal/user-profile-modal.component';
 import { User } from 'src/models/IUser';
 import { UserService } from 'src/services/user.service';
 import { AlertsService } from 'src/utils/alerts.service';
@@ -53,6 +54,15 @@ export class HabilitarCentroRescatistaComponent {
         this.centrosPendientes = r;
       });        
     } 
+
+
+    openUserForm(usuario: User){
+      this.dialog.open(UserProfileModalComponent, {
+        data: {
+            User: usuario,
+        }
+    })
+    }
 
     proximamente(){
       this.alertsService.infoMessage('La visualización del centro rescatista aún no se encuentra disponible','Información')
