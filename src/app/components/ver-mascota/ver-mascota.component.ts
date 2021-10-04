@@ -31,7 +31,7 @@ export class VerMascotaComponent implements OnInit {
   Titulo = "";
   columnas = ['Nombre', 'Cantidad dosis'];
   listaVacunas: any = []; //aca se guardaran todas las vacunas
-  slideIndex = 1;
+  slideIndex = 0;
   fotos: any = [];
   fotoVisualizar: any = [];
 
@@ -44,6 +44,8 @@ export class VerMascotaComponent implements OnInit {
     //obtengo el usuario
     this.mascota = this.data.mascota;
 
+    console.log("slideIndex:")
+    console.log(this.slideIndex)
 
     this.Titulo = this.mascota.nombreMascota;
     // Formato fecha  
@@ -54,8 +56,6 @@ export class VerMascotaComponent implements OnInit {
       this.mascota.fechaNacimiento = revdate;
     }
 
-
-    console.log(this.mascota.Foto)
     if (this.mascota.Foto.length != 0) {
       //Recorro imágenes
       for (let i = 0; i < this.mascota.Foto.length; i++) {
@@ -73,13 +73,8 @@ export class VerMascotaComponent implements OnInit {
           this.fotos.push(object1);
         }
       }
-      console.log("fotos:")
-      console.log(this.fotos)
     }
 
-
-
-    this.showSlides(this.slideIndex);
 
     this.ProfileForm = new FormGroup({
       nombres: new FormControl({ value: this.mascota.nombreMascota, disabled: true }),
@@ -107,26 +102,32 @@ export class VerMascotaComponent implements OnInit {
 
   // Next/previous controls
   plusSlides(action: number) {
-    if ((this.slideIndex + action) >= 0 &&  (this.slideIndex + action) < this.fotos.length) {
-      const object1 = {
-        path: this.mascota.Foto[this.slideIndex  + action].foto,
+
+    this.slideIndex + action
+    let object1 = {};
+    if ((this.slideIndex + action) >= 0 && (this.slideIndex + action) < this.fotos.length) {
+      object1 = {
+        path: this.fotos[this.slideIndex + action].path,
       };
-      this.fotoVisualizar = [];
-      this.fotoVisualizar.push(object1);
       this.slideIndex += action;
     }
+    else if (action == 1) {
+      object1 = {
+        path: this.fotos[0].path,
+      };
+      this.slideIndex = 0;
+    }
+    else{
+      object1 = {
+        path: this.fotos[this.fotos.length - 1].path,
+      };
+      this.slideIndex = this.fotos.length - 1;
+    }
+
+    this.fotoVisualizar = [];
+    this.fotoVisualizar.push(object1);
   }
 
-  // Thumbnail image controls
-  currentSlide(n) {
-    this.showSlides(this.slideIndex = n);
-  }
-
-  showSlides(n) {
-    let slides = document.getElementsByClassName("mySlides");
-    if (n > slides.length) { this.slideIndex = 1 }
-    if (n < 1) { this.slideIndex = slides.length }
-  }
 
   openUserForm() {
     this.dialog.open(UserFormComponent, {
