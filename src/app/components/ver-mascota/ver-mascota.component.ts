@@ -33,6 +33,7 @@ export class VerMascotaComponent implements OnInit {
   listaVacunas: any = []; //aca se guardaran todas las vacunas
   slideIndex = 1;
   fotos: any = [];
+  fotoVisualizar: any = [];
 
   constructor(private authservice: AuthService, private mascotaService: MascotaService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private alertsService: AlertsService, private router: Router) {
 
@@ -53,21 +54,30 @@ export class VerMascotaComponent implements OnInit {
       this.mascota.fechaNacimiento = revdate;
     }
 
+
     console.log(this.mascota.Foto)
-    if (this.mascota.Foto.length != 0){
+    if (this.mascota.Foto.length != 0) {
       //Recorro imágenes
-      for (let i = 0; i < this.mascota.Foto.length; i++){
+      for (let i = 0; i < this.mascota.Foto.length; i++) {
         // Foto Principal
-        if (this.mascota.Foto[i].esPrincipal){
-          this.fotos.imagenCard.unshift(this.mascota.Foto[i].foto);
+
+        const object1 = {
+          path: this.mascota.Foto[i].foto,
+        };
+        if (this.mascota.Foto[i].esPrincipal) {
+          this.fotos.unshift(object1);
+          this.fotoVisualizar = [];
+          this.fotoVisualizar.push(object1);
         }
-        else{
-          this.fotos.push(this.mascota.Foto[i].foto);
+        else {
+          this.fotos.push(object1);
         }
       }
+      console.log("fotos:")
       console.log(this.fotos)
     }
-    
+
+
 
     this.showSlides(this.slideIndex);
 
@@ -96,8 +106,15 @@ export class VerMascotaComponent implements OnInit {
 
 
   // Next/previous controls
-  plusSlides(n) {
-    this.showSlides(this.slideIndex += n);
+  plusSlides(action: number) {
+    if ((this.slideIndex + action) >= 0 &&  (this.slideIndex + action) < this.fotos.length) {
+      const object1 = {
+        path: this.mascota.Foto[this.slideIndex  + action].foto,
+      };
+      this.fotoVisualizar = [];
+      this.fotoVisualizar.push(object1);
+      this.slideIndex += action;
+    }
   }
 
   // Thumbnail image controls
@@ -106,7 +123,7 @@ export class VerMascotaComponent implements OnInit {
   }
 
   showSlides(n) {
-    let slides =  document.getElementsByClassName("mySlides");
+    let slides = document.getElementsByClassName("mySlides");
     if (n > slides.length) { this.slideIndex = 1 }
     if (n < 1) { this.slideIndex = slides.length }
   }

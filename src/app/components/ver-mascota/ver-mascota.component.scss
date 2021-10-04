@@ -103,8 +103,9 @@ justify-content: center;
 }
 
 .imagen{
-  width: auto;
-  height: 100%;
+  width: 350px;
+  height: 266px;
+  object-fit: cover;
 }
 
 .contenedor-imagen{
@@ -161,15 +162,15 @@ table {
 .prev, .next {
   cursor: pointer;
   position: absolute;
-  top: 50%;
+  top: 30%;
   width: auto;
-  margin-top: -72px;
+  margin-top: -32px;
   padding: 16px;
   color: #00000061;
   font-weight: 700;
   font-size: 18px;
   transition: .6s ease;
-  border-radius: 0 3px 3px 0;
+  border-radius: 50%;
   -webkit-user-select: none;
   user-select: none;
 }
@@ -177,7 +178,7 @@ table {
 /* Position the "next button" to the right */
 .next {
   right: 28%;
-  border-radius: 3px 0 0 3px;
+  margin-right: 4%;
 }
 
 .numbertext {
@@ -190,7 +191,7 @@ table {
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
+  background-color: #f8d5ed
 }
 
 
