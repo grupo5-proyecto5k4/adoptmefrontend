@@ -4,8 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { RegistroMascotasService} from 'src/services/registro-mascotas.service';
 import { MatDialog } from '@angular/material/dialog';
-import { UserFormComponent } from '../components/user-form/user-form.component';
 import { Mascota } from 'src/models/IMascota';
+import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
 export interface Pet {
   name: string;
   age: number;
@@ -92,8 +92,8 @@ export class PublicacionesAdopComponent implements OnInit {
   }
   */
 
-  openUserForm(mascota: Mascota){
-    this.dialog.open(UserFormComponent, {
+  openMascota(mascota: Mascota){
+    this.dialog.open(VerMascotaComponent, {
       data: {
           mascota: mascota,
       }

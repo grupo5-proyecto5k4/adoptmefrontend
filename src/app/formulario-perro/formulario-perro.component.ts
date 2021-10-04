@@ -297,6 +297,7 @@ export class FormularioPerroComponent implements OnInit {
       mascota.descripcion = this.SignupForm.controls.descripcion.value;
 
       console.log(mascota);
+      this.alerts.infoMessage(""+mascota+"", "mascota");
 
 
       this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(

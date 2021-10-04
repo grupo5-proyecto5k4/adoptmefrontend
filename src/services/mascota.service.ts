@@ -45,15 +45,7 @@ registrarVacunas(listaVacunas: any[]): Observable <any[]> {
     return this.httpClient.post<Notificacion>(this.api + '/notificacion/', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
-  /*
-  updateAccount(user: User, token:string): Observable <any> {
-    this.alert.infoMessage(token, "token");
-    return this.httpClient.put(this.api + '/centros/' + user._id, { headers: new HttpHeaders().set('auth-token', `${token}`) })
-    .pipe(
-      map((res: any) => {
-        return res.payload;
-      }));
+  async getVacunas(idMascota: string): Promise <any[]> {
+    return this.httpClient.get<any[]>(this.api + '/vacunas/filtrarVacunaAnimal/'+idMascota).toPromise();
   }
-  */
-
   }
