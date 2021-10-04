@@ -3,7 +3,10 @@ import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angu
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { Mascota } from 'src/models/IMascota';
+import { MatDialog } from '@angular/material/dialog';
 import { RegistroMascotasService} from 'src/services/registro-mascotas.service';
+import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
 
 export interface Pet {
   name: string;
@@ -43,7 +46,7 @@ export class PublicacionesProvComponent implements OnInit {
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
   */
-  constructor(public registroMascotasService:RegistroMascotasService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(public registroMascotasService:RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -104,5 +107,13 @@ export class PublicacionesProvComponent implements OnInit {
       sms = "Adulto"
     }
     return sms
+}
+
+openMascota(mascota: Mascota){
+  this.dialog.open(VerMascotaComponent, {
+    data: {
+        mascota: mascota,
+    }
+})
 }
 }

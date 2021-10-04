@@ -14,16 +14,18 @@
                   </div>
                   <div class="centrado">
                     <form [formGroup]="ProfileForm" class="example-form">
+
+
                       <div class="contenedor-imagen">
                         <div *ngFor=" let foto of fotoVisualizar, index as id">
                           
                           <div>
-                            <img src="{{foto.path}}" style="width:100%">
+                            <img class="imagen" src="{{foto.path}}" style="width:100%">
                           </div>
                         </div>
-                        <!-- Next and previous buttons -->
-                        <a class="prev" (click)="plusSlides(1)">&#10094;</a>
-                        <a class="next" (click)="plusSlides(-1)">&#10095;</a>
+              
+                        <a class="prev" (click)="plusSlides(-1)" *ngIf="fotos.length > 1">&#10094;</a>
+                        <a class="next" (click)="plusSlides(1)" *ngIf="fotos.length > 1">&#10095;</a>
                         <br>
 
                       </div>
@@ -102,8 +104,8 @@
                       <div class="container-row1">
                         <div>
                           <mat-label style="color: #00000070"><u>Datos de vacunaciones:</u><span
-                              style="color: #00000070" class="example-margin" *ngIf="listaVacunas.length == 0">Datos no
-                              especificados</span></mat-label>
+                              style="color: #00000070" class="example-margin" *ngIf="listaVacunas.length == 0">No
+                              especificado</span></mat-label>
                         </div>
                       </div>
 
