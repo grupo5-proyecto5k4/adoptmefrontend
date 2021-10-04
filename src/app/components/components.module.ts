@@ -11,11 +11,14 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { UserFormComponent } from './user-form/user-form.component';
 import { UserProfileModalComponent } from './user-profile-modal/user-profile-modal.component';
+import { VerMascotaComponent } from './ver-mascota/ver-mascota.component';
+import {MatTableModule} from '@angular/material/table';
+
 
 
 
 @NgModule({
-    declarations: [SignupParticularComponent, SignupRescatistComponent, UserFormComponent, UserProfileModalComponent],
+    declarations: [SignupParticularComponent, SignupRescatistComponent, UserFormComponent, UserProfileModalComponent, VerMascotaComponent],
     imports: [
       ReactiveFormsModule,
       FormsModule,
@@ -26,13 +29,15 @@ import { UserProfileModalComponent } from './user-profile-modal/user-profile-mod
       MatTooltipModule,
       MatRadioModule,
       MatCheckboxModule,
+      MatTableModule
     ],
     providers:[],
     exports: [
       SignupParticularComponent,
       SignupRescatistComponent,
       UserFormComponent,
-      UserProfileModalComponent
+      UserProfileModalComponent,
+      VerMascotaComponent
      ]
   })
 export class ComponentsModule{}

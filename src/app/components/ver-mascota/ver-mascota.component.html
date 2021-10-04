@@ -1,0 +1,150 @@
+<mat-dialog-content class="dialog-content">
+
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <section id="cta4">
+        <div class="container">
+          <header>
+            <div class="card-container">
+              <input type=button id="btncerrar" style="margin: 10px;" name=boton value=X matDialogClose>
+              <div class="lower-container">
+                <div>
+                  <div>
+                    <h2 class="subtitulo">{{Titulo}}</h2>
+                  </div>
+                  <div class="centrado">
+                    <form [formGroup]="ProfileForm" class="example-form">
+                      <div class="contenedor-imagen">
+                        <div *ngFor=" let foto of fotos, index as id">
+                          
+                          <div class="mySlides fade">
+                            <div class="numbertext">{{id}} / {{fotos.length}} </div>
+                            <img src="{{foto}}" style="width:100%">
+                          </div>
+                        </div>
+                        <!-- Next and previous buttons -->
+                        <a class="prev" (click)="plusSlides(-1)">&#10094;</a>
+                        <a class="next" (click)="plusSlides(1)">&#10095;</a>
+                        <br>
+
+                      </div>
+
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Tamaño final</mat-label>
+                            <input matInput formControlName="tamañoFinal">
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field class="derecha">
+                            <mat-label>Raza</mat-label>
+                            <input matInput formControlName="raza">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Sexo</mat-label>
+                            <input matInput formControlName="sexo">
+                          </mat-form-field>
+                        </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Fecha de nacimiento estimada</mat-label>
+                            <input matInput formControlName="fechaNacimiento">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Castrado</mat-label>
+                            <input matInput formControlName="castrado">
+                          </mat-form-field>
+                        </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Conducta con niños</mat-label>
+                            <input matInput formControlName="conductaNiños">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Conducta con perros</mat-label>
+                            <input matInput formControlName="conductaPerros">
+                          </mat-form-field>
+                        </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Conducta con gatos</mat-label>
+                            <input matInput formControlName="conductaGatos">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field class="ref">
+                            <mat-label>Descripcion</mat-label>
+                            <textarea matInput formControlName="descripcion" maxlength="150"></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-label style="color: #00000070"><u>Datos de vacunaciones:</u><span
+                              style="color: #00000070" class="example-margin" *ngIf="listaVacunas.length == 0">Datos no
+                              especificados</span></mat-label>
+                        </div>
+                      </div>
+
+
+
+                      <div class="example-full-width" *ngIf="listaVacunas.length > 0">
+                        <table class="my-table" #tabla2>
+                          <thead class="my-table headers">
+                            <tr>
+                              <th *ngFor="let column of columnas">{{column}}</th>
+                            </tr>
+                          </thead>
+                          <tbody class="my-table body">
+                            <tr *ngFor="let vacuna of listaVacunas">
+                              <td>{{ vacuna.nombreVacuna }}</td>
+                              <td>{{ vacuna.cantidadDosis }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+
+
+                      <div class="container-row1" id="botones">
+                        <div style="margin-left:auto;margin-right: auto;">
+                          <a mat-raised-button color="accent" style="padding: 10px;" class="button cancelar"
+                            type="button" id="btncuenta" mat-dialog-close>Cancelar</a>
+                          <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
+                            style="padding: 10px;" (click)="openUserForm()">Adoptar</a>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+    </div>
+  </body>
+</mat-dialog-content>
