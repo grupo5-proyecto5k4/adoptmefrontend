@@ -231,24 +231,17 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   CalculateAge() {
-    const today: Date = new Date();
-    const fechaNacimiento: Date = new Date(this.SignupForm.controls.fechaNacimiento.value);
-    let age: number = today.getFullYear() - fechaNacimiento.getFullYear();
-    const month: number = today.getMonth() - fechaNacimiento.getMonth();
-    if (month < 0 || (month === 0 && today.getDate() < fechaNacimiento.getDate())) {
-      age--;
-    }
-    if (month >= 0 && month < 12) {
-      this.mensajeEdad = "La mascota es cachorro";
-    }
-    else if (month >= 12) {
-      this.mensajeEdad = "La mascota es adulta";
-    }
-    else {
-      this.mensajeEdad = "Fecha de nacimiento no válida";
+    let today = new Date();
+    let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
+    let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
+    if (difference < 365){
+      this.mensajeEdad = "La mascota es cachorro"
+    } else {
+      this.mensajeEdad = "La mascota es adulta"
     }
     this.edadInvalida = true;
-  }
+}
+
 
 
   selectFiles(event) {
