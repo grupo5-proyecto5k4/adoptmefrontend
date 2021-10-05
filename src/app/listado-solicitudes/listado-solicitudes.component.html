@@ -25,8 +25,6 @@
                         <div class="columna2">
                             <mat-card-actions>
                                 <button mat-button class="end" (click)="openSolicitud(solicitud)"><mat-icon>remove_red_eye</mat-icon></button>
-                                <button mat-button class="btnrechazar">Rechazar</button>
-                                <button mat-raised-button color="accent" class="btncuenta">Aceptar</button>
                             </mat-card-actions>
                         </div>
                     </div>
@@ -39,7 +37,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Adopciones">
+        <mat-tab label="Provisorios">
             <div class="margenes container-publicaciones">
                 <mat-card class="card-solicitud" *ngFor="let solicitud of solicitudesProvi">
                     <div class="contenido-card">
@@ -59,9 +57,7 @@
 
                         <div class="columna2">
                             <mat-card-actions>
-                                <button mat-button class="end" (click)="openSolicitud(solicitud)"><mat-icon>remove_red_eye</mat-icon></button>
-                                <button mat-button class="btnrechazar">Rechazar</button>
-                                <button mat-raised-button color="accent" class="btncuenta">Aceptar</button>
+                                <button mat-button class="end btn-ojo" (click)="openSolicitud(solicitud)"><mat-icon>remove_red_eye</mat-icon></button>
                             </mat-card-actions>
                         </div>
                     </div>
