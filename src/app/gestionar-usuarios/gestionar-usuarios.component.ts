@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/auth.service';
 import { User } from 'src/models/IUser';
 import { UserService } from 'src/services/user.service';
 import { AlertsService } from 'src/utils/alerts.service';
+import { UserProfileModalComponent } from '../components/user-profile-modal/user-profile-modal.component';
+
 
 
 @Component({
@@ -134,6 +136,16 @@ export class GestionarUsuariosComponent {
      return "Administrador"
    }
   }
+
+  openUserForm(usuario: User){
+    this.dialog.open(UserProfileModalComponent, {
+      data: {
+          User: usuario,
+      }
+  })
+  }
+
+  
 
   getPaginatorData(event) {
       if (event.pageIndex === this.pageIndex + 1) {

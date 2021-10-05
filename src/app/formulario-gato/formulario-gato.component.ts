@@ -20,6 +20,9 @@ import {vacuna} from '../../models/IVacuna';
 import { MatTable } from '@angular/material/table';
 import {NuevaVacuna} from '../../models/INuevaVacuna';
 import { MascotaService } from 'src/services/mascota.service';
+import { Observable } from 'rxjs';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import {Foto} from '../../models/IFoto';
 
 interface HtmlInputEvent extends Event{
   target: HTMLInputElement & EventTarget;
@@ -35,28 +38,32 @@ export class FormularioGatoComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo="Registro de Gato";
   TituloVacuna="Registro de Vacunaciones";
-  public archivos: any = [];
-  private fileToUpload: File = null;
-  public previsualizacion: string;
+  
+
   public loading: boolean;
-  listaVacunas:any[]=[]; //aca se guardaran todas las vacunas 
   SignupFormVac: FormGroup;
-  vacunas: vacuna []= [];
-  columnas = ['Nombre', 'CantidadDosis','Opciones'];
-  vac: any= {};
-  nuevaVacuna:any= {};
-  nombreVac: string;
-  cantDosis:number;
   verTabla=false;
-  mensajeB= 'Agregar Vacunación';
   edadInvalida: Boolean = false;
   mensajeEdad: string = "";
   isLoading: Boolean = false;
   adoptarChecked: Boolean = false;
   provisorioChecked: Boolean = false;
+  marcaPrincipal: Boolean=false;
 
+  //Lista de archivos seleccionados
+  selectedFiles: FileList;
+  //Es el array que contiene los items para mostrar el progreso de subida de cada archivo
+  progressInfo = []
+  //Mensaje que almacena la respuesta de las Apis
+  message = '';
+  //Nombre del archivo para usarlo posteriormente en la vista html
+  fileName = "";
+  fileInfos: Observable<any>;
+  urls = new Array<string>();
+  previsualizacion: any;
+  
   constructor(private http:HttpClient,private sanitizer: DomSanitizer, private mascotaService:MascotaService, private auth: AuthService, private  alerts: AlertsService,private photo: photoService,private route:Router,private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioGatoComponent>) { }
-  @ViewChild(MatTable) tabla1: MatTable<vacuna>;
+  @ViewChild(MatTable) tabla1: MatTable<Foto>;
   
   ngOnInit(): void {
     this.SignupForm= new FormGroup({
@@ -71,14 +78,10 @@ export class FormularioGatoComponent implements OnInit {
       conductaGatos: new FormControl('',Validators.required),
       conductaPerros: new FormControl('',Validators.required),
       descripcion: new FormControl('',[Validators.required,Validators.maxLength(150),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
-      foto: new FormControl('',Validators.required),
+      //foto: new FormControl('',Validators.required),
     });
 
-    this.SignupFormVac= new FormGroup({
-      nombre: new FormControl('',[Validators.required, Validators.maxLength(30),Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      cantidadDosis: new FormControl('',Validators.required),
-    });
-
+    
     this.dialogRef.disableClose=true;
     
   }
@@ -104,50 +107,12 @@ export class FormularioGatoComponent implements OnInit {
     }
   }
 
-  capturarFile(event): any {
-    const archivoCapturado = event.target.files[0]
-    this.extraerBase64(archivoCapturado).then((imagen: any) => {
-      if (archivoCapturado) {
-        let fileSize = archivoCapturado.size;
-        let fileSizeKb = Math.round(fileSize / 1024);
-        if (fileSizeKb > 5120) {
-          this.alerts.errorMessage('El tamaño máximo de la imagen permitida es de 5MB.')
-          return false;
-        }
-        else {
-          this.previsualizacion = imagen.base;
-          return true;
-        }
-      }
-      else {
-        return true;
-      }       
-     
-    })
-    this.archivos.push(archivoCapturado)
-    
-  }
-
-  borrarFila(cantD: number) {
-    if (this.alerts.errorMessage("Realmente quiere borrarlo?")) {
-      this.vacunas.splice(cantD,1);
-      this.tabla1.renderRows();
+  marcarPrincipal(principal: number){
+    if (principal == 0){
+      this.marcaPrincipal = !this.marcaPrincipal;
     }
   }
-
-  agregar() {
-    this.vacunas.push(this.vac);
-    this.nombreVac=this.vac.nombre;
-    this.cantDosis=this.vac.cantidadDosis;
-    this.tabla1.renderRows();
-    this.vac={};
-  } 
-
-  mostrarVacunas(){
-    this.mensajeB= this.verTabla? 'Agregar Vacunación': 'Cancelar Vacunación';
-    this.verTabla=!this.verTabla;
-   
- }
+  
 
  CalculateAge() {
   const today: Date = new Date();
@@ -169,39 +134,38 @@ export class FormularioGatoComponent implements OnInit {
   this.edadInvalida = true;
 }
 
-  extraerBase64 = async ($event: any) => new Promise((resolve, reject) => {
-    try {
-      const unsafeImg = window.URL.createObjectURL($event);
-      const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-      const reader = new FileReader();
-      reader.readAsDataURL($event);
-      reader.onload = () => {
-        resolve({
-          base: reader.result
-        });
-      };
-      reader.onerror = error => {
-        resolve({
-          base: null
-        });
-      };
 
-    } catch (e) {
-      return null;
+selectFiles(event) {
+  this.progressInfo = [];
+  //Validación para obtener el nombre del archivo si es uno solo
+  //En caso de que sea >1 asigna a fileName length
+  event.target.files.length == 1 ? this.fileName = event.target.files[0].name : this.fileName = event.target.files.length + " imagenes a subir";
+  this.selectedFiles = event.target.files;
+  
+  this.urls = [];
+    
+    if (event.target.files) {
+      for (let file of event.target.files) {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.urls.push(e.target.result);
+        }
+        reader.readAsDataURL(file);
+      }
     }
-  })
+  
+  
+}
 
-  clearImage(): any {
-    this.previsualizacion = '';
-    this.archivos = [];
-  }
-
+clearImage(url:number){  
+  this.urls.splice(url,1);
+}
+ 
   
     registrarAnimal(){
-      this.alerts.confirmMessage("Su mascota ha sido registrada").then((result) => window.location.href = '/');
-               
-      //this.isLoading = true;
-      /*
+                     
+      this.isLoading = true;
+      
       if(this.SignupForm.valid){        
         let mascota: Mascota = new Mascota();
         mascota.tipoMascota=1; 
@@ -218,60 +182,36 @@ export class FormularioGatoComponent implements OnInit {
         mascota.descripcion=this.SignupForm.controls.descripcion.value;
             
         console.log(mascota); 
-        this.alerts.confirmMessage("Su mascota ha sido registrada").then((result)=> window.location.href='/mascotas')
-          
-        /*
+                
+        
        this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
          (resp: Data) => {
-          try {
-            this.loading = true;
-            const formularioDeDatos = new FormData();
-            this.archivos.forEach(archivo => {
-              formularioDeDatos.append('imagen', archivo)
-              formularioDeDatos.append('id_Animal',resp.id_Animal)
-            
-            })
 
-            console.log(formularioDeDatos);
-            let nuevaVac: NuevaVacuna=new NuevaVacuna();
-            nuevaVac.nombreVacuna=this.nombreVac;
-            nuevaVac.cantidadDosis=this.cantDosis;
+        
 
-            this.listaVacunas.push( nuevaVac,resp.id_Animal);
-            //this.listaVacunas.push(resp.id_Animal)
-            
-            console.log(this.listaVacunas);
-            
-            this.mascotaService.registrarVacunas(this.listaVacunas)
-              .subscribe({
-                complete: () => {
-                  this.alerts.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
-                },
-                error: (err: any) => {
-                  this.alerts.errorMessage(err.error.error).then((result) => {
-                    this.isLoading = false;
-                  }
-                )
-                }
+          for (let i = 0; i < this.selectedFiles.length; i++) {
+           this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
+              let foto: Foto=new Foto();
+              foto.foto=this.selectedFiles.item(i);
+              foto.esPrincipal=this.marcaPrincipal;
+
+            this.photo.upload(this.selectedFiles[i],resp.id_Animal).subscribe(
+              event => {
+                console.log('llego la foto');
+                if (event.type === HttpEventType.UploadProgress) {
+                  this.progressInfo[i].value = Math.round(100 * event.loaded / event.total);
+                } 
+              },
+              err => {
+                console.log('no llego la foto');
+                this.progressInfo[i].value = 0;
+                this.message = 'No se puede subir el archivo ';
               });
-            
-            this.http.post(`https://adoptmebackend.herokuapp.com/fotos/imagen/add`, formularioDeDatos)
-              .subscribe(() => {
-                this.loading = false;
-                
-      
-              }, () => {
-                this.loading = false;
-                alert('Error');
-              })
-          } catch (e) {
-            this.loading = false;
-            console.log('ERROR', e);
-      
-          }
-           
+
+          } 
           this.alerts.confirmMessage("Su mascota ha sido registrada").then((result)=> window.location.href='/mascotas')
-         },
+         
+        },
          () => {
            this.alerts.errorMessage("No se ha podido registrar su mascota");
            
@@ -281,7 +221,7 @@ export class FormularioGatoComponent implements OnInit {
 
        }
        
-       */
+      
 
      }
 

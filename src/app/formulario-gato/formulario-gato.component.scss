@@ -454,6 +454,18 @@ input:disabled {
   background-color: #f0b2e3;
 }
 
+.container-publicaciones{
+  background-color:#f8e2f1;
+  justify-content: space-evenly;
+  align-content: space-around;
+  //display: flex;
+  //flex-flow: row wrap;
+}
+
+.card-publicacion {
+  margin-bottom: 20px;
+}
+
 h3 {
   font-size: 1.5em;
   letter-spacing: -0.02em;
