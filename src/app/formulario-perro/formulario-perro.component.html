@@ -42,9 +42,10 @@
                                         <mat-form-field class="example-form" style="float: left;">
                                             <mat-label>*Tamaño final</mat-label>
                                             <mat-select formControlName="tamaño">
-                                                <mat-option value="Pequeño">Pequeño</mat-option>
-                                                <mat-option value="Mediano">Mediano</mat-option>
-                                                <mat-option value="Grande">Grande</mat-option>
+                                                <mat-option *ngIf="animal == 0" value="Pequeño">Pequeño</mat-option>
+                                                <mat-option *ngIf="animal == 0" value="Mediano">Mediano</mat-option>
+                                                <mat-option *ngIf="animal == 0" value="Grande">Grande</mat-option>
+                                                <mat-option *ngIf="animal == 1" value="No aplica">No aplica</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                         <span class="help-block" *ngIf="((SignupForm.get('tamaño').touched ||

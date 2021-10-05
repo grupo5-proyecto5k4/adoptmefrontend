@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormGroupDirective, NgForm, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
@@ -36,9 +36,9 @@ interface HtmlInputEvent extends Event {
 export class FormularioPerroComponent implements OnInit {
 
   SignupForm: FormGroup;
-  Titulo = "Registro de Perro";
+  Titulo = "";
 
-
+  private animal: number;
   public loading: boolean;
   SignupFormVac: FormGroup;
   verTabla = false;
@@ -68,11 +68,20 @@ export class FormularioPerroComponent implements OnInit {
   urls = new Array<string>();
   previsualizacion: any;
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer, private mascotaService: MascotaService, private auth: AuthService, private alerts: AlertsService, private photo: photoService, private route: Router, private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioPerroComponent>) { }
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer, @Inject(MAT_DIALOG_DATA) public data: any, private mascotaService: MascotaService, private auth: AuthService, private alerts: AlertsService, private photo: photoService, private route: Router, private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioPerroComponent>) { }
   @ViewChild(MatTable) tabla1: MatTable<Foto>;
   @ViewChild(MatTable) tabla2: MatTable<NuevaVacuna>;
 
   ngOnInit(): void {
+
+    this.animal = this.data.tipoMascota;
+    if (this.animal == 0){
+      this.Titulo = "Registrar Perro"
+    }
+    else{
+      this.Titulo = "Registrar Gato"
+    }
+
     this.SignupForm = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       estado: new FormControl('', Validators.required),
@@ -276,7 +285,7 @@ export class FormularioPerroComponent implements OnInit {
 
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
       let mascota: Mascota = new Mascota();
-      mascota.tipoMascota = 0;
+      mascota.tipoMascota = this.data.tipoMascota;
       mascota.nombreMascota = this.SignupForm.controls.nombre.value;
       mascota.estado = this.SignupForm.controls.estado.value;
       mascota.fechaNacimiento = (this.SignupForm.controls.fechaNacimiento.value).toLocaleString();;
