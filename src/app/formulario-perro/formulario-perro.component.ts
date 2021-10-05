@@ -75,10 +75,10 @@ export class FormularioPerroComponent implements OnInit {
   ngOnInit(): void {
 
     this.animal = this.data.tipoMascota;
-    if (this.animal == 0){
+    if (this.animal == 0) {
       this.Titulo = "Registrar Perro"
     }
-    else{
+    else {
       this.Titulo = "Registrar Gato"
     }
 
@@ -195,7 +195,7 @@ export class FormularioPerroComponent implements OnInit {
     return (((this.SignupFormVac.get('nombre').touched ||
       this.SignupFormVac.get('nombre').dirty) &&
       this.SignupFormVac.get('nombre').errors));
-  }  
+  }
 
   validateDosis() {
     return (((this.SignupFormVac.get('cantidadDosis').touched ||
@@ -211,7 +211,7 @@ export class FormularioPerroComponent implements OnInit {
     }
   }
 
-  validateVacunas(){
+  validateVacunas() {
     if (this.SignupFormVac.valid) {
       document.getElementById("btnVacuna").classList.remove("buttonDisabled");
     } else {
@@ -220,17 +220,18 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   agregar() {
+    if (this.SignupFormVac.valid) {
+      const object1 = {
+        nombre: this.SignupFormVac.controls.nombre.value,
+        cantidadDosis: this.SignupFormVac.controls.cantidadDosis.value,
+      };
 
-    const object1 = {
-      nombre: this.SignupFormVac.controls.nombre.value,
-      cantidadDosis: this.SignupFormVac.controls.cantidadDosis.value,
-    };
+      this.listaVacunas.push(
+        object1
+      );
 
-    this.listaVacunas.push(
-      object1
-    );
-
-    console.log("listado vacunas: " + this.listaVacunas)
+      console.log("listado vacunas: " + this.listaVacunas)
+    }
   }
 
 
@@ -243,13 +244,13 @@ export class FormularioPerroComponent implements OnInit {
     let today = new Date();
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
-    if (difference < 365){
+    if (difference < 365) {
       this.mensajeEdad = "La mascota es cachorro"
     } else {
       this.mensajeEdad = "La mascota es adulta"
     }
     this.edadInvalida = true;
-}
+  }
 
 
 
@@ -297,9 +298,6 @@ export class FormularioPerroComponent implements OnInit {
       mascota.conductaGatos = this.SignupForm.controls.conductaGatos.value;
       mascota.conductaPerros = this.SignupForm.controls.conductaPerros.value;
       mascota.descripcion = this.SignupForm.controls.descripcion.value;
-
-      console.log(mascota);
-      this.alerts.infoMessage(""+mascota+"", "mascota");
 
 
       this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
