@@ -1,6 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-visualizacion-solicitud',
@@ -12,7 +12,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
   SolicitudForm:any;
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {

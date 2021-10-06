@@ -34,6 +34,7 @@ export class VerMascotaComponent implements OnInit {
   slideIndex = 0;
   fotos: any = [];
   fotoVisualizar: any = [];
+  accion: any;
 
   constructor(private authservice: AuthService, private mascotaService: MascotaService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private alertsService: AlertsService, private router: Router) {
 
@@ -43,6 +44,7 @@ export class VerMascotaComponent implements OnInit {
 
     //obtengo el usuario
     this.mascota = this.data.mascota;
+    this.accion = this.data.accion;
 
     console.log("slideIndex:")
     console.log(this.slideIndex)
