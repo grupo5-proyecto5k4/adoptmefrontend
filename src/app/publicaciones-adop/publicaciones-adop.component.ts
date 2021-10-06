@@ -96,6 +96,7 @@ export class PublicacionesAdopComponent implements OnInit {
     this.dialog.open(VerMascotaComponent, {
       data: {
           mascota: mascota,
+          accion: 1
       }
   })
   }
