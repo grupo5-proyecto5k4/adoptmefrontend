@@ -33,7 +33,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();;
+    return this.notificar(notificacion, token)
   }
 
   notificarSolicitudProvisorio(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -43,6 +43,30 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
+  notificarConfirmacionAdopcion(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Confirmacion de adopción";
+    notificacion.descripcion = "La solicitud de adopción de "+nombreMascota+" ha sido aceptada";
+    notificacion.objetoAMostrar = "Adopcion";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
+  notificarConfirmacionProvisorio(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Confirmacion de provisorio";
+    notificacion.descripcion = "La solicitud de provisorio de "+nombreMascota+" ha sido aceptada";
+    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
+  notificar(notificacion: Notificacion, token:string): Promise <any>{
     return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();;
   }
 
