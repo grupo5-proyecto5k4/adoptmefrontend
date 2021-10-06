@@ -10,6 +10,10 @@ import { stringify } from '@angular/compiler/src/util';
 import { AlertsService } from 'src/utils/alerts.service';
 import { NotificacionService } from 'src/services/notificacion.service';
 import { Notificacion } from 'src/models/INotificacion';
+import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
+import { ThrowStmt } from '@angular/compiler';
+import { MatDialog } from '@angular/material/dialog';
+import { VisualizacionSolicitudComponent } from '../visualizacion-solicitud/visualizacion-solicitud.component';
 
 
 
@@ -36,7 +40,7 @@ export class NavbarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private notificacionService: NotificacionService, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
+  constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog, private notificacionService: NotificacionService, private visualizarService: VisualizacionSolicitudesService, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
     this.profile = this.localStorageService.getProfile();
     if (this.isLogued()) {
       this.currentUser = this.authservice.getCurrentUser();
@@ -95,6 +99,24 @@ showNotifications(){
 
 }
 
+async abrirNotificacion(notificacion: Notificacion){
+  this.marcarLeida(notificacion);
+  if (notificacion.objetoAMostrar == "Adopcion" || notificacion.objetoAMostrar == "Provisorio"){
+    
+    let solicitud = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
+
+    this.dialog.open(VisualizacionSolicitudComponent, {
+      data: {
+        solicitud: solicitud,
+      }
+    });
+
+
+  }
+}
+
+
+
 
 async marcarLeida(notificacion: Notificacion){
   if (notificacion.leida == 0) {
@@ -102,7 +124,6 @@ async marcarLeida(notificacion: Notificacion){
     this.cantNotifNoLeidas --;
     let notificacionLeida: Notificacion = { _id: notificacion._id, leida: 1, nombreNotificacion: notificacion.nombreNotificacion, descripcion: notificacion.descripcion };
     await this.notificacionService.updateNotificacion(notificacionLeida, this.authservice.getToken())
-    this.alertsService.infoMessage("Hola!! hiciste click en la notificación, como la leíste fijate que ahora no te aparece el puntito rosa! Saludos!", "Notificación")
   }
   //acá va el código o la llamada a la función que abra el modal o página en base al tipo de objeto que se esté abriendo
 }

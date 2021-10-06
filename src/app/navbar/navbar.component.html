@@ -48,7 +48,7 @@
       <div class="titleNotificacion">
       <h2>Notificaciones</h2>
     </div>
-      <div *ngFor="let noti of notificaciones" class="notificacion-box" (click)="marcarLeida(noti)">
+      <div *ngFor="let noti of notificaciones" class="notificacion-box" (click)="abrirNotificacion(noti)">
         <div class="notificationContent">
           <mat-label><strong>{{noti.nombreNotificacion}}</strong></mat-label><br>
           <mat-label>{{noti.descripcion}}</mat-label>
