@@ -113,6 +113,7 @@ openMascota(mascota: Mascota){
   this.dialog.open(VerMascotaComponent, {
     data: {
         mascota: mascota,
+        accion: 0
     }
 })
 }
