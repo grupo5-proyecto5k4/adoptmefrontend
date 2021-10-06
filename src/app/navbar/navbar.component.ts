@@ -99,11 +99,11 @@ showNotifications(){
 
 }
 
-abrirNotificacion(notificacion: Notificacion){
+async abrirNotificacion(notificacion: Notificacion){
   this.marcarLeida(notificacion);
   if (notificacion.objetoAMostrar == "Adopcion" || notificacion.objetoAMostrar == "Provisorio"){
     
-    let solicitud = this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
+    let solicitud = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
 
     this.dialog.open(VisualizacionSolicitudComponent, {
       data: {
