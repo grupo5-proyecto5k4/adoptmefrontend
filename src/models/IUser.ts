@@ -15,7 +15,7 @@ interface IUser {
     fechaModificacion?: Date;
     tipoUsuario?: number;
     contrasenia: string;
-    Direccion: Address;   
+    Direccion?: Address;   
     }
   
     export class User implements IUser {
@@ -33,7 +33,7 @@ interface IUser {
       fechaModificacion?: Date;
       tipoUsuario?: number;
       contrasenia: string;
-      Direccion: Address; 
+      Direccion?: Address; 
     
       constructor() {
         };

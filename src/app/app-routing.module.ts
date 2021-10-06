@@ -8,26 +8,39 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
-import {RegistroMascotaComponent} from '../app/registro-mascota/registro-mascota.component';
 import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
 import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
-
+import { CenterProfileComponent } from './center-profile/center-profile.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
+import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
+import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
+import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
+import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
+import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 const routes: Routes = [
   {
     path: 'adoptar',
     component: PublicacionesAdopComponent
   },
   {
-    
     path: 'provisorio',
-    component: UnderConstructionComponent
+    component: PublicacionesProvComponent
   },
   {path: 'inicio-sesion',
-    component:InicioSesionComponent},
+    component: InicioSesionComponent
+  },
   {
     path: 'mascotas',
     component: RegistroMascotaComponent
   },
+  {
+    path: 'registrar-mascota',
+    component: NuevaMascotaComponent
+  },
+
   {
     path: 'donaciones',
     component: UnderConstructionComponent
@@ -38,7 +51,7 @@ const routes: Routes = [
   },
   {
     path: 'gestionar-usuarios',
-    component: UnderConstructionComponent
+    component: GestionarUsuariosComponent
   },
   {
     path: 'gestionar-mascotas',
@@ -49,8 +62,24 @@ const routes: Routes = [
     component: UnderConstructionComponent
   },
   {
+    path: 'miperfil',
+    component: UserProfileComponent
+  },
+  {
+    path: 'micentro',
+    component: CenterProfileComponent
+  },
+  {
+    path: 'perfiladmin',
+    component: AdminProfileComponent
+  },
+  {
     path: 'visualizar-provisorios',
     component: UnderConstructionComponent
+  },
+  {
+    path: 'administrar-recomendaciones',
+    component: AdministrarRecomendacionesComponent
   },
   {
     path: 'habilitar-centros-rescatistas',
@@ -72,10 +101,18 @@ const routes: Routes = [
     path: 'mapas',
     component: LeaftletPathComponent
   },
-
   {
+
     path: 'faqs',
     component: FaqsComponent
+  },
+  {
+    path: 'vacunaciones',
+    component: VacunacionesComponent
+  },
+  {
+    path: 'solicitudes',
+    component: ListadoSolicitudesComponent
   },
   {
     path: '', redirectTo: '/landing', pathMatch: 'full'

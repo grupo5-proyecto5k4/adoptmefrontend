@@ -1,0 +1,81 @@
+<div class="logout-container">
+    <button mat-button type="button" color="accent" class="btnLogout" (click)="logOut()">Cerrar sesión</button>
+</div>
+<h1 class="titulo">Mi Perfil</h1>
+<br>
+<br>
+
+<div class="centrado">
+    <form [formGroup]="ProfileForm" class="example-form" *ngIf="currentUser">
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombres">
+                </mat-form-field>
+            </div>
+
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="apellidos">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field>
+                    <mat-label>DNI</mat-label>
+                    <input matInput formControlName="dni">
+                </mat-form-field>
+            </div>
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput formControlName="fechaNacimiento">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field class="ref">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput formControlName="correoElectronico">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field>
+                    <mat-label>Instagram</mat-label>
+                    <input matInput formControlName="instagram">
+                </mat-form-field>
+            </div>
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Facebook</mat-label>
+                    <input matInput formControlName="facebook">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field>
+                    <mat-label>Número de contacto</mat-label>
+                    <input matInput formControlName="numeroContacto">
+                </mat-form-field>
+            </div>
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="contrasenia">
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>

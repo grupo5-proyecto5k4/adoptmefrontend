@@ -1,61 +1,77 @@
-<mat-dialog-content class="dialog-content">
+    
+<h3 class="titulo">Mis mascotas</h3>
+<div class="new-container">
+    <a mat-raised-button routerLink="/registrar-mascota" color="accent" id="btncuenta">Registrar nueva mascota</a>
+</div>
+<div class="new-container espacio">
+    <a mat-raised-button routerLink="/solicitudes" color="accent" id="btncuenta">Visualizar solicitudes</a>
+</div>
 
-    <body class="is-preload">
-      <div id="page-wrapper">
-          <section id="cta4">
-              <header>
-                  <div class="card-container">
-                      <div class="upper-container">
-                          <h3 class="subtitulo">{{Titulo}}</h3>
-                      </div>
+    <div class="container-principal">
+        <mat-tab-group>
 
-                     <div class="container">
-                        <div>
-                          <mat-card class="registroPerro">
-                            <mat-card-header>
-                                <mat-card-title id="titGato">Registrar Perro</mat-card-title>
-                                
-                              </mat-card-header>
-                              
-                              <mat-card-content>
-                                <p id="parraf">
-                                  Registra un perro para que pueda ser adoptado o encuentre un hogar provisorio 
-                                  dentro de la ciudad de Córdoba Capital.
-                                </p>
-                              </mat-card-content>
-                              <mat-card-actions>
-                                  <button mat-raised-button class="btnRegistro" (click)="signupPerro()">Registrar</button>
-                              </mat-card-actions>
-                          </mat-card>  
-
-                         <mat-card class="registroGato">
-                             <mat-card-header>
-                                <mat-card-title id="titGato">Registrar Gato</mat-card-title>
-                             </mat-card-header>
-
-                             <mat-card-content>
-                                <p id="parraf">
-                                  Registra un gato para que pueda ser adoptado o encuentre un hogar provisorio 
-                                  dentro de la ciudad de Córdoba Capital.
-                                </p>
-                              </mat-card-content>
-                              <mat-card-actions>
-                                  <button mat-raised-button class="btnRegistro" (click)="signupGato()">Registrar</button>
-                              </mat-card-actions>
-                         </mat-card> 
+            <mat-tab label="Disponibles">
+                <div class="margenes container-publicaciones">
+                    <mat-card class="card-publicacion" *ngFor=" let pet of mascotasUsuario">
+                        <mat-card-header>
+                            <mat-card-title class="card-title">
+                                <div class=primer-renglon>
+                                    <div class="sin-overflow">{{pet.nombreMascota}}</div>
+                                    <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>
+                                </div> 
+                            </mat-card-title>
+                            <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <div class="contenedor-imagen">
+                            <img mat-card-image src={{pet.imagenCard}} alt="Imagen de la mascota" class="imagen">
                         </div>
-                     </div> 
-                   
+                        <mat-card-content class="card-description">
+                            <div class="sin-overflow-description">{{pet.descripcion}}</div> 
+                            <div class="estado-container">
+                                <p class="estado">{{pet.estado}}</p>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button>EDITAR</button>
+                        </mat-card-actions>
+                    </mat-card>
+                    <div *ngIf="mascotasUsuario.length == 0">
+                        <h2>Por el momento no tienes mascotas que estén buscando adopción u hogar provisorio...</h2>
+                    </div>
+                </div>
+            </mat-tab>
 
 
-                      
-                  </div>
-              </header>
-          </section>
-      </div>
 
-
-    </body>
-
-
-</mat-dialog-content>
+            <mat-tab label="No disponibles">
+            <div class="margenes container-publicaciones">
+                <mat-card class="card-publicacion" *ngFor=" let pet of mascotasUsuarioNoDisponibles">
+                    <mat-card-header>
+                        <mat-card-title class="card-title">
+                            <div class=primer-renglon>
+                                <div class="sin-overflow">{{pet.nombreMascota}}</div>
+                                <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>
+                            </div> 
+                        </mat-card-title>
+                        <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="contenedor-imagen">
+                        <img mat-card-image src={{pet.imagenCard}} alt="Imagen de la mascota" class="imagen">
+                    </div>
+                    <mat-card-content class="card-description">
+                        <div class="sin-overflow-description">{{pet.descripcion}}</div> 
+                        <div class="estado-container">
+                            <p class="estado">{{pet.estado}}</p>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button>EDITAR</button>
+                    </mat-card-actions>
+                </mat-card>
+                <div *ngIf="mascotasUsuarioNoDisponibles.length == 0">
+                    <h2>Por el momento no tienes mascotas que hayan sido adoptadas o estén en provisorio...</h2>
+                </div>
+            </div>
+        </mat-tab>
+        </mat-tab-group>
+    </div>

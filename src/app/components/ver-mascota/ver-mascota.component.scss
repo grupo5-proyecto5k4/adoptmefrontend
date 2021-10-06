@@ -1,0 +1,320 @@
+
+
+.card-container{
+  width: 50%;
+  min-height: 60%;
+  height: auto;
+  border-radius: 15px;
+  position: absolute;
+  top: 46.5%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  box-shadow: 0px 1px 10px 1px #000;
+  overflow: hidden;
+  display: inline-block;
+  background: rgb(255, 245, 237);
+  overflow-y: auto !important;
+  max-height: 83%;
+  margin-top: 5%;
+  padding-bottom: 2% !important;
+  }
+
+  .example-margin {
+    margin: 10px 5px;
+    margin-top: 0px;
+  }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  border-radius: 15px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  margin:3px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px rgb(255, 245, 237) inset;
+}
+
+
+.subtitulo{
+  font-size: 200% !important;
+  font-family: 'Times New Roman';
+  font-style: bold;
+  margin: 50px 0px 20px 30px;
+  text-align: center;
+}
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.centrado{
+display: flex;
+flex-direction: row;
+justify-content: center;
+}
+
+#btncerrar{
+  color:#B80092;
+  cursor: pointer;
+  float:right;
+  border-color:transparent;
+  background-color: transparent;
+  outline: none;
+  border-radius: 3px;
+  margin-right: 0%;
+  margin-top: 0%;
+  line-height: 36px;
+  width: 36px;
+  font-size: 150%;
+}
+
+#btncuenta, #confirmar{
+  color: #EBEEF1;
+  background-color: #c50fa1;
+  min-width: 64px;
+  line-height: 36px;
+  //padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+.cancelar{
+  margin-right: 2px;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+
+#botones{
+  margin-top: 6%;
+}
+
+.imagen{
+  width: 350px;
+  height: 266px;
+}
+
+.contenedor-imagen{
+  width: 350px;
+  height: 266px;
+  overflow: hidden;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
+  border: 1px solid #000000de;
+}
+
+
+table {
+  width: 100%;
+  background-color: #f8e2f1;
+  margin-left: auto;
+  margin-right: auto;
+  
+  }
+  
+  table.my-table {
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+  
+  thead.my-table.headers tr th {
+        border: 1px solid #000000de;
+        background-color: #d996cc;
+        color: #000000de;
+        height: 25px;
+        width: 50%;
+  }
+  
+  tbody.my-table.body tr td {
+    border: 1px solid #000000de;
+    height: 25px;
+  }
+  
+  tbody.my-table.body tr td.last {
+    border-right: none;
+  }
+  
+  tbody.my-table.body tr.active {
+    background-color: gainsboro;
+    cursor: pointer;
+  }
+
+  /* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 30%;
+  width: auto;
+  margin-top: -30px;
+  padding: 16px;
+  color: #00000061;
+  font-weight: 700;
+  font-size: 18px;
+  transition: .6s ease;
+  border-radius: 50%;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 20%;
+  margin-right: 4%;
+}
+
+.numbertext {
+  color: #aaaaaa;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: #f8d5ed
+}
+
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.logo{
+  margin-bottom: -15px;
+  width: 40px;
+  height: 40px;
+  }
+  
+  .confirmar {
+  margin-left: 2px;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  }
+  
+
+// MEDIAS QUERIES
+
+.container-row1{
+    display:flex;
+    flex-direction:row;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.derecha{
+    margin-left: 20px;
+}
+
+.ref{
+    width: 510px;
+}
+
+mat-form-field{
+    width: 245px;
+}
+
+textarea{
+    width: 510px;
+}
+
+
+@media (max-width: 599px){
+    .container-row1{
+    flex-direction: column;}
+
+    .derecha{
+        margin-left: 0px;
+    }
+
+    .card-container, table{
+      width: 95% !important;
+      }
+
+      .ref, textarea, table{
+        width: 245px !important;
+    }
+
+    .contenedor-imagen, .imagen{
+      width: 245px;
+      height: 180px;
+  }
+
+    /* Next & previous buttons */
+  .prev, .next {
+    margin-top: -10px;
+  }
+
+}
+
+
+
+@media (min-width: 600px) and (max-width: 1099px)
+{
+  
+  .card-container{
+      top: 43.5% !important;
+      width: 90% !important;
+      }
+
+            /* Next & previous buttons */
+  .prev, .next {
+    margin-top: 35px;
+  }
+
+  /* Position the "next button" to the right */
+  .next {
+    right: 20%;
+  }
+  
+}
+
+
+@media (min-width: 1100px){
+
+  .card-container{
+      top: 40% !important;
+      width: 50% !important;
+      }
+
+}
+
