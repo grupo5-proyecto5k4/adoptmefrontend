@@ -29,7 +29,7 @@ export class VerMascotaComponent implements OnInit {
   ProfileForm: FormGroup;
   mascota: any;
   Titulo = "";
-  columnas = ['Nombre', 'Cantidad dosis'];
+  columnas = ['Nombre', 'Fecha de aplicacion'];
   listaVacunas: any = []; //aca se guardaran todas las vacunas
   slideIndex = 0;
   fotos: any = [];

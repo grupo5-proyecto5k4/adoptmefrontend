@@ -333,7 +333,7 @@
                                                     </span>
                                                 </span>
                                                 <span class="help-block blank"
-                                                    *ngIf="(validateDosis() && !validateNombreVac())">
+                                                    *ngIf="(validateFechaAplicacion() && !validateNombreVac())">
                                                     <span>
                                                         <h6 class="helpError"
                                                             style="color: rgb(255, 250, 250) !important;">
@@ -346,20 +346,19 @@
 
                                             <div class="derecha">
                                                 <mat-form-field class="example-full-width">
-                                                    <mat-label>*Cantidad de dosis</mat-label>
-                                                    <input matInput type="number" [(ngModel)]="vac.cantidadDosis"
-                                                        formControlName="cantidadDosis" class="form-control" min="0"
-                                                        max="10">
+                                                    <mat-label>*Fecha de aplicacion</mat-label>
+                                                    <input matInput type="date" [(ngModel)]="vac.fechaAplicacion"
+                                                        formControlName="fechaAplicacion" class="form-control">
                                                 </mat-form-field>
                                                 <span class="help-block"
-                                                    *ngIf="((SignupFormVac.get('cantidadDosis').touched ||
-                                          SignupFormVac.get('cantidadDosis').dirty) && SignupFormVac.get('cantidadDosis').errors)">
-                                                    <span *ngIf="SignupFormVac.get('cantidadDosis').errors.required">
+                                                    *ngIf="((SignupFormVac.get('fechaAplicacion').touched ||
+                                          SignupFormVac.get('fechaAplicacion').dirty) && SignupFormVac.get('fechaAplicacion').errors)">
+                                                    <span *ngIf="SignupFormVac.get('fechaAplicacion').errors.required">
                                                         <h6 class="helpError">Campo requerido</h6>
                                                     </span>
                                                 </span>
                                                 <span class="help-block blank"
-                                                    *ngIf="(!validateDosis() && validateNombreVac())">
+                                                    *ngIf="(!validateFechaAplicacion() && validateNombreVac())">
                                                     <span>
                                                         <h6 class="helpError"
                                                             style="color: rgb(255, 250, 250) !important;">
@@ -386,7 +385,7 @@
                                                         <tbody class="my-table body">
                                                             <tr *ngFor="let vacuna of listaVacunas">
                                                                 <td>{{ vacuna.nombre }}</td>
-                                                                <td>{{ vacuna.cantidadDosis }}</td>
+                                                                <td>{{ vacuna.fechaAplicacion }}</td>
                                                                 <td (click)="borrarFila(index)">🗑️</td>
                                                             </tr>
                                                         </tbody>

@@ -49,11 +49,9 @@ export class FormularioPerroComponent implements OnInit {
   provisorioChecked: Boolean = false;
   marcaPrincipal: Boolean = false;
   listaVacunas = []; //aca se guardaran todas las vacunas
-  columnas = ['Nombre', 'Cantidad dosis', 'Opciones'];
+  columnas = ['Nombre', 'Fecha de aplicacion', 'Opciones'];
   vac: any = {};
   nuevaVacuna: any = {};
-  nombreVac: string;
-  cantDosis: number;
   mensajeB = '💉 Registrar vacunaciones';
 
   //Lista de archivos seleccionados
@@ -99,7 +97,7 @@ export class FormularioPerroComponent implements OnInit {
 
     this.SignupFormVac = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      cantidadDosis: new FormControl('', Validators.required),
+      fechaAplicacion: new FormControl('', Validators.required),
     });
 
 
@@ -197,10 +195,10 @@ export class FormularioPerroComponent implements OnInit {
       this.SignupFormVac.get('nombre').errors));
   }
 
-  validateDosis() {
-    return (((this.SignupFormVac.get('cantidadDosis').touched ||
-      this.SignupFormVac.get('cantidadDosis').dirty) &&
-      this.SignupFormVac.get('cantidadDosis').errors));
+  validateFechaAplicacion() {
+    return (((this.SignupFormVac.get('fechaAplicacion').touched ||
+      this.SignupFormVac.get('fechaAplicacion').dirty) &&
+      this.SignupFormVac.get('fechaAplicacion').errors));
   }
 
   validateButton() {
@@ -223,7 +221,7 @@ export class FormularioPerroComponent implements OnInit {
     if (this.SignupFormVac.valid) {
       const object1 = {
         nombre: this.SignupFormVac.controls.nombre.value,
-        cantidadDosis: this.SignupFormVac.controls.cantidadDosis.value,
+        fechaAplicacion: this.SignupFormVac.controls.fechaAplicacion.value,
       };
 
       this.listaVacunas.push(
@@ -282,7 +280,7 @@ export class FormularioPerroComponent implements OnInit {
 
   registrarAnimal() {
 
-    this.isLoading = true;
+    //this.isLoading = true;
 
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
       let mascota: Mascota = new Mascota();
@@ -298,6 +296,9 @@ export class FormularioPerroComponent implements OnInit {
       mascota.conductaGatos = this.SignupForm.controls.conductaGatos.value;
       mascota.conductaPerros = this.SignupForm.controls.conductaPerros.value;
       mascota.descripcion = this.SignupForm.controls.descripcion.value;
+
+      console.log(mascota);
+
 
 
       this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
@@ -321,15 +322,15 @@ export class FormularioPerroComponent implements OnInit {
                 this.progressInfo[i].value = 0;
                 this.message = 'No se puede subir el archivo ';
               });
-
           }
+
 
           let vacunasAnimal = [];
 
           for (let i = 0; i < this.listaVacunas.length; i++) {
             let nuevaVac: NuevaVacuna = new NuevaVacuna();
             nuevaVac.nombreVacuna = this.listaVacunas[i].nombre;
-            nuevaVac.cantidadDosis = this.listaVacunas[i].nombre;
+            nuevaVac.fechaAplicacion = this.listaVacunas[i].fechaAplicacion;
             nuevaVac.id_Animal = resp.id_Animal;
 
             vacunasAnimal.push(nuevaVac);
@@ -353,6 +354,7 @@ export class FormularioPerroComponent implements OnInit {
           this.alerts.errorMessage("No se ha podido registrar su mascota");
 
         }
+
       )
 
 

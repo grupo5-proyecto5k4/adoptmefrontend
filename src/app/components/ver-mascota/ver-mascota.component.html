@@ -121,7 +121,7 @@
                           <tbody class="my-table body">
                             <tr *ngFor="let vacuna of listaVacunas">
                               <td>{{ vacuna.nombreVacuna }}</td>
-                              <td>{{ vacuna.cantidadDosis }}</td>
+                              <td>{{ vacuna.fechaAplicacion }}</td>
                             </tr>
                           </tbody>
                         </table>
@@ -136,7 +136,7 @@
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
                             style="padding: 10px;" (click)="openUserForm()" *ngIf="accion === 1">Adoptar</a>
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
-                            style="padding: 10px;" *ngIf="accion === 0">Ser Provisorio</a>
+                            style="padding: 10px;" *ngIf="accion === 0">Dar Provisorio</a>
                         </div>
                       </div>
 

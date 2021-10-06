@@ -1,7 +1,7 @@
 interface INuevaVacuna{
     _id?:string;
     nombreVacuna:string;
-    cantidadDosis:number;
+    fechaAplicacion:Date;
     fechaCreacion?: Date;
     fechaModificacion?: Date;
     id_Animal:string;
@@ -10,7 +10,7 @@ interface INuevaVacuna{
    export class NuevaVacuna implements INuevaVacuna{
        _id?:string;
        nombreVacuna:string;
-       cantidadDosis:number;
+       fechaAplicacion:Date;
        fechaCreacion?: Date;
        fechaModificacion?: Date;
        id_Animal:string;
