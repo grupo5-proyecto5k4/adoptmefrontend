@@ -12,9 +12,6 @@
     margin-bottom: 10px;
 }
 
-.btnrechazar{
-    color: red;
-}
 
 .return-container{
     display: flex;
@@ -91,6 +88,7 @@
 
 .columna2{
     margin-left: 200px;
+    flex-flow: nowrap;
 }
 
 /* Medias Query ----------------------------------------------  */

@@ -51,8 +51,4 @@ export class ListadoSolicitudesComponent implements OnInit {
   openSolicitud(soli){
     this.dialog.open(VisualizacionSolicitudComponent, {data: {solicitud: soli}});
   }
-
-  //PEDIR A EVA QUE CUANDO NO HAYA SOLICITUDES DEVUELVA 200 CON ARRAY vacio
-  //NO HAY QUE DEJAR QUE UNA MISMA PERSONA HAGA UNA SOLICITUD PARA UNA DE SUS MASCOTAS
-  //RAMONA DIAS EN CERO
 }
