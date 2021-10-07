@@ -385,8 +385,8 @@
                                                         <tbody class="my-table body">
                                                             <tr *ngFor="let vacuna of listaVacunas">
                                                                 <td>{{ vacuna.nombre }}</td>
-                                                                <td>{{ vacuna.fechaAplicacion }}</td>
-                                                                <td (click)="borrarFila(index)">🗑️</td>
+                                                                <td>{{ vacuna.fechaAplicacion | date:'dd/MM/yyyy'}}</td>
+                                                                <td (click)="borrarFila(vacuna)">🗑️</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
@@ -428,18 +428,6 @@
                                             type="button" id="btncuenta">
                                             <img class=logo src="../../../assets/images/loading.gif" /></a>
                                     </div>
-
-                                    <!--
-                                    <div>
-                                        <a mat-raised-button color="accent" class="button" *ngIf="!isLoading"
-                                            id="btnRegistro" style="margin-right: 3px;" type="button"
-                                            mat-dialog-close>Cancelar</a>
-                                        <a mat-raised-button color="accent" class="button" id="btnRegistro" type="button" (click)="registrarAnimal()">Aceptar</a>
-                                        <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading"
-                                            type="button" id="btncuenta">
-                                            <img class=logo src="../../assets/images/loading.gif" /></a>
-                                    </div>
-                                -->
                                 </form>
                             </div>
                         </div>

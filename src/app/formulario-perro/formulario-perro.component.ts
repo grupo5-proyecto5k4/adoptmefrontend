@@ -227,15 +227,19 @@ export class FormularioPerroComponent implements OnInit {
       this.listaVacunas.push(
         object1
       );
-
-      console.log("listado vacunas: " + this.listaVacunas)
     }
   }
 
 
-  borrarFila(cantD: number) {
+  borrarFila(vacuna: NuevaVacuna) {
+    let cantD = 0;
+    for (let i = 0; i < this.listaVacunas.length; i++){
+      if (vacuna == this.listaVacunas[i]){
+        cantD = i;
+        break
+      }
+    }
     this.listaVacunas.splice(cantD, 1);
-    this.tabla2.renderRows();
   }
 
   CalculateAge() {
@@ -280,7 +284,7 @@ export class FormularioPerroComponent implements OnInit {
 
   registrarAnimal() {
 
-    //this.isLoading = true;
+    this.isLoading = true;
 
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
       let mascota: Mascota = new Mascota();
@@ -312,13 +316,11 @@ export class FormularioPerroComponent implements OnInit {
 
             this.photo.upload(this.selectedFiles[i], resp.id_Animal).subscribe(
               event => {
-                console.log('llego la foto');
                 if (event.type === HttpEventType.UploadProgress) {
                   this.progressInfo[i].value = Math.round(100 * event.loaded / event.total);
                 }
               },
               err => {
-                console.log('no llego la foto');
                 this.progressInfo[i].value = 0;
                 this.message = 'No se puede subir el archivo ';
               });
@@ -340,18 +342,15 @@ export class FormularioPerroComponent implements OnInit {
 
           this.http.post<NuevaVacuna>('https://adoptmebackend.herokuapp.com/vacunas/vacuna', vacunasAnimal)
             .subscribe(() => {
-              console.log("se registro vacuna!");
-
 
             }, () => {
               this.loading = false;
-              alert('Error de vacuna');
             })
           this.alerts.confirmMessage("Su mascota ha sido registrada").then((result) => window.location.href = '/mascotas')
 
         },
         () => {
-          this.alerts.errorMessage("No se ha podido registrar su mascota");
+          this.alerts.errorMessage("No se ha podido registrar la mascota");
 
         }
 
