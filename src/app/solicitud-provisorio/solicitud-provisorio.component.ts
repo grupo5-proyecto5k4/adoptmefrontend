@@ -5,7 +5,7 @@ import { Data } from '@angular/router';
 import { AlertsService } from 'src/utils/alerts.service';
 import { TermsAndConditionsComponent } from 'src/app/terms-and-conditions/terms-and-conditions.component';
 import { UserService } from 'src/services/user.service';
-import { FormularioAdopcion } from 'src/models/IFormularioAdopcion';
+import { FormularioProvisorio } from 'src/models/IFormularioProvisorio';
 import { Address } from 'src/models/IAddress';
 import { AuthService } from 'src/app/auth.service';
 import { NotificacionService } from 'src/services/notificacion.service';
@@ -28,12 +28,14 @@ export class SolicitudProvisorioComponent implements OnInit {
   otrasMascotasSelected: number;
   tiempoSoloSelected: number;
   viviendaSelected: number;
-  vacunacionSelected: number;
   seguimientoSelected: number;
   balconSelected: number;
   permisoEdificioSelected: number;
   TerminosChecked = false;
   tiempoPresupuestoSelected: number;
+  
+  opcionesDuracion = ["7 días", "14 días", "1 mes", "Indefinido"];
+  duracionSelected: number;
 
 
   constructor(private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private notificacionService: NotificacionService, private dialog: MatDialog,private userService: UserService, private dialogref: MatDialogRef<SolicitudProvisorioComponent>) { }
@@ -133,6 +135,29 @@ export class SolicitudProvisorioComponent implements OnInit {
     this.balconSelected = answer;
   }
 
+  radioDuracionChange(value: string) {
+    let answer: number;
+    switch (value) {
+      case this.opcionesDuracion[0]: { //7 días
+        answer = 1;
+        break;
+      }
+      case this.opcionesDuracion[1]: { //14 días
+        answer = 0;
+        break;
+      }
+      case this.opcionesDuracion[2]: { //1 mes
+        answer = 2;
+        break;
+      }
+      case this.opcionesDuracion[3]: { //Indefinido
+        answer = 3;
+        break;
+      }
+    }
+    this.duracionSelected = answer;
+  }
+
   radioTiempoPresupuestoChange(value: string) {
     this.tiempoPresupuestoSelected = this.siNoFuncion(value);
   }
@@ -200,10 +225,12 @@ export class SolicitudProvisorioComponent implements OnInit {
   }
 
   allRadioSelected(){
-    return (this.viviendaSelected !== null && this.otrasMascotasSelected !== null && this.permisoEdificioSelected !== null && this.balconSelected != null && this.seguimientoSelected !== null && this.vacunacionSelected != null && this.tiempoSoloSelected !== null && this.TerminosChecked)
+    return (this.viviendaSelected !== null && this.otrasMascotasSelected !== null && this.permisoEdificioSelected !== null && this.balconSelected != null && this.seguimientoSelected !== null && this.duracionSelected != null && this.tiempoSoloSelected !== null && this.TerminosChecked)
   }
 
   async signup() {
+    console.log("Form válido", this.UserForm.valid);
+    console.log("Todos seleccionados", this.allRadioSelected());
     if (this.UserForm.valid && this.allRadioSelected()) {
       this.isLoading = true;
 
@@ -216,7 +243,7 @@ export class SolicitudProvisorioComponent implements OnInit {
       userAddress.barrio = this.UserForm.controls.barrio.value;
       
       //Acá seteamos los valores del formulario
-      let formulario: FormularioAdopcion = new FormularioAdopcion();
+      let formulario: FormularioProvisorio = new FormularioProvisorio();
       formulario.otraMascota = this.otrasMascotasSelected;
       if (this.UserForm.controls.descripcionOtraMascota.value !== "") {
         formulario.descripcionOtraMascota = this.UserForm.controls.descripcionOtraMascota.value;
@@ -227,16 +254,16 @@ export class SolicitudProvisorioComponent implements OnInit {
       formulario.tiempoSolo = this.tiempoSoloSelected;
       formulario.tiempoPresupuesto = this.tiempoPresupuestoSelected;
       formulario.accionViaje = this.UserForm.controls.accionViaje.value;
-      formulario.vacunacionCastracion = this.vacunacionSelected;
       formulario.seguimiento = this.seguimientoSelected;
       formulario.vivienda = this.viviendaSelected;
       formulario.permiso = this.permisoEdificioSelected;
       formulario.espacioAbierto = this.balconSelected;
       formulario.Direccion = userAddress;
       formulario.mascotaId = this.data.mascota._id;
+      formulario.tiempoTenencia = this.duracionSelected;
       
       
-      this.userService.registrarFormularioAdopcion(formulario, this.authService.getToken()).subscribe((resp:Data) => {
+      this.userService.registrarFormularioProvisorio(formulario, this.authService.getToken()).subscribe((resp:Data) => {
         this.notificacionService.notificarSolicitudProvisorio(this.data.mascota.nombreMascota,this.data.mascota.responsableId, resp._id,this.authService.getToken())
         this.alertsService.confirmMessage("Su solicitud de provisorio ha sido registrada").then((result) => window.location.href = '/');        
       },
