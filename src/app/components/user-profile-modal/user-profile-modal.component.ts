@@ -34,7 +34,7 @@ export class UserProfileModalComponent implements OnInit {
   ngOnInit() {
     //obtengo el usuario
     this.currentUser = this.data.User;
-    console.log(this.currentUser)
+
 
     //en base al perfil, los datos que se visualizan
     //particular:

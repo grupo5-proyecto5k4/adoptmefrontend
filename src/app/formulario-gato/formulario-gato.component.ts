@@ -181,7 +181,7 @@ clearImage(url:number){
         mascota.conductaPerros=this.SignupForm.controls.conductaPerros.value;
         mascota.descripcion=this.SignupForm.controls.descripcion.value;
             
-        console.log(mascota); 
+
                 
         
        this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
@@ -197,13 +197,13 @@ clearImage(url:number){
 
             this.photo.upload(this.selectedFiles[i],resp.id_Animal).subscribe(
               event => {
-                console.log('llego la foto');
+
                 if (event.type === HttpEventType.UploadProgress) {
                   this.progressInfo[i].value = Math.round(100 * event.loaded / event.total);
                 } 
               },
               err => {
-                console.log('no llego la foto');
+
                 this.progressInfo[i].value = 0;
                 this.message = 'No se puede subir el archivo ';
               });

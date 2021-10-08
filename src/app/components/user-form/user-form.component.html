@@ -156,6 +156,16 @@
                             <mat-form-field class="example-full-width">
                               <textarea matInput type="text" rows="1" formControlName="descripcionCercamiento" maxlength="200"></textarea>
                             </mat-form-field>
+                            <span class="help-block" *ngIf="((UserForm.get('descripcionCercamiento').touched ||
+                            UserForm.get('descripcionCercamiento').dirty) &&
+                            UserForm.get('descripcionCercamiento').errors)">
+                              <span *ngIf="UserForm.get('descripcionCercamiento').errors.required">
+                                <h6 class="helpError">Campo requerido</h6>
+                              </span>
+                              <span *ngIf="UserForm.get('descripcionCercamiento').errors.maxlength">
+                                <mat-error class="helpError">Ingrese como máximo 200 caracteres</mat-error>
+                              </span>
+                            </span>
                           </div>
                         </section>
                       </div>
@@ -173,6 +183,9 @@
                             UserForm.get('composicionFamilia').errors)">
                               <span *ngIf="UserForm.get('composicionFamilia').errors.required">
                                 <h6 class="helpError">Campo requerido</h6>
+                              </span>
+                              <span *ngIf="UserForm.get('composicionFamilia').errors.maxlength">
+                                <mat-error class="helpError">Ingrese como máximo 200 caracteres</mat-error>
                               </span>
                             </span>
                           </div>
@@ -206,8 +219,11 @@
                             <span class="help-block" *ngIf="((UserForm.get('descripcionOtraMascota').touched ||
                             UserForm.get('descripcionOtraMascota').dirty) &&
                             UserForm.get('descripcionOtraMascota').errors)">
-                              <span *ngIf="UserForm.get('descripcionOtraMascota').errors.required">
+                              <span *ngIf="this.otrasMascotasSelected == 1">
                                 <h6 class="helpError">Campo requerido</h6>
+                              </span>
+                              <span *ngIf="UserForm.get('descripcionOtraMascota').errors.maxlength">
+                                <mat-error class="helpError">Ingrese como máximo 200 caracteres</mat-error>
                               </span>
                             </span>
                           </div>
@@ -268,6 +284,16 @@
                             <mat-form-field class="example-full-width">
                               <textarea matInput type="text"  rows="1" formControlName="accionViaje" maxlength="300"></textarea>
                             </mat-form-field>
+                            <span class="help-block" *ngIf="((UserForm.get('accionViaje').touched ||
+                            UserForm.get('accionViaje').dirty) &&
+                            UserForm.get('accionViaje').errors)">
+                              <span *ngIf="UserForm.get('accionViaje').errors.required">
+                                <h6 class="helpError">Campo requerido</h6>
+                              </span>
+                              <span *ngIf="UserForm.get('accionViaje').errors.maxlength">
+                                <mat-error class="helpError">Ingrese como máximo 300 caracteres</mat-error>
+                              </span>
+                            </span>
                           </div>
                         </section>
                       </div>
@@ -279,6 +305,16 @@
                             <mat-form-field class="example-full-width">
                               <textarea matInput type="text"  rows="1" formControlName="accionImpedimento" maxlength="300"></textarea>
                             </mat-form-field>
+                            <span class="help-block" *ngIf="((UserForm.get('accionImpedimento').touched ||
+                            UserForm.get('accionImpedimento').dirty) &&
+                            UserForm.get('accionImpedimento').errors)">
+                              <span *ngIf="UserForm.get('accionImpedimento').errors.required">
+                                <h6 class="helpError">Campo requerido</h6>
+                              </span>
+                              <span *ngIf="UserForm.get('accionImpedimento').errors.maxlength">
+                                <mat-error class="helpError">Ingrese como máximo 300 caracteres</mat-error>
+                              </span>
+                            </span>
                           </div>
                         </section>
                       </div>
@@ -318,7 +354,7 @@
                         <a mat-raised-button *ngIf="!isLoading" color="accent" style="padding: 10px;"
                           class="button cancelar" type="button" id="btncuenta" mat-dialog-close>Cancelar</a>
                         <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar" type="button"
-                          id="confirmar" (mouseover)="validateButton()" style="padding: 10px;" (click)="signup()">Enviar</a>
+                          id="confirmado" (mouseover)="validateButton()" style="padding: 10px;" (click)="signup()">Enviar</a>
                         <a mat-raised-button *ngIf="isLoading" style="padding: 10px;" color="accent"
                           class="button loading" type="button" id="btncuenta">
                           <img class=logo src="../../../assets/images/loading.gif" /></a>

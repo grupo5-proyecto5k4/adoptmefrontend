@@ -80,7 +80,7 @@ export class PublicacionesAdopComponent implements OnInit {
       })
     },
     err => {
-      console.log('ERROR...')
+
     }
     )
   }

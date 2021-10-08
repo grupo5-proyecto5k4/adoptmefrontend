@@ -58,10 +58,9 @@ export class NuevaMascotaComponent implements OnInit {
 
     this.registroMascotasService.getMascotas(1).subscribe(data => {
       this.mascotasPubAdopcion = data;
-      console.log(data);
     },
       err => {
-        console.log('VER SMS ERROR')
+
       }
     )
   }

@@ -24,7 +24,6 @@ export class CenterProfileComponent implements OnInit {
     if (this.profile == "2") {
       this.currentUser = this.authservice.getCurrentUser();
 
-      console.log(this.currentUser);
       if (this.currentUser.facebook == null) {
         this.currentUser.facebook = "No especificado"
       };
@@ -40,8 +39,6 @@ export class CenterProfileComponent implements OnInit {
       }
       // Formato fecha   
       this.currentUser.pwd = "********";
-      console.log(JSON.stringify(this.currentUser.Direccion));
-      console.log(this.currentUser.Direccion.calle);
     }
     else {
       window.scrollTo(0, 0);

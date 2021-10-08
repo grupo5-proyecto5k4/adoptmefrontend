@@ -6,7 +6,7 @@
 }
 
 
-#btncuenta, #confirmar{
+#btncuenta, #confirmado{
   color: #EBEEF1;
   background-color: #c50fa1;
   cursor: pointer;
@@ -20,9 +20,6 @@ input{
   width: 98% !important;
 }
 
-.buttonDisabled{
-  cursor: not-allowed !important;
-}
 
 .password{
   width: 90%;
@@ -75,7 +72,7 @@ input:-webkit-autofill {
   width: 100%;
 }
 
-#confirmar{
+#confirmado{
   padding-left: 26px !important;
   padding-right: 26px !important;
 }
@@ -114,7 +111,7 @@ input {
   border-color: rgba(85, 85, 85, 0.596) !important;
 }
 
-#btncuenta, #confirmar{
+#btncuenta, #confirmado{
   color: #EBEEF1;
   background-color: #c50fa1;
   min-width: 64px;

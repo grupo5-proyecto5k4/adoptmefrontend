@@ -41,14 +41,11 @@ ngOnInit() {
       if (dataAdoptado.mesage === "[]"){
         dataAdoptado = [];
       }
-      console.log("Data en provi", dataEnProvi);
-      console.log("Data adoptado", dataAdoptado);
         
       this.mascotasUsuarioAdoptado = dataAdoptado;
 
       var dato = [].concat(dataEnProvi, dataAdoptado); 
       this.mascotasUsuarioNoDisponibles = dato;
-      console.log("Mascotas vacias", dato);
 
       if (dato.length > 0){
               //Recorro mascotas
@@ -67,7 +64,7 @@ ngOnInit() {
     
     },
   err => {
-    console.log('ERROR...')
+    
   }
   );
 
@@ -117,6 +114,6 @@ ngOnInit() {
     })
   },
   err => {
-    console.log('ERROR...')
+
   }
   )})}}

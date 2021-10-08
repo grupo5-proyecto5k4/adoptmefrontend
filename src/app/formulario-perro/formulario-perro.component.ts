@@ -265,14 +265,13 @@ export class FormularioPerroComponent implements OnInit {
 
 
   selectFiles(event) {
-    console.log(event)
+
     this.progressInfo = [];
     //Validación para obtener el nombre del archivo si es uno solo
     //En caso de que sea >1 asigna a fileName length
     event.target.files.length == 1 ? this.fileName = event.target.files[0].name : this.fileName = event.target.files.length + " imagenes a subir";
     this.selectedFiles = event.target.files;
-    console.log("selected files:")
-    console.log(this.selectedFiles);
+
     this.urls = [];
 
     if (this.selectedFiles) {
@@ -319,7 +318,7 @@ export class FormularioPerroComponent implements OnInit {
       mascota.conductaPerros = this.SignupForm.controls.conductaPerros.value;
       mascota.descripcion = this.SignupForm.controls.descripcion.value;
 
-      console.log(mascota);
+
 
 
 
@@ -355,7 +354,7 @@ export class FormularioPerroComponent implements OnInit {
             nuevaVac.id_Animal = resp.id_Animal;
 
             vacunasAnimal.push(nuevaVac);
-            console.log(vacunasAnimal);
+
           }
 
 

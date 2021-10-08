@@ -14,7 +14,6 @@ export class HttpErrorHandlerService implements ErrorHandler {
   public handleError(httpError: HttpErrorResponse) {
     let errorMessage = null;
     const {status, statusText, message, url, error} = httpError;
-    console.log(httpError);
 
     if (status === 403) {
       errorMessage = error.error.message ? error.error.message : 'Sin autorización';

@@ -85,7 +85,7 @@ export class PublicacionesProvComponent implements OnInit {
           
     },
     err => {
-      console.log('ERROR...')
+
     }
     )
   }
