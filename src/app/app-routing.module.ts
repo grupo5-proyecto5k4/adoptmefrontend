@@ -20,6 +20,8 @@ import { AdministrarRecomendacionesComponent } from './pages/administrar-recomen
 import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
 import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
+import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
+
 const routes: Routes = [
   {
     path: 'adoptar',
@@ -40,7 +42,10 @@ const routes: Routes = [
     path: 'registrar-mascota',
     component: NuevaMascotaComponent
   },
-
+  {
+    path: 'reportesCentro',
+    component: ReportesCentroComponent
+  },
   {
     path: 'donaciones',
     component: UnderConstructionComponent

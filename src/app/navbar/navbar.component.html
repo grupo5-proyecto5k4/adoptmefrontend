@@ -27,6 +27,7 @@
       <a *ngIf="!isAdmin()" routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adopciones</a>
       <a *ngIf="!isAdmin()" routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Provisorios</a>
       <a *ngIf="isRescatist()||isParticular()" routerLink="/mascotas" class="nav-titles" (click)="scrollTop()">Mis Mascotas</a>
+      <a *ngIf="isRescatist()" routerLink="/reportesCentro" class="nav-titles" (click)="scrollTop()">Reportes</a>
       <a *ngIf="isAdmin()" routerLink="/configuraciones" class="nav-titles" (click)="scrollTop()">Configuraciones</a>
       <a *ngIf="isAdmin()" routerLink="/reportes" class="nav-titles" (click)="scrollTop()">Reportes</a>
       <a  routerLink="/donaciones" class="nav-titles" (click)="scrollTop()">Donaciones</a>
