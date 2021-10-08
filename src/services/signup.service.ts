@@ -10,6 +10,8 @@ import { User } from 'src/models/IUser';
 })
 export class SignupService {
  
+  urlEdit='https://adoptmebackend.herokuapp.com/user/modificacionPerfil';
+  
   constructor(private httpClient: HttpClient) {}
  
   registerUser(request: User): Observable<User> {
@@ -17,5 +19,12 @@ export class SignupService {
       const url = `${environment.base_url}${environment.user.base_url}`;
       return this.httpClient.post<User>(url, request);
     }
+
+   
+    editUser(user: User, token:string): Observable <any> {
+      return this.httpClient.put<any>(this.urlEdit, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
+    }
+  
+    
   }
 
