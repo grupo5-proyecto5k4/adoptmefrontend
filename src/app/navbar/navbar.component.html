@@ -31,6 +31,7 @@
       <a *ngIf="isAdmin()" routerLink="/configuraciones" class="nav-titles" (click)="scrollTop()">Configuraciones</a>
       <a  routerLink="/donaciones" class="nav-titles" (click)="scrollTop()">Donaciones</a>
       <a *ngIf="!isAdmin()" routerLink="/mapas" class="nav-titles" (click)="scrollTop()">Recomendaciones</a>
+      <a *ngIf="isAdmin()||isRescatist()" routerLink="/reportes" class="nav-titles" (click)="scrollTop()">Reportes</a>
 
       <span class="spacer"></span>
       <a mat-raised-button routerLink="/inicio-sesion" color="accent" id="btncuenta"

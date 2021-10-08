@@ -47,13 +47,11 @@ export class FormularioPerroComponent implements OnInit {
   isLoading: Boolean = false;
   adoptarChecked: Boolean = false;
   provisorioChecked: Boolean = false;
-  marcaPrincipal: Boolean = false;
+  marcaPrincipal: string;
   listaVacunas = []; //aca se guardaran todas las vacunas
-  columnas = ['Nombre', 'Cantidad dosis', 'Opciones'];
+  columnas = ['Nombre', 'Fecha de aplicacion', 'Opciones'];
   vac: any = {};
   nuevaVacuna: any = {};
-  nombreVac: string;
-  cantDosis: number;
   mensajeB = '💉 Registrar vacunaciones';
 
   //Lista de archivos seleccionados
@@ -99,13 +97,18 @@ export class FormularioPerroComponent implements OnInit {
 
     this.SignupFormVac = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      cantidadDosis: new FormControl('', Validators.required),
+      fechaAplicacion: new FormControl('', Validators.required),
     });
 
 
     this.dialogRef.disableClose = true;
 
   }
+
+  principal(url: string){
+    return (this.marcaPrincipal == url)
+  }
+
 
   estadoChange(estado: number) {
     if (estado == 0) {
@@ -128,9 +131,12 @@ export class FormularioPerroComponent implements OnInit {
     }
   }
 
-  marcarPrincipal(principal: number) {
-    if (principal == 0) {
-      this.marcaPrincipal = !this.marcaPrincipal;
+  marcarPrincipal(url: string) {
+    for (let i = 0; i < this.urls.length; i++){
+      if (url == this.urls[i]){
+        this.marcaPrincipal = this.urls[i];
+        break
+      }
     }
   }
 
@@ -197,10 +203,10 @@ export class FormularioPerroComponent implements OnInit {
       this.SignupFormVac.get('nombre').errors));
   }
 
-  validateDosis() {
-    return (((this.SignupFormVac.get('cantidadDosis').touched ||
-      this.SignupFormVac.get('cantidadDosis').dirty) &&
-      this.SignupFormVac.get('cantidadDosis').errors));
+  validateFechaAplicacion() {
+    return (((this.SignupFormVac.get('fechaAplicacion').touched ||
+      this.SignupFormVac.get('fechaAplicacion').dirty) &&
+      this.SignupFormVac.get('fechaAplicacion').errors));
   }
 
   validateButton() {
@@ -223,21 +229,25 @@ export class FormularioPerroComponent implements OnInit {
     if (this.SignupFormVac.valid) {
       const object1 = {
         nombre: this.SignupFormVac.controls.nombre.value,
-        cantidadDosis: this.SignupFormVac.controls.cantidadDosis.value,
+        fechaAplicacion: this.SignupFormVac.controls.fechaAplicacion.value,
       };
 
       this.listaVacunas.push(
         object1
       );
-
-      console.log("listado vacunas: " + this.listaVacunas)
     }
   }
 
 
-  borrarFila(cantD: number) {
+  borrarFila(vacuna: NuevaVacuna) {
+    let cantD = 0;
+    for (let i = 0; i < this.listaVacunas.length; i++){
+      if (vacuna == this.listaVacunas[i]){
+        cantD = i;
+        break
+      }
+    }
     this.listaVacunas.splice(cantD, 1);
-    this.tabla2.renderRows();
   }
 
   CalculateAge() {
@@ -255,11 +265,14 @@ export class FormularioPerroComponent implements OnInit {
 
 
   selectFiles(event) {
+    console.log(event)
     this.progressInfo = [];
     //Validación para obtener el nombre del archivo si es uno solo
     //En caso de que sea >1 asigna a fileName length
     event.target.files.length == 1 ? this.fileName = event.target.files[0].name : this.fileName = event.target.files.length + " imagenes a subir";
     this.selectedFiles = event.target.files;
+    console.log("selected files:")
+    console.log(this.selectedFiles);
     this.urls = [];
 
     if (this.selectedFiles) {
@@ -275,8 +288,15 @@ export class FormularioPerroComponent implements OnInit {
   }
 
 
-  clearImage(url: number) {
-    this.urls.splice(url, 1);
+  clearImage(url: string) {
+    let cantD = 0;
+    for (let i = 0; i < this.urls.length; i++){
+      if (url == this.urls[i]){
+        cantD = i;
+        break
+      }
+    }
+    this.urls.splice(cantD, 1);
   }
 
 
@@ -299,6 +319,9 @@ export class FormularioPerroComponent implements OnInit {
       mascota.conductaPerros = this.SignupForm.controls.conductaPerros.value;
       mascota.descripcion = this.SignupForm.controls.descripcion.value;
 
+      console.log(mascota);
+
+
 
       this.photo.registroAnimal(mascota, this.auth.getToken()).subscribe(
         (resp: Data) => {
@@ -307,29 +330,28 @@ export class FormularioPerroComponent implements OnInit {
             this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
             let foto: Foto = new Foto();
             foto.foto = this.selectedFiles.item(i);
-            foto.esPrincipal = this.marcaPrincipal;
+            //if ()
+            foto.esPrincipal = true;
 
             this.photo.upload(this.selectedFiles[i], resp.id_Animal).subscribe(
               event => {
-                console.log('llego la foto');
                 if (event.type === HttpEventType.UploadProgress) {
                   this.progressInfo[i].value = Math.round(100 * event.loaded / event.total);
                 }
               },
               err => {
-                console.log('no llego la foto');
                 this.progressInfo[i].value = 0;
                 this.message = 'No se puede subir el archivo ';
               });
-
           }
+
 
           let vacunasAnimal = [];
 
           for (let i = 0; i < this.listaVacunas.length; i++) {
             let nuevaVac: NuevaVacuna = new NuevaVacuna();
             nuevaVac.nombreVacuna = this.listaVacunas[i].nombre;
-            nuevaVac.cantidadDosis = this.listaVacunas[i].nombre;
+            nuevaVac.fechaAplicacion = this.listaVacunas[i].fechaAplicacion;
             nuevaVac.id_Animal = resp.id_Animal;
 
             vacunasAnimal.push(nuevaVac);
@@ -339,20 +361,18 @@ export class FormularioPerroComponent implements OnInit {
 
           this.http.post<NuevaVacuna>('https://adoptmebackend.herokuapp.com/vacunas/vacuna', vacunasAnimal)
             .subscribe(() => {
-              console.log("se registro vacuna!");
-
 
             }, () => {
               this.loading = false;
-              alert('Error de vacuna');
             })
           this.alerts.confirmMessage("Su mascota ha sido registrada").then((result) => window.location.href = '/mascotas')
 
         },
         () => {
-          this.alerts.errorMessage("No se ha podido registrar su mascota");
+          this.alerts.errorMessage("No se ha podido registrar la mascota");
 
         }
+
       )
 
 
