@@ -77,5 +77,12 @@
                 </mat-form-field>
             </div>
         </div>
+
+        <button mat-button *ngIf="esconder" id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editar()">Editar</button>
+
+       <div class="centrado" *ngIf="editarDatos">
+        <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelar()">Cancelar</button>
+        <button mat-button type="button" color="accent" class="btnLogout" (click)="guardar()">Guardar Cambios</button>
+       </div> 
     </form>
 </div>
