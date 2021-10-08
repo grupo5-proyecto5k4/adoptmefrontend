@@ -29,7 +29,7 @@ export class VerMascotaComponent implements OnInit {
   ProfileForm: FormGroup;
   mascota: any;
   Titulo = "";
-  columnas = ['Nombre', 'Cantidad dosis'];
+  columnas = ['Nombre', 'Fecha de aplicacion'];
   listaVacunas: any = []; //aca se guardaran todas las vacunas
   slideIndex = 0;
   fotos: any = [];
@@ -46,15 +46,12 @@ export class VerMascotaComponent implements OnInit {
     this.mascota = this.data.mascota;
     this.accion = this.data.accion;
 
-    console.log("slideIndex:")
-    console.log(this.slideIndex)
-
     this.Titulo = this.mascota.nombreMascota;
     // Formato fecha  
     if (this.mascota.fechaNacimiento !== null && this.mascota.fechaNacimiento !== undefined) {
       var date = this.mascota.fechaNacimiento.substring(0, 10);
       var [yyyy, mm, dd] = date.split("-");
-      var revdate = `${dd}-${mm}-${yyyy}`;
+      var revdate = `${dd}/${mm}/${yyyy}`;
       this.mascota.fechaNacimiento = revdate;
     }
 
