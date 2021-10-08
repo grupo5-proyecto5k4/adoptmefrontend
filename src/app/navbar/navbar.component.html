@@ -9,9 +9,9 @@
       <a mat-list-item *ngIf="!isAdmin()" routerLink="/provisorio" (click)="drawer.toggle(); scrollTop()">Provisorios</a>
       <a mat-list-item *ngIf="isRescatist()||isParticular()" routerLink="/mascotas" (click)="drawer.toggle(); scrollTop()">Mis Mascotas</a>
       <a mat-list-item *ngIf="isAdmin()" routerLink="/configuraciones"  (click)="drawer.toggle(); scrollTop()">Configuraciones</a>
+      <a mat-list-item *ngIf="isRescatist()" routerLink="/reportesCentro"  (click)="drawer.toggle(); scrollTop()">Reportes</a>
       <a mat-list-item  routerLink="/donaciones" (click)="drawer.toggle(); scrollTop()">Donaciones</a>
       <a mat-list-item *ngIf="!isAdmin()" routerLink="/mapas" (click)="drawer.toggle(); scrollTop()">Recomendaciones</a>
-      <a mat-list-item *ngIf="isAdmin()||isRescatist()" routerLink="/reportes"  (click)="drawer.toggle(); scrollTop()">Reportes</a>
       <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
     </mat-nav-list>
   </mat-sidenav>
