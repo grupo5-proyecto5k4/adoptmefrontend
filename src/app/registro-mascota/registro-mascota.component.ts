@@ -64,7 +64,7 @@ ngOnInit() {
     
     },
   err => {
-    
+    console.log('ERROR...')
   }
   );
 
@@ -114,6 +114,6 @@ ngOnInit() {
     })
   },
   err => {
-
+    console.log('ERROR...')
   }
   )})}}
