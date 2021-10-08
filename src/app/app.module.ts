@@ -54,6 +54,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 import { VisualizacionSolicitudComponent } from './visualizacion-solicitud/visualizacion-solicitud.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-provisorio.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     VacunacionesComponent,
     ListadoSolicitudesComponent,
     VisualizacionSolicitudComponent,
+    SolicitudProvisorioComponent,
     //PublicacionesProvComponent
 
   ],

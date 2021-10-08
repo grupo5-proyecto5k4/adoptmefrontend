@@ -17,6 +17,7 @@ import { NotificacionService } from 'src/services/notificacion.service';
 import { Mascota } from 'src/models/IMascota';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { MascotaService } from 'src/services/mascota.service';
+import { SolicitudProvisorioComponent } from 'src/app/solicitud-provisorio/solicitud-provisorio.component';
 
 
 @Component({
@@ -133,6 +134,14 @@ export class VerMascotaComponent implements OnInit {
 
   openUserForm() {
     this.dialog.open(UserFormComponent, {
+      data: {
+        mascota: this.data.mascota,
+      }
+    })
+  }
+
+  openProvisorioForm() {
+    this.dialog.open(SolicitudProvisorioComponent, {
       data: {
         mascota: this.data.mascota,
       }
