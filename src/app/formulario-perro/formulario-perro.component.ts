@@ -47,7 +47,7 @@ export class FormularioPerroComponent implements OnInit {
   isLoading: Boolean = false;
   adoptarChecked: Boolean = false;
   provisorioChecked: Boolean = false;
-  marcaPrincipal: Boolean = false;
+  marcaPrincipal: string;
   listaVacunas = []; //aca se guardaran todas las vacunas
   columnas = ['Nombre', 'Fecha de aplicacion', 'Opciones'];
   vac: any = {};
@@ -105,6 +105,11 @@ export class FormularioPerroComponent implements OnInit {
 
   }
 
+  principal(url: string){
+    return (this.marcaPrincipal == url)
+  }
+
+
   estadoChange(estado: number) {
     if (estado == 0) {
       this.adoptarChecked = !this.adoptarChecked;
@@ -126,9 +131,12 @@ export class FormularioPerroComponent implements OnInit {
     }
   }
 
-  marcarPrincipal(principal: number) {
-    if (principal == 0) {
-      this.marcaPrincipal = !this.marcaPrincipal;
+  marcarPrincipal(url: string) {
+    for (let i = 0; i < this.urls.length; i++){
+      if (url == this.urls[i]){
+        this.marcaPrincipal = this.urls[i];
+        break
+      }
     }
   }
 
@@ -257,11 +265,14 @@ export class FormularioPerroComponent implements OnInit {
 
 
   selectFiles(event) {
+    console.log(event)
     this.progressInfo = [];
     //Validación para obtener el nombre del archivo si es uno solo
     //En caso de que sea >1 asigna a fileName length
     event.target.files.length == 1 ? this.fileName = event.target.files[0].name : this.fileName = event.target.files.length + " imagenes a subir";
     this.selectedFiles = event.target.files;
+    console.log("selected files:")
+    console.log(this.selectedFiles);
     this.urls = [];
 
     if (this.selectedFiles) {
@@ -277,8 +288,15 @@ export class FormularioPerroComponent implements OnInit {
   }
 
 
-  clearImage(url: number) {
-    this.urls.splice(url, 1);
+  clearImage(url: string) {
+    let cantD = 0;
+    for (let i = 0; i < this.urls.length; i++){
+      if (url == this.urls[i]){
+        cantD = i;
+        break
+      }
+    }
+    this.urls.splice(cantD, 1);
   }
 
 
@@ -312,7 +330,8 @@ export class FormularioPerroComponent implements OnInit {
             this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
             let foto: Foto = new Foto();
             foto.foto = this.selectedFiles.item(i);
-            foto.esPrincipal = this.marcaPrincipal;
+            //if ()
+            foto.esPrincipal = true;
 
             this.photo.upload(this.selectedFiles[i], resp.id_Animal).subscribe(
               event => {
