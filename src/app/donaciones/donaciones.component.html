@@ -1,0 +1,92 @@
+<body class="is-preload">
+    <div id="page-wrapper">
+      <section id="cta4">
+        <div class="container">
+          <header>
+            <div>
+              <div>
+                <h3 class="titulo">{{Titulo}}</h3>
+              </div>
+              <div id="RequestContainer">
+                <table class="table table-bordered table-striped" id="searchTable">
+                  <tbody>
+                    <tr *ngFor="let centro of centrosPendientes  | 
+                    slice: lowValue : highValue">
+                      <mat-card class="card">
+                        <!--Este contenedor tiene el contenido de la solicitud-->
+                        <td class="requestContent">
+                          <div>
+                            <!-- Este es el codigo de la CARD-->
+                            <mat-card-header>
+                              <mat-card-title class="cut">Nombre: {{centro.nombres}}
+                              </mat-card-title>
+                              <mat-card-subtitle>
+  
+                              </mat-card-subtitle>
+                              <mat-card-subtitle>
+  
+                              </mat-card-subtitle>
+                            </mat-card-header>
+                            <mat-card-content class="description">
+                              <div class="boxDescription">
+                                <p>
+  
+                                </p>
+                              </div>
+                            </mat-card-content>
+                          </div>
+                        </td>
+                        <td class="requestActions">
+                          <div class="actionButton">
+                            <ng-container matColumnDef="Visualizar">
+                              <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Visualizar
+                              </th>
+                              <td mat-cell style="padding: 2px;">
+                                <button mat-raised-button color="accent" class="accion" (click)="proximamente()"
+                                  style="height: 32px; border-radius: 10px;">
+                                  <mat-icon>remove_red_eye</mat-icon>
+                                </button>
+                              </td>
+                            </ng-container>
+  
+                            <ng-container matColumnDef="Rechazar">
+                              <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Rechazar
+                              </th>
+                              <td mat-cell style="padding: 2px;">
+                                <button mat-raised-button color="warn" class="accion" (click)="cambiarEstado(centro,3)"
+                                  style="height: 32px; border-radius: 10px;">
+                                  <mat-icon>block</mat-icon>
+                                </button>
+                              </td>
+                            </ng-container>
+  
+                            <ng-container matColumnDef="Habilitar">
+                              <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;">
+                                Habilitar
+                              </th>
+                              <td mat-cell style="padding: 2px;">
+                                <button mat-raised-button class="accion" color="primary" (click)="cambiarEstado(centro,1)"
+                                  style="height: 32px; border-radius: 10px;">
+                                  <mat-icon>how_to_reg</mat-icon>
+                                </button>
+                              </td>
+                            </ng-container>
+                          </div>
+                        </td>
+                      </mat-card>
+                    </tr>
+  
+                    <!--[length]="onGoingRequests.length"-->
+                    <!--
+                    <mat-paginator [pageSize]="pageSize" (page)="getPaginatorData($event)">
+                    </mat-paginator>
+                    -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+    </div>
+  </body>

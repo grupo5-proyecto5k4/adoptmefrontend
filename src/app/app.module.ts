@@ -47,6 +47,7 @@ import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {MatTableModule} from '@angular/material/table';
 import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
+import { DonacionesComponent } from './donaciones/donaciones.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios
     AdminProfileComponent,
     PublicacionesProvComponent,
     VacunacionesComponent,
+    DonacionesComponent,
     //PublicacionesProvComponent
 
   ],
