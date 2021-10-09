@@ -46,7 +46,6 @@ import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { AdministrarRecomendacionesModule } from './pages/administrar-recomendaciones/administrar-recomendaciones.module';
-import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {MatTableModule} from '@angular/material/table';
 import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
@@ -55,6 +54,8 @@ import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solic
 import { VisualizacionSolicitudComponent } from './visualizacion-solicitud/visualizacion-solicitud.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-provisorio.component';
+import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -77,10 +78,10 @@ import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-p
     AdminProfileComponent,
     PublicacionesProvComponent,
     NuevaMascotaComponent,
-    VacunacionesComponent,
     ListadoSolicitudesComponent,
     VisualizacionSolicitudComponent,
     SolicitudProvisorioComponent,
+    ReportesCentroComponent,
     //PublicacionesProvComponent
 
   ],
@@ -118,7 +119,8 @@ import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-p
     GestionarUsuariosModule,
     MatBadgeModule,
     MatRadioModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    ChartsModule
   ],
   
   providers: [],

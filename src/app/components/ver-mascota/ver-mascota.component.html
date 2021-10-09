@@ -121,7 +121,7 @@
                           <tbody class="my-table body">
                             <tr *ngFor="let vacuna of listaVacunas">
                               <td>{{ vacuna.nombreVacuna }}</td>
-                              <td>{{ vacuna.cantidadDosis }}</td>
+                              <td>{{ vacuna.fechaAplicacion | date:'dd/MM/yyyy'}}</td>
                             </tr>
                           </tbody>
                         </table>

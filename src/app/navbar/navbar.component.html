@@ -9,7 +9,7 @@
       <a mat-list-item *ngIf="!isAdmin()" routerLink="/provisorio" (click)="drawer.toggle(); scrollTop()">Provisorios</a>
       <a mat-list-item *ngIf="isRescatist()||isParticular()" routerLink="/mascotas" (click)="drawer.toggle(); scrollTop()">Mis Mascotas</a>
       <a mat-list-item *ngIf="isAdmin()" routerLink="/configuraciones"  (click)="drawer.toggle(); scrollTop()">Configuraciones</a>
-      <a mat-list-item *ngIf="isAdmin()" routerLink="/reportes"  (click)="drawer.toggle(); scrollTop()">Reportes</a>
+      <a mat-list-item *ngIf="isRescatist()" routerLink="/reportesCentro"  (click)="drawer.toggle(); scrollTop()">Reportes</a>
       <a mat-list-item  routerLink="/donaciones" (click)="drawer.toggle(); scrollTop()">Donaciones</a>
       <a mat-list-item *ngIf="!isAdmin()" routerLink="/mapas" (click)="drawer.toggle(); scrollTop()">Recomendaciones</a>
       <fa-icon [icon]="faPaw" class="paw-icon"></fa-icon>
@@ -27,10 +27,11 @@
       <a *ngIf="!isAdmin()" routerLink="/adoptar" class="nav-titles" (click)="scrollTop()">Adopciones</a>
       <a *ngIf="!isAdmin()" routerLink="/provisorio" class="nav-titles" (click)="scrollTop()">Provisorios</a>
       <a *ngIf="isRescatist()||isParticular()" routerLink="/mascotas" class="nav-titles" (click)="scrollTop()">Mis Mascotas</a>
+      <a *ngIf="isRescatist()" routerLink="/reportesCentro" class="nav-titles" (click)="scrollTop()">Reportes</a>
       <a *ngIf="isAdmin()" routerLink="/configuraciones" class="nav-titles" (click)="scrollTop()">Configuraciones</a>
-      <a *ngIf="isAdmin()" routerLink="/reportes" class="nav-titles" (click)="scrollTop()">Reportes</a>
       <a  routerLink="/donaciones" class="nav-titles" (click)="scrollTop()">Donaciones</a>
       <a *ngIf="!isAdmin()" routerLink="/mapas" class="nav-titles" (click)="scrollTop()">Recomendaciones</a>
+      <a *ngIf="isAdmin()||isRescatist()" routerLink="/reportes" class="nav-titles" (click)="scrollTop()">Reportes</a>
 
       <span class="spacer"></span>
       <a mat-raised-button routerLink="/inicio-sesion" color="accent" id="btncuenta"

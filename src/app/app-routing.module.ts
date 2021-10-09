@@ -17,9 +17,10 @@ import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.co
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
-import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
 import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
+import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
+
 const routes: Routes = [
   {
     path: 'adoptar',
@@ -40,7 +41,10 @@ const routes: Routes = [
     path: 'registrar-mascota',
     component: NuevaMascotaComponent
   },
-
+  {
+    path: 'reportesCentro',
+    component: ReportesCentroComponent
+  },
   {
     path: 'donaciones',
     component: UnderConstructionComponent
@@ -105,10 +109,6 @@ const routes: Routes = [
 
     path: 'faqs',
     component: FaqsComponent
-  },
-  {
-    path: 'vacunaciones',
-    component: VacunacionesComponent
   },
   {
     path: 'solicitudes',
