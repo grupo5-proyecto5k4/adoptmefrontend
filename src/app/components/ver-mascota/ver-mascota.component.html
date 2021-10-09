@@ -136,7 +136,7 @@
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
                             style="padding: 10px;" (click)="openUserForm()" *ngIf="accion === 1">Adoptar</a>
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
-                            style="padding: 10px;" *ngIf="accion === 0">Dar Provisorio</a>
+                            style="padding: 10px;" (click)="openProvisorioForm()" *ngIf="accion === 0">Ser Provisorio</a>
                         </div>
                       </div>
 

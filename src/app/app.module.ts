@@ -53,6 +53,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 import { VisualizacionSolicitudComponent } from './visualizacion-solicitud/visualizacion-solicitud.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-provisorio.component';
 import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
 import { ChartsModule } from 'ng2-charts';
 
@@ -79,6 +80,7 @@ import { ChartsModule } from 'ng2-charts';
     NuevaMascotaComponent,
     ListadoSolicitudesComponent,
     VisualizacionSolicitudComponent,
+    SolicitudProvisorioComponent,
     ReportesCentroComponent,
     //PublicacionesProvComponent
 
