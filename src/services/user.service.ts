@@ -53,7 +53,7 @@ export class UserService {
   }
 
   registrarFormularioProvisorio(formulario: FormularioProvisorio, token: string): Observable<FormularioProvisorio> {
-    return this.httpClient.post<FormularioProvisorio>(this.api + '/formulario/provisorio', formulario, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+    return this.httpClient.post<FormularioProvisorio>(this.api + '/formulario/adopcion', formulario, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
   }

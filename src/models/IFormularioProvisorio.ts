@@ -4,46 +4,41 @@ interface IFormularioProvisorio {
     _id?: string;
     otraMascota: number;
     descripcionOtraMascota?: string;
-    tiempoPresupuesto: number;
-    estadoId?: string;
-    accionViaje: string;
+    gastosCubiertos: number;
     seguimiento: number;
     vivienda: number;
-    fotoVivienda?: string;
-    fechaCreacion?: Date;
-    fechaModificacion?: Date;
     permiso: number;
+    tiempoTenencia: number;
     espacioAbierto: number;
     descripcionCercamiento?: string;
+    tiempoSuficiente: number;
+    estadoId?: string;
     Direccion: Address;   
     mascotaId: string;
     solitanteId: string;
-    tiempoSolo: number;
-
-    tiempoTenencia: number;
+    fechaCreacion?: Date;
+    fechaModificacion?: Date;
     }
   
     export class FormularioProvisorio implements IFormularioProvisorio {
       _id?: string;
       otraMascota: number;
       descripcionOtraMascota?: string;
-      tiempoPresupuesto: number;
-      estadoId?: string;
-      accionViaje: string;
+      gastosCubiertos: number;
       seguimiento: number;
       vivienda: number;
-      fotoVivienda?: string;
-      fechaCreacion?: Date;
-      fechaModificacion?: Date;
       permiso: number;
+      tiempoTenecia: number;
       espacioAbierto: number;
       descripcionCercamiento?: string;
+      tiempoSuficiente: number;
+      fechaCreacion?: Date;
+      fechaModificacion?: Date;
       Direccion: Address;   
       mascotaId: string;
       solitanteId: string;
-      tiempoSolo: number;
-
       tiempoTenencia: number;
+      estadoId?: string;
     
       constructor() {
         };

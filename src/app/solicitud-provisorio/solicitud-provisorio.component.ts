@@ -21,21 +21,21 @@ export class SolicitudProvisorioComponent implements OnInit {
   UserForm: FormGroup;
   Titulo = "Solicitud de provisorio";
   siNo: string[] = ['Sí', 'No'];
-  tiempoSolo: string[] = ['1-3hs', '4-8hs', 'más de 8hs'];
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
   opcionesPatioBalcon: string[] = ['Patio', 'Balcón', 'Ambos', 'Ninguno'];
   isLoading: Boolean = false;
   otrasMascotasSelected: number;
-  tiempoSoloSelected: number;
   viviendaSelected: number;
   seguimientoSelected: number;
   balconSelected: number;
   permisoEdificioSelected: number;
   TerminosChecked = false;
-  tiempoPresupuestoSelected: number;
+
+  tiempoSuficienteSelected: number;
   
   opcionesDuracion = ["7 días", "14 días", "1 mes", "Indefinido"];
   duracionSelected: number;
+  presupuestoSelected: number;
 
 
   constructor(private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private notificacionService: NotificacionService, private dialog: MatDialog,private userService: UserService, private dialogref: MatDialogRef<SolicitudProvisorioComponent>) { }
@@ -43,7 +43,6 @@ export class SolicitudProvisorioComponent implements OnInit {
   ngOnInit() {
     this.UserForm = new FormGroup({
       descripcionOtraMascota: new FormControl('', [Validators.maxLength(250)]),
-      accionViaje: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       descripcionCercamiento: new FormControl(''),
       localidad: new FormControl({value: 'Córdoba Capital', disabled: true}),
       street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -112,6 +111,10 @@ export class SolicitudProvisorioComponent implements OnInit {
     this.permisoEdificioSelected = this.siNoFuncion(value);
   }
 
+  radioTiempoSuficienteChange(value: string){
+    this.tiempoSuficienteSelected = this.siNoFuncion(value);
+  }
+
   radioBalconChange(value: string) {
     let answer: number;
     switch (value) {
@@ -158,8 +161,8 @@ export class SolicitudProvisorioComponent implements OnInit {
     this.duracionSelected = answer;
   }
 
-  radioTiempoPresupuestoChange(value: string) {
-    this.tiempoPresupuestoSelected = this.siNoFuncion(value);
+  radioPresupuestoChange(value: string) {
+    this.presupuestoSelected = this.siNoFuncion(value);
   }
 
   radioSeguimientoChange(value: string) {
@@ -205,32 +208,12 @@ export class SolicitudProvisorioComponent implements OnInit {
     this.viviendaSelected = answer;
   }
 
-  radioTiempoSoloChange(value: string) {
-    let answer: number;
-    switch (value) {
-      case this.tiempoSolo[0]: { //1-3 hs
-        answer = 0;
-        break;
-      }
-      case this.tiempoSolo[1]: { //4-8 hs
-        answer = 1;
-        break;
-      }
-      case this.tiempoSolo[2]: { //más de 8 hs
-        answer = 2;
-        break;
-      }
-    }
-    this.tiempoSoloSelected = answer;
-  }
 
   allRadioSelected(){
-    return (this.viviendaSelected !== null && this.otrasMascotasSelected !== null && this.permisoEdificioSelected !== null && this.balconSelected != null && this.seguimientoSelected !== null && this.duracionSelected != null && this.tiempoSoloSelected !== null && this.TerminosChecked)
+    return (this.viviendaSelected !== null && this.otrasMascotasSelected !== null && this.permisoEdificioSelected !== null && this.balconSelected != null && this.seguimientoSelected !== null && this.duracionSelected != null && this.TerminosChecked && this.tiempoSuficienteSelected != null && this.presupuestoSelected != null)
   }
 
   async signup() {
-    console.log("Form válido", this.UserForm.valid);
-    console.log("Todos seleccionados", this.allRadioSelected());
     if (this.UserForm.valid && this.allRadioSelected()) {
       this.isLoading = true;
 
@@ -251,17 +234,17 @@ export class SolicitudProvisorioComponent implements OnInit {
       if (this.UserForm.controls.descripcionCercamiento.value !== "") {
         formulario.descripcionCercamiento = this.UserForm.controls.descripcionCercamiento.value;
       }
-      formulario.tiempoSolo = this.tiempoSoloSelected;
-      formulario.tiempoPresupuesto = this.tiempoPresupuestoSelected;
-      formulario.accionViaje = this.UserForm.controls.accionViaje.value;
+
+      formulario.gastosCubiertos = this.presupuestoSelected;
       formulario.seguimiento = this.seguimientoSelected;
       formulario.vivienda = this.viviendaSelected;
       formulario.permiso = this.permisoEdificioSelected;
+      formulario.tiempoTenencia = this.duracionSelected;
       formulario.espacioAbierto = this.balconSelected;
+      formulario.tiempoSuficiente = this.tiempoSuficienteSelected;
       formulario.Direccion = userAddress;
       formulario.mascotaId = this.data.mascota._id;
-      formulario.tiempoTenencia = this.duracionSelected;
-      
+
       
       this.userService.registrarFormularioProvisorio(formulario, this.authService.getToken()).subscribe((resp:Data) => {
         this.notificacionService.notificarSolicitudProvisorio(this.data.mascota.nombreMascota,this.data.mascota.responsableId, resp._id,this.authService.getToken())
