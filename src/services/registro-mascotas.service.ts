@@ -54,4 +54,11 @@ export class RegistroMascotasService {
         }
         return this.http.get((this.endpointUser + status), { headers: new HttpHeaders().set('auth-token', `${token}`)});
     }
+
+
+
+    getMascotasFiltradas(filters: any): Promise <any[]> {
+        return this.http.get<any[]>('https://adoptmebackend.herokuapp.com/animales/filtrosMascota/filtroAnimal'+filters).toPromise();
+    }
+
 }

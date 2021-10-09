@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef} from '@angular/core';
-import { MatPaginator} from '@angular/material/paginator';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, Input } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { RegistroMascotasService} from 'src/services/registro-mascotas.service';
+import { RegistroMascotasService } from 'src/services/registro-mascotas.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Mascota } from 'src/models/IMascota';
 import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 export interface Pet {
   name: string;
   age: number;
@@ -15,17 +16,17 @@ export interface Pet {
 
 
 const DATA: Pet[] = [
-  {name: "Pepe", age: 3, esCachorro: "Adulto", sexo: "Hembra"},
-  {name: "Limon", age: 2,  esCachorro: "Cachorro", sexo: "Macho"},
-  {name: "Teodoro", age: 1,  esCachorro: "Adulto", sexo: "Hembra"},
-  {name: "Zeus", age: 2,  esCachorro: "Cachorro", sexo: "Macho"},
-  {name: "Jamón", age: 2,  esCachorro: "Cachorro", sexo: "Macho"},
-  {name: "Messi", age: 1,  esCachorro: "Adulto", sexo: "Hembra"},
-  {name: "Totin", age: 2,  esCachorro: "Cachorro", sexo: "Macho"},
-  {name: "Jose", age: 2,  esCachorro: "Cachorro", sexo: "Macho"},
-  {name: "Ragnar", age: 1,  esCachorro: "Adulto", sexo: "Hembra"},
-  {name: "Osiris", age: 2,  esCachorro: "Cachorro", sexo: "Macho"},
-  {name: "Jack", age: 5,  esCachorro: "Cachorro", sexo: "Macho"}
+  { name: "Pepe", age: 3, esCachorro: "Adulto", sexo: "Hembra" },
+  { name: "Limon", age: 2, esCachorro: "Cachorro", sexo: "Macho" },
+  { name: "Teodoro", age: 1, esCachorro: "Adulto", sexo: "Hembra" },
+  { name: "Zeus", age: 2, esCachorro: "Cachorro", sexo: "Macho" },
+  { name: "Jamón", age: 2, esCachorro: "Cachorro", sexo: "Macho" },
+  { name: "Messi", age: 1, esCachorro: "Adulto", sexo: "Hembra" },
+  { name: "Totin", age: 2, esCachorro: "Cachorro", sexo: "Macho" },
+  { name: "Jose", age: 2, esCachorro: "Cachorro", sexo: "Macho" },
+  { name: "Ragnar", age: 1, esCachorro: "Adulto", sexo: "Hembra" },
+  { name: "Osiris", age: 2, esCachorro: "Cachorro", sexo: "Macho" },
+  { name: "Jack", age: 5, esCachorro: "Cachorro", sexo: "Macho" }
 ]
 @Component({
   selector: 'app-publicaciones-adop',
@@ -34,25 +35,34 @@ const DATA: Pet[] = [
 })
 
 export class PublicacionesAdopComponent implements OnInit {
-
+  @Input() inputCards: Mascota[];
   mascotasPubAdopcion: any;
   mascotasPub: any;
+  FilterForm: FormGroup;
+  animal = 0;
 
   /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
 */
-  constructor(public registroMascotasService:RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    this.FilterForm = new FormGroup({
+      nombre: new FormControl(''),
+      tipoAnimal: new FormControl(''),
+      tamano: new FormControl(''),
+      sexo: new FormControl(''),
+      barrio: new FormControl(''),
+    });
     /*
     this.changeDetectorRef.detectChanges();
     this.dataSource.paginator = this.paginator;
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
-    */ 
+    */
     // "En adopcion"
     this.registroMascotasService.getMascotas(1).subscribe(dataOne => {
       this.mascotasPub = dataOne;
@@ -64,14 +74,14 @@ export class PublicacionesAdopComponent implements OnInit {
         var data = [].concat(dataBoth, dataOne);
         this.mascotasPubAdopcion = data;
         //Recorro mascotas
-        for (let x = 0; x < (data.length); x++){
+        for (let x = 0; x < (data.length); x++) {
           // Edad 
           this.mascotasPubAdopcion[x].edad = this.calculateAge(data[x].fechaNacimiento);
-          if (data[x].Foto.length != 0){
+          if (data[x].Foto.length != 0) {
             //Recorro imágenes
-            for (let i = 0; i < data[x].Foto.length; i++){
+            for (let i = 0; i < data[x].Foto.length; i++) {
               // Foto Principal
-              if (data[x].Foto[i].esPrincipal){
+              if (data[x].Foto[i].esPrincipal) {
                 this.mascotasPubAdopcion[x].imagenCard = data[x].Foto[i].foto;
               }
             }
@@ -79,9 +89,9 @@ export class PublicacionesAdopComponent implements OnInit {
         }
       })
     },
-    err => {
+      err => {
 
-    }
+      }
     )
   }
   /*
@@ -92,13 +102,57 @@ export class PublicacionesAdopComponent implements OnInit {
   }
   */
 
-  openMascota(mascota: Mascota){
+
+
+  async buscar() {
+    let filters: any = { nombres: null, barrio: null, sexo: null, tamañoFinal: null, tipoAnimal: null };
+    if (this.FilterForm.controls.nombre.value !== '') {
+      filters.nombres = this.FilterForm.controls.nombre.value;
+    }
+    if (this.FilterForm.controls.barrio.value !== '') {
+      filters.barrio = this.FilterForm.controls.barrio.value;
+    }
+    if (this.FilterForm.controls.tamañoFinal.value !== '') {
+      filters.barrio = this.FilterForm.controls.tamañoFinal.value;
+    }
+    if (this.FilterForm.controls.nombre.value !== '') {
+      filters.nombres = this.FilterForm.controls.sexo.value;
+    }
+    if (this.FilterForm.controls.nombre.value !== '') {
+      filters.nombres = this.FilterForm.controls.tipoAnimal.value;
+    }
+    this.inputCards = [];
+    if (filters.nombres || filters.barrio || filters.sexo || filters.tamañoFinal || filters.tipoAnimal) {
+      let filterRequest = await this.registroMascotasService.getMascotasFiltradas(filters);
+      console.log(filterRequest);
+
+    } else {
+      this.clean();
+    }
+    window.scrollTo(0, 0);
+  }
+
+
+
+
+  clean() {
+    //this.subcategorieChanged = false;
+    this.FilterForm.controls.nombre.setValue('');
+    this.FilterForm.controls.sexo.setValue('');
+    this.FilterForm.controls.tipoAnimal.setValue('');
+    this.FilterForm.controls.barrio.setValue('');
+    this.FilterForm.controls.tamañoFinal.setValue('');
+  }
+
+
+
+  openMascota(mascota: Mascota) {
     this.dialog.open(VerMascotaComponent, {
       data: {
-          mascota: mascota,
-          accion: 1
+        mascota: mascota,
+        accion: 1
       }
-  })
+    })
   }
 
   calculateAge(fechaNacimiento) {
@@ -106,11 +160,11 @@ export class PublicacionesAdopComponent implements OnInit {
     var fechaNacimientoFormato = new Date(fechaNacimiento);
     var difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
     var sms: String;
-    if (difference < 365){
+    if (difference < 365) {
       sms = "Cachorro"
     } else {
       sms = "Adulto"
     }
     return sms
-}
+  }
 }
