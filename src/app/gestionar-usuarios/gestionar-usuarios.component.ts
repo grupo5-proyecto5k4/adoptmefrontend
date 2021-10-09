@@ -8,6 +8,8 @@ import { AuthService } from 'src/app/auth.service';
 import { User } from 'src/models/IUser';
 import { UserService } from 'src/services/user.service';
 import { AlertsService } from 'src/utils/alerts.service';
+import { UserProfileModalComponent } from '../components/user-profile-modal/user-profile-modal.component';
+
 
 
 @Component({
@@ -105,7 +107,7 @@ export class GestionarUsuariosComponent {
         if (estado == 1){
         this.alertsService.confirmMessage("El usuario ha sido activado")
           .then((result) => {
-            this.obtenerUsuarios;
+            this.obtenerUsuarios();
           });
         }
         else if (estado == 3){
@@ -134,6 +136,16 @@ export class GestionarUsuariosComponent {
      return "Administrador"
    }
   }
+
+  openUserForm(usuario: User){
+    this.dialog.open(UserProfileModalComponent, {
+      data: {
+          User: usuario,
+      }
+  })
+  }
+
+  
 
   getPaginatorData(event) {
       if (event.pageIndex === this.pageIndex + 1) {

@@ -8,6 +8,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
@@ -43,12 +44,18 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
-import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
+import { AdministrarRecomendacionesModule } from './pages/administrar-recomendaciones/administrar-recomendaciones.module';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {MatTableModule} from '@angular/material/table';
 import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
-import { DonacionesComponent } from './donaciones/donaciones.component';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
+import { VisualizacionSolicitudComponent } from './visualizacion-solicitud/visualizacion-solicitud.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-provisorio.component';
+import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -70,8 +77,11 @@ import { DonacionesComponent } from './donaciones/donaciones.component';
     CenterProfileComponent,
     AdminProfileComponent,
     PublicacionesProvComponent,
-    VacunacionesComponent,
-    DonacionesComponent,
+    NuevaMascotaComponent,
+    ListadoSolicitudesComponent,
+    VisualizacionSolicitudComponent,
+    SolicitudProvisorioComponent,
+    ReportesCentroComponent,
     //PublicacionesProvComponent
 
   ],
@@ -97,15 +107,20 @@ import { DonacionesComponent } from './donaciones/donaciones.component';
     SignupOptionsModule,
     AdminConfigurationsModule,
     HabilitarCentroRescatistaModule,
+    AdministrarRecomendacionesModule,
     MatExpansionModule,
     MatCardModule,
     MatFormFieldModule,
     MatPaginatorModule,
     MatSelectModule,
     FileUploadModule,
+    MatRadioModule,
+    MatSlideToggleModule,
     GestionarUsuariosModule,
     MatBadgeModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule,
+    ChartsModule
   ],
   
   providers: [],

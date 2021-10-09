@@ -64,7 +64,7 @@ export class InicioSesionComponent implements OnInit {
           this.alertsService.errorMessage(error.error.error).then((result) => {
             this.isLoading = false;  })
         }
-        );;
+        );
     }
   }
   

@@ -15,8 +15,11 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
-import {VacunacionesComponent} from '../app/vacunaciones/vacunaciones.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
+import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
 import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
+import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
+import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
 
 const routes: Routes = [
   {
@@ -33,6 +36,14 @@ const routes: Routes = [
   {
     path: 'mascotas',
     component: RegistroMascotaComponent
+  },
+  {
+    path: 'registrar-mascota',
+    component: NuevaMascotaComponent
+  },
+  {
+    path: 'reportesCentro',
+    component: ReportesCentroComponent
   },
   {
     path: 'donaciones',
@@ -71,6 +82,10 @@ const routes: Routes = [
     component: UnderConstructionComponent
   },
   {
+    path: 'administrar-recomendaciones',
+    component: AdministrarRecomendacionesComponent
+  },
+  {
     path: 'habilitar-centros-rescatistas',
     component: HabilitarCentroRescatistaComponent
   },
@@ -96,8 +111,8 @@ const routes: Routes = [
     component: FaqsComponent
   },
   {
-    path: 'vacunaciones',
-    component: VacunacionesComponent
+    path: 'solicitudes',
+    component: ListadoSolicitudesComponent
   },
   {
     path: '', redirectTo: '/landing', pathMatch: 'full'

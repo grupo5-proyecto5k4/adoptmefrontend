@@ -5,6 +5,8 @@ import { environment } from 'src/environments/environment.prod';
 import {catchError, map} from 'rxjs/operators';
 import { User } from 'src/models/IUser';
 import { HttpErrorHandlerService } from 'src/utils/ErrorHandler';
+import { FormularioAdopcion } from 'src/models/IFormularioAdopcion';
+import { FormularioProvisorio } from 'src/models/IFormularioProvisorio';
 
 
 @Injectable({
@@ -43,6 +45,16 @@ export class UserService {
       }));
   }
   */
+
+  registrarFormularioAdopcion(formulario: FormularioAdopcion, token: string): Observable<FormularioAdopcion> {
+    console.log('ruta: '+this.api + '/formulario/adopcion');
+    console.log(formulario);
+    return this.httpClient.post<FormularioAdopcion>(this.api + '/formulario/adopcion', formulario, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
+  registrarFormularioProvisorio(formulario: FormularioProvisorio, token: string): Observable<FormularioProvisorio> {
+    return this.httpClient.post<FormularioProvisorio>(this.api + '/formulario/adopcion', formulario, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
 
   }
 
