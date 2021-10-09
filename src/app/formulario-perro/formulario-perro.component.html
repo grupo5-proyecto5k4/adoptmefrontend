@@ -51,7 +51,8 @@
                                         <span class="help-block blank" *ngIf="edadInvalida">
                                             <h5 class="helpError" style="color: rgb(255, 250, 250) !important;">-</h5>
                                         </span>
-                                        <span class="help-block blank" *ngIf="(!validateSexo() && validateFechaNacimiento())">
+                                        <span class="help-block blank"
+                                            *ngIf="(!validateSexo() && validateFechaNacimiento())">
                                             <span>
                                                 <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
                                                     -
@@ -129,8 +130,7 @@
                                                 <h6 class="helpError">Formato de la raza no válido</h6>
                                             </span>
                                         </span>
-                                        <span class="help-block blank"
-                                            *ngIf="(validateTamano() && !validateRaza())">
+                                        <span class="help-block blank" *ngIf="(validateTamano() && !validateRaza())">
                                             <span>
                                                 <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
                                                     -
@@ -260,39 +260,39 @@
 
                                     <div>
 
-                                        <mat-from-field class="example-full-width">
-                                            <div class="subirImagen">
-                                                <label style="cursor: pointer;">📷 Seleccionar imágenes
-                                                    <button mat-raised-button accept="image/jpeg,image/jpg,image/png"
-                                                        (click)="fileInput.click()" style="display: none;"></button>
+                                        <mat-from-field class="example-full-width" (click)="cambiarEstadoInput()">
+                                            <div class="subirImagen" (click)="fileInput.click()">
+                                                <div>
+                                                    <label style="cursor: pointer;">📷 Seleccionar imágenes
+                                                        <button mat-raised-button
+                                                            accept="image/jpeg,image/jpg,image/png"
+                                                            style="display: none;"></button>
 
-                                                </label>
-
+                                                    </label>
+                                                </div>
                                             </div>
-                                            <input #fileInput type="file" hidden multiple
-                                                (change)="selectFiles($event)" />
+                                            <input #fileInput type="file" hidden multiple (change)="selectFiles($event)"
+                                                formControlName="foto" />
                                             <span *ngIf="fileName"></span>
                                             <br>
+                                            <span class="help-block" *ngIf="(InputSeleccionadoYVacio)">
+                                                <span>
+                                                    <h6 class="helpError" style="    margin-top: -5px;
+                                                    margin-bottom: 5px;">Campo requerido</h6>
+                                                </span>
+                                            </span>
                                             <h5 style="margin-bottom: 15px;">Sólo se pueden subir hasta 5 imágenes con
-                                                extensión jpeg, jpg y png</h5>
+                                                extensión jpeg, jpg y png. La primera imagen será la foto de portada de la mascota.</h5>
 
                                             <div class="margenes container-publicaciones" *ngIf="fileName">
-                                                
-                                                <mat-card class="card-publicacion"
-                                                    *ngFor="let url of urls">
+
+                                                <mat-card class="card-publicacion" *ngFor="let url of urls">
                                                     <div style="width: 100%;height: auto;">
                                                         <span class="cruz" (click)="clearImage(url)">x</span>
                                                     </div>
                                                     <div class="contenedor-imagen">
                                                         <img mat-card-image [src]="url" class="imagen">
                                                     </div>
-                                                    <mat-card-content class="card-description">
-                                                        <div class="sin-overflow-description">
-                                                            <mat-checkbox (change)="marcarPrincipal(url)" [ngChecked]="principal(url)"></mat-checkbox>
-                                                            <span style="margin-left: 5px">Marcar como principal</span> 
-                                                            
-                                                        </div>
-                                                    </mat-card-content>
                                                 </mat-card>
                                             </div>
 
@@ -302,7 +302,7 @@
 
                                     <div class="example-full-width" style="text-align: left; margin-bottom: 1%;
                                     margin-top: 8%;">
-                                        <mat-label style="width: 100%;">💉 Registrar vacunas:</mat-label>
+                                        <mat-label style="width: 100%;">💉 Registrar vacunas (opcional):</mat-label>
                                     </div>
 
                                     <div>
@@ -310,15 +310,12 @@
                                         <form class="example-form" [formGroup]="SignupFormVac">
                                             <div class="izquierda">
                                                 <mat-form-field class="example-full-width">
-                                                    <mat-label>*Nombre</mat-label>
+                                                    <mat-label>Nombre</mat-label>
                                                     <input matInput [(ngModel)]="vac.nombre" formControlName="nombre"
                                                         class="form-control" maxlength="30">
                                                 </mat-form-field>
                                                 <span class="help-block" *ngIf="((SignupFormVac.get('nombre').touched || 
                                            SignupFormVac.get('nombre').dirty) && SignupFormVac.get('nombre').errors)">
-                                                    <span *ngIf="SignupFormVac.get('nombre').errors.required">
-                                                        <h6 class="helpError">Campo requerido</h6>
-                                                    </span>
                                                     <span *ngIf="SignupFormVac.get('nombre').errors.maxlength">
                                                         <mat-error class="helpError">Ingrese como máximo 30
                                                             caracteres</mat-error>
@@ -341,17 +338,10 @@
 
                                             <div class="derecha">
                                                 <mat-form-field class="example-full-width">
-                                                    <mat-label>*Fecha de aplicacion</mat-label>
+                                                    <mat-label>Fecha de aplicacion</mat-label>
                                                     <input matInput type="date" [(ngModel)]="vac.fechaAplicacion"
                                                         formControlName="fechaAplicacion" class="form-control">
                                                 </mat-form-field>
-                                                <span class="help-block"
-                                                    *ngIf="((SignupFormVac.get('fechaAplicacion').touched ||
-                                          SignupFormVac.get('fechaAplicacion').dirty) && SignupFormVac.get('fechaAplicacion').errors)">
-                                                    <span *ngIf="SignupFormVac.get('fechaAplicacion').errors.required">
-                                                        <h6 class="helpError">Campo requerido</h6>
-                                                    </span>
-                                                </span>
                                                 <span class="help-block blank"
                                                     *ngIf="(!validateFechaAplicacion() && validateNombreVac())">
                                                     <span>

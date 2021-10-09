@@ -65,6 +65,7 @@ export class FormularioPerroComponent implements OnInit {
   fileInfos: Observable<any>;
   urls = new Array<string>();
   previsualizacion: any;
+  InputSeleccionadoYVacio = false;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer, @Inject(MAT_DIALOG_DATA) public data: any, private mascotaService: MascotaService, private auth: AuthService, private alerts: AlertsService, private photo: photoService, private route: Router, private matdialog: MatDialog, private dialogRef: MatDialogRef<FormularioPerroComponent>) { }
   @ViewChild(MatTable) tabla1: MatTable<Foto>;
@@ -92,7 +93,7 @@ export class FormularioPerroComponent implements OnInit {
       conductaGatos: new FormControl('', Validators.required),
       conductaPerros: new FormControl('', Validators.required),
       descripcion: new FormControl('', [Validators.required, Validators.maxLength(150), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
-      //foto: new FormControl('',Validators.required),
+      foto: new FormControl('', Validators.required),
     });
 
     this.SignupFormVac = new FormGroup({
@@ -105,7 +106,7 @@ export class FormularioPerroComponent implements OnInit {
 
   }
 
-  principal(url: string){
+  principal(url: string) {
     return (this.marcaPrincipal == url)
   }
 
@@ -132,14 +133,19 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   marcarPrincipal(url: string) {
-    for (let i = 0; i < this.urls.length; i++){
-      if (url == this.urls[i]){
+    for (let i = 0; i < this.urls.length; i++) {
+      if (url == this.urls[i]) {
         this.marcaPrincipal = this.urls[i];
         break
       }
     }
   }
 
+  cambiarEstadoInput() {
+    if (this.urls.length == 0) {
+      this.InputSeleccionadoYVacio = true;
+    }
+  }
   validateInitialDate() {
     return (this.SignupForm.get('fechaNacimiento').touched && (this.SignupForm.controls.fechaNacimiento.value == ""));
   }
@@ -241,8 +247,8 @@ export class FormularioPerroComponent implements OnInit {
 
   borrarFila(vacuna: NuevaVacuna) {
     let cantD = 0;
-    for (let i = 0; i < this.listaVacunas.length; i++){
-      if (vacuna == this.listaVacunas[i]){
+    for (let i = 0; i < this.listaVacunas.length; i++) {
+      if (vacuna == this.listaVacunas[i]) {
         cantD = i;
         break
       }
@@ -265,7 +271,6 @@ export class FormularioPerroComponent implements OnInit {
 
 
   selectFiles(event) {
-    console.log(event)
     this.progressInfo = [];
     //Validación para obtener el nombre del archivo si es uno solo
     //En caso de que sea >1 asigna a fileName length
@@ -276,13 +281,24 @@ export class FormularioPerroComponent implements OnInit {
     this.urls = [];
 
     if (this.selectedFiles) {
+      this.InputSeleccionadoYVacio = false;
+      let cant = 0;
       for (let file of event.target.files) {
-        let reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.urls.push(e.target.result);
+        cant += 1;
+        if (cant < 6) {
+          let reader = new FileReader();
+          reader.onload = (e: any) => {
+            this.urls.push(e.target.result);
+          }
+          reader.readAsDataURL(file);
         }
-        reader.readAsDataURL(file);
+        else {
+          break;
+        }
       }
+    }
+    else if (this.urls.length == 0){
+      this.InputSeleccionadoYVacio = true;
     }
 
   }
@@ -290,21 +306,23 @@ export class FormularioPerroComponent implements OnInit {
 
   clearImage(url: string) {
     let cantD = 0;
-    for (let i = 0; i < this.urls.length; i++){
-      if (url == this.urls[i]){
+    for (let i = 0; i < this.urls.length; i++) {
+      if (url == this.urls[i]) {
         cantD = i;
         break
       }
     }
     this.urls.splice(cantD, 1);
+    if (this.urls.length == 0) {
+      this.InputSeleccionadoYVacio = true;
+    }
   }
 
 
   registrarAnimal() {
 
-    this.isLoading = true;
-
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
+      this.isLoading = true;
       let mascota: Mascota = new Mascota();
       mascota.tipoMascota = this.data.tipoMascota;
       mascota.nombreMascota = this.SignupForm.controls.nombre.value;
@@ -330,8 +348,12 @@ export class FormularioPerroComponent implements OnInit {
             this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
             let foto: Foto = new Foto();
             foto.foto = this.selectedFiles.item(i);
-            //if ()
-            foto.esPrincipal = true;
+            foto.esPrincipal = false;
+            if (i == 0) {
+              foto.esPrincipal = true;
+            }
+            console.log("foto")
+            console.log(this.selectedFiles.item(i))
 
             this.photo.upload(this.selectedFiles[i], resp.id_Animal).subscribe(
               event => {
@@ -369,6 +391,7 @@ export class FormularioPerroComponent implements OnInit {
 
         },
         () => {
+          this.isLoading = false;
           this.alerts.errorMessage("No se ha podido registrar la mascota");
 
         }
