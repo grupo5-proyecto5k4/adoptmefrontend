@@ -1,53 +1,10 @@
 <h3 class="titulo">Mascotas en adopción</h3>
-<div class="componente-filtros margenes container-publicaciones" >
-    <form *ngIf="FilterForm">
-        <div>
-            <mat-form-field class="example-full-width">
-                <mat-label>Sexo</mat-label>
-                <mat-select formControlName="sexo">
-                    <mat-option value="Hembra">Hembra</mat-option>
-                    <mat-option value="Macho">Macho</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field class="example-full-width">
-                <mat-label>Centro rescatita / Responsable</mat-label>
-                <input matInput placeholder="Nombre" formControlName="nombre"
-                class="form-control" maxlength="30">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field class="example-full-width">
-                <mat-label>Especie</mat-label>
-                <mat-select formControlName="tipoAnimal">
-                    <mat-option value="0">Perro</mat-option>
-                    <mat-option value="1">Gato</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field class="example-full-width">
-                <mat-label>Tamaño final</mat-label>
-                <mat-select formControlName="tamano">
-                    <mat-option *ngIf="animal == 0" value="Pequeño">Pequeño</mat-option>
-                    <mat-option *ngIf="animal == 0" value="Mediano">Mediano</mat-option>
-                    <mat-option *ngIf="animal == 0" value="Grande">Grande</mat-option>
-                    <mat-option *ngIf="animal == 1" value="No aplica">No aplica</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field class="example-full-width">
-                <input matInput placeholder="Barrio" formControlName="barrio"
-                class="form-control" maxlength="30">
-            </mat-form-field>
-        </div>
 
-        <a mat-raised-button color="accent" class="button confirmar"
-        type="button" id="confirmar" (click)="buscar()">Buscar</a>
-    </form>
-</div>
+<app-filters [inputCards]="cardsRequests" [inputEntityType]="solicitud"
+    [inputStatusArray]="['Disponible Adopción y Provisorio','Disponible Adopción','Disponible Provisorio']" (initParentForm)="initForm($event)"
+    (parentSetPage)="setPage($event)">
+</app-filters>
+
 <div class="margenes container-publicaciones">
     <mat-card class="card-publicacion" *ngFor=" let pet of mascotasPubAdopcion">
         <mat-card-header>

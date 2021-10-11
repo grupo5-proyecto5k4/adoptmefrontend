@@ -13,12 +13,20 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserProfileModalComponent } from './user-profile-modal/user-profile-modal.component';
 import { VerMascotaComponent } from './ver-mascota/ver-mascota.component';
 import {MatTableModule} from '@angular/material/table';
+import { FiltersComponent } from './filters/filters.component';
 
 
 
 
 @NgModule({
-    declarations: [SignupParticularComponent, SignupRescatistComponent, UserFormComponent, UserProfileModalComponent, VerMascotaComponent],
+    declarations: [
+      SignupParticularComponent, 
+      SignupRescatistComponent, 
+      UserFormComponent, 
+      UserProfileModalComponent, 
+      VerMascotaComponent,
+      FiltersComponent
+    ],
     imports: [
       ReactiveFormsModule,
       FormsModule,
@@ -37,7 +45,8 @@ import {MatTableModule} from '@angular/material/table';
       SignupRescatistComponent,
       UserFormComponent,
       UserProfileModalComponent,
-      VerMascotaComponent
+      VerMascotaComponent,
+      FiltersComponent
      ]
   })
 export class ComponentsModule{}
