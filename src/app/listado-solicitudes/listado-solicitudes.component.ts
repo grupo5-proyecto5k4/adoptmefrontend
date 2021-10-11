@@ -34,10 +34,8 @@ export class ListadoSolicitudesComponent implements OnInit {
   
     this.visualizacionSolicitudesService.getSolicitudesProvisorio(this.auth.getToken()).subscribe(dataProvi => {
       this.solicitudesProvi = dataProvi;
-      console.log("Mis solicitudes", this.solicitudesProvi);
 
       for (let x = 0 ; x < this.solicitudesProvi.length; x++){
-        console.log("For");
         //Formato fecha de creación de solicitud
         var date = this.solicitudesProvi[x].Solicitud.fechaCreacion.substring(0, 10);
         var [yyyy, mm, dd] = date.split("-");

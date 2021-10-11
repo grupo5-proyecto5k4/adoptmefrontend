@@ -36,62 +36,62 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
     // Vivienda 0:casa/1:depto
     if (dataSolicitud.vivienda === 0){
-      this.data.solicitud.Solicitud.vivienda = "Casa"
-    } else { this.data.solicitud.Solicitud.vivienda = "Departamento"}
+      this.data.solicitud.Solicitud.viviendaString = "Casa"
+    } else { this.data.solicitud.Solicitud.viviendaString = "Departamento"}
 
     // Permiso mascotas en vivienda 0:No/1:Si
     if (dataSolicitud.permiso === 1){
-      this.data.solicitud.Solicitud.permiso = "Sí"
+      this.data.solicitud.Solicitud.permisoString = "Sí"
     } else {
-      this.data.solicitud.Solicitud.permiso = "No"
+      this.data.solicitud.Solicitud.permisoString = "No"
     }
 
     // Espacio abierto 0:Balcon,/1:Patio/2:P,B/3:Ninguno
     if (dataSolicitud.espacioAbierto === 0){
-      dataSolicitud.espacioAbierto = "Balcón"
+      dataSolicitud.espacioAbiertoString = "Balcón"
     } else if (dataSolicitud.espacioAbierto === 1){
-      dataSolicitud.espacioAbierto = "Patio"}
+      dataSolicitud.espacioAbiertoString = "Patio"}
       else if (dataSolicitud.espacioAbierto === 2)
-      {dataSolicitud.espacioAbierto = "Patio y Balcón"}
+      {dataSolicitud.espacioAbiertoString = "Patio y Balcón"}
       else if (dataSolicitud.espacioAbierto === 3){
-        dataSolicitud.espacioAbierto = "No posee"
+        dataSolicitud.espacioAbiertoString = "No posee"
     }
 
     // Tiene otras mascotas 0:No/1:Si
     if (dataSolicitud.otraMascota === 1){
-      dataSolicitud.otraMascota = "Sí"
+      dataSolicitud.otraMascotaString = "Sí"
     } else {
-      dataSolicitud.otraMascota = "No"
+      dataSolicitud.otraMascotaString = "No"
     }
     
     // Tiene tiempo y presupuesto 0:No/1:Sí
     if (dataSolicitud.tiempoPresupuesto === 1){
-      this.data.solicitud.Solicitud.tiempoPresupuesto = "Sí"
+      this.data.solicitud.Solicitud.tiempoPresupuestoString = "Sí"
     } else {
-      this.data.solicitud.Solicitud.tiempoPresupuesto = "No"
+      this.data.solicitud.Solicitud.tiempoPresupuestoString = "No"
     }
 
     // Vacunacion y castracion: 0:Vacunacion/1:Castracion
     if (dataSolicitud.vacunacionCastracion === 0){
-      this.data.solicitud.Solicitud.vacunacionCastracion = "Vacunación"
+      this.data.solicitud.Solicitud.vacunacionCastracionString = "Vacunación"
     } else {
-      this.data.solicitud.Solicitud.vacunacionCastracion = "Vacunación y Castración"
+      this.data.solicitud.Solicitud.vacunacionCastracionString = "Vacunación y Castración"
     }
 
     // Tiempo solo
     if (dataSolicitud.tiempoSolo === 0){
-      dataSolicitud.tiempoSolo = "Entre 1 a 3 horas"
+      dataSolicitud.tiempoSoloString = "Entre 1 a 3 horas"
     } else if ( dataSolicitud.tiempoSolo === 1){
-      dataSolicitud.tiempoSolo = "Entre 4 a 8 horas"
+      dataSolicitud.tiempoSoloString = "Entre 4 a 8 horas"
     } else {
-      dataSolicitud.tiempoSolo = "Más de 8 horas"
+      dataSolicitud.tiempoSoloString = "Más de 8 horas"
     }
 
     // Seguimiento
     if (dataSolicitud.seguimiento === 1){
-      this.data.solicitud.Solicitud.seguimiento = "De acuerdo"
+      this.data.solicitud.Solicitud.seguimientoString = "De acuerdo"
     } else {
-      this.data.solicitud.Solicitud.seguimiento = "En desacuerdo"
+      this.data.solicitud.Solicitud.seguimientoString = "En desacuerdo"
     }
 
 
@@ -100,8 +100,8 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
     this.SolicitudForm = new FormGroup({
       nombreMascota: new FormControl({value: dataAnimal.nombreMascota, disabled:true}),
-      fechaSolicitud: new FormControl({ value: "27/07/2009", disabled: true}),
-      vivienda: new FormControl({value: dataSolicitud.vivienda, disabled: true}),
+      fechaSolicitud: new FormControl({ value: this.data.solicitud.fechaSolicitud, disabled: true}),
+      vivienda: new FormControl({value: dataSolicitud.viviendaString, disabled: true}),
       nombreSolicitante: new FormControl({value: dataSolicitante.nombreSolicitante, disabled:true}),
       calle: new FormControl({value: dataSolicitud.Direccion.calle, disabled:true}),
       altura: new FormControl({value: dataSolicitud.Direccion.numero, disabled:true}),
@@ -112,16 +112,16 @@ export class VisualizacionSolicitudComponent implements OnInit {
       email: new FormControl({value: dataSolicitante.email, disabled:true}),
       instagram: new FormControl({value: dataSolicitante.instagram, disabled:true}),
       facebook: new FormControl({value: dataSolicitante.facebook, disabled:true}),
-      permiso: new FormControl({value: dataSolicitud.permiso, disabled:true}),
-      espacioAbierto: new FormControl({value: dataSolicitud.espacioAbierto, disabled:true}),
+      permiso: new FormControl({value: dataSolicitud.permisoString, disabled:true}),
+      espacioAbierto: new FormControl({value: dataSolicitud.espacioAbiertoString, disabled:true}),
       descripcionCercamiento: new FormControl({value: dataSolicitud.descripcionCercamiento, disabled:true}),
       composicionFamilia: new FormControl({value: dataSolicitud.composicionFamilia, disabled:true}),
-      otraMascota: new FormControl({value:dataSolicitud.otraMascota, disabled:true}),
+      otraMascota: new FormControl({value:dataSolicitud.otraMascotaString, disabled:true}),
       descripcionOtraMascota: new FormControl({value: dataSolicitud.descripcionOtraMascota, disabled:true}),
-      tiempoPresupuesto: new FormControl({value: dataSolicitud.tiempoPresupuesto, disabled:true}),
-      vacunacionCastracion: new FormControl({value: dataSolicitud.vacunacionCastracion, disabled:true}),
-      tiempoSolo: new FormControl({value: dataSolicitud.tiempoSolo, disabled:true}),
-      seguimiento: new FormControl({value: dataSolicitud.seguimiento, disabled:true}),
+      tiempoPresupuesto: new FormControl({value: dataSolicitud.tiempoPresupuestoString, disabled:true}),
+      vacunacionCastracion: new FormControl({value: dataSolicitud.vacunacionCastracionString, disabled:true}),
+      tiempoSolo: new FormControl({value: dataSolicitud.tiempoSoloString, disabled:true}),
+      seguimiento: new FormControl({value: dataSolicitud.seguimientoString, disabled:true}),
       accionViaje: new FormControl({value: dataSolicitud.accionViaje , disabled:true}),
       accionImpedimento: new FormControl({value: dataSolicitud.accionImpedimento, disabled:true})
     });  
