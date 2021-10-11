@@ -42,25 +42,25 @@ export class UserFormComponent implements OnInit {
   tiempoPresupuestoSelected: number;
 
 
-  constructor(private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private notificacionService: NotificacionService, private dialog: MatDialog,private userService: UserService, private dialogref: MatDialogRef<UserFormComponent>) { }
+  constructor(private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private notificacionService: NotificacionService, private dialog: MatDialog, private userService: UserService, private dialogref: MatDialogRef<UserFormComponent>) { }
 
   ngOnInit() {
     this.UserForm = new FormGroup({
-      descripcionOtraMascota: new FormControl('', [Validators.maxLength(250)]),
-      accionViaje: new FormControl('', [Validators.required, Validators.maxLength(250)]),
-      accionImpedimento: new FormControl('', [Validators.required, Validators.maxLength(250)]),
-      descripcionCercamiento: new FormControl(''),
+      descripcionOtraMascota: new FormControl('', [Validators.maxLength(200)]),
+      accionViaje: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+      accionImpedimento: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+      descripcionCercamiento: new FormControl('', [Validators.maxLength(200)]),
       composicionFamilia: new FormControl('', [Validators.required]),
-      localidad: new FormControl({value: 'Córdoba Capital', disabled: true}),
-      street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      altura:  new FormControl('', [Validators.pattern('[0-9]{0,4}')]),
+      localidad: new FormControl({ value: 'Córdoba Capital', disabled: true }),
+      street: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      altura: new FormControl('', [Validators.pattern('[0-9]{0,4}')]),
       reference: new FormControl('', [Validators.maxLength(150)]),
       barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     });
     this.dialogref.disableClose = true;
   }
 
-  close(){
+  close() {
     this.dialogref.close();
   }
 
@@ -69,22 +69,12 @@ export class UserFormComponent implements OnInit {
   }
 
   validateButton() {
+    document.getElementById("confirmado").classList.add("buttonDisabled");
     if (this.UserForm.valid && this.allRadioSelected()) {
-      document.getElementById("confirmar").classList.remove("buttonDisabled");
-    } else {
-      document.getElementById("confirmar").classList.add("buttonDisabled");
+      document.getElementById("confirmado").classList.remove("buttonDisabled");
     }
   }
 
-
-  validarCampos() {
-    if (this.UserForm.valid && !this.UserForm.pristine) {
-      document.getElementById("changePassword").classList.remove('disabledBtnPassword');
-    }
-    else{
-      document.getElementById("changePassword").classList.add('disabledBtnPassword');
-  }
-  }
 
   validateCalle() {
     return (((this.UserForm.get('street').touched ||
@@ -112,6 +102,7 @@ export class UserFormComponent implements OnInit {
 
   radioOtrasMascotasChange(value: string) {
     this.otrasMascotasSelected = this.siNoFuncion(value);
+    this.updateOtraMascotaValidator();
   }
 
   radioVacunacionChange(value: string) {
@@ -126,7 +117,7 @@ export class UserFormComponent implements OnInit {
         break;
       }
     }
-    this.vacunacionSelected = answer;    
+    this.vacunacionSelected = answer;
   }
 
   radioPermisoEdificioChange(value: string) {
@@ -154,6 +145,34 @@ export class UserFormComponent implements OnInit {
       }
     }
     this.balconSelected = answer;
+    this.updateCercamientoValidator();
+
+  }
+
+  updateCercamientoValidator() {
+    let site_id_control = this.UserForm.controls['descripcionCercamiento'];
+    if (this.balconSelected !== 3 && this.balconSelected !== undefined) {
+      site_id_control.setValidators(Validators.compose([Validators.required, Validators.maxLength(300)]));
+    }
+    else {
+      site_id_control.setValidators(Validators.compose([Validators.maxLength(300)]));
+    }
+
+    site_id_control.updateValueAndValidity();
+
+  }
+
+  updateOtraMascotaValidator() {
+    let site_id_control = this.UserForm.controls['descripcionOtraMascota'];
+    if (this.otrasMascotasSelected == 1) {
+      site_id_control.setValidators(Validators.compose([Validators.required, Validators.maxLength(300)]));
+    }
+    else {
+      site_id_control.setValidators(Validators.compose([Validators.maxLength(300)]));
+    }
+
+    site_id_control.updateValueAndValidity();
+
   }
 
   radioTiempoPresupuestoChange(value: string) {
@@ -164,15 +183,15 @@ export class UserFormComponent implements OnInit {
     this.seguimientoSelected = this.siNoFuncion(value);
   }
 
-  TerminosCheckedChange(){
-      this.TerminosChecked = !this.TerminosChecked;
+  TerminosCheckedChange() {
+    this.TerminosChecked = !this.TerminosChecked;
   }
 
-  openTermsAndConditions(){
+  openTermsAndConditions() {
     this.dialog.open(TermsAndConditionsComponent);
   }
 
-  siNoFuncion(value: string){
+  siNoFuncion(value: string) {
     let answer: number;
     switch (value) {
       case this.siNo[0]: { //si
@@ -222,8 +241,8 @@ export class UserFormComponent implements OnInit {
     this.tiempoSoloSelected = answer;
   }
 
-  allRadioSelected(){
-    return (this.viviendaSelected !== null && this.otrasMascotasSelected !== null && this.permisoEdificioSelected !== null && this.balconSelected != null && this.seguimientoSelected !== null && this.vacunacionSelected != null && this.tiempoSoloSelected !== null && this.TerminosChecked)
+  allRadioSelected() {
+    return (this.viviendaSelected !== undefined && this.otrasMascotasSelected !== undefined && this.permisoEdificioSelected !== undefined && this.balconSelected != undefined && this.seguimientoSelected !== undefined && this.vacunacionSelected != undefined && this.tiempoSoloSelected !== undefined && this.TerminosChecked)
   }
 
   async signup() {
@@ -237,14 +256,14 @@ export class UserFormComponent implements OnInit {
       userAddress.referencia = this.UserForm.controls.reference.value;
       userAddress.localidad = "Córdoba Capital";
       userAddress.barrio = this.UserForm.controls.barrio.value;
-      
+
       //Acá seteamos los valores del formulario
       let formulario: FormularioAdopcion = new FormularioAdopcion();
       formulario.otraMascota = this.otrasMascotasSelected;
-      if (this.UserForm.controls.descripcionOtraMascota.value !== "") {
+      if (this.otrasMascotasSelected == 1 && this.UserForm.controls.descripcionOtraMascota.value !== "") {
         formulario.descripcionOtraMascota = this.UserForm.controls.descripcionOtraMascota.value;
       }
-      if (this.UserForm.controls.descripcionCercamiento.value !== "") {
+      if (this.balconSelected !== 3 && this.UserForm.controls.descripcionCercamiento.value !== "") {
         formulario.descripcionCercamiento = this.UserForm.controls.descripcionCercamiento.value;
       }
       formulario.tiempoSolo = this.tiempoSoloSelected;
@@ -259,18 +278,19 @@ export class UserFormComponent implements OnInit {
       formulario.mascotaId = this.data.mascota._id;
       formulario.accionImpedimento = this.UserForm.controls.accionImpedimento.value;
       formulario.composicionFamilia = this.UserForm.controls.composicionFamilia.value;
-      
-      
-      this.userService.registrarFormularioAdopcion(formulario, this.authService.getToken()).subscribe((resp:Data) => {
-        this.notificacionService.notificarSolicitudAdopcion(this.data.mascota.nombreMascota,this.data.mascota.responsableId, resp._id,this.authService.getToken())
-        this.alertsService.confirmMessage("Su solicitud de adopción ha sido registrada").then((result) => window.location.href = '/');        
+
+
+      this.userService.registrarFormularioAdopcion(formulario, this.authService.getToken()).subscribe((resp: Data) => {
+        this.notificacionService.notificarSolicitudAdopcion(this.data.mascota.nombreMascota, this.data.mascota.responsableId, resp._id, this.authService.getToken())
+        this.alertsService.confirmMessage("Su solicitud de adopción ha sido registrada").then((result) => window.location.href = '/');
       },
         error => {
           this.alertsService.errorMessage(error.error.error).then((result) => {
-            this.isLoading = false;  })
+            this.isLoading = false;
+          })
         }
-        );
-    } 
+      );
+    }
   }
 
   async init() {
