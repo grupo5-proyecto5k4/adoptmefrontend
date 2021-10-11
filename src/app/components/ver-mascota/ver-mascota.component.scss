@@ -160,14 +160,33 @@ table {
   display: none;
 }
 
+.flecha{
+  height: 35px;
+  width: 35px;
+}
+
+.izq{
+  float: left;
+}
+
+.der{
+  float: right;
+}
+
+.position{
+  width: 350px;
+  height: 35px;
+  position: absolute;
+}
+
 /* Next & previous buttons */
 .prev, .next {
+  line-height: 2rem;
   cursor: pointer;
-  top: 30%;
+  text-align: center;
+  position: absolute;
   width: 35px;
-  height: 35px;
-  margin-top: -30px;
-  padding: 16px;
+  margin-top: -45%;
   color: #00000061;
   font-weight: 700;
   font-size: 18px;
@@ -179,14 +198,14 @@ table {
 
 /* Position the "next button" to the right */
 .next {
-  float: right;
   //right: 20%;
-  margin-right: 4%;
+  //margin-right: 4%;
+  float: right;
 }
 
 .prev {
+  //margin-left: 4%;
   float: left;
-  margin-left: 4%;
 }
 
 .numbertext {
@@ -285,10 +304,10 @@ textarea{
       height: 180px;
   }
 
-    /* Next & previous buttons */
-  .prev, .next {
-    margin-top: -10px;
+  .position{
+    width: 245px;
   }
+
 
 }
 
@@ -302,16 +321,6 @@ textarea{
       width: 90% !important;
       }
 
-            /* Next & previous buttons */
-  .prev, .next {
-    margin-top: 35px;
-  }
-
-  /* Position the "next button" to the right */
-  .next {
-    right: 20%;
-  }
-  
 }
 
 
