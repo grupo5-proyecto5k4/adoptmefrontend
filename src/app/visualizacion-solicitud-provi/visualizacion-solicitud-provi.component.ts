@@ -133,7 +133,6 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   }
 
   aceptarSolicitud(){
-    console.log("aceptar");
     this.visualizacionSolicitudesService.confirmarSolicitudProvisorio(this.auth.getToken(), this.idSolicitud).subscribe(dataProvi => {
       this.data = dataProvi;
       }
@@ -141,7 +140,6 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   }
 
   rechazarSolicitud(){
-    console.log("rechazar");
     this.visualizacionSolicitudesService.rechazarSolicitudProvisorio(this.auth.getToken(), this.idSolicitud).subscribe(dataProvi => {
       this.data = dataProvi;
       }

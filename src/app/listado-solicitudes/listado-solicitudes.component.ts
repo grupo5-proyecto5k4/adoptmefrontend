@@ -50,7 +50,6 @@ export class ListadoSolicitudesComponent implements OnInit {
   }
 
   openSolicitudProvi(soli){
-    console.log("Datos de la solicitud", soli);
     this.dialog.open(VisualizacionSolicitudProviComponent, {data: {solicitud: soli}});
   }
 }
