@@ -27,6 +27,8 @@ export class ReportesCentroComponent implements OnInit {
   promedios:any;
   maximos:any;
 
+  flagNoData: number = 0;
+
   // Gráfico de tiempos mínimos
   public barChartOptionsMin: ChartOptions = {
     responsive: true,
@@ -157,15 +159,15 @@ export class ReportesCentroComponent implements OnInit {
 
     var minimosPositivos = [];
     for (let x = 0; x < this.minimos.length; x++){
-      console.log("MINIMO", this.minimos[x].data)
       if (this.minimos[x].data != 0){
         minimosPositivos.push(this.minimos[x]);
       }
     }
-    console.log("Minimos que no son cero: ", minimosPositivos);
     this.barChartDataMin = minimosPositivos;
-    console.log("Datos del minimo: ", this.barChartDataMin);
 
+    if (this.barChartDataMin.length === 0){
+      this.flagNoData = 1;
+    }
 
 
     this.promedios = [
