@@ -17,6 +17,7 @@
 
 
                       <div class="contenedor-imagen">
+                        <div class="prev" (click)="plusSlides(-1)" *ngIf="fotos.length > 1">&#10094;</div>
                         <div *ngFor=" let foto of fotoVisualizar, index as id">
                           
                           <div>
@@ -24,8 +25,8 @@
                           </div>
                         </div>
               
-                        <a class="prev" (click)="plusSlides(-1)" *ngIf="fotos.length > 1">&#10094;</a>
-                        <a class="next" (click)="plusSlides(1)" *ngIf="fotos.length > 1">&#10095;</a>
+                        
+                        <div class="next" (click)="plusSlides(1)" *ngIf="fotos.length > 1">&#10095;</div>
                         <br>
 
                       </div>

@@ -163,9 +163,9 @@ table {
 /* Next & previous buttons */
 .prev, .next {
   cursor: pointer;
-  position: absolute;
   top: 30%;
-  width: auto;
+  width: 35px;
+  height: 35px;
   margin-top: -30px;
   padding: 16px;
   color: #00000061;
@@ -179,8 +179,14 @@ table {
 
 /* Position the "next button" to the right */
 .next {
-  right: 20%;
+  float: right;
+  //right: 20%;
   margin-right: 4%;
+}
+
+.prev {
+  float: left;
+  margin-left: 4%;
 }
 
 .numbertext {
