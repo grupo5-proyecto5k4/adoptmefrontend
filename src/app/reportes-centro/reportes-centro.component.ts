@@ -159,18 +159,14 @@ export class ReportesCentroComponent implements OnInit {
 
     var minimosPositivos = [];
     for (let x = 0; x < this.minimos.length; x++){
-      console.log("MINIMO", this.minimos[x].data)
       if (this.minimos[x].data != 0){
         minimosPositivos.push(this.minimos[x]);
       }
     }
-    console.log("Minimos que no son cero: ", minimosPositivos);
     this.barChartDataMin = minimosPositivos;
-    console.log("Longitud del cartdata ", this.barChartDataMin.length);
 
     if (this.barChartDataMin.length === 0){
       this.flagNoData = 1;
-      console.log("ENTRA AL FLAG");
     }
 
 
