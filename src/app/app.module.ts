@@ -56,6 +56,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-provisorio.component';
 import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
 import { ChartsModule } from 'ng2-charts';
+import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +83,7 @@ import { ChartsModule } from 'ng2-charts';
     VisualizacionSolicitudComponent,
     SolicitudProvisorioComponent,
     ReportesCentroComponent,
+    VisualizacionSolicitudProviComponent,
     //PublicacionesProvComponent
 
   ],
