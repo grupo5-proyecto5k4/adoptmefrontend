@@ -47,3 +47,37 @@
     </div>
 </div>
 
+<div class="subtitle">
+    <h2>Animales adoptados por la misma persona que les dió provisorio en algún momento</h2>
+</div>
+
+<div class="container-principal">
+    <div class="container-grafico">
+        <h3>Perros adoptados por su provisorio</h3>
+
+        <div id="myChart">
+            <canvas baseChart
+            [datasets]="barChartDataPerro"
+            [labels]="barChartLabelsPerro"
+            [options]="pieChartPerrosAdoptados"
+            [legend]="barChartLegendPerro"
+            [chartType]="barChartPerros">
+            </canvas>
+        </div>
+    </div>
+
+    <div class="container-grafico">
+        <h3>Gatos adoptados por su provisorio</h3>
+        <div id="myChart">
+            <canvas baseChart
+            [datasets]="barChartDataGato"
+            [labels]="barChartLabelsGato"
+            [options]="pieChartGatosAdoptados"
+            [legend]="barChartLegendGato"
+            [chartType]="barChartGatos">
+            </canvas>
+        </div>
+    </div>
+</div>
+
+
