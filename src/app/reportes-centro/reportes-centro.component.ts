@@ -27,6 +27,9 @@ export class ReportesCentroComponent implements OnInit {
   promedios:any;
   maximos:any;
 
+  graficoPerro: any = {perrosAdoptadosPorSuProvisorio: 0, perrosAdoptadosPorOtro: 0, totalPerrosAdoptados : 0}
+  graficoGato: any = {gatosAdoptadosPorSuProvisorio: 0, gatosAdoptadosPorOtro: 0, totalGatosAdoptados : 0}
+
   flagNoData: number = 0;
 
   // Gráfico de tiempos mínimos
@@ -93,6 +96,47 @@ export class ReportesCentroComponent implements OnInit {
       { data: [30], label: 'Gatos cachorros' },
       { data: [27], label: 'Gatos adultos' }
     ];
+
+
+    // Gráfico de Perros que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
+
+  public pieChartPerrosAdoptados: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    plugins: {
+      datalabels: {
+        color: "black",
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+
+  public barChartLabelsPerro: Label[] = ['Adoptante fue su provisorio', 'Adoptante no le dió provisorio'];
+  public barChartPerros: ChartType = 'doughnut';
+  public barChartLegendPerro = true;
+  public barChartDataPerro: ChartDataSets[] = [
+    { data: [28, 61] },
+  ];
+
+  // Gráfico de Gatos que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
+  public pieChartGatosAdoptados: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+
+  public barChartLabelsGato: Label[] = ['Adoptante fue su provisorio', 'Adoptante no le dió provisorio'];
+  public barChartGatos: ChartType = 'doughnut';
+  public barChartLegendGato = true;
+  public barChartDataGato: ChartDataSets[] = [
+    { data: [15, 52] },
+  ];
 
 
   constructor() { }
@@ -198,6 +242,35 @@ export class ReportesCentroComponent implements OnInit {
       }
     }
     this.barChartDataMax = maximosPositivos;
+
+    //Datos para el grafico de mascotas adoptadas
+    var jsonMascotas = [{
+      "tipoMascota":"0",
+      "perrosAdoptadosPorSuProvisorio":15,
+      "perrosAdoptadosPorOtro":15,
+      "totalPerrosAdoptados":15
+      },
+      {
+        "tipoMascota":"1",
+        "gatosAdoptadosPorSuProvisorio":15,
+        "gatosAdoptadosPorOtro":15,
+        "totalGatosAdoptados":15
+        },
+      ]
+
+
+      for (let x = 0; x < jsonMascotas.length; x++){
+        if (jsonMascotas[x].tipoMascota === "0"){
+          this.graficoPerro.perrosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosAdoptadosPorSuProvisorio;
+          this.graficoPerro.perrosAdoptadosPorOtro = jsonMascotas[x].perrosAdoptadosPorOtro;
+          this.graficoPerro.totalPerrosAdoptados = jsonMascotas[x].totalPerrosAdoptados;
+        } else if (jsonMascotas[x].tipoMascota === "1"){
+          this.graficoGato.gatosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosAdoptadosPorSuProvisorio;
+          this.graficoGato.gatosAdoptadosPorOtro = jsonMascotas[x].gatosAdoptadosPorOtro;
+          this.graficoGato.totalGatosAdoptados = jsonMascotas[x].totalGatosAdoptados;
+        }
+      }
+
 
   }
 
