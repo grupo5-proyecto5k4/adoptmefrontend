@@ -11,6 +11,7 @@ export class VisualizacionSolicitudesService {
     endpointSolicitudesAdoptar='https://adoptmebackend.herokuapp.com/formulario/buscar/solicitudadopcion/adopcion';
     endpointSolicitudesProvisorio='https://adoptmebackend.herokuapp.com/formulario/buscar/solicitudadopcion/provisorio';
     endpointGetSolicitudes='https://adoptmebackend.herokuapp.com/formulario/adopcion';
+    endpointCambiarEstado='';
 
     constructor(private http: HttpClient) {}
 
@@ -24,5 +25,9 @@ export class VisualizacionSolicitudesService {
 
     async getSolicitud(idSolictud: string): Promise<any> {
         return this.http.get((this.endpointGetSolicitudes+'/'+idSolictud)).toPromise();
+    }
+
+    cambiarEstadoSolicitud(request:string):Observable<any>{
+        return this.http.put(this.endpointCambiarEstado,request);
     }
 }
