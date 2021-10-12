@@ -19,23 +19,83 @@
                         <div>
                           <mat-form-field class="ref">
                             <mat-label>Nombre</mat-label>
-                            <input matInput formControlName="nombres">
+                            <input matInput formControlName="nombres" maxlength="30">
                           </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched ||
+                          ProfileForm.get('nombres').dirty) && ProfileForm.get('nombres').errors)">
+                                  <span *ngIf="ProfileForm.get('nombres').errors.required">
+                                    <h6 class="helpError">Campo requerido</h6>
+                                  </span>
+                                  <span *ngIf="ProfileForm.get('nombres').errors.maxlength">
+                                    <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                                  </span>
+                                  <span *ngIf="ProfileForm.get('nombres').errors.pattern">
+                                    <h6 class="helpError">Formato del nombre no válido</h6>
+                                  </span>
+                                </span>
+                                <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                                  <span>
+                                    <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                                      -
+                                    </h6>
+                                  </span>
+                                </span>
                         </div>
                       </div>
+
                       <div class="container-row1" *ngIf="currentUser.tipoUsuario !== 2">
                         <div>
                           <mat-form-field>
                             <mat-label>Nombre</mat-label>
-                            <input matInput formControlName="nombres">
+                            <input matInput formControlName="nombres" maxlength="30">
                           </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched ||
+                          ProfileForm.get('nombres').dirty) &&
+                          ProfileForm.get('nombres').errors)">
+                                  <span *ngIf="ProfileForm.get('nombres').errors.required">
+                                    <h6 class="helpError">Campo requerido</h6>
+                                  </span>
+                                  <span *ngIf="ProfileForm.get('nombres').errors.maxlength">
+                                    <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                                  </span>
+                                  <span *ngIf="ProfileForm.get('nombres').errors.pattern">
+                                    <h6 class="helpError">Formato del nombre no válido</h6>
+                                  </span>
+                                </span>
+                                <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                                  <span>
+                                    <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                                      -
+                                    </h6>
+                                  </span>
+                                </span>
                         </div>
 
                         <div class="derecha">
                           <mat-form-field>
                             <mat-label>Apellido</mat-label>
-                            <input matInput formControlName="apellidos">
+                            <input matInput formControlName="apellidos" maxlength="30">
                           </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('apellidos').touched ||
+                      ProfileForm.get('apellidos').dirty) &&
+                      ProfileForm.get('apellidos').errors)">
+                        <span *ngIf="ProfileForm.get('apellidos').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('apellidos').errors.maxlength">
+                          <h6 class="helpError">Ingrese como máximo 30 caracteres</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('apellidos').errors.pattern">
+                          <h6 class="helpError">Formato del apellido no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateLastname() && validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
                         </div>
                       </div>
 
@@ -45,12 +105,45 @@
                             <mat-label>DNI</mat-label>
                             <input matInput formControlName="dni">
                           </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('dni').touched ||
+                      ProfileForm.get('dni').dirty) &&
+                      ProfileForm.get('dni').errors)">
+                        <span *ngIf="ProfileForm.get('dni').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('dni').errors.pattern">
+                          <h6 class="helpError">Formato del DNI no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateDNI() && validateBirthdate())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
                         </div>
+
                         <div class="derecha">
                           <mat-form-field>
                             <mat-label>Fecha de nacimiento</mat-label>
-                            <input matInput formControlName="fechaNacimiento">
+                            <input matInput type="date" (change)="CalculateAge()" formControlName="fechaNacimiento">
                           </mat-form-field>
+                          <span class="help-block" *ngIf="validateInitialDate()">
+                            <span *ngIf="validateInitialDate">
+                              <h6 class="helpError">Campo requerido</h6>
+                            </span>
+                          </span>
+                          <span *ngIf="edadInvalida">
+                            <h6 class="helpError">{{mensajeEdad}}</h6>
+                          </span>
+                          <span class="help-block" *ngIf="(validateDNI() && !validateBirthdate())">
+                            <span>
+                              <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                                -
+                              </h6>
+                            </span>
+                          </span>
                         </div>
                       </div>
 
@@ -67,14 +160,39 @@
                           <div>
                             <mat-form-field>
                               <mat-label>Calle</mat-label>
-                              <input matInput formControlName="calle">
+                              <input matInput formControlName="calle" maxlength="50">
                             </mat-form-field>
+                            <span class="help-block" *ngIf="((ProfileForm.get('calle').touched ||
+                             ProfileForm.get('calle').dirty) && ProfileForm.get('calle').errors)">
+                        <span *ngIf="ProfileForm.get('calle').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('calle').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateCalle() && validateAltura())">
+                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                          -
+                        </h6>
+                      </span>
                           </div>
                           <div class="derecha">
                             <mat-form-field>
                               <mat-label>Altura</mat-label>
-                              <input matInput formControlName="altura">
+                              <input matInput formControlName="altura" maxlength="4">
                             </mat-form-field>
+                            <span class="help-block" *ngIf="((ProfileForm.get('altura').touched ||
+                      ProfileForm.get('altura').dirty) && ProfileForm.get('altura').errors)">
+                        <span *ngIf="ProfileForm.get('altura').errors.pattern">
+                          <mat-error class="helpError">Formato de la altura no válido</mat-error>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateAltura() && validateCalle())">
+                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                          -
+                        </h6>
+                      </span>
                           </div>
                         </div>
 
@@ -88,8 +206,17 @@
                           <div class="derecha">
                             <mat-form-field>
                               <mat-label>Barrio</mat-label>
-                              <input matInput formControlName="barrio">
+                              <input matInput formControlName="barrio" maxlength="50">
                             </mat-form-field>
+                            <span class="help-block" *ngIf="((ProfileForm.get('barrio').touched ||
+                      ProfileForm.get('barrio').dirty) && ProfileForm.get('barrio').errors)">
+                          <span *ngIf="ProfileForm.get('barrio').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="ProfileForm.get('barrio').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 50 caracteres</mat-error>
+                          </span>
+                        </span>
                           </div>
                         </div>
 
@@ -99,38 +226,124 @@
                               <mat-label>Referencia</mat-label>
                               <textarea matInput formControlName="referencia" maxlength="150"></textarea>
                             </mat-form-field>
-                          </div>
+                            <span class="help-block" *ngIf="((ProfileForm.get('referencia').touched ||
+                      ProfileForm.get('referencia').dirty) && ProfileForm.get('referencia').errors)">
+                      <span *ngIf="ProfileForm.get('referencia').errors.maxlength">
+                        <mat-error class="helpError">Ingrese como máximo 150 caracteres</mat-error>
+                      </span>
+                        </span>
                         </div>
-                      </div>
-                      <div class="container-row1">
+                        </div>
+
+                       <div class="container-row1">
                         <div>
-                          <mat-form-field>
-                            <mat-label>Instagram</mat-label>
-                            <input matInput formControlName="instagram">
+                          <mat-form-field class="banco">
+                            <mat-label>Nombre del banco</mat-label>
+                            <textarea matInput formControlName="banco" maxlength="30"></textarea>
                           </mat-form-field>
                         </div>
+
                         <div class="derecha">
-                          <mat-form-field>
-                            <mat-label>Facebook</mat-label>
-                            <input matInput formControlName="facebook">
+                          <mat-form-field class="alias">
+                            <mat-label>Alias</mat-label>
+                            <textarea matInput formControlName="alias" maxlength="30"></textarea>
                           </mat-form-field>
                         </div>
                       </div>
 
                       <div class="container-row1">
                         <div>
-                          <mat-form-field>
-                            <mat-label>Número de Contacto</mat-label>
-                            <input matInput formControlName="numeroContacto">
+                          <mat-form-field class="ref">
+                            <mat-label>CBU</mat-label>
+                            <textarea matInput formControlName="CBU" maxlength="150"></textarea>
                           </mat-form-field>
                         </div>
+                      </div>
+
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Instagram</mat-label>
+                            <input matInput formControlName="instagram" maxlength="30">
+                          </mat-form-field>
+                        </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Facebook</mat-label>
+                            <input matInput formControlName="facebook" maxlength="30">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                              <mat-label>Número de Contacto</mat-label>
+                              <input matInput formControlName="numeroContacto" maxlength="15">
+                          </mat-form-field>
+                             <span class="help-block" *ngIf="((ProfileForm.get('numeroContacto').touched ||
+                               ProfileForm.get('numeroContacto').dirty) &&ProfileForm.get('numeroContacto').errors)">
+                             <span *ngIf="ProfileForm.get('numeroContacto').errors.pattern">
+                              <h6 class="helpError">Ingrese valor numérico entre 10 y 13 dígitos</h6>
+                            </span>
+                          </span>
+                          <span class="help-block" *ngIf="(!validateContactNumber() && validatePassword())">
+                            <span>
+                              <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                                -
+                              </h6>
+                            </span>
+                          </span>
+                        </div>
+
                         <div class="derecha">
                           <mat-form-field>
                             <mat-label>Contraseña</mat-label>
                             <input matInput formControlName="contrasenia">
                           </mat-form-field>
-                        </div>
-                      </div>
+                          <span class="help-block" *ngIf="((ProfileForm.get('contrasenia').touched ||
+                             ProfileForm.get('contrasenia').dirty) && ProfileForm.get('contrasenia').errors)">
+                         <span *ngIf="ProfileForm.get('contrasenia').errors.required">
+                              <h6 class="helpError">Campo requerido</h6>
+                         </span>
+                         <span *ngIf="ProfileForm.get('contrasenia').errors.pattern">
+                             <h6 class="helpError">La contraseña no cumple con los requisitos</h6>
+                             </span>
+                        </span>
+                        <span class="help-block blank" *ngIf="(validateContactNumber() && !validatePassword())">
+                        <span>
+                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                          -  </h6>
+                         </span>
+                         </span>
+                   </div>
+
+                   <div class="tooldiv" *ngIf="editarDatos">
+                    <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+                Entre 8 y 15 caracteres,al menos una mayúscula,una minúscula y un número"
+                      aria-label="Button that displays a tooltip when focused or hovered over">
+                      ℹ
+                    </label>
+                    <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">
+                      <span>
+                        <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                          -
+                        </h6>
+                      </span>
+                    </span>
+                  </div>
+
+                  </div>
+
+                      <button mat-button class="centrado" *ngIf="esconder" id="btnEdit" type="button" style="padding: 10px;" color="accent" (click)="editar()">Editar</button>
+
+                      <div class="centrado" *ngIf="editarDatos">
+                       <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" matDialogClose>Cancelar</button>
+                       <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" (click)="guardar()">Guardar Cambios</button>
+                      </div> 
 
                     </form>
                   </div>

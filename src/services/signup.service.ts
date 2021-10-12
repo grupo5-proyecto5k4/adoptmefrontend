@@ -11,6 +11,7 @@ import { User } from 'src/models/IUser';
 export class SignupService {
  
   urlEdit='https://adoptmebackend.herokuapp.com/user/modificacionPerfil';
+  urlEditCentro='https://adoptmebackend.herokuapp.com/user/modificacion/centrorescatista';
   
   constructor(private httpClient: HttpClient) {}
  
@@ -21,10 +22,15 @@ export class SignupService {
     }
 
    
-    editUser(user: User, token:string): Observable <any> {
-      return this.httpClient.put<any>(this.urlEdit, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
+    editUser(user: User, token:string): Observable <User> {
+      return this.httpClient.put<User>(this.urlEdit, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
     }
-  
+
+    
+    editCentro(user: User, token:string): Observable <User> {
+      return this.httpClient.put<User>(this.urlEditCentro, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
+    }
+
     
   }
 
