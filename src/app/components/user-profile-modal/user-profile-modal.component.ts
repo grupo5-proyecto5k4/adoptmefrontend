@@ -87,7 +87,7 @@ export class UserProfileModalComponent implements OnInit {
 
       if(this.currentUser.Donacion==null){
         this.ProfileForm.controls['banco'].setValue("No especificado");
-        this.ProfileForm.controls['CBU'].setValue("No especificado");
+        this.ProfileForm.controls['cbu'].setValue("No especificado");
         this.ProfileForm.controls['alias'].setValue("No especificado");
       }
 
@@ -106,7 +106,7 @@ export class UserProfileModalComponent implements OnInit {
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
        
         banco: new FormControl({ value:'', disabled: false },[Validators.maxLength(30)]),
-        CBU: new FormControl({ value: '', disabled: false },[Validators.maxLength(150)]),
+        cbu: new FormControl({ value: '', disabled: false },[Validators.maxLength(150)]),
         alias: new FormControl({ value: '', disabled: false },[Validators.maxLength(30)]),
        
         calle: new FormControl({ value:'', disabled: true }),
@@ -135,7 +135,7 @@ export class UserProfileModalComponent implements OnInit {
         barrio: new FormControl({ value: '', disabled: true }),
         referencia: new FormControl({ value: '', disabled: true }),
         banco: new FormControl({ value:'', disabled: true }),
-        CBU: new FormControl({ value: '', disabled: true }),
+        cbu: new FormControl({ value: '', disabled: true }),
         alias: new FormControl({ value: '', disabled: true }),
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
@@ -163,7 +163,7 @@ export class UserProfileModalComponent implements OnInit {
       
       let donaciones: Donacion=new Donacion();
       donaciones._id=this.currentUser._id;
-      donaciones.CBU=this.ProfileForm.controls.CBU.value;
+      donaciones.cbu=this.ProfileForm.controls.cbu.value;
       donaciones.alias=this.ProfileForm.controls.alias.value;
       donaciones.banco=this.ProfileForm.controls.banco.value;
           
