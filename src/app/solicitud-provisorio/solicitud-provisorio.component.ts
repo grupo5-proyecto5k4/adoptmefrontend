@@ -62,21 +62,10 @@ export class SolicitudProvisorioComponent implements OnInit {
   }
 
   validateButton() {
+    document.getElementById("confirmado").classList.add("buttonDisabled");
     if (this.UserForm.valid && this.allRadioSelected()) {
-      document.getElementById("confirmar").classList.remove("buttonDisabled");
-    } else {
-      document.getElementById("confirmar").classList.add("buttonDisabled");
+      document.getElementById("confirmado").classList.remove("buttonDisabled");
     }
-  }
-
-
-  validarCampos() {
-    if (this.UserForm.valid && !this.UserForm.pristine) {
-      document.getElementById("changePassword").classList.remove('disabledBtnPassword');
-    }
-    else{
-      document.getElementById("changePassword").classList.add('disabledBtnPassword');
-  }
   }
 
   validateCalle() {
@@ -105,6 +94,7 @@ export class SolicitudProvisorioComponent implements OnInit {
 
   radioOtrasMascotasChange(value: string) {
     this.otrasMascotasSelected = this.siNoFuncion(value);
+    this.updateOtraMascotaValidator();
   }
 
   radioPermisoEdificioChange(value: string) {
@@ -136,6 +126,33 @@ export class SolicitudProvisorioComponent implements OnInit {
       }
     }
     this.balconSelected = answer;
+    this.updateCercamientoValidator();
+  }
+
+  updateCercamientoValidator() {
+    let site_id_control = this.UserForm.controls['descripcionCercamiento'];
+    if (this.balconSelected !== 3 && this.balconSelected !== undefined) {
+      site_id_control.setValidators(Validators.compose([Validators.required, Validators.maxLength(300)]));
+    }
+    else {
+      site_id_control.setValidators(Validators.compose([Validators.maxLength(300)]));
+    }
+
+    site_id_control.updateValueAndValidity();
+
+  }
+
+  updateOtraMascotaValidator() {
+    let site_id_control = this.UserForm.controls['descripcionOtraMascota'];
+    if (this.otrasMascotasSelected == 1) {
+      site_id_control.setValidators(Validators.compose([Validators.required, Validators.maxLength(300)]));
+    }
+    else {
+      site_id_control.setValidators(Validators.compose([Validators.maxLength(300)]));
+    }
+
+    site_id_control.updateValueAndValidity();
+
   }
 
   radioDuracionChange(value: string) {
@@ -210,10 +227,11 @@ export class SolicitudProvisorioComponent implements OnInit {
 
 
   allRadioSelected(){
-    return (this.viviendaSelected !== null && this.otrasMascotasSelected !== null && this.permisoEdificioSelected !== null && this.balconSelected != null && this.seguimientoSelected !== null && this.duracionSelected != null && this.TerminosChecked && this.tiempoSuficienteSelected != null && this.presupuestoSelected != null)
+    return (this.viviendaSelected !== undefined && this.otrasMascotasSelected !== undefined && this.permisoEdificioSelected !== undefined && this.balconSelected != undefined && this.seguimientoSelected !== undefined && this.duracionSelected != undefined && this.TerminosChecked && this.tiempoSuficienteSelected != undefined && this.presupuestoSelected != undefined)
   }
 
   async signup() {
+    console.log("Todos seleccionados?", this.allRadioSelected());
     if (this.UserForm.valid && this.allRadioSelected()) {
       this.isLoading = true;
 
@@ -228,10 +246,10 @@ export class SolicitudProvisorioComponent implements OnInit {
       //Acá seteamos los valores del formulario
       let formulario: FormularioProvisorio = new FormularioProvisorio();
       formulario.otraMascota = this.otrasMascotasSelected;
-      if (this.UserForm.controls.descripcionOtraMascota.value !== "") {
+      if (this.otrasMascotasSelected == 1 && this.UserForm.controls.descripcionOtraMascota.value !== "") {
         formulario.descripcionOtraMascota = this.UserForm.controls.descripcionOtraMascota.value;
       }
-      if (this.UserForm.controls.descripcionCercamiento.value !== "") {
+      if (this.balconSelected !== 3 && this.UserForm.controls.descripcionCercamiento.value !== "") {
         formulario.descripcionCercamiento = this.UserForm.controls.descripcionCercamiento.value;
       }
 

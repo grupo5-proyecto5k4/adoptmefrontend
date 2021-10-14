@@ -46,7 +46,7 @@ export class NotificacionService {
     return this.notificar(notificacion, token)
   }
 
-  notificarConfirmacionAdopcion(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+  notificarConfirmacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Confirmacion de adopción";
     notificacion.descripcion = "La solicitud de adopción de "+nombreMascota+" ha sido aceptada";
@@ -56,10 +56,30 @@ export class NotificacionService {
     return this.notificar(notificacion, token)
   }
 
-  notificarConfirmacionProvisorio(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+  notificarConfirmacionProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Confirmacion de provisorio";
     notificacion.descripcion = "La solicitud de provisorio de "+nombreMascota+" ha sido aceptada";
+    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
+  notificarConfirmacionAdopcionACentro(nombreMascota: string, nombreAdoptante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Confirmacion de adopción";
+    notificacion.descripcion = nombreAdoptante+" Ha confirmado la adopción de "+nombreMascota;
+    notificacion.objetoAMostrar = "Adopcion";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
+  notificarConfirmacionProvisorioACentro(nombreMascota: string, nombreAdoptante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Confirmacion de provisorio";
+    notificacion.descripcion = nombreAdoptante+" Ha confirmado la adopción de "+nombreMascota;
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;

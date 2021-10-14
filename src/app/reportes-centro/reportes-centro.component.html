@@ -5,45 +5,91 @@
     <h2>¿En cuántos días mis mascotas consiguen un hogar?</h2>
 </div>
 
+<div>
+    <div class="container-principal" *ngIf="flagNoData === 0">
+        <div class="container-grafico" >
+            <h3>Tiempos mínimos de adopción</h3>
+
+            <div id="myChart">
+                <canvas baseChart
+                [datasets]="barChartDataMin"
+                [labels]="barChartLabelsMin"
+                [options]="barChartOptionsMin"
+                [legend]="barChartLegendMin"
+                [chartType]="barChartTypeMin">
+                </canvas>
+            </div>
+        </div>
+
+        <div class="container-grafico">
+            <h3>Tiempos promedios de adopción</h3>
+            <div id="myChart">
+                <canvas baseChart
+                [datasets]="barChartDataProm"
+                [labels]="barChartLabelsProm"
+                [options]="barChartOptionsProm"
+                [legend]="barChartLegendProm"
+                [chartType]="barChartTypeProm">
+                </canvas>
+            </div>
+        </div>
+
+        <div class="container-grafico">
+            <h3>Tiempos máximos de adopción</h3>
+            <div id="myChart">
+                <canvas baseChart
+                [datasets]="barChartDataMax"
+                [labels]="barChartLabelsMax"
+                [options]="barChartOptionsMax"
+                [legend]="barChartLegendMax"
+                [chartType]="barChartTypeMax">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="flagNoData === 1" class="sms">
+        <h4>¡Todavía no tienes mascotas adoptadas! Volvé a esta sección luego de haber concretado adopciones para obtener información valiosa sobre los tiempos de las mismas... </h4>
+    </div>
+    
+</div>
+
+<div class="subtitle">
+    <h2>Animales adoptados por la misma persona que les dió provisorio en algún momento</h2>
+</div>
+
 <div class="container-principal">
     <div class="container-grafico">
-        <h3>Tiempos mínimos de adopción</h3>
+        <h3>Perros adoptados por su provisorio</h3>
 
         <div id="myChart">
             <canvas baseChart
-            [datasets]="barChartDataMin"
-            [labels]="barChartLabelsMin"
-            [options]="barChartOptionsMin"
-            [legend]="barChartLegendMin"
-            [chartType]="barChartTypeMin">
+            [datasets]="barChartDataPerro"
+            [labels]="barChartLabelsPerro"
+            [options]="pieChartPerrosAdoptados"
+            [legend]="barChartLegendPerro"
+            [chartType]="barChartPerros">
             </canvas>
         </div>
     </div>
 
     <div class="container-grafico">
-        <h3>Tiempos promedios de adopción</h3>
+        <h3>Gatos adoptados por su provisorio</h3>
         <div id="myChart">
             <canvas baseChart
-            [datasets]="barChartDataProm"
-            [labels]="barChartLabelsProm"
-            [options]="barChartOptionsProm"
-            [legend]="barChartLegendProm"
-            [chartType]="barChartTypeProm">
-            </canvas>
-        </div>
-    </div>
-
-    <div class="container-grafico">
-        <h3>Tiempos máximos de adopción</h3>
-        <div id="myChart">
-            <canvas baseChart
-            [datasets]="barChartDataMax"
-            [labels]="barChartLabelsMax"
-            [options]="barChartOptionsMax"
-            [legend]="barChartLegendMax"
-            [chartType]="barChartTypeMax">
+            [datasets]="barChartDataGato"
+            [labels]="barChartLabelsGato"
+            [options]="pieChartGatosAdoptados"
+            [legend]="barChartLegendGato"
+            [chartType]="barChartGatos">
             </canvas>
         </div>
     </div>
 </div>
+
+
+
+
+
+
+
 

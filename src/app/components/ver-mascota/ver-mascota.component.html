@@ -18,16 +18,19 @@
 
                       <div class="contenedor-imagen">
                         <div *ngFor=" let foto of fotoVisualizar, index as id">
-                          
+
                           <div>
                             <img class="imagen" src="{{foto.path}}" style="width:100%">
                           </div>
                         </div>
-              
-                        <a class="prev" (click)="plusSlides(-1)" *ngIf="fotos.length > 1">&#10094;</a>
-                        <a class="next" (click)="plusSlides(1)" *ngIf="fotos.length > 1">&#10095;</a>
-                        <br>
-
+                        <div class="position">
+                          <div class="flecha izq">
+                            <a class="prev" (click)="plusSlides(-1)" *ngIf="fotos.length > 1">&#10094;</a>
+                          </div>
+                          <div class="flecha der">
+                            <a class="next" (click)="plusSlides(1)" *ngIf="fotos.length > 1">&#10095;</a>
+                          </div>
+                        </div>
                       </div>
 
 
@@ -136,7 +139,8 @@
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
                             style="padding: 10px;" (click)="openUserForm()" *ngIf="accion === 1">Adoptar</a>
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
-                            style="padding: 10px;" (click)="openProvisorioForm()" *ngIf="accion === 0">Ser Provisorio</a>
+                            style="padding: 10px;" (click)="openProvisorioForm()" *ngIf="accion === 0">Ser
+                            Provisorio</a>
                         </div>
                       </div>
 
