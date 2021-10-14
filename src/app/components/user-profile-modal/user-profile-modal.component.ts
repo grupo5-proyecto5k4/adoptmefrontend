@@ -14,6 +14,8 @@ import { FormularioAdopcion } from 'src/models/IFormularioAdopcion';
 import { Address } from 'src/models/IAddress';
 import { AuthService } from 'src/app/auth.service';
 import { NotificacionService } from 'src/services/notificacion.service';
+import { ifStmt } from '@angular/compiler/src/output/output_ast';
+import { Donacion } from 'src/models/IDonacion';
 
 
 @Component({
@@ -26,8 +28,13 @@ export class UserProfileModalComponent implements OnInit {
   ProfileForm: FormGroup;
   currentUser: any;
   Titulo = "Perfil de usuario"
+  enEdicion:boolean=false;
+  editarDatos:boolean=false;
+  esconder:boolean=true;
+  edadInvalida: Boolean = false;
+  mensajeEdad: string = "";
 
-  constructor(private authservice: AuthService, @Inject(MAT_DIALOG_DATA) public data: any, private alertsService: AlertsService, private router: Router) {
+  constructor(private editUser: SignupService, private authservice: AuthService, @Inject(MAT_DIALOG_DATA) public data: any, private alertsService: AlertsService, private router: Router) {
 
   }
 
@@ -44,6 +51,8 @@ export class UserProfileModalComponent implements OnInit {
     if (this.currentUser.instagram == null) {
       this.currentUser.instagram = "No especificado"
     };
+
+
     // Formato fecha  
     if (this.currentUser.fechaNacimiento !== null && this.currentUser.fechaNacimiento !== undefined) {
     var date = this.currentUser.fechaNacimiento.substring(0, 10);
@@ -54,22 +63,8 @@ export class UserProfileModalComponent implements OnInit {
 
     this.currentUser.pwd = "********";
 
-    this.ProfileForm = new FormGroup({
-      nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
-      apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
-      dni: new FormControl({ value: '', disabled: true }),
-      fechaNacimiento: new FormControl({ value: '', disabled: true }),
-      correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
-      calle: new FormControl({ value: '', disabled: true }),
-      altura: new FormControl({ value: '', disabled: true }),
-      localidad: new FormControl({ value: '', disabled: true }),
-      barrio: new FormControl({ value: '', disabled: true }),
-      referencia: new FormControl({ value: '', disabled: true }),
-      numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
-      facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
-      instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
-      contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
-    });
+   
+    this.inicializarFormulario(); 
 
     if (this.currentUser.Direccion !== undefined){
       this.ProfileForm.controls['calle'].setValue(this.currentUser.Direccion.calle);
@@ -85,11 +80,114 @@ export class UserProfileModalComponent implements OnInit {
       this.ProfileForm.controls['referencia'].setValue(this.currentUser.Direccion.referencia);
     }
 
-    if (this.currentUser.dni !== "No especificado") {
+    if (this.currentUser.dni !== undefined) {
       this.ProfileForm.controls['dni'].setValue(this.currentUser.dni);
       this.ProfileForm.controls['fechaNacimiento'].setValue(this.currentUser.fechaNacimiento);
       }
 
+      if(this.currentUser.Donacion==null){
+        this.ProfileForm.controls['banco'].setValue("No especificado");
+        this.ProfileForm.controls['CBU'].setValue("No especificado");
+        this.ProfileForm.controls['alias'].setValue("No especificado");
+      }
+
+
 
   }
+
+  inicializarFormulario(){
+    if(this.enEdicion==true && this.currentUser.tipoUsuario==2){
+
+      this.ProfileForm = new FormGroup({
+        nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
+        apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
+        dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
+        fechaNacimiento: new FormControl({ value: '', disabled: true}),
+        correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+       
+        banco: new FormControl({ value:'', disabled: false },[Validators.maxLength(30)]),
+        CBU: new FormControl({ value: '', disabled: false },[Validators.maxLength(150)]),
+        alias: new FormControl({ value: '', disabled: false },[Validators.maxLength(30)]),
+       
+        calle: new FormControl({ value:'', disabled: true }),
+        altura: new FormControl({ value:'', disabled: true}),
+        localidad: new FormControl({ value: '', disabled: true }),
+        barrio: new FormControl({ value: '', disabled: true }),
+        referencia: new FormControl({ value: '', disabled: true}),
+        numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
+        facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
+        instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
+        contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true})
+      });
+
+    }
+    else{
+
+      this.ProfileForm = new FormGroup({
+        nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
+        apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
+        dni: new FormControl({value:'', disabled: true }),
+        fechaNacimiento: new FormControl({ value: '', disabled: true }),
+        correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+        calle: new FormControl({ value: '', disabled: true }),
+        altura: new FormControl({ value: '', disabled: true }),
+        localidad: new FormControl({ value: '', disabled: true }),
+        barrio: new FormControl({ value: '', disabled: true }),
+        referencia: new FormControl({ value: '', disabled: true }),
+        banco: new FormControl({ value:'', disabled: true }),
+        CBU: new FormControl({ value: '', disabled: true }),
+        alias: new FormControl({ value: '', disabled: true }),
+        numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
+        facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
+        instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
+        contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
+      });
+      
+    }
+  }
+
+
+  editar(){
+
+    this.enEdicion=true;
+    this.editarDatos=true;
+    this.esconder=false;
+
+    this.inicializarFormulario();
+        
+  }
+
+  guardar(){
+
+    if(this.currentUser.tipoUsuario==2){
+      
+      let donaciones: Donacion=new Donacion();
+      donaciones._id=this.currentUser._id;
+      donaciones.CBU=this.ProfileForm.controls.CBU.value;
+      donaciones.alias=this.ProfileForm.controls.alias.value;
+      donaciones.banco=this.ProfileForm.controls.banco.value;
+          
+      this.editUser.editCentro(donaciones,this.authservice.getToken()).subscribe({
+        complete: () => {
+          this.alertsService.confirmMessage("Los datos bancarios del centro rescatista han sido modificados con exito!").then((result) => window.location.href ="/miperfil");
+        },
+        error: (err: any) => {
+          this.alertsService.errorMessage(err.error.error).then((result) => {
+           
+          }
+        )
+        }
+      })
+      
+    } 
+
+   }   
+
 }
+    
+      
+
+
+
+  
+  

@@ -14,6 +14,7 @@ export class VisualizacionSolicitudesService {
     endpointConfirmarSolicitud = 'https://adoptmebackend.herokuapp.com/formulario/actualizarEstado/Aprobado/'
     endpointRechazarSolicitud = 'https://adoptmebackend.herokuapp.com/formulario/actualizarEstado/Rechazado/'
 
+
     constructor(private http: HttpClient) {}
 
     getSolicitudesAdoptar(token:string): Observable<any> {

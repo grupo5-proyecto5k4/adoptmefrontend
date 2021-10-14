@@ -21,21 +21,25 @@
                             <mat-label>Nombre</mat-label>
                             <input matInput formControlName="nombres">
                           </mat-form-field>
+                          
                         </div>
                       </div>
+
                       <div class="container-row1" *ngIf="currentUser.tipoUsuario !== 2">
                         <div>
                           <mat-form-field>
                             <mat-label>Nombre</mat-label>
-                            <input matInput formControlName="nombres">
+                            <input matInput formControlName="nombres" maxlength="30">
                           </mat-form-field>
+                          
                         </div>
 
                         <div class="derecha">
                           <mat-form-field>
                             <mat-label>Apellido</mat-label>
-                            <input matInput formControlName="apellidos">
+                            <input matInput formControlName="apellidos" maxlength="30">
                           </mat-form-field>
+                         
                         </div>
                       </div>
 
@@ -45,12 +49,15 @@
                             <mat-label>DNI</mat-label>
                             <input matInput formControlName="dni">
                           </mat-form-field>
+                          
                         </div>
+
                         <div class="derecha">
                           <mat-form-field>
                             <mat-label>Fecha de nacimiento</mat-label>
-                            <input matInput formControlName="fechaNacimiento">
+                            <input matInput  formControlName="fechaNacimiento">
                           </mat-form-field>
+                          
                         </div>
                       </div>
 
@@ -67,14 +74,16 @@
                           <div>
                             <mat-form-field>
                               <mat-label>Calle</mat-label>
-                              <input matInput formControlName="calle">
+                              <input matInput formControlName="calle" maxlength="50">
                             </mat-form-field>
+                            
                           </div>
                           <div class="derecha">
                             <mat-form-field>
                               <mat-label>Altura</mat-label>
-                              <input matInput formControlName="altura">
+                              <input matInput formControlName="altura" maxlength="4">
                             </mat-form-field>
+                          
                           </div>
                         </div>
 
@@ -88,8 +97,9 @@
                           <div class="derecha">
                             <mat-form-field>
                               <mat-label>Barrio</mat-label>
-                              <input matInput formControlName="barrio">
+                              <input matInput formControlName="barrio" maxlength="50">
                             </mat-form-field>
+                            
                           </div>
                         </div>
 
@@ -99,38 +109,80 @@
                               <mat-label>Referencia</mat-label>
                               <textarea matInput formControlName="referencia" maxlength="150"></textarea>
                             </mat-form-field>
-                          </div>
+                            
                         </div>
                       </div>
-                      <div class="container-row1">
+
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario == 2">
                         <div>
-                          <mat-form-field>
-                            <mat-label>Instagram</mat-label>
-                            <input matInput formControlName="instagram">
+                          <mat-form-field class="banco">
+                            <mat-label>Nombre del banco</mat-label>
+                            <textarea matInput formControlName="banco" maxlength="30"></textarea>
                           </mat-form-field>
                         </div>
+
                         <div class="derecha">
-                          <mat-form-field>
-                            <mat-label>Facebook</mat-label>
-                            <input matInput formControlName="facebook">
+                          <mat-form-field class="alias">
+                            <mat-label>Alias</mat-label>
+                            <textarea matInput formControlName="alias" maxlength="30"></textarea>
                           </mat-form-field>
                         </div>
+                      </div>
+
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario == 2">
+                        <div>
+                          <mat-form-field class="ref">
+                            <mat-label>CBU</mat-label>
+                            <textarea matInput formControlName="CBU" maxlength="150"></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
                       </div>
 
                       <div class="container-row1">
                         <div>
                           <mat-form-field>
-                            <mat-label>Número de Contacto</mat-label>
-                            <input matInput formControlName="numeroContacto">
+                            <mat-label>Instagram</mat-label>
+                            <input matInput formControlName="instagram" maxlength="30">
                           </mat-form-field>
                         </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Facebook</mat-label>
+                            <input matInput formControlName="facebook" maxlength="30">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                              <mat-label>Número de Contacto</mat-label>
+                              <input matInput formControlName="numeroContacto" maxlength="15">
+                          </mat-form-field>
+                             
+                        </div>
+
                         <div class="derecha">
                           <mat-form-field>
                             <mat-label>Contraseña</mat-label>
                             <input matInput formControlName="contrasenia">
                           </mat-form-field>
-                        </div>
-                      </div>
+                         
+                   </div>
+
+                   
+
+                  </div>
+
+                      <button mat-button class="centrado" *ngIf="esconder&&currentUser.tipoUsuario == 2" id="btnEdit" type="button" style="padding: 10px;" color="accent" (click)="editar()">Editar</button>
+
+                      <div class="centrado" *ngIf="editarDatos&&currentUser.tipoUsuario == 2">
+                       <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" matDialogClose>Cancelar</button>
+                       <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" (click)="guardar()">Guardar Cambios</button>
+                      </div> 
 
                     </form>
                   </div>

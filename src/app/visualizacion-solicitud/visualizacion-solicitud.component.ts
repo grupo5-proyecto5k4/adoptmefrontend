@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AlertsService } from 'src/utils/alerts.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
 import { AuthService } from '../auth.service';
@@ -14,9 +15,9 @@ export class VisualizacionSolicitudComponent implements OnInit {
   SolicitudForm:any;
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
   idSolicitud: string;
-  
+  rechazoSol:boolean=false;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private alertsService: AlertsService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -147,4 +148,17 @@ export class VisualizacionSolicitudComponent implements OnInit {
       }
   )
   }
+
+ aceptarSolicitudAlerta(){
+  
+  this.alertsService.confirmMessage("La solicitud ha sido confirmada")
+  this.dialog.closeAll();
+  
+ } 
+ 
+ cancelarSolicitudAlerta(){
+  this.rechazoSol=true;
+   this.alertsService.errorMessage("La solicitud ha sido rechazada")
+ }
+
 }

@@ -12,15 +12,55 @@
             <div>
                 <mat-form-field>
                     <mat-label>Nombre</mat-label>
-                    <input matInput formControlName="nombres">
+                    <input matInput formControlName="nombres" maxlength="30">
                 </mat-form-field>
+                <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched ||
+                ProfileForm.get('nombres').dirty) &&
+                ProfileForm.get('nombres').errors)">
+                        <span *ngIf="ProfileForm.get('nombres').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('nombres').errors.maxlength">
+                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                        </span>
+                        <span *ngIf="ProfileForm.get('nombres').errors.pattern">
+                          <h6 class="helpError">Formato del nombre no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
             </div>
 
             <div class="derecha">
                 <mat-form-field>
                     <mat-label>Apellido</mat-label>
-                    <input matInput formControlName="apellidos">
+                    <input matInput formControlName="apellidos" maxlength="30">
                 </mat-form-field>
+                <span class="help-block" *ngIf="((ProfileForm.get('apellidos').touched ||
+                      ProfileForm.get('apellidos').dirty) &&
+                      ProfileForm.get('apellidos').errors)">
+                        <span *ngIf="ProfileForm.get('apellidos').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('apellidos').errors.maxlength">
+                          <h6 class="helpError">Ingrese como máximo 30 caracteres</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('apellidos').errors.pattern">
+                          <h6 class="helpError">Formato del apellido no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateLastname() && validateName())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
             </div>
         </div>
 
@@ -30,12 +70,46 @@
                     <mat-label>DNI</mat-label>
                     <input matInput formControlName="dni">
                 </mat-form-field>
+                <span class="help-block" *ngIf="((ProfileForm.get('dni').touched ||
+                      ProfileForm.get('dni').dirty) &&
+                      ProfileForm.get('dni').errors)">
+                        <span *ngIf="ProfileForm.get('dni').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('dni').errors.pattern">
+                          <h6 class="helpError">Formato del DNI no válido</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateDNI() && validateBirthdate())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
             </div>
+            
             <div class="derecha">
                 <mat-form-field>
                     <mat-label>Fecha de nacimiento</mat-label>
-                    <input matInput formControlName="fechaNacimiento">
+                    <input matInput type="date" (change)="CalculateAge()" formControlName="fechaNacimiento">
                 </mat-form-field>
+
+                <span class="help-block" *ngIf="validateInitialDate()">
+                    <span *ngIf="validateInitialDate">
+                      <h6 class="helpError">Campo requerido</h6>
+                    </span>
+                  </span>
+                  <span *ngIf="edadInvalida">
+                    <h6 class="helpError">{{mensajeEdad}}</h6>
+                  </span>
+                  <span class="help-block" *ngIf="(validateDNI() && !validateBirthdate())">
+                    <span>
+                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                        -
+                      </h6>
+                    </span>
+                  </span>
             </div>
         </div>
 
@@ -52,13 +126,13 @@
             <div>
                 <mat-form-field>
                     <mat-label>Instagram</mat-label>
-                    <input matInput formControlName="instagram">
+                    <input matInput formControlName="instagram"  maxlength="30">
                 </mat-form-field>
             </div>
             <div class="derecha">
                 <mat-form-field>
                     <mat-label>Facebook</mat-label>
-                    <input matInput formControlName="facebook">
+                    <input matInput formControlName="facebook"  maxlength="30">
                 </mat-form-field>
             </div>
         </div>
@@ -67,15 +141,65 @@
             <div>
                 <mat-form-field>
                     <mat-label>Número de Contacto</mat-label>
-                    <input matInput formControlName="numeroContacto">
+                    <input matInput formControlName="numeroContacto" maxlength="15">
                 </mat-form-field>
+                <span class="help-block" *ngIf="((ProfileForm.get('numeroContacto').touched ||
+                      ProfileForm.get('numeroContacto').dirty) &&
+                      ProfileForm.get('numeroContacto').errors)">
+                        <span *ngIf="ProfileForm.get('numeroContacto').errors.pattern">
+                          <h6 class="helpError">Ingrese valor numérico entre 10 y 13 dígitos</h6>
+                        </span>
+                      </span>
+                      <span class="help-block" *ngIf="(!validateContactNumber() && validatePassword())">
+                        <span>
+                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                            -
+                          </h6>
+                        </span>
+                      </span>
             </div>
+
             <div class="derecha">
                 <mat-form-field>
                     <mat-label>Contraseña</mat-label>
                     <input matInput formControlName="contrasenia">
                 </mat-form-field>
+                 
+                <span class="help-block" *ngIf="((ProfileForm.get('contrasenia').touched ||
+                ProfileForm.get('contrasenia').dirty) &&
+                ProfileForm.get('contrasenia').errors)">
+                    <span *ngIf="ProfileForm.get('contrasenia').errors.required">
+                      <h6 class="helpError">Campo requerido</h6>
+                    </span>
+                    <span *ngIf="ProfileForm.get('contrasenia').errors.pattern">
+                      <h6 class="helpError">La contraseña no cumple con los requisitos</h6>
+                    </span>
+                  </span>
+                  <span class="help-block blank" *ngIf="(validateContactNumber() && !validatePassword())">
+                    <span>
+                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                        -
+                      </h6>
+                    </span>
+                  </span>
             </div>
+
+            <div class="tooldiv" *ngIf="editarDatos">
+                <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+            Entre 8 y 15 caracteres,
+            al menos una mayúscula,
+            una minúscula y un número"
+                  aria-label="Button that displays a tooltip when focused or hovered over">
+                  ℹ
+                </label>
+                <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">
+                  <span>
+                    <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                      -
+                    </h6>
+                  </span>
+                </span>
+              </div>
         </div>
 
         <button mat-button *ngIf="esconder" id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editar()">Editar</button>

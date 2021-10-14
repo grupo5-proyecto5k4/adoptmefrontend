@@ -245,9 +245,20 @@
             </form>
         </div>
   
-
         <div class="container-btn">
             <button mat-button class="btnrechazar" (click)="rechazarSolicitud()">Rechazar</button>
             <button mat-raised-button color="accent" class="btnaceptar" (click)="aceptarSolicitud()">Aceptar</button>
         </div>
+
+    <div  class="container-row1" *ngIf="rechazoSol">
+        <div>
+            <br>
+            <br>
+            <mat-form-field  class="ref">
+                <mat-label>Agregar Comentario</mat-label>
+                <input matInput formControlName="comentario" placeholder="comentario" class="form-control" maxlength="150">
+            </mat-form-field>
+        </div>
+    </div>
+
 </mat-dialog-content>
