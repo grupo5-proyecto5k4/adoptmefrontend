@@ -133,14 +133,14 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   }
 
   aceptarSolicitud(){
-    this.visualizacionSolicitudesService.confirmarSolicitudProvisorio(this.auth.getToken(), this.idSolicitud).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
       }
   )
   }
 
   rechazarSolicitud(){
-    this.visualizacionSolicitudesService.rechazarSolicitudProvisorio(this.auth.getToken(), this.idSolicitud).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
       }
   )

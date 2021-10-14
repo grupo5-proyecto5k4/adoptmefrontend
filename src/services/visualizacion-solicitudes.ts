@@ -29,13 +29,12 @@ export class VisualizacionSolicitudesService {
         return this.http.get((this.endpointGetSolicitudes+'/'+idSolictud)).toPromise();
     }
 
-
-    confirmarSolicitudProvisorio(token:string, idSolicitud: string): Observable<any> {
-        return this.http.put((this.endpointConfirmarSolicitud + idSolicitud), { headers: new HttpHeaders().set('auth-token', `${token}`)});
+    confirmarSolicitud(idSolicitud: string, token:string): Observable<any> {
+        return this.http.put<any>(this.endpointConfirmarSolicitud + idSolicitud, "some-string", { headers: new HttpHeaders().set('auth-token', `${token}`)});
     }
 
-    rechazarSolicitudProvisorio(token:string, idSolicitud: string): Observable<any> {
-        return this.http.put((this.endpointRechazarSolicitud + idSolicitud), { headers: new HttpHeaders().set('auth-token', `${token}`)});
+    rechazarSolicitud(idSolicitud: string, token:string): Observable<any> {
+        return this.http.put<any>(this.endpointRechazarSolicitud + idSolicitud, "some-string", { headers: new HttpHeaders().set('auth-token', `${token}`)});
 
     }
 }

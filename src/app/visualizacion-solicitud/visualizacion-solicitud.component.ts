@@ -2,6 +2,8 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AlertsService } from 'src/utils/alerts.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-visualizacion-solicitud',
@@ -12,9 +14,10 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   SolicitudForm:any;
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
+  idSolicitud: string;
   rechazoSol:boolean=false;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private alertsService: AlertsService) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private alertsService: AlertsService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -22,6 +25,9 @@ export class VisualizacionSolicitudComponent implements OnInit {
     var dataAnimal = this.data.solicitud.Animales;
     var dataSolicitud = this.data.solicitud.Solicitud;
     var dataSolicitante = this.data.solicitud.Solicitante;
+
+    //SolicitudId
+    this.idSolicitud = this.data.solicitud.Solicitud._id;
 
     //camposOpcionales
     if (dataSolicitud.Direccion.numero == null) {
@@ -129,14 +135,28 @@ export class VisualizacionSolicitudComponent implements OnInit {
     });  
   }
 
- aceptarSolicitud(){
+  aceptarSolicitud(){
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+      this.data = dataProvi;
+      }
+  )
+  }
+
+  rechazarSolicitud(){
+    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+      this.data = dataProvi;
+      }
+  )
+  }
+
+ aceptarSolicitudAlerta(){
   
   this.alertsService.confirmMessage("La solicitud ha sido confirmada")
   this.dialog.closeAll();
   
  } 
  
- cancelarSolicitud(){
+ cancelarSolicitudAlerta(){
   this.rechazoSol=true;
    this.alertsService.errorMessage("La solicitud ha sido rechazada")
  }

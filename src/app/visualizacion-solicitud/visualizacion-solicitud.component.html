@@ -245,11 +245,10 @@
             </form>
         </div>
   
-
-    <div class="container-btn">
-        <button mat-button class="btnrechazar" (click)="cancelarSolicitud()">Rechazar</button>
-        <button mat-raised-button color="accent" class="btnaceptar" (click)="aceptarSolicitud()">Aceptar</button>
-    </div>
+        <div class="container-btn">
+            <button mat-button class="btnrechazar" (click)="rechazarSolicitud()">Rechazar</button>
+            <button mat-raised-button color="accent" class="btnaceptar" (click)="aceptarSolicitud()">Aceptar</button>
+        </div>
 
     <div  class="container-row1" *ngIf="rechazoSol">
         <div>
@@ -261,4 +260,5 @@
             </mat-form-field>
         </div>
     </div>
+
 </mat-dialog-content>
