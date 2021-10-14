@@ -246,8 +246,8 @@
         </div>
   
 
-    <div class="container-btn">
-        <button mat-button class="btnrechazar">Rechazar</button>
-        <button mat-raised-button color="accent" class="btnaceptar">Aceptar</button>
-    </div>
+        <div class="container-btn">
+            <button mat-button class="btnrechazar" (click)="rechazarSolicitud()">Rechazar</button>
+            <button mat-raised-button color="accent" class="btnaceptar" (click)="aceptarSolicitud()">Aceptar</button>
+        </div>
 </mat-dialog-content>
