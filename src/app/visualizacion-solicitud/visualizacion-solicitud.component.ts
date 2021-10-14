@@ -1,5 +1,6 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { AlertsService } from 'src/utils/alerts.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -11,8 +12,9 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   SolicitudForm:any;
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
+  rechazoSol:boolean=false;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private alertsService: AlertsService) {
   }
 
   ngOnInit(): void {
@@ -126,4 +128,17 @@ export class VisualizacionSolicitudComponent implements OnInit {
       accionImpedimento: new FormControl({value: dataSolicitud.accionImpedimento, disabled:true})
     });  
   }
+
+ aceptarSolicitud(){
+  
+  this.alertsService.confirmMessage("La solicitud ha sido confirmada")
+  this.dialog.closeAll();
+  
+ } 
+ 
+ cancelarSolicitud(){
+  this.rechazoSol=true;
+   this.alertsService.errorMessage("La solicitud ha sido rechazada")
+ }
+
 }

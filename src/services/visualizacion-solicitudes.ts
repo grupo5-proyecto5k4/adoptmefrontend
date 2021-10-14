@@ -14,6 +14,7 @@ export class VisualizacionSolicitudesService {
     endpointConfirmarSolicitud = 'https://adoptmebackend.herokuapp.com/formulario/actualizarEstado/Aprobado/'
     endpointRechazarSolicitud = 'https://adoptmebackend.herokuapp.com/formulario/actualizarEstado/Rechazado/'
 
+
     constructor(private http: HttpClient) {}
 
     getSolicitudesAdoptar(token:string): Observable<any> {
@@ -28,11 +29,13 @@ export class VisualizacionSolicitudesService {
         return this.http.get((this.endpointGetSolicitudes+'/'+idSolictud)).toPromise();
     }
 
+
     confirmarSolicitudProvisorio(token:string, idSolicitud: string): Observable<any> {
         return this.http.put((this.endpointConfirmarSolicitud + idSolicitud), { headers: new HttpHeaders().set('auth-token', `${token}`)});
     }
 
     rechazarSolicitudProvisorio(token:string, idSolicitud: string): Observable<any> {
         return this.http.put((this.endpointRechazarSolicitud + idSolicitud), { headers: new HttpHeaders().set('auth-token', `${token}`)});
+
     }
 }
