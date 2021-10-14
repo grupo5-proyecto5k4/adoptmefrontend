@@ -164,6 +164,7 @@
                     <mat-label>Contraseña</mat-label>
                     <input matInput formControlName="contrasenia">
                 </mat-form-field>
+                 
                 <span class="help-block" *ngIf="((ProfileForm.get('contrasenia').touched ||
                 ProfileForm.get('contrasenia').dirty) &&
                 ProfileForm.get('contrasenia').errors)">
@@ -201,7 +202,6 @@
               </div>
         </div>
 
-        
         <button mat-button *ngIf="esconder" id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editar()">Editar</button>
 
        <div class="centrado" *ngIf="editarDatos">

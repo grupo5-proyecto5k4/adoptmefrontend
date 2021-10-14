@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import {catchError, map} from 'rxjs/operators';
 import { User } from 'src/models/IUser';
+import {Donacion} from 'src/models/IDonacion';
 
 @Injectable({
   providedIn: 'root'
@@ -27,8 +28,8 @@ export class SignupService {
     }
 
     
-    editCentro(user: User, token:string): Observable <User> {
-      return this.httpClient.put<User>(this.urlEditCentro, user ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
+    editCentro(req: Donacion, token:string): Observable <Donacion> {
+      return this.httpClient.put<Donacion>(this.urlEditCentro, req ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
     }
 
     
