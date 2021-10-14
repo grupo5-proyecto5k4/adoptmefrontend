@@ -1,27 +1,30 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { AlertsService } from 'src/utils/alerts.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
+import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-visualizacion-solicitud',
-  templateUrl: './visualizacion-solicitud.component.html',
-  styleUrls: ['./visualizacion-solicitud.component.scss']
+  selector: 'app-visualizacion-solicitud-provi',
+  templateUrl: './visualizacion-solicitud-provi.component.html',
+  styleUrls: ['./visualizacion-solicitud-provi.component.scss']
 })
-export class VisualizacionSolicitudComponent implements OnInit {
+export class VisualizacionSolicitudProviComponent implements OnInit {
 
   SolicitudForm:any;
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
-  rechazoSol:boolean=false;
+  idSolicitud: string;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private alertsService: AlertsService) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
   }
 
   ngOnInit(): void {
-
     var dataAnimal = this.data.solicitud.Animales;
     var dataSolicitud = this.data.solicitud.Solicitud;
     var dataSolicitante = this.data.solicitud.Solicitante;
+
+    //SolicitudId
+    this.idSolicitud = this.data.solicitud.Solicitud._id;
 
     //camposOpcionales
     if (dataSolicitud.Direccion.numero == null) {
@@ -37,6 +40,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
     //camposBooleanos
 
     // Vivienda 0:casa/1:depto
+    console.log("vivienda", dataSolicitud.vivienda)
     if (dataSolicitud.vivienda === 0){
       this.data.solicitud.Solicitud.viviendaString = "Casa"
     } else { this.data.solicitud.Solicitud.viviendaString = "Departamento"}
@@ -66,27 +70,11 @@ export class VisualizacionSolicitudComponent implements OnInit {
       dataSolicitud.otraMascotaString = "No"
     }
     
-    // Tiene tiempo y presupuesto 0:No/1:Sí
-    if (dataSolicitud.tiempoPresupuesto === 1){
-      this.data.solicitud.Solicitud.tiempoPresupuestoString = "Sí"
+    // Tiene tiempo 0:No/1:Sí
+    if (dataSolicitud.tiempoSuficiente === 1){
+      this.data.solicitud.Solicitud.tiempoSuficienteString = "Sí"
     } else {
-      this.data.solicitud.Solicitud.tiempoPresupuestoString = "No"
-    }
-
-    // Vacunacion y castracion: 0:Vacunacion/1:Castracion
-    if (dataSolicitud.vacunacionCastracion === 0){
-      this.data.solicitud.Solicitud.vacunacionCastracionString = "Vacunación"
-    } else {
-      this.data.solicitud.Solicitud.vacunacionCastracionString = "Vacunación y Castración"
-    }
-
-    // Tiempo solo
-    if (dataSolicitud.tiempoSolo === 0){
-      dataSolicitud.tiempoSoloString = "Entre 1 a 3 horas"
-    } else if ( dataSolicitud.tiempoSolo === 1){
-      dataSolicitud.tiempoSoloString = "Entre 4 a 8 horas"
-    } else {
-      dataSolicitud.tiempoSoloString = "Más de 8 horas"
+      this.data.solicitud.Solicitud.tiempoSuficienteString = "No"
     }
 
     // Seguimiento
@@ -94,6 +82,24 @@ export class VisualizacionSolicitudComponent implements OnInit {
       this.data.solicitud.Solicitud.seguimientoString = "De acuerdo"
     } else {
       this.data.solicitud.Solicitud.seguimientoString = "En desacuerdo"
+    }
+
+    // Quiere cubrir gastos
+    if (dataSolicitud.gastosCubiertos === 1){
+      this.data.solicitud.Solicitud.gastosCubiertosString = "Sí"
+    } else {
+        this.data.solicitud.Solicitud.gastosCubiertosString = "No"
+    }
+
+    // Tiempo de provisorio
+    if (dataSolicitud.tiempoTenencia === 0){
+      dataSolicitud.tiempoTenenciaString = "7 días"
+    } else if (dataSolicitud.tiempoTenencia === 1){
+      dataSolicitud.tiempoTenenciaString = "14 días"}
+      else if (dataSolicitud.tiempoTenencia === 2)
+      {dataSolicitud.tiempoTenenciaString = "Un Mes"}
+      else if (dataSolicitud.tiempoTenencia === 3){
+        dataSolicitud.tiempoTenenciaString = "Indefinido"
     }
 
 
@@ -117,28 +123,26 @@ export class VisualizacionSolicitudComponent implements OnInit {
       permiso: new FormControl({value: dataSolicitud.permisoString, disabled:true}),
       espacioAbierto: new FormControl({value: dataSolicitud.espacioAbiertoString, disabled:true}),
       descripcionCercamiento: new FormControl({value: dataSolicitud.descripcionCercamiento, disabled:true}),
-      composicionFamilia: new FormControl({value: dataSolicitud.composicionFamilia, disabled:true}),
       otraMascota: new FormControl({value:dataSolicitud.otraMascotaString, disabled:true}),
       descripcionOtraMascota: new FormControl({value: dataSolicitud.descripcionOtraMascota, disabled:true}),
-      tiempoPresupuesto: new FormControl({value: dataSolicitud.tiempoPresupuestoString, disabled:true}),
-      vacunacionCastracion: new FormControl({value: dataSolicitud.vacunacionCastracionString, disabled:true}),
-      tiempoSolo: new FormControl({value: dataSolicitud.tiempoSoloString, disabled:true}),
+      tiempoSuficiente: new FormControl({value: dataSolicitud.tiempoSuficienteString, disabled:true}),
       seguimiento: new FormControl({value: dataSolicitud.seguimientoString, disabled:true}),
-      accionViaje: new FormControl({value: dataSolicitud.accionViaje , disabled:true}),
-      accionImpedimento: new FormControl({value: dataSolicitud.accionImpedimento, disabled:true})
+      gastosCubiertos: new FormControl({value: dataSolicitud.gastosCubiertosString, disabled:true}),
+      tiempoTenencia: new FormControl({value: dataSolicitud.tiempoTenenciaString, disabled:true})
     });  
   }
 
- aceptarSolicitud(){
-  
-  this.alertsService.confirmMessage("La solicitud ha sido confirmada")
-  this.dialog.closeAll();
-  
- } 
- 
- cancelarSolicitud(){
-  this.rechazoSol=true;
-   this.alertsService.errorMessage("La solicitud ha sido rechazada")
- }
+  aceptarSolicitud(){
+    this.visualizacionSolicitudesService.confirmarSolicitudProvisorio(this.auth.getToken(), this.idSolicitud).subscribe(dataProvi => {
+      this.data = dataProvi;
+      }
+  )
+  }
 
+  rechazarSolicitud(){
+    this.visualizacionSolicitudesService.rechazarSolicitudProvisorio(this.auth.getToken(), this.idSolicitud).subscribe(dataProvi => {
+      this.data = dataProvi;
+      }
+  )
+  }
 }
