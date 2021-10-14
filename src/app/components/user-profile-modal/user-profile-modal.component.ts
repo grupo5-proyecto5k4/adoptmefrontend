@@ -272,17 +272,7 @@ export class UserProfileModalComponent implements OnInit {
       console.log(particularUser);
       
 
-      this.editUser.editCentro(particularUser,this.authservice.getToken()).subscribe({
-        complete: () => {
-          this.alertsService.confirmMessage("El usuario ha sido modificado con exito!").then((result) => window.location.href ="/miperfil");
-        },
-        error: (err: any) => {
-          this.alertsService.errorMessage(err.error.error).then((result) => {
-           
-          }
-        )
-        }
-      })
+    
     } 
 
     else{
