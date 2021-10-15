@@ -14,6 +14,10 @@
 
 /* CARDS */
 
+.filtro{
+    float: left;
+}
+
 .card-publicacion {
     max-width: 300px;
     margin-bottom: 30px;
@@ -21,9 +25,34 @@
     margin-right: 10px;
 }
 
+#btncuenta, #confirmado{
+    color: #EBEEF1;
+    background-color: #c50fa1;
+    min-width: 64px;
+    line-height: 36px;
+    //padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+    margin-left: 0.5%;
+    margin-top: 20px;
+  }
+
+  #confirmado{
+    padding-left: 26px !important;
+    padding-right: 26px !important;
+  }
+
+.padding-filtros{
+    margin-right: auto !important;
+    margin-left: auto !important;
+    width: 70%;
+}
+
 .card-title{
     color: #C50FA1;
 }
+
+
 
 .card-description{
     width: 270px;
@@ -71,11 +100,95 @@
     text-align: center;
   }
 
+.example-full-width{
+    width: 14%;
+}
 
 .componente-filtros{
     width: 100%;
-    min-height: 90px;
+    min-height: 80px;
     background-color: #f8e2f1;
     height: auto;
+    margin-top: 1.5%;
+}
+
+.margenesFiltros{
+    margin-left: 30px;
+    margin-top: 15px;
+}
+
+
+
+@media (max-width: 782px){
+
+    .componente-filtros{
+        padding-top: 3%;
+        padding-bottom: 2%;
+    }
+
+    .example-full-width{
+        width: 100%;
+    }
+
+    .margenesFiltros{
+        margin-left: 0px;
+        margin-top: 0px;
+    }
+
+    .filtro{
+        float: clear;
+    }
+
+    .botones{
+        align-items: center;
+        float: none;
+        width: 400px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-bottom: 10px;
+        padding-left: 7%;
+    }
+}
+
+
+
+@media (min-width: 783px) and (max-width: 1499px)
+{
+    .padding-filtros{
+        width: 90%;
+        padding-left: 4%;
+    }
+
+    .botones{
+        align-items: center;
+        float: none;
+        width: 500px;
+        margin-right: auto;
+        margin-left: auto;
+        padding-bottom: 10px;
+        padding-left: 7%;
+    }
 
 }
+
+
+@media (min-width: 1500px){
+
+    .componente-filtros{
+        width: 91.5%;
+        margin-right: auto;
+        margin-left: auto;
+        border-radius: 8px;
+    }
+
+    .padding-filtros{
+        width: 90%;
+        padding-left: 4%;
+    }
+
+    .botones{
+        width: 100%;
+        align-items: center;
+    }
+}
+

@@ -35,7 +35,6 @@ const DATA: Pet[] = [
 })
 
 export class PublicacionesAdopComponent implements OnInit {
-  @Input() inputCards: Mascota[];
   mascotasPubAdopcion: any;
   mascotasPub: any;
   FilterForm: FormGroup;
@@ -50,43 +49,15 @@ export class PublicacionesAdopComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.FilterForm = new FormGroup({
-      nombre: new FormControl(''),
-      tipoAnimal: new FormControl(''),
-      tamano: new FormControl(''),
-      sexo: new FormControl(''),
-      barrio: new FormControl(''),
-    });
-    /*
-    this.changeDetectorRef.detectChanges();
-    this.dataSource.paginator = this.paginator;
-    this.obs = this.dataSource.connect();
-    this.paginator._intl.itemsPerPageLabel = "Animales por página";
-    */
+
+    this.iniciarForm();
+
     // "En adopcion"
     this.registroMascotasService.getMascotas(1).subscribe(dataOne => {
-      this.mascotasPub = dataOne;
 
       // "En adopcion y en provisorio"
       this.registroMascotasService.getMascotas(0).subscribe(dataBoth => {
-
-        // Junto los de "En adopción" con los de "En adopción y en provisorio"
-        var data = [].concat(dataBoth, dataOne);
-        this.mascotasPubAdopcion = data;
-        //Recorro mascotas
-        for (let x = 0; x < (data.length); x++) {
-          // Edad 
-          this.mascotasPubAdopcion[x].edad = this.calculateAge(data[x].fechaNacimiento);
-          if (data[x].Foto.length != 0) {
-            //Recorro imágenes
-            for (let i = 0; i < data[x].Foto.length; i++) {
-              // Foto Principal
-              if (data[x].Foto[i].esPrincipal) {
-                this.mascotasPubAdopcion[x].imagenCard = data[x].Foto[i].foto;
-              }
-            }
-          }
-        }
+        this.unirMascotas(dataBoth, dataOne)
       })
     },
       err => {
@@ -102,46 +73,97 @@ export class PublicacionesAdopComponent implements OnInit {
   }
   */
 
+  changeTipoAnimal(){
+    this.animal = this.FilterForm.controls.tipoMascota.value;
+  }
+
+  iniciarForm(){
+    this.FilterForm = new FormGroup({
+      nombre: new FormControl(''),
+      tipoMascota: new FormControl(''),
+      tamanoFinal: new FormControl(''),
+      sexo: new FormControl(''),
+      barrio: new FormControl(''),
+    });
+  }
+
+  unirMascotas(dataBoth: any, dataOne: any) {
+    this.mascotasPubAdopcion = [];
+    // Junto los de "En adopción" con los de "En adopción y en provisorio"
+    let data = undefined;
+    if (dataBoth && dataOne) {
+      data = [].concat(dataBoth, dataOne);
+    }
+    else if(dataBoth[0]._id){
+      data = dataBoth;
+    }
+    else{
+      data = dataOne;
+    }
+    this.mascotasPubAdopcion = data;
+    //Recorro mascotas
+    console.log("cantidad de mascotas a mostrar:")
+    console.log(this.mascotasPubAdopcion)
+    if (this.mascotasPubAdopcion.length > 0) {
+      for (let x = 0; x < (this.mascotasPubAdopcion.length); x++) {
+        // Edad 
+        this.mascotasPubAdopcion[x].edad = this.calculateAge(data[x].fechaNacimiento);
+        if (data[x].Foto.length > 0) {
+          //Recorro imágenes
+          for (let i = 0; i < data[x].Foto.length; i++) {
+            // Foto Principal
+            if (data[x].Foto[i].esPrincipal) {
+              this.mascotasPubAdopcion[x].imagenCard = data[x].Foto[i].foto;
+            }
+          }
+        }
+      }
+    }
+  }
 
 
   async buscar() {
-    let filters: any = { nombres: null, barrio: null, sexo: null, tamañoFinal: null, tipoAnimal: null };
+    let filters: any = {};
     if (this.FilterForm.controls.nombre.value !== '') {
       filters.nombres = this.FilterForm.controls.nombre.value;
     }
     if (this.FilterForm.controls.barrio.value !== '') {
       filters.barrio = this.FilterForm.controls.barrio.value;
     }
-    if (this.FilterForm.controls.tamañoFinal.value !== '') {
-      filters.barrio = this.FilterForm.controls.tamañoFinal.value;
+    if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
     }
-    if (this.FilterForm.controls.nombre.value !== '') {
-      filters.nombres = this.FilterForm.controls.sexo.value;
+    if (this.FilterForm.controls.sexo.value !== '') {
+      filters.sexo = this.FilterForm.controls.sexo.value;
     }
-    if (this.FilterForm.controls.nombre.value !== '') {
-      filters.nombres = this.FilterForm.controls.tipoAnimal.value;
+    if (this.FilterForm.controls.tipoMascota.value !== '') {
+      filters.tipoMascota = this.FilterForm.controls.tipoMascota.value;
     }
-    this.inputCards = [];
-    if (filters.nombres || filters.barrio || filters.sexo || filters.tamañoFinal || filters.tipoAnimal) {
-      let filterRequest = await this.registroMascotasService.getMascotasFiltradas(filters);
-      console.log(filterRequest);
 
-    } else {
-      this.clean();
-    }
+    filters.estado = "Disponible Adopción";
+    this.registroMascotasService.getMascotasFiltradas(filters).subscribe(dataOne => {
+      console.log(dataOne);
+
+      // "En adopcion y en provisorio"
+      filters.estado = "Disponible Adopción y Provisorio";
+      this.registroMascotasService.getMascotasFiltradas(filters).subscribe(dataBoth => {
+        console.log(dataBoth);
+        this.unirMascotas(dataBoth, dataOne);
+      })
+    },
+      err => {
+
+      }
+    )
     window.scrollTo(0, 0);
   }
+    
 
 
 
 
   clean() {
-    //this.subcategorieChanged = false;
-    this.FilterForm.controls.nombre.setValue('');
-    this.FilterForm.controls.sexo.setValue('');
-    this.FilterForm.controls.tipoAnimal.setValue('');
-    this.FilterForm.controls.barrio.setValue('');
-    this.FilterForm.controls.tamañoFinal.setValue('');
+    this.iniciarForm();
   }
 
 
