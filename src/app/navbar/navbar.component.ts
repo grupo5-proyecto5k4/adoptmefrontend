@@ -80,6 +80,7 @@ export class NavbarComponent {
         cantNotifNoLeidas ++;
       }
     }
+
     this.cantNotifNoLeidas = cantNotifNoLeidas;
   }
 }

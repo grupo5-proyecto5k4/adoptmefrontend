@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { Recomendacion } from 'src/models/IRecomendacion';
 import { RecomendacionService } from 'src/services/recomendaciones.service';
-import { LatLng } from  'leaflet'
+
 
 
 @Component({
@@ -36,6 +36,9 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
   tiposRecomendacion: string[] = ['Veterinaria', 'Centro de castración'];
   tiposRecomendacionSelected: number = 0;
   abierto24hsSelected: number = 0;
+  selectedMarker: any;
+  coordenadas: any;
+
   private redIcon = Leaflet.icon({
     iconUrl: 'assets/images/leaflet/red-icon.png',
     iconSize: [25, 41], // size of the icon
@@ -130,9 +133,19 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
 
     for (var i = 0; i < this.veterinaria.length; i++) {
       var marker = new Leaflet.marker([this.veterinaria[i][1], this.veterinaria[i][2]], { icon: this.blueIcon }).bindPopup(this.veterinaria[i][0])
-        .addTo(this.map);
+        .addTo(this.map)
+        /*.on('click', function(e) {
+          this.coordenadas = e.latlng;
+          this.obtenerDatosMarker();
+      })
+        .on('draw:edited', function (e) {
+          this.coordenadas = e.latlng;
+          this.obtenerDatosMarker();
+    });
+      ;*/
     }
 
+    
     for (var i = 0; i < this.centro_castracion.length; i++) {
       var marker = new Leaflet.marker([this.centro_castracion[i][1], this.centro_castracion[i][2]], { icon: this.redIcon }).bindPopup(this.centro_castracion[i][0])
         .addTo(this.map);
@@ -152,8 +165,40 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       }
     }
     this.tiposRecomendacionSelected = answer;
+    this.ubicarEnMapa();
   }
 
+  async obtenerDatosMarker(){
+    this.Titulo = "Modificar recomendación"
+    const r = await this.recomendacionService.getTodasRecomendaciones();
+
+    for (var i = 0; i < r.length; i++) {
+      if (r[i].latitud == this.coordenadas.latitud && r[i].longitud == this.coordenadas.longitud) {
+        this.selectedMarker =  r[i];
+        break
+      }
+    
+      if (this.selectedMarker.tipoRecomendacion == 0) {
+        document.getElementById("veterinaria").setAttribute('checked', 'checked');
+      } else {
+        document.getElementById("centro").setAttribute('checked', 'checked');
+      }
+      
+      this.SignupForm.controls.name.setValue = this.selectedMarker.nombre;
+      this.SignupForm.controls.facebook.setValue = this.selectedMarker.sitioWeb;
+      this.SignupForm.controls.street.setValue = this.selectedMarker.calle;
+      this.SignupForm.controls.altura.setValue = this.selectedMarker.altura;
+
+
+      if (this.selectedMarker.abierto24hs == 1) {
+        document.getElementById("abierto24hs").setAttribute('checked', 'checked');
+      } else {
+        document.getElementById("abierto24hs").removeAttribute('checked');
+      }
+
+    }
+    console.log("finaliza recomendaciones centros");
+  }
 
   abierto24hsChange() {
     if (this.abierto24hsSelected == 0) {
@@ -163,6 +208,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       this.abierto24hsSelected = 0;
     }
 
+    this.ubicarEnMapa();
   }
 
   async obtenerRecomendacionesCentrosCastracion() {
@@ -201,7 +247,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       if (this.SignupForm.controls.facebook.value !== undefined && this.SignupForm.controls.facebook.value !== "") {
         vete += "<br><a target='_blank' href='" + this.SignupForm.controls.facebook.value + "'>Sitio Web</a>";
       }
-      if (this.abierto24hsSelected == 1) {
+      if (this.abierto24hsSelected == 1 && this.tiposRecomendacionSelected == 0) {
         vete += "<br><u>Abierto las 24hs.</u>";
       }
 
