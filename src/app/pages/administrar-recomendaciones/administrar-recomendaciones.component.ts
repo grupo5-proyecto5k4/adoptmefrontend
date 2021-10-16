@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { Recomendacion } from 'src/models/IRecomendacion';
 import { RecomendacionService } from 'src/services/recomendaciones.service';
-import { LatLng } from  'leaflet'
-import { threadId } from 'worker_threads';
+
 
 
 @Component({
@@ -139,10 +138,15 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       console.log(this.veterinaria[i]);
       var marker = new Leaflet.marker([this.veterinaria[i][1], this.veterinaria[i][2]], { icon: this.blueIcon }).bindPopup(this.veterinaria[i][0])
         .addTo(this.map)
-        .on('click', function(e) {
+        /*.on('click', function(e) {
           this.coordenadas = e.latlng;
           this.obtenerDatosMarker();
-      });
+      })
+        .on('draw:edited', function (e) {
+          this.coordenadas = e.latlng;
+          this.obtenerDatosMarker();
+    });
+      ;*/
     }
 
     
@@ -167,6 +171,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       }
     }
     this.tiposRecomendacionSelected = answer;
+    this.ubicarEnMapa();
   }
 
   async obtenerDatosMarker(){
@@ -209,6 +214,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       this.abierto24hsSelected = 0;
     }
 
+    this.ubicarEnMapa();
   }
 
   async obtenerRecomendacionesCentrosCastracion() {
@@ -250,7 +256,7 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       if (this.SignupForm.controls.facebook.value !== undefined && this.SignupForm.controls.facebook.value !== "") {
         vete += "<br><a target='_blank' href='" + this.SignupForm.controls.facebook.value + "'>Sitio Web</a>";
       }
-      if (this.abierto24hsSelected == 1) {
+      if (this.abierto24hsSelected == 1 && this.tiposRecomendacionSelected == 0) {
         vete += "<br><u>Abierto las 24hs.</u>";
       }
 
