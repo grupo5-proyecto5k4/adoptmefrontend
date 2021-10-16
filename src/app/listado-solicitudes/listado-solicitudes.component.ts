@@ -20,6 +20,7 @@ export class ListadoSolicitudesComponent implements OnInit {
 
     this.visualizacionSolicitudesService.getSolicitudesAdoptar(this.auth.getToken()).subscribe(data => {
       this.solicitudes = data;
+      console.log("Solicitudes de adopcion", this.solicitudes);
 
       for (let x = 0 ; x < this.solicitudes.length; x++){
 
@@ -28,12 +29,20 @@ export class ListadoSolicitudesComponent implements OnInit {
         var [yyyy, mm, dd] = date.split("-");
         var revdate = `${dd}-${mm}-${yyyy}`;
         this.solicitudes[x].fechaSolicitud = revdate;
+
+        //Estado de solicitud
+        var estado = this.solicitudes[x].Solicitud.estadoId;
+        if (estado === "Aprobado Por Responsable"){
+          this.solicitudes[x].estado = true;
+        }
+
       }
   })
 
   
     this.visualizacionSolicitudesService.getSolicitudesProvisorio(this.auth.getToken()).subscribe(dataProvi => {
       this.solicitudesProvi = dataProvi;
+      console.log("Solicitudes de provi", this.solicitudes); 
 
       for (let x = 0 ; x < this.solicitudesProvi.length; x++){
         //Formato fecha de creación de solicitud
@@ -41,6 +50,11 @@ export class ListadoSolicitudesComponent implements OnInit {
         var [yyyy, mm, dd] = date.split("-");
         var revdate = `${dd}-${mm}-${yyyy}`;
         this.solicitudesProvi[x].fechaSolicitud = revdate;
+
+        var estado = this.solicitudesProvi[x].Solicitud.estadoId;
+        if (estado === "Aprobado Por Responsable"){
+          this.solicitudesProvi[x].estado = true;
+        }
       }
   })
   }

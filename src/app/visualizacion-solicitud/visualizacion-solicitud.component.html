@@ -245,7 +245,7 @@
             </form>
         </div>
   
-        <div class="container-btn">
+        <div class="container-btn" *ngIf="data.solicitud.estado != true">
             <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading" style="margin-right: 3px;" type="button"
                 (click)="rechazarSolicitud()">Rechazar</a>
             <a mat-raised-button class="button" id="btnRegistro" type="button" (click)="aceptarSolicitud()" *ngIf="!isLoading">Aceptar</a>

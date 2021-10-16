@@ -23,6 +23,10 @@
                         </div> 
 
                         <div class="columna2">
+                            <div class="estado-container">
+                                <p class="estado" *ngIf="solicitud.estado === true">Aprobada</p>
+                            </div>
+                            
                             <mat-card-actions>
                                 <button mat-button class="end" (click)="openSolicitud(solicitud)"><mat-icon>remove_red_eye</mat-icon></button>
                             </mat-card-actions>
@@ -56,6 +60,10 @@
                         </div> 
 
                         <div class="columna2">
+                            <div class="estado-container">
+                                <p class="estado" *ngIf="solicitud.estado === true">Aprobada</p>
+                            </div>
+
                             <mat-card-actions>
                                 <button mat-button class="end" (click)="openSolicitudProvi(solicitud)"><mat-icon>remove_red_eye</mat-icon></button>
                             </mat-card-actions>
