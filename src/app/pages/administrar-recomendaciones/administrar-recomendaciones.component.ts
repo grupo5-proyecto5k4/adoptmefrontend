@@ -165,6 +165,9 @@ export class AdministrarRecomendacionesComponent implements OnInit, OnDestroy {
       }
     }
     this.tiposRecomendacionSelected = answer;
+    if (this.tiposRecomendacionSelected == 1 && this.abierto24hsSelected == 1){
+      this.abierto24hsSelected = 0;
+    }
     this.ubicarEnMapa();
   }
 
