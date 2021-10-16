@@ -17,6 +17,9 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
   idSolicitud: string;
   isLoading: Boolean = false;
+  dataSolicitud: any;
+  dataSolicitante: any;
+  dataAnimal: any;
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,private notificacionService: NotificacionService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService, private alertsService: AlertsService) {
   }
@@ -25,6 +28,9 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     var dataAnimal = this.data.solicitud.Animales;
     var dataSolicitud = this.data.solicitud.Solicitud;
     var dataSolicitante = this.data.solicitud.Solicitante;
+    this.dataSolicitud = dataSolicitud;
+    this.dataAnimal = dataAnimal;
+    this.dataSolicitante = dataSolicitante;
 
     //SolicitudId
     this.idSolicitud = this.data.solicitud.Solicitud._id;
@@ -142,7 +148,10 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       this.data = dataProvi;
       this.notificacionService.notificarConfirmacionProvisorioAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solitanteId ,this.auth.getToken());    
     this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result)=> window.location.href='/solicitudes')
-    , () => { this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");}
+    , () => { 
+      this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
+      this.isLoading = false;
+    }
   })
   }
 
@@ -152,7 +161,24 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       this.data = dataProvi;
       this.notificacionService.notificarCancelacionProvisorioAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solitanteId ,this.auth.getToken());    
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
-      , () => { this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");}
+      , () => { 
+        this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
+        this.isLoading = false;
+      }
+    })
+    }
+
+
+    confirmarSolicitud(){
+      this.isLoading = true;
+      this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+        this.data = dataProvi;
+        this.notificacionService.notificarConfirmacionProvisorioACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre+' '+this.dataSolicitante.apellido, this.idSolicitud, this.data.solicitud.solitanteId ,this.auth.getToken());    
+      this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result)=> window.location.href='/solicitudes')
+      , () => { 
+        this.alertsService.errorMessage("En estos momentos no se puede confirmar la solicitud");
+        this.isLoading = false;
+      }
     })
     }
 
