@@ -4,6 +4,7 @@ import { AlertsService } from 'src/utils/alerts.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
 import { AuthService } from '../auth.service';
+import { NotificacionService } from 'src/services/notificacion.service';
 
 @Component({
   selector: 'app-visualizacion-solicitud',
@@ -18,7 +19,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
   rechazoSol:boolean=false;
   isLoading: Boolean = false;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private alertsService: AlertsService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private notificacionService: NotificacionService, private alertsService: AlertsService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
   }
 
   ngOnInit(): void {
@@ -141,7 +142,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
     this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      
+      this.notificacionService.notificarConfirmacionAdopcionAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solitanteId ,this.auth.getToken());    
     this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result)=> window.location.href='/solicitudes')
     , () => { this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");}
   })
@@ -151,6 +152,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
     this.isLoading = true;
     this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
+      this.notificacionService.notificarCancelacionAdopcionAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solitanteId ,this.auth.getToken());    
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
       , () => { this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");}
     })

@@ -48,7 +48,7 @@ export class NotificacionService {
 
   notificarConfirmacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Confirmacion de adopción";
+    notificacion.nombreNotificacion = "Confirmación de adopción";
     notificacion.descripcion = "La solicitud de adopción de "+nombreMascota+" ha sido aceptada";
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
@@ -58,8 +58,28 @@ export class NotificacionService {
 
   notificarConfirmacionProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Confirmacion de provisorio";
+    notificacion.nombreNotificacion = "Confirmación de provisorio";
     notificacion.descripcion = "La solicitud de provisorio de "+nombreMascota+" ha sido aceptada";
+    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
+  notificarCancelacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de adopción";
+    notificacion.descripcion = "La solicitud de adopción de "+nombreMascota+" ha sido rechazada";
+    notificacion.objetoAMostrar = "Adopcion";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
+  notificarCancelacionProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de provisorio";
+    notificacion.descripcion = "La solicitud de provisorio de "+nombreMascota+" ha sido rechazada";
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;

@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
 import { AuthService } from '../auth.service';
 import { AlertsService } from 'src/utils/alerts.service';
+import { NotificacionService } from 'src/services/notificacion.service';
 
 @Component({
   selector: 'app-visualizacion-solicitud-provi',
@@ -17,7 +18,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   idSolicitud: string;
   isLoading: Boolean = false;
 
-  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService, private alertsService: AlertsService) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,private notificacionService: NotificacionService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService, private alertsService: AlertsService) {
   }
 
   ngOnInit(): void {
@@ -139,7 +140,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
     this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      
+      this.notificacionService.notificarConfirmacionProvisorioAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solitanteId ,this.auth.getToken());    
     this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result)=> window.location.href='/solicitudes')
     , () => { this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");}
   })
@@ -149,6 +150,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     this.isLoading = true;
     this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
+      this.notificacionService.notificarCancelacionProvisorioAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solitanteId ,this.auth.getToken());    
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
       , () => { this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");}
     })
