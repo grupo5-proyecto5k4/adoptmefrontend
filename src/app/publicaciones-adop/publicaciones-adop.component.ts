@@ -36,7 +36,6 @@ const DATA: Pet[] = [
 
 export class PublicacionesAdopComponent implements OnInit {
   mascotasPubAdopcion: any;
-  mascotasPub: any;
   FilterForm: FormGroup;
   animal = 0;
 
