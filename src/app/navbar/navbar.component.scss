@@ -29,6 +29,7 @@
   border-radius: 0px 0px 0px 10px;
   box-shadow: 0px 2px 5px 2px #d8d6d6;
   z-index: 1;
+  margin-right: 18px;
 }
 
 .titleNotificacion{
@@ -79,7 +80,7 @@
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 3;
 }
 
 /* NavBar */

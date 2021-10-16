@@ -3,7 +3,10 @@ import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef} from '@angu
 import { MatPaginator} from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { Mascota } from 'src/models/IMascota';
+import { MatDialog } from '@angular/material/dialog';
 import { RegistroMascotasService} from 'src/services/registro-mascotas.service';
+import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
 
 export interface Pet {
   name: string;
@@ -38,19 +41,21 @@ export class PublicacionesProvComponent implements OnInit {
   mascotasPubProvisorio: any;
   mascotasPub:any;
 
+  /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
-
-  constructor(public registroMascotasService:RegistroMascotasService, private changeDetectorRef: ChangeDetectorRef) {
+  */
+  constructor(public registroMascotasService:RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+    /*
     this.changeDetectorRef.detectChanges();
     this.dataSource.paginator = this.paginator;
     this.obs = this.dataSource.connect();
     this.paginator._intl.itemsPerPageLabel = "Animales por página";
-
+    */
     // En provisorio
     this.registroMascotasService.getMascotas(2).subscribe(dataOne => {
       this.mascotasPub = dataOne;
@@ -63,6 +68,8 @@ export class PublicacionesProvComponent implements OnInit {
             this.mascotasPubProvisorio = data;
             //Recorro mascotas
             for (let x = 0; x < (data.length); x++){
+              // Edad 
+              this.mascotasPubProvisorio[x].edad = this.calculateAge(data[x].fechaNacimiento);
               if (data[x].Foto.length != 0){
                 //Recorro imágenes
                 for (let i = 0; i < data[x].Foto.length; i++){
@@ -82,11 +89,32 @@ export class PublicacionesProvComponent implements OnInit {
     }
     )
   }
-  
+  /*
   ngOnDestroy() {
     if (this.dataSource) { 
       this.dataSource.disconnect(); 
     }
   }
+  */
+  calculateAge(fechaNacimiento) {
+    var today = new Date();
+    var fechaNacimientoFormato = new Date(fechaNacimiento);
+    var difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
+    var sms: String;
+    if (difference < 365){
+      sms = "Cachorro"
+    } else {
+      sms = "Adulto"
+    }
+    return sms
+}
 
+openMascota(mascota: Mascota){
+  this.dialog.open(VerMascotaComponent, {
+    data: {
+        mascota: mascota,
+        accion: 0
+    }
+})
+}
 }

@@ -8,6 +8,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'; 
@@ -43,12 +44,19 @@ import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { AdministrarRecomendacionesModule } from './pages/administrar-recomendaciones/administrar-recomendaciones.module';
-import { VacunacionesComponent } from './vacunaciones/vacunaciones.component';
 //import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {MatTableModule} from '@angular/material/table';
 import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
+import { VisualizacionSolicitudComponent } from './visualizacion-solicitud/visualizacion-solicitud.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-provisorio.component';
+import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
+import { ChartsModule } from 'ng2-charts';
+import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +78,12 @@ import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios
     CenterProfileComponent,
     AdminProfileComponent,
     PublicacionesProvComponent,
-    VacunacionesComponent,
+    NuevaMascotaComponent,
+    ListadoSolicitudesComponent,
+    VisualizacionSolicitudComponent,
+    SolicitudProvisorioComponent,
+    ReportesCentroComponent,
+    VisualizacionSolicitudProviComponent,
     //PublicacionesProvComponent
 
   ],
@@ -103,9 +116,13 @@ import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios
     MatPaginatorModule,
     MatSelectModule,
     FileUploadModule,
+    MatRadioModule,
+    MatSlideToggleModule,
     GestionarUsuariosModule,
     MatBadgeModule,
-    MatRadioModule
+    MatRadioModule,
+    MatCheckboxModule,
+    ChartsModule
   ],
   
   providers: [],

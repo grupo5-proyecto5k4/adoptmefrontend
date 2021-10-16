@@ -3,11 +3,17 @@ import { FormGroup, FormGroupDirective, NgForm, FormControl, Validators } from '
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { SignupService } from 'src/services/signup.service';
 import { User } from 'src/models/IUser';
+import { Data, Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AlertsService } from 'src/utils/alerts.service';
 import { TermsAndConditionsComponent } from 'src/app/terms-and-conditions/terms-and-conditions.component';
+import { UserService } from 'src/services/user.service';
+import { FormularioAdopcion } from 'src/models/IFormularioAdopcion';
+import { Address } from 'src/models/IAddress';
+import { AuthService } from 'src/app/auth.service';
+import { NotificacionService } from 'src/services/notificacion.service';
 
 
 @Component({
@@ -33,33 +39,28 @@ export class UserFormComponent implements OnInit {
   balconSelected: number;
   permisoEdificioSelected: number;
   TerminosChecked = false;
+  tiempoPresupuestoSelected: number;
 
 
-  constructor(private alertsService: AlertsService, private dialog: MatDialog, private dialogref: MatDialogRef<UserFormComponent>) { }
+  constructor(private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private notificacionService: NotificacionService, private dialog: MatDialog, private userService: UserService, private dialogref: MatDialogRef<UserFormComponent>) { }
 
   ngOnInit() {
     this.UserForm = new FormGroup({
-      otraMascota: new FormControl('', [Validators.required]),
-      descripcionOtraMascota: new FormControl('', [Validators.required, Validators.maxLength(250)]),
-      tiempoPresupuesto: new FormControl('', [Validators.required]),
-      accionViaje: new FormControl('', [Validators.required, Validators.maxLength(250)]),
-      vacunacionCastracion: new FormControl('', [Validators.required]),
-      seguimiento: new FormControl('', [Validators.required]),
-      vivienda: new FormControl('', [Validators.required]),
-      permiso: new FormControl('', [Validators.required]),
-      espacioAbierto: new FormControl('', [Validators.required]),
-      descripcionCercamiento: new FormControl('', [Validators.required]),
+      descripcionOtraMascota: new FormControl('', [Validators.maxLength(200)]),
+      accionViaje: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+      accionImpedimento: new FormControl('', [Validators.required, Validators.maxLength(300)]),
+      descripcionCercamiento: new FormControl('', [Validators.maxLength(200)]),
       composicionFamilia: new FormControl('', [Validators.required]),
-
-      street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      altura:  new FormControl('', [Validators.pattern('[0-9]{0,4}')]),
+      localidad: new FormControl({ value: 'Córdoba Capital', disabled: true }),
+      street: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      altura: new FormControl('', [Validators.pattern('[0-9]{0,4}')]),
       reference: new FormControl('', [Validators.maxLength(150)]),
       barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
     });
     this.dialogref.disableClose = true;
   }
 
-  close(){
+  close() {
     this.dialogref.close();
   }
 
@@ -68,22 +69,12 @@ export class UserFormComponent implements OnInit {
   }
 
   validateButton() {
-    if (this.UserForm.valid) {
-      document.getElementById("confirmar").classList.remove("buttonDisabled");
-    } else {
-      document.getElementById("confirmar").classList.add("buttonDisabled");
+    document.getElementById("confirmado").classList.add("buttonDisabled");
+    if (this.UserForm.valid && this.allRadioSelected()) {
+      document.getElementById("confirmado").classList.remove("buttonDisabled");
     }
   }
 
-
-  validarCampos() {
-    if (this.UserForm.valid && !this.UserForm.pristine) {
-      document.getElementById("changePassword").classList.remove('disabledBtnPassword');
-    }
-    else{
-      document.getElementById("changePassword").classList.add('disabledBtnPassword');
-  }
-  }
 
   validateCalle() {
     return (((this.UserForm.get('street').touched ||
@@ -111,6 +102,7 @@ export class UserFormComponent implements OnInit {
 
   radioOtrasMascotasChange(value: string) {
     this.otrasMascotasSelected = this.siNoFuncion(value);
+    this.updateOtraMascotaValidator();
   }
 
   radioVacunacionChange(value: string) {
@@ -125,7 +117,7 @@ export class UserFormComponent implements OnInit {
         break;
       }
     }
-    this.vacunacionSelected = answer;    
+    this.vacunacionSelected = answer;
   }
 
   radioPermisoEdificioChange(value: string) {
@@ -153,21 +145,53 @@ export class UserFormComponent implements OnInit {
       }
     }
     this.balconSelected = answer;
+    this.updateCercamientoValidator();
+
+  }
+
+  updateCercamientoValidator() {
+    let site_id_control = this.UserForm.controls['descripcionCercamiento'];
+    if (this.balconSelected !== 3 && this.balconSelected !== undefined) {
+      site_id_control.setValidators(Validators.compose([Validators.required, Validators.maxLength(300)]));
+    }
+    else {
+      site_id_control.setValidators(Validators.compose([Validators.maxLength(300)]));
+    }
+
+    site_id_control.updateValueAndValidity();
+
+  }
+
+  updateOtraMascotaValidator() {
+    let site_id_control = this.UserForm.controls['descripcionOtraMascota'];
+    if (this.otrasMascotasSelected == 1) {
+      site_id_control.setValidators(Validators.compose([Validators.required, Validators.maxLength(300)]));
+    }
+    else {
+      site_id_control.setValidators(Validators.compose([Validators.maxLength(300)]));
+    }
+
+    site_id_control.updateValueAndValidity();
+
+  }
+
+  radioTiempoPresupuestoChange(value: string) {
+    this.tiempoPresupuestoSelected = this.siNoFuncion(value);
   }
 
   radioSeguimientoChange(value: string) {
     this.seguimientoSelected = this.siNoFuncion(value);
   }
 
-  TerminosCheckedChange(){
-      this.TerminosChecked = !this.TerminosChecked;
+  TerminosCheckedChange() {
+    this.TerminosChecked = !this.TerminosChecked;
   }
 
-  openTermsAndConditions(){
+  openTermsAndConditions() {
     this.dialog.open(TermsAndConditionsComponent);
   }
 
-  siNoFuncion(value: string){
+  siNoFuncion(value: string) {
     let answer: number;
     switch (value) {
       case this.siNo[0]: { //si
@@ -217,38 +241,56 @@ export class UserFormComponent implements OnInit {
     this.tiempoSoloSelected = answer;
   }
 
+  allRadioSelected() {
+    return (this.viviendaSelected !== undefined && this.otrasMascotasSelected !== undefined && this.permisoEdificioSelected !== undefined && this.balconSelected != undefined && this.seguimientoSelected !== undefined && this.vacunacionSelected != undefined && this.tiempoSoloSelected !== undefined && this.TerminosChecked)
+  }
 
-  signup() {
-    if (this.UserForm.valid) {
+  async signup() {
+    if (this.UserForm.valid && this.allRadioSelected()) {
       this.isLoading = true;
-      let particularUser: User = new User();
-      particularUser.nombres = this.UserForm.controls.name.value;
-      particularUser.apellidos = this.UserForm.controls.lastname.value;
-      particularUser.correoElectronico = this.UserForm.controls.email.value;
-      particularUser.numeroContacto = this.UserForm.controls.contactNumber.value;
-      particularUser.dni = this.UserForm.controls.dni.value;
-      particularUser.fechaNacimiento = (this.UserForm.controls.birthDate.value).toLocaleString();;
-      if (this.UserForm.controls.facebook.value !== "") {
-        particularUser.facebook = this.UserForm.controls.facebook.value;
-      }
-      if (this.UserForm.controls.instagram.value !== "") {
-        particularUser.instagram = this.UserForm.controls.instagram.value;
-      }
 
-      particularUser.contrasenia = this.UserForm.controls.password.value;
-      /*
-      this.SignupService.registerUser(particularUser).subscribe({
-        complete: () => {
-          this.alertsService.confirmMessage("Su cuenta ha sido registrada").then((result) => window.location.href = '/');
-        },
-        error: (err: any) => {
-          this.alertsService.errorMessage(err.error.error).then((result) => {
+      //Acá seteamos los valores de la dirección
+      let userAddress: Address = new Address();
+      userAddress.calle = this.UserForm.controls.street.value;
+      userAddress.numero = this.UserForm.controls.altura.value;
+      userAddress.referencia = this.UserForm.controls.reference.value;
+      userAddress.localidad = "Córdoba Capital";
+      userAddress.barrio = this.UserForm.controls.barrio.value;
+
+      //Acá seteamos los valores del formulario
+      let formulario: FormularioAdopcion = new FormularioAdopcion();
+      formulario.otraMascota = this.otrasMascotasSelected;
+      if (this.otrasMascotasSelected == 1 && this.UserForm.controls.descripcionOtraMascota.value !== "") {
+        formulario.descripcionOtraMascota = this.UserForm.controls.descripcionOtraMascota.value;
+      }
+      if (this.balconSelected !== 3 && this.UserForm.controls.descripcionCercamiento.value !== "") {
+        formulario.descripcionCercamiento = this.UserForm.controls.descripcionCercamiento.value;
+      }
+      formulario.tiempoSolo = this.tiempoSoloSelected;
+      formulario.tiempoPresupuesto = this.tiempoPresupuestoSelected;
+      formulario.accionViaje = this.UserForm.controls.accionViaje.value;
+      formulario.vacunacionCastracion = this.vacunacionSelected;
+      formulario.seguimiento = this.seguimientoSelected;
+      formulario.vivienda = this.viviendaSelected;
+      formulario.permiso = this.permisoEdificioSelected;
+      formulario.espacioAbierto = this.balconSelected;
+      formulario.Direccion = userAddress;
+      formulario.mascotaId = this.data.mascota._id;
+      formulario.accionImpedimento = this.UserForm.controls.accionImpedimento.value;
+      formulario.composicionFamilia = this.UserForm.controls.composicionFamilia.value;
+
+
+      this.userService.registrarFormularioAdopcion(formulario, this.authService.getToken()).subscribe((resp: Data) => {
+        this.notificacionService.notificarSolicitudAdopcion(this.data.mascota.nombreMascota, this.data.mascota.responsableId, resp._id, this.authService.getToken())
+        this.alertsService.confirmMessage("Su solicitud de adopción ha sido registrada").then((result) => window.location.href = '/');
+      },
+        error => {
+          this.alertsService.errorMessage(error.error.error).then((result) => {
             this.isLoading = false;
-          }
-        )
+          })
         }
-      }) */
-    } 
+      );
+    }
   }
 
   async init() {
