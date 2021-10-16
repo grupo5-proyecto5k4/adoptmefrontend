@@ -141,6 +141,18 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     });  
   }
 
+
+  faltaAceptar(){
+    console.log("dataSolicitud")
+    console.log(this.dataAnimal)
+    return(this.dataSolicitud.estadoId == 'Abierto')
+    //&& this.auth.getCurrentUser()._id == this.dataAnimal.responsableId   FALTA AGREGAR ESTO CUANDO EL BACK TRAIGA EL RESPONSABLE ID
+  }
+
+  faltaConfirmar(){
+    return(this.dataSolicitud.estadoId == 'Aprobado Por Responsable' && this.auth.getCurrentUser()._id == this.dataSolicitud.solitanteId)
+  }
+
   aceptarSolicitud(){
     this.isLoading = true;
 
