@@ -30,6 +30,13 @@ export class ListadoSolicitudesComponent implements OnInit {
         var [yyyy, mm, dd] = date.split("-");
         var revdate = `${dd}-${mm}-${yyyy}`;
         this.solicitudes[x].fechaSolicitud = revdate;
+
+        //Estado de solicitud
+        var estado = this.solicitudes[x].Solicitud.estadoId;
+        if (estado === "Aprobado Por Responsable"){
+          this.solicitudes[x].estado = true;
+        }
+
       }
     })
 
@@ -43,6 +50,11 @@ export class ListadoSolicitudesComponent implements OnInit {
         var [yyyy, mm, dd] = date.split("-");
         var revdate = `${dd}-${mm}-${yyyy}`;
         this.solicitudesProvi[x].fechaSolicitud = revdate;
+
+        var estado = this.solicitudesProvi[x].Solicitud.estadoId;
+        if (estado === "Aprobado Por Responsable"){
+          this.solicitudesProvi[x].estado = true;
+        }
       }
     })
 
