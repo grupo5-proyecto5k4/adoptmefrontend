@@ -214,11 +214,12 @@
             </div>
         </form>
     </div>
+
     <div class="container-btn" *ngIf="faltaAceptar()">
         <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading" style="margin-right: 3px;" type="button"
             (click)="rechazarSolicitud()">Rechazar</a>
         <a mat-raised-button class="button" id="btnRegistro" type="button" (click)="aceptarSolicitud()" *ngIf="!isLoading">Aceptar</a>
-        
+
         <a mat-raised-button *ngIf="isLoading" class="button loading"
             type="button" id="btncuenta">
             <img class=logo src="../../assets/images/loading.gif" /></a>
