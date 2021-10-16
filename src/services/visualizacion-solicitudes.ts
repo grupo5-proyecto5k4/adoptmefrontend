@@ -37,4 +37,8 @@ export class VisualizacionSolicitudesService {
         return this.http.put<any>(this.endpointRechazarSolicitud + idSolicitud, "some-string", { headers: new HttpHeaders().set('auth-token', `${token}`)});
 
     }
+
+    getSolicitudesRealizadas(tipoSolicitud: string, token:string): Observable<any> {
+        return this.http.get(('https://adoptmebackend.herokuapp.com/formulario/buscar/solicitudrealizada/'+tipoSolicitud), { headers: new HttpHeaders().set('auth-token', `${token}`)});
+    }
 }
