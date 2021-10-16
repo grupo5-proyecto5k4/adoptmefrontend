@@ -76,10 +76,30 @@ export class NotificacionService {
     return this.notificar(notificacion, token)
   }
 
+  notificarCancelacionAdopcionACentro(nombreMascota: string, nombreAdoptante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de adopción";
+    notificacion.descripcion = nombreAdoptante+" Ha cancelado la adopción de "+nombreMascota;
+    notificacion.objetoAMostrar = "Adopcion";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
   notificarConfirmacionProvisorioACentro(nombreMascota: string, nombreAdoptante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Confirmacion de provisorio";
     notificacion.descripcion = nombreAdoptante+" Ha confirmado la adopción de "+nombreMascota;
+    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.notificar(notificacion, token)
+  }
+
+  notificarCancelacionProvisorioACentro(nombreMascota: string, nombreAdoptante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de provisorio";
+    notificacion.descripcion = nombreAdoptante+" Ha cancelado la adopción de "+nombreMascota;
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
