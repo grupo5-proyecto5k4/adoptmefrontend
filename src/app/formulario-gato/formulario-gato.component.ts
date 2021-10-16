@@ -209,6 +209,7 @@ clearImage(url:number){
               });
 
           } 
+          
           this.alerts.confirmMessage("Su mascota ha sido registrada").then((result)=> window.location.href='/mascotas')
          
         },

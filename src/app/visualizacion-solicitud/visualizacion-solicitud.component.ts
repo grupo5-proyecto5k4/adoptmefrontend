@@ -16,6 +16,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
   opcionesVivienda: string[] = ['Casa', 'Departamento'];
   idSolicitud: string;
   rechazoSol:boolean=false;
+  isLoading: Boolean = false;
 
   constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private alertsService: AlertsService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
   }
@@ -136,18 +137,24 @@ export class VisualizacionSolicitudComponent implements OnInit {
   }
 
   aceptarSolicitud(){
+    this.isLoading = true;
+
     this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      }
-  )
+      
+    this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result)=> window.location.href='/solicitudes')
+    , () => { this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");}
+  })
   }
 
   rechazarSolicitud(){
+    this.isLoading = true;
     this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      }
-  )
-  }
+      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
+      , () => { this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");}
+    })
+    }
 
  aceptarSolicitudAlerta(){
   
