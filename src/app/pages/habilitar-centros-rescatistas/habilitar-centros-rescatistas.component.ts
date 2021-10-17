@@ -2,7 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { UserProfileModalComponent } from 'src/app/components/user-profile-modal/user-profile-modal.component';
 import { User } from 'src/models/IUser';
 import { UserService } from 'src/services/user.service';
 import { AlertsService } from 'src/utils/alerts.service';
@@ -26,11 +28,19 @@ export class HabilitarCentroRescatistaComponent {
     private pageIndex: number = 0;
     private activePageIndex: boolean = false;
     centrosPendientes: any;
+    profile: any;
 
-    constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService) { }
+    constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService, private router: Router) { }
 
-    async ngOnInit() { 
-      await this.obtenerCentros();
+    async ngOnInit() {
+      this.profile = this.authService.getProfile();
+      if(this.profile == '0'){
+        await this.obtenerCentros();
+      }
+      else{
+        window.scrollTo(0, 0);
+        this.router.navigate(['/']);
+      }
     }
 
 
@@ -44,6 +54,15 @@ export class HabilitarCentroRescatistaComponent {
         this.centrosPendientes = r;
       });        
     } 
+
+
+    openUserForm(usuario: User){
+      this.dialog.open(UserProfileModalComponent, {
+        data: {
+            User: usuario,
+        }
+    })
+    }
 
     proximamente(){
       this.alertsService.infoMessage('La visualización del centro rescatista aún no se encuentra disponible','Información')

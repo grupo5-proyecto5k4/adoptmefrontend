@@ -1,4 +1,5 @@
 import { Address } from './IAddress';
+import {Donacion} from './IDonacion';
 
 interface IUser {
     _id?: number;
@@ -15,7 +16,8 @@ interface IUser {
     fechaModificacion?: Date;
     tipoUsuario?: number;
     contrasenia: string;
-    Direccion: Address;   
+    Direccion?: Address; 
+    Donacion?:Donacion;  
     }
   
     export class User implements IUser {
@@ -33,8 +35,9 @@ interface IUser {
       fechaModificacion?: Date;
       tipoUsuario?: number;
       contrasenia: string;
-      Direccion: Address; 
-    
+      Direccion?: Address; 
+      Donacion?:Donacion; 
+      
       constructor() {
         };
       }
