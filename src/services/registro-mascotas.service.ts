@@ -58,8 +58,7 @@ export class RegistroMascotasService {
 
 
     getMascotasFiltradas(filters: any): Observable<any> {
-        //const urlFiltered = new URL('https://adoptme-testing-backend.herokuapp.com/animales/filtrosMascota/filtroAnimalCentroResc');
-        const urlFiltered = new URL('http://localhost:3003/animales/filtrosMascota/filtroAnimalCentroResc')
+        const urlFiltered = new URL('https://adoptmebackend.herokuapp.com/animales/filtrosMascota/filtroAnimalCentroResc')
         if (filters.nombres) {
             urlFiltered.searchParams.append("nombres", filters.nombres)
         }

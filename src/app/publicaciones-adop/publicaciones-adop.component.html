@@ -30,10 +30,7 @@
         <mat-form-field class="example-full-width margenesFiltros filtro">
           <mat-label>Tamaño final</mat-label>
           <mat-select formControlName="tamanoFinal">
-            <mat-option *ngIf="animal == 0" value="Pequeño">Pequeño</mat-option>
-            <mat-option *ngIf="animal == 0" value="Mediano">Mediano</mat-option>
-            <mat-option *ngIf="animal == 0" value="Grande">Grande</mat-option>
-            <mat-option *ngIf="animal == 1" value="No aplica">No aplica</mat-option>
+            <mat-option *ngFor="let tamano of tamanos" value="{{tamano}}">{{tamano}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -69,4 +66,8 @@
       <button mat-button (click)="openMascota(pet)">Ver más</button>
     </mat-card-actions>
   </mat-card>
+</div>
+
+<div class="margenes container-publicaciones" *ngIf="mascotasPubAdopcion.length == 0 && filtroAplicado">
+  <h2>No se han encontrado mascotas que coincidan con la búsqueda realizada...</h2>
 </div>

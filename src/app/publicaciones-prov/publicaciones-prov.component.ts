@@ -39,9 +39,11 @@ const DATA: Pet[] = [
 
 
 export class PublicacionesProvComponent implements OnInit {
-  mascotasPubProvisorio: any;
+  mascotasPubProvisorio = [];
   FilterForm: FormGroup;
-  animal = 0;
+  tamanos = ['Pequeño','Mediano','Grande'];
+  gatoSeleccionado = false;
+  filtroAplicado = false;
 
   /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -74,7 +76,12 @@ export class PublicacionesProvComponent implements OnInit {
 
   
   changeTipoAnimal(){
-    this.animal = this.FilterForm.controls.tipoMascota.value;
+    if (this.FilterForm.controls.tipoMascota.value == 1){
+      this.gatoSeleccionado = true;
+    }
+    else{
+      this.gatoSeleccionado = false;
+    }
   }
 
   iniciarForm(){
@@ -123,6 +130,7 @@ export class PublicacionesProvComponent implements OnInit {
 
 
   async buscar() {
+    this.filtroAplicado = true;
     let filters: any = {};
     if (this.FilterForm.controls.nombre.value !== '') {
       filters.nombres = this.FilterForm.controls.nombre.value;
