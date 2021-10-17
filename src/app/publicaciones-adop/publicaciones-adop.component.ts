@@ -78,11 +78,9 @@ export class PublicacionesAdopComponent implements OnInit {
 
   iniciarForm(){
     this.FilterForm = new FormGroup({
-      nombre: new FormControl(''),
       tipoMascota: new FormControl(''),
       tamanoFinal: new FormControl(''),
       sexo: new FormControl(''),
-      barrio: new FormControl(''),
     });
   }
 
@@ -124,12 +122,6 @@ export class PublicacionesAdopComponent implements OnInit {
   async buscar() {
     this.filtroAplicado = true;
     let filters: any = {};
-    if (this.FilterForm.controls.nombre.value !== '') {
-      filters.nombres = this.FilterForm.controls.nombre.value;
-    }
-    if (this.FilterForm.controls.barrio.value !== '') {
-      filters.barrio = this.FilterForm.controls.barrio.value;
-    }
     if (this.FilterForm.controls.tamanoFinal.value !== '') {
       filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
     }
