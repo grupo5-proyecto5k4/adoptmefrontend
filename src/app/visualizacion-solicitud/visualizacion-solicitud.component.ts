@@ -145,12 +145,11 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   async aceptarSolicitud() {
     this.isLoading = true;
-
+    console.log(this.data.solicitud.Animales.nombreMascota +" "+ this.idSolicitud +' '+ this.data.solicitud.solicitanteId)
     this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
       this.data = dataProvi;
-      await this.notificacionService.notificarConfirmacionAdopcionAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken())
-      .then((result) => {
-      this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')})
+      this.notificacionService.notificarConfirmacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
+      this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
         , () => {
           this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
           this.isLoading = false;
@@ -158,19 +157,18 @@ export class VisualizacionSolicitudComponent implements OnInit {
     })
   }
 
-  async rechazarSolicitud() {
+  async rechazarSolicitud(){
     this.isLoading = true;
-    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
+    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      await this.notificacionService.notificarCancelacionAdopcionAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken())
-      .then((result) => {
-      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')})
-        , () => {
-          this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
-          this.isLoading = false;
-        }
+      this.notificacionService.notificarCancelacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken());    
+      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
+      , () => { 
+        this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
+        this.isLoading = false;
+      }
     })
-  }
+    }
 
   aceptarSolicitudAlerta() {
 
@@ -192,17 +190,30 @@ export class VisualizacionSolicitudComponent implements OnInit {
     return (this.dataSolicitud.estadoId == 'Aprobado Por Responsable' && this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
   }
 
-  async confirmarSolicitud() {
+  async confirmarSolicitud(){
     this.isLoading = true;
-    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
+      this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      await this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken())
-      .then((result) => {this.alertsService.confirmMessage("La solicitud ha sido confirmada")})
-      window.location.href = '/solicitudes'})
-        , () => {
-          this.alertsService.errorMessage("En estos momentos no se puede confirmar la solicitud");
-          this.isLoading = false;
-        }
+      this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre+' '+this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId ,this.auth.getToken());    
+    this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result)=> window.location.href='/solicitudes')
+    , () => { 
+      this.alertsService.errorMessage("En estos momentos no se puede confirmar la solicitud");
+      this.isLoading = false;
+    }
+  })
+  }
+
+  async rechazarSolicitudAprobada(){
+    this.isLoading = true;
+      this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+      this.data = dataProvi;
+      this.notificacionService.notificarCancelacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre+' '+this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId ,this.auth.getToken());    
+    this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
+    , () => { 
+      this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
+      this.isLoading = false;
+    }
+  })
   }
 
 }

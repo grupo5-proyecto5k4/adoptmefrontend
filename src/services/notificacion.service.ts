@@ -47,12 +47,14 @@ export class NotificacionService {
   }
 
   notificarConfirmacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    console.log("llegue a la confirmacion adopcion")
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Confirmación de adopción";
     notificacion.descripcion = "La solicitud de adopción de "+nombreMascota+" ha sido aceptada";
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
+    console.log(notificacion)
     return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
@@ -63,6 +65,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
+    console.log(notificacion)
     return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
@@ -89,7 +92,7 @@ export class NotificacionService {
   notificarConfirmacionAdopcionACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Confirmacion de adopción";
-    notificacion.descripcion = nombreSolicitante+" Ha confirmado la adopción de "+nombreMascota;
+    notificacion.descripcion = nombreSolicitante+" ha confirmado la adopción de "+nombreMascota;
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
@@ -99,7 +102,7 @@ export class NotificacionService {
   notificarCancelacionAdopcionACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Cancelación de adopción";
-    notificacion.descripcion = nombreSolicitante+" Ha cancelado la adopción de "+nombreMascota;
+    notificacion.descripcion = nombreSolicitante+" ha cancelado la adopción de "+nombreMascota;
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
@@ -109,7 +112,7 @@ export class NotificacionService {
   notificarConfirmacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Confirmacion de provisorio";
-    notificacion.descripcion = nombreSolicitante+" Ha confirmado la adopción de "+nombreMascota;
+    notificacion.descripcion = nombreSolicitante+" ha confirmado la adopción de "+nombreMascota;
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
@@ -119,7 +122,7 @@ export class NotificacionService {
   notificarCancelacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Cancelación de provisorio";
-    notificacion.descripcion = nombreSolicitante+" Ha cancelado la adopción de "+nombreMascota;
+    notificacion.descripcion = nombreSolicitante+" ha cancelado la adopción de "+nombreMascota;
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
