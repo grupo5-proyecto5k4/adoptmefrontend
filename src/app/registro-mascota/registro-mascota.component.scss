@@ -269,7 +269,19 @@
   }
 
   .filtro{
-      width: 15%;
+      width: 20%;
+      display: inline-table;
+  }
+
+  .container-filtros{
+    padding-left: 15%;
+    align-items: center;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    display: flex;
+    width: 60%;
   }
 
 }
@@ -290,5 +302,14 @@
       padding-bottom: 10px;
       display: flex;
       margin-top: 8px;
+  }
+
+  .filtro{
+    display: inline-table;
+  }
+
+  .container-filtros{
+    margin-left: 25%; 
+    margin-right: "auto";
   }
 }

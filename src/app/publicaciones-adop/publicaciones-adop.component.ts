@@ -78,9 +78,11 @@ export class PublicacionesAdopComponent implements OnInit {
 
   iniciarForm(){
     this.FilterForm = new FormGroup({
+      nombre: new FormControl(''),
       tipoMascota: new FormControl(''),
       tamanoFinal: new FormControl(''),
       sexo: new FormControl(''),
+      barrio: new FormControl(''),
     });
   }
 

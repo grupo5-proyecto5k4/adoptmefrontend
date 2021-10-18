@@ -14,6 +14,7 @@
             <div class="componente-filtros">
                 <div class="padding-filtros">
                     <form [formGroup]="FilterForm" *ngIf="FilterForm">
+                        <div class="container-filtros">
                         <div>
                             <mat-form-field class="example-full-width margenesFiltros filtro">
                                 <mat-label>Sexo</mat-label>
@@ -42,6 +43,7 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
+                    </div>
                     </form>
                 </div>
                 <div class="botones">

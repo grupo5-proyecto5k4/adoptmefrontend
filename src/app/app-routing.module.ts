@@ -10,12 +10,10 @@ import { AdminConfigurationsComponent } from './pages/admin-configurations/admin
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
 import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
-import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
-import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
 import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
@@ -36,10 +34,6 @@ const routes: Routes = [
   {
     path: 'mascotas',
     component: RegistroMascotaComponent
-  },
-  {
-    path: 'registrar-mascota',
-    component: NuevaMascotaComponent
   },
   {
     path: 'reportesCentro',
@@ -68,10 +62,6 @@ const routes: Routes = [
   {
     path: 'miperfil',
     component: UserProfileComponent
-  },
-  {
-    path: 'micentro',
-    component: CenterProfileComponent
   },
   {
     path: 'perfiladmin',
