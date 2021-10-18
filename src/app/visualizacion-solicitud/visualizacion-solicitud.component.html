@@ -254,27 +254,28 @@
             <a mat-raised-button *ngIf="isLoading" class="button loading" type="button" id="btncuenta">
                 <img class=logo src="../../assets/images/loading.gif" /></a>
         </div>
+    </div>
+    <div *ngIf="faltaConfirmar()">
+        <div class="container-btn">
+            <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading" style="margin-right: 3px;" type="button"
+                (click)="rechazarSolicitud()">Rechazar</a>
+            <a mat-raised-button class="button" id="btnRegistro" type="button" (click)="confirmarSolicitud()"
+                *ngIf="!isLoading">Confirmar</a>
 
-        <div class="container-row1" *ngIf="rechazoSol">
-            <div>
-                <br>
-                <br>
-                <mat-form-field class="ref">
-                    <mat-label>Agregar Comentario</mat-label>
-                    <input matInput formControlName="comentario" placeholder="comentario" class="form-control"
-                        maxlength="150">
-                </mat-form-field>
-            </div>
+            <a mat-raised-button *ngIf="isLoading" class="button loading" type="button" id="btncuenta">
+                <img class=logo src="../../assets/images/loading.gif" /></a>
         </div>
     </div>
-    <div class="container-btn" *ngIf="faltaConfirmar()">
-        <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading" style="margin-right: 3px;" type="button"
-            (click)="rechazarSolicitud()">Rechazar</a>
-        <a mat-raised-button class="button" id="btnRegistro" type="button" (click)="confirmarSolicitud()"
-            *ngIf="!isLoading">Confirmar</a>
-
-        <a mat-raised-button *ngIf="isLoading" class="button loading" type="button" id="btncuenta">
-            <img class=logo src="../../assets/images/loading.gif" /></a>
+    <div class="container-row1" *ngIf="rechazoSol">
+        <div>
+            <br>
+            <br>
+            <mat-form-field class="ref">
+                <mat-label>Agregar Comentario</mat-label>
+                <input matInput formControlName="comentario" placeholder="comentario" class="form-control"
+                    maxlength="150">
+            </mat-form-field>
+        </div>
     </div>
 
 </mat-dialog-content>
