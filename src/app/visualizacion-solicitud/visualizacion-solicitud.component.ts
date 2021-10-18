@@ -146,10 +146,11 @@ export class VisualizacionSolicitudComponent implements OnInit {
   async aceptarSolicitud() {
     this.isLoading = true;
 
-    await this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
       this.data = dataProvi;
-      //this.notificacionService.notificarConfirmacionAdopcionAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken());
-      this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
+      await this.notificacionService.notificarConfirmacionAdopcionAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken())
+      .then((result) => {
+      this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')})
         , () => {
           this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
           this.isLoading = false;
@@ -159,10 +160,11 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   async rechazarSolicitud() {
     this.isLoading = true;
-    await this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
       this.data = dataProvi;
-      //this.notificacionService.notificarCancelacionAdopcionAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken());
-      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')
+      await this.notificacionService.notificarCancelacionAdopcionAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken())
+      .then((result) => {
+      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')})
         , () => {
           this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
           this.isLoading = false;
@@ -183,10 +185,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
   }
 
   faltaAceptar(){
-    console.log("dataSolicitud")
-    console.log(this.dataAnimal)
-    return(this.dataSolicitud.estadoId == 'Abierto')
-    //&& this.auth.getCurrentUser()._id == this.dataAnimal.responsableId   FALTA AGREGAR ESTO CUANDO EL BACK TRAIGA EL RESPONSABLE ID
+    return(this.dataSolicitud.estadoId == 'Abierta' && this.auth.getCurrentUser()._id == this.dataAnimal.responsableId)
   }
 
   faltaConfirmar() {
@@ -195,15 +194,15 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   async confirmarSolicitud() {
     this.isLoading = true;
-    await this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
       this.data = dataProvi;
-      //this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken());
-      this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result) => window.location.href = '/solicitudes')
+      await this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.data.solicitud.solicitanteId, this.auth.getToken())
+      .then((result) => {this.alertsService.confirmMessage("La solicitud ha sido confirmada")})
+      window.location.href = '/solicitudes'})
         , () => {
           this.alertsService.errorMessage("En estos momentos no se puede confirmar la solicitud");
           this.isLoading = false;
         }
-    })
   }
 
 }

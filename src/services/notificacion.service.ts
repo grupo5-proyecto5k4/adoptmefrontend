@@ -33,7 +33,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarSolicitudProvisorio(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -43,7 +43,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarConfirmacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -53,7 +53,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarConfirmacionProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -63,7 +63,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarCancelacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -73,7 +73,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarCancelacionProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -83,7 +83,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarConfirmacionAdopcionACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -93,7 +93,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarCancelacionAdopcionACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -103,7 +103,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarConfirmacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -113,7 +113,7 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarCancelacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
@@ -123,12 +123,9 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
-  notificar(notificacion: Notificacion, token:string): Promise <any>{
-    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();;
-  }
 
   /*
   updateAccount(user: User, token:string): Observable <any> {

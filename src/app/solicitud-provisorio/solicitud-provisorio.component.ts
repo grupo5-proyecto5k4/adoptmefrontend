@@ -265,7 +265,7 @@ export class SolicitudProvisorioComponent implements OnInit {
 
       
       this.userService.registrarFormularioProvisorio(formulario, this.authService.getToken()).subscribe((resp:Data) => {
-        this.notificacionService.notificarSolicitudProvisorio(this.data.mascota.nombreMascota,this.data.mascota.responsableId, resp._id,this.authService.getToken())
+        this.notificacionService.notificarSolicitudProvisorio(this.data.mascota.nombreMascota,this.data.mascota.responsableId, resp._id, this.authService.getToken())
         this.alertsService.confirmMessage("Su solicitud de provisorio ha sido registrada").then((result) => window.location.href = '/');        
       },
         error => {

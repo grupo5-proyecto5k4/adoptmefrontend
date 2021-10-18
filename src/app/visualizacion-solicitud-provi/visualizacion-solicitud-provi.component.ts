@@ -143,9 +143,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
 
   faltaAceptar(){
-    console.log("dataSolicitud")
-    console.log(this.dataAnimal)
-    return(this.dataSolicitud.estadoId == 'Abierto')
+    return(this.dataSolicitud.estadoId == 'Abierta' && this.auth.getCurrentUser()._id == this.dataAnimal.responsableId)
     //&& this.auth.getCurrentUser()._id == this.dataAnimal.responsableId   FALTA AGREGAR ESTO CUANDO EL BACK TRAIGA EL RESPONSABLE ID
   }
 
