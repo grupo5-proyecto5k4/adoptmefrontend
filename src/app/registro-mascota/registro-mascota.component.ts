@@ -29,6 +29,7 @@ export class RegistroMascotaComponent implements OnInit {
   gatoSeleccionado = false;
   filtroDisponibleAplicado = false;
   filtroNoDisponibleAplicado = false;
+  countNoDisponibles = 0;
 
   constructor(public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private auth: AuthService) {
   }
@@ -39,25 +40,7 @@ export class RegistroMascotaComponent implements OnInit {
 
     // SECCIÓN NO DISPONIBLES: Adoptado (3) y En Provisorio (4)
     //
-    this.registroMascotasService.getMascotasUser(4, this.auth.getToken()).subscribe(dataEnProvi => {
-      if (dataEnProvi.mesage === "[]") {
-        dataEnProvi = [];
-      }
-      this.mascotasUsuarioEnProvi = dataEnProvi;
-
-      this.registroMascotasService.getMascotasUser(3, this.auth.getToken()).subscribe(dataAdoptado => {
-        if (dataAdoptado.mesage === "[]") {
-          dataAdoptado = [];
-        }
-
-        this.unirMascotasNoDisponibles(dataEnProvi,dataAdoptado);
-
-      },
-        err => {
-          console.log('ERROR...')
-        }
-      );
-
+    this.buscarMascotasNoDisponibles();
 
 
       // Sección DISPONIBLES: Disponible Adopción, Disponible Provisorio y Disponible Adopción y Provisorio
@@ -91,7 +74,7 @@ export class RegistroMascotaComponent implements OnInit {
         }
       )
 
-    })
+
   }
 
 
@@ -116,7 +99,10 @@ export class RegistroMascotaComponent implements OnInit {
   }
 
   async buscarMascotasNoDisponibles(){
-    this.filtroNoDisponibleAplicado = true;
+    this.countNoDisponibles ++;
+    if (this.countNoDisponibles>1){
+      this.filtroNoDisponibleAplicado = true;
+    }
     let filters: any = {};
     if (this.FilterForm.controls.nombre.value !== '') {
       filters.nombres = this.FilterForm.controls.nombre.value;
@@ -136,7 +122,7 @@ export class RegistroMascotaComponent implements OnInit {
     filters.responsableId = this.auth.getCurrentUser()._id;
 
     // SECCIÓN NO DISPONIBLES: Adoptado (3) y En Provisorio (4)
-    filters.estado = "En Provisorio";
+    filters.estado = "En provisorio";
     this.registroMascotasService.getMascotasPropiasFiltradas(filters, this.auth.getToken()).subscribe(dataEnProvi => {
       this.mascotasUsuarioEnProvi = dataEnProvi;
 
