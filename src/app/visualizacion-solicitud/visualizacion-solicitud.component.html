@@ -1,281 +1,306 @@
-<mat-dialog-content>
+<mat-dialog-content class="dialog-content">
 
-    <div class="container-cruz">
-        <input type=button id="btncruz" name=boton value=X (click)="dialog.closeAll()">
-        <br>
-        <br>
-    </div>
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <section id="cta4">
+                <div class="container">
+                    <header>
+                        <div class="card-container">
+                            <input type=button id="btncruz" style="margin: 10px;" name=boton value=X matDialogClose>
+                            <div class="lower-container">
+                                <div>
+                                    <div>
+                                        <h2 class="subtitulo">Solicitud de adopción</h2>
+                                    </div>
 
-    <div class="container-titulo">
-        <h1 class="titulo">Solicitud de adopción</h1>
-    </div>
 
-    <div class="centrado">
-        <form [formGroup]="SolicitudForm" class="example-form">
-            <div class="container-row1">
-                <div>
-                    <mat-form-field>
-                        <mat-label>Nombre de la mascota</mat-label>
-                        <input matInput formControlName="nombreMascota">
-                    </mat-form-field>
+
+                                    <div class="centrado">
+                                        <form [formGroup]="SolicitudForm" class="example-form">
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Nombre de la mascota</mat-label>
+                                                        <input matInput formControlName="nombreMascota">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Fecha de Solicitud</mat-label>
+                                                        <input matInput formControlName="fechaSolicitud">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <h2 class="centrado-titulo">Datos del solicitante</h2>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Solicitante</mat-label>
+                                                        <input matInput formControlName="nombreSolicitante">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <h3 class="centrado-titulo">Domicilio</h3>
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Calle</mat-label>
+                                                        <input matInput formControlName="calle">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Altura</mat-label>
+                                                        <input matInput formControlName="altura">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Localidad</mat-label>
+                                                        <input matInput formControlName="localidad">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Barrio</mat-label>
+                                                        <input matInput formControlName="barrio">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Referencia</mat-label>
+                                                        <textarea matInput formControlName="referencia"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <h3 class="centrado-titulo">Datos de contacto</h3>
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Teléfono</mat-label>
+                                                        <input matInput formControlName="telefono">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Correo electrónico</mat-label>
+                                                        <input matInput formControlName="email">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Facebook</mat-label>
+                                                        <input matInput formControlName="facebook">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Instagram</mat-label>
+                                                        <input matInput formControlName="instagram">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <h2 class="centrado-titulo">Respuestas del formulario</h2>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Hogar</mat-label>
+                                                        <input matInput formControlName="vivienda">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Familia de acuerdo con adopción</mat-label>
+                                                        <input matInput formControlName="permiso">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Ingreso permitido de animales</mat-label>
+                                                        <input matInput formControlName="permiso">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Exteriores de vivienda</mat-label>
+                                                        <input matInput formControlName="espacioAbierto">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1"
+                                                *ngIf="data.solicitud.Solicitud.descripcionCercamiento != null">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Seguridad en exteriores</mat-label>
+                                                        <textarea matInput formControlName="descripcionCercamiento"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1"
+                                                *ngIf="data.solicitud.Solicitud.descripcionCercamiento != null">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Composición de la familia</mat-label>
+                                                        <textarea matInput formControlName="composicionFamilia"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Otras mascotas en el hogar</mat-label>
+                                                        <input matInput formControlName="otraMascota">
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="container-row1"
+                                                *ngIf="data.solicitud.Solicitud.descripcionOtraMascota != null">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Descripción mascotas del hogar</mat-label>
+                                                        <textarea matInput formControlName="descripcionOtraMascota"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Posee tiempo y presupuesto</mat-label>
+                                                        <input matInput formControlName="tiempoPresupuesto">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Compromiso de</mat-label>
+                                                        <input matInput formControlName="vacunacionCastracion">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Tiempo que pasará solo</mat-label>
+                                                        <input matInput formControlName="tiempoSolo">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Realización de Seguimiento</mat-label>
+                                                        <input matInput formControlName="seguimiento">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>En caso de viaje</mat-label>
+                                                        <textarea matInput formControlName="accionViaje"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>En caso de no poder tenerlo más</mat-label>
+                                                        <textarea matInput formControlName="accionImpedimento"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div *ngIf="faltaAceptar()">
+                                        <div class="container-btn">
+                                            <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading"
+                                                style="margin-right: 3px;" type="button"
+                                                (click)="rechazarSolicitud()">Rechazar</a>
+                                            <a mat-raised-button class="button" id="btnRegistro" type="button"
+                                                (click)="aceptarSolicitud()" *ngIf="!isLoading">Aceptar</a>
+                                            <a mat-raised-button *ngIf="isLoading" class="button loading" type="button"
+                                                id="btncuenta">
+                                                <img class=logo src="../../assets/images/loading.gif" /></a>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="faltaConfirmar()">
+                                        <div class="container-btn">
+                                            <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading"
+                                                style="margin-right: 3px;" type="button"
+                                                (click)="rechazarSolicitudAprobada()">Rechazar</a>
+                                            <a mat-raised-button class="button" id="btnRegistro" type="button"
+                                                (click)="confirmarSolicitud()" *ngIf="!isLoading">Confirmar</a>
+
+                                            <a mat-raised-button *ngIf="isLoading" class="button loading" type="button"
+                                                id="btncuenta">
+                                                <img class=logo src="../../assets/images/loading.gif" /></a>
+                                        </div>
+                                    </div>
+                                    <div class="container-row1" *ngIf="rechazoSol">
+                                        <div>
+                                            <br>
+                                            <br>
+                                            <mat-form-field class="ref">
+                                                <mat-label>Agregar Comentario</mat-label>
+                                                <input matInput formControlName="comentario" placeholder="comentario"
+                                                    class="form-control" maxlength="150">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
                 </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Fecha de Solicitud</mat-label>
-                        <input matInput formControlName="fechaSolicitud">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <h2 class="centrado-titulo">Datos del solicitante</h2>
-
-            <div class="container-row1">
-                <div>
-                    <mat-form-field>
-                        <mat-label>Solicitante</mat-label>
-                        <input matInput formControlName="nombreSolicitante">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <h3 class="centrado-titulo">Domicilio</h3>
-            <div class="container-row1">
-                <div>
-                    <mat-form-field>
-                        <mat-label>Calle</mat-label>
-                        <input matInput formControlName="calle">
-                    </mat-form-field>
-                </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Altura</mat-label>
-                        <input matInput formControlName="altura">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1">
-                <div>
-                    <mat-form-field>
-                        <mat-label>Localidad</mat-label>
-                        <input matInput formControlName="localidad">
-                    </mat-form-field>
-                </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Barrio</mat-label>
-                        <input matInput formControlName="barrio">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1">
-                <div>
-                    <mat-form-field class="ref">
-                        <mat-label>Referencia</mat-label>
-                        <textarea matInput formControlName="referencia" maxlength="150"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <h3 class="centrado-titulo">Datos de contacto</h3>
-            <div class="container-row1">
-                <div>
-                    <mat-form-field>
-                        <mat-label>Teléfono</mat-label>
-                        <input matInput formControlName="telefono">
-                    </mat-form-field>
-                </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Correo electrónico</mat-label>
-                        <input matInput formControlName="email">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1">
-                <div>
-                    <mat-form-field>
-                        <mat-label>Facebook</mat-label>
-                        <input matInput formControlName="facebook">
-                    </mat-form-field>
-                </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Instagram</mat-label>
-                        <input matInput formControlName="instagram">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <h2 class="centrado-titulo">Respuestas del formulario</h2>
-
-            <div class="container-row1">
-
-                <div>
-                    <mat-form-field>
-                        <mat-label>Hogar</mat-label>
-                        <input matInput formControlName="vivienda">
-                    </mat-form-field>
-                </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Familia de acuerdo con adopción</mat-label>
-                        <input matInput formControlName="permiso">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1">
-
-                <div>
-                    <mat-form-field>
-                        <mat-label>Ingreso permitido de animales</mat-label>
-                        <input matInput formControlName="permiso">
-                    </mat-form-field>
-                </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Exteriores de vivienda</mat-label>
-                        <input matInput formControlName="espacioAbierto">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1" *ngIf="data.solicitud.Solicitud.descripcionCercamiento != null">
-                <div>
-                    <mat-form-field class="ref">
-                        <mat-label>Seguridad en exteriores</mat-label>
-                        <textarea matInput formControlName="descripcionCercamiento" maxlength="150"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1" *ngIf="data.solicitud.Solicitud.descripcionCercamiento != null">
-                <div>
-                    <mat-form-field class="ref">
-                        <mat-label>Composición de la familia</mat-label>
-                        <textarea matInput formControlName="composicionFamilia" maxlength="150"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1">
-
-                <div>
-                    <mat-form-field>
-                        <mat-label>Otras mascotas en el hogar</mat-label>
-                        <input matInput formControlName="otraMascota">
-                    </mat-form-field>
-                </div>
-
-            </div>
-
-            <div class="container-row1" *ngIf="data.solicitud.Solicitud.descripcionOtraMascota != null">
-                <div>
-                    <mat-form-field class="ref">
-                        <mat-label>Descripción mascotas del hogar</mat-label>
-                        <textarea matInput formControlName="descripcionOtraMascota" maxlength="150"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1">
-
-                <div>
-                    <mat-form-field>
-                        <mat-label>Posee tiempo y presupuesto</mat-label>
-                        <input matInput formControlName="tiempoPresupuesto">
-                    </mat-form-field>
-                </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Compromiso de</mat-label>
-                        <input matInput formControlName="vacunacionCastracion">
-                    </mat-form-field>
-                </div>
-            </div>
-
-
-            <div class="container-row1">
-
-                <div>
-                    <mat-form-field>
-                        <mat-label>Tiempo que pasará solo</mat-label>
-                        <input matInput formControlName="tiempoSolo">
-                    </mat-form-field>
-                </div>
-
-                <div class="derecha">
-                    <mat-form-field>
-                        <mat-label>Realización de Seguimiento</mat-label>
-                        <input matInput formControlName="seguimiento">
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="container-row1">
-                <div>
-                    <mat-form-field class="ref">
-                        <mat-label>En caso de viaje</mat-label>
-                        <textarea matInput formControlName="accionViaje" maxlength="150"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
-
-
-            <div class="container-row1">
-                <div>
-                    <mat-form-field class="ref">
-                        <mat-label>En caso de no poder tenerlo más</mat-label>
-                        <textarea matInput formControlName="accionImpedimento" maxlength="150"></textarea>
-                    </mat-form-field>
-                </div>
-            </div>
-
-        </form>
-    </div>
-
-    <div *ngIf="faltaAceptar()">
-        <div class="container-btn">
-            <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading" style="margin-right: 3px;" type="button"
-                (click)="rechazarSolicitud()">Rechazar</a>
-            <a mat-raised-button class="button" id="btnRegistro" type="button" (click)="aceptarSolicitud()"
-                *ngIf="!isLoading">Aceptar</a>
-            <a mat-raised-button *ngIf="isLoading" class="button loading" type="button" id="btncuenta">
-                <img class=logo src="../../assets/images/loading.gif" /></a>
+            </section>
         </div>
-    </div>
-    <div *ngIf="faltaConfirmar()">
-        <div class="container-btn">
-            <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading" style="margin-right: 3px;" type="button"
-                (click)="rechazarSolicitudAprobada()">Rechazar</a>
-            <a mat-raised-button class="button" id="btnRegistro" type="button" (click)="confirmarSolicitud()"
-                *ngIf="!isLoading">Confirmar</a>
-
-            <a mat-raised-button *ngIf="isLoading" class="button loading" type="button" id="btncuenta">
-                <img class=logo src="../../assets/images/loading.gif" /></a>
-        </div>
-    </div>
-    <div class="container-row1" *ngIf="rechazoSol">
-        <div>
-            <br>
-            <br>
-            <mat-form-field class="ref">
-                <mat-label>Agregar Comentario</mat-label>
-                <input matInput formControlName="comentario" placeholder="comentario" class="form-control"
-                    maxlength="150">
-            </mat-form-field>
-        </div>
-    </div>
-
+    </body>
 </mat-dialog-content>
