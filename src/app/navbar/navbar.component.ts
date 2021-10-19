@@ -14,7 +14,7 @@ import { VisualizacionSolicitudesService } from 'src/services/visualizacion-soli
 import { ThrowStmt } from '@angular/compiler';
 import { MatDialog } from '@angular/material/dialog';
 import { VisualizacionSolicitudComponent } from '../visualizacion-solicitud/visualizacion-solicitud.component';
-
+import { VisualizacionSolicitudProviComponent } from '../visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
 
 
 
@@ -102,7 +102,7 @@ showNotifications(){
 
 async abrirNotificacion(notificacion: Notificacion){
   this.marcarLeida(notificacion);
-  if (notificacion.objetoAMostrar == "Adopcion" || notificacion.objetoAMostrar == "Provisorio"){
+  if (notificacion.objetoAMostrar == "Adopcion"){
     
     let solicitud = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
 
@@ -111,8 +111,14 @@ async abrirNotificacion(notificacion: Notificacion){
         solicitud: solicitud,
       }
     });
+  } else if (notificacion.objetoAMostrar == "Provisorio"){
+    let solicitudProvi = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
 
-
+    this.dialog.open(VisualizacionSolicitudProviComponent, {
+      data: {
+        solicitud: solicitudProvi,
+      }
+    });
   }
 }
 
