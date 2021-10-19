@@ -21,6 +21,8 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   dataSolicitante: any;
   dataAnimal: any;
 
+
+
   constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog,private notificacionService: NotificacionService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService, private alertsService: AlertsService) {
   }
 
@@ -31,6 +33,9 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     this.dataSolicitud = dataSolicitud;
     this.dataAnimal = dataAnimal;
     this.dataSolicitante = dataSolicitante;
+    console.log(this.dataSolicitud)
+    console.log(this.dataSolicitante)
+    console.log(this.dataAnimal)
 
     //SolicitudId
     this.idSolicitud = this.data.solicitud.Solicitud._id;
@@ -143,36 +148,32 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
 
   faltaAceptar(){
-    console.log("dataSolicitud")
-    console.log(this.dataAnimal)
-    return(this.dataSolicitud.estadoId == 'Abierto')
-    //&& this.auth.getCurrentUser()._id == this.dataAnimal.responsableId   FALTA AGREGAR ESTO CUANDO EL BACK TRAIGA EL RESPONSABLE ID
+    return (this.dataSolicitud.estadoId == 'Abierta' && this.auth.getCurrentUser()._id == this.dataAnimal.responsableId)
   }
 
   faltaConfirmar(){
     return(this.dataSolicitud.estadoId == 'Aprobado Por Responsable' && this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
   }
 
-  async aceptarSolicitud(){
+  async aceptarSolicitud() {
     this.isLoading = true;
-
-    await this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    console.log(this.data.solicitud.Animales.nombreMascota +" "+ this.idSolicitud +' '+ this.data.solicitud.solicitanteId)
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
       this.data = dataProvi;
-      
-      //this.notificacionService.notificarConfirmacionProvisorioAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solicitanteId ,this.auth.getToken());    
-    this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result)=> window.location.href='/solicitudes')
-    , () => { 
-      this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
-      this.isLoading = false;
-    }
-  })
+      this.notificacionService.notificarConfirmacionProvisorioAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
+      this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
+        , () => {
+          this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
+          this.isLoading = false;
+        }
+    })
   }
 
   async rechazarSolicitud(){
     this.isLoading = true;
-    await this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+      this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      //this.notificacionService.notificarCancelacionProvisorioAParticular(this.data.solicitud.Animales.nombreMascota, this.idSolicitud, this.data.solicitud.solicitanteId ,this.auth.getToken());    
+      this.notificacionService.notificarCancelacionProvisorioAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken());    
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
       , () => { 
         this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
@@ -184,12 +185,25 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
     async confirmarSolicitud(){
       this.isLoading = true;
-      await this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+        this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
         this.data = dataProvi;
-        //this.notificacionService.notificarConfirmacionProvisorioACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre+' '+this.dataSolicitante.apellido, this.idSolicitud, this.data.solicitud.solicitanteId ,this.auth.getToken());    
+        this.notificacionService.notificarConfirmacionProvisorioACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre+' '+this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId ,this.auth.getToken());    
       this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result)=> window.location.href='/solicitudes')
       , () => { 
         this.alertsService.errorMessage("En estos momentos no se puede confirmar la solicitud");
+        this.isLoading = false;
+      }
+    })
+    }
+
+    async rechazarSolicitudAprobada(){
+      this.isLoading = true;
+        this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+        this.data = dataProvi;
+        this.notificacionService.notificarCancelacionProvisorioACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre+' '+this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId ,this.auth.getToken());    
+      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
+      , () => { 
+        this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
         this.isLoading = false;
       }
     })

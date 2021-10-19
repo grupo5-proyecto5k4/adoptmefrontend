@@ -18,6 +18,8 @@ import { AdministrarRecomendacionesComponent } from './pages/administrar-recomen
 import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
+import { CenterProfileComponent } from './center-profile/center-profile.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 
 const routes: Routes = [
   {
@@ -105,6 +107,14 @@ const routes: Routes = [
     component: ListadoSolicitudesComponent
   },
   {
+    path: 'micentro',
+    component: CenterProfileComponent
+  },
+  {
+    path: 'registrar-mascota',
+    component: NuevaMascotaComponent
+  },
+  {
     path: '', redirectTo: '/landing', pathMatch: 'full'
   },
   //La ruta comodín '**' siempre debe ser la última del listado.
@@ -112,6 +122,9 @@ const routes: Routes = [
     path: '**',
     component: NotFoundComponent
   },
+
+
+  
 
 ];
 

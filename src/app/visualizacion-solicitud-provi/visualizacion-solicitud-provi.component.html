@@ -226,7 +226,7 @@
     </div>
     <div class="container-btn" *ngIf="faltaConfirmar()">
         <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading" style="margin-right: 3px;" type="button"
-            (click)="rechazarSolicitud()">Rechazar</a>
+            (click)="rechazarSolicitudAprobada()">Rechazar</a>
         <a mat-raised-button class="button" id="btnRegistro" type="button" (click)="confirmarSolicitud()" *ngIf="!isLoading">Confirmar</a>
         
         <a mat-raised-button *ngIf="isLoading" class="button loading"

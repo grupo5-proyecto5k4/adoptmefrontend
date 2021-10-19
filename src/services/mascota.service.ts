@@ -26,24 +26,6 @@ registrarVacunas(listaVacunas: any[]): Observable <any[]> {
   updateNotificacion(notificacion: Notificacion, token:string): Promise <any> {
     return this.httpClient.put(this.api + '/notificacion/' + notificacion._id, notificacion ,{ headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
-  
-  notificarSolicitudAdopcion(coleccion: String, nombreMascota:String, objetoId: string, token:string): Observable <any>{
-    let notificacion: Notificacion;
-    notificacion.nombreNotificacion = "Solicitud de adopción";
-    notificacion.descripcion = nombreMascota+" ha recibido una nueva solicitud de adopción";
-    notificacion.objetoAMostrar = "Adopcion";
-    notificacion.objetoAMostrarId = objetoId;
-    return this.httpClient.post<Notificacion>(this.api + '/notificacion/', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) });
-  }
-
-  notificarSolicitudProvisorio(nombreMascota:String, objetoId: string, token:string): Observable <any>{
-    let notificacion: Notificacion;
-    notificacion.nombreNotificacion = "Solicitud de provisorio";
-    notificacion.descripcion = nombreMascota+" ha recibido una solicitud de provisorio";
-    notificacion.objetoAMostrar = "Provisorio";
-    notificacion.objetoAMostrarId = objetoId;
-    return this.httpClient.post<Notificacion>(this.api + '/notificacion/', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) });
-  }
 
   async getVacunas(idMascota: string): Promise <any[]> {
     return this.httpClient.get<any[]>(this.api + '/vacunas/filtrarVacunaAnimal/'+idMascota).toPromise();
