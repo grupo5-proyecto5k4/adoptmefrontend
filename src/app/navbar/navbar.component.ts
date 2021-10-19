@@ -60,113 +60,113 @@ export class NavbarComponent {
     if (this.isLogued()) {
       this.consultarNotificaciones();
     }
-   // setInterval(() => {    DESCOMENTAR ESTAS DOS LINEAS PARA QUE FUNCIONEN LAS NOTIFICACIONES DE NUEVO
-   //     this.consultarNotificaciones();
-   // }, 5000);
+    setInterval(() => {
+      this.consultarNotificaciones();
+    }, 5000);
+  }
+
+
+
+
+
+
+  async consultarNotificaciones() {
+    let nuevasNotificaciones = await this.notificacionService.getNotificaciones(this.authservice.getToken())
+    if (nuevasNotificaciones.length > this.notificaciones.length) {
+      this.notificaciones = nuevasNotificaciones;
+      let cantNotifNoLeidas = 0;
+      for (let i = 0; i < this.notificaciones.length; i++) {
+        if (nuevasNotificaciones[i].leida == 0) {
+          cantNotifNoLeidas++;
+        }
+      }
+
+      this.cantNotifNoLeidas = cantNotifNoLeidas;
+    }
+  }
+
+  isSignupOptions() {
+    return (this.router.url == '/opciones-de-registro');
+
+  }
+
+  showNotifications() {
+    if (this.mostrarNotificaciones) {
+      this.mostrarNotificaciones = false;
+    }
+    else {
+      this.mostrarNotificaciones = true;
     }
 
-  
+  }
 
+  async abrirNotificacion(notificacion: Notificacion) {
+    this.marcarLeida(notificacion);
+    if (notificacion.objetoAMostrar == "Adopcion") {
 
+      let solicitud = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
 
+      this.dialog.open(VisualizacionSolicitudComponent, {
+        data: {
+          solicitud: solicitud,
+        }
+      });
+    } else if (notificacion.objetoAMostrar == "Provisorio") {
+      let solicitudProvi = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
 
-  async consultarNotificaciones(){
-  let nuevasNotificaciones = await this.notificacionService.getNotificaciones(this.authservice.getToken())
-  if (nuevasNotificaciones.length > this.notificaciones.length) {
-    this.notificaciones = nuevasNotificaciones;
-    let cantNotifNoLeidas = 0;
-    for (let i = 0; i < this.notificaciones.length; i++) {
-      if (nuevasNotificaciones[i].leida == 0) {
-        cantNotifNoLeidas ++;
-      }
+      this.dialog.open(VisualizacionSolicitudProviComponent, {
+        data: {
+          solicitud: solicitudProvi,
+        }
+      });
     }
-
-    this.cantNotifNoLeidas = cantNotifNoLeidas;
-  }
-}
-
-isSignupOptions(){
-  return (this.router.url == '/opciones-de-registro');
-
-}
-
-showNotifications(){
-  if (this.mostrarNotificaciones) {
-    this.mostrarNotificaciones = false;
-  }
-  else {
-    this.mostrarNotificaciones = true;
   }
 
-}
 
-async abrirNotificacion(notificacion: Notificacion){
-  this.marcarLeida(notificacion);
-  if (notificacion.objetoAMostrar == "Adopcion"){
-    
-    let solicitud = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
 
-    this.dialog.open(VisualizacionSolicitudComponent, {
-      data: {
-        solicitud: solicitud,
-      }
-    });
-  } else if (notificacion.objetoAMostrar == "Provisorio"){
-    let solicitudProvi = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
 
-    this.dialog.open(VisualizacionSolicitudProviComponent, {
-      data: {
-        solicitud: solicitudProvi,
-      }
-    });
+  async marcarLeida(notificacion: Notificacion) {
+    if (notificacion.leida == 0) {
+      notificacion.leida = 1;
+      this.cantNotifNoLeidas--;
+      let notificacionLeida: Notificacion = { _id: notificacion._id, leida: 1, nombreNotificacion: notificacion.nombreNotificacion, descripcion: notificacion.descripcion };
+      await this.notificacionService.updateNotificacion(notificacionLeida, this.authservice.getToken())
+    }
+    //acá va el código o la llamada a la función que abra el modal o página en base al tipo de objeto que se esté abriendo
   }
-}
 
 
-
-
-async marcarLeida(notificacion: Notificacion){
-  if (notificacion.leida == 0) {
-    notificacion.leida = 1;
-    this.cantNotifNoLeidas --;
-    let notificacionLeida: Notificacion = { _id: notificacion._id, leida: 1, nombreNotificacion: notificacion.nombreNotificacion, descripcion: notificacion.descripcion };
-    await this.notificacionService.updateNotificacion(notificacionLeida, this.authservice.getToken())
+  isInicioSesion() {
+    return (this.router.url == '/inicio-sesion');
   }
-  //acá va el código o la llamada a la función que abra el modal o página en base al tipo de objeto que se esté abriendo
-}
 
-
-isInicioSesion(){
-  return (this.router.url == '/inicio-sesion');
-}
-
-isLogued(){
-  return (this.profile !== null && this.profile !== undefined)
-}
-
-scrollTop(){
-  document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0)
-}
-
-isParticular(){
-  return (this.profile == '1')
-}
-
-isRescatist(){
-  return (this.profile == '2')
-}
-
-isAdmin(){
-  return (this.profile == '0')
-}
-
-goToProfile(){
-  if (this.currentUser.tipoUsuario == "1") {
-    this.router.navigate(['/miperfil']);
-  } else if (this.currentUser.tipoUsuario == "2") {
-    this.router.navigate(['/micentro']);
-  } else {
-    this.router.navigate(['/perfiladmin']);
+  isLogued() {
+    return (this.profile !== null && this.profile !== undefined)
   }
-}
+
+  scrollTop() {
+    document.getElementsByTagName('mat-sidenav-content')[0].scrollTo(0, 0)
+  }
+
+  isParticular() {
+    return (this.profile == '1')
+  }
+
+  isRescatist() {
+    return (this.profile == '2')
+  }
+
+  isAdmin() {
+    return (this.profile == '0')
+  }
+
+  goToProfile() {
+    if (this.currentUser.tipoUsuario == "1") {
+      this.router.navigate(['/miperfil']);
+    } else if (this.currentUser.tipoUsuario == "2") {
+      this.router.navigate(['/micentro']);
+    } else {
+      this.router.navigate(['/perfiladmin']);
+    }
+  }
 }
