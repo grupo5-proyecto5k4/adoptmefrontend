@@ -20,6 +20,7 @@ import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solic
 import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
+import { DonacionesComponent} from './donaciones/donaciones.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,7 @@ const routes: Routes = [
   },
   {
     path: 'donaciones',
-    component: UnderConstructionComponent
+    component: DonacionesComponent
   },
   {
     path: 'configuraciones',
