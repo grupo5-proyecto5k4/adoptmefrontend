@@ -155,10 +155,10 @@ export class VerMascotaComponent implements OnInit {
   }
 
   esParticular(){
-    console.log("this.profile", this.profile); 
     if (this.profile == "1"){
-      console.log("mascota", this.data.mascota);
-      return true;
+      if (this.localStorageService.getUser()._id === this.data.mascota.responsableId){
+        return false;
+      } else {return true;}
     } else if (this.profile == "2"){
       return false;
     } else if (this.profile == "3"){

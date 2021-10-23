@@ -15,4 +15,8 @@ export class LocalStorageService {
     getProfile() {
         return JSON.parse(localStorage.getItem("Profile"));
     }
+
+    getUser() {
+        return JSON.parse(localStorage.getItem("currentUser"));
+    }
 }
