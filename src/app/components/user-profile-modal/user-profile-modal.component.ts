@@ -43,12 +43,17 @@ export class UserProfileModalComponent implements OnInit {
     this.currentUser = this.data.User;
     console.log(this.currentUser)
     
-    this.editUser.getDonacion(this.currentUser._id).subscribe((don)=>{
+   let donacion = this.editUser.getDonacion(this.currentUser._id).subscribe((don)=>{
       this.ProfileForm.controls['banco'].setValue(don.banco);
       this.ProfileForm.controls['cbu'].setValue(don.cbu);
       this.ProfileForm.controls['alias'].setValue(don.alias);
     })
 
+    if(donacion==undefined){
+      this.ProfileForm.controls['banco'].setValue("No especificado");
+      this.ProfileForm.controls['cbu'].setValue("No especificado");
+      this.ProfileForm.controls['alias'].setValue("No especificado");
+    }
     //en base al perfil, los datos que se visualizan
     //particular:
     if (this.currentUser.facebook == null) {
