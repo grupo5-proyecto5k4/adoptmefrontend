@@ -132,7 +132,7 @@
 
 
 
-                      <div class="container-row1" id="botones">
+                      <div class="container-row1" id="botones" *ngIf="esParticular()">
                         <div style="margin-left:auto;margin-right: auto;">
                           <a mat-raised-button style="padding: 10px;" class="button cancelar btnRechazar"
                             type="button" mat-dialog-close>Cancelar</a>
@@ -142,6 +142,11 @@
                             style="padding: 10px;" (click)="openProvisorioForm()" *ngIf="accion === 0">Ser
                             Provisorio</a>
                         </div>
+                      </div>
+
+                      <div class="centrado espacio" *ngIf="indicarLogueo()">
+                          <button mat-button type="button" color="accent" class="btnLogout" *ngIf="accion === 1" (click)="goToSesion()">Iniciá sesión para solicitar su adopción</button>
+                          <button mat-button type="button" color="accent" class="btnLogout" *ngIf="accion === 0" (click)="goToSesion()">Iniciá sesión para solicitar su provisorio</button>
                       </div>
 
                     </form>
