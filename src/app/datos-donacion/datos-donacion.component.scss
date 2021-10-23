@@ -51,7 +51,10 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    margin-top: 50px;
+    font-size: 200% !important;
+    font-family: 'Times New Roman';
+    font-style: bold;
+    margin: 50px 0px 0px 30px;
 }
 
 .container-rowcenter{
@@ -132,6 +135,7 @@ button:disabled{
         flex-direction:row;
         text-align: center;
         justify-content: space-between;
+        text-align: center;
     }
     
     .derecha{
@@ -153,7 +157,10 @@ button:disabled{
     
 @media (max-width: 540px){
     .container-row1{
-        flex-direction: column;}
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
 
     .derecha{
         margin-left: 0px;}
@@ -210,11 +217,3 @@ button:disabled{
     margin-top: 5%;
     padding-bottom: 2% !important;
     }
-
-.subtitulo{
-    font-size: 200% !important;
-    font-family: 'Times New Roman';
-    font-style: bold;
-    margin: 50px 0px 20px 30px;
-    text-align: center;
-}  
