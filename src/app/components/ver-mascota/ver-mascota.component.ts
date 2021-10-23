@@ -46,6 +46,7 @@ export class VerMascotaComponent implements OnInit {
   ngOnInit() {
 
     this.profile = this.localStorageService.getProfile();
+    //this.usuarioId = this.localStorageService.
 
     //obtengo el usuario
     this.mascota = this.data.mascota;
@@ -161,8 +162,22 @@ export class VerMascotaComponent implements OnInit {
     } else if (this.profile == "2"){
       return false;
     } else if (this.profile == "3"){
-      return false
+      return false;
+    } else if (this.profile == null){
+      return false;
     }
   }
 
+  indicarLogueo(){
+    if (this.profile == null){
+      return true;
+    } else {return false;}
+  }
+
+  goToSesion(){
+    this.dialog.closeAll();
+    this.router.navigate(['/inicio-sesion']);
+  }
+
+  
 }
