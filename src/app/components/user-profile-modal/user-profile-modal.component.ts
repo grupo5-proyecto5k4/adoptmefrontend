@@ -42,6 +42,12 @@ export class UserProfileModalComponent implements OnInit {
     //obtengo el usuario
     this.currentUser = this.data.User;
     console.log(this.currentUser)
+    
+    this.editUser.getDonacion(this.currentUser._id).subscribe((don)=>{
+      this.ProfileForm.controls['banco'].setValue(don.banco);
+      this.ProfileForm.controls['cbu'].setValue(don.cbu);
+      this.ProfileForm.controls['alias'].setValue(don.alias);
+    })
 
     //en base al perfil, los datos que se visualizan
     //particular:
@@ -105,9 +111,9 @@ export class UserProfileModalComponent implements OnInit {
         fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true}),
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
        
-        banco: new FormControl({ value:'', disabled: false },[Validators.maxLength(30)]),
-        cbu: new FormControl({ value: '', disabled: false },[Validators.maxLength(150)]),
-        alias: new FormControl({ value: '', disabled: false },[Validators.maxLength(30)]),
+        banco: new FormControl({ value: this.ProfileForm.controls['banco'], disabled: false },[Validators.maxLength(30), Validators.required,Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+        cbu: new FormControl({ value: this.ProfileForm.controls['cbu'], disabled: false },[Validators.maxLength(22),Validators.required,Validators.pattern('[0-9]{22}')]),
+        alias: new FormControl({ value: this.ProfileForm.controls['alias'], disabled: false },[Validators.maxLength(30), Validators.required,Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
        
         calle: new FormControl({ value:this.currentUser.Direccion.calle, disabled: true }),
         altura: new FormControl({ value:this.currentUser.Direccion.numero, disabled: true}),
@@ -129,14 +135,14 @@ export class UserProfileModalComponent implements OnInit {
         dni: new FormControl({value:'', disabled: true }),
         fechaNacimiento: new FormControl({ value: '', disabled: true }),
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
-        calle: new FormControl({ value: '', disabled: true }),
-        altura: new FormControl({ value: '', disabled: true }),
-        localidad: new FormControl({ value: '', disabled: true }),
-        barrio: new FormControl({ value: '', disabled: true }),
-        referencia: new FormControl({ value: '', disabled: true }),
-        banco: new FormControl({ value:'', disabled: true }),
-        cbu: new FormControl({ value: '', disabled: true }),
-        alias: new FormControl({ value: '', disabled: true }),
+        calle: new FormControl({ value:this.currentUser.Direccion.calle, disabled: true }),
+        altura: new FormControl({ value: this.currentUser.Direccion.numero, disabled: true }),
+        localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
+        barrio: new FormControl({ value: this.currentUser.Direccion.barrio, disabled: true }),
+        referencia: new FormControl({ value: this.currentUser.Direccion.referencia, disabled: true }),
+        banco: new FormControl({ value: this.ProfileForm.controls['banco'], disabled: true }),
+        cbu: new FormControl({ value:  this.ProfileForm.controls['cbu'], disabled: true }),
+        alias: new FormControl({ value:  this.ProfileForm.controls['alias'], disabled: true }),
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
         instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
@@ -155,6 +161,14 @@ export class UserProfileModalComponent implements OnInit {
 
     this.inicializarFormulario();
         
+  }
+
+  cancelar(){
+    this.enEdicion=false;
+    this.editarDatos=false;
+    this.esconder=true;
+
+    this.inicializarFormulario();
   }
 
   guardar(){
