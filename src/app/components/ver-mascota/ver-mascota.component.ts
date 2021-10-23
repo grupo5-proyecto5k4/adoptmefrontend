@@ -18,6 +18,7 @@ import { Mascota } from 'src/models/IMascota';
 import { UserFormComponent } from '../user-form/user-form.component';
 import { MascotaService } from 'src/services/mascota.service';
 import { SolicitudProvisorioComponent } from 'src/app/solicitud-provisorio/solicitud-provisorio.component';
+import { LocalStorageService } from 'src/services/local-storage.service';
 
 
 @Component({
@@ -36,12 +37,15 @@ export class VerMascotaComponent implements OnInit {
   fotos: any = [];
   fotoVisualizar: any = [];
   accion: any;
+  profile: any;
 
-  constructor(private authservice: AuthService, private mascotaService: MascotaService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private alertsService: AlertsService, private router: Router) {
+  constructor(private authservice: AuthService, private mascotaService: MascotaService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
 
   }
 
   ngOnInit() {
+
+    this.profile = this.localStorageService.getProfile();
 
     //obtengo el usuario
     this.mascota = this.data.mascota;
@@ -143,6 +147,22 @@ export class VerMascotaComponent implements OnInit {
         mascota: this.data.mascota,
       }
     })
+  }
+
+  esResponsable(){
+    console.log("Repsonsable");
+  }
+
+  esParticular(){
+    console.log("this.profile", this.profile); 
+    if (this.profile == "1"){
+      console.log("mascota", this.data.mascota);
+      return true;
+    } else if (this.profile == "2"){
+      return false;
+    } else if (this.profile == "3"){
+      return false
+    }
   }
 
 }
