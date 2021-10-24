@@ -71,7 +71,7 @@ export class NotificacionService {
 
   notificarCancelacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Cancelación de adopción";
+    notificacion.nombreNotificacion = "Rechazo de adopción";
     notificacion.descripcion = "La solicitud de adopción de "+nombreMascota+" ha sido rechazada";
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
@@ -81,9 +81,29 @@ export class NotificacionService {
 
   notificarCancelacionProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Cancelación de provisorio";
+    notificacion.nombreNotificacion = "Rechazo de provisorio";
     notificacion.descripcion = "La solicitud de provisorio de "+nombreMascota+" ha sido rechazada";
     notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
+
+  notificarBajaDeProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de provisorio";
+    notificacion.descripcion = "El provisorio de "+nombreMascota+" ha sido finalizado por su responsable";
+    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
+
+  notificarBajaDeAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de adopción";
+    notificacion.descripcion = "La tenencia de "+nombreMascota+" ha sido finalizada por su responsable";
+    notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
     return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
