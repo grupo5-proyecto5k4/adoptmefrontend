@@ -51,7 +51,7 @@
 </div>
 
 <div class="margenes container-publicaciones">
-  <mat-card class="card-publicacion" *ngFor=" let pet of mascotasPubAdopcion">
+  <mat-card class="card-publicacion" *ngFor="let pet of obs | async">
     <mat-card-header>
       <mat-card-title class="card-title sin-overflow">{{pet.nombreMascota}}</mat-card-title>
       <mat-card-subtitle>{{pet.sexo}} | {{pet.edad}}</mat-card-subtitle>
@@ -71,3 +71,5 @@
 <div class="margenes container-publicaciones" *ngIf="mascotasPubAdopcion.length == 0 && filtroAplicado">
   <h2>No se han encontrado mascotas que coincidan con la búsqueda realizada...</h2>
 </div>
+
+<mat-paginator [pageSizeOptions]="[4, 8, 16, 32]"></mat-paginator>

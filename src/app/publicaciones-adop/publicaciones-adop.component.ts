@@ -7,14 +7,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { Mascota } from 'src/models/IMascota';
 import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-export interface Pet {
-  name: string;
-  age: number;
-  esCachorro: string;
-  sexo: string;
-}
-
-
 @Component({
   selector: 'app-publicaciones-adop',
   templateUrl: './publicaciones-adop.component.html',
@@ -29,29 +21,31 @@ export class PublicacionesAdopComponent implements OnInit {
   gatoSeleccionado = false;
   filtroAplicado = false;
 
-  /*
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
-  dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
-*/
+  dataSource = new MatTableDataSource<any>();
+
   constructor(public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
 
     this.iniciarForm();
-    /*
-    this.changeDetectorRef.detectChanges();
-    this.dataSource.paginator = this.paginator;
-    this.obs = this.dataSource.connect();
-    this.paginator._intl.itemsPerPageLabel = "Animales por página";
-    */ 
+
+
     // "En adopcion"
     this.registroMascotasService.getMascotas(1).subscribe(dataOne => {
 
       // "En adopcion y en provisorio"
       this.registroMascotasService.getMascotas(0).subscribe(dataBoth => {
-        this.unirMascotas(dataBoth, dataOne)
+        this.unirMascotas(dataBoth, dataOne);
+        this.changeDetectorRef.detectChanges();
+        this.dataSource = new MatTableDataSource<any>(this.mascotasPubAdopcion);
+        this.obs = this.dataSource.connect();
+        this.paginator._intl.itemsPerPageLabel = "Animales por página";
+        
+        this.dataSource.paginator = this.paginator;
       })
     },
     err => {
@@ -59,13 +53,13 @@ export class PublicacionesAdopComponent implements OnInit {
     }
     )
   }
-  /*
+  
   ngOnDestroy() {
     if (this.dataSource) { 
       this.dataSource.disconnect(); 
     }
   }
-  */
+  
 
   changeTipoAnimal(){
     if (this.FilterForm.controls.tipoMascota.value == 1){
