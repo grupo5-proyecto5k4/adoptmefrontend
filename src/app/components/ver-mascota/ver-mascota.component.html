@@ -145,10 +145,9 @@
                       </div>
 
                       <div class="centrado espacio" *ngIf="indicarLogueo()">
-                          <button mat-button type="button" color="accent" class="btnLogout" *ngIf="accion === 1" (click)="goToSesion()">Iniciá sesión para solicitar su adopción</button>
-                          <button mat-button type="button" color="accent" class="btnLogout" *ngIf="accion === 0" (click)="goToSesion()">Iniciá sesión para solicitar su provisorio</button>
+                        <a (click)="goToSesion()"><u class="example-margin-btn" *ngIf="accion === 1">Iniciá sesión para solicitar su adopción</u></a>
+                        <a (click)="goToSesion()"><u class="example-margin-btn" *ngIf="accion === 0">Iniciá sesión para solicitar su provisorio</u></a>
                       </div>
-
                     </form>
                   </div>
                 </div>
