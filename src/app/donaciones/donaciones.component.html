@@ -1,7 +1,7 @@
 
 <h3 class="titulo">Donaciones</h3>
 
-<p class="subtitulo">Encontrá la información para colaborar con los Centros Rescatistas de la ciudad, ¡Entre todos hacemos la diferencia!</p>
+<p class="subtitulo">Encontrá la información para colaborar con los Centros Rescatistas de la ciudad, ¡entre todos hacemos la diferencia!</p>
 
 
     
@@ -12,8 +12,9 @@
             <div class="columna1">
                 <mat-card-header>
                     <mat-card-title class="card-title">
-                        <div class="sin-overflow">Centro {{centro.Nombre}}</div>
+                        <div class="sin-overflow">Centro {{centro.nombres}}</div>
                     </mat-card-title>
+                    <mat-card-subtitle>Barrio: {{centro.Direccion.barrio}}</mat-card-subtitle>
                 </mat-card-header>
             </div>
             <div class="columna2">

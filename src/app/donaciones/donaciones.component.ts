@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatosDonacionComponent } from '../datos-donacion/datos-donacion.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CentroDonacionesService } from 'src/services/centro-donaciones.service';
 
 @Component({
   selector: 'app-donaciones',
@@ -9,24 +10,18 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class DonacionesComponent implements OnInit {
 
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private CentroDonacionesService: CentroDonacionesService) {}
 
   centros:any;
 
   ngOnInit(): void {
-    this.centros = [
-      {
-        "Nombre":"Pepe",
-      "Banco": "Frances"
-      },
-      {
-          "Nombre":"CR Mili",
-        "Banco": "Galicia"
-      },
-    ]
-  }
+    this.CentroDonacionesService.getCentrosDonaciones().subscribe(data => {
+      console.log("DATA", data);
+      this.centros = data;
+  })}
 
   openInfo(centro) {
     this.dialog.open(DatosDonacionComponent, { data: { centrores: centro } });
   }
 }
+

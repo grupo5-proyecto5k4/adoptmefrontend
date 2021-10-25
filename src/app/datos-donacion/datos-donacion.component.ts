@@ -15,16 +15,21 @@ export class DatosDonacionComponent implements OnInit {
   constructor( @Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private auth: AuthService){}
 
   ngOnInit(): void {
-    console.log("CENTROOO: ", this.data);
+    if (this.data.centrores.facebook == null) {
+      this.data.centrores.facebook = "No especificado"
+    };
+    if (this.data.centrores.instagram == null) {
+      this.data.centrores.instagram = "No especificado"
+    };
 
     this.SolicitudForm = new FormGroup({
-      banco: new FormControl({value: this.data.centrores.Nombre, disabled:true}),
-      cbu: new FormControl({ value: this.data.centrores.Nombre, disabled: true}),
-      alias: new FormControl({value: this.data.centrores.Nombre, disabled: true}),
-      telefono: new FormControl({value: this.data.centrores.Nombre, disabled:true}),
-      email: new FormControl({value: this.data.centrores.Nombre, disabled:true}),
-      instagram: new FormControl({value: this.data.centrores.Nombre, disabled:true}),
-      facebook: new FormControl({value: this.data.centrores.Nombre, disabled:true})
+      banco: new FormControl({value: this.data.centrores.banco, disabled:true}),
+      cbu: new FormControl({ value: this.data.centrores.cbu, disabled: true}),
+      alias: new FormControl({value: this.data.centrores.alias, disabled: true}),
+      telefono: new FormControl({value: this.data.centrores.numeroContacto, disabled:true}),
+      email: new FormControl({value: this.data.centrores.correoElectronico, disabled:true}),
+      instagram: new FormControl({value: this.data.centrores.instagram, disabled:true}),
+      facebook: new FormControl({value: this.data.centrores.facebook, disabled:true})
     });  
   }
 
