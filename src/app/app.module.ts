@@ -57,6 +57,8 @@ import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-p
 import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
 import { ChartsModule } from 'ng2-charts';
 import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
+import { DonacionesComponent } from './donaciones/donaciones.component';
+import { DatosDonacionComponent } from './datos-donacion/datos-donacion.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +86,8 @@ import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-
     SolicitudProvisorioComponent,
     ReportesCentroComponent,
     VisualizacionSolicitudProviComponent,
+    DonacionesComponent,
+    DatosDonacionComponent,
     //PublicacionesProvComponent
 
   ],

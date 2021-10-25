@@ -1,0 +1,220 @@
+#btncruz{
+    color:#B80092;
+    cursor: pointer;
+    float:right;
+    border-color:transparent;
+    background-color: transparent;
+    outline: none;
+    border-radius: 3px;
+    line-height: 24px;
+    width: 32px;
+    font-size: 150%;
+}
+
+.titulo{
+    display: flex;
+    flex-direction: row;
+    font-size: 200% !important;
+    font-family: 'Times New Roman';
+    font-style: bold;
+    margin-top: 20px;
+    }
+
+.container-titulo{
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.centrado{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.centrado-titulo{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.centrado-titulo-pri{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 200% !important;
+    font-family: 'Times New Roman';
+    font-style: bold;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container-rowcenter{
+    display:flex;
+    flex-direction:row;
+    text-align: center;
+    justify-content: space-between;
+}
+
+// Scroll
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+    }
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 15px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    margin:3px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+.container-btn{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+button:disabled{
+    cursor: not-allowed;
+}
+
+#btnRegistro{
+    color: #EBEEF1;
+    background-color: #c50fa1;
+    cursor: pointer;
+}
+
+
+#btncruz{
+    color:#B80092;
+    cursor: pointer;
+    float:right;
+    border-color:transparent;
+    background-color: transparent;
+    outline: none;
+    border-radius: 3px;
+    line-height: 24px;
+    width: 32px;
+    font-size: 150%;
+}
+
+.logo{
+    margin-left: -5px;
+    width: 40px;
+    height: 40px;
+    margin-top:-20px;
+}
+
+// MEDIAS QUERIES
+
+@media (min-width: 541px){ 
+    .container-row1{
+        display:flex;
+        flex-direction:row;
+        text-align: center;
+        justify-content: space-between;
+        text-align: center;
+    }
+    
+    .derecha{
+        margin-left: 20px;
+    }
+    
+    .ref{
+        width: 510px;
+    }
+    
+    mat-form-field{
+        width: 245px;
+    }
+    
+    textarea{
+        width: 510px;
+    }
+    }
+    
+@media (max-width: 540px){
+    .container-row1{
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .derecha{
+        margin-left: 0px;}
+}
+
+
+
+@media (max-width: 599px){
+
+    .card-container{
+        width: 95% !important;
+        }
+  
+  }
+  
+  
+  
+  @media (min-width: 600px) and (max-width: 1099px)
+  {
+    
+    .card-container{
+        top: 43.5% !important;
+        width: 90% !important;
+        }
+    
+  }
+  
+  
+  @media (min-width: 1100px){
+  
+    .card-container{
+        top: 40% !important;
+        width: 50% !important;
+        }
+  }
+  
+
+
+  .card-container{
+    width: 50%;
+    min-height: 60%;
+    height: auto;
+    border-radius: 15px;
+    position: absolute;
+    top: 46.5%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 1px 10px 1px #000;
+    overflow: hidden;
+    display: inline-block;
+    background: rgb(255, 245, 237);
+    overflow-y: auto !important;
+    max-height: 83%;
+    margin-top: 5%;
+    padding-bottom: 2% !important;
+    }
