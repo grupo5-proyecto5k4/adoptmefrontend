@@ -15,35 +15,35 @@
                 <div class="padding-filtros">
                     <form [formGroup]="FilterForm" *ngIf="FilterForm">
                         <div class="container-filtros">
-                        <div>
-                            <mat-form-field class="example-full-width margenesFiltros filtro">
-                                <mat-label>Sexo</mat-label>
-                                <mat-select formControlName="sexo">
-                                    <mat-option value="Hembra">Hembra</mat-option>
-                                    <mat-option value="Macho">Macho</mat-option>
-                                </mat-select>
-                            </mat-form-field>
+                            <div>
+                                <mat-form-field class="example-full-width margenesFiltros filtro">
+                                    <mat-label>Sexo</mat-label>
+                                    <mat-select formControlName="sexo">
+                                        <mat-option value="Hembra">Hembra</mat-option>
+                                        <mat-option value="Macho">Macho</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field class="example-full-width margenesFiltros filtro"
+                                    (change)="changeTipoAnimal()">
+                                    <mat-label>Tipo de mascota</mat-label>
+                                    <mat-select formControlName="tipoMascota">
+                                        <mat-option value="0">Perro</mat-option>
+                                        <mat-option value="1">Gato</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field class="example-full-width margenesFiltros filtro">
+                                    <mat-label>Tamaño final</mat-label>
+                                    <mat-select formControlName="tamanoFinal">
+                                        <mat-option *ngFor="let tamano of tamanos" value="{{tamano}}">{{tamano}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
                         </div>
-                        <div>
-                            <mat-form-field class="example-full-width margenesFiltros filtro"
-                                (change)="changeTipoAnimal()">
-                                <mat-label>Tipo de mascota</mat-label>
-                                <mat-select formControlName="tipoMascota">
-                                    <mat-option value="0">Perro</mat-option>
-                                    <mat-option value="1">Gato</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <div>
-                            <mat-form-field class="example-full-width margenesFiltros filtro">
-                                <mat-label>Tamaño final</mat-label>
-                                <mat-select formControlName="tamanoFinal">
-                                    <mat-option *ngFor="let tamano of tamanos" value="{{tamano}}">{{tamano}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
                     </form>
                 </div>
                 <div class="botones">
@@ -93,49 +93,49 @@
 
 
         <mat-tab label="No disponibles">
-                        <!--FILTROS-->
-                        <div class="componente-filtros">
-                            <div class="padding-filtros">
-                                <form [formGroup]="FilterForm" *ngIf="FilterForm">
-                                    <div>
-                                        <mat-form-field class="example-full-width margenesFiltros filtro">
-                                            <mat-label>Sexo</mat-label>
-                                            <mat-select formControlName="sexo">
-                                                <mat-option value="Hembra">Hembra</mat-option>
-                                                <mat-option value="Macho">Macho</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                    <div>
-                                        <mat-form-field class="example-full-width margenesFiltros filtro"
-                                            (change)="changeTipoAnimal()">
-                                            <mat-label>Tipo de mascota</mat-label>
-                                            <mat-select formControlName="tipoMascota">
-                                                <mat-option value="0">Perro</mat-option>
-                                                <mat-option value="1">Gato</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                    <div>
-                                        <mat-form-field class="example-full-width margenesFiltros filtro">
-                                            <mat-label>Tamaño final</mat-label>
-                                            <mat-select formControlName="tamanoFinal">
-                                                <mat-option *ngFor="let tamano of tamanos" value="{{tamano}}">{{tamano}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="botones">
-                                <a mat-raised-button color="accent" class="button confirmado"
-                                    style="color: #ffffff; background-color: rgb(133 131 131 / 83%);" type="button" id="confirmado"
-                                    (click)="clean()">Limpiar</a>
-                                <a mat-raised-button color="accent" class="button confirmado"
-                                    style="color: #ffffff; margin-left: 2%;" type="button" id="confirmado"
-                                    (click)="buscarMascotasNoDisponibles()">Buscar</a>
-                            </div>
+            <!--FILTROS-->
+            <div class="componente-filtros">
+                <div class="padding-filtros">
+                    <form [formGroup]="FilterForm" *ngIf="FilterForm">
+                        <div>
+                            <mat-form-field class="example-full-width margenesFiltros filtro">
+                                <mat-label>Sexo</mat-label>
+                                <mat-select formControlName="sexo">
+                                    <mat-option value="Hembra">Hembra</mat-option>
+                                    <mat-option value="Macho">Macho</mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </div>
+                        <div>
+                            <mat-form-field class="example-full-width margenesFiltros filtro"
+                                (change)="changeTipoAnimal()">
+                                <mat-label>Tipo de mascota</mat-label>
+                                <mat-select formControlName="tipoMascota">
+                                    <mat-option value="0">Perro</mat-option>
+                                    <mat-option value="1">Gato</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width margenesFiltros filtro">
+                                <mat-label>Tamaño final</mat-label>
+                                <mat-select formControlName="tamanoFinal">
+                                    <mat-option *ngFor="let tamano of tamanos" value="{{tamano}}">{{tamano}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+                <div class="botones">
+                    <a mat-raised-button color="accent" class="button confirmado"
+                        style="color: #ffffff; background-color: rgb(133 131 131 / 83%);" type="button" id="confirmado"
+                        (click)="clean()">Limpiar</a>
+                    <a mat-raised-button color="accent" class="button confirmado"
+                        style="color: #ffffff; margin-left: 2%;" type="button" id="confirmado"
+                        (click)="buscarMascotasNoDisponibles()">Buscar</a>
+                </div>
+            </div>
 
             <!--PUBLICACIONES-->
             <div class="margenes container-publicaciones">
@@ -164,6 +164,86 @@
                 </mat-card>
                 <div *ngIf="mascotasUsuarioNoDisponibles.length == 0 && !filtroNoDisponibleAplicado">
                     <h2>Por el momento no tienes mascotas que hayan sido adoptadas o estén en provisorio...</h2>
+                </div>
+                <div *ngIf="mascotasUsuarioNoDisponibles.length == 0 && filtroNoDisponibleAplicado">
+                    <h2>No se han encontrado mascotas que coincidan con la búsqueda realizada...</h2>
+                </div>
+            </div>
+        </mat-tab>
+
+
+        <mat-tab label="Tenencia" *ngIf="profile == 1">
+            <!--FILTROS-->
+            <div class="componente-filtros">
+                <div class="padding-filtros">
+                    <form [formGroup]="FilterForm" *ngIf="FilterForm">
+                        <div>
+                            <mat-form-field class="example-full-width margenesFiltros filtro">
+                                <mat-label>Sexo</mat-label>
+                                <mat-select formControlName="sexo">
+                                    <mat-option value="Hembra">Hembra</mat-option>
+                                    <mat-option value="Macho">Macho</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width margenesFiltros filtro"
+                                (change)="changeTipoAnimal()">
+                                <mat-label>Tipo de mascota</mat-label>
+                                <mat-select formControlName="tipoMascota">
+                                    <mat-option value="0">Perro</mat-option>
+                                    <mat-option value="1">Gato</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <mat-form-field class="example-full-width margenesFiltros filtro">
+                                <mat-label>Tamaño final</mat-label>
+                                <mat-select formControlName="tamanoFinal">
+                                    <mat-option *ngFor="let tamano of tamanos" value="{{tamano}}">{{tamano}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </form>
+                </div>
+                <div class="botones">
+                    <a mat-raised-button color="accent" class="button confirmado"
+                        style="color: #ffffff; background-color: rgb(133 131 131 / 83%);" type="button" id="confirmado"
+                        (click)="clean()">Limpiar</a>
+                    <a mat-raised-button color="accent" class="button confirmado"
+                        style="color: #ffffff; margin-left: 2%;" type="button" id="confirmado"
+                        (click)="buscarMascotasNoDisponibles()">Buscar</a>
+                </div>
+            </div>
+
+            <!--PUBLICACIONES-->
+            <div class="margenes container-publicaciones">
+                <mat-card class="card-publicacion" *ngFor=" let pet of mascotasUsuarioNoDisponibles">
+                    <mat-card-header>
+                        <mat-card-title class="card-title">
+                            <div class=primer-renglon>
+                                <div class="sin-overflow">{{pet.nombreMascota}}</div>
+                                <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>
+                            </div>
+                        </mat-card-title>
+                        <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <div class="contenedor-imagen">
+                        <img mat-card-image src={{pet.imagenCard}} alt="Imagen de la mascota" class="imagen">
+                    </div>
+                    <mat-card-content class="card-description">
+                        <div class="sin-overflow-description">{{pet.descripcion}}</div>
+                        <div class="estado-container">
+                            <p class="estado">{{pet.estado}}</p>
+                        </div>
+                    </mat-card-content>
+                    <mat-card-actions>
+                        <button mat-button>EDITAR</button>
+                    </mat-card-actions>
+                </mat-card>
+                <div *ngIf="mascotasUsuarioNoDisponibles.length == 0 && !filtroNoDisponibleAplicado">
+                    <h2>Por el momento no tienes mascotas que adoptadas o en provisorio...</h2>
                 </div>
                 <div *ngIf="mascotasUsuarioNoDisponibles.length == 0 && filtroNoDisponibleAplicado">
                     <h2>No se han encontrado mascotas que coincidan con la búsqueda realizada...</h2>

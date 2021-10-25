@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { LocalStorageService } from 'src/services/local-storage.service';
 
 import { RegistroMascotasService } from 'src/services/registro-mascotas.service';
 import { AuthService } from '../auth.service';
@@ -30,11 +31,13 @@ export class RegistroMascotaComponent implements OnInit {
   filtroDisponibleAplicado = false;
   filtroNoDisponibleAplicado = false;
   countNoDisponibles = 0;
+  profile: any;
 
-  constructor(public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private auth: AuthService) {
+  constructor(public registroMascotasService: RegistroMascotasService,private localStorageService: LocalStorageService, private dialog: MatDialog, private auth: AuthService) {
   }
 
   ngOnInit() {
+    this.profile = this.localStorageService.getProfile();
 
     this.iniciarForm();
 
