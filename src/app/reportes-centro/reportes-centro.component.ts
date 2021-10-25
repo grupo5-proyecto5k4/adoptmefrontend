@@ -26,9 +26,8 @@ export class ReportesCentroComponent implements OnInit {
   minimos:any;
   promedios:any;
   maximos:any;
-
-  graficoPerro: any = {perrosAdoptadosPorSuProvisorio: 0, perrosAdoptadosPorOtro: 0, totalPerrosAdoptados : 0}
-  graficoGato: any = {gatosAdoptadosPorSuProvisorio: 0, gatosAdoptadosPorOtro: 0, totalGatosAdoptados : 0}
+  graficoPerro: any = {perrosCachorrosAdoptadosPorSuProvisorio: 0, perrosAdultosAdoptadosPorSuProvisorio: 0, perrosCachorrosAdoptadosPorOtro: 0, perrosAdultosAdoptadosPorOtro: 0, totalPerrosAdoptados : 0}
+  graficoGato: any = {gatosCachorrosAdoptadosPorSuProvisorio: 0, gatosAdultosAdoptadosPorSuProvisorio: 0, gatosCachorrosAdoptadosPorOtro: 0, gatosAdultosAdoptadosPorOtro: 0, totalGatosAdoptados : 0}
 
   flagNoData: number = 0;
 
@@ -246,27 +245,35 @@ export class ReportesCentroComponent implements OnInit {
     //Datos para el grafico de mascotas adoptadas
     var jsonMascotas = [{
       "tipoMascota":"0",
-      "perrosAdoptadosPorSuProvisorio":15,
-      "perrosAdoptadosPorOtro":15,
-      "totalPerrosAdoptados":15
+      "perrosCachorrosAdoptadosPorSuProvisorio":4,
+      "perrosAdultosAdoptadosPorSuProvisorio":10,
+      "perrosCachorrosAdoptadosPorOtro":5,
+      "perrosAdultosAdoptadosPorOtro":5,
+      "totalPerrosAdoptados":24
       },
       {
         "tipoMascota":"1",
-        "gatosAdoptadosPorSuProvisorio":15,
-        "gatosAdoptadosPorOtro":15,
-        "totalGatosAdoptados":15
+        "gatosCachorrosAdoptadosPorSuProvisorio":15,
+        "gatosAdultosAdoptadosPorSuProvisorio":12,
+        "gatosCachorrosAdoptadosPorOtro":8,
+        "gatosAdultosAdoptadosPorOtro":2,
+        "totalGatosAdoptados":37
         },
       ]
 
 
       for (let x = 0; x < jsonMascotas.length; x++){
         if (jsonMascotas[x].tipoMascota === "0"){
-          this.graficoPerro.perrosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosAdoptadosPorSuProvisorio;
-          this.graficoPerro.perrosAdoptadosPorOtro = jsonMascotas[x].perrosAdoptadosPorOtro;
+          this.graficoPerro.perrosCachorrosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosCachorrosAdoptadosPorSuProvisorio;
+          this.graficoPerro.perrosAdultosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosAdultosAdoptadosPorSuProvisorio;
+          this.graficoPerro.perrosCachorrosAdoptadosPorOtro = jsonMascotas[x].perrosCachorrosAdoptadosPorOtro;
+          this.graficoPerro.perrosAdultosAdoptadosPorOtro = jsonMascotas[x].perrosAdultosAdoptadosPorOtro;
           this.graficoPerro.totalPerrosAdoptados = jsonMascotas[x].totalPerrosAdoptados;
         } else if (jsonMascotas[x].tipoMascota === "1"){
-          this.graficoGato.gatosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosAdoptadosPorSuProvisorio;
-          this.graficoGato.gatosAdoptadosPorOtro = jsonMascotas[x].gatosAdoptadosPorOtro;
+          this.graficoGato.gatosCachorrosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosCachorrosAdoptadosPorSuProvisorio;
+          this.graficoGato.gatosAdultosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosAdultosAdoptadosPorSuProvisorio;
+          this.graficoGato.gatosCachorrosAdoptadosPorOtro = jsonMascotas[x].gatosCachorrosAdoptadosPorOtro;
+          this.graficoGato.gatosAdultosAdoptadosPorOtro = jsonMascotas[x].gatosAdultosAdoptadosPorOtro;
           this.graficoGato.totalGatosAdoptados = jsonMascotas[x].totalGatosAdoptados;
         }
       }
