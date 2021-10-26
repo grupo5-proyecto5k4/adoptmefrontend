@@ -165,8 +165,8 @@ validatePassword() {
       this.ProfileForm = new FormGroup({
         nombres: new FormControl({ value: this.currentUser.nombres, disabled: false },[Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
         apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: false },[Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
-        dni: new FormControl({ value: this.currentUser.dni, disabled: false },[Validators.required, Validators.pattern('[0-9]{7,8}')]),
-        fechaNacimiento: new FormControl({ value: this.currentUser.fechaNacimiento, disabled: false},[Validators.required]),
+        dni: new FormControl({ value: this.currentUser.dni, disabled: true },[Validators.required, Validators.pattern('[0-9]{7,8}')]),
+        fechaNacimiento: new FormControl({ value: this.currentUser.fechaNacimiento, disabled: true},[Validators.required]),
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: false },[Validators.required, Validators.pattern('[0-9]{10,13}')]),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: false }),
@@ -207,7 +207,26 @@ validatePassword() {
       (resp:Data) => {
         localStorage.setItem('auth_token', resp.token);
         
-        this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => window.location.href ="/miperfil");
+        this.ProfileForm = new FormGroup({
+          nombres: new FormControl({ value: resp.nombres, disabled: true }),
+          apellidos: new FormControl({ value: resp.apellidos, disabled: true }),
+          correoElectronico: new FormControl({ value: resp.correoElectronico, disabled: true }),
+          dni: new FormControl({ value: resp.dni, disabled: true }),
+          numeroContacto: new FormControl({ value: resp.numeroContacto, disabled: true }),
+          fechaNacimiento: new FormControl({ value:resp.fechaNacimiento, disabled: true }),
+          facebook: new FormControl({ value: resp.facebook, disabled: true }),
+          instagram: new FormControl({ value: resp.instagram, disabled: true }),
+          contrasenia: new FormControl({ value: '', disabled: true })
+        });
+        
+
+        this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( (r)=>{
+          this.enEdicion=false;
+          this.editarDatos=false;
+          this.esconder=true;
+        }
+        )
+      
       },
       (err: any) => {
         this.alertsService.errorMessage(err.error.error).then((result) => {
