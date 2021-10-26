@@ -7,7 +7,7 @@
         <mat-label>Seleccionar periodo</mat-label>
             
         <mat-date-range-input type="date" [rangePicker]="picker" [max]="today" [min]="yearAgo" [formGroup]="range">
-            <input matStartDate placeholder="Desde" formControlName="start" disabled>
+            <input matStartDate placeholder="Desde" formControlName="start" disabled [formControl]="today">
             <input matEndDate placeholder="Hasta" formControlName="end" disabled [formControl]="today">
         </mat-date-range-input>
         
@@ -24,7 +24,12 @@
     </div> 
 </div>
 
-<div class="container-reportes">
+<div class="container-loading" *ngIf="reportesFlag">
+    <img class=logo src="../../../assets/images/loading.gif" />
+</div>
+
+
+<div class="container-reportes" *ngIf="reportesFlag === false">
     <div class="subtitle">
         <h2>¿En cuántos días mis mascotas consiguen un hogar?</h2>
     </div>
@@ -109,7 +114,5 @@
             </div>
         </div>
     </div>
-
-
 
 

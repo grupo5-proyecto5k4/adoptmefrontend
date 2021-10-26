@@ -39,6 +39,19 @@
     background-color: #fafafa;
 }
 
+.logo{
+    width: 70px;
+    height: 70px;
+  }
+
+.container-loading{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: center;
+    height: 600px;
+}
 // ----------------
 
 .container-grafico{
