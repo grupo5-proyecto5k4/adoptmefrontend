@@ -36,7 +36,7 @@ export class NotificacionService {
     return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
-  notificarSolicitudProvisorio(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+  notificarSolicitudProvisorio(nombreMascota:string, remitente:string, objetoId: string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Solicitud de provisorio";
     notificacion.descripcion = nombreMascota+" ha recibido una solicitud de provisorio";
