@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-reportes-centro',
@@ -8,6 +9,24 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./reportes-centro.component.scss']
 })
 export class ReportesCentroComponent implements OnInit {
+
+  // Date picker ------------------
+  today = new Date();
+
+  // default 30 days before
+  numberOfDaysToSubstract = 30;
+  prior = new Date().setDate(this.today.getDate() - this.numberOfDaysToSubstract);
+
+  // defaults
+  range = new FormGroup({
+    start: new FormControl(new Date(this.prior)),
+    end: new FormControl(this.today)
+  });
+
+  // validations
+  reportesFlag: boolean = false;
+  yearAgo = new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+  // -----------------------
 
   minimoPerroCachorro: number;
   promedioPerroCachorro: any;
@@ -141,9 +160,6 @@ export class ReportesCentroComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.barChartLabelsMin = ['Últimos 3 meses'];
-    this.barChartLabelsProm = ['Últimos 3 meses'];
-    this.barChartLabelsMax = ['Últimos 3 meses'];
 
     // Datos del backend:
   
@@ -281,8 +297,22 @@ export class ReportesCentroComponent implements OnInit {
 
   }
 
+  async generarReportes(desde, hasta){
+    this.reportesFlag = true;
+    var desdeBack = this.convertEnviarBack(desde);
+    var hastaBack = this.convertEnviarBack(hasta);
+    console.log("desde", desdeBack, "hasta", hastaBack);
+    //TODO: Agregar Llamadas al backend
+    await new Promise(r => setTimeout(r, 3000));
+    this.reportesFlag = false;
+  }
 
-
+  convertEnviarBack(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return (date.getFullYear().toString() + mnth + day)
+  }
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
