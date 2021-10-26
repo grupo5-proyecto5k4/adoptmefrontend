@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-reportes-centro',
@@ -8,6 +10,17 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./reportes-centro.component.scss']
 })
 export class ReportesCentroComponent implements OnInit {
+
+  // Date picker  
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+  // invalida fechas futuras
+  today = new Date();
+  // hasta 365 días antes
+  yearAgo = new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+  // -----------------------
 
   minimoPerroCachorro: number;
   promedioPerroCachorro: any;
@@ -144,6 +157,8 @@ export class ReportesCentroComponent implements OnInit {
     this.barChartLabelsMin = ['Últimos 3 meses'];
     this.barChartLabelsProm = ['Últimos 3 meses'];
     this.barChartLabelsMax = ['Últimos 3 meses'];
+    console.log("HOY", this.today);
+    console.log("UN AÑO", this.yearAgo );
 
     // Datos del backend:
   
@@ -281,7 +296,11 @@ export class ReportesCentroComponent implements OnInit {
 
   }
 
-
+  generarReportes(desde, hasta){
+    console.log("desde", desde);
+    console.log("hasta", hasta);
+    
+  }
 
 
   // events

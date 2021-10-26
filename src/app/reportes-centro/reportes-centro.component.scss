@@ -23,6 +23,24 @@
     justify-content: space-around;
 }
 
+// Fechas 
+.container-fecha{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.btnPeriodo{
+    color:#B80092;
+    font-weight:bold;
+    border: #fafafa;
+    background-color: #fafafa;
+}
+
+// ----------------
+
 .container-grafico{
     display: flex;
     flex-flow: column;
