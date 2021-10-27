@@ -22,6 +22,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
   dataSolicitante: any;
   dataAnimal: any;
   seguimientoChecked = false;
+  seguimientoSolicitud = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private notificacionService: NotificacionService, private alertsService: AlertsService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
   }
@@ -81,7 +82,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
     // Tiene otras mascotas 0:No/1:Si
     if (dataSolicitud.otraMascota === 1) {
-      dataSolicitud.otraMascotaString = "Sí"
+      dataSolicitud.otraMascotaString = "Sí";
     } else {
       dataSolicitud.otraMascotaString = "No"
     }
@@ -111,7 +112,8 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
     // Seguimiento
     if (dataSolicitud.seguimiento === 1) {
-      this.data.solicitud.Solicitud.seguimientoString = "De acuerdo"
+      this.data.solicitud.Solicitud.seguimientoString = "De acuerdo";
+      this.seguimientoSolicitud = true;
     } else {
       this.data.solicitud.Solicitud.seguimientoString = "En desacuerdo"
     }

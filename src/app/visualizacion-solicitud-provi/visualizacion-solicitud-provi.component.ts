@@ -21,6 +21,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   dataSolicitante: any;
   dataAnimal: any;
   seguimientoChecked = false;
+  seguimientoSolicitud = false;
 
 
 
@@ -94,7 +95,8 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
     // Seguimiento
     if (dataSolicitud.seguimiento === 1) {
-      this.data.solicitud.Solicitud.seguimientoString = "De acuerdo"
+      this.data.solicitud.Solicitud.seguimientoString = "De acuerdo";
+      this.seguimientoSolicitud = true;
     } else {
       this.data.solicitud.Solicitud.seguimientoString = "En desacuerdo"
     }
