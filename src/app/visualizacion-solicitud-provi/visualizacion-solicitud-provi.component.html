@@ -14,7 +14,7 @@
                                     </div>
 
                                     <div class="centrado">
-                                        <form [formGroup]="SolicitudForm" class="example-form">
+                                        <form [formGroup]="SolicitudForm" class="example-form" *ngIf="SolicitudForm">
                                             <div class="container-row1">
                                                 <div>
                                                     <mat-form-field>
@@ -217,6 +217,47 @@
                                                     <mat-form-field>
                                                         <mat-label>Realización de Seguimiento</mat-label>
                                                         <input matInput formControlName="seguimiento">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="margin" *ngIf="faltaAceptar()">
+                                                <section>
+                                                    <div class="passwordRequirement" style="margin-bottom: 15px;">
+                                                        <mat-checkbox style="margin-bottom: 2px !important;"
+                                                            (change)="SeguimientoChange()"></mat-checkbox>
+                                                        <a class="example-margin">Realizar seguimiento</a>
+                                                    </div>
+                                                </section>
+
+                                                <div style="width: 100%;" *ngIf="seguimientoChecked">
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>*¿Con qué frecuencia desea realizar el seguimiento?
+                                                        </mat-label>
+                                                        <mat-select formControlName="frecuencia">
+                                                            <mat-option value="7">Cada 1 semana</mat-option>
+                                                            <mat-option value="14">Cada 2 semanas</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <span class="help-block"
+                                                        *ngIf="((SolicitudForm.get('frecuencia').touched ||
+                                                SolicitudForm.get('frecuencia').dirty) && SolicitudForm.get('frecuencia').errors)">
+                                                        <span *ngIf="SolicitudForm.get('frecuencia').errors.required">
+                                                            <h6 class="helpError">Campo requerido</h6>
+                                                        </span>
+                                                    </span>
+                                                    <div id="passwordRequirement">
+                                                        <div>
+                                                            <p id="requer">(*)Campos obligatorios</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="container-row1" *ngIf="!faltaAceptar()">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Frecuencia con la que se realizará el seguimiento</mat-label>
+                                                        <textarea matInput formControlName="frecuencia"
+                                                            maxlength="150"></textarea>
                                                     </mat-form-field>
                                                 </div>
                                             </div>
