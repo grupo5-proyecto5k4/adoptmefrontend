@@ -121,7 +121,7 @@ validatePassword() {
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
         dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
-        fechaNacimiento: new FormControl({ value:'', disabled: true }),
+        fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true }),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
         instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
         contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })

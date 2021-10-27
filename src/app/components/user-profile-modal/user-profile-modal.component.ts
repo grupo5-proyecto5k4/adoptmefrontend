@@ -96,7 +96,16 @@ export class UserProfileModalComponent implements OnInit {
         
       }
 
+      if(this.currentUser.Donacion.banco==null){
+        this.ProfileForm.controls['banco'].setValue("No especificado");
+        
+      }
+
       if(this.currentUser.Donacion.cbu==undefined){
+        this.ProfileForm.controls['cbu'].setValue("No especificado");
+      }
+      
+      if(this.currentUser.Donacion.cbu==null){
         this.ProfileForm.controls['cbu'].setValue("No especificado");
       }
 
@@ -104,7 +113,9 @@ export class UserProfileModalComponent implements OnInit {
         this.ProfileForm.controls['alias'].setValue("No especificado");
       }
 
-
+      if(this.currentUser.Donacion.alias==null){
+        this.ProfileForm.controls['alias'].setValue("No especificado");
+      }
 
   }
 
