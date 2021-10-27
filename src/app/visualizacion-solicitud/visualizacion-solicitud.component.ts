@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AlertsService } from 'src/utils/alerts.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
@@ -21,6 +21,8 @@ export class VisualizacionSolicitudComponent implements OnInit {
   dataSolicitud: any;
   dataSolicitante: any;
   dataAnimal: any;
+  seguimientoChecked = false;
+  seguimientoSolicitud = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private notificacionService: NotificacionService, private alertsService: AlertsService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
   }
@@ -41,12 +43,17 @@ export class VisualizacionSolicitudComponent implements OnInit {
     if (dataSolicitud.Direccion.numero == null) {
       this.data.solicitud.Solicitud.Direccion.numero = "No especificado"
     }
+    if (dataSolicitud.Direccion.referencia == null) {
+      this.data.solicitud.Solicitud.Direccion.referencia = "No especificado"
+    }
     if (dataSolicitante.facebook == null) {
       this.data.solicitud.Solicitante.facebook = "No especificado"
     }
     if (dataSolicitante.instagram == null) {
       this.data.solicitud.Solicitante.instagram = "No especificado"
     }
+
+
 
     //camposBooleanos
 
@@ -75,7 +82,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
     // Tiene otras mascotas 0:No/1:Si
     if (dataSolicitud.otraMascota === 1) {
-      dataSolicitud.otraMascotaString = "Sí"
+      dataSolicitud.otraMascotaString = "Sí";
     } else {
       dataSolicitud.otraMascotaString = "No"
     }
@@ -105,7 +112,8 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
     // Seguimiento
     if (dataSolicitud.seguimiento === 1) {
-      this.data.solicitud.Solicitud.seguimientoString = "De acuerdo"
+      this.data.solicitud.Solicitud.seguimientoString = "De acuerdo";
+      this.seguimientoSolicitud = true;
     } else {
       this.data.solicitud.Solicitud.seguimientoString = "En desacuerdo"
     }
@@ -139,36 +147,56 @@ export class VisualizacionSolicitudComponent implements OnInit {
       tiempoSolo: new FormControl({ value: dataSolicitud.tiempoSoloString, disabled: true }),
       seguimiento: new FormControl({ value: dataSolicitud.seguimientoString, disabled: true }),
       accionViaje: new FormControl({ value: dataSolicitud.accionViaje, disabled: true }),
-      accionImpedimento: new FormControl({ value: dataSolicitud.accionImpedimento, disabled: true })
+      accionImpedimento: new FormControl({ value: dataSolicitud.accionImpedimento, disabled: true }),
+      frecuencia: new FormControl('', [Validators.required]),
     });
+
+    let frecuencia = 'No se realizará seguimiento';
+    if (!this.faltaAceptar()) {
+      if (dataSolicitud.cadaCuanto !== null && dataSolicitud.cadaCuanto !== undefined) {
+        if (dataSolicitud.cadaCuanto == 30) {
+          frecuencia = 'Cada 1 mes'
+        }
+        else if (dataSolicitud.cadaCuanto == 60) {
+          frecuencia = 'Cada 2 meses'
+        }
+        else {
+          frecuencia = 'Cada 3 meses'
+        }
+      }
+      this.SolicitudForm.controls['frecuencia'].setValue(frecuencia);
+      this.SolicitudForm.controls['frecuencia'].disable();
+    }
   }
 
   async aceptarSolicitud() {
+    if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '')) {
+      this.isLoading = true;
+      console.log(this.data.solicitud.Animales.nombreMascota + " " + this.idSolicitud + ' ' + this.data.solicitud.solicitanteId)
+      this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
+        this.data = dataProvi;
+        this.notificacionService.notificarConfirmacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
+        this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
+          , () => {
+            this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
+            this.isLoading = false;
+          }
+      })
+    }
+  }
+
+  async rechazarSolicitud() {
     this.isLoading = true;
-    console.log(this.data.solicitud.Animales.nombreMascota +" "+ this.idSolicitud +' '+ this.data.solicitud.solicitanteId)
-    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
+    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      this.notificacionService.notificarConfirmacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
-      this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
+      this.notificacionService.notificarCancelacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken());
+      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')
         , () => {
-          this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
+          this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
           this.isLoading = false;
         }
     })
   }
-
-  async rechazarSolicitud(){
-    this.isLoading = true;
-    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
-      this.data = dataProvi;
-      this.notificacionService.notificarCancelacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken());    
-      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
-      , () => { 
-        this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
-        this.isLoading = false;
-      }
-    })
-    }
 
   aceptarSolicitudAlerta() {
 
@@ -182,38 +210,42 @@ export class VisualizacionSolicitudComponent implements OnInit {
     this.alertsService.errorMessage("La solicitud ha sido rechazada")
   }
 
-  faltaAceptar(){
-    return(this.dataSolicitud.estadoId == 'Abierta' && this.auth.getCurrentUser()._id == this.dataAnimal.responsableId)
+  faltaAceptar() {
+    return (this.dataSolicitud.estadoId == 'Abierta' && this.auth.getCurrentUser()._id == this.dataAnimal.responsableId)
   }
 
   faltaConfirmar() {
     return (this.dataSolicitud.estadoId == 'Aprobado Por Responsable' && this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
   }
 
-  async confirmarSolicitud(){
-    this.isLoading = true;
-      this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
-      this.data = dataProvi;
-      this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre+' '+this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId ,this.auth.getToken());    
-    this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result)=> window.location.href='/solicitudes')
-    , () => { 
-      this.alertsService.errorMessage("En estos momentos no se puede confirmar la solicitud");
-      this.isLoading = false;
-    }
-  })
+  SeguimientoChange() {
+    this.seguimientoChecked = !this.seguimientoChecked;
   }
 
-  async rechazarSolicitudAprobada(){
+  async confirmarSolicitud() {
     this.isLoading = true;
-      this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      this.notificacionService.notificarCancelacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre+' '+this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId ,this.auth.getToken());    
-    this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result)=> window.location.href='/solicitudes')
-    , () => { 
-      this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
-      this.isLoading = false;
-    }
-  })
+      this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId, this.auth.getToken());
+      this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result) => window.location.href = '/solicitudes')
+        , () => {
+          this.alertsService.errorMessage("En estos momentos no se puede confirmar la solicitud");
+          this.isLoading = false;
+        }
+    })
+  }
+
+  async rechazarSolicitudAprobada() {
+    this.isLoading = true;
+    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+      this.data = dataProvi;
+      this.notificacionService.notificarCancelacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId, this.auth.getToken());
+      this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')
+        , () => {
+          this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
+          this.isLoading = false;
+        }
+    })
   }
 
 }
