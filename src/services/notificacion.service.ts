@@ -33,62 +33,122 @@ export class NotificacionService {
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
-  notificarSolicitudProvisorio(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+  notificarSolicitudProvisorio(nombreMascota:string, remitente:string, objetoId: string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Solicitud de provisorio";
     notificacion.descripcion = nombreMascota+" ha recibido una solicitud de provisorio";
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarConfirmacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    console.log("llegue a la confirmacion adopcion")
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Confirmacion de adopción";
+    notificacion.nombreNotificacion = "Confirmación de adopción";
     notificacion.descripcion = "La solicitud de adopción de "+nombreMascota+" ha sido aceptada";
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    console.log(notificacion)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   notificarConfirmacionProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Confirmacion de provisorio";
+    notificacion.nombreNotificacion = "Confirmación de provisorio";
     notificacion.descripcion = "La solicitud de provisorio de "+nombreMascota+" ha sido aceptada";
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    console.log(notificacion)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
-  notificarConfirmacionAdopcionACentro(nombreMascota: string, nombreAdoptante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+  notificarCancelacionAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Confirmacion de adopción";
-    notificacion.descripcion = nombreAdoptante+" Ha confirmado la adopción de "+nombreMascota;
+    notificacion.nombreNotificacion = "Rechazo de adopción";
+    notificacion.descripcion = "La solicitud de adopción de "+nombreMascota+" ha sido rechazada";
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
-  notificarConfirmacionProvisorioACentro(nombreMascota: string, nombreAdoptante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+  notificarCancelacionProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Confirmacion de provisorio";
-    notificacion.descripcion = nombreAdoptante+" Ha confirmado la adopción de "+nombreMascota;
+    notificacion.nombreNotificacion = "Rechazo de provisorio";
+    notificacion.descripcion = "La solicitud de provisorio de "+nombreMascota+" ha sido rechazada";
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
-    return this.notificar(notificacion, token)
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
-  notificar(notificacion: Notificacion, token:string): Promise <any>{
-    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();;
+  notificarBajaDeProvisorioAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de provisorio";
+    notificacion.descripcion = "El provisorio de "+nombreMascota+" ha sido finalizado por su responsable";
+    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
+
+  notificarBajaDeAdopcionAParticular(nombreMascota:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de adopción";
+    notificacion.descripcion = "La tenencia de "+nombreMascota+" ha sido finalizada por su responsable";
+    notificacion.objetoAMostrar = "Adopcion";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
+
+  notificarConfirmacionAdopcionACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Confirmacion de adopción";
+    notificacion.descripcion = nombreSolicitante+" ha confirmado la adopción de "+nombreMascota;
+    notificacion.objetoAMostrar = "Adopcion";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
+
+  notificarCancelacionAdopcionACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de adopción";
+    notificacion.descripcion = nombreSolicitante+" ha cancelado la adopción de "+nombreMascota;
+    notificacion.objetoAMostrar = "Adopcion";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
+
+  notificarConfirmacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Confirmacion de provisorio";
+    notificacion.descripcion = nombreSolicitante+" ha confirmado la adopción de "+nombreMascota;
+    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
+
+  notificarCancelacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Cancelación de provisorio";
+    notificacion.descripcion = nombreSolicitante+" ha cancelado la adopción de "+nombreMascota;
+    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.remitenteId = remitente;
+    return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+  }
+
 
   /*
   updateAccount(user: User, token:string): Observable <any> {

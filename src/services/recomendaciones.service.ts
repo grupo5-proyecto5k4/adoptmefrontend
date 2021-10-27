@@ -44,5 +44,9 @@ export class RecomendacionService {
     return this.httpClient.get<Recomendacion[]>(`${environment.base_url}` + '/recomendacionCentroCastracion/').toPromise();
   }
 
+  getTodasRecomendaciones(): Promise<Recomendacion[]> {
+    return this.httpClient.get<Recomendacion[]>(`${environment.base_url}` + '/recomendaciones/').toPromise();
+  }
+
 }
 

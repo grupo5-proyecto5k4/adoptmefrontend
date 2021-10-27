@@ -67,6 +67,10 @@ flex-direction: row;
 justify-content: center;
 }
 
+.espacio{
+  margin-top: 20px;
+}
+
 #btncerrar{
   color:#B80092;
   cursor: pointer;
@@ -96,6 +100,31 @@ justify-content: center;
   margin-right: 2px;
   padding-left: 20px !important;
   padding-right: 20px !important;
+}
+
+.example-margin-btn {
+  margin: 10px 10px;
+  margin-top: 0px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btnLogout{
+  color:#B80092;
+  font-weight:bold;
+  border: #fafafa;
+  background-color: transparent;
+}
+
+.btnRechazar{
+  color: #EBEEF1;
+  background-color: #666666;
+  cursor: pointer;
+  min-width: 64px;
+  line-height: 36px;
+  //padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
 }
 
 #botones{

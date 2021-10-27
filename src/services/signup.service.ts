@@ -32,11 +32,9 @@ export class SignupService {
       return this.httpClient.put<Donacion>(this.urlEditCentro, req ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
     }
 
-    getDonacion(req:string):Observable<any>{
-      return this.httpClient.get(this.urlEditCentro + req);
-    }
-   
+    getCentrosDonaciones(idcentro:string): Observable<any> {
+      return this.httpClient.get(this.urlEditCentro + idcentro);
+  }
 
-    
   }
 

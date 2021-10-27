@@ -281,6 +281,7 @@ export class UserFormComponent implements OnInit {
 
 
       this.userService.registrarFormularioAdopcion(formulario, this.authService.getToken()).subscribe((resp: Data) => {
+        console.log(this.data.mascota.nombreMascota+" "+resp._id+" "+this.data.mascota.responsableId);
         this.notificacionService.notificarSolicitudAdopcion(this.data.mascota.nombreMascota, this.data.mascota.responsableId, resp._id, this.authService.getToken())
         this.alertsService.confirmMessage("Su solicitud de adopción ha sido registrada").then((result) => window.location.href = '/');
       },

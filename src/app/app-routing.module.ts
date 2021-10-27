@@ -10,16 +10,17 @@ import { AdminConfigurationsComponent } from './pages/admin-configurations/admin
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
 import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
 import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
-import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
-import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
 import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
 import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
 import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
+import { CenterProfileComponent } from './center-profile/center-profile.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
+import { DonacionesComponent} from './donaciones/donaciones.component';
 
 const routes: Routes = [
   {
@@ -38,16 +39,12 @@ const routes: Routes = [
     component: RegistroMascotaComponent
   },
   {
-    path: 'registrar-mascota',
-    component: NuevaMascotaComponent
-  },
-  {
     path: 'reportesCentro',
     component: ReportesCentroComponent
   },
   {
     path: 'donaciones',
-    component: UnderConstructionComponent
+    component: DonacionesComponent
   },
   {
     path: 'configuraciones',
@@ -68,10 +65,6 @@ const routes: Routes = [
   {
     path: 'miperfil',
     component: UserProfileComponent
-  },
-  {
-    path: 'micentro',
-    component: CenterProfileComponent
   },
   {
     path: 'perfiladmin',
@@ -115,6 +108,14 @@ const routes: Routes = [
     component: ListadoSolicitudesComponent
   },
   {
+    path: 'micentro',
+    component: CenterProfileComponent
+  },
+  {
+    path: 'registrar-mascota',
+    component: NuevaMascotaComponent
+  },
+  {
     path: '', redirectTo: '/landing', pathMatch: 'full'
   },
   //La ruta comodín '**' siempre debe ser la última del listado.
@@ -122,6 +123,9 @@ const routes: Routes = [
     path: '**',
     component: NotFoundComponent
   },
+
+
+  
 
 ];
 

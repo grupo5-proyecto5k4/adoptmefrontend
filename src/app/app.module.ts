@@ -57,6 +57,10 @@ import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-p
 import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
 import { ChartsModule } from 'ng2-charts';
 import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
+import { DonacionesComponent } from './donaciones/donaciones.component';
+import { DatosDonacionComponent } from './datos-donacion/datos-donacion.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -84,6 +88,8 @@ import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-
     SolicitudProvisorioComponent,
     ReportesCentroComponent,
     VisualizacionSolicitudProviComponent,
+    DonacionesComponent,
+    DatosDonacionComponent,
     //PublicacionesProvComponent
 
   ],
@@ -122,7 +128,9 @@ import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-
     MatBadgeModule,
     MatRadioModule,
     MatCheckboxModule,
-    ChartsModule
+    ChartsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   
   providers: [],

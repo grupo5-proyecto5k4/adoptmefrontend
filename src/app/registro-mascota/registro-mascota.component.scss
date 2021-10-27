@@ -130,6 +130,69 @@
   flex-flow: row nowrap;
   align-items: center;
 }
+
+
+.filtro{
+  float: left;
+}
+
+
+#btncuenta, #confirmado{
+  color: #EBEEF1;
+  background-color: #c50fa1;
+  min-width: 64px;
+  line-height: 36px;
+  //padding: 10px;
+  border-radius: 4px;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+}
+
+#confirmado{
+  padding-left: 26px !important;
+  padding-right: 26px !important;
+}
+
+.padding-filtros{
+  margin-right: auto !important;
+  margin-left: auto !important;
+  width: 70%;
+}
+
+
+.botones{
+  align-items: center;
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
+  display: flex;
+}
+
+
+.example-full-width{
+  width: 17%;
+}
+
+.componente-filtros{
+  display: flex;
+  flex-flow: row wrap;
+  min-height: 80px;
+  background-color: #f8e2f1;
+  height: auto;
+  margin-top: 1.5%;
+  width: 91.5%;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 8px;
+}
+
+.margenesFiltros{
+  margin-left: 30px;
+  margin-top: 15px;
+}
+
+
+
 /* Mobile */
 
 @media (max-width: 849px){
@@ -165,4 +228,88 @@
   width: 315px;
   height: 266px;
   overflow: hidden;
+}
+
+
+@media (max-width: 782px){
+
+  .componente-filtros{
+      padding-top: 3%;
+      padding-bottom: 2%;
+  }
+
+  .example-full-width{
+      width: 100%;
+  }
+
+  .margenesFiltros{
+      margin-left: 0px;
+      margin-top: 0px;
+  }
+
+  .filtro{
+      float: clear;
+  }
+
+  .padding-filtros{
+      width: 90%;
+      padding-left: 4%;
+      padding-right: 4%;
+  }
+
+}
+
+
+
+@media (min-width: 783px) and (max-width: 1499px)
+{
+  .padding-filtros{
+      width: 90%;
+      padding-left: 4%;
+  }
+
+  .filtro{
+      width: 20%;
+      display: inline-table;
+  }
+
+  .container-filtros{
+    padding-left: 15%;
+    align-items: center;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+    display: flex;
+    width: 60%;
+  }
+
+}
+
+
+@media (min-width: 1500px){
+
+  .padding-filtros{
+      width: 80%;
+      padding-left: 4%;
+  }
+
+  .botones{
+      align-items: center;
+      float: none;
+      margin-left: -100px;
+      margin-right: auto;
+      padding-bottom: 10px;
+      display: flex;
+      margin-top: 8px;
+  }
+
+  .filtro{
+    display: inline-table;
+  }
+
+  .container-filtros{
+    margin-left: 25%; 
+    margin-right: "auto";
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-reportes-centro',
@@ -8,6 +9,24 @@ import { Label } from 'ng2-charts';
   styleUrls: ['./reportes-centro.component.scss']
 })
 export class ReportesCentroComponent implements OnInit {
+
+  // Date picker ------------------
+  today = new Date();
+
+  // default 30 days before
+  numberOfDaysToSubstract = 30;
+  prior = new Date().setDate(this.today.getDate() - this.numberOfDaysToSubstract);
+
+  // defaults
+  range = new FormGroup({
+    start: new FormControl(new Date(this.prior)),
+    end: new FormControl(this.today)
+  });
+
+  // validations
+  reportesFlag: boolean = false;
+  yearAgo = new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+  // -----------------------
 
   minimoPerroCachorro: number;
   promedioPerroCachorro: any;
@@ -26,9 +45,8 @@ export class ReportesCentroComponent implements OnInit {
   minimos:any;
   promedios:any;
   maximos:any;
-
-  graficoPerro: any = {perrosAdoptadosPorSuProvisorio: 0, perrosAdoptadosPorOtro: 0, totalPerrosAdoptados : 0}
-  graficoGato: any = {gatosAdoptadosPorSuProvisorio: 0, gatosAdoptadosPorOtro: 0, totalGatosAdoptados : 0}
+  graficoPerro: any = {perrosCachorrosAdoptadosPorSuProvisorio: 0, perrosAdultosAdoptadosPorSuProvisorio: 0, perrosCachorrosAdoptadosPorOtro: 0, perrosAdultosAdoptadosPorOtro: 0, totalPerrosAdoptados : 0}
+  graficoGato: any = {gatosCachorrosAdoptadosPorSuProvisorio: 0, gatosAdultosAdoptadosPorSuProvisorio: 0, gatosCachorrosAdoptadosPorOtro: 0, gatosAdultosAdoptadosPorOtro: 0, totalGatosAdoptados : 0}
 
   flagNoData: number = 0;
 
@@ -142,9 +160,6 @@ export class ReportesCentroComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.barChartLabelsMin = ['Últimos 3 meses'];
-    this.barChartLabelsProm = ['Últimos 3 meses'];
-    this.barChartLabelsMax = ['Últimos 3 meses'];
 
     // Datos del backend:
   
@@ -246,27 +261,35 @@ export class ReportesCentroComponent implements OnInit {
     //Datos para el grafico de mascotas adoptadas
     var jsonMascotas = [{
       "tipoMascota":"0",
-      "perrosAdoptadosPorSuProvisorio":15,
-      "perrosAdoptadosPorOtro":15,
-      "totalPerrosAdoptados":15
+      "perrosCachorrosAdoptadosPorSuProvisorio":4,
+      "perrosAdultosAdoptadosPorSuProvisorio":10,
+      "perrosCachorrosAdoptadosPorOtro":5,
+      "perrosAdultosAdoptadosPorOtro":5,
+      "totalPerrosAdoptados":24
       },
       {
         "tipoMascota":"1",
-        "gatosAdoptadosPorSuProvisorio":15,
-        "gatosAdoptadosPorOtro":15,
-        "totalGatosAdoptados":15
+        "gatosCachorrosAdoptadosPorSuProvisorio":15,
+        "gatosAdultosAdoptadosPorSuProvisorio":12,
+        "gatosCachorrosAdoptadosPorOtro":8,
+        "gatosAdultosAdoptadosPorOtro":2,
+        "totalGatosAdoptados":37
         },
       ]
 
 
       for (let x = 0; x < jsonMascotas.length; x++){
         if (jsonMascotas[x].tipoMascota === "0"){
-          this.graficoPerro.perrosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosAdoptadosPorSuProvisorio;
-          this.graficoPerro.perrosAdoptadosPorOtro = jsonMascotas[x].perrosAdoptadosPorOtro;
+          this.graficoPerro.perrosCachorrosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosCachorrosAdoptadosPorSuProvisorio;
+          this.graficoPerro.perrosAdultosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosAdultosAdoptadosPorSuProvisorio;
+          this.graficoPerro.perrosCachorrosAdoptadosPorOtro = jsonMascotas[x].perrosCachorrosAdoptadosPorOtro;
+          this.graficoPerro.perrosAdultosAdoptadosPorOtro = jsonMascotas[x].perrosAdultosAdoptadosPorOtro;
           this.graficoPerro.totalPerrosAdoptados = jsonMascotas[x].totalPerrosAdoptados;
         } else if (jsonMascotas[x].tipoMascota === "1"){
-          this.graficoGato.gatosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosAdoptadosPorSuProvisorio;
-          this.graficoGato.gatosAdoptadosPorOtro = jsonMascotas[x].gatosAdoptadosPorOtro;
+          this.graficoGato.gatosCachorrosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosCachorrosAdoptadosPorSuProvisorio;
+          this.graficoGato.gatosAdultosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosAdultosAdoptadosPorSuProvisorio;
+          this.graficoGato.gatosCachorrosAdoptadosPorOtro = jsonMascotas[x].gatosCachorrosAdoptadosPorOtro;
+          this.graficoGato.gatosAdultosAdoptadosPorOtro = jsonMascotas[x].gatosAdultosAdoptadosPorOtro;
           this.graficoGato.totalGatosAdoptados = jsonMascotas[x].totalGatosAdoptados;
         }
       }
@@ -274,8 +297,22 @@ export class ReportesCentroComponent implements OnInit {
 
   }
 
+  async generarReportes(desde, hasta){
+    this.reportesFlag = true;
+    var desdeBack = this.convertEnviarBack(desde);
+    var hastaBack = this.convertEnviarBack(hasta);
+    console.log("desde", desdeBack, "hasta", hastaBack);
+    //TODO: Agregar Llamadas al backend
+    await new Promise(r => setTimeout(r, 3000));
+    this.reportesFlag = false;
+  }
 
-
+  convertEnviarBack(str) {
+    var date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return (date.getFullYear().toString() + mnth + day)
+  }
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {

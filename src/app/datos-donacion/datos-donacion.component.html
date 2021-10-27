@@ -1,0 +1,87 @@
+<mat-dialog-content class="dialog-content">
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <section id="cta4">
+                <div class="container">
+                    <header>
+                        <div class="card-container">
+                            <input type=button id="btncruz" style="margin: 10px;" name=boton value=X matDialogClose>
+                                <div class="lower-container">
+                                    <div>
+                                        <div>
+                                            <h2 class="centrado-titulo-pri">Centro {{data.centrores.nombres}}</h2>
+                                        </div>
+                                        <div>
+                                            <div class="centrado">
+                                            <form [formGroup]="SolicitudForm" class="example-form">
+                                                <h3 class="centrado-titulo">Datos bancarios</h3>
+                                                <div class="container-row1">
+                                                    <div>
+                                                        <mat-form-field>
+                                                            <mat-label>Banco</mat-label>
+                                                            <input matInput formControlName="banco">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div>
+                                                        <mat-form-field>
+                                                            <mat-label>Alias</mat-label>
+                                                            <input matInput formControlName="alias">
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+
+                                                <div class="container-row1">
+                                                    <div>
+                                                        <mat-form-field>
+                                                            <mat-label>CBU</mat-label>
+                                                            <input matInput formControlName="cbu">
+                                                        </mat-form-field>
+                                                    </div>
+
+                                                </div>
+
+                                                <h3 class="centrado-titulo">Datos de contacto</h3>
+                                                <div class="container-row1">
+                                                    <div>
+                                                        <mat-form-field>
+                                                            <mat-label>Teléfono</mat-label>
+                                                            <input matInput formControlName="telefono">
+                                                        </mat-form-field>
+                                                    </div>
+                                                    <div class="derecha">
+                                                        <mat-form-field>
+                                                            <mat-label>Correo electrónico</mat-label>
+                                                            <input matInput formControlName="email">
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+
+                                                <div class="container-row1">
+                                                    <div>
+                                                        <mat-form-field>
+                                                            <mat-label>Facebook</mat-label>
+                                                            <input matInput formControlName="facebook">
+                                                        </mat-form-field>
+                                                    </div>
+
+                                                    <div class="derecha">
+                                                        <mat-form-field>
+                                                            <mat-label>Instagram</mat-label>
+                                                            <input matInput formControlName="instagram">
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                        
+
+                                    </div>
+                                </div>
+                        </div>
+                    </header>
+                </div>
+            </section>
+        </div>
+    </body>
+</mat-dialog-content>

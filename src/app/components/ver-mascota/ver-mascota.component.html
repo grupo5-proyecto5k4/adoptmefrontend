@@ -132,10 +132,10 @@
 
 
 
-                      <div class="container-row1" id="botones">
+                      <div class="container-row1" id="botones" *ngIf="esParticular()">
                         <div style="margin-left:auto;margin-right: auto;">
-                          <a mat-raised-button color="accent" style="padding: 10px;" class="button cancelar"
-                            type="button" id="btncuenta" mat-dialog-close>Cancelar</a>
+                          <a mat-raised-button style="padding: 10px;" class="button cancelar btnRechazar"
+                            type="button" mat-dialog-close>Cancelar</a>
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
                             style="padding: 10px;" (click)="openUserForm()" *ngIf="accion === 1">Adoptar</a>
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
@@ -144,6 +144,10 @@
                         </div>
                       </div>
 
+                      <div class="centrado espacio" *ngIf="indicarLogueo()">
+                        <h5 (click)="goToSesion()"><u class="example-margin-btn" *ngIf="accion === 1">Iniciá sesión para solicitar su adopción</u></h5>
+                        <h5 (click)="goToSesion()"><u class="example-margin-btn" *ngIf="accion === 0">Iniciá sesión para solicitar su provisorio</u></h5>
+                      </div>
                     </form>
                   </div>
                 </div>
