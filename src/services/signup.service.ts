@@ -12,7 +12,7 @@ import {Donacion} from 'src/models/IDonacion';
 export class SignupService {
  
   urlEdit='https://adoptmebackend.herokuapp.com/user/modificacionPerfil';
-  urlEditCentro='https://adoptmebackend.herokuapp.com/user/modificacion/centrorescatista';
+  urlEditCentro='https://adoptmebackend.herokuapp.com/user/modificacion/centrorescatista/';
   
   constructor(private httpClient: HttpClient) {}
  

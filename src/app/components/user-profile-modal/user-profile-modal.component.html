@@ -119,6 +119,15 @@
                             <mat-label>Nombre del banco</mat-label>
                             <textarea matInput formControlName="banco" maxlength="30"></textarea>
                           </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('banco').touched ||
+                      ProfileForm.get('banco').dirty) && ProfileForm.get('banco').errors)">
+                          <span *ngIf="ProfileForm.get('banco').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="ProfileForm.get('banco').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                          </span>
+                        </span>
                         </div>
 
                         <div class="derecha">
@@ -126,6 +135,15 @@
                             <mat-label>Alias</mat-label>
                             <textarea matInput formControlName="alias" maxlength="30"></textarea>
                           </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('alias').touched ||
+                      ProfileForm.get('alias').dirty) && ProfileForm.get('alias').errors)">
+                          <span *ngIf="ProfileForm.get('alias').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="ProfileForm.get('alias').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                          </span>
+                        </span>
                         </div>
                       </div>
 
@@ -133,8 +151,17 @@
                         <div>
                           <mat-form-field class="ref">
                             <mat-label>CBU</mat-label>
-                            <textarea matInput formControlName="cbu" maxlength="150"></textarea>
+                            <textarea matInput formControlName="cbu" maxlength="22"></textarea>
                           </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('cbu').touched ||
+                      ProfileForm.get('cbu').dirty) && ProfileForm.get('cbu').errors)">
+                          <span *ngIf="ProfileForm.get('cbu').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="ProfileForm.get('cbu').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 22 caracteres</mat-error>
+                          </span>
+                        </span>
                         </div>
                       </div>
 
