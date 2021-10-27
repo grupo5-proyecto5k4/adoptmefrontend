@@ -18,10 +18,11 @@ export class ConsultaSeguimientosComponent implements OnInit {
   }
 
  async cancelarProceso(){
-
-
     await this.enviarNotificacionDeBaja()
+  }
 
+  agregarVisita(){
+    
   }
 
 

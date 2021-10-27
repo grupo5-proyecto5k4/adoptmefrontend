@@ -15,11 +15,19 @@ import { VerMascotaComponent } from './ver-mascota/ver-mascota.component';
 import {MatTableModule} from '@angular/material/table';
 import { ConsultaSeguimientosComponent } from './consulta-seguimientos/consulta-seguimientos.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { AgregarVisitaComponent } from './agregar-visita/agregar-visita.component';
 
 
 
 @NgModule({
-    declarations: [SignupParticularComponent, SignupRescatistComponent, UserFormComponent, UserProfileModalComponent, VerMascotaComponent, ConsultaSeguimientosComponent],
+    declarations: [
+      SignupParticularComponent, 
+      SignupRescatistComponent, 
+      UserFormComponent, 
+      UserProfileModalComponent, 
+      VerMascotaComponent, 
+      ConsultaSeguimientosComponent,
+      AgregarVisitaComponent],
     imports: [
       ReactiveFormsModule,
       FormsModule,
@@ -40,7 +48,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
       UserFormComponent,
       UserProfileModalComponent,
       VerMascotaComponent,
-      ConsultaSeguimientosComponent
+      ConsultaSeguimientosComponent,
+      AgregarVisitaComponent
      ]
   })
 export class ComponentsModule{}

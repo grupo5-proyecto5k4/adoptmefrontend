@@ -6,6 +6,9 @@
             <div class=txt-construction>
                 <p class=subtitulo>Consulta de seguimientos</p>
                 <div class="logout-container">
+                    <button mat-button type="button" color="accent" class="btnLogout" (click)="agregarVisita()">Agregar visita</button>
+                </div>
+                <div class="logout-container">
                     <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelarProceso()">Cancelar provisorio</button>
                 </div>
                 <mat-dialog-content *ngIf="seguimientos">
