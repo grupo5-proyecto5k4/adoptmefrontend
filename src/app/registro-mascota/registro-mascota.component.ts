@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Mascota } from 'src/models/IMascota';
 
 import { RegistroMascotasService } from 'src/services/registro-mascotas.service';
 import { AuthService } from '../auth.service';
+import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
 
 
 @Component({
@@ -228,6 +230,14 @@ export class RegistroMascotaComponent implements OnInit {
     }
   }
 
+  openMascota(mascota: Mascota) {
+    this.dialog.open(VerMascotaComponent, {
+      data: {
+        mascota: mascota,
+        accion: 0
+      }
+    })
+  }
 
   clean() {
     this.iniciarForm();

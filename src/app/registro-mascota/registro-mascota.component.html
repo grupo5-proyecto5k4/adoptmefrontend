@@ -76,7 +76,7 @@
                         </div>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button>EDITAR</button>
+                        <button mat-button (click)="openMascota(pet)">EDITAR</button>
                     </mat-card-actions>
                 </mat-card>
                 <div *ngIf="mascotasUsuario.length == 0 && !filtroDisponibleAplicado">
@@ -157,7 +157,7 @@
                         </div>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button>EDITAR</button>
+                        <button mat-button (click)="openMascota(pet)">EDITAR</button>
                     </mat-card-actions>
                 </mat-card>
                 <div *ngIf="mascotasUsuarioNoDisponibles.length == 0 && !filtroNoDisponibleAplicado">

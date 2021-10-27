@@ -1,0 +1,36 @@
+<mat-dialog-content>
+    <div class="container">
+        <div class=card-container>
+            <input type=button id="btncuenta" style="margin: 10px;" name=boton value=X (click)="dialog.closeAll()">
+
+            <div class=txt-construction>
+                <p class=subtitulo>Consulta de seguimientos</p>
+                <div class="logout-container">
+                    <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelarProceso()">Cancelar provisorio</button>
+                </div>
+                <mat-dialog-content *ngIf="seguimientos">
+
+                    <mat-accordion *ngFor="let seguimiento of seguimientos">
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <p class=section-title>Nombre del adoptante</p>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <h3 class=question-title>¿Quiénes pueden participar en los procesos?</h3>
+                            <p>Toda persona mayor a 18 años puede postularse para adoptar o brindar provisorio a un
+                                animalito.</p>
+                            <mat-divider></mat-divider><br>
+                            <h3 class=question-title>Ya me postulé, ¿y ahora qué?</h3>
+                            <p>El Centro Rescatista o particular a cargo de la mascota recibirá la información de tu
+                                perfil y los datos de tu formulario.</p>
+                            <p>A partir de allí, analizarán tu información. Cuando tomen una decisión serás notificado y
+                                podrás continuar con el proceso si fuiste seleccionado.</p>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+
+                </mat-dialog-content>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
