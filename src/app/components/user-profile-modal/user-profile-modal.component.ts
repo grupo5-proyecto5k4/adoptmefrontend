@@ -118,9 +118,9 @@ export class UserProfileModalComponent implements OnInit {
         fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true}),
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
        
-        banco: new FormControl({ value:this.currentUser.Donacion.banco, disabled: false },[Validators.maxLength(30)]),
-        cbu: new FormControl({ value: this.currentUser.Donacion.cbu, disabled: false },[Validators.maxLength(150)]),
-        alias: new FormControl({ value: this.currentUser.Donacion.alias, disabled: false },[Validators.maxLength(30)]),
+        banco: new FormControl({ value:this.currentUser.Donacion.banco, disabled: false },[Validators.maxLength(30), Validators.required]),
+        cbu: new FormControl({ value: this.currentUser.Donacion.cbu, disabled: false },[Validators.maxLength(22),Validators.required]),
+        alias: new FormControl({ value: this.currentUser.Donacion.alias, disabled: false },[Validators.maxLength(30),Validators.required]),
        
         calle: new FormControl({ value:this.currentUser.Direccion.calle, disabled: true }),
         altura: new FormControl({ value:this.currentUser.Direccion.numero, disabled: true}),
