@@ -70,44 +70,13 @@
                     <mat-label>DNI</mat-label>
                     <input matInput formControlName="dni">
                 </mat-form-field>
-                <span class="help-block" *ngIf="((ProfileForm.get('dni').touched ||
-                      ProfileForm.get('dni').dirty) &&
-                      ProfileForm.get('dni').errors)">
-                        <span *ngIf="ProfileForm.get('dni').errors.required">
-                          <h6 class="helpError">Campo requerido</h6>
-                        </span>
-                        <span *ngIf="ProfileForm.get('dni').errors.pattern">
-                          <h6 class="helpError">Formato del DNI no válido</h6>
-                        </span>
-                      </span>
-                      <span class="help-block" *ngIf="(!validateDNI() && validateBirthdate())">
-                        <span>
-                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                            -
-                          </h6>
-                        </span>
-                      </span>
             </div>
             <div class="derecha">
                 <mat-form-field>
                     <mat-label>Fecha de nacimiento</mat-label>
-                    <input matInput type="date" (change)="CalculateAge()" formControlName="fechaNacimiento">
+                    <input matInput formControlName="fechaNacimiento">
                 </mat-form-field>
-                <span class="help-block" *ngIf="validateInitialDate()">
-                    <span *ngIf="validateInitialDate">
-                      <h6 class="helpError">Campo requerido</h6>
-                    </span>
-                  </span>
-                  <span *ngIf="edadInvalida">
-                    <h6 class="helpError">{{mensajeEdad}}</h6>
-                  </span>
-                  <span class="help-block" *ngIf="(validateDNI() && !validateBirthdate())">
-                    <span>
-                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                        -
-                      </h6>
-                    </span>
-                  </span>
+                
             </div>
         </div>
 

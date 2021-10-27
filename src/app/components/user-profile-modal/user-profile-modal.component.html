@@ -180,7 +180,7 @@
                       <button mat-button class="centrado" *ngIf="esconder&&currentUser.tipoUsuario == 2" id="btnEdit" type="button" style="padding: 10px;" color="accent" (click)="editar()">Editar</button>
 
                       <div class="centrado" *ngIf="editarDatos&&currentUser.tipoUsuario == 2">
-                       <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" matDialogClose>Cancelar</button>
+                       <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" (click)="cancelar()">Cancelar</button>
                        <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" (click)="guardar()">Guardar Cambios</button>
                       </div> 
 
