@@ -171,17 +171,19 @@ validatePassword() {
     this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
       (resp:Data) => {
         localStorage.setItem('auth-token', resp.token);
+        this.currentUser= this.authservice.setUser(resp);
+        console.log(resp);
         
         this.ProfileForm = new FormGroup({
-          nombres: new FormControl({ value: resp.nombres, disabled: true }),
-          apellidos: new FormControl({ value: resp.apellidos, disabled: true }),
-          correoElectronico: new FormControl({ value: resp.correoElectronico, disabled: true }),
-          dni: new FormControl({ value: resp.dni, disabled: true }),
-          numeroContacto: new FormControl({ value: resp.numeroContacto, disabled: true }),
-          fechaNacimiento: new FormControl({ value:resp.fechaNacimiento, disabled: true }),
-          facebook: new FormControl({ value: resp.facebook, disabled: true }),
-          instagram: new FormControl({ value: resp.instagram, disabled: true }),
-          contrasenia: new FormControl({ value: '*********', disabled: true })
+          nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
+          apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
+          correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+          dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
+          numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
+          fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true }),
+          facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
+          instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
+          contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
         });
         
 
