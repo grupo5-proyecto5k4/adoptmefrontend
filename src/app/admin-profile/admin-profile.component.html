@@ -26,13 +26,7 @@
                           <h6 class="helpError">Formato del nombre no válido</h6>
                         </span>
                       </span>
-                      <span class="help-block" *ngIf="(validateLastname() && !validateName())">
-                        <span>
-                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                            -
-                          </h6>
-                        </span>
-                      </span>
+                      
             </div>
 
             <div class="derecha">
@@ -52,13 +46,7 @@
                           <h6 class="helpError">Formato del apellido no válido</h6>
                         </span>
                       </span>
-                      <span class="help-block" *ngIf="(!validateLastname() && validateName())">
-                        <span>
-                          <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                            -
-                          </h6>
-                        </span>
-                      </span>
+                      
             </div>
         </div>
 
@@ -114,13 +102,7 @@
                     <h6 class="helpError">Ingrese valor numérico entre 10 y 13 dígitos</h6>
                   </span>
                 </span>
-                <span class="help-block" *ngIf="(!validateContactNumber() && validatePassword())">
-                  <span>
-                    <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                      -
-                    </h6>
-                  </span>
-                </span>
+                
             </div>
             <div class="derecha">
                 <mat-form-field>
@@ -137,13 +119,7 @@
                       <h6 class="helpError">La contraseña no cumple con los requisitos</h6>
                     </span>
                   </span>
-                  <span class="help-block blank" *ngIf="(validateContactNumber() && !validatePassword())">
-                    <span>
-                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                        -
-                      </h6>
-                    </span>
-                  </span>
+                 
             </div>
 
             <div class="tooldiv" *ngIf="editarDatos">
@@ -152,13 +128,7 @@
                   aria-label="Button that displays a tooltip when focused or hovered over">
                   ℹ
                 </label>
-                <span class="help-block" *ngIf="(validateContactNumber() || validatePassword())">
-                  <span>
-                    <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                      -
-                    </h6>
-                  </span>
-                </span>
+               
               </div>
         </div>
 

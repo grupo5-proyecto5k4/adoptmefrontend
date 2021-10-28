@@ -84,34 +84,6 @@ export class AdminProfileComponent implements OnInit {
   }
  
 
-  
-  
-validateName() {
-  return (((this.ProfileForm.get('nombres').touched ||
-    this.ProfileForm.get('nombres').dirty) &&
-    this.ProfileForm.get('nombres').errors));
-}
-
-validateLastname() {
-  return (((this.ProfileForm.get('apellidos').touched ||
-    this.ProfileForm.get('apellidos').dirty) &&
-    this.ProfileForm.get('apellidos').errors));
-}
-
-
-validateContactNumber() {
-  return (((this.ProfileForm.get('numeroContacto').touched ||
-    this.ProfileForm.get('numeroContacto').dirty) &&
-    this.ProfileForm.get('numeroContacto').errors));
-}
-
-validatePassword() {
-  return (((this.ProfileForm.get('contrasenia').touched ||
-    this.ProfileForm.get('contrasenia').dirty) &&
-    this.ProfileForm.get('contrasenia').errors));
-}
-
-
   inicializarFormulario(){
 
     if(this.enEdicion==false){
