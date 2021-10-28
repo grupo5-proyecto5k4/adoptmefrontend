@@ -24,12 +24,15 @@ export class RegistroMascotaComponent implements OnInit {
   mascotasUsuarioEnProvi: any;
   mascotasUsuarioAdoptado: any;
   mascotasUsuarioNoDisponibles;
+  mascotasEnTenencia;
   FilterForm: FormGroup;
   tamanos = ['Pequeño', 'Mediano', 'Grande'];
   gatoSeleccionado = false;
   filtroDisponibleAplicado = false;
   filtroNoDisponibleAplicado = false;
+  filtroEnTenenciaAplicado =  false;
   countNoDisponibles = 0;
+  countTenencia = 0;
 
   constructor(public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private auth: AuthService) {
   }
@@ -41,6 +44,8 @@ export class RegistroMascotaComponent implements OnInit {
     // SECCIÓN NO DISPONIBLES: Adoptado (3) y En Provisorio (4)
     //
     this.buscarMascotasNoDisponibles();
+
+    this.buscarMascotasEnTenencia();
 
 
       // Sección DISPONIBLES: Disponible Adopción, Disponible Provisorio y Disponible Adopción y Provisorio
@@ -183,6 +188,35 @@ export class RegistroMascotaComponent implements OnInit {
   }
 
 
+  async buscarMascotasEnTenencia(){
+    this.filtroEnTenenciaAplicado = true;
+    let filters: any = {};
+    if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
+    }
+    if (this.FilterForm.controls.sexo.value !== '') {
+      filters.sexo = this.FilterForm.controls.sexo.value;
+    }
+    if (this.FilterForm.controls.tipoMascota.value !== '') {
+      filters.tipoMascota = this.FilterForm.controls.tipoMascota.value;
+    }
+ 
+    // TRAER MASCOTAS
+    filters.modelo = "Adopcion";
+    this.registroMascotasService.filtrarMascotasEnTenencia(filters, this.auth.getToken()).subscribe(dataEnProvi => {
+      this.mascotasUsuarioEnProvi = dataEnProvi;
+ 
+      filters.estado = "Provisorio";
+      this.registroMascotasService.filtrarMascotasEnTenencia(filters, this.auth.getToken()).subscribe(dataAdoptado => {
+ 
+        this.unirMascotasEnTenencia(dataEnProvi,dataAdoptado);
+ 
+      });
+    });
+  }
+
+
+
   unirMascotasDisponibles(dataProvi: any, dataProAdop: any, dataAdop: any) {
     this.mascotasUsuario = [];
     //Junto los de "D.provisorio", "D.Adopción" y "D.Adopción y provisorio"
@@ -227,6 +261,30 @@ export class RegistroMascotaComponent implements OnInit {
       }
     }
   }
+
+  unirMascotasEnTenencia(dataEnProvi: any, dataAdoptado: any) {
+    this.mascotasEnTenencia = [];
+ 
+    var dato = [].concat(dataEnProvi, dataAdoptado);
+    this.mascotasEnTenencia = dato;
+ 
+ 
+    if (dato.length > 0) {
+      //Recorro mascotas
+      for (let x = 0; x < (dato.length); x++) {
+        if (dato[x].Foto.length != 0) {
+          //Recorro imágenes
+          for (let i = 0; i < dato[x].Foto.length; i++) {
+            // Foto Principal
+            if (dato[x].Foto[i].esPrincipal) {
+              this.mascotasEnTenencia[x].imagenCard = dato[x].Foto[i].foto;
+            }
+          }
+        }
+      }
+    }
+  }
+
 
 
   clean() {

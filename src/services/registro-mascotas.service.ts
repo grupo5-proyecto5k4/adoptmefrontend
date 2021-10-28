@@ -108,4 +108,23 @@ export class RegistroMascotasService {
         return this.http.get<any>(urlFiltered.toString(), { headers: new HttpHeaders().set('auth-token', `${token}`) });
     }
 
+    filtrarMascotasEnTenencia(filters: any, token: string): Observable<any> {
+        const urlFiltered = new URL("https://adoptme-testing-backend.herokuapp.com/animales/buscar/solicitudConfirmada")
+        if (filters.sexo) {
+            urlFiltered.searchParams.append("sexo", filters.sexo)
+        }
+        if (filters.tipoMascota) {
+            urlFiltered.searchParams.append("tipoMascota", filters.tipoMascota)
+        }
+        if (filters.tamañoFinal) {
+            urlFiltered.searchParams.append("tamañoFinal", filters.tamañoFinal)
+        }
+        if (filters.modelo) {
+            urlFiltered.searchParams.append("modelo", filters.modelo)
+        }
+        console.log(urlFiltered.toString())
+        return this.http.get<any>(urlFiltered.toString(), { headers: new HttpHeaders().set('auth-token', `${token}`) });
+    }
+
+
 }
