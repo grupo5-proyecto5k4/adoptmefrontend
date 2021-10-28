@@ -148,8 +148,6 @@ validatePassword() {
 
   guardar(){
 
-    if(this.ProfileForm.valid){
-
     let particularUser: User = new User();
     particularUser.nombres = this.ProfileForm.controls.nombres.value;
     particularUser.apellidos = this.ProfileForm.controls.apellidos.value;
@@ -168,11 +166,11 @@ validatePassword() {
       particularUser.facebook = this.ProfileForm.controls.facebook.value;
     }
     particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
-    console.log(particularUser);
+  
     
     this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
       (resp:Data) => {
-        localStorage.setItem('auth_token', resp.token);
+        localStorage.setItem('auth-token', resp.token);
         
         this.ProfileForm = new FormGroup({
           nombres: new FormControl({ value: resp.nombres, disabled: true }),
@@ -183,7 +181,7 @@ validatePassword() {
           fechaNacimiento: new FormControl({ value:resp.fechaNacimiento, disabled: true }),
           facebook: new FormControl({ value: resp.facebook, disabled: true }),
           instagram: new FormControl({ value: resp.instagram, disabled: true }),
-          contrasenia: new FormControl({ value: '', disabled: true })
+          contrasenia: new FormControl({ value: '*********', disabled: true })
         });
         
 
@@ -207,4 +205,3 @@ validatePassword() {
 
 
 
-}

@@ -15,8 +15,7 @@
                     <input matInput formControlName="nombres" maxlength="30">
                 </mat-form-field>
                 <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched ||
-                ProfileForm.get('nombres').dirty) &&
-                ProfileForm.get('nombres').errors)">
+                ProfileForm.get('nombres').dirty) && ProfileForm.get('nombres').errors)">
                         <span *ngIf="ProfileForm.get('nombres').errors.required">
                           <h6 class="helpError">Campo requerido</h6>
                         </span>
@@ -42,8 +41,7 @@
                     <input matInput formControlName="apellidos" maxlength="30">
                 </mat-form-field>
                 <span class="help-block" *ngIf="((ProfileForm.get('apellidos').touched ||
-                      ProfileForm.get('apellidos').dirty) &&
-                      ProfileForm.get('apellidos').errors)">
+                      ProfileForm.get('apellidos').dirty) && ProfileForm.get('apellidos').errors)">
                         <span *ngIf="ProfileForm.get('apellidos').errors.required">
                           <h6 class="helpError">Campo requerido</h6>
                         </span>
@@ -111,8 +109,7 @@
                     <input matInput formControlName="numeroContacto" maxlength="15">
                 </mat-form-field>
                 <span class="help-block" *ngIf="((ProfileForm.get('numeroContacto').touched ||
-                ProfileForm.get('numeroContacto').dirty) &&
-                ProfileForm.get('numeroContacto').errors)">
+                ProfileForm.get('numeroContacto').dirty) && ProfileForm.get('numeroContacto').errors)">
                   <span *ngIf="ProfileForm.get('numeroContacto').errors.pattern">
                     <h6 class="helpError">Ingrese valor numérico entre 10 y 13 dígitos</h6>
                   </span>
@@ -132,8 +129,7 @@
                 </mat-form-field>
                  
                 <span class="help-block" *ngIf="((ProfileForm.get('contrasenia').touched ||
-                ProfileForm.get('contrasenia').dirty) &&
-                ProfileForm.get('contrasenia').errors)">
+                ProfileForm.get('contrasenia').dirty) && ProfileForm.get('contrasenia').errors)">
                     <span *ngIf="ProfileForm.get('contrasenia').errors.required">
                       <h6 class="helpError">Campo requerido</h6>
                     </span>
@@ -152,9 +148,7 @@
 
             <div class="tooldiv" *ngIf="editarDatos">
                 <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
-            Entre 8 y 15 caracteres,
-            al menos una mayúscula,
-            una minúscula y un número"
+            Entre 8 y 15 caracteres, al menos una mayúscula, una minúscula y un número"
                   aria-label="Button that displays a tooltip when focused or hovered over">
                   ℹ
                 </label>

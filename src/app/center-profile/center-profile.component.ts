@@ -214,8 +214,32 @@ export class CenterProfileComponent implements OnInit {
 
       this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
         (resp:Data) => {
-          localStorage.setItem('auth_token', resp.token);
-          this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => window.location.href ="/miperfil");
+          localStorage.setItem('auth-token', resp.token);
+
+           this.ProfileForm = new FormGroup({
+          nombres: new FormControl({ value: resp.nombres, disabled: true }),
+          correoElectronico: new FormControl({ value: resp.correoElectronico, disabled: true }), 
+          numeroContacto: new FormControl({ value: resp.numeroContacto, disabled: true }),
+          fechaNacimiento: new FormControl({ value:resp.fechaNacimiento, disabled: true }),
+          facebook: new FormControl({ value: resp.facebook, disabled: true }),
+          instagram: new FormControl({ value: resp.instagram, disabled: true }),
+          contrasenia: new FormControl({ value: '*********', disabled: true }),         
+          calle: new FormControl({ value: resp.Direccion.calle, disabled: true }),
+          altura: new FormControl({ value: resp.Direccion.numero, disabled: true }),
+          localidad: new FormControl({ value: resp.Direccion.localidad, disabled: true }),
+          barrio: new FormControl({ value: resp.Direccion.barrio, disabled: true }),
+          referencia: new FormControl({ value: resp.Direccion.referencia, disabled: true }),
+          banco: new FormControl({ value: resp.Donacion.banco, disabled: true }),
+          cbu: new FormControl({ value: resp.Donacion.cbu, disabled: true }),
+          alias: new FormControl({ value: resp.Donacion.alias, disabled: true }),
+        
+        });
+
+          this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
+          this.enEdicion=false;
+          this.editarDatos=false;
+          this.esconder=true;
+        });
         },
         (err: any) => {
           this.alertsService.errorMessage(err.error.error).then((result) => {
