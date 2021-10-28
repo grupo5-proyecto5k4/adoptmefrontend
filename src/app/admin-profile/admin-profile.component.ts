@@ -145,24 +145,13 @@ export class AdminProfileComponent implements OnInit {
         localStorage.setItem('auth-token', resp.token);
         this.currentUser= this.authservice.setUser(resp);
         console.log(resp);
-        
-        this.ProfileForm = new FormGroup({
-          nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
-          apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
-          correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
-          dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
-          numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
-          fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true }),
-          facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
-          instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
-          contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
-        });
-        
+              
 
         this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( (r)=>{
           this.enEdicion=false;
           this.editarDatos=false;
           this.esconder=true;
+          this.inicializarFormulario();
         }
         )
       
