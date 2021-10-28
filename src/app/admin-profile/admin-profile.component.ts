@@ -70,7 +70,11 @@ export class AdminProfileComponent implements OnInit {
   }
 
   cancelar(){
-    window.location.href = "/perfiladmin";
+    this.enEdicion=false;
+    this.editarDatos=false;
+    this.esconder=true;
+  
+    this.inicializarFormulario();
   }
 
   editar(){
@@ -124,9 +128,7 @@ export class AdminProfileComponent implements OnInit {
     particularUser.nombres = this.ProfileForm.controls.nombres.value;
     particularUser.apellidos = this.ProfileForm.controls.apellidos.value;
     particularUser.numeroContacto = this.ProfileForm.controls.numeroContacto.value;
-    particularUser.dni = this.ProfileForm.controls.dni.value;
     
-    particularUser.fechaNacimiento = (this.ProfileForm.controls.fechaNacimiento.value).toLocaleString();;
     if (this.ProfileForm.controls.facebook.value !== "") {
       particularUser.facebook = this.ProfileForm.controls.facebook.value;
     }
@@ -134,9 +136,6 @@ export class AdminProfileComponent implements OnInit {
       particularUser.instagram = this.ProfileForm.controls.instagram.value;
     }
     
-    if (this.ProfileForm.controls.facebook.value !== "") {
-      particularUser.facebook = this.ProfileForm.controls.facebook.value;
-    }
     particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
   
     

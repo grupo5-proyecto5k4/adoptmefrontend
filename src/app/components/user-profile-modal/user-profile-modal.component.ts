@@ -62,7 +62,7 @@ export class UserProfileModalComponent implements OnInit {
     // Formato fecha  
     if (this.currentUser.fechaNacimiento !== null && this.currentUser.fechaNacimiento !== undefined) {
     var date = this.currentUser.fechaNacimiento.substring(0, 10);
-    var [yyyy, mm, dd] = date.split("-");
+   var [yyyy, mm, dd] = date.split("-");
     var revdate = `${dd}-${mm}-${yyyy}`;
     this.currentUser.fechaNacimiento = revdate;
     }
