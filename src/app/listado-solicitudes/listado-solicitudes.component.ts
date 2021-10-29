@@ -34,8 +34,17 @@ export class ListadoSolicitudesComponent implements OnInit {
         //Estado de solicitud
         var estado = this.solicitudes[x].Solicitud.estadoId;
         if (estado === "Aprobado Por Responsable"){
-          this.solicitudes[x].estado = true;
+          this.solicitudes[x].estado = "Aprobada";
+        } else if (estado === "Abierta"){
+          this.solicitudes[x].estado = "Pendiente de análisis";
+        } else if (estado === "Suspendido por Solicitante"){
+          this.solicitudes[x].estado = "Rechazada por solicitante";
+        } else if (estado === "Bloqueada"){
+          this.solicitudes[x].estado = "Bloqueada";
+        } else if (estado === "Aprobado"){
+          this.solicitudes[x].estado = "Exitosa";
         }
+      
 
       }
     })
@@ -53,7 +62,15 @@ export class ListadoSolicitudesComponent implements OnInit {
 
         var estado = this.solicitudesProvi[x].Solicitud.estadoId;
         if (estado === "Aprobado Por Responsable"){
-          this.solicitudesProvi[x].estado = true;
+          this.solicitudesProvi[x].estado = "Aprobada";
+        } else if (estado === "Abierta"){
+          this.solicitudesProvi[x].estado = "Pendiente de análisis";
+        } else if (estado === "Suspendido por Solicitante"){
+          this.solicitudesProvi[x].estado = "Rechazada por solicitante";
+        } else if (estado === "Bloqueada"){
+          this.solicitudesProvi[x].estado = "Bloqueada";
+        } else if (estado === "Aprobado"){
+          this.solicitudesProvi[x].estado = "Exitosa";
         }
       }
     })
@@ -67,6 +84,20 @@ export class ListadoSolicitudesComponent implements OnInit {
         var [yyyy, mm, dd] = date.split("-");
         var revdate = `${dd}-${mm}-${yyyy}`;
         this.solicitudesRealizadasAdop[x].fechaSolicitud = revdate;
+
+        //Estado de solicitud
+        var estado = this.solicitudesRealizadasAdop[x].Solicitud.estadoId;
+        if (estado === "Aprobado Por Responsable"){
+          this.solicitudesRealizadasAdop[x].estado = "Aprobada";
+        } else if (estado === "Abierta"){
+          this.solicitudesRealizadasAdop[x].estado = "Siendo analizada";
+        } else if (estado === "Suspendido por Solicitante"){
+          this.solicitudesRealizadasAdop[x].estado = "Rechazada";
+        } else if (estado === "Bloqueada"){
+          this.solicitudesRealizadasAdop[x].estado = "Bloqueada";
+        } else if (estado === "Aprobado"){
+          this.solicitudesRealizadasAdop[x].estado = "Exitosa";
+        }
       }
     })
 
@@ -79,6 +110,20 @@ export class ListadoSolicitudesComponent implements OnInit {
         var [yyyy, mm, dd] = date.split("-");
         var revdate = `${dd}-${mm}-${yyyy}`;
         this.solicitudesRealizadasProv[x].fechaSolicitud = revdate;
+        
+        //Estado de solicitud
+        var estado = this.solicitudesRealizadasProv[x].Solicitud.estadoId;
+        if (estado === "Aprobado Por Responsable"){
+          this.solicitudesRealizadasProv[x].estado = "Aprobada";
+        } else if (estado === "Abierta"){
+          this.solicitudesRealizadasProv[x].estado = "Siendo analizada";
+        } else if (estado === "Suspendido por Solicitante"){
+          this.solicitudesRealizadasProv[x].estado = "Rechazada";
+        } else if (estado === "Bloqueada"){
+          this.solicitudesRealizadasProv[x].estado = "Bloqueada";
+        } else if (estado === "Aprobado"){
+          this.solicitudesRealizadasProv[x].estado = "Exitosa";
+        }
       }
     })
   }
