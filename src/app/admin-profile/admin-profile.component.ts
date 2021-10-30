@@ -17,9 +17,9 @@ export class AdminProfileComponent implements OnInit {
   ProfileForm: FormGroup;
   profile: any;
   currentUser: any;
-  enEdicion:boolean=false;
-  editarDatos:boolean=false;
-  esconder:boolean=true;
+  enEdicion:boolean;
+  editarDatos:boolean;
+  esconder:boolean;
   token:any;
   edadInvalida: Boolean = false;
   mensajeEdad: string = "";
@@ -29,6 +29,12 @@ export class AdminProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.enEdicion=false;
+    this.editarDatos=false;
+    this.esconder=true;
+    
+
     this.profile = this.localStorageService.getProfile();
     if (this.profile == "0") {
       this.currentUser = this.authservice.getCurrentUser();
@@ -70,10 +76,11 @@ export class AdminProfileComponent implements OnInit {
   }
 
   cancelar(){
+    
     this.enEdicion=false;
     this.editarDatos=false;
     this.esconder=true;
-  
+
     this.inicializarFormulario();
   }
 
@@ -144,13 +151,14 @@ export class AdminProfileComponent implements OnInit {
         localStorage.setItem('auth-token', resp.token);
         this.currentUser= this.authservice.setUser(resp);
         console.log(resp);
-              
+         this.enEdicion=false;
+         this.editarDatos=false;
+         this.esconder=true;
 
         this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( (r)=>{
-          this.enEdicion=false;
-          this.editarDatos=false;
-          this.esconder=true;
-          this.inicializarFormulario();
+         
+         window.location.href ="/perfiladmin";
+         // this.inicializarFormulario();
         }
         )
       

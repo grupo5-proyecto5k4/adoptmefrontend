@@ -8,25 +8,17 @@
 <div class="centrado">
     <form [formGroup]="ProfileForm" class="example-form" *ngIf="ProfileForm">
 
-        <div class="container-row1">
+        <div class="container-row1">    
+
             <div>
-                <mat-form-field>
-                    <mat-label>Nombre</mat-label>
-                    <input matInput formControlName="nombres" maxlength="30">
-                </mat-form-field>
-                <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched ||
-                ProfileForm.get('nombres').dirty) && ProfileForm.get('nombres').errors)">
-                        <span *ngIf="ProfileForm.get('nombres').errors.required">
-                          <h6 class="helpError">Campo requerido</h6>
-                        </span>
-                        <span *ngIf="ProfileForm.get('nombres').errors.maxlength">
-                          <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
-                        </span>
-                        <span *ngIf="ProfileForm.get('nombres').errors.pattern">
-                          <h6 class="helpError">Formato del nombre no válido</h6>
-                        </span>
-                      </span>
-                      
+               <mat-form-field>
+                 <mat-label>Nombre</mat-label>
+                 <input matInput formControlName="nombres" maxlength="30">
+               </mat-form-field>
+              <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched || 
+              ProfileForm.get('nombres').dirty) && ProfileForm.get('nombres').errors)">
+              
+              </span> 
             </div>
 
             <div class="derecha">

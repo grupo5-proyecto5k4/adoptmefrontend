@@ -59,7 +59,11 @@ export class UserProfileComponent implements OnInit {
 
 
   cancelar(){
-    window.location.href = "/miperfil";
+    this.enEdicion=false;
+    this.editarDatos=false;
+    this.esconder=true;
+
+    this.inicializarFormulario();
   }
 
 
@@ -166,19 +170,19 @@ guardar(){
     particularUser.instagram = this.ProfileForm.controls.instagram.value;
   }
   
-  if (this.ProfileForm.controls.facebook.value !== "") {
-    particularUser.facebook = this.ProfileForm.controls.facebook.value;
-  }
   particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
   console.log(particularUser);
   
   this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
     (resp:Data) => {
       localStorage.setItem('auth-token', resp.token);
-      this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
-        this.enEdicion=false;
+      this.currentUser= this.authservice.setUser(resp);
+      this.enEdicion=false;
         this.editarDatos=false;
         this.esconder=true;
+
+      this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
+         window.location.href ="/miperfil";
       });
     },
     (err: any) => {

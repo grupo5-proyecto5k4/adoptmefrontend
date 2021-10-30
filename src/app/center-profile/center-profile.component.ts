@@ -7,6 +7,7 @@ import { Data, Router } from '@angular/router';
 import { SignupService } from 'src/services/signup.service';
 import { Address } from 'src/models/IAddress';
 import { User } from 'src/models/IUser';
+import { Donacion } from 'src/models/IDonacion';
 @Component({
   selector: 'app-center-profile',
   templateUrl: './center-profile.component.html',
@@ -30,6 +31,24 @@ export class CenterProfileComponent implements OnInit {
     if (this.profile == "2") {
       this.currentUser = this.authservice.getCurrentUser();
 
+      this.editUser.getCentrosDonaciones(this.currentUser._id, this.authservice.getToken()).subscribe(data => {
+        console.log("datos del banco", data);
+        this.currentUser.Donacion.banco= this.ProfileForm.controls['banco'].setValue(data.banco);
+        this.currentUser.Donacion.cbu= this.ProfileForm.controls['cbu'].setValue(data.cbu);
+        this.currentUser.Donacion.alias=this.ProfileForm.controls['alias'].setValue(data.alias);
+  
+        if(data.banco==null || data.banco==undefined){
+          this.ProfileForm.controls['banco'].setValue("No especificado"); 
+        }
+        if(data.cbu==null || data.cbu==undefined){
+          this.ProfileForm.controls['cbu'].setValue("No especificado"); 
+        }
+        if(data.alias==null || data.alias==undefined){
+          this.ProfileForm.controls['alias'].setValue("No especificado"); 
+        }
+      
+      })
+
       console.log(this.currentUser);
       if (this.currentUser.facebook == null) {
         this.currentUser.facebook = "No especificado"
@@ -45,16 +64,7 @@ export class CenterProfileComponent implements OnInit {
         this.currentUser.Direccion.referencia = "No especificado"
       }
 
-     //if(this.currentUser.Donacion.CBU==undefined){
-
-        // this.ProfileForm.controls['banco'].setValue("No especificado");
-       //  this.ProfileForm.controls['CBU'].setValue("No especificado");
-         
-         //this.ProfileForm.controls['alias'].setValue("No especificado");
-         //this.currentUser.Donacion.banco="No especificado";
-     //    this.currentUser.Donacion.CBU="No especificado";
-         //this.currentUser.Donacion.alias="No especificado";
-      //}
+     
 
       // Formato fecha   
       this.currentUser.pwd = "********";
@@ -94,9 +104,9 @@ export class CenterProfileComponent implements OnInit {
         localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
         barrio: new FormControl({ value: this.currentUser.Direccion.barrio, disabled: true }),
         referencia: new FormControl({ value: this.currentUser.Direccion.referencia, disabled: true }),
-        banco: new FormControl({ value: 'No especificado', disabled: true }),
-        cbu: new FormControl({ value: 'No especificado', disabled: true }),
-        alias: new FormControl({ value:'No especificado', disabled: true }),
+        banco: new FormControl({ value: this.currentUser.Donacion.banco, disabled: true }),
+        cbu: new FormControl({ value: this.currentUser.Donacion.cbu, disabled: true }),
+        alias: new FormControl({ value:this.currentUser.Donacion.alias, disabled: true }),
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
         instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
@@ -195,11 +205,11 @@ export class CenterProfileComponent implements OnInit {
       userAddress.barrio = this.ProfileForm.controls.barrio.value;
       particularUser.Direccion = userAddress;
 
-     // let donaciones: Donacion=new Donacion();
-      //donaciones.CBU=this.ProfileForm.controls.CBU.value;
-      //donaciones.alias=this.ProfileForm.controls.alias.value;
-      //donaciones.banco=this.ProfileForm.controls.banco.value;
-      //particularUser.Donacion=donaciones;
+     let donaciones: Donacion=new Donacion();
+     donaciones.cbu=this.ProfileForm.controls.cbu.value;
+      donaciones.alias=this.ProfileForm.controls.alias.value;
+      donaciones.banco=this.ProfileForm.controls.banco.value;
+      particularUser.Donacion=donaciones;
 
      
       if (this.ProfileForm.controls.instagram.value !== "") {
@@ -216,29 +226,12 @@ export class CenterProfileComponent implements OnInit {
         (resp:Data) => {
           localStorage.setItem('auth-token', resp.token);
 
-           this.ProfileForm = new FormGroup({
-          nombres: new FormControl({ value: resp.nombres, disabled: true }),
-          correoElectronico: new FormControl({ value: resp.correoElectronico, disabled: true }), 
-          numeroContacto: new FormControl({ value: resp.numeroContacto, disabled: true }),
-          fechaNacimiento: new FormControl({ value:resp.fechaNacimiento, disabled: true }),
-          facebook: new FormControl({ value: resp.facebook, disabled: true }),
-          instagram: new FormControl({ value: resp.instagram, disabled: true }),
-          contrasenia: new FormControl({ value: '*********', disabled: true }),         
-          calle: new FormControl({ value: resp.Direccion.calle, disabled: true }),
-          altura: new FormControl({ value: resp.Direccion.numero, disabled: true }),
-          localidad: new FormControl({ value: resp.Direccion.localidad, disabled: true }),
-          barrio: new FormControl({ value: resp.Direccion.barrio, disabled: true }),
-          referencia: new FormControl({ value: resp.Direccion.referencia, disabled: true }),
-          banco: new FormControl({ value: resp.Donacion.banco, disabled: true }),
-          cbu: new FormControl({ value: resp.Donacion.cbu, disabled: true }),
-          alias: new FormControl({ value: resp.Donacion.alias, disabled: true }),
-        
-        });
-
-          this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
-          this.enEdicion=false;
+           this.enEdicion=false;
           this.editarDatos=false;
           this.esconder=true;
+
+          this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
+            window.location.href ="/micentro";
         });
         },
         (err: any) => {

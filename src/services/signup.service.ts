@@ -32,8 +32,8 @@ export class SignupService {
       return this.httpClient.put<Donacion>(this.urlEditCentro, req ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
     }
 
-    getCentrosDonaciones(idcentro:string): Observable<any> {
-      return this.httpClient.get(this.urlEditCentro + idcentro);
+    getCentrosDonaciones(idcentro:string, token:string): Observable<any> {
+      return this.httpClient.get(this.urlEditCentro + idcentro,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
   }

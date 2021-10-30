@@ -13,7 +13,7 @@
                     <h2 class="subtitulo">{{Titulo}}</h2>
                   </div>
                   <div class="centrado">
-                    <form [formGroup]="ProfileForm" class="example-form" *ngIf="currentUser">
+                    <form [formGroup]="ProfileForm" class="example-form" *ngIf="ProfileForm">
 
                       <div class="container-row1"*ngIf="currentUser.tipoUsuario == 2">
                         <div>

@@ -52,11 +52,23 @@ export class UserProfileModalComponent implements OnInit {
       this.currentUser.instagram = "No especificado"
     };
 
-    this.editUser.getCentrosDonaciones(this.currentUser._id).subscribe(data => {
+    this.editUser.getCentrosDonaciones(this.currentUser._id, this.authservice.getToken()).subscribe(data => {
       console.log("datos del banco", data);
-      this.currentUser.Donacion.banco = data.banco;
-      this.currentUser.Donacion.cbu = data.cbu;
-      this.currentUser.Donacion.alias = data.alias;
+      this.ProfileForm.controls['banco'].setValue(data.banco);
+      this.ProfileForm.controls['cbu'].setValue(data.cbu);
+      this.ProfileForm.controls['alias'].setValue(data.alias);
+
+      if(data.banco==null){
+        this.ProfileForm.controls['banco'].setValue("No especificado"); 
+      }
+      if(data.cbu==null){
+        this.ProfileForm.controls['cbu'].setValue("No especificado"); 
+      }
+
+      if(data.alias==null){
+        this.ProfileForm.controls['alias'].setValue("No especificado"); 
+      }
+
   })
 
     // Formato fecha  
@@ -91,32 +103,7 @@ export class UserProfileModalComponent implements OnInit {
       this.ProfileForm.controls['fechaNacimiento'].setValue(this.currentUser.fechaNacimiento);
       }
 
-      if(this.currentUser.Donacion.banco==undefined){
-        this.ProfileForm.controls['banco'].setValue("No especificado");
-        
-      }
-
-      if(this.currentUser.Donacion.banco==null){
-        this.ProfileForm.controls['banco'].setValue("No especificado");
-        
-      }
-
-      if(this.currentUser.Donacion.cbu==undefined){
-        this.ProfileForm.controls['cbu'].setValue("No especificado");
-      }
-      
-      if(this.currentUser.Donacion.cbu==null){
-        this.ProfileForm.controls['cbu'].setValue("No especificado");
-      }
-
-      if(this.currentUser.Donacion.alias==undefined){
-        this.ProfileForm.controls['alias'].setValue("No especificado");
-      }
-
-      if(this.currentUser.Donacion.alias==null){
-        this.ProfileForm.controls['alias'].setValue("No especificado");
-      }
-
+     
   }
 
   inicializarFormulario(){
