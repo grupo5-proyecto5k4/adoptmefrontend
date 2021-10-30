@@ -94,6 +94,7 @@ export class ReportesCentroComponent implements OnInit {
 
     // Gráfico de tiempos máximos
     public barChartOptionsMax: ChartOptions = {
+
       responsive: true,
       // We use these empty structures as placeholders for dynamic theming.
       scales: { xAxes: [{}], yAxes: [{}] },
@@ -102,17 +103,17 @@ export class ReportesCentroComponent implements OnInit {
           anchor: 'end',
           align: 'end',
         }
-      }
+      }      
     };
     public barChartLabelsMax: Label[];
     public barChartTypeMax: ChartType = 'bar';
     public barChartLegendMax = true;
   
     public barChartDataMax: ChartDataSets[] = [
-      { data: [65], label: 'Perros cachorros' },
-      { data: [28], label: 'Perros adultos' },
-      { data: [30], label: 'Gatos cachorros' },
-      { data: [27], label: 'Gatos adultos' }
+      { data: [65], label: 'Perros cachorros', backgroundColor: "red" },
+      { data: [28], label: 'Perros adultos', backgroundColor: "purple" },
+      { data: [30], label: 'Gatos cachorros', backgroundColor: "blue" },
+      { data: [27], label: 'Gatos adultos', backgroundColor: "#222222", }
     ];
 
 
@@ -160,6 +161,11 @@ export class ReportesCentroComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+    this.barChartLabelsMin = ['Adopciones'];
+    this.barChartLabelsProm = ['Adopciones'];
+    this.barChartLabelsMax = ['Adopciones'];
+
 
     // Datos del backend:
   
@@ -210,10 +216,10 @@ export class ReportesCentroComponent implements OnInit {
     }
 
     this.minimos = [
-      { data: [this.minimoPerroCachorro], label: 'Perros cachorros' },
-      { data: [this.minimoPerroAdulto], label: 'Perros adultos' },
-      { data: [this.minimoGatoCachorro], label: 'Gatos cachorros'},
-      { data: [this.minimoGatoAdulto], label: 'Gatos adultos'}
+      { data: [this.minimoPerroCachorro], label: "Perros cachorros", backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1"},
+      { data: [this.minimoPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089"},
+      { data: [this.minimoGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC"},
+      { data: [this.minimoGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88"}
     ];
 
     var minimosPositivos = [];
@@ -230,11 +236,12 @@ export class ReportesCentroComponent implements OnInit {
 
 
     this.promedios = [
-      { data: [this.promedioPerroCachorro], label: 'Perros cachorros' },
-      { data: [this.promedioPerroAdulto], label: 'Perros adultos' },
-      { data: [this.promedioGatoCachorro], label: 'Gatos cachorros'},
-      { data: [this.promedioGatoAdulto], label: 'Gatos adultos'}
+      { data: [this.promedioPerroCachorro], label: 'Perros cachorros', backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1"},
+      { data: [this.promedioPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089"},
+      { data: [this.promedioGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC"},
+      { data: [this.promedioGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88"}
     ];
+
     var promediosPositivos = [];
     for (let x = 0; x < this.promedios.length; x++){
       if (this.promedios[x].data != 0){
@@ -244,10 +251,10 @@ export class ReportesCentroComponent implements OnInit {
     this.barChartDataProm = promediosPositivos;
 
     this.maximos = [
-      { data: [this.maximoPerroCachorro], label: 'Perros cachorros' },
-      { data: [this.maximoPerroAdulto], label: 'Perros adultos' },
-      { data: [this.maximoGatoCachorro], label: 'Gatos cachorros'},
-      { data: [this.maximoGatoAdulto], label: 'Gatos adultos'}
+      { data: [this.maximoPerroCachorro], label: 'Perros cachorros', backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1"},
+      { data: [this.maximoPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089"},
+      { data: [this.maximoGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC"},
+      { data: [this.maximoGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88"}
     ];
 
     var maximosPositivos = [];
