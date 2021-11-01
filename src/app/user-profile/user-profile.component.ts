@@ -59,7 +59,11 @@ export class UserProfileComponent implements OnInit {
 
 
   cancelar(){
-    window.location.href = "/miperfil";
+    this.enEdicion=false;
+    this.editarDatos=false;
+    this.esconder=true;
+
+    this.inicializarFormulario();
   }
 
 
@@ -99,8 +103,8 @@ export class UserProfileComponent implements OnInit {
     this.ProfileForm = new FormGroup({
       nombres: new FormControl({ value: this.currentUser.nombres, disabled: false },[Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
       apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: false },[Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
-      dni: new FormControl({ value: this.currentUser.dni, disabled: false },[Validators.required, Validators.pattern('[0-9]{7,8}')]),
-      fechaNacimiento: new FormControl({ value: '', disabled: false},[Validators.required]),
+      dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
+      fechaNacimiento: new FormControl({ value: this.currentUser.fechaNacimiento, disabled: true}),
       correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
       numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: false },[Validators.required, Validators.pattern('[0-9]{10,13}')]),
       facebook: new FormControl({ value: this.currentUser.facebook, disabled: false }),
@@ -122,32 +126,7 @@ editar(){
       
 }
 
-validateInitialDate() {
-  return (this.ProfileForm.get('fechaNacimiento').touched && (this.ProfileForm.controls.fechaNacimiento.value == ""));
-}
-
-
-
-CalculateAge() {
-    const today: Date = new Date();
-    const birthDate: Date = new Date(this.ProfileForm.controls.fechaNacimiento.value);
-    let age: number = today.getFullYear() - birthDate.getFullYear();
-    const month: number = today.getMonth() - birthDate.getMonth();
-    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    if (age < 18) {
-      this.edadInvalida = true;
-      this.mensajeEdad = "Debe ser mayor a 18 años";
-    }
-    else if (age > 100){
-      this.edadInvalida = true;
-      this.mensajeEdad = "Edad no válida";
-    }
-    else {
-      this.edadInvalida = false;
-    }
-}
+   
 
 validateName() {
   return (((this.ProfileForm.get('nombres').touched ||
@@ -161,17 +140,6 @@ validateLastname() {
     this.ProfileForm.get('apellidos').errors));
 }
 
-validateDNI() {
-  return (((this.ProfileForm.get('dni').touched ||
-    this.ProfileForm.get('dni').dirty) &&
-    this.ProfileForm.get('dni').errors));
-}
-
-validateBirthdate() {
-  return (((this.ProfileForm.get('fechaNacimiento').touched ||
-    this.ProfileForm.get('fechaNacimiento').dirty) &&
-    this.ProfileForm.get('fechaNacimiento').errors));
-}
 
 validateContactNumber() {
   return (((this.ProfileForm.get('numeroContacto').touched ||
@@ -202,16 +170,20 @@ guardar(){
     particularUser.instagram = this.ProfileForm.controls.instagram.value;
   }
   
-  if (this.ProfileForm.controls.facebook.value !== "") {
-    particularUser.facebook = this.ProfileForm.controls.facebook.value;
-  }
   particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
   console.log(particularUser);
   
   this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
     (resp:Data) => {
-      localStorage.setItem('auth_token', resp.token);
-      this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => window.location.href ="/miperfil");
+      localStorage.setItem('auth-token', resp.token);
+      this.currentUser= this.authservice.setUser(resp);
+      this.enEdicion=false;
+        this.editarDatos=false;
+        this.esconder=true;
+
+      this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
+         window.location.href ="/miperfil";
+      });
     },
     (err: any) => {
       this.alertsService.errorMessage(err.error.error).then((result) => {

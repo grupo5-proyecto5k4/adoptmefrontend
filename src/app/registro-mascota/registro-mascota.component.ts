@@ -26,14 +26,18 @@ export class RegistroMascotaComponent implements OnInit {
   mascotasUsuarioEnProvi: any;
   mascotasUsuarioAdoptado: any;
   mascotasUsuarioNoDisponibles;
+  mascotasEnTenencia;
   FilterForm: FormGroup;
   tamanos = ['Pequeño', 'Mediano', 'Grande'];
   gatoSeleccionado = false;
   filtroDisponibleAplicado = false;
   filtroNoDisponibleAplicado = false;
+  filtroEnTenenciaAplicado = false;
   countNoDisponibles = 0;
+  countTenencia = 0;
+  profile: any;
 
-  constructor(public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private auth: AuthService) {
+  constructor(public registroMascotasService: RegistroMascotasService, private authservice: AuthService, private dialog: MatDialog, private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -43,38 +47,41 @@ export class RegistroMascotaComponent implements OnInit {
     // SECCIÓN NO DISPONIBLES: Adoptado (3) y En Provisorio (4)
     //
     this.buscarMascotasNoDisponibles();
+    this.profile = this.authservice.getProfile();
+    if (this.profile == "1") {
+      this.buscarMascotasEnTenencia();
+    }
 
+    // Sección DISPONIBLES: Disponible Adopción, Disponible Provisorio y Disponible Adopción y Provisorio
+    // Disponible Provisorio
+    this.registroMascotasService.getMascotasUser(2, this.auth.getToken()).subscribe(dataProvi => {
+      if (dataProvi.mesage === "[]") {
+        dataProvi = [];
+      }
+      this.mascotasUsuarioProvi = dataProvi;
 
-      // Sección DISPONIBLES: Disponible Adopción, Disponible Provisorio y Disponible Adopción y Provisorio
-      // Disponible Provisorio
-      this.registroMascotasService.getMascotasUser(2, this.auth.getToken()).subscribe(dataProvi => {
-        if (dataProvi.mesage === "[]") {
-          dataProvi = [];
+      // Provisorio y Adopcion 
+      this.registroMascotasService.getMascotasUser(0, this.auth.getToken()).subscribe(dataProAdop => {
+        if (dataProAdop.mesage === "[]") {
+          dataProAdop = [];
         }
-        this.mascotasUsuarioProvi = dataProvi;
+        this.mascotasUsuarioProAdop = dataProAdop;
 
-        // Provisorio y Adopcion 
-        this.registroMascotasService.getMascotasUser(0, this.auth.getToken()).subscribe(dataProAdop => {
-          if (dataProAdop.mesage === "[]") {
-            dataProAdop = [];
+        // Disponible Adopción
+        this.registroMascotasService.getMascotasUser(1, this.auth.getToken()).subscribe(dataAdop => {
+          if (dataAdop.mesage === "[]") {
+            dataAdop = [];
           }
-          this.mascotasUsuarioProAdop = dataProAdop;
+          this.mascotasUsuarioAdop = dataAdop;
 
-          // Disponible Adopción
-          this.registroMascotasService.getMascotasUser(1, this.auth.getToken()).subscribe(dataAdop => {
-            if (dataAdop.mesage === "[]") {
-              dataAdop = [];
-            }
-            this.mascotasUsuarioAdop = dataAdop;
-
-            this.unirMascotasDisponibles(dataProvi, dataProAdop, dataAdop)
-          })
+          this.unirMascotasDisponibles(dataProvi, dataProAdop, dataAdop)
         })
-      },
-        err => {
-          console.log('ERROR...')
-        }
-      )
+      })
+    },
+      err => {
+        console.log('ERROR...')
+      }
+    )
 
 
   }
@@ -100,9 +107,9 @@ export class RegistroMascotaComponent implements OnInit {
     });
   }
 
-  async buscarMascotasNoDisponibles(){
-    this.countNoDisponibles ++;
-    if (this.countNoDisponibles>1){
+  async buscarMascotasNoDisponibles() {
+    this.countNoDisponibles++;
+    if (this.countNoDisponibles > 1) {
       this.filtroNoDisponibleAplicado = true;
     }
     let filters: any = {};
@@ -131,7 +138,7 @@ export class RegistroMascotaComponent implements OnInit {
       filters.estado = "Adoptado";
       this.registroMascotasService.getMascotasPropiasFiltradas(filters, this.auth.getToken()).subscribe(dataAdoptado => {
 
-        this.unirMascotasNoDisponibles(dataEnProvi,dataAdoptado);
+        this.unirMascotasNoDisponibles(dataEnProvi, dataAdoptado);
 
       });
     });
@@ -157,32 +164,61 @@ export class RegistroMascotaComponent implements OnInit {
     }
     filters.responsableId = this.auth.getCurrentUser()._id;
 
-          // Sección DISPONIBLES: Disponible Adopción, Disponible Provisorio y Disponible Adopción y Provisorio
-      // Disponible Provisorio
-      filters.estado = "Disponible Provisorio";
-      this.registroMascotasService.getMascotasPropiasFiltradas(filters, this.auth.getToken()).subscribe(dataProvi => {
-        this.mascotasUsuarioProvi = dataProvi;
+    // Sección DISPONIBLES: Disponible Adopción, Disponible Provisorio y Disponible Adopción y Provisorio
+    // Disponible Provisorio
+    filters.estado = "Disponible Provisorio";
+    this.registroMascotasService.getMascotasPropiasFiltradas(filters, this.auth.getToken()).subscribe(dataProvi => {
+      this.mascotasUsuarioProvi = dataProvi;
 
-        // Provisorio y Adopcion 
-        filters.estado = "Disponible Adopción y Provisorio";
-        this.registroMascotasService.getMascotasPropiasFiltradas(filters, this.auth.getToken()).subscribe(dataProAdop => {
-          this.mascotasUsuarioProAdop = dataProAdop;
+      // Provisorio y Adopcion 
+      filters.estado = "Disponible Adopción y Provisorio";
+      this.registroMascotasService.getMascotasPropiasFiltradas(filters, this.auth.getToken()).subscribe(dataProAdop => {
+        this.mascotasUsuarioProAdop = dataProAdop;
 
-          // Disponible Adopción
-          filters.estado = "Disponible Adopción";
-          this.registroMascotasService.getMascotasPropiasFiltradas(filters, this.auth.getToken()).subscribe(dataAdop => {
-            this.mascotasUsuarioAdop = dataAdop;
+        // Disponible Adopción
+        filters.estado = "Disponible Adopción";
+        this.registroMascotasService.getMascotasPropiasFiltradas(filters, this.auth.getToken()).subscribe(dataAdop => {
+          this.mascotasUsuarioAdop = dataAdop;
 
-            this.unirMascotasDisponibles(dataProvi, dataProAdop, dataAdop)
-          })
+          this.unirMascotasDisponibles(dataProvi, dataProAdop, dataAdop)
         })
-      },
-        err => {
-          console.log('ERROR...')
-        }
-      )
+      })
+    },
+      err => {
+        console.log('ERROR...')
+      }
+    )
     window.scrollTo(0, 0);
   }
+
+
+  async buscarMascotasEnTenencia() {
+    this.filtroEnTenenciaAplicado = true;
+    let filters: any = {};
+    if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
+    }
+    if (this.FilterForm.controls.sexo.value !== '') {
+      filters.sexo = this.FilterForm.controls.sexo.value;
+    }
+    if (this.FilterForm.controls.tipoMascota.value !== '') {
+      filters.tipoMascota = this.FilterForm.controls.tipoMascota.value;
+    }
+
+    // TRAER MASCOTAS
+    filters.modelo = "Adopcion";
+    this.registroMascotasService.filtrarMascotasEnTenencia(filters, this.auth.getToken()).subscribe(dataEnProvi => {
+      this.mascotasUsuarioEnProvi = dataEnProvi;
+
+      filters.modelo = "Provisorio";
+      this.registroMascotasService.filtrarMascotasEnTenencia(filters, this.auth.getToken()).subscribe(dataAdoptado => {
+
+        this.unirMascotasEnTenencia(dataEnProvi, dataAdoptado);
+
+      });
+    });
+  }
+
 
 
   unirMascotasDisponibles(dataProvi: any, dataProAdop: any, dataAdop: any) {
@@ -204,7 +240,7 @@ export class RegistroMascotaComponent implements OnInit {
           }
         }
       }
-    } 
+    }
   }
 
   unirMascotasNoDisponibles(dataEnProvi: any, dataAdoptado: any) {
@@ -230,6 +266,7 @@ export class RegistroMascotaComponent implements OnInit {
     }
   }
 
+
   openMascota(mascota: Mascota) {
     this.dialog.open(VerMascotaComponent, {
       data: {
@@ -238,6 +275,31 @@ export class RegistroMascotaComponent implements OnInit {
       }
     })
   }
+
+  unirMascotasEnTenencia(dataEnProvi: any, dataAdoptado: any) {
+    this.mascotasEnTenencia = [];
+
+    var dato = [].concat(dataEnProvi, dataAdoptado);
+    this.mascotasEnTenencia = dato;
+
+
+    if (dato.length > 0) {
+      //Recorro mascotas
+      for (let x = 0; x < (dato.length); x++) {
+        if (dato[x].Foto.length != 0) {
+          //Recorro imágenes
+          for (let i = 0; i < dato[x].Foto.length; i++) {
+            // Foto Principal
+            if (dato[x].Foto[i].esPrincipal) {
+              this.mascotasEnTenencia[x].imagenCard = dato[x].Foto[i].foto;
+            }
+          }
+        }
+      }
+    }
+  }
+
+
 
   clean() {
     this.iniciarForm();

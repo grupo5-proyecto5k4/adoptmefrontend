@@ -17,9 +17,9 @@ export class AdminProfileComponent implements OnInit {
   ProfileForm: FormGroup;
   profile: any;
   currentUser: any;
-  enEdicion:boolean=false;
-  editarDatos:boolean=false;
-  esconder:boolean=true;
+  enEdicion:boolean;
+  editarDatos:boolean;
+  esconder:boolean;
   token:any;
   edadInvalida: Boolean = false;
   mensajeEdad: string = "";
@@ -29,6 +29,12 @@ export class AdminProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.enEdicion=false;
+    this.editarDatos=false;
+    this.esconder=true;
+    
+
     this.profile = this.localStorageService.getProfile();
     if (this.profile == "0") {
       this.currentUser = this.authservice.getCurrentUser();
@@ -70,7 +76,12 @@ export class AdminProfileComponent implements OnInit {
   }
 
   cancelar(){
-    window.location.href = "/perfiladmin";
+    
+    this.enEdicion=false;
+    this.editarDatos=false;
+    this.esconder=true;
+
+    this.inicializarFormulario();
   }
 
   editar(){
@@ -82,68 +93,7 @@ export class AdminProfileComponent implements OnInit {
     this.inicializarFormulario();
         
   }
-  
-  validateInitialDate() {
-    return (this.ProfileForm.get('fechaNacimiento').touched && (this.ProfileForm.controls.fechaNacimiento.value == ""));
-  }
-
-  CalculateAge() {
-    const today: Date = new Date();
-    const birthDate: Date = new Date(this.ProfileForm.controls.fechaNacimiento.value);
-    let age: number = today.getFullYear() - birthDate.getFullYear();
-    const month: number = today.getMonth() - birthDate.getMonth();
-    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
-      age--;
-    }
-    if (age < 18) {
-      this.edadInvalida = true;
-      this.mensajeEdad = "Debe ser mayor a 18 años";
-    }
-    else if (age > 100){
-      this.edadInvalida = true;
-      this.mensajeEdad = "Edad no válida";
-    }
-    else {
-      this.edadInvalida = false;
-    }
-}
-  
-validateName() {
-  return (((this.ProfileForm.get('nombres').touched ||
-    this.ProfileForm.get('nombres').dirty) &&
-    this.ProfileForm.get('nombres').errors));
-}
-
-validateLastname() {
-  return (((this.ProfileForm.get('apellidos').touched ||
-    this.ProfileForm.get('apellidos').dirty) &&
-    this.ProfileForm.get('apellidos').errors));
-}
-
-validateDNI() {
-  return (((this.ProfileForm.get('dni').touched ||
-    this.ProfileForm.get('dni').dirty) &&
-    this.ProfileForm.get('dni').errors));
-}
-
-validateBirthdate() {
-  return (((this.ProfileForm.get('fechaNacimiento').touched ||
-    this.ProfileForm.get('fechaNacimiento').dirty) &&
-    this.ProfileForm.get('fechaNacimiento').errors));
-}
-
-validateContactNumber() {
-  return (((this.ProfileForm.get('numeroContacto').touched ||
-    this.ProfileForm.get('numeroContacto').dirty) &&
-    this.ProfileForm.get('numeroContacto').errors));
-}
-
-validatePassword() {
-  return (((this.ProfileForm.get('contrasenia').touched ||
-    this.ProfileForm.get('contrasenia').dirty) &&
-    this.ProfileForm.get('contrasenia').errors));
-}
-
+ 
 
   inicializarFormulario(){
 
@@ -154,7 +104,7 @@ validatePassword() {
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
         dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
-        fechaNacimiento: new FormControl({ value: this.currentUser.fechaNacimiento, disabled: true }),
+        fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true }),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
         instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
         contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
@@ -165,8 +115,8 @@ validatePassword() {
       this.ProfileForm = new FormGroup({
         nombres: new FormControl({ value: this.currentUser.nombres, disabled: false },[Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
         apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: false },[Validators.required,Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú ]*$')]),
-        dni: new FormControl({ value: this.currentUser.dni, disabled: false },[Validators.required, Validators.pattern('[0-9]{7,8}')]),
-        fechaNacimiento: new FormControl({ value: '', disabled: false},[Validators.required]),
+        dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
+        fechaNacimiento: new FormControl({ value: this.currentUser.fechaNacimiento, disabled: true}),
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: false },[Validators.required, Validators.pattern('[0-9]{10,13}')]),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: false }),
@@ -181,15 +131,11 @@ validatePassword() {
 
   guardar(){
 
-    if(this.ProfileForm.valid){
-
     let particularUser: User = new User();
     particularUser.nombres = this.ProfileForm.controls.nombres.value;
     particularUser.apellidos = this.ProfileForm.controls.apellidos.value;
     particularUser.numeroContacto = this.ProfileForm.controls.numeroContacto.value;
-    particularUser.dni = this.ProfileForm.controls.dni.value;
     
-    particularUser.fechaNacimiento = (this.ProfileForm.controls.fechaNacimiento.value).toLocaleString();;
     if (this.ProfileForm.controls.facebook.value !== "") {
       particularUser.facebook = this.ProfileForm.controls.facebook.value;
     }
@@ -197,16 +143,25 @@ validatePassword() {
       particularUser.instagram = this.ProfileForm.controls.instagram.value;
     }
     
-    if (this.ProfileForm.controls.facebook.value !== "") {
-      particularUser.facebook = this.ProfileForm.controls.facebook.value;
-    }
     particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
-    console.log(particularUser);
+  
     
     this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
       (resp:Data) => {
-        localStorage.setItem('auth_token', resp.token);
-        this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => window.location.href ="/miperfil");
+        localStorage.setItem('auth-token', resp.token);
+        this.currentUser= this.authservice.setUser(resp);
+        console.log(resp);
+         this.enEdicion=false;
+         this.editarDatos=false;
+         this.esconder=true;
+
+        this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( (r)=>{
+         
+         window.location.href ="/perfiladmin";
+         // this.inicializarFormulario();
+        }
+        )
+      
       },
       (err: any) => {
         this.alertsService.errorMessage(err.error.error).then((result) => {
@@ -220,4 +175,3 @@ validatePassword() {
 
 
 
-}
