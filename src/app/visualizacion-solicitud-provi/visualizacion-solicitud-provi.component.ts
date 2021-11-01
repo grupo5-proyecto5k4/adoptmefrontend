@@ -174,7 +174,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   }
 
   async aceptarSolicitud() {
-    if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '')) {
+    if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '' && !this.validarFrecuencia())) {
       this.isLoading = true;
       console.log(this.data.solicitud.Animales.nombreMascota + " " + this.idSolicitud + ' ' + this.data.solicitud.solicitanteId)
       this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
@@ -222,19 +222,20 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
   validarFrecuencia(){
     let tiempo_provisorio: number;
-    if (this.dataSolicitud.tiempoTenencia == "7 días"){
+    if (this.dataSolicitud.tiempoTenencia == 0){
       tiempo_provisorio = 7;
     }
-    else if(this.dataSolicitud.tiempoTenencia == "14 días"){
+    else if(this.dataSolicitud.tiempoTenencia == 1){
       tiempo_provisorio = 14;
     }
-    else if(this.dataSolicitud.tiempoTenencia == "1 mes"){
+    else if(this.dataSolicitud.tiempoTenencia == 2){
       tiempo_provisorio = 30;
     }
     else{
       tiempo_provisorio = 999;
     }
-    return (this.SolicitudForm.controls.frecuencia.value < tiempo_provisorio)
+    
+    return ((this.SolicitudForm.controls.frecuencia.value >= tiempo_provisorio)&&(this.SolicitudForm.controls.frecuencia.value != ''))
   }
 
   async rechazarSolicitudAprobada() {

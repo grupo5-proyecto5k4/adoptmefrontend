@@ -230,10 +230,11 @@
                                                 </section>
 
                                                 <div style="width: 100%;" *ngIf="seguimientoChecked">
-                                                    <mat-form-field class="ref" (change)="validarFrecuencia()">
+                                                    <mat-form-field class="ref">
                                                         <mat-label>*¿Con qué frecuencia desea realizar el seguimiento?
                                                         </mat-label>
                                                         <mat-select formControlName="frecuencia">
+                                                            <mat-option value="3">Cada 3 días</mat-option>
                                                             <mat-option value="7">Cada 1 semana</mat-option>
                                                             <mat-option value="14">Cada 2 semanas</mat-option>
                                                         </mat-select>
@@ -245,6 +246,9 @@
                                                             <h6 class="helpError">Campo requerido</h6>
                                                         </span>
                                                     </span>
+                                                    <span class="help-block" *ngIf="validarFrecuencia()">
+                                                        <h6 class="helpError">La frecuencia del seguimiento debe ser menor al plazo del provisorio</h6>
+                                                    </span>
                                                     <div id="passwordRequirement">
                                                         <div>
                                                             <p id="requer">(*)Campos obligatorios</p>
@@ -255,7 +259,8 @@
                                             <div class="container-row1" *ngIf="!faltaAceptar()">
                                                 <div>
                                                     <mat-form-field class="ref">
-                                                        <mat-label>Frecuencia con la que se realizará el seguimiento</mat-label>
+                                                        <mat-label>Frecuencia con la que se realizará el seguimiento
+                                                        </mat-label>
                                                         <textarea matInput formControlName="frecuencia"
                                                             maxlength="150"></textarea>
                                                     </mat-form-field>
