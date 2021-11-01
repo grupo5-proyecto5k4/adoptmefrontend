@@ -109,7 +109,7 @@ export class RegistroMascotasService {
     }
 
     filtrarMascotasEnTenencia(filters: any, token: string): Observable<any> {
-        const urlFiltered = new URL("https://adoptme-testing-backend.herokuapp.com/animales/buscar/solicitudConfirmada")
+        const urlFiltered = new URL("https://adoptmebackend.herokuapp.com/animales/buscar/solicitudConfirmada")
         if (filters.sexo) {
             urlFiltered.searchParams.append("sexo", filters.sexo)
         }
