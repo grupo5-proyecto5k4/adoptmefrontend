@@ -1,0 +1,130 @@
+
+.card-container{
+    width: 50%;
+    height: 85%;
+    border-radius: 15px;
+    position: absolute;
+    top: 46.5%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: 0px 1px 10px 1px #000;
+    overflow: hidden;
+    display: inline-block;
+    background: rgb(255, 245, 237);
+    overflow-y: auto !important;
+    max-height: 83%;
+    margin-top: 5%;
+    }
+
+
+  ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 15px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    margin:3px;
+}
+  
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px rgb(255, 245, 237) inset;
+  }
+
+
+.section-title{
+    margin-top: 10px;
+    color: #B80092,
+}
+
+.subtitulo{
+    font-size: 200% !important;
+    font-family: 'Times New Roman';
+    font-style: bold;
+    text-align: center;
+  }
+
+  .btnLogout{
+    color:#B80092;
+    font-weight:bold;
+    border: #fafafa;
+    background-color: #fafafa;
+}
+
+.logout-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+#btncuenta{
+    color:#B80092;
+    cursor: pointer;
+    float:right;
+    border-color:transparent;
+    background-color: transparent;
+    outline: none;
+    border-radius: 3px;
+    margin-right: 0%;
+    margin-top: 0%;
+    line-height: 36px;
+    width: 36px;
+    font-size: 150%;
+  }
+
+.txt-construction{
+    margin-top: 25px;
+    text-align: justify;
+    width: 91%;
+    padding: 40px 1px 1px 40px;
+    line-height: 200%;
+}
+
+
+@media (max-width:600px){
+      
+    .txt-construction{
+        padding: 20px 1px 1px 20px;
+    }
+
+    
+.card-container{
+    width: 80% !important;
+    height: 60% !important;
+    top: 40% !important;
+    margin-top: 2% !important;
+    }
+   
+    
+}
+
+@media (min-width: 601px) and (max-width: 1599px)
+{
+    
+    .txt-construction{
+        padding: 30px 1px 1px 30px;
+    }
+
+    .card-container{
+        top: 43.5% !important;
+        }
+    
+}
+
+
+@media (min-width: 1600px){
+    .txt-construction{
+        padding: 30px 1px 1px 30px;
+    }
+
+    .card-container{
+        top: 40% !important;
+        }
+}

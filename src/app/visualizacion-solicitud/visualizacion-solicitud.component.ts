@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
 import { AuthService } from '../auth.service';
 import { NotificacionService } from 'src/services/notificacion.service';
+import { FormularioAdopcion } from 'src/models/IFormularioAdopcion';
 
 @Component({
   selector: 'app-visualizacion-solicitud',
@@ -172,6 +173,12 @@ export class VisualizacionSolicitudComponent implements OnInit {
   async aceptarSolicitud() {
     if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '')) {
       this.isLoading = true;
+      if (this.seguimientoChecked){
+        let solicitud: FormularioAdopcion = new FormularioAdopcion();
+        solicitud._id = this.idSolicitud;
+        solicitud.cadaCuanto = this.SolicitudForm.controls.frecuencia.value;
+        this.visualizacionSolicitudesService.actualizarSolicitudAdopcion(solicitud, this.auth.getToken()).subscribe(async soli => { })
+      }
       console.log(this.data.solicitud.Animales.nombreMascota + " " + this.idSolicitud + ' ' + this.data.solicitud.solicitanteId)
       this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
         this.data = dataProvi;

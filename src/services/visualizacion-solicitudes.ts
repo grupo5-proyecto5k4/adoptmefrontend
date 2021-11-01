@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { FormularioProvisorio } from 'src/models/IFormularioProvisorio';
+import { FormularioAdopcion } from 'src/models/IFormularioAdopcion';
 
 @Injectable({
     providedIn: 'root'
@@ -40,5 +42,15 @@ export class VisualizacionSolicitudesService {
 
     getSolicitudesRealizadas(tipoSolicitud: string, token:string): Observable<any> {
         return this.http.get(('https://adoptmebackend.herokuapp.com/formulario/buscar/solicitudrealizada/'+tipoSolicitud), { headers: new HttpHeaders().set('auth-token', `${token}`)});
+    }
+
+    actualizarSolicitudProvisorio(solicitud: FormularioProvisorio, token:string): Observable <FormularioProvisorio> {
+        return this.http.put<FormularioProvisorio>('url', solicitud ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
+      //AGREGAR LA URL DEL BACK
+    }
+
+    actualizarSolicitudAdopcion(solicitud: FormularioAdopcion, token:string): Observable <FormularioAdopcion> {
+        return this.http.put<FormularioAdopcion>('url', solicitud ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
+      //AGREGAR LA URL DEL BACK
     }
 }

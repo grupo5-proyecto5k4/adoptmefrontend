@@ -18,6 +18,7 @@ interface IFormularioProvisorio {
     solitanteId: string;
     fechaCreacion?: Date;
     fechaModificacion?: Date;
+    cadaCuanto?: number;
     }
   
     export class FormularioProvisorio implements IFormularioProvisorio {
@@ -39,6 +40,7 @@ interface IFormularioProvisorio {
       solitanteId: string;
       tiempoTenencia: number;
       estadoId?: string;
+      cadaCuanto?: number;
     
       constructor() {
         };

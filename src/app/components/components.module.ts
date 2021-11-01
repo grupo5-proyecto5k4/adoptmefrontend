@@ -13,12 +13,13 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { UserProfileModalComponent } from './user-profile-modal/user-profile-modal.component';
 import { VerMascotaComponent } from './ver-mascota/ver-mascota.component';
 import {MatTableModule} from '@angular/material/table';
-
+import { ConsultaSeguimientosComponent } from './consulta-seguimientos/consulta-seguimientos.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
 @NgModule({
-    declarations: [SignupParticularComponent, SignupRescatistComponent, UserFormComponent, UserProfileModalComponent, VerMascotaComponent],
+    declarations: [SignupParticularComponent, SignupRescatistComponent, UserFormComponent, UserProfileModalComponent, VerMascotaComponent, ConsultaSeguimientosComponent],
     imports: [
       ReactiveFormsModule,
       FormsModule,
@@ -29,7 +30,8 @@ import {MatTableModule} from '@angular/material/table';
       MatTooltipModule,
       MatRadioModule,
       MatCheckboxModule,
-      MatTableModule
+      MatTableModule,
+      MatExpansionModule
     ],
     providers:[],
     exports: [
@@ -37,7 +39,8 @@ import {MatTableModule} from '@angular/material/table';
       SignupRescatistComponent,
       UserFormComponent,
       UserProfileModalComponent,
-      VerMascotaComponent
+      VerMascotaComponent,
+      ConsultaSeguimientosComponent
      ]
   })
 export class ComponentsModule{}

@@ -19,6 +19,7 @@ import { UserFormComponent } from '../user-form/user-form.component';
 import { MascotaService } from 'src/services/mascota.service';
 import { SolicitudProvisorioComponent } from 'src/app/solicitud-provisorio/solicitud-provisorio.component';
 import { LocalStorageService } from 'src/services/local-storage.service';
+import { ConsultaSeguimientosComponent } from '../consulta-seguimientos/consulta-seguimientos.component';
 
 
 @Component({
@@ -150,8 +151,17 @@ export class VerMascotaComponent implements OnInit {
     })
   }
 
+  openSeguimientos(){
+    this.dialog.open(ConsultaSeguimientosComponent, {
+      data: {
+        mascota: this.data.mascota,
+        accion: this.accion,
+      }
+    })
+  }
+
   esResponsable(){
-    console.log("Repsonsable");
+    return (this.localStorageService.getUser()._id === this.data.mascota.responsableId);
   }
 
   esParticular(){
