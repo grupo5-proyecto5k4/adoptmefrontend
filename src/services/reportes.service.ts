@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class ReportesService {
 
-  endpointTiempoAdopcion = "";
+  endpointTiempoAdopcion = " https://adoptmebackend.herokuapp.com/animales/reportes/reporteTiempoAdopcion";
 
   constructor(private http: HttpClient) {}
 
-  getAdoptionsTimeArray(): Observable<any> {  
-    return this.http.get(this.endpointTiempoAdopcion);
+  getAdoptionsTimeArray(desde, hasta, token): Observable<any> {
+    return this.http.get(this.endpointTiempoAdopcion + "?fechaDesde=" + desde + "&fechaHasta=" + hasta, { headers: new HttpHeaders().set('auth-token', `${token}`) });
     }
   }
 
