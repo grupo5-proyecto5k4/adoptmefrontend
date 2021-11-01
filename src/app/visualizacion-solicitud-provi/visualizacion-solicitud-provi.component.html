@@ -230,7 +230,7 @@
                                                 </section>
 
                                                 <div style="width: 100%;" *ngIf="seguimientoChecked">
-                                                    <mat-form-field class="ref">
+                                                    <mat-form-field class="ref" (change)="validarFrecuencia()">
                                                         <mat-label>*¿Con qué frecuencia desea realizar el seguimiento?
                                                         </mat-label>
                                                         <mat-select formControlName="frecuencia">

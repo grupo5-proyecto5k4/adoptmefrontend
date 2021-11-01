@@ -220,6 +220,23 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     this.seguimientoChecked = !this.seguimientoChecked;
   }
 
+  validarFrecuencia(){
+    let tiempo_provisorio: number;
+    if (this.dataSolicitud.tiempoTenencia == "7 días"){
+      tiempo_provisorio = 7;
+    }
+    else if(this.dataSolicitud.tiempoTenencia == "14 días"){
+      tiempo_provisorio = 14;
+    }
+    else if(this.dataSolicitud.tiempoTenencia == "1 mes"){
+      tiempo_provisorio = 30;
+    }
+    else{
+      tiempo_provisorio = 999;
+    }
+    return (this.SolicitudForm.controls.frecuencia.value < tiempo_provisorio)
+  }
+
   async rechazarSolicitudAprobada() {
     this.isLoading = true;
     this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
