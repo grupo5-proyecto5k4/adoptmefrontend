@@ -5,6 +5,7 @@ import { VisualizacionSolicitudesService } from 'src/services/visualizacion-soli
 import { AuthService } from '../auth.service';
 import { AlertsService } from 'src/utils/alerts.service';
 import { NotificacionService } from 'src/services/notificacion.service';
+import { FormularioProvisorio } from 'src/models/IFormularioProvisorio';
 
 @Component({
   selector: 'app-visualizacion-solicitud-provi',
@@ -176,7 +177,12 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   async aceptarSolicitud() {
     if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '' && !this.validarFrecuencia())) {
       this.isLoading = true;
-      console.log(this.data.solicitud.Animales.nombreMascota + " " + this.idSolicitud + ' ' + this.data.solicitud.solicitanteId)
+      if (this.seguimientoChecked){
+        let solicitud: FormularioProvisorio = new FormularioProvisorio();
+        solicitud._id = this.idSolicitud;
+        solicitud.cadaCuanto = this.SolicitudForm.controls.frecuencia.value;
+        this.visualizacionSolicitudesService.actualizarSolicitudProvisorio(solicitud, this.auth.getToken()).subscribe(async soli => { })
+      }
       this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
         this.data = dataProvi;
         this.notificacionService.notificarConfirmacionProvisorioAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
@@ -188,6 +194,30 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       })
     }
   }
+
+/*
+  async aceptarSolicitud() {
+    if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '' && !this.validarFrecuencia())) {
+      this.isLoading = true;
+      console.log(this.data.solicitud.Animales.nombreMascota + " " + this.idSolicitud + ' ' + this.data.solicitud.solicitanteId)
+      this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
+        this.data = dataProvi;
+        let solicitud: FormularioProvisorio = new FormularioProvisorio();
+        solicitud._id = this.idSolicitud;
+        solicitud.cadaCuanto = this.SolicitudForm.controls.frecuencia.value;
+        this.notificacionService.notificarConfirmacionProvisorioAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
+        this.visualizacionSolicitudesService.actualizarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async solicitud => {
+          this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
+            , () => {
+              this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
+              this.isLoading = false;
+            }
+        })
+      })
+    }
+  }
+
+*/
 
   async rechazarSolicitud() {
     this.isLoading = true;
