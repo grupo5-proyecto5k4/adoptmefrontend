@@ -55,6 +55,10 @@ export class RegistroMascotasService {
         return this.http.get((this.endpointUser + status), { headers: new HttpHeaders().set('auth-token', `${token}`) });
     }
 
+    async getMascota(idAnimal: string): Promise<any> {
+        return this.http.get(('https://adoptmebackend.herokuapp.com/animales/buscar/'+idAnimal)).toPromise();
+    }
+
 
 
     getMascotasFiltradas(filters: any): Observable<any> {

@@ -15,6 +15,8 @@ import { ThrowStmt } from '@angular/compiler';
 import { MatDialog } from '@angular/material/dialog';
 import { VisualizacionSolicitudComponent } from '../visualizacion-solicitud/visualizacion-solicitud.component';
 import { VisualizacionSolicitudProviComponent } from '../visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
+import { RegistroMascotasService } from 'src/services/registro-mascotas.service';
+import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
 
 
 
@@ -40,7 +42,7 @@ export class NavbarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog, private notificacionService: NotificacionService, private visualizarService: VisualizacionSolicitudesService, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
+  constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog, private notificacionService: NotificacionService, private registroMascotasService: RegistroMascotasService,private visualizarService: VisualizacionSolicitudesService, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
     this.profile = this.localStorageService.getProfile();
     if (this.isLogued()) {
       this.currentUser = this.authservice.getCurrentUser();
@@ -117,6 +119,16 @@ export class NavbarComponent {
       this.dialog.open(VisualizacionSolicitudProviComponent, {
         data: {
           solicitud: solicitudProvi,
+        }
+      });
+    }
+    else if (notificacion.objetoAMostrar == "Mascota") {
+      let mascota = await this.registroMascotasService.getMascota(notificacion.objetoAMostrarId);
+
+      this.dialog.open(VerMascotaComponent, {
+        data: {
+          mascota: mascota[0],
+          accion: 0
         }
       });
     }

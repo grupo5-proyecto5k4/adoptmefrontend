@@ -52,6 +52,7 @@ export class VerMascotaComponent implements OnInit {
     //obtengo el usuario
     this.mascota = this.data.mascota;
     this.accion = this.data.accion;
+    console.log(this.mascota)
 
     this.Titulo = this.mascota.nombreMascota;
     // Formato fecha  
