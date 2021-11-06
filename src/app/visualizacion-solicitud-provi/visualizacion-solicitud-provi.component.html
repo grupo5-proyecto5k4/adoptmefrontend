@@ -220,6 +220,15 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
+                                            <div>
+                                                <mat-form-field class="margin" *ngIf="faltaAceptar()">
+                                                    <mat-label>*Fecha de fin de provisorio</mat-label>
+                                                    <input matInput name="fechaFinProvisorio" formControlName="fechaFinProvisorio" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+
                                             <div class="margin" *ngIf="faltaAceptar()&&seguimientoSolicitud">
                                                 <section>
                                                     <div class="passwordRequirement" style="margin-bottom: 15px;">
@@ -272,9 +281,9 @@
                                     <div class="container-btn" *ngIf="faltaAceptar()">
                                         <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading"
                                             style="margin-right: 3px;" type="button"
-                                            (click)="rechazarSolicitud()">Rechazar</a>
+                                            (click)="rechazarSolicitud()" (mouseover)="validateButton()">Rechazar</a>
                                         <a mat-raised-button class="button" id="btnRegistro" type="button"
-                                            (click)="aceptarSolicitud()" *ngIf="!isLoading">Aceptar</a>
+                                            (click)="aceptarSolicitud()" *ngIf="!isLoading" (mouseover)="validateButton()">Aceptar</a>
 
                                         <a mat-raised-button *ngIf="isLoading" class="button loading" type="button"
                                             id="btncuenta">
@@ -285,7 +294,7 @@
                                             style="margin-right: 3px;" type="button"
                                             (click)="rechazarSolicitudAprobada()">Rechazar</a>
                                         <a mat-raised-button class="button" id="btnRegistro" type="button"
-                                            (click)="confirmarSolicitud()" *ngIf="!isLoading">Confirmar</a>
+                                            (click)="confirmarSolicitud()" *ngIf="!isLoading" >Confirmar</a>
 
                                         <a mat-raised-button *ngIf="isLoading" class="button loading" type="button"
                                             id="btncuenta">
