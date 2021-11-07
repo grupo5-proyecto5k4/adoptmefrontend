@@ -93,7 +93,7 @@ export class NotificacionService {
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Cancelación de provisorio";
     notificacion.descripcion = "El provisorio de "+nombreMascota+" ha sido finalizado por su responsable";
-    notificacion.objetoAMostrar = "Provisorio";
+    notificacion.objetoAMostrar = "Mascota";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
     return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
@@ -103,7 +103,7 @@ export class NotificacionService {
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Cancelación de adopción";
     notificacion.descripcion = "La tenencia de "+nombreMascota+" ha sido finalizada por su responsable";
-    notificacion.objetoAMostrar = "Adopcion";
+    notificacion.objetoAMostrar = "Mascota";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
     return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();

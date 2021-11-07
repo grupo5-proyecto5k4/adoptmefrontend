@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AuthService } from 'src/app/auth.service';
 import { NotificacionService } from 'src/services/notificacion.service';
 
 @Component({
@@ -10,10 +11,21 @@ import { NotificacionService } from 'src/services/notificacion.service';
 export class ConsultaSeguimientosComponent implements OnInit {
   seguimientos = [];
   accion: any;
-  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private notificacionService: NotificacionService) { }
+  mascota: any;
+  proceso = "";
+  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private notificacionService: NotificacionService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.accion = this.data.accion;
+    this.mascota = this.data.mascota;
+
+    console.log(this.consultarEstadoMascota())
+    if (this.mascota.estado == "Adoptado"){
+      this.proceso = "Cancelar adopción"
+    }
+    else{
+      this.proceso = "Cancelar provisorio"
+    }
 
   }
 
@@ -21,16 +33,19 @@ export class ConsultaSeguimientosComponent implements OnInit {
 
 
     await this.enviarNotificacionDeBaja()
+  }
 
+  consultarEstadoMascota(){
+    return (this.mascota.estado=='Adoptado'|| this.mascota.estado=='En provisorio')
   }
 
 
  async enviarNotificacionDeBaja(){
-    if(this.accion.data === 1){
-      //this.notificacionService.notificarBajaDeAdopcionAParticular()
+    if(this.mascota.estado == "Adoptado"){
+      this.notificacionService.notificarBajaDeAdopcionAParticular(this.mascota.nombreMascota, this.mascota._id, this.mascota.responsableId, this.authService.getToken())
     }
     else{
-      //this.notificacionService.notificarBajaDeProvisorioAParticular()
+      this.notificacionService.notificarBajaDeProvisorioAParticular(this.mascota.nombreMascota, this.mascota._id, this.mascota.responsableId, this.authService.getToken())
     }
   }
 }
