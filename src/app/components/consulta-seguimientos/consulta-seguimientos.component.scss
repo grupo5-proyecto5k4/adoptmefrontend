@@ -55,13 +55,20 @@ input:-webkit-autofill {
     color:#B80092;
     font-weight:bold;
     border: #fafafa;
-    background-color: #fafafa;
+    background-color: #fff5ed;
 }
 
 .logout-container{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.container-publicaciones{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-content: space-around;
 }
 
 #btncuenta{
