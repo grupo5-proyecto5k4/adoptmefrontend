@@ -7,6 +7,30 @@
               <div>
                 <h3 class="titulo">{{Titulo}}</h3>
               </div>
+              <div class="componente-filtros">
+                <div class="padding-filtros">
+                  <form [formGroup]="FilterForm" *ngIf="FilterForm">
+                    <div>
+                      <mat-form-field class="example-full-width margenesFiltros filtro">
+                        <mat-label>Centro rescatista</mat-label>
+                        <input matInput placeholder="Nombre" formControlName="nombre" class="form-control" maxlength="30">
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field class="example-full-width margenesFiltros filtro">
+                        <mat-label>Barrio</mat-label>
+                        <input matInput placeholder="Barrio" formControlName="barrio" class="form-control" maxlength="30">
+                      </mat-form-field>
+                    </div>
+                  </form>
+                </div>
+                <div class="botones">
+                  <a mat-raised-button color="accent" class="button confirmado" style="color: #ffffff; background-color: rgb(133 131 131 / 83%);" type="button" id="confirmado"
+                  (click)="clean()">Limpiar</a>
+                  <a mat-raised-button color="accent" class="button confirmado" style="color: #ffffff; margin-left: 2%;" type="button" id="confirmado"
+                    (click)="buscar()">Buscar</a>
+                  </div>
+              </div>
               <div id="RequestContainer">
                 <table class="table table-bordered table-striped" id="searchTable">
                   <tbody>
@@ -125,6 +149,12 @@
                     </mat-paginator>
                     -->
                   </tbody>
+                  <div class="margenes container-publicaciones" *ngIf="UsuariosActivos.length == 0 && UsuariosBloq.length == 0 && !filtroAplicado">
+                    <h2>Por el momento no hay centros pendientes de habilitación...</h2>
+                </div>
+                <div class="margenes container-publicaciones" *ngIf="UsuariosActivos.length == 0 && UsuariosBloq.length == 0 && filtroAplicado">
+                    <h2>No se han encontrado resultados que coincidan con la búsqueda realizada...</h2>
+                </div>
                 </table>
               </div>
             </div>
