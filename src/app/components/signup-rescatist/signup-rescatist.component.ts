@@ -7,7 +7,9 @@ import { AlertsService } from 'src/utils/alerts.service';
 import { SignupService } from 'src/services/signup.service';
 import { User } from 'src/models/IUser';
 import { Address } from 'src/models/IAddress';
-
+import {map, startWith} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { BarriosService } from 'src/services/barrios.service';
 @Component({
   selector: 'app-signup-rescatist',
   templateUrl: './signup-rescatist.component.html',
@@ -18,9 +20,27 @@ export class SignupRescatistComponent implements OnInit {
   Titulo = "Registrar cuenta";
   isLoading: Boolean = false;
 
-  constructor(private SignupService: SignupService, private alertsService: AlertsService, private dialogref: MatDialogRef<SignupRescatistComponent>) { }
+  myControl = new FormControl();
+  selectedBarrio; 
+  filteredBarrios: Observable<string[]>;
+  barrios: string[] = [];
+  barriosBack;
+
+
+
+  constructor(private SignupService: SignupService, private BarriosService : BarriosService, private alertsService: AlertsService, private dialogref: MatDialogRef<SignupRescatistComponent>) { }
 
   ngOnInit() {
+    this.BarriosService.getBarrios().subscribe(data => {
+      this.barriosBack = data;
+      for (let x = 0; x < this.barriosBack.length; x++){
+        this.barrios.push(this.barriosBack[x].nombre);
+      }
+      this.filteredBarrios = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
     this.SignupForm = new FormGroup({
       name: new FormControl('', [Validators.required, Validators.maxLength(60), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       contactNumber: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10,13}')]),
@@ -29,12 +49,17 @@ export class SignupRescatistComponent implements OnInit {
       street:  new FormControl('', [Validators.required, Validators.maxLength(50)]),
       altura:  new FormControl('', [Validators.pattern('[0-9]{0,4}')]),
       reference: new FormControl('', [Validators.maxLength(150)]),
-      barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      barrio: new FormControl(''),
       facebook: new FormControl(''),
       instagram: new FormControl(''),
       localidad: new FormControl({value: 'Córdoba Capital', disabled: true}),
   });
   this.dialogref.disableClose = true;
+}
+
+_filter(value: string): string[] {
+  const filterValue = value.toLowerCase();
+  return this.barrios.filter(option => option.toLowerCase().includes(filterValue));
 }
 
 
@@ -76,9 +101,12 @@ validateButton() {
     this.SignupForm.get('password').errors));
   }
 
+  OnHumanSelected(SelectedHuman) {
+    this.selectedBarrio = SelectedHuman;
+  }
 
 
-  signup() {
+  signup() { 
       if (this.SignupForm.valid) {
         this.isLoading = true;
         //Acá seteamos los valores de la dirección
@@ -87,7 +115,7 @@ validateButton() {
         userAddress.numero = this.SignupForm.controls.altura.value;
         userAddress.referencia = this.SignupForm.controls.reference.value;
         userAddress.localidad = "Córdoba Capital";
-        userAddress.barrio = this.SignupForm.controls.barrio.value;
+        userAddress.barrio = this.selectedBarrio;
         
         //Acá seteamos los valores del usuario
         let particularUser: User = new User();

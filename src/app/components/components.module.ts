@@ -15,6 +15,7 @@ import { VerMascotaComponent } from './ver-mascota/ver-mascota.component';
 import {MatTableModule} from '@angular/material/table';
 import { ConsultaSeguimientosComponent } from './consulta-seguimientos/consulta-seguimientos.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -31,7 +32,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
       MatRadioModule,
       MatCheckboxModule,
       MatTableModule,
-      MatExpansionModule
+      MatExpansionModule,
+      MatAutocompleteModule
     ],
     providers:[],
     exports: [
