@@ -64,7 +64,17 @@ export class UserService {
   if (filters.barrio) {
       urlFiltered.searchParams.append("barrio", filters.barrio)
   }
-    console.log(urlFiltered.toString())
+    return this.httpClient.get<any>(urlFiltered.toString(), { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
+  getUsuariosFiltrados(filters: any, token: string): Observable<any> {
+    const urlFiltered = new URL("https://adoptmebackend.herokuapp.com/particularFiltro/filtroNombresApellidos")
+    if (filters.nombres) {
+      urlFiltered.searchParams.append("nombres", filters.nombres)
+  }
+  if (filters.barrio) {
+      urlFiltered.searchParams.append("barrio", filters.barrio)
+  }
     return this.httpClient.get<any>(urlFiltered.toString(), { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 

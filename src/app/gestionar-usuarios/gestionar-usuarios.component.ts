@@ -29,12 +29,15 @@ export class GestionarUsuariosComponent {
   UsuariosActivos:any=[];
   UsuariosBloq:any=[];
   profile: any;
+  FilterForm: FormGroup;
+  filtroAplicado = false;
 
   constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService, private router: Router) { }
 
   async ngOnInit() {
     this.profile = this.authService.getProfile();
     if(this.profile == '0'){
+      this.iniciarForm();
       await this.obtenerUsuarios();
 
     }
@@ -172,6 +175,41 @@ export class GestionarUsuariosComponent {
         this.lowValue = 0;
         this.highValue = 10;
       }
+    }
+
+    buscar() {
+      this.filtroAplicado = true;
+      let filters: any = {};
+      if (this.FilterForm.controls.nombre.value !== '') {
+        filters.nombres = this.FilterForm.controls.nombre.value;
+      }
+      if (this.FilterForm.controls.barrio.value !== '') {
+        filters.barrio = this.FilterForm.controls.barrio.value;
+      }
+      filters.estado = "Activo";
+      this.userService.getUsuariosFiltrados(filters, this.authService.getToken()).subscribe(activos => {
+        this.UsuariosActivos = activos;     
+              // "En adopcion y en provisorio"
+      });
+      filters.estado = "Bloqueado";
+      this.userService.getUsuariosFiltrados(filters, this.authService.getToken()).subscribe(bloqueados => {
+        this.UsuariosBloq= bloqueados;     
+      }) 
+    }
+  
+    clean() {
+      this.iniciarForm();
+    }
+  
+  
+    iniciarForm() {
+      this.FilterForm = new FormGroup({
+        nombre: new FormControl(''),
+        tipoMascota: new FormControl(''),
+        tamanoFinal: new FormControl(''),
+        sexo: new FormControl(''),
+        barrio: new FormControl(''),
+      });
     }
 }
 
