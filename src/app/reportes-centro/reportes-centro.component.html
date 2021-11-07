@@ -5,12 +5,12 @@
 
     <mat-form-field appearance="outline">
         <mat-label>Seleccionar periodo</mat-label>
-            
+
         <mat-date-range-input type="date" [rangePicker]="picker" [max]="today" [min]="yearAgo" [formGroup]="range">
             <input matStartDate placeholder="Desde" formControlName="start" disabled [formControl]="today">
             <input matEndDate placeholder="Hasta" formControlName="end" disabled [formControl]="today">
         </mat-date-range-input>
-        
+
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
 
@@ -18,10 +18,11 @@
         <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
 
     </mat-form-field>
-    
+
     <div class="centrado" *ngIf="range.value.start && range.value.end">
-        <button mat-button type="button" color="accent" class="btnPeriodo" (click)="generarReportes(range.value.start, range.value.end)">Generar reportes</button>
-    </div> 
+        <button mat-button type="button" color="accent" class="btnPeriodo"
+            (click)="generarReportes(range.value.start, range.value.end)">Generar reportes</button>
+    </div>
 </div>
 
 <div class="container-loading" *ngIf="reportesFlag">
@@ -36,16 +37,12 @@
 
     <div>
         <div class="container-principal" *ngIf="flagNoData === 0">
-            <div class="container-grafico" >
+            <div class="container-grafico">
                 <h3>Tiempos mínimos de adopción</h3>
 
                 <div id="myChart">
-                    <canvas baseChart
-                    [datasets]="barChartDataMin"
-                    [labels]="barChartLabelsMin"
-                    [options]="barChartOptionsMin"
-                    [legend]="barChartLegendMin"
-                    [chartType]="barChartTypeMin">
+                    <canvas baseChart [datasets]="barChartDataMin" [labels]="barChartLabelsMin"
+                        [options]="barChartOptionsMin" [legend]="barChartLegendMin" [chartType]="barChartTypeMin">
                     </canvas>
                 </div>
             </div>
@@ -53,12 +50,8 @@
             <div class="container-grafico">
                 <h3>Tiempos promedios de adopción</h3>
                 <div id="myChart">
-                    <canvas baseChart
-                    [datasets]="barChartDataProm"
-                    [labels]="barChartLabelsProm"
-                    [options]="barChartOptionsProm"
-                    [legend]="barChartLegendProm"
-                    [chartType]="barChartTypeProm">
+                    <canvas baseChart [datasets]="barChartDataProm" [labels]="barChartLabelsProm"
+                        [options]="barChartOptionsProm" [legend]="barChartLegendProm" [chartType]="barChartTypeProm">
                     </canvas>
                 </div>
             </div>
@@ -66,53 +59,48 @@
             <div class="container-grafico">
                 <h3>Tiempos máximos de adopción</h3>
                 <div id="myChart">
-                    <canvas baseChart
-                    [datasets]="barChartDataMax"
-                    [labels]="barChartLabelsMax"
-                    [options]="barChartOptionsMax"
-                    [legend]="barChartLegendMax"
-                    [chartType]="barChartTypeMax">
+                    <canvas baseChart [datasets]="barChartDataMax" [labels]="barChartLabelsMax"
+                        [options]="barChartOptionsMax" [legend]="barChartLegendMax" [chartType]="barChartTypeMax">
                     </canvas>
                 </div>
             </div>
         </div>
         <div *ngIf="flagNoData === 1" class="sms">
-            <h4>¡Todavía no tienes mascotas adoptadas! Volvé a esta sección luego de haber concretado adopciones para obtener información valiosa sobre los tiempos de las mismas... </h4>
+            <h4>¡Todavía no tienes mascotas adoptadas! Volvé a esta sección luego de haber concretado adopciones para
+                obtener información valiosa sobre los tiempos de las mismas... </h4>
         </div>
-        
+
     </div>
 
     <div class="subtitle">
-        <h2>Animales adoptados por la misma persona que les dió provisorio en algún momento</h2>
+        <h2>Mascotas adoptadas por la misma persona que les dió provisorio en algún momento</h2>
     </div>
+
 
     <div class="container-principal">
         <div class="container-grafico">
-            <h3>Perros adoptados por su provisorio</h3>
+            <h3>Perros adoptados</h3>
 
-            <div id="myChart">
-                <canvas baseChart
-                [datasets]="barChartDataPerro"
-                [labels]="barChartLabelsPerro"
-                [options]="pieChartPerrosAdoptados"
-                [legend]="barChartLegendPerro"
-                [chartType]="barChartPerros">
+            <div id="myChart" *ngIf="mostrarReportePerro()">
+                <canvas baseChart [datasets]="barChartDataPerro" [labels]="barChartLabelsPerro"
+                    [options]="pieChartPerrosAdoptados" [legend]="barChartLegendPerro" [chartType]="barChartPerros">
                 </canvas>
+            </div>
+            <div id="myChart" *ngIf="!mostrarReportePerro()">
+                <h4>No se encuentran resultados para el periodo seleccionado</h4>
             </div>
         </div>
 
         <div class="container-grafico">
-            <h3>Gatos adoptados por su provisorio</h3>
-            <div id="myChart">
-                <canvas baseChart
-                [datasets]="barChartDataGato"
-                [labels]="barChartLabelsGato"
-                [options]="pieChartGatosAdoptados"
-                [legend]="barChartLegendGato"
-                [chartType]="barChartGatos">
+            <h3>Gatos adoptados</h3>
+            <div id="myChart" *ngIf="mostrarReporteGato()">
+                <canvas baseChart [datasets]="barChartDataGato" [labels]="barChartLabelsGato"
+                    [options]="pieChartGatosAdoptados" [legend]="barChartLegendGato" [chartType]="barChartGatos">
                 </canvas>
+            </div>
+            <div id="myChart" *ngIf="!mostrarReporteGato()">
+                <h4>No se encuentran resultados para el periodo seleccionado</h4>
             </div>
         </div>
     </div>
-
-
+</div>

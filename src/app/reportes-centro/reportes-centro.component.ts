@@ -47,10 +47,22 @@ export class ReportesCentroComponent implements OnInit {
   minimos:any;
   promedios:any;
   maximos:any;
-  graficoPerro: any = {perrosCachorrosAdoptadosPorSuProvisorio: 0, perrosAdultosAdoptadosPorSuProvisorio: 0, perrosCachorrosAdoptadosPorOtro: 0, perrosAdultosAdoptadosPorOtro: 0, totalPerrosAdoptados : 0}
-  graficoGato: any = {gatosCachorrosAdoptadosPorSuProvisorio: 0, gatosAdultosAdoptadosPorSuProvisorio: 0, gatosCachorrosAdoptadosPorOtro: 0, gatosAdultosAdoptadosPorOtro: 0, totalGatosAdoptados : 0}
-
+  graficoPerro: any = { perrosCachorrosAdoptadosPorSuProvisorio: 0, perrosAdultosAdoptadosPorSuProvisorio: 0, perrosCachorrosAdoptadosPorOtro: 0, perrosAdultosAdoptadosPorOtro: 0, totalPerrosAdoptados: 0 }
+  graficoGato: any = { gatosCachorrosAdoptadosPorSuProvisorio: 0, gatosAdultosAdoptadosPorSuProvisorio: 0, gatosCachorrosAdoptadosPorOtro: 0, gatosAdultosAdoptadosPorOtro: 0, totalGatosAdoptados: 0 }
   flagNoData: number = 0;
+  reporteProvisorio: any;
+
+  public pieChartPerrosAdoptados: ChartOptions;
+  public barChartLabelsPerro: Label[] = ['Adoptante fue su provisorio', 'Adoptante no le dió provisorio'];
+  public barChartPerros: ChartType = 'doughnut';
+  public barChartLegendPerro = true;
+  public barChartDataPerro: ChartDataSets[];
+  // Gráfico de Gatos que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
+  public pieChartGatosAdoptados: ChartOptions;
+  public barChartLabelsGato: Label[] = ['Adoptante fue su provisorio', 'Adoptante no le dió provisorio'];
+  public barChartGatos: ChartType = 'doughnut';
+  public barChartLegendGato = true;
+  public barChartDataGato: ChartDataSets[];
 
   // Gráfico de tiempos mínimos
   public barChartOptionsMin: ChartOptions = {
@@ -119,47 +131,6 @@ export class ReportesCentroComponent implements OnInit {
     ];
 
 
-    // Gráfico de Perros que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
-
-  public pieChartPerrosAdoptados: ChartOptions = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    plugins: {
-      datalabels: {
-        color: "black",
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
-
-  public barChartLabelsPerro: Label[] = ['Adoptante fue su provisorio', 'Adoptante no le dió provisorio'];
-  public barChartPerros: ChartType = 'doughnut';
-  public barChartLegendPerro = true;
-  public barChartDataPerro: ChartDataSets[] = [
-    { data: [28, 61] },
-  ];
-
-  // Gráfico de Gatos que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
-  public pieChartGatosAdoptados: ChartOptions = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
-    }
-  };
-
-  public barChartLabelsGato: Label[] = ['Adoptante fue su provisorio', 'Adoptante no le dió provisorio'];
-  public barChartGatos: ChartType = 'doughnut';
-  public barChartLegendGato = true;
-  public barChartDataGato: ChartDataSets[] = [
-    { data: [15, 52] },
-  ];
-
-
   constructor( private reporteService: ReportesService, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -208,7 +179,7 @@ export class ReportesCentroComponent implements OnInit {
         }
       }
 
-
+    
   }
 
   async generarReportes(desde, hasta){
@@ -219,6 +190,16 @@ export class ReportesCentroComponent implements OnInit {
     //TODO: Agregar Llamadas al backend
     await this.reporteService.getAdoptionsTimeArray(desdeBack, hastaBack, this.authService.getToken()).subscribe(dataAdoption => {
       this.reporteTiempoAdopcion(dataAdoption);
+    })
+    err => {
+      console.log('ERROR...')
+    }
+
+    await this.reporteService.getReporteProvisoriosAdoptados(desdeBack, hastaBack, this.authService.getToken()).subscribe(dataReporteProvi => {
+      this.reporteProvisorio = dataReporteProvi;
+      this.cargarReporteProvisorio();
+      console.log('perros: '+ this.reporteProvisorio[0].perrosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosCachorrosAdoptadosPorOtro, this.reporteProvisorio[0].perrosAdultosAdoptadosPorOtro)
+      console.log('gatos: '+this.reporteProvisorio[1].gatosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosCachorrosAdoptadosPorOtro, this.reporteProvisorio[1].gatosAdultosAdoptadosPorOtro)
     })
     err => {
       console.log('ERROR...')
@@ -313,6 +294,50 @@ export class ReportesCentroComponent implements OnInit {
     
   }
 
+  cargarReporteProvisorio(){
+    // Gráfico de Perros que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
+
+  this.pieChartPerrosAdoptados = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    plugins: {
+      datalabels: {
+        color: "black",
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+
+  this.barChartLabelsPerro  = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otro provisorio', 'Adultos adoptados por otro provisorio'];
+  this.barChartPerros = 'doughnut';
+  this.barChartLegendPerro = false;
+  this.barChartDataPerro = [
+    { data: [this.reporteProvisorio[0].perrosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosCachorrosAdoptadosPorOtro, this.reporteProvisorio[0].perrosAdultosAdoptadosPorOtro] },
+  ];
+
+
+
+  // Gráfico de Gatos que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
+  this.pieChartGatosAdoptados = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+
+  this.barChartLabelsGato = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otro provisorio', 'Adultos adoptados por otro provisorio'];
+  this.barChartGatos = 'doughnut';
+  this.barChartLegendGato = false;
+  this.barChartDataGato = [
+    { data: [this.reporteProvisorio[1].gatosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosCachorrosAdoptadosPorOtro, this.reporteProvisorio[1].gatosAdultosAdoptadosPorOtro] },
+  ];
+  }
+
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -321,6 +346,14 @@ export class ReportesCentroComponent implements OnInit {
 
   public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
     console.log(event, active);
+  }
+
+  mostrarReportePerro(){
+    return (this.reporteProvisorio[0].totalPerrosAdoptados > 0)
+  }
+  
+  mostrarReporteGato(){
+    return (this.reporteProvisorio[1].totalGatosAdoptados > 0)
   }
 
 
