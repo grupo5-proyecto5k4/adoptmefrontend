@@ -14,6 +14,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [HabilitarCentroRescatistaComponent],
@@ -32,7 +33,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatTabsModule, 
     MatPaginatorModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocompleteModule
 
   ],
   entryComponents: [
