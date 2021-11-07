@@ -60,6 +60,7 @@ import { DonacionesComponent } from './donaciones/donaciones.component';
 import { DatosDonacionComponent } from './datos-donacion/datos-donacion.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -128,7 +129,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCheckboxModule,
     ChartsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatAutocompleteModule
   ],
   
   providers: [],
