@@ -8,6 +8,9 @@ import { UserProfileModalComponent } from 'src/app/components/user-profile-modal
 import { User } from 'src/models/IUser';
 import { UserService } from 'src/services/user.service';
 import { AlertsService } from 'src/utils/alerts.service';
+import { BarriosService } from 'src/services/barrios.service';
+import {map, startWith} from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 
 
@@ -32,9 +35,26 @@ export class HabilitarCentroRescatistaComponent {
   FilterForm: FormGroup;
   filtroAplicado = false;
 
-  constructor(private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService, private router: Router) { }
+  myControl = new FormControl();
+  selectedBarrio; 
+  filteredBarrios: Observable<string[]>;
+  barrios: string[] = [];
+  barriosBack;
+
+  constructor(private BarriosService: BarriosService, private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService, private router: Router) { }
 
   async ngOnInit() {
+    this.BarriosService.getBarrios().subscribe(data => {
+      this.barriosBack = data;
+      for (let x = 0; x < this.barriosBack.length; x++){
+        this.barrios.push(this.barriosBack[x].nombre);
+      }
+      this.filteredBarrios = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
+
     this.profile = this.authService.getProfile();
     if (this.profile == '0') {
       this.iniciarForm();
@@ -58,6 +78,14 @@ export class HabilitarCentroRescatistaComponent {
     });
   }
 
+  _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.barrios.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  OnHumanSelected(SelectedHuman) {
+    this.selectedBarrio = SelectedHuman;
+  }
 
   openUserForm(usuario: User) {
     this.dialog.open(UserProfileModalComponent, {
@@ -128,8 +156,8 @@ export class HabilitarCentroRescatistaComponent {
     if (this.FilterForm.controls.nombre.value !== '') {
       filters.nombres = this.FilterForm.controls.nombre.value;
     }
-    if (this.FilterForm.controls.barrio.value !== '') {
-      filters.barrio = this.FilterForm.controls.barrio.value;
+    if (this.selectedBarrio !== '') {
+      filters.barrio = this.selectedBarrio;
     }
     this.userService.getCentrosRescatistasPendientesFiltrados(filters, this.authService.getToken()).subscribe(centros => {
       this.centrosPendientes = centros;      
