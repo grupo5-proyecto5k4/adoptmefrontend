@@ -72,14 +72,14 @@
 
     </div>
 
-    <div class="subtitle">
+    <div class="subtitle" style="margin-top: 5%;">
         <h2>Mascotas adoptadas por la misma persona que les dió provisorio en algún momento</h2>
     </div>
 
 
     <div class="container-principal">
         <div class="container-grafico">
-            <h3>Perros adoptados</h3>
+            <h3><u>Perros adoptados</u></h3>
 
             <div id="myChart" *ngIf="mostrarReportePerro()">
                 <canvas baseChart [datasets]="barChartDataPerro" [labels]="barChartLabelsPerro"
@@ -92,7 +92,7 @@
         </div>
 
         <div class="container-grafico">
-            <h3>Gatos adoptados</h3>
+            <h3><u>Gatos adoptados</u></h3>
             <div id="myChart" *ngIf="mostrarReporteGato()">
                 <canvas baseChart [datasets]="barChartDataGato" [labels]="barChartLabelsGato"
                     [options]="pieChartGatosAdoptados" [legend]="barChartLegendGato" [chartType]="barChartGatos">
