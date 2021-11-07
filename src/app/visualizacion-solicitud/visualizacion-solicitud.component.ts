@@ -177,7 +177,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
         let solicitud: FormularioAdopcion = new FormularioAdopcion();
         solicitud._id = this.idSolicitud;
         solicitud.cadaCuanto = this.SolicitudForm.controls.frecuencia.value;
-        this.visualizacionSolicitudesService.actualizarSolicitudAdopcion(solicitud, this.auth.getToken()).subscribe(async soli => { })
+        //this.visualizacionSolicitudesService.actualizarSolicitudAdopcion(solicitud, this.auth.getToken()).subscribe(async soli => { })
       }
       console.log(this.data.solicitud.Animales.nombreMascota + " " + this.idSolicitud + ' ' + this.data.solicitud.solicitanteId)
       this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
