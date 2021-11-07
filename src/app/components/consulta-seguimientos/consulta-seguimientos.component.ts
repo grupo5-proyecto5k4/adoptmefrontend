@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth.service';
+import { MascotaService } from 'src/services/mascota.service';
 import { NotificacionService } from 'src/services/notificacion.service';
 
 @Component({
@@ -13,11 +14,15 @@ export class ConsultaSeguimientosComponent implements OnInit {
   accion: any;
   mascota: any;
   proceso = "";
-  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private notificacionService: NotificacionService, private authService: AuthService) { }
+  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private mascotaService: MascotaService, private notificacionService: NotificacionService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.accion = this.data.accion;
     this.mascota = this.data.mascota;
+
+    this.mascotaService.getSeguimientosAnimal(this.mascota._id, this.authService.getToken()).subscribe(seguimiento => {
+      this.seguimientos = seguimiento;      
+    });
 
     console.log(this.consultarEstadoMascota())
     if (this.mascota.estado == "Adoptado"){
@@ -39,13 +44,25 @@ export class ConsultaSeguimientosComponent implements OnInit {
     return (this.mascota.estado=='Adoptado'|| this.mascota.estado=='En provisorio')
   }
 
+  registrarVisita(){
+
+  }
+
 
  async enviarNotificacionDeBaja(){
+
+    let particular = this.buscarSolicitante();
+
     if(this.mascota.estado == "Adoptado"){
       this.notificacionService.notificarBajaDeAdopcionAParticular(this.mascota.nombreMascota, this.mascota._id, this.mascota.responsableId, this.authService.getToken())
     }
     else{
       this.notificacionService.notificarBajaDeProvisorioAParticular(this.mascota.nombreMascota, this.mascota._id, this.mascota.responsableId, this.authService.getToken())
     }
+  }
+
+
+  buscarSolicitante(){
+    
   }
 }
