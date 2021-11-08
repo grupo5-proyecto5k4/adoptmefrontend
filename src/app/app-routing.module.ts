@@ -21,6 +21,7 @@ import { ReportesCentroComponent } from './reportes-centro/reportes-centro.compo
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { DonacionesComponent} from './donaciones/donaciones.component';
+import { ReportesAdminComponent } from './reportes-admin/reportes-admin.component';
 
 const routes: Routes = [
   {
@@ -84,7 +85,7 @@ const routes: Routes = [
   },
   {
     path: 'reportes',
-    component: UnderConstructionComponent
+    component: ReportesAdminComponent
   },
   {
     path: 'opciones-de-registro',

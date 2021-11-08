@@ -61,6 +61,7 @@ import { DatosDonacionComponent } from './datos-donacion/datos-donacion.componen
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { ReportesAdminComponent } from './reportes-admin/reportes-admin.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     VisualizacionSolicitudProviComponent,
     DonacionesComponent,
     DatosDonacionComponent,
+    ReportesAdminComponent
     //PublicacionesProvComponent
 
   ],
@@ -130,7 +132,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     ChartsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   
   providers: [],
