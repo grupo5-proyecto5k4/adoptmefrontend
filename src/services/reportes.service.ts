@@ -25,6 +25,10 @@ export class ReportesService {
   }
     return this.http.get<any>(urlFiltered.toString(), { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
+
+  getSolicitudesTimeArray(desde, hasta, token): Observable<any> {
+    return this.http.get('https://adoptmebackend.herokuapp.com/reporte/tiempoTotalMaxPromedio' + "?fechaDesde=" + desde + "&fechaHasta=" + hasta, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
   
 }
 
