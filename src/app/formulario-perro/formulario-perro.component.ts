@@ -53,6 +53,7 @@ export class FormularioPerroComponent implements OnInit {
   vac: any = {};
   nuevaVacuna: any = {};
   mensajeB = '💉 Registrar vacunaciones';
+  isfechaFuturaInvalida : Boolean = false;
 
   //Lista de archivos seleccionados
   selectedFiles: FileList;
@@ -147,7 +148,26 @@ export class FormularioPerroComponent implements OnInit {
     }
   }
   validateInitialDate() {
+    console.log("que ess", this.SignupForm.get('fechaNacimiento').touched);
     return (this.SignupForm.get('fechaNacimiento').touched && (this.SignupForm.controls.fechaNacimiento.value == ""));
+  }
+
+  validatePastDate(){
+    let today = new Date();
+    let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
+    let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
+    if (difference < 0){
+      return true
+    } else return false;
+  }
+  
+  validateMaxEdad(){
+    let today = new Date();
+    let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
+    let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
+    if (difference > 365*27){
+      return true
+    } else return false;
   }
 
   mostrarVacunas() {
@@ -260,10 +280,15 @@ export class FormularioPerroComponent implements OnInit {
     let today = new Date();
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
-    if (difference < 365) {
+    console.log("difference", difference);
+    if (difference < 0 ){
+      this.mensajeEdad = "";
+    } else if (difference < 365) {
       this.mensajeEdad = "La mascota es cachorro"
-    } else {
+    } else if (difference > 365 || difference <= 365*30) {
       this.mensajeEdad = "La mascota es adulta"
+    } else if (difference > 365*27){
+      this.mensajeEdad = "";
     }
     this.edadInvalida = true;
   }
