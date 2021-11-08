@@ -1,0 +1,74 @@
+.titulo{
+    font-weight: 800;
+    color: black;
+    font-size: 200%;
+    font-style: italic;
+    margin-top: 2rem;
+    text-align: center;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+
+#myChart{
+    display: block;
+    width: 350px;
+    height: 250px;
+}
+
+.container-principal{
+    display: flex;
+    flex-flow: row wrap;
+    justify-items: center;
+    justify-content: space-around;
+}
+
+// Fechas 
+.container-fecha{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.btnPeriodo{
+    color:#B80092;
+    font-weight:bold;
+    border: #fafafa;
+    background-color: #fafafa;
+}
+
+.logo{
+    width: 70px;
+    height: 70px;
+  }
+
+.container-loading{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: center;
+    height: 600px;
+}
+// ----------------
+
+.container-grafico{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+}
+
+.subtitle{
+    text-align: center;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.sms{
+    margin-right: 20px;
+    margin-left: 20px;
+    text-align: center;
+}
