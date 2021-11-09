@@ -148,7 +148,6 @@ export class FormularioPerroComponent implements OnInit {
     }
   }
   validateInitialDate() {
-    console.log("que ess", this.SignupForm.get('fechaNacimiento').touched);
     return (this.SignupForm.get('fechaNacimiento').touched && (this.SignupForm.controls.fechaNacimiento.value == ""));
   }
 
@@ -236,6 +235,9 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   validateButton() {
+    if (this.animal === 1){
+      this.SignupForm.controls['tamaño'].setValue("No aplica");
+    }  
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
       document.getElementById("confirmar").classList.remove("buttonDisabled");
     } else {
@@ -280,7 +282,6 @@ export class FormularioPerroComponent implements OnInit {
     let today = new Date();
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
-    console.log("difference", difference);
     if (difference < 0 ){
       this.mensajeEdad = "";
     } else if (difference < 365) {
@@ -345,14 +346,16 @@ export class FormularioPerroComponent implements OnInit {
 
 
   registrarAnimal() {
-
+    if (this.animal === 1){
+      this.SignupForm.controls['tamaño'].setValue("No aplica");
+    }  
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
       this.isLoading = true;
       let mascota: Mascota = new Mascota();
       mascota.tipoMascota = this.data.tipoMascota;
       mascota.nombreMascota = this.SignupForm.controls.nombre.value;
       mascota.estado = this.SignupForm.controls.estado.value;
-      mascota.fechaNacimiento = (this.SignupForm.controls.fechaNacimiento.value).toLocaleString();;
+      mascota.fechaNacimiento = (this.SignupForm.controls.fechaNacimiento.value).toLocaleString();
       mascota.tamañoFinal = this.SignupForm.controls.tamaño.value;
       mascota.sexo = this.SignupForm.controls.sexo.value;
       mascota.raza = this.SignupForm.controls.raza.value;
