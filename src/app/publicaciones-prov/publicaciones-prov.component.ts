@@ -110,9 +110,9 @@ export class PublicacionesProvComponent implements OnInit {
     this.FilterForm = new FormGroup({
       nombre: new FormControl(''),
       tipoMascota: new FormControl(''),
-      tamanoFinal: new FormControl(''),
+      tamanoFinal: new FormControl({value: '', disabled:true}),
       sexo: new FormControl(''),
-      barrio: new FormControl(''),
+      barrio: new FormControl('') 
     });
   }
 
@@ -163,14 +163,20 @@ export class PublicacionesProvComponent implements OnInit {
     if (this.selectedBarrio !== '') {
       filters.barrio = this.selectedBarrio;
     }
-    if (this.FilterForm.controls.tamanoFinal.value !== '') {
-      filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
-    }
+    
     if (this.FilterForm.controls.sexo.value !== '') {
       filters.sexo = this.FilterForm.controls.sexo.value;
     }
     if (this.FilterForm.controls.tipoMascota.value !== '') {
       filters.tipoMascota = this.FilterForm.controls.tipoMascota.value;
+    }
+    if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      if (this.FilterForm.controls.tipoMascota.value === 1){
+        filters.tamañoFinal = 'No aplica';
+      }
+        else {
+       filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
+      }
     }
 
     filters.estado = "Disponible Provisorio";
@@ -214,6 +220,16 @@ export class PublicacionesProvComponent implements OnInit {
       sms = "Adulto"
     }
     return sms
+  }
+
+  activarTamanio(){
+    this.FilterForm.controls['tamanoFinal'].setValue("");
+    this.FilterForm.controls.tamanoFinal.enable();
+  }
+
+  desactivarTamanio(){
+    this.FilterForm.controls['tamanoFinal'].setValue("No aplica");
+    this.FilterForm.controls.tamanoFinal.disable();
   }
 
   openMascota(mascota: Mascota) {

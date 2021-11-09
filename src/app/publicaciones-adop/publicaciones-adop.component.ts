@@ -80,9 +80,9 @@ export class PublicacionesAdopComponent implements OnInit {
     this.FilterForm = new FormGroup({
       nombre: new FormControl(''),
       tipoMascota: new FormControl(''),
-      tamanoFinal: new FormControl(''),
+      tamanoFinal: new FormControl({value: '', disabled:true}),
       sexo: new FormControl(''),
-      barrio: new FormControl(''),
+      barrio: new FormControl('')
     });
   }
 
@@ -125,7 +125,12 @@ export class PublicacionesAdopComponent implements OnInit {
     this.filtroAplicado = true;
     let filters: any = {};
     if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      if (this.FilterForm.controls.tipoMascota.value === 1){
+        filters.tamañoFinal = 'No aplica';
+      }
+        else {
       filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
+      }
     }
     if (this.FilterForm.controls.sexo.value !== '') {
       filters.sexo = this.FilterForm.controls.sexo.value;
@@ -167,6 +172,16 @@ export class PublicacionesAdopComponent implements OnInit {
           accion: 1
       }
   })
+  }
+
+  activarTamanio(){
+    this.FilterForm.controls['tamanoFinal'].setValue("");
+    this.FilterForm.controls.tamanoFinal.enable();
+  }
+
+  desactivarTamanio(){
+    this.FilterForm.controls['tamanoFinal'].setValue("No aplica");
+    this.FilterForm.controls.tamanoFinal.disable();
   }
 
   calculateAge(fechaNacimiento) {
