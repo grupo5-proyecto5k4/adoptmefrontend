@@ -28,8 +28,8 @@
                                 (change)="changeTipoAnimal()">
                                 <mat-label>Tipo de mascota</mat-label>
                                 <mat-select formControlName="tipoMascota">
-                                    <mat-option value="0">Perro</mat-option>
-                                    <mat-option value="1">Gato</mat-option>
+                                    <mat-option value="0" (click)="activarTamanio()">Perro</mat-option>
+                                    <mat-option value="1" (click)="desactivarTamanio()">Gato</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
@@ -109,8 +109,8 @@
                                 (change)="changeTipoAnimal()">
                                 <mat-label>Tipo de mascota</mat-label>
                                 <mat-select formControlName="tipoMascota">
-                                    <mat-option value="0">Perro</mat-option>
-                                    <mat-option value="1">Gato</mat-option>
+                                    <mat-option value="0" (click)="activarTamanio()">Perro</mat-option>
+                                    <mat-option value="1" (click)="desactivarTamanio()">Gato</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
@@ -187,8 +187,8 @@
                                 (change)="changeTipoAnimal()">
                                 <mat-label>Tipo de mascota</mat-label>
                                 <mat-select formControlName="tipoMascota">
-                                    <mat-option value="0">Perro</mat-option>
-                                    <mat-option value="1">Gato</mat-option>
+                                    <mat-option value="0" (click)="activarTamanio()">Perro</mat-option>
+                                    <mat-option value="1" (click)="desactivarTamanio()">Gato</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
