@@ -62,6 +62,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ReportesAdminComponent } from './reportes-admin/reportes-admin.component';
+import { RegistrarVisitaComponent } from './registrar-visita/registrar-visita.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { ReportesAdminComponent } from './reportes-admin/reportes-admin.componen
     VisualizacionSolicitudProviComponent,
     DonacionesComponent,
     DatosDonacionComponent,
-    ReportesAdminComponent
+    ReportesAdminComponent,
+    RegistrarVisitaComponent
     //PublicacionesProvComponent
 
   ],

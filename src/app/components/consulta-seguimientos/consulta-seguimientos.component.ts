@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth.service';
+import { RegistrarVisitaComponent } from 'src/app/registrar-visita/registrar-visita.component';
 import { MascotaService } from 'src/services/mascota.service';
 import { NotificacionService } from 'src/services/notificacion.service';
 import { VisualizacionSolicitudesService } from 'src/services/visualizacion-solicitudes';
@@ -44,10 +45,14 @@ export class ConsultaSeguimientosComponent implements OnInit {
     return (this.mascota.estado == 'Adoptado' || this.mascota.estado == 'En provisorio')
   }
 
-  registrarVisita() {
+  registrarVisita(seguim: string) {
+    this.dialog.open(RegistrarVisitaComponent, {
+      data: {
+        seguimiento: seguim,
+      }
+    });
 
   }
-
 
   async enviarNotificacionDeBaja() {
 
