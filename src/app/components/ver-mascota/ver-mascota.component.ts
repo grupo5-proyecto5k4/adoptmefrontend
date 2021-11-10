@@ -161,8 +161,8 @@ export class VerMascotaComponent implements OnInit {
     })
   }
 
-  esResponsable(){
-    return (this.localStorageService.getUser()._id === this.data.mascota.responsableId);
+  esResponsableOAdmin(){
+    return ((this.localStorageService.getUser()._id === this.data.mascota.responsableId)||(this.localStorageService.getProfile() == "0"));
   }
 
   esParticular(){
