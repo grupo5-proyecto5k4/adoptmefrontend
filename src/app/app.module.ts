@@ -45,7 +45,6 @@ import {MatRadioModule} from '@angular/material/radio';
 import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { AdministrarRecomendacionesModule } from './pages/administrar-recomendaciones/administrar-recomendaciones.module';
-//import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
 import {MatTableModule} from '@angular/material/table';
 import { GestionarUsuariosModule } from './gestionar-usuarios/gestionar-usuarios.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -55,13 +54,15 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { SolicitudProvisorioComponent } from './solicitud-provisorio/solicitud-provisorio.component';
 import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
 import { ChartsModule } from 'ng2-charts';
-import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
 import { DonacionesComponent } from './donaciones/donaciones.component';
 import { DatosDonacionComponent } from './datos-donacion/datos-donacion.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { ReportesAdminComponent } from './reportes-admin/reportes-admin.component';
+import { VisualizarAdopcionesComponent } from './visualizar-adopciones/visualizar-adopciones.component';
+import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
+import { VisualizarProvisoriosComponent } from './visualizar-provisorios/visualizar-provisorios.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,9 @@ import { ReportesAdminComponent } from './reportes-admin/reportes-admin.componen
     VisualizacionSolicitudProviComponent,
     DonacionesComponent,
     DatosDonacionComponent,
-    ReportesAdminComponent
+    ReportesAdminComponent,
+    VisualizarAdopcionesComponent,
+    VisualizarProvisoriosComponent
     //PublicacionesProvComponent
 
   ],
