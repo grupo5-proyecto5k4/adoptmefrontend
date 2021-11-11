@@ -32,6 +32,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
     var dataAnimal = this.data.solicitud.Animales;
     var dataSolicitud = this.data.solicitud.Solicitud;
+    console.log(this.data)
     var dataSolicitante = this.data.solicitud.Solicitante;
     this.dataSolicitud = dataSolicitud;
     this.dataAnimal = dataAnimal;
@@ -180,7 +181,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
         //this.visualizacionSolicitudesService.actualizarSolicitudAdopcion(solicitud, this.auth.getToken()).subscribe(async soli => { })
       }
       console.log(this.data.solicitud.Animales.nombreMascota + " " + this.idSolicitud + ' ' + this.data.solicitud.solicitanteId)
-      this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
+      this.visualizacionSolicitudesService.confirmarSolicitud(this.dataSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
         this.data = dataProvi;
         this.notificacionService.notificarConfirmacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
         this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
@@ -231,7 +232,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   async confirmarSolicitud() {
     this.isLoading = true;
-    this.visualizacionSolicitudesService.confirmarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.dataSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
       this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result) => window.location.href = '/solicitudes')
