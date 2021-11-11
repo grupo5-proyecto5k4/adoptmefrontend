@@ -63,6 +63,7 @@ import { ReportesAdminComponent } from './reportes-admin/reportes-admin.componen
 import { VisualizarAdopcionesComponent } from './visualizar-adopciones/visualizar-adopciones.component';
 import { VisualizacionSolicitudProviComponent } from './visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
 import { VisualizarProvisoriosComponent } from './visualizar-provisorios/visualizar-provisorios.component';
+import { RegistrarVisitaComponent } from './registrar-visita/registrar-visita.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { VisualizarProvisoriosComponent } from './visualizar-provisorios/visuali
     DatosDonacionComponent,
     ReportesAdminComponent,
     VisualizarAdopcionesComponent,
-    VisualizarProvisoriosComponent
+    VisualizarProvisoriosComponent,
+    RegistrarVisitaComponent
     //PublicacionesProvComponent
 
   ],
