@@ -42,7 +42,8 @@ export class ConsultaSeguimientosComponent implements OnInit {
   }
 
   consultarEstadoMascota() {
-    return (this.mascota.estado == 'Adoptado' || this.mascota.estado == 'En provisorio')
+    return false; // despues eliminar este false y descomentar la linea de abajo
+    //return (this.mascota.estado == 'Adoptado' || this.mascota.estado == 'En provisorio')
   }
 
   registrarVisita(seguim: any) {
