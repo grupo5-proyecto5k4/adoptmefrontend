@@ -196,12 +196,12 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
         solicitud._id = this.idSolicitud;
         var y: number = +this.SolicitudForm.controls.frecuencia.value;
         solicitud.cadaCuanto = y;
-        solicitud.fechaFinProvisorio = this.SolicitudForm.controls.fechaFinProvisorio.value;
+        solicitud.fechaFinProvisor = this.SolicitudForm.controls.fechaFinProvisorio.value;
         //this.visualizacionSolicitudesService.actualizarSolicitudProvisorio(solicitud, this.auth.getToken()).subscribe(async soli => { })
       } else {
         var solicitud: FormularioProvisorio = new FormularioProvisorio();
         solicitud._id = this.idSolicitud;
-        solicitud.fechaFinProvisorio = this.SolicitudForm.controls.fechaFinProvisorio.value;
+        solicitud.fechaFinProvisor = this.SolicitudForm.controls.fechaFinProvisorio.value;
         //this.visualizacionSolicitudesService.actualizarSolicitudProvisorio(solicitud, this.auth.getToken()).subscribe(async soli => { })
       }
       // Añade fecha de fin de provisorio y acepta/rechaza solicitud
