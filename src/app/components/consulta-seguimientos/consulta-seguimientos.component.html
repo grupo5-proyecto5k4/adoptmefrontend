@@ -19,18 +19,18 @@
                                     </mat-panel-title>
                                 </mat-expansion-panel-header>
                                
-                                    <div class="contenedor-imagen" *ngIf="fotoVisualizar">
-                                      <div *ngFor=" let foto of fotoVisualizar, index as id">
+                                    <div class="contenedor-imagen" *ngIf="Visita.path">
+                                      <div>
                                         <div>
-                                          <img class="imagen" src="{{foto.path}}" style="width:100%">
+                                          <img class="imagen" src="{{Visita.path}}" style="width:100%">
                                         </div>
                                       </div>
                                       <div class="position">
                                         <div class="flecha izq">
-                                          <a class="prev" (click)="plusSlides(-1)" *ngIf="fotos.length > 1">&#10094;</a>
+                                          <a class="prev" (click)="plusSlides(-1)" *ngIf="Visita.path.length > 1">&#10094;</a>
                                         </div>
                                         <div class="flecha der">
-                                          <a class="next" (click)="plusSlides(1)" *ngIf="fotos.length > 1">&#10095;</a>
+                                          <a class="next" (click)="plusSlides(1)" *ngIf="Visita.path.length > 1">&#10095;</a>
                                         </div>
                                       </div>
                                     </div>
