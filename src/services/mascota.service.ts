@@ -34,4 +34,8 @@ export class MascotaService {
   getSeguimientosAnimal(idMascota: string, token: string): Observable<any>  {
     return this.httpClient.get<any[]>(this.api + '/seguimiento/consultaEstado/' + idMascota, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
+
+  actualizarSeguimiento(visita: any, token: string):  Observable <any>{
+    return this.httpClient.put('/seguimiento/modificarSeguimiento/visita', visita, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
 }
