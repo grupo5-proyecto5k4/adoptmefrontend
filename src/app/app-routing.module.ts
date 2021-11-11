@@ -24,6 +24,7 @@ import { DonacionesComponent} from './donaciones/donaciones.component';
 import { ReportesAdminComponent } from './reportes-admin/reportes-admin.component';
 import { VisualizarAdopcionesComponent } from './visualizar-adopciones/visualizar-adopciones.component';
 import { VisualizarProvisoriosComponent } from './visualizar-provisorios/visualizar-provisorios.component';
+import { MascotasDisponiblesComponent } from './mascotas-disponibles/mascotas-disponibles.component';
 
 const routes: Routes = [
   {
@@ -58,8 +59,8 @@ const routes: Routes = [
     component: GestionarUsuariosComponent
   },
   {
-    path: 'gestionar-mascotas',
-    component: UnderConstructionComponent
+    path: 'visualizar-mascotas',
+    component: MascotasDisponiblesComponent
   },
   {
     path: 'visualizar-adopciones',
