@@ -7,7 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AlertsService } from 'src/utils/alerts.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { R3TargetBinder } from '@angular/compiler';
+import { R3TargetBinder, visitAll } from '@angular/compiler';
 import { photoService } from '../../services/photo.service';
 import { Mascota } from '../../models/IMascota';
 import { validateVerticalPosition } from '@angular/cdk/overlay';
@@ -66,32 +66,21 @@ export class RegistrarVisitaComponent implements OnInit {
   urls = new Array<string>();
   previsualizacion: any;
   InputSeleccionadoYVacio = false;
+  seguimiento: any;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer, @Inject(MAT_DIALOG_DATA) public data: any, private mascotaService: MascotaService, private auth: AuthService, private alerts: AlertsService, private photo: photoService, private route: Router, private matdialog: MatDialog, private dialogRef: MatDialogRef<RegistrarVisitaComponent>) { }
   @ViewChild(MatTable) tabla1: MatTable<Foto>;
   @ViewChild(MatTable) tabla2: MatTable<NuevaVacuna>;
 
   ngOnInit(): void {
-
+    this.seguimiento = this.data.seguimiento;
+    console.log(this.seguimiento)
+    console.log(this.seguimiento._id)
     this.SignupForm = new FormGroup({
-      nombre: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      estado: new FormControl('', Validators.required),
-      tamaño: new FormControl('', [Validators.required]),
-      sexo: new FormControl('', Validators.required),
-      fechaNacimiento: new FormControl('', [Validators.required]),
-      raza: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      castrado: new FormControl('', Validators.required),
-      conductaNiños: new FormControl('', Validators.required),
-      conductaGatos: new FormControl('', Validators.required),
-      conductaPerros: new FormControl('', Validators.required),
-      descripcion: new FormControl('', [Validators.required, Validators.maxLength(150), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
-      foto: new FormControl('', Validators.required),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(350), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
+      imagen: new FormControl(''),
     });
 
-    this.SignupFormVac = new FormGroup({
-      nombre: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-      fechaAplicacion: new FormControl('', Validators.required),
-    });
 
 
     this.dialogRef.disableClose = true;
@@ -165,65 +154,7 @@ export class RegistrarVisitaComponent implements OnInit {
     this.verTabla = !this.verTabla;
   }
 
-  validateTamano() {
-    return (((this.SignupForm.get('tamaño').touched ||
-      this.SignupForm.get('tamaño').dirty) &&
-      this.SignupForm.get('tamaño').errors));
-  }
-
-  validateSexo() {
-    return (((this.SignupForm.get('sexo').touched ||
-      this.SignupForm.get('sexo').dirty) &&
-      this.SignupForm.get('sexo').errors));
-  }
-
-  validateFechaNacimiento() {
-    return (((this.SignupForm.get('fechaNacimiento').touched ||
-      this.SignupForm.get('fechaNacimiento').dirty) &&
-      this.SignupForm.get('fechaNacimiento').errors));
-  }
-
-  validateRaza() {
-    return (((this.SignupForm.get('raza').touched ||
-      this.SignupForm.get('raza').dirty) &&
-      this.SignupForm.get('raza').errors));
-  }
-
-  validateCastrado() {
-    return (((this.SignupForm.get('castrado').touched ||
-      this.SignupForm.get('castrado').dirty) &&
-      this.SignupForm.get('castrado').errors));
-  }
-
-  validateNinos() {
-    return (((this.SignupForm.get('conductaNiños').touched ||
-      this.SignupForm.get('conductaNiños').dirty) &&
-      this.SignupForm.get('conductaNiños').errors));
-  }
-
-  validateGatos() {
-    return (((this.SignupForm.get('conductaGatos').touched ||
-      this.SignupForm.get('conductaGatos').dirty) &&
-      this.SignupForm.get('conductaGatos').errors));
-  }
-
-  validatePerros() {
-    return (((this.SignupForm.get('conductaPerros').touched ||
-      this.SignupForm.get('conductaPerros').dirty) &&
-      this.SignupForm.get('conductaPerros').errors));
-  }
-
-  validateNombreVac() {
-    return (((this.SignupFormVac.get('nombre').touched ||
-      this.SignupFormVac.get('nombre').dirty) &&
-      this.SignupFormVac.get('nombre').errors));
-  }
-
-  validateFechaAplicacion() {
-    return (((this.SignupFormVac.get('fechaAplicacion').touched ||
-      this.SignupFormVac.get('fechaAplicacion').dirty) &&
-      this.SignupFormVac.get('fechaAplicacion').errors));
-  }
+ 
 
   validateButton() {
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
@@ -241,46 +172,7 @@ export class RegistrarVisitaComponent implements OnInit {
     }
   }
 
-  agregar() {
-    if (this.SignupFormVac.valid) {
-      const object1 = {
-        nombre: this.SignupFormVac.controls.nombre.value,
-        fechaAplicacion: this.SignupFormVac.controls.fechaAplicacion.value,
-      };
 
-      this.listaVacunas.push(
-        object1
-      );
-    }
-  }
-
-
-  borrarFila(vacuna: NuevaVacuna) {
-    let cantD = 0;
-    for (let i = 0; i < this.listaVacunas.length; i++) {
-      if (vacuna == this.listaVacunas[i]) {
-        cantD = i;
-        break
-      }
-    }
-    this.listaVacunas.splice(cantD, 1);
-  }
-
-  CalculateAge() {
-    let today = new Date();
-    let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
-    let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
-    if (difference < 0) {
-      this.mensajeEdad = "";
-    } else if (difference < 365) {
-      this.mensajeEdad = "La mascota es cachorro"
-    } else if (difference > 365 || difference <= 365 * 30) {
-      this.mensajeEdad = "La mascota es adulta"
-    } else if (difference > 365 * 27) {
-      this.mensajeEdad = "";
-    }
-    this.edadInvalida = true;
-  }
 
 
 
@@ -334,55 +226,41 @@ export class RegistrarVisitaComponent implements OnInit {
 
 
   async registrarVisita() {
-
     //updateSeguimiento
     if (this.SignupForm.valid) {
-      this.isLoading = true;
-      let mascota: Mascota = new Mascota();
-      mascota.tipoMascota = this.data.tipoMascota;
-      mascota.nombreMascota = this.SignupForm.controls.nombre.value;
-      mascota.estado = this.SignupForm.controls.estado.value;
-      mascota.fechaNacimiento = (this.SignupForm.controls.fechaNacimiento.value).toLocaleString();
-      mascota.tamañoFinal = this.SignupForm.controls.tamaño.value;
-      mascota.sexo = this.SignupForm.controls.sexo.value;
-      mascota.raza = this.SignupForm.controls.raza.value;
-      mascota.castrado = this.SignupForm.controls.castrado.value;
-      mascota.conductaNiños = this.SignupForm.controls.conductaNiños.value;
-      mascota.conductaGatos = this.SignupForm.controls.conductaGatos.value;
-      mascota.conductaPerros = this.SignupForm.controls.conductaPerros.value;
-      mascota.descripcion = this.SignupForm.controls.descripcion.value;
-
-      console.log(mascota);
+      //this.isLoading = true;
+      console.log("enviando..")
+      let visita: any = {};
+      visita.seguimientoId = this.seguimiento._id;
+      visita.descripcionVisita = this.SignupForm.controls.descripcion.value;
 
 
-
-      await this.mascotaService.updateSeguimiento(mascota, this.auth.getToken()).then(
+      this.photo.registroVisita(visita, this.auth.getToken()).subscribe(
         (resp: Data) => {
 
-          if (this.urls !== undefined && this.urls !== null) {
-            for (let i = 0; i < this.selectedFiles.length; i++) {
-              this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
-              let foto: Foto = new Foto();
-              foto.foto = this.selectedFiles.item(i);
-              foto.esPrincipal = false;
-              if (i == 0) {
-                foto.esPrincipal = true;
-              }
-              console.log("foto")
-              console.log(this.selectedFiles.item(i))
-
-              this.photo.upload(this.selectedFiles[i], resp.id_Animal).subscribe(
-                event => {
-                  if (event.type === HttpEventType.UploadProgress) {
-                    this.progressInfo[i].value = Math.round(100 * event.loaded / event.total);
-                  }
-                },
-                err => {
-                  this.progressInfo[i].value = 0;
-                  this.message = 'No se puede subir el archivo ';
-                });
+          for (let i = 0; i < this.selectedFiles.length; i++) {
+            this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
+            let foto: Foto = new Foto();
+            foto.foto = this.selectedFiles.item(i);
+            foto.esPrincipal = false;
+            if (i == 0) {
+              foto.esPrincipal = true;
             }
+            console.log("foto")
+            console.log(this.selectedFiles.item(i))
+
+            this.photo.uploadFotoVisita(this.selectedFiles[i], resp.id_Animal).subscribe(
+              event => {
+                if (event.type === HttpEventType.UploadProgress) {
+                  this.progressInfo[i].value = Math.round(100 * event.loaded / event.total);
+                }
+              },
+              err => {
+                this.progressInfo[i].value = 0;
+                this.message = 'No se puede subir el archivo ';
+              });
           }
+
 
           this.alerts.confirmMessage("La visita ha sido registrada").then((result) => window.location.href = '/mascotas')
 
@@ -394,8 +272,7 @@ export class RegistrarVisitaComponent implements OnInit {
         }
 
       )
-
-
+      
     }
 
 

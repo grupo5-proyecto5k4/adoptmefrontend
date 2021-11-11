@@ -35,8 +35,7 @@ export class MascotaService {
     return this.httpClient.get<any[]>(this.api + '/seguimiento/consultaEstado/' + idMascota, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
-  updateSeguimiento(seguimiento: any, token: string){
-    return this.httpClient.put('https://adoptmebackend.herokuapp.com/seguimiento/modificarSeguimiento', seguimiento, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
-  
+  actualizarSeguimiento(visita: any, token: string):  Observable <any>{
+    return this.httpClient.put('/seguimiento/modificarSeguimiento/visita', visita, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 }

@@ -45,7 +45,8 @@ export class ConsultaSeguimientosComponent implements OnInit {
     return (this.mascota.estado == 'Adoptado' || this.mascota.estado == 'En provisorio')
   }
 
-  registrarVisita(seguim: string) {
+  registrarVisita(seguim: any) {
+    console.log(seguim)
     this.dialog.open(RegistrarVisitaComponent, {
       data: {
         seguimiento: seguim,
