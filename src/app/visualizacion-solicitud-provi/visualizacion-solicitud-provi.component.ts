@@ -194,7 +194,8 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       if (this.seguimientoChecked){
         var solicitud: FormularioProvisorio = new FormularioProvisorio();
         solicitud._id = this.idSolicitud;
-        solicitud.cadaCuanto = this.SolicitudForm.controls.frecuencia.value;
+        var y: number = +this.SolicitudForm.controls.frecuencia.value;
+        solicitud.cadaCuanto = y;
         solicitud.fechaFinProvisorio = this.SolicitudForm.controls.fechaFinProvisorio.value;
         //this.visualizacionSolicitudesService.actualizarSolicitudProvisorio(solicitud, this.auth.getToken()).subscribe(async soli => { })
       } else {
@@ -256,11 +257,11 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
 
   async confirmarSolicitud() {
-    var solicitud;
-    solicitud._id = this.idSolicitud;
-    console.log("confirmarSolicitud()", solicitud);
+    //var solicitud;
+    //solicitud._id = this.idSolicitud;
+    //console.log("confirmarSolicitud()", solicitud);
     this.isLoading = true;
-    this.visualizacionSolicitudesService.confirmarSolicitud(solicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.dataSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
       this.notificacionService.notificarConfirmacionProvisorioACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result) => window.location.href = '/solicitudes')

@@ -159,11 +159,11 @@ export class SolicitudProvisorioComponent implements OnInit {
     let answer: number;
     switch (value) {
       case this.opcionesDuracion[0]: { //7 días
-        answer = 1;
+        answer = 0;
         break;
       }
       case this.opcionesDuracion[1]: { //14 días
-        answer = 0;
+        answer = 1;
         break;
       }
       case this.opcionesDuracion[2]: { //1 mes
