@@ -41,6 +41,7 @@ export class photoService {
 
 //PASO 2)
     uploadFotoVisita(file: File, id_Animal: string, token:string): Observable<HttpEvent<any>> {
+        console.log("estooo"+id_Animal)
         const formData: FormData = new FormData();
         formData.append('imagen', file);
         formData.append('id_Animal', id_Animal)
@@ -50,7 +51,6 @@ export class photoService {
 
 //PASO 1)
     registroVisita(request: any, token: string): Observable<any> {
-        console.log("llgue")
         return this.http.post<any>(this.regVisita+request.seguimientoId, request, { headers: new HttpHeaders().set('auth-token', `${token}`) });
     }
 
