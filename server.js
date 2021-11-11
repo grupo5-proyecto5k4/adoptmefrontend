@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const cloudinary = require('cloudinary').v2;
+
 // Run the app by serving the static files
 // in the dist directory
 app.use(express.static(__dirname + '/dist/adoptmefrontend'));
@@ -31,5 +33,8 @@ const forceSSL = function() {
 app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname + '/dist/adoptmefrontend/index.html'));
   });
+  
+
+
 
   

@@ -5,6 +5,7 @@ import{ TermsAndConditionsComponent } from '../terms-and-conditions/terms-and-co
 import { FaqsComponent } from '../faqs/faqs.component';
 import { faPaw } from '@fortawesome/free-solid-svg-icons';
 import {LandingPageComponent} from '../landing-page/landing-page.component';
+
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
@@ -24,9 +25,10 @@ export class FooterComponent {
   
 
   goToHome(){
-     
-       document.getElementById("quienesomos").scrollIntoView(true);
-      
+    
+    this.router.navigate(['/landing']);
+    document.getElementById("quienesomos").scrollIntoView(true);
+            
      }
      
 

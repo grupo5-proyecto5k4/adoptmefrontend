@@ -1,0 +1,48 @@
+<mat-dialog-content>
+    <div class="container">
+        <div class=card-container>
+            <input type=button id="btncuenta" style="margin: 10px;" name=boton value=X (click)="dialog.closeAll()">
+
+            <div class=txt-construction>
+                <p class=subtitulo>Consulta de seguimientos</p>
+                <mat-dialog-content *ngIf="seguimientos">
+                    <div *ngFor="let seguimiento of seguimientos">
+                        <h4 class="btnLogout">Seguimiento iniciado el día {{seguimiento.fechaCreacion |
+                            date:'dd/MM/yyyy'}} </h4>
+
+                        <mat-accordion *ngFor="let visita of seguimiento.Visita">
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title>
+                                        <p class=section-title>Visita del día: {{visita.fechaCreacion |
+                                            date:'dd/MM/yyyy'}} </p>
+                                    </mat-panel-title>
+                                </mat-expansion-panel-header>
+                                <h3 class=question-title>¿Quiénes pueden participar en los procesos?</h3>
+                                <p>Toda persona mayor a 18 años puede postularse para adoptar o brindar provisorio a un
+                                    animalito.</p>
+                                <mat-divider></mat-divider><br>
+                                <h3 class=question-title>Ya me postulé, ¿y ahora qué?</h3>
+                                <p>El Centro Rescatista o particular a cargo de la mascota recibirá la información de tu
+                                    perfil y los datos de tu formulario.</p>
+                                <p>A partir de allí, analizarán tu información. Cuando tomen una decisión serás
+                                    notificado y
+                                    podrás continuar con el proceso si fuiste seleccionado.</p>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+                        <h5  *ngIf="seguimiento.Visita.length == 0" class="container-publicaciones">No se han registrado visitas durante el seguimiento...</h5>
+                        <div class="logout-container container-publicaciones" *ngIf="seguimiento.estadoId == 'Iniciado'">
+                            <button mat-button type="button" color="accent" class="btnLogout" style="margin-bottom: 1%;"
+                                (click)="registrarVisita(seguimiento)">→ Registrar nueva visita ←</button>
+                        </div>
+                        <div class="logout-container container-publicaciones" style="margin-bottom: 20px" *ngIf="consultarEstadoMascota()">
+                            <button mat-button type="button" color="accent" class="btnLogout"
+                                (click)="cancelarProceso(seguimiento)">{{proceso}}</button>
+                        </div>
+                    </div>
+                    <h4  *ngIf="seguimientos.length == 0" class="container-publicaciones" style="margin-top: 1%">No se han realizado seguimientos a la mascota hasta el momento... </h4>
+                </mat-dialog-content>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

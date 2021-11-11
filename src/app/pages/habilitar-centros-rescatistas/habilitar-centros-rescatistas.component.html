@@ -7,6 +7,44 @@
             <div>
               <h3 class="titulo">{{Titulo}}</h3>
             </div>
+            <div class="componente-filtros">
+              <div class="padding-filtros">
+                <form [formGroup]="FilterForm" *ngIf="FilterForm">
+                  <div>
+                    <mat-form-field class="example-full-width margenesFiltros filtro">
+                      <mat-label>Centro rescatista</mat-label>
+                      <input matInput placeholder="Nombre" formControlName="nombre" class="form-control" maxlength="30">
+                    </mat-form-field>
+                  </div>
+                  <div>
+                    <mat-form-field class="example-full-width margenesFiltros filtro">
+                        <mat-label>Barrio</mat-label>
+                        <input type="text"
+                               placeholder="Seleccionar barrio"
+                               aria-label="Number"
+                               matInput
+                               name="barrio"
+                               [formControl]="myControl"
+                               [matAutocomplete]="auto"
+                               [(ngModel)]="SelectedHuman"
+                               >
+                        <mat-autocomplete #auto="matAutocomplete">
+                          <mat-option (click)="OnHumanSelected(SelectedHuman)" *ngFor="let barrio of filteredBarrios | async" [value]="barrio">
+                            {{barrio}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
+                  </div>
+                </form>
+              </div>
+              <div class="botones">
+                <a mat-raised-button color="accent" class="button confirmado"
+                  style="color: #ffffff; background-color: rgb(133 131 131 / 83%);" type="button" id="confirmado"
+                  (click)="clean()">Limpiar</a>
+                <a mat-raised-button color="accent" class="button confirmado" style="color: #ffffff; margin-left: 2%;"
+                  type="button" id="confirmado" (click)="buscar()">Buscar</a>
+              </div>
+            </div>
             <div id="RequestContainer">
               <table class="table table-bordered table-striped" id="searchTable">
                 <tbody>
@@ -39,54 +77,60 @@
                       <td class="requestActions">
                         <div class="actionButton">
                           <ng-container matColumnDef="Visualizar">
-                            <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Visualizar
-                            </th>
-                            <td mat-cell style="padding: 2px;">
-                              <button mat-raised-button color="accent" class="accion" (click)="proximamente()"
-                                style="height: 32px; border-radius: 10px;">
-                                <mat-icon>remove_red_eye</mat-icon>
-                              </button>
-                            </td>
-                          </ng-container>
-
-                          <ng-container matColumnDef="Rechazar">
-                            <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Rechazar
-                            </th>
-                            <td mat-cell style="padding: 2px;">
-                              <button mat-raised-button color="warn" class="accion" (click)="cambiarEstado(centro,3)"
-                                style="height: 32px; border-radius: 10px;">
-                                <mat-icon>block</mat-icon>
-                              </button>
-                            </td>
-                          </ng-container>
-
-                          <ng-container matColumnDef="Habilitar">
-                            <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;">
-                              Habilitar
-                            </th>
-                            <td mat-cell style="padding: 2px;">
-                              <button mat-raised-button class="accion" color="primary" (click)="cambiarEstado(centro,1)"
-                                style="height: 32px; border-radius: 10px;">
-                                <mat-icon>how_to_reg</mat-icon>
-                              </button>
-                            </td>
-                          </ng-container>
-                        </div>
+                      <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Visualizar
+                      </th>
+                      <td mat-cell style="padding: 2px;">
+                        <button mat-raised-button color="accent" class="accion" (click)="openUserForm(centro)"
+                          style="height: 32px; border-radius: 10px;">
+                          <mat-icon>remove_red_eye</mat-icon>
+                        </button>
                       </td>
-                    </mat-card>
-                  </tr>
+                      </ng-container>
 
-                  <!--[length]="onGoingRequests.length"-->
-                  <!--
+                      <ng-container matColumnDef="Rechazar">
+                        <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;"> Rechazar
+                        </th>
+                        <td mat-cell style="padding: 2px;">
+                          <button mat-raised-button color="warn" class="accion" (click)="cambiarEstado(centro,3)"
+                            style="height: 32px; border-radius: 10px;">
+                            <mat-icon>block</mat-icon>
+                          </button>
+                        </td>
+                      </ng-container>
+
+                      <ng-container matColumnDef="Habilitar">
+                        <th mat-header-cell *matHeaderCellDef style="border-radius: 20px; text-align: center;">
+                          Habilitar
+                        </th>
+                        <td mat-cell style="padding: 2px;">
+                          <button mat-raised-button class="accion" color="primary" (click)="cambiarEstado(centro,1)"
+                            style="height: 32px; border-radius: 10px;">
+                            <mat-icon>how_to_reg</mat-icon>
+                          </button>
+                        </td>
+                      </ng-container>
+            </div>
+            </td>
+            </mat-card>
+            </tr>
+
+            <!--[length]="onGoingRequests.length"-->
+            <!--
                   <mat-paginator [pageSize]="pageSize" (page)="getPaginatorData($event)">
                   </mat-paginator>
                   -->
-                </tbody>
-              </table>
+            </tbody>
+            </table>
+            <div class="margenes container-publicaciones" *ngIf="centrosPendientes.length == 0 && !filtroAplicado">
+              <h2>Por el momento no hay centros pendientes de habilitación...</h2>
+            </div>
+            <div class="margenes container-publicaciones" *ngIf="centrosPendientes.length == 0 && filtroAplicado">
+              <h2>No se han encontrado resultados que coincidan con la búsqueda realizada...</h2>
             </div>
           </div>
-        </header>
       </div>
-    </section>
+      </header>
+  </div>
+  </section>
   </div>
 </body>

@@ -1,0 +1,224 @@
+<mat-dialog-content class="dialog-content">
+
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <section id="cta4">
+        <div class="container">
+          <header>
+            <div class="card-container">
+              <input type=button id="btncuenta" style="margin: 10px;" name=boton value=X matDialogClose>
+              <div class="lower-container">
+                <div>
+                  <div>
+                    <h2 class="subtitulo">{{Titulo}}</h2>
+                  </div>
+                  <div class="centrado">
+                    <form [formGroup]="ProfileForm" class="example-form" *ngIf="ProfileForm">
+
+                      <div class="container-row1"*ngIf="currentUser.tipoUsuario == 2">
+                        <div>
+                          <mat-form-field class="ref">
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombres">
+                          </mat-form-field>
+                          
+                        </div>
+                      </div>
+
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario !== 2">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input matInput formControlName="nombres" maxlength="30">
+                          </mat-form-field>
+                          
+                        </div>
+
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Apellido</mat-label>
+                            <input matInput formControlName="apellidos" maxlength="30">
+                          </mat-form-field>
+                         
+                        </div>
+                      </div>
+
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario !== 2">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>DNI</mat-label>
+                            <input matInput formControlName="dni">
+                          </mat-form-field>
+                          
+                        </div>
+
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Fecha de nacimiento</mat-label>
+                            <input matInput  formControlName="fechaNacimiento">
+                          </mat-form-field>
+                          
+                        </div>
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field class="ref">
+                            <mat-label>Correo electrónico</mat-label>
+                            <input matInput formControlName="correoElectronico">
+                          </mat-form-field>
+                        </div>
+                      </div>
+                      <div *ngIf="currentUser.tipoUsuario == 2">
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Calle</mat-label>
+                              <input matInput formControlName="calle" maxlength="50">
+                            </mat-form-field>
+                            
+                          </div>
+                          <div class="derecha">
+                            <mat-form-field>
+                              <mat-label>Altura</mat-label>
+                              <input matInput formControlName="altura" maxlength="4">
+                            </mat-form-field>
+                          
+                          </div>
+                        </div>
+
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Localidad</mat-label>
+                              <input matInput formControlName="localidad">
+                            </mat-form-field>
+                          </div>
+                          <div class="derecha">
+                            <mat-form-field>
+                              <mat-label>Barrio</mat-label>
+                              <input matInput formControlName="barrio" maxlength="50">
+                            </mat-form-field>
+                            
+                          </div>
+                        </div>
+
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field class="ref">
+                              <mat-label>Referencia</mat-label>
+                              <textarea matInput formControlName="referencia" maxlength="150"></textarea>
+                            </mat-form-field>
+                            
+                        </div>
+                      </div>
+
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario == 2">
+                        <div>
+                          <mat-form-field class="banco">
+                            <mat-label>Nombre del banco</mat-label>
+                            <textarea matInput formControlName="banco" maxlength="30"></textarea>
+                          </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('banco').touched ||
+                      ProfileForm.get('banco').dirty) && ProfileForm.get('banco').errors)">
+                          <span *ngIf="ProfileForm.get('banco').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="ProfileForm.get('banco').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                          </span>
+                        </span>
+                        </div>
+
+                        <div class="derecha">
+                          <mat-form-field class="alias">
+                            <mat-label>Alias</mat-label>
+                            <textarea matInput formControlName="alias" maxlength="30"></textarea>
+                          </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('alias').touched ||
+                      ProfileForm.get('alias').dirty) && ProfileForm.get('alias').errors)">
+                          <span *ngIf="ProfileForm.get('alias').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="ProfileForm.get('alias').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 30 caracteres</mat-error>
+                          </span>
+                        </span>
+                        </div>
+                      </div>
+
+                      <div class="container-row1" *ngIf="currentUser.tipoUsuario == 2">
+                        <div>
+                          <mat-form-field class="ref">
+                            <mat-label>CBU</mat-label>
+                            <textarea matInput formControlName="cbu" maxlength="22"></textarea>
+                          </mat-form-field>
+                          <span class="help-block" *ngIf="((ProfileForm.get('cbu').touched ||
+                      ProfileForm.get('cbu').dirty) && ProfileForm.get('cbu').errors)">
+                          <span *ngIf="ProfileForm.get('cbu').errors.required">
+                            <h6 class="helpError">Campo requerido</h6>
+                          </span>
+                          <span *ngIf="ProfileForm.get('cbu').errors.maxlength">
+                            <mat-error class="helpError">Ingrese como máximo 22 caracteres</mat-error>
+                          </span>
+                        </span>
+                        </div>
+                      </div>
+
+                      </div>
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                            <mat-label>Instagram</mat-label>
+                            <input matInput formControlName="instagram" maxlength="30">
+                          </mat-form-field>
+                        </div>
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Facebook</mat-label>
+                            <input matInput formControlName="facebook" maxlength="30">
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+
+                      <div class="container-row1">
+                        <div>
+                          <mat-form-field>
+                              <mat-label>Número de Contacto</mat-label>
+                              <input matInput formControlName="numeroContacto" maxlength="15">
+                          </mat-form-field>
+                             
+                        </div>
+
+                        <div class="derecha">
+                          <mat-form-field>
+                            <mat-label>Contraseña</mat-label>
+                            <input matInput formControlName="contrasenia">
+                          </mat-form-field>
+                         
+                   </div>
+
+                   
+
+                  </div>
+
+                      <button mat-button class="centrado" *ngIf="esconder&&currentUser.tipoUsuario == 2" id="btnEdit" type="button" style="padding: 10px;" color="accent" (click)="editar()">Editar</button>
+
+                      <div class="centrado" *ngIf="editarDatos&&currentUser.tipoUsuario == 2">
+                       <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" (click)="cancelar()">Cancelar</button>
+                       <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" (click)="guardar()">Guardar Cambios</button>
+                      </div> 
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+    </div>
+  </body>
+</mat-dialog-content>
