@@ -40,7 +40,7 @@ export class AdminConfigurationsComponent {
 
   gestionarMascotas() {
     window.scrollTo(0, 0);
-    this.router.navigate(['/gestionar-mascotas']);
+   // this.router.navigate(['/visualizar-mascotas']);
   }
 
   visualizarAdopciones() {
