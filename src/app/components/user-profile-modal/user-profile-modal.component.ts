@@ -203,7 +203,27 @@ export class UserProfileModalComponent implements OnInit {
             this.editarDatos=!this.editarDatos;
             this.esconder=!this.esconder;
 
-            this.inicializarFormulario();
+            this.ProfileForm = new FormGroup({
+              nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
+              apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
+              dni: new FormControl({value:this.currentUser.dni, disabled: true }),
+              fechaNacimiento: new FormControl({ value: this.currentUser.fechaNacimiento, disabled: true }),
+              correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+              calle: new FormControl({ value: this.currentUser.Direccion.calle, disabled: true }),
+              altura: new FormControl({ value: this.currentUser.Direccion.numero, disabled: true }),
+              localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
+              barrio: new FormControl({ value: this.currentUser.Direccion.barrio, disabled: true }),
+              referencia: new FormControl({ value: this.currentUser.Direccion.referencia, disabled: true }),
+              
+              banco: new FormControl({value: this.ProfileForm.controls.banco.value, disabled:true}),
+              cbu: new FormControl({ value: this.ProfileForm.controls.cbu.value, disabled: true}),
+              alias: new FormControl({value: this.ProfileForm.controls.alias.value, disabled: true}),
+              
+              numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
+              facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
+              instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
+              contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
+            });
           });
         },
         error: (err: any) => {

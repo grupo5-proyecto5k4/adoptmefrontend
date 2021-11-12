@@ -150,21 +150,26 @@ export class AdminProfileComponent implements OnInit {
     this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
       (resp:Data) => {
         localStorage.setItem('auth-token', resp.token);
-        this.nuevotoken=resp.token;
-     
         console.log(resp);
        
         this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( (r)=>{
-         
-          this.editUser.getUsuarioModificado(this.nuevotoken).subscribe(
-            
-          )
-                   
+                                     
          this.enEdicion=!this.enEdicion;
          this.editarDatos=!this.editarDatos;
          this.esconder=!this.esconder;
 
-          this.inicializarFormulario();
+         this.ProfileForm = new FormGroup({
+          nombres: new FormControl({ value: this.ProfileForm.controls.nombres.value, disabled: true }),
+          apellidos: new FormControl({ value: this.ProfileForm.controls.apellidos.value, disabled: true }),
+          correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+          dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
+          numeroContacto: new FormControl({ value: this.ProfileForm.controls.numeroContacto.value, disabled: true }),
+          fechaNacimiento: new FormControl({ value:this.ProfileForm.controls.fechaNacimiento.value, disabled: true }),
+          facebook: new FormControl({ value: this.ProfileForm.controls.facebook.value, disabled: true }),
+          instagram: new FormControl({ value: this.ProfileForm.controls.instagram.value, disabled: true }),
+          contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
+        });
+    
      
         
         }

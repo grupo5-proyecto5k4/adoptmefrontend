@@ -118,9 +118,9 @@ export class CenterProfileComponent implements OnInit {
         localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
         barrio: new FormControl({ value: this.currentUser.Direccion.barrio, disabled: false },[Validators.required, Validators.maxLength(50)]),
         referencia: new FormControl({ value: this.currentUser.Direccion.referencia, disabled: false },[Validators.maxLength(150)]),
-        banco: new FormControl({ value: 'No especificado', disabled: true }),
-        cbu: new FormControl({ value: 'No especificado', disabled: true }),
-        alias: new FormControl({ value:'No especificado', disabled: true }),
+        banco: new FormControl({ value: this.currentUser.banco, disabled: true }),
+        cbu: new FormControl({ value: this.currentUser.cbu, disabled: true }),
+        alias: new FormControl({ value:this.currentUser.alias, disabled: true }),
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: false },[Validators.required, Validators.pattern('[0-9]{10,13}')]),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: false }),
         instagram: new FormControl({ value: this.currentUser.instagram, disabled: false }),
@@ -226,7 +226,23 @@ export class CenterProfileComponent implements OnInit {
             this.editarDatos=!this.editarDatos;
             this.esconder=!this.esconder;
 
-            this.inicializarFormulario();
+            this.ProfileForm = new FormGroup({
+              nombres: new FormControl({ value: this.ProfileForm.controls.nombres.value, disabled: true }),
+              correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+              calle: new FormControl({ value: this.ProfileForm.controls.calle.value, disabled: true }),
+              altura: new FormControl({ value: this.ProfileForm.controls.numero.value, disabled: true }),
+              localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
+              barrio: new FormControl({ value: this.ProfileForm.controls.barrio.value, disabled: true }),
+              referencia: new FormControl({ value: this.ProfileForm.controls.referencia.value, disabled: true }),
+              banco: new FormControl({ value: this.currentUser.banco, disabled: true }),
+              cbu: new FormControl({ value: this.currentUser.cbu, disabled: true }),
+              alias: new FormControl({ value:this.currentUser.alias, disabled: true }),
+              numeroContacto: new FormControl({ value: this.ProfileForm.controls.numeroContacto.value, disabled: true }),
+              facebook: new FormControl({ value: this.ProfileForm.controls.facebook.value, disabled: true }),
+              instagram: new FormControl({ value: this.ProfileForm.controls.instagram.value, disabled: true }),
+              contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true }),
+                      
+            });
         });
         },
         (err: any) => {

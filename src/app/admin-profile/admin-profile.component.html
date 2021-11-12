@@ -18,7 +18,15 @@
                </mat-form-field>
               <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched || 
               ProfileForm.get('nombres').dirty) && ProfileForm.get('nombres').errors)">
-              
+              <span *ngIf="ProfileForm.get('nombres').errors.required">
+                <h6 class="helpError">Campo requerido</h6>
+              </span>
+              <span *ngIf="ProfileForm.get('nombres').errors.maxlength">
+                <h6 class="helpError">Ingrese como máximo 30 caracteres</h6>
+              </span>
+              <span *ngIf="ProfileForm.get('nombres').errors.pattern">
+                <h6 class="helpError">Formato del apellido no válido</h6>
+              </span>
               </span> 
             </div>
 
