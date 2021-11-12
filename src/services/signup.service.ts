@@ -36,5 +36,9 @@ export class SignupService {
       return this.httpClient.get(this.urlEditCentro + idcentro,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
+  getUsuarioModificado(token:string):Observable<any>{
+    return this.httpClient.get(this.urlEdit,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
   }
 

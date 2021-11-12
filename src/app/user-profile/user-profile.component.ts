@@ -176,13 +176,14 @@ guardar(){
   this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
     (resp:Data) => {
       localStorage.setItem('auth-token', resp.token);
-      this.currentUser= this.authservice.setUser(resp);
-      this.enEdicion=false;
-        this.editarDatos=false;
-        this.esconder=true;
-
+    
       this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
-         window.location.href ="/miperfil";
+        this.enEdicion=!this.enEdicion;
+        this.editarDatos=!this.editarDatos;
+        this.esconder=!this.esconder;
+
+        this.inicializarFormulario();
+
       });
     },
     (err: any) => {

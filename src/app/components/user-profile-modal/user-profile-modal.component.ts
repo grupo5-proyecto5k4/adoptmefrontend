@@ -52,25 +52,18 @@ export class UserProfileModalComponent implements OnInit {
       this.currentUser.instagram = "No especificado"
     };
 
-    this.editUser.getCentrosDonaciones(this.currentUser._id, this.authservice.getToken()).subscribe(data => {
-      console.log("datos del banco", data);
-      this.ProfileForm.controls['banco'].setValue(data.banco);
-      this.ProfileForm.controls['cbu'].setValue(data.cbu);
-      this.ProfileForm.controls['alias'].setValue(data.alias);
+    if (this.currentUser.banco == null) {
+      this.currentUser.banco = "No especificado"
+    };
 
-      if(data.banco==null){
-        this.ProfileForm.controls['banco'].setValue("No especificado"); 
-      }
-      if(data.cbu==null){
-        this.ProfileForm.controls['cbu'].setValue("No especificado"); 
-      }
+    if (this.currentUser.cbu == null) {
+      this.currentUser.cbu = "No especificado"
+    };
 
-      if(data.alias==null){
-        this.ProfileForm.controls['alias'].setValue("No especificado"); 
-      }
-
-  })
-
+    if (this.currentUser.alias == null) {
+      this.currentUser.alias = "No especificado"
+    };
+    
     // Formato fecha  
     if (this.currentUser.fechaNacimiento !== null && this.currentUser.fechaNacimiento !== undefined) {
     var date = this.currentUser.fechaNacimiento.substring(0, 10);
@@ -116,9 +109,9 @@ export class UserProfileModalComponent implements OnInit {
         fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true}),
         correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
        
-        banco: new FormControl({ value: this.currentUser.Donacion.banco, disabled: false },[Validators.maxLength(30), Validators.required,Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
-        cbu: new FormControl({ value: this.currentUser.Donacion.cbu, disabled: false },[Validators.maxLength(22),Validators.required,Validators.pattern('[0-9]{22}')]),
-        alias: new FormControl({ value: this.currentUser.Donacion.alias, disabled: false },[Validators.maxLength(30), Validators.required,Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+        banco: new FormControl({ value: this.currentUser.banco, disabled: false },[Validators.maxLength(30), Validators.required,Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
+        cbu: new FormControl({ value: this.currentUser.cbu, disabled: false },[Validators.maxLength(22),Validators.required,Validators.pattern('[0-9]{22}')]),
+        alias: new FormControl({ value: this.currentUser.alias, disabled: false },[Validators.maxLength(30), Validators.required,Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
        
         calle: new FormControl({ value:this.currentUser.Direccion.calle, disabled: true }),
         altura: new FormControl({ value:this.currentUser.Direccion.numero, disabled: true}),
@@ -146,9 +139,9 @@ export class UserProfileModalComponent implements OnInit {
         barrio: new FormControl({ value: this.currentUser.Direccion.barrio, disabled: true }),
         referencia: new FormControl({ value: this.currentUser.Direccion.referencia, disabled: true }),
         
-        banco: new FormControl({value: this.currentUser.Donacion.banco, disabled:true}),
-        cbu: new FormControl({ value: this.currentUser.Donacion.cbu, disabled: true}),
-        alias: new FormControl({value: this.currentUser.Donacion.alias, disabled: true}),
+        banco: new FormControl({value: this.currentUser.banco, disabled:true}),
+        cbu: new FormControl({ value: this.currentUser.cbu, disabled: true}),
+        alias: new FormControl({value: this.currentUser.alias, disabled: true}),
         
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
@@ -190,7 +183,13 @@ export class UserProfileModalComponent implements OnInit {
           
       this.editUser.editCentro(donaciones,this.authservice.getToken()).subscribe({
         complete: () => {
-          this.alertsService.confirmMessage("Los datos bancarios del centro rescatista han sido modificados con exito!").then((result) => window.location.href ="/miperfil");
+          this.alertsService.confirmMessage("Los datos bancarios del centro rescatista han sido modificados con exito!").then((result) => {
+            this.enEdicion=!this.enEdicion;
+            this.editarDatos=!this.editarDatos;
+            this.esconder=!this.esconder;
+
+            this.inicializarFormulario();
+          });
         },
         error: (err: any) => {
           this.alertsService.errorMessage(err.error.error).then((result) => {
