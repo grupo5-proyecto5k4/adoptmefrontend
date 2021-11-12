@@ -39,6 +39,7 @@ export class VerMascotaComponent implements OnInit {
   fotoVisualizar: any = [];
   accion: any;
   profile: any;
+  fechaNacimientoVisualizada: any = "";
 
   constructor(private authservice: AuthService, private mascotaService: MascotaService, @Inject(MAT_DIALOG_DATA) public data: any, private dialog: MatDialog, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
 
@@ -60,7 +61,7 @@ export class VerMascotaComponent implements OnInit {
       var date = this.mascota.fechaNacimiento.substring(0, 10);
       var [yyyy, mm, dd] = date.split("-");
       var revdate = `${dd}/${mm}/${yyyy}`;
-      this.mascota.fechaNacimiento = revdate;
+      this.fechaNacimientoVisualizada = revdate;
     }
 
     if (this.mascota.Foto.length != 0) {
@@ -87,7 +88,7 @@ export class VerMascotaComponent implements OnInit {
       nombres: new FormControl({ value: this.mascota.nombreMascota, disabled: true }),
       tamañoFinal: new FormControl({ value: this.mascota.tamañoFinal, disabled: true }),
       sexo: new FormControl({ value: this.mascota.sexo, disabled: true }),
-      fechaNacimiento: new FormControl({ value: this.mascota.fechaNacimiento, disabled: true }),
+      fechaNacimiento: new FormControl({ value: this.fechaNacimientoVisualizada, disabled: true }),
       raza: new FormControl({ value: this.mascota.raza, disabled: true }),
       castrado: new FormControl({ value: this.mascota.castrado, disabled: true }),
       conductaGatos: new FormControl({ value: this.mascota.conductaGatos, disabled: true }),
@@ -161,8 +162,8 @@ export class VerMascotaComponent implements OnInit {
     })
   }
 
-  esResponsable(){
-    return (this.localStorageService.getUser()._id === this.data.mascota.responsableId);
+  esResponsableOAdmin(){
+    return ((this.localStorageService.getUser()._id === this.data.mascota.responsableId)||(this.localStorageService.getProfile() == "0"));
   }
 
   esParticular(){

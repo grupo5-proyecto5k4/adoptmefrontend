@@ -24,6 +24,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   seguimientoChecked = false;
   seguimientoSolicitud = false;
   isFechaFinLoaded = false;
+  observacionExplicacion;
   
     // Date picker ------------------
     today = new Date();
@@ -63,6 +64,9 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       this.data.solicitud.Solicitante.instagram = "No especificado"
     }
 
+    if (this.dataSolicitud.observacionCancelacion != "" || this.dataSolicitud.observacionCancelacion != null ){
+      this.observacionExplicacion = this.dataSolicitud.observacionCancelacion;
+    }
 
     //camposBooleanos
 
@@ -162,6 +166,8 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       tiempoTenencia: new FormControl({ value: dataSolicitud.tiempoTenenciaString, disabled: true }),
       frecuencia: new FormControl('', [Validators.required]),
       fechaFinProvisorio: new FormControl({ value: dataSolicitud.fechaFinProvisorio}),
+      comentario: new FormControl(''),
+      comentarioRespuesta: new FormControl({ value: this.dataSolicitud.observacionCancelacion, disabled:true})
     });
 
     if (!this.faltaAceptar()) {
@@ -188,21 +194,20 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     return (this.dataSolicitud.estadoId == 'Aprobado Por Responsable' && this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
   }
 
+    // ACEPTACIÓN POR PARTE DEL CENTRO/RESPONSABLE A LA SOLICITUD CARGADA POR EL SOLICITANTE
   async aceptarSolicitud() {
     if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '' && !this.validarFrecuencia())) {
       this.isLoading = true;
+      var solicitud: FormularioProvisorio = new FormularioProvisorio();
+      solicitud._id = this.idSolicitud;
+      solicitud.observacion = this.SolicitudForm.controls.comentario.value;
+      solicitud.fechaFinProvisor = this.SolicitudForm.controls.fechaFinProvisorio.value;
       if (this.seguimientoChecked){
-        var solicitud: FormularioProvisorio = new FormularioProvisorio();
-        solicitud._id = this.idSolicitud;
-        solicitud.cadaCuanto = this.SolicitudForm.controls.frecuencia.value;
-        solicitud.fechaFinProvisorio = this.SolicitudForm.controls.fechaFinProvisorio.value;
+        var y: number = +this.SolicitudForm.controls.frecuencia.value;
+        solicitud.cadaCuanto = y;
         //this.visualizacionSolicitudesService.actualizarSolicitudProvisorio(solicitud, this.auth.getToken()).subscribe(async soli => { })
-      } else {
-        var solicitud: FormularioProvisorio = new FormularioProvisorio();
-        solicitud._id = this.idSolicitud;
-        solicitud.fechaFinProvisorio = this.SolicitudForm.controls.fechaFinProvisorio.value;
+      } 
         //this.visualizacionSolicitudesService.actualizarSolicitudProvisorio(solicitud, this.auth.getToken()).subscribe(async soli => { })
-      }
       // Añade fecha de fin de provisorio y acepta/rechaza solicitud
       console.log("AceptarSolicitud()", solicitud);
       this.visualizacionSolicitudesService.confirmarSolicitud(solicitud, this.auth.getToken()).subscribe(async dataProvi => {
@@ -241,9 +246,13 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
 */
 
+  // RECHAZO POR PARTE DEL CENTRO/RESPONSABLE A LA SOLICITUD CARGADA POR EL SOLICITANTE
   async rechazarSolicitud() {
+    let solicitud: FormularioProvisorio = new FormularioProvisorio();
+    solicitud._id = this.idSolicitud;
+    solicitud.observacion = this.SolicitudForm.controls.comentario.value;
     this.isLoading = true;
-    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.rechazarSolicitud(solicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
       this.notificacionService.notificarCancelacionProvisorioAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')
@@ -256,11 +265,11 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
 
   async confirmarSolicitud() {
-    var solicitud;
-    solicitud._id = this.idSolicitud;
-    console.log("confirmarSolicitud()", solicitud);
+    //var solicitud;
+    //solicitud._id = this.idSolicitud;
+    //console.log("confirmarSolicitud()", solicitud);
     this.isLoading = true;
-    this.visualizacionSolicitudesService.confirmarSolicitud(solicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.confirmarSolicitud(this.dataSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
       this.notificacionService.notificarConfirmacionProvisorioACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result) => window.location.href = '/solicitudes')
@@ -318,5 +327,10 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
         }
     })
   }
+
+  faltaRechazar() {
+    return (this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
+  }
+
 
 }

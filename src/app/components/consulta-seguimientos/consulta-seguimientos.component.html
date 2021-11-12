@@ -18,27 +18,45 @@
                                             date:'dd/MM/yyyy'}} </p>
                                     </mat-panel-title>
                                 </mat-expansion-panel-header>
-                                <h3 class=question-title>¿Quiénes pueden participar en los procesos?</h3>
-                                <p>Toda persona mayor a 18 años puede postularse para adoptar o brindar provisorio a un
-                                    animalito.</p>
-                                <mat-divider></mat-divider><br>
-                                <h3 class=question-title>Ya me postulé, ¿y ahora qué?</h3>
-                                <p>El Centro Rescatista o particular a cargo de la mascota recibirá la información de tu
-                                    perfil y los datos de tu formulario.</p>
-                                <p>A partir de allí, analizarán tu información. Cuando tomen una decisión serás
-                                    notificado y
-                                    podrás continuar con el proceso si fuiste seleccionado.</p>
+                               
+                                <!--
+                                    <div class="contenedor-imagen" *ngIf="Visita.path">
+                                      <div>
+                                        <div>
+                                          <img class="imagen" src="{{Visita.path}}" style="width:100%">
+                                        </div>
+                                      </div>
+                                      <div class="position">
+                                        <div class="flecha izq">
+                                          <a class="prev" (click)="plusSlides(-1)" *ngIf="Visita.path.length > 1">&#10094;</a>
+                                        </div>
+                                        <div class="flecha der">
+                                          <a class="next" (click)="plusSlides(1)" *ngIf="Visita.path.length > 1">&#10095;</a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                               -->
+                                    <div class="container-row1">
+                                      <div>
+                                        <mat-form-field class="ref" style="width: 100%;">
+                                          <mat-label>Descripcion</mat-label>
+                                          <textarea matInput value="{{visita.descripcionVisita}}" maxlength="350" disabled></textarea>
+                                        </mat-form-field>
+                                      </div>
+                                    </div>        
                             </mat-expansion-panel>
                         </mat-accordion>
                         <h5  *ngIf="seguimiento.Visita.length == 0" class="container-publicaciones">No se han registrado visitas durante el seguimiento...</h5>
                         <div class="logout-container container-publicaciones" *ngIf="seguimiento.estadoId == 'Iniciado'">
-                            <button mat-button type="button" color="accent" class="btnLogout" style="margin-bottom: 1%;"
-                                (click)="registrarVisita()">→ Registrar nueva visita ←</button>
+                            <button mat-button type="button" color="accent" class="btnLogout" style="margin-top: 4%; cursor: pointer;"
+                                (click)="registrarVisita(seguimiento)">→ Registrar nueva visita ←</button>
                         </div>
+                        
                         <div class="logout-container container-publicaciones" style="margin-bottom: 20px" *ngIf="consultarEstadoMascota()">
                             <button mat-button type="button" color="accent" class="btnLogout"
                                 (click)="cancelarProceso(seguimiento)">{{proceso}}</button>
                         </div>
+
                     </div>
                     <h4  *ngIf="seguimientos.length == 0" class="container-publicaciones" style="margin-top: 1%">No se han realizado seguimientos a la mascota hasta el momento... </h4>
                 </mat-dialog-content>

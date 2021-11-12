@@ -141,15 +141,13 @@
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
                             style="padding: 10px;" (click)="openProvisorioForm()" *ngIf="accion === 0">Ser
                             Provisorio</a>
-                            <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
-                            style="padding: 10px;" (click)="openSeguimientos()">Ver seguimiento</a>
                         </div>
                       </div>
 
-                      <div class="container-row1" id="botones" *ngIf="esResponsable()">
+                      <div class="container-row1" id="botones" *ngIf="esResponsableOAdmin()">
                         <div style="margin-left:auto;margin-right: auto;">
                             <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
-                            style="padding: 10px;" (click)="openSeguimientos()">Ver seguimiento</a>
+                            style="padding: 10px; cursor: pointer;" (click)="openSeguimientos()">Ver seguimiento</a>
                         </div>
                       </div>
 
