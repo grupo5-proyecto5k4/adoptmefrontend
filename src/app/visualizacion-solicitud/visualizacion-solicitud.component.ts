@@ -24,6 +24,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
   dataAnimal: any;
   seguimientoChecked = false;
   seguimientoSolicitud = false;
+  observacionExplicacion;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private notificacionService: NotificacionService, private alertsService: AlertsService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService) {
   }
@@ -55,8 +56,9 @@ export class VisualizacionSolicitudComponent implements OnInit {
       this.data.solicitud.Solicitante.instagram = "No especificado"
     }
 
-
-
+    if (this.dataSolicitud.observacionCancelacion != "" || this.dataSolicitud.observacionCancelacion != null ){
+      this.observacionExplicacion = this.dataSolicitud.observacionCancelacion;
+    }
     //camposBooleanos
 
     // Vivienda 0:casa/1:depto
@@ -151,6 +153,8 @@ export class VisualizacionSolicitudComponent implements OnInit {
       accionViaje: new FormControl({ value: dataSolicitud.accionViaje, disabled: true }),
       accionImpedimento: new FormControl({ value: dataSolicitud.accionImpedimento, disabled: true }),
       frecuencia: new FormControl('', [Validators.required]),
+      comentario: new FormControl(''),
+      comentarioRespuesta: new FormControl({ value: this.dataSolicitud.observacionCancelacion, disabled:true})
     });
 
     let frecuencia = 'No se realizará seguimiento';
@@ -171,17 +175,18 @@ export class VisualizacionSolicitudComponent implements OnInit {
     }
   }
 
+  // ACEPTACIÓN POR PARTE DEL CENTRO/RESPONSABLE A LA SOLICITUD CARGADA POR EL SOLICITANTE
   async aceptarSolicitud() {
     if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '')) {
       this.isLoading = true;
+      let solicitud: FormularioAdopcion = new FormularioAdopcion();
+      solicitud._id = this.idSolicitud;
+      solicitud.observacion = this.SolicitudForm.controls.comentario.value;
       if (this.seguimientoChecked){
-        let solicitud: FormularioAdopcion = new FormularioAdopcion();
-        solicitud._id = this.idSolicitud;
         solicitud.cadaCuanto = this.SolicitudForm.controls.frecuencia.value;
         //this.visualizacionSolicitudesService.actualizarSolicitudAdopcion(solicitud, this.auth.getToken()).subscribe(async soli => { })
       }
-      console.log(this.data.solicitud.Animales.nombreMascota + " " + this.idSolicitud + ' ' + this.data.solicitud.solicitanteId)
-      this.visualizacionSolicitudesService.confirmarSolicitud(this.dataSolicitud, this.auth.getToken()).subscribe(async dataProvi => {
+      this.visualizacionSolicitudesService.confirmarSolicitud(solicitud, this.auth.getToken()).subscribe(async dataProvi => {
         this.data = dataProvi;
         this.notificacionService.notificarConfirmacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
         this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
@@ -193,9 +198,14 @@ export class VisualizacionSolicitudComponent implements OnInit {
     }
   }
 
+  // RECHAZO POR PARTE DEL CENTRO/RESPONSABLE A LA SOLICITUD CARGADA POR EL SOLICITANTE
   async rechazarSolicitud() {
+    let solicitud: FormularioAdopcion = new FormularioAdopcion();
+    solicitud._id = this.idSolicitud;
+    solicitud.observacion = this.SolicitudForm.controls.comentario.value;
     this.isLoading = true;
-    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    
+    this.visualizacionSolicitudesService.rechazarSolicitud(solicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
       this.notificacionService.notificarCancelacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')
@@ -224,6 +234,10 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   faltaConfirmar() {
     return (this.dataSolicitud.estadoId == 'Aprobado Por Responsable' && this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
+  }
+
+  faltaRechazar() {
+    return (this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
   }
 
   SeguimientoChange() {

@@ -15,6 +15,41 @@
 
                                     <div class="centrado">
                                         <form [formGroup]="SolicitudForm" class="example-form" *ngIf="SolicitudForm">
+
+        
+                                                    <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Suspendido' && faltaRechazar()">
+                                                        <p class="estado">Solicitud Rechazada</p>
+                                                    </div>
+                                                    <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Suspendido' && faltaRechazar()">
+                                                        <p class="estadoText">¡Lo sentimos! Luego de analizar tu solicitud el responsable no cree que eres el indicado para brindar provisorio a esta mascota.</p>
+                                                    </div>
+        
+                                                    <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Aprobado Por Responsable' && faltaConfirmar()">
+                                                        <p class="estadoFeliz">Solicitud Aprobada</p>
+                                                    </div>
+                                                    <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Aprobado Por Responsable' && faltaConfirmar()">
+                                                        <p class="estadoText">¡Excelente! El responsable de la mascota te ha seleccionado para ser su provisorio. Luego de que confirmes tu decisión se contactará contigo para coordinar.</p>
+                                                    </div>
+        
+                                                    <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Aprobado Por Responsable'">
+                                                        <div>
+                                                            <mat-form-field class="ref">
+                                                                <mat-label>Respuesta del responsable</mat-label>
+                                                                <textarea class="colorcitoFeliz" matInput formControlName="comentarioRespuesta"
+                                                                    maxlength="150"></textarea>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Suspendido'">
+                                                        <div>
+                                                            <mat-form-field class="ref">
+                                                                <mat-label>Respuesta del responsable</mat-label>
+                                                                <textarea class="colorcito" matInput formControlName="comentarioRespuesta"
+                                                                        maxlength="150"></textarea>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
                                             <div class="container-row1">
                                                 <div>
                                                     <mat-form-field>

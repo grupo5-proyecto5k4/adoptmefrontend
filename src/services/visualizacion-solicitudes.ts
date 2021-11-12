@@ -35,8 +35,8 @@ export class VisualizacionSolicitudesService {
         return this.http.put<any>(this.endpointConfirmarSolicitud + solicitud._id, solicitud, { headers: new HttpHeaders().set('auth-token', `${token}`)});
     }
 
-    rechazarSolicitud(idSolicitud: string, token:string): Observable<any> {
-        return this.http.put<any>(this.endpointRechazarSolicitud + idSolicitud, "some-string", { headers: new HttpHeaders().set('auth-token', `${token}`)});
+    rechazarSolicitud(solicitud, token:string): Observable<any> {
+        return this.http.put<any>(this.endpointRechazarSolicitud + solicitud._id, solicitud, { headers: new HttpHeaders().set('auth-token', `${token}`)});
 
     }
 

@@ -12,12 +12,46 @@
                                     <div>
                                         <h2 class="subtitulo">Solicitud de adopción</h2>
                                     </div>
-
-
-
+            
                                     <div class="centrado">
                                         <form [formGroup]="SolicitudForm" class="example-form" *ngIf="SolicitudForm">
-                                            <div class="container-row1">
+
+                                            <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Suspendido' && faltaRechazar()">
+                                                <p class="estado">Solicitud Rechazada</p>
+                                            </div>
+                                            <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Suspendido' && faltaRechazar()">
+                                                <p class="estadoText">¡Lo sentimos! Luego de analizar tu solicitud el responsable no cree que eres el indicado para adoptar a esta mascota.</p>
+                                            </div>
+
+                                            <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Aprobado Por Responsable' && faltaConfirmar()">
+                                                <p class="estadoFeliz">Solicitud Aprobada</p>
+                                            </div>
+                                            <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Aprobado Por Responsable' && faltaConfirmar()">
+                                                <p class="estadoText">¡Excelente! El responsable de la mascota te ha seleccionado para ser su nuevo dueño. Luego de que confirmes tu decisión se contactará contigo para coordinar.</p>
+                                            </div>
+
+                                            <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Aprobado Por Responsable'">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Respuesta del responsable</mat-label>
+                                                        <textarea class="colorcitoFeliz" matInput formControlName="comentarioRespuesta"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Suspendido'">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Respuesta del responsable</mat-label>
+                                                        <textarea class="colorcito" matInput formControlName="comentarioRespuesta"
+                                                                maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+
+                                                <div class="container-row1">
+
                                                 <div>
                                                     <mat-form-field>
                                                         <mat-label>Nombre de la mascota</mat-label>
@@ -298,10 +332,17 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
+                                            <br>
+                                            <div class="container-btn" *ngIf="faltaAceptar()">
+                                                <mat-form-field class="ref">
+                                                    <mat-label>Enviar comentario junto a tu decisión</mat-label>
+                                                    <textarea matInput formControlName="comentario"
+                                                        maxlength="150"></textarea>
+                                                </mat-form-field>
+                                            </div>
                                         </form>
                                     </div>
-
-                                    <div *ngIf="faltaAceptar()">
+                                    <div class="container-btn" *ngIf="faltaAceptar()">
                                         <div class="container-btn">
                                             <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading"
                                                 style="margin-right: 3px;" type="button"
@@ -324,17 +365,6 @@
                                             <a mat-raised-button *ngIf="isLoading" class="button loading" type="button"
                                                 id="btncuenta">
                                                 <img class=logo src="../../assets/images/loading.gif" /></a>
-                                        </div>
-                                    </div>
-                                    <div class="container-row1" *ngIf="rechazoSol">
-                                        <div>
-                                            <br>
-                                            <br>
-                                            <mat-form-field class="ref">
-                                                <mat-label>Agregar Comentario</mat-label>
-                                                <input matInput formControlName="comentario" placeholder="comentario"
-                                                    class="form-control" maxlength="150">
-                                            </mat-form-field>
                                         </div>
                                     </div>
                                 </div>

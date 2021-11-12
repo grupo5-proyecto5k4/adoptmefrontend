@@ -43,6 +43,8 @@ export class ListadoSolicitudesComponent implements OnInit {
           this.solicitudes[x].estado = "Bloqueada";
         } else if (estado === "Aprobado"){
           this.solicitudes[x].estado = "Exitosa";
+        } else if (estado === "Suspendido"){
+          this.solicitudes[x].estado = "Rechazada por responsable";
         }
       
 
