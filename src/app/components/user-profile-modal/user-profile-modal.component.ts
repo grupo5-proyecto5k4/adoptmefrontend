@@ -100,6 +100,21 @@ export class UserProfileModalComponent implements OnInit {
   }
 
   inicializarFormulario(){
+
+    if(this.enEdicion==false){
+      this.ProfileForm = new FormGroup({
+        nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
+        apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
+        correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+        dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
+        numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
+        fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true }),
+        facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
+        instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
+        contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
+      });
+    }
+
     if(this.enEdicion==true && this.currentUser.tipoUsuario==2){
 
       this.ProfileForm = new FormGroup({
