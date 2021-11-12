@@ -14,6 +14,9 @@ import { FormularioAdopcion } from 'src/models/IFormularioAdopcion';
 import { Address } from 'src/models/IAddress';
 import { AuthService } from 'src/app/auth.service';
 import { NotificacionService } from 'src/services/notificacion.service';
+import {map, startWith} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { BarriosService } from 'src/services/barrios.service';
 
 
 @Component({
@@ -41,10 +44,27 @@ export class UserFormComponent implements OnInit {
   TerminosChecked = false;
   tiempoPresupuestoSelected: number;
 
+  myControl = new FormControl();
+  selectedBarrio; 
+  filteredBarrios: Observable<string[]>;
+  barrios: string[] = [];
+  barriosBack;
 
-  constructor(private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private notificacionService: NotificacionService, private dialog: MatDialog, private userService: UserService, private dialogref: MatDialogRef<UserFormComponent>) { }
+
+  constructor(private BarriosService : BarriosService, private alertsService: AlertsService, @Inject(MAT_DIALOG_DATA) public data: any, private authService: AuthService, private notificacionService: NotificacionService, private dialog: MatDialog, private userService: UserService, private dialogref: MatDialogRef<UserFormComponent>) { }
 
   ngOnInit() {
+    this.BarriosService.getBarrios().subscribe(data => {
+      this.barriosBack = data;
+      for (let x = 0; x < this.barriosBack.length; x++){
+        this.barrios.push(this.barriosBack[x].nombre);
+      }
+      this.filteredBarrios = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
+
     this.UserForm = new FormGroup({
       descripcionOtraMascota: new FormControl('', [Validators.maxLength(200)]),
       accionViaje: new FormControl('', [Validators.required, Validators.maxLength(300)]),
@@ -55,9 +75,18 @@ export class UserFormComponent implements OnInit {
       street: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       altura: new FormControl('', [Validators.pattern('[0-9]{0,4}')]),
       reference: new FormControl('', [Validators.maxLength(150)]),
-      barrio: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      barrio: new FormControl('', [Validators.required]),
     });
     this.dialogref.disableClose = true;
+  }
+
+  _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.barrios.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  OnHumanSelected(SelectedHuman) {
+    this.UserForm.controls['barrio'].setValue(SelectedHuman);
   }
 
   close() {
