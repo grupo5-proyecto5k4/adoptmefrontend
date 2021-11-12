@@ -4,6 +4,7 @@ import { VisualizacionSolicitudesService } from 'src/services/visualizacion-soli
 import { AuthService } from '../auth.service';
 import { VisualizacionSolicitudComponent } from '../visualizacion-solicitud/visualizacion-solicitud.component';
 import { VisualizacionSolicitudProviComponent } from '../visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
+import { LocalStorageService } from 'src/services/local-storage.service';
 @Component({
   selector: 'app-listado-solicitudes',
   templateUrl: './listado-solicitudes.component.html',
@@ -14,11 +15,16 @@ export class ListadoSolicitudesComponent implements OnInit {
   solicitudesProvi: any;
   solicitudesRealizadasAdop: any;
   solicitudesRealizadasProv: any;
+  isCentro: Boolean = false;
 
 
-  constructor(public visualizacionSolicitudesService: VisualizacionSolicitudesService, private dialog: MatDialog, private auth: AuthService) { }
+  constructor(private LocalStorageService: LocalStorageService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private dialog: MatDialog, private auth: AuthService) { }
 
   ngOnInit(): void {
+
+    if (this.LocalStorageService.getProfile() === 2) {
+      this.isCentro = true;
+    }
 
     this.visualizacionSolicitudesService.getSolicitudesAdoptar(this.auth.getToken()).subscribe(data => {
       this.solicitudes = data;

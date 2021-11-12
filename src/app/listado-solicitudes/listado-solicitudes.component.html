@@ -78,7 +78,7 @@
             </div>
         </mat-tab>
 
-        <mat-tab label="Realizadas">
+        <mat-tab *ngIf="!isCentro" label="Realizadas">
             <div class="margenes container-publicaciones">
                 <mat-card class="card-solicitud" *ngFor="let solicitud of solicitudesRealizadasAdop">
                     <div class="contenido-card">
