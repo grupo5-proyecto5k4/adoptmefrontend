@@ -62,6 +62,10 @@ export class ReportesAdminComponent implements OnInit {
           beginAtZero: true,
           stepSize: 1,
           min: 0
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Días'
         }
       }]
     },
@@ -89,6 +93,10 @@ export class ReportesAdminComponent implements OnInit {
           beginAtZero: true,
           stepSize: 1,
           min: 0
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Días'
         }
       }]
     },
@@ -125,6 +133,10 @@ export class ReportesAdminComponent implements OnInit {
           beginAtZero: true,
           stepSize: 1,
           min: 0
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Días'
         }
       }]
     }
