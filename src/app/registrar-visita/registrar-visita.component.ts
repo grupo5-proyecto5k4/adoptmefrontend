@@ -228,8 +228,7 @@ export class RegistrarVisitaComponent implements OnInit {
   async registrarVisita() {
     //updateSeguimiento
     if (this.SignupForm.valid) {
-      //this.isLoading = true;
-      console.log("enviando..")
+      this.isLoading = true;
       let visita: any = {};
       visita.seguimientoId = this.seguimiento._id;
       visita.descripcionVisita = this.SignupForm.controls.descripcion.value;
@@ -246,8 +245,6 @@ export class RegistrarVisitaComponent implements OnInit {
             if (i == 0) {
               foto.esPrincipal = true;
             }
-            console.log("foto")
-            console.log(this.selectedFiles.item(i))
 
             this.photo.uploadFotoVisita(this.selectedFiles[i], resp.id_Animal, this.auth.getToken()).subscribe(
               event => {
