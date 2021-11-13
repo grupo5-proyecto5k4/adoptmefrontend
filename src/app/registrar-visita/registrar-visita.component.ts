@@ -75,7 +75,7 @@ export class RegistrarVisitaComponent implements OnInit {
   ngOnInit(): void {
     this.seguimiento = this.data.seguimiento;
     this.SignupForm = new FormGroup({
-      descripcion: new FormControl('', [Validators.required, Validators.maxLength(350), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(350)]),
       imagen: new FormControl(''),
     });
 

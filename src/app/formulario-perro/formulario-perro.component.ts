@@ -93,7 +93,7 @@ export class FormularioPerroComponent implements OnInit {
       conductaNiños: new FormControl('', Validators.required),
       conductaGatos: new FormControl('', Validators.required),
       conductaPerros: new FormControl('', Validators.required),
-      descripcion: new FormControl('', [Validators.required, Validators.maxLength(150), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(150)]),
       foto: new FormControl('', Validators.required),
     });
 
