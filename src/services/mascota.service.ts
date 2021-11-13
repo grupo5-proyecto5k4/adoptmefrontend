@@ -22,8 +22,8 @@ export class MascotaService {
     return this.httpClient.post<any[]>(this.api + '/vacunas/vacuna', listaVacunas);
   }
 
-  actualizarMascota(mascota: any): Promise<any> {
-    return this.httpClient.put<any[]>(this.api + '/animales/user/modificarMascota', mascota).toPromise();;
+  actualizarMascota(mascota: any, token: string): Promise<any> {
+    return this.httpClient.put<any[]>(this.api + '/animales/user/modificarMascota', mascota, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
   updateNotificacion(notificacion: Notificacion, token: string): Promise<any> {

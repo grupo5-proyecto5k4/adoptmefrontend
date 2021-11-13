@@ -107,7 +107,7 @@ export class VerMascotaComponent implements OnInit {
       this.inicializarFormulario();
       this.boton = "Guardar";
     }
-    else{
+    else {
       this.guardarCambios();
     }
     this.enEdicion = !this.enEdicion;
@@ -122,6 +122,7 @@ export class VerMascotaComponent implements OnInit {
         fechaNacimiento: new FormControl({ value: this.mascota.fechaNacimiento, disabled: true }),
         raza: new FormControl({ value: this.mascota.raza, disabled: true }),
         castrado: new FormControl({ value: this.mascota.castrado, disabled: true }),
+        castradoPut: new FormControl({ value: this.mascota.castrado, disabled: false }),
         conductaGatos: new FormControl({ value: this.mascota.conductaGatos, disabled: true }),
         conductaPerros: new FormControl({ value: this.mascota.conductaPerros, disabled: true }),
         conductaNiños: new FormControl({ value: this.mascota.conductaNiños, disabled: true }),
@@ -136,7 +137,8 @@ export class VerMascotaComponent implements OnInit {
         sexo: new FormControl({ value: this.mascota.sexo, disabled: true }),
         fechaNacimiento: new FormControl({ value: this.mascota.fechaNacimiento, disabled: true }),
         raza: new FormControl({ value: this.mascota.raza, disabled: true }),
-        castrado: new FormControl({ value: this.mascota.castrado }),
+        castrado: new FormControl({ value: this.mascota.castrado, disabled: true }),
+        castradoPut: new FormControl({ value: this.mascota.castrado, disabled: false }),
         conductaGatos: new FormControl({ value: this.mascota.conductaGatos, disabled: true }),
         conductaPerros: new FormControl({ value: this.mascota.conductaPerros, disabled: true }),
         conductaNiños: new FormControl({ value: this.mascota.conductaNiños, disabled: true }),
@@ -150,23 +152,20 @@ export class VerMascotaComponent implements OnInit {
   }
 
 
-  guardarCambios(){
+  guardarCambios() {
     let mascotaActualiza: Mascota = new Mascota();
     mascotaActualiza = this.mascota;
-    mascotaActualiza.castrado = this.SignupFormVac.controls.castrado.value;
-    this.mascotaService.actualizarMascota(mascotaActualiza);
-
-
-
-      this.photo.registroAnimal(mascotaActualiza, this.authservice.getToken()).subscribe(
-        (resp: Data) => {
-         let vacunasAnimal = [];
+    mascotaActualiza.castrado = this.ProfileForm.controls.castradoPut.value;
+    this.mascotaService.actualizarMascota(mascotaActualiza, this.authservice.getToken()).then(
+      (resp) => {
+        if (resp.value) {
+          let vacunasAnimal = [];
 
           for (let i = 0; i < this.listaVacunas.length; i++) {
             let nuevaVac: NuevaVacuna = new NuevaVacuna();
             nuevaVac.nombreVacuna = this.listaVacunas[i].nombre;
             nuevaVac.fechaAplicacion = this.listaVacunas[i].fechaAplicacion;
-            nuevaVac.id_Animal = resp.id_Animal;
+            nuevaVac.id_Animal = this.mascota._id;
 
             vacunasAnimal.push(nuevaVac);
             console.log(vacunasAnimal);
@@ -174,27 +173,19 @@ export class VerMascotaComponent implements OnInit {
 
 
           this.http.post<NuevaVacuna>('https://adoptmebackend.herokuapp.com/vacunas/vacuna', vacunasAnimal)
-            .subscribe(() => {
-
-            }, () => {
-
-            })
+            .subscribe()
           this.alertsService.confirmMessage("Se han actualizado los datos de la mascota correctamente").then((result) => window.location.href = '/mascotas')
-
-        },
-        () => {
-
-          this.alertsService.errorMessage("No se han podido actualizar los datos de la mascota");
-
         }
+        else{
+          this.alertsService.errorMessage("No se han podido actualizar los datos de la mascota");
+        }
+      }
 
-      )
-
-
-    
+    );
 
 
     this.boton = "Editar";
+
   }
 
   agregar() {

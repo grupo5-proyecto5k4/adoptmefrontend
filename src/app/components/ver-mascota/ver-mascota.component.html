@@ -74,7 +74,7 @@
                           <div *ngIf="enEdicion">
                             <mat-form-field>
                               <mat-label>Castrado</mat-label>
-                              <mat-select formControlName="castrado" [(value)]="selected">
+                              <mat-select matInput formControlName="castradoPut" [(value)]="selected">
                                 <mat-option value="Sí">Sí</mat-option>
                                 <mat-option value="No">No</mat-option>
                               </mat-select>
