@@ -25,7 +25,7 @@ export class ConsultaSeguimientosComponent implements OnInit {
   SignupForm: FormGroup;
   motivoVisible = false;
 
-  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any,private alertService: AlertsService, private visualizarService: VisualizacionSolicitudesService, private mascotaService: MascotaService, private notificacionService: NotificacionService, private authService: AuthService) { }
+  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private alertService: AlertsService, private visualizarService: VisualizacionSolicitudesService, private mascotaService: MascotaService, private notificacionService: NotificacionService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.accion = this.data.accion;
@@ -69,22 +69,24 @@ export class ConsultaSeguimientosComponent implements OnInit {
 
   async cancelarProceso() {
     console.log("valido?", this.SignupForm.valid)
-    if (this.SignupForm.valid){
+    if (this.SignupForm.valid) {
       let body: any = {};
       body.observacion = this.SignupForm.controls.observacion.value;
       this.mascotaService.finalizarProvisorio(this.mascota._id, this.authService.getToken(), body).subscribe(respuesta => {
         this.solicitanteId = respuesta._id;
         this.enviarNotificacionDeBaja();
-      this.alertService.confirmMessage("El provisorio de "+this.mascota.nombreMascota+" ha sido finalizado")
+        this.alertService.confirmMessage("El provisorio de " + this.mascota.nombreMascota + " ha sido finalizado")
       });
-      
+
     }
-    else{
-      this.alertService.questionMessage('¿Desea finalizar el proceso de hogar provisorio de '+this.mascota.nombreMascota+'?','Finalizar provisorio','Finalizar','Cancelar')
-      .then(result =>{
-        this.motivoVisible = true;
-      })
-      ;
+    else {
+      this.alertService.questionMessage('¿Desea finalizar el proceso de hogar provisorio de ' + this.mascota.nombreMascota + '?', 'Finalizar provisorio', 'Finalizar', 'Cancelar')
+        .then(result => {
+          if (result.value) {
+            this.motivoVisible = true;
+          }
+        })
+        ;
     }
   }
 
