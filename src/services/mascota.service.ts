@@ -38,4 +38,8 @@ export class MascotaService {
   actualizarSeguimiento(visita: any, token: string):  Observable <any>{
     return this.httpClient.put('/seguimiento/modificarSeguimiento/visita', visita, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
+
+  finalizarProvisorio(idAnimal: string, token: string, motivo: any): Observable <any>{
+    return this.httpClient.put('/seguimiento/modificarSeguimiento/'+idAnimal, motivo, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
 }

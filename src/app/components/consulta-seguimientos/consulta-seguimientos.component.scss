@@ -16,6 +16,9 @@
     margin-top: 5%;
     }
 
+    .example-full-width {
+        width: 100%;
+      }
 
   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
@@ -49,6 +52,13 @@ input:-webkit-autofill {
     margin-top: 10px;
     color: #B80092,
 }
+
+.helpError {
+    color: #f44336; 
+    font-size: 10px;
+    text-align: center;
+  }
+
 
 .subtitulo{
     font-size: 200% !important;
@@ -94,7 +104,7 @@ input:-webkit-autofill {
 
 .txt-construction{
     margin-top: 25px;
-    text-align: justify;
+    //text-align: justify;
     width: 91%;
     padding: 40px 1px 1px 40px;
     line-height: 200%;
