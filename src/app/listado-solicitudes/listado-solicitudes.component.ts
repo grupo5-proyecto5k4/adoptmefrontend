@@ -109,7 +109,7 @@ export class ListadoSolicitudesComponent implements OnInit {
       }
     })
 
-    this.visualizacionSolicitudesService.getSolicitudesRealizadas('provisorio', this.auth.getToken()).subscribe(dataRealizadasProv => {
+    this.visualizacionSolicitudesService.getSolicitudesRealizadas('Provisorio', this.auth.getToken()).subscribe(dataRealizadasProv => {
       this.solicitudesRealizadasProv = dataRealizadasProv;
 
       for (let x = 0; x < this.solicitudesRealizadasProv.length; x++) {
