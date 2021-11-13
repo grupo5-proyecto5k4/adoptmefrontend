@@ -4,6 +4,7 @@ import { Label } from 'ng2-charts';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ReportesService } from 'src/services/reportes.service';
 import { AuthService } from '../auth.service';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-reportes-admin',
@@ -163,7 +164,9 @@ export class ReportesAdminComponent implements OnInit {
   ];
 
 
-  constructor(private reporteService: ReportesService, private authService: AuthService) { }
+  constructor(private dateAdapter: DateAdapter<Date>, private reporteService: ReportesService, private authService: AuthService) {
+    this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
+  }
 
   ngOnInit(): void {
 
