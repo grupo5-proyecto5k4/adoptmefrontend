@@ -50,6 +50,11 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     console.log(this.dataSolicitante)
     console.log(this.dataAnimal)
 
+    // Formato fecha   
+    var date = this.dataSolicitud.fechaFinProvisorio.substring(0, 10);
+    var [yyyy, mm, dd] = date.split("-");
+    var revdate = `${dd}-${mm}-${yyyy}`;
+    this.dataSolicitud.fechaFinProvisorioString = revdate;
     //SolicitudId
     this.idSolicitud = this.data.solicitud.Solicitud._id;
 
@@ -166,6 +171,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       tiempoTenencia: new FormControl({ value: dataSolicitud.tiempoTenenciaString, disabled: true }),
       frecuencia: new FormControl('', [Validators.required]),
       fechaFinProvisorio: new FormControl({ value: dataSolicitud.fechaFinProvisorio}),
+      fechaFinProvisorioString: new FormControl({ value: dataSolicitud.fechaFinProvisorioString, disabled:true}),
       comentario: new FormControl(''),
       comentarioRespuesta: new FormControl({ value: this.dataSolicitud.observacionCancelacion, disabled:true})
     });
