@@ -246,7 +246,7 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   validateVacunas() {
-    if (this.SignupFormVac.valid) {
+    if (this.SignupFormVac.valid && this.SignupFormVac.controls.fechaAplicacion.value != ' ' && this.SignupFormVac.controls.nombre.value != ' ') {
       document.getElementById("btnVacuna").classList.remove("buttonDisabled");
     } else {
       document.getElementById("btnVacuna").classList.add("buttonDisabled");
@@ -254,7 +254,7 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   agregar() {
-    if (this.SignupFormVac.valid) {
+    if (this.SignupFormVac.valid && this.SignupFormVac.controls.fechaAplicacion.value != ' ' && this.SignupFormVac.controls.nombre.value != ' ') {
       const object1 = {
         nombre: this.SignupFormVac.controls.nombre.value,
         fechaAplicacion: this.SignupFormVac.controls.fechaAplicacion.value,
@@ -264,6 +264,9 @@ export class FormularioPerroComponent implements OnInit {
         object1
       );
     }
+    // LIMPIAR CAMPO VACUNA
+    this.SignupFormVac.controls['fechaAplicacion'].setValue(" ");
+    this.SignupFormVac.controls['nombre'].setValue(" ");
   }
 
 
