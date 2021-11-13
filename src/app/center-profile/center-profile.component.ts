@@ -8,6 +8,11 @@ import { SignupService } from 'src/services/signup.service';
 import { Address } from 'src/models/IAddress';
 import { User } from 'src/models/IUser';
 import { Donacion } from 'src/models/IDonacion';
+import { BarriosService } from 'src/services/barrios.service';
+import {map, startWith} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 @Component({
   selector: 'app-center-profile',
   templateUrl: './center-profile.component.html',
@@ -21,8 +26,13 @@ export class CenterProfileComponent implements OnInit {
   enEdicion:boolean=false;
   editarDatos:boolean=false;
   esconder:boolean=true;
+  selectedBarrio; 
+  filteredBarrios: Observable<string[]>;
+  barrios: string[] = [];
+  barriosBack;
+  myControl = new FormControl();
 
-  constructor(private editUser: SignupService, private authservice: AuthService, private router: Router, private alertsService: AlertsService, private localStorageService: LocalStorageService) {
+  constructor(private BarriosService: BarriosService,private editUser: SignupService, private authservice: AuthService, private router: Router, private alertsService: AlertsService, private localStorageService: LocalStorageService) {
 
   }
 
@@ -58,6 +68,25 @@ export class CenterProfileComponent implements OnInit {
         this.currentUser.alias = "No especificado"
       }
      
+      this.BarriosService.getBarrios().subscribe(data => {
+        this.barriosBack = data;
+        for (let x = 0; x < this.barriosBack.length; x++){
+          this.barrios.push(this.barriosBack[x].nombre);
+        }
+      });
+
+      this.BarriosService.getBarrios().subscribe(data => {
+        this.barriosBack = data;
+        for (let x = 0; x < this.barriosBack.length; x++){
+          this.barrios.push(this.barriosBack[x].nombre);
+        }
+        this.filteredBarrios = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map(value => this._filter(value)),
+        );
+      });
+
+      
 
       // Formato fecha   
       this.currentUser.pwd = "********";
@@ -71,6 +100,15 @@ export class CenterProfileComponent implements OnInit {
 
     this.inicializarFormulario();
 
+  }
+
+  _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.barrios.filter(option => option.toLowerCase().includes(filterValue));
+  }
+
+  OnHumanSelected(SelectedHuman) {
+    this.selectedBarrio = SelectedHuman;
   }
 
   logOut() {
@@ -116,7 +154,7 @@ export class CenterProfileComponent implements OnInit {
         calle: new FormControl({ value: this.currentUser.Direccion.calle, disabled: false },[Validators.required, Validators.maxLength(50)]),
         altura: new FormControl({ value: this.currentUser.Direccion.numero, disabled: false }, [Validators.pattern('[0-9]{0,4}')]),
         localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
-        barrio: new FormControl({ value: this.currentUser.Direccion.barrio, disabled: false },[Validators.required, Validators.maxLength(50)]),
+        barrio: new FormControl({ value: this.ProfileForm.controls.barrio.value, disabled: false }),
         referencia: new FormControl({ value: this.currentUser.Direccion.referencia, disabled: false },[Validators.maxLength(150)]),
         banco: new FormControl({ value: this.currentUser.banco, disabled: true }),
         cbu: new FormControl({ value: this.currentUser.cbu, disabled: true }),
@@ -211,39 +249,18 @@ export class CenterProfileComponent implements OnInit {
       if (this.ProfileForm.controls.facebook.value !== "") {
         particularUser.facebook = this.ProfileForm.controls.facebook.value;
       }
-
       particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
-      console.log(particularUser);
 
       this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
         (resp:Data) => {
-          localStorage.setItem('auth-token', resp.token);
+          localStorage.setItem('auth_token', resp.token);
+          this.currentUser=this.editUser.getUsuarioModificado(resp.token).subscribe((r)=>{
+            this.currentUser=this.authservice.setUser(r);
+            this.localStorageService.setProfile(r.tipoUsuario); 
+            this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( ()=>
+            window.location.href = "/micentro");
+          });  
 
-          
-
-          this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
-            this.enEdicion=!this.enEdicion;
-            this.editarDatos=!this.editarDatos;
-            this.esconder=!this.esconder;
-
-            this.ProfileForm = new FormGroup({
-              nombres: new FormControl({ value: this.ProfileForm.controls.nombres.value, disabled: true }),
-              correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
-              calle: new FormControl({ value: this.ProfileForm.controls.calle.value, disabled: true }),
-              altura: new FormControl({ value: this.ProfileForm.controls.numero.value, disabled: true }),
-              localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
-              barrio: new FormControl({ value: this.ProfileForm.controls.barrio.value, disabled: true }),
-              referencia: new FormControl({ value: this.ProfileForm.controls.referencia.value, disabled: true }),
-              banco: new FormControl({ value: this.currentUser.banco, disabled: true }),
-              cbu: new FormControl({ value: this.currentUser.cbu, disabled: true }),
-              alias: new FormControl({ value:this.currentUser.alias, disabled: true }),
-              numeroContacto: new FormControl({ value: this.ProfileForm.controls.numeroContacto.value, disabled: true }),
-              facebook: new FormControl({ value: this.ProfileForm.controls.facebook.value, disabled: true }),
-              instagram: new FormControl({ value: this.ProfileForm.controls.instagram.value, disabled: true }),
-              contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true }),
-                      
-            });
-        });
         },
         (err: any) => {
           this.alertsService.errorMessage(err.error.error).then((result) => {
