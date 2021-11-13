@@ -51,6 +51,9 @@ export class ReportesAdminComponent implements OnInit {
   reporteProvisorio: any;
   chartOptions: any;
 
+  cantidadTotalPromedioProvi: any;
+  cantidadTotalPromedioAdopcion: any;
+
   // Gráfico de tiempos mínimos
   public barChartOptionsMin: ChartOptions = {
     responsive: true,
@@ -180,6 +183,12 @@ export class ReportesAdminComponent implements OnInit {
     //TODO: Agregar Llamadas al backend
     await this.reporteService.getSolicitudesTimeArray(desdeBack, hastaBack, this.authService.getToken()).subscribe(dataAdoption => {
       this.reporteTiempoAdopcion(dataAdoption);
+      console.log("dataAdoption", dataAdoption);
+      console.log("cantidadTotalAdopcion", dataAdoption[0].cantidadTotalAdopcion);
+      
+      this.cantidadTotalPromedioProvi = dataAdoption[1].cantidadTotalProvisorio;
+      this.cantidadTotalPromedioAdopcion = dataAdoption[0].cantidadTotalAdopcion;
+      
     })
     err => {
     }
