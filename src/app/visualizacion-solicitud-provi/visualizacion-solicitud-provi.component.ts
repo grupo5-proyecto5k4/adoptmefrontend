@@ -201,7 +201,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       var solicitud: FormularioProvisorio = new FormularioProvisorio();
       solicitud._id = this.idSolicitud;
       solicitud.observacion = this.SolicitudForm.controls.comentario.value;
-      solicitud.fechaFinProvisor = this.SolicitudForm.controls.fechaFinProvisorio.value;
+      solicitud.fechaFinProvisorio = this.SolicitudForm.controls.fechaFinProvisorio.value;
       if (this.seguimientoChecked){
         var y: number = +this.SolicitudForm.controls.frecuencia.value;
         solicitud.cadaCuanto = y;

@@ -19,7 +19,7 @@ interface IFormularioProvisorio {
     fechaCreacion?: Date;
     fechaModificacion?: Date;
     cadaCuanto?: number;
-    fechaFinProvisor: Date;
+    fechaFinProvisorio: Date;
     observacion?: string;
     }
   
@@ -43,7 +43,7 @@ interface IFormularioProvisorio {
       tiempoTenencia: number;
       estadoId?: string;
       cadaCuanto?: number;
-      fechaFinProvisor: Date;
+      fechaFinProvisorio: Date;
       observacion?: string;
     
       constructor() {
