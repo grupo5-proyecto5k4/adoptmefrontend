@@ -202,28 +202,60 @@ export class UserProfileModalComponent implements OnInit {
             this.enEdicion=!this.enEdicion;
             this.editarDatos=!this.editarDatos;
             this.esconder=!this.esconder;
-
-            this.ProfileForm = new FormGroup({
-              nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
-              apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
-              dni: new FormControl({value:this.currentUser.dni, disabled: true }),
-              fechaNacimiento: new FormControl({ value: this.currentUser.fechaNacimiento, disabled: true }),
-              correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
-              calle: new FormControl({ value: this.currentUser.Direccion.calle, disabled: true }),
-              altura: new FormControl({ value: this.currentUser.Direccion.numero, disabled: true }),
-              localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
-              barrio: new FormControl({ value: this.currentUser.Direccion.barrio, disabled: true }),
-              referencia: new FormControl({ value: this.currentUser.Direccion.referencia, disabled: true }),
-              
-              banco: new FormControl({value: this.ProfileForm.controls.banco.value, disabled:true}),
-              cbu: new FormControl({ value: this.ProfileForm.controls.cbu.value, disabled: true}),
-              alias: new FormControl({value: this.ProfileForm.controls.alias.value, disabled: true}),
-              
-              numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
-              facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
-              instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
-              contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
-            });
+            this.currentUser = this.data.User;
+        
+            //en base al perfil, los datos que se visualizan
+            //particular:
+            if (this.currentUser.facebook == null) {
+              this.currentUser.facebook = "No especificado"
+            };
+            if (this.currentUser.instagram == null) {
+              this.currentUser.instagram = "No especificado"
+            };
+        
+            if (this.currentUser.banco == null) {
+              this.currentUser.banco = "No especificado"
+            };
+        
+            if (this.currentUser.cbu == null) {
+              this.currentUser.cbu = "No especificado"
+            };
+        
+            if (this.currentUser.alias == null) {
+              this.currentUser.alias = "No especificado"
+            };
+            
+            // Formato fecha  
+            if (this.currentUser.fechaNacimiento !== null && this.currentUser.fechaNacimiento !== undefined) {
+            var date = this.currentUser.fechaNacimiento.substring(0, 10);
+           var [yyyy, mm, dd] = date.split("-");
+            var revdate = `${dd}-${mm}-${yyyy}`;
+            this.currentUser.fechaNacimiento = revdate;
+            }
+        
+            this.currentUser.pwd = "********";
+                   
+            this.inicializarFormulario(); 
+        
+            if (this.currentUser.Direccion !== undefined){
+              this.ProfileForm.controls['calle'].setValue(this.currentUser.Direccion.calle);
+              if (this.currentUser.Direccion.numero == undefined){
+                this.currentUser.Direccion.numero = "s/n";
+              }
+              this.ProfileForm.controls['altura'].setValue(this.currentUser.Direccion.numero);
+              this.ProfileForm.controls['localidad'].setValue(this.currentUser.Direccion.localidad);
+              this.ProfileForm.controls['barrio'].setValue(this.currentUser.Direccion.barrio);
+              if (this.currentUser.Direccion.referencia == undefined){
+                this.currentUser.Direccion.referencia = "No especificado";
+              }
+              this.ProfileForm.controls['referencia'].setValue(this.currentUser.Direccion.referencia);
+            }
+        
+            if (this.currentUser.dni !== undefined) {
+              this.ProfileForm.controls['dni'].setValue(this.currentUser.dni);
+              this.ProfileForm.controls['fechaNacimiento'].setValue(this.currentUser.fechaNacimiento);
+              }      
+            
           });
         },
         error: (err: any) => {

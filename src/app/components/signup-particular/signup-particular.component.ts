@@ -66,7 +66,7 @@ export class SignupParticularComponent implements OnInit {
 
       if(birthDate.getFullYear() > today.getFullYear()){
         this.edadInvalida = true;
-        this.mensajeEdad = "fecha no válida";
+        this.mensajeEdad = "Fecha no válida";
       }else{
 
       if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
