@@ -50,17 +50,7 @@ export class ConsultaSeguimientosComponent implements OnInit {
          //   if (this.seguimientos.Visita[x].visitaFotos[i].esPrincipal) {
               this.seguimientos.Visita[x].imagenCard = this.seguimientos.Visita[x].Foto[i].foto;
 
-              const object1 = {
-                path: this.seguimientos.Visita[x].imagenCard
-              };
-              if (this.seguimientos.Visita[x].imagenCard.esPrincipal) {
-                this.seguimientos.Visita[x].fotos.unshift(object1);
-                this.fotoVisualizar = [];
-                this.fotoVisualizar.push(object1);
-              }
-              else {
-                this.seguimientos.Visita[x].push(object1);
-              }
+        
 
          //   }
           }

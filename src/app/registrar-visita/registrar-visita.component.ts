@@ -74,10 +74,8 @@ export class RegistrarVisitaComponent implements OnInit {
 
   ngOnInit(): void {
     this.seguimiento = this.data.seguimiento;
-    console.log(this.seguimiento)
-    console.log(this.seguimiento._id)
     this.SignupForm = new FormGroup({
-      descripcion: new FormControl('', [Validators.required, Validators.maxLength(350), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(350)]),
       imagen: new FormControl(''),
     });
 
@@ -154,7 +152,7 @@ export class RegistrarVisitaComponent implements OnInit {
     this.verTabla = !this.verTabla;
   }
 
- 
+
 
   validateButton() {
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
@@ -182,8 +180,6 @@ export class RegistrarVisitaComponent implements OnInit {
     //En caso de que sea >1 asigna a fileName length
     event.target.files.length == 1 ? this.fileName = event.target.files[0].name : this.fileName = event.target.files.length + " imagenes a subir";
     this.selectedFiles = event.target.files;
-    console.log("selected files:")
-    console.log(this.selectedFiles);
     this.urls = [];
 
     if (this.selectedFiles) {
@@ -191,7 +187,7 @@ export class RegistrarVisitaComponent implements OnInit {
       let cant = 0;
       for (let file of event.target.files) {
         cant += 1;
-        if (cant < 6) {
+        if (cant < 3) {
           let reader = new FileReader();
           reader.onload = (e: any) => {
             this.urls.push(e.target.result);
@@ -228,8 +224,7 @@ export class RegistrarVisitaComponent implements OnInit {
   async registrarVisita() {
     //updateSeguimiento
     if (this.SignupForm.valid) {
-      //this.isLoading = true;
-      console.log("enviando..")
+      this.isLoading = true;
       let visita: any = {};
       visita.seguimientoId = this.seguimiento._id;
       visita.descripcionVisita = this.SignupForm.controls.descripcion.value;
@@ -238,31 +233,25 @@ export class RegistrarVisitaComponent implements OnInit {
       this.photo.registroVisita(visita, this.auth.getToken()).subscribe(
         (resp: Data) => {
 
-          for (let i = 0; i < this.selectedFiles.length; i++) {
-            this.progressInfo[i] = { value: 0, fileName: this.selectedFiles[i].name };
-            let foto: Foto = new Foto();
-            foto.foto = this.selectedFiles.item(i);
-            foto.esPrincipal = false;
-            if (i == 0) {
-              foto.esPrincipal = true;
+          if (this.urls.length > 0) {
+            for (let i = 0; i < this.selectedFiles.length; i++) {
+              let foto: Foto = new Foto();
+              foto.foto = this.selectedFiles.item(i);
+              foto.esPrincipal = false;
+              if (i == 0) {
+                foto.esPrincipal = true;
+              }
+
+              this.photo.uploadFotoVisita(this.selectedFiles[i], resp.id_Animal, this.auth.getToken()).subscribe(
+                event => {
+
+                },
+                err => {
+                  this.message = 'No se puede subir el archivo ';
+                });
             }
-            console.log("foto")
-            console.log(this.selectedFiles.item(i))
-
-            this.photo.uploadFotoVisita(this.selectedFiles[i], resp.id_Animal, this.auth.getToken()).subscribe(
-              event => {
-                if (event.type === HttpEventType.UploadProgress) {
-                  this.progressInfo[i].value = Math.round(100 * event.loaded / event.total);
-                }
-              },
-              err => {
-                this.progressInfo[i].value = 0;
-                this.message = 'No se puede subir el archivo ';
-              });
           }
-
-
-          this.alerts.confirmMessage("La visita ha sido registrada").then((result) => window.location.href = '/mascotas')
+          this.alerts.confirmMessage("La visita ha sido registrada").then((result) => this.dialogRef.close())
 
         },
         () => {
@@ -272,7 +261,7 @@ export class RegistrarVisitaComponent implements OnInit {
         }
 
       )
-      
+
     }
 
 
