@@ -23,6 +23,11 @@ export class MascotaService {
   }
 
 
+  actualizarMascota(mascota: any, token: string): Observable<any> {
+    return this.httpClient.put<any[]>(this.api + '/animales/mascota/modificarMascota', mascota, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
+
   updateNotificacion(notificacion: Notificacion, token: string): Promise<any> {
     return this.httpClient.put(this.api + '/notificacion/' + notificacion._id, notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }

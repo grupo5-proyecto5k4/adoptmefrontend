@@ -54,6 +54,15 @@ input:-webkit-autofill {
   text-align: center;
 }
 
+.btnPeriodo{
+  color:#B80092;
+  font-weight:bold;
+  border: #fafafa;
+  cursor: pointer;
+  background-color: transparent;
+  width: 100%;
+}
+
 
 .example-form {
   min-width: 150px;
@@ -71,6 +80,16 @@ justify-content: center;
   margin-top: 20px;
 }
 
+#requer{
+  text-align: left;
+  font-size: 12px;
+}
+
+.helpError {
+  color: #f44336; 
+  font-size: 10px;
+}
+
 #btncerrar{
   color:#B80092;
   cursor: pointer;
@@ -84,6 +103,10 @@ justify-content: center;
   line-height: 36px;
   width: 36px;
   font-size: 150%;
+}
+
+.example-full-width {
+  width: 100%;
 }
 
 #btncuenta, #confirmar{
@@ -100,6 +123,11 @@ justify-content: center;
   margin-right: 2px;
   padding-left: 20px !important;
   padding-right: 20px !important;
+}
+
+a [type="button"]:disabled {
+  background-color: #F8E2F1;
+  cursor: not-allowed ;
 }
 
 .example-margin-btn {
@@ -312,6 +340,7 @@ textarea{
 }
 
 
+
 @media (max-width: 599px){
     .container-row1{
     flex-direction: column;}
@@ -319,6 +348,10 @@ textarea{
     .derecha{
         margin-left: 0px;
     }
+
+    #btnVacuna{
+      min-width: 350px;
+  }
 
     .card-container, table{
       width: 95% !important;

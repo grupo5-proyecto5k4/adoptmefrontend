@@ -282,7 +282,7 @@
                                         <mat-form-field class="example-full-width">
                                             <mat-label>*Descripción</mat-label>
                                             <input matInput placeholder="Descripcion" formControlName="descripcion"
-                                                class="form-control" maxlength="150">
+                                                class="form-control" maxlength="300">
                                         </mat-form-field>
                                         <span class="help-block" *ngIf="((SignupForm.get('descripcion').touched ||
                                   SignupForm.get('descripcion').dirty) && SignupForm.get('descripcion').errors)">
@@ -290,7 +290,7 @@
                                                 <h6 class="helpError">Campo requerido</h6>
                                             </span>
                                             <span *ngIf="SignupForm.get('descripcion').errors.maxlength">
-                                                <mat-error class="helpError">Ingrese como máximo 150 caracteres
+                                                <mat-error class="helpError">Ingrese como máximo 300 caracteres
                                                 </mat-error>
                                             </span>
                                         </span>
