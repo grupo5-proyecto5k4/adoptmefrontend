@@ -95,13 +95,14 @@ export class ConsultaSeguimientosComponent implements OnInit {
   }
 
   registrarVisita(seguim: any) {
-    console.log(seguim)
-    this.dialog.open(RegistrarVisitaComponent, {
+    let dialogRef = this.dialog.open(RegistrarVisitaComponent, {
       data: {
         seguimiento: seguim,
       }
     });
-
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    })
   }
 
   // Next/previous controls
