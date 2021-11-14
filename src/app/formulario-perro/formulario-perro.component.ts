@@ -54,6 +54,8 @@ export class FormularioPerroComponent implements OnInit {
   nuevaVacuna: any = {};
   mensajeB = '💉 Registrar vacunaciones';
   isfechaFuturaInvalida : Boolean = false;
+  PastDate = false;
+  MaxEdad = false;
 
   //Lista de archivos seleccionados
   selectedFiles: FileList;
@@ -156,8 +158,9 @@ export class FormularioPerroComponent implements OnInit {
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
     if (difference < 0){
-      return true
-    } else return false;
+      this.PastDate = true;
+      this.edadInvalida = false;
+    } else  this.PastDate = false;
   }
   
   validateMaxEdad(){
@@ -165,8 +168,9 @@ export class FormularioPerroComponent implements OnInit {
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
     if (difference > 365*27){
-      return true
-    } else return false;
+      this.MaxEdad = true;
+      this.edadInvalida = false;
+    } else this.MaxEdad = false;
   }
 
   mostrarVacunas() {
@@ -295,6 +299,10 @@ export class FormularioPerroComponent implements OnInit {
       this.mensajeEdad = "";
     }
     this.edadInvalida = true;
+
+    this.validatePastDate();
+
+    this.validateMaxEdad();
   }
 
 
