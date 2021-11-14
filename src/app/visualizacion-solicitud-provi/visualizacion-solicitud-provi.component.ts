@@ -322,7 +322,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
   async rechazarSolicitudAprobada() {
     this.isLoading = true;
-    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    this.visualizacionSolicitudesService.rechazarSolicitud(this.dataSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
       this.notificacionService.notificarCancelacionProvisorioACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')
