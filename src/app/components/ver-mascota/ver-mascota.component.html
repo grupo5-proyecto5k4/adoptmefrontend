@@ -64,56 +64,109 @@
                           </div>
                         </div>
 
-                        <div class="container-row1">
-                          <div *ngIf="!enEdicion">
-                            <mat-form-field>
-                              <mat-label>Castrado</mat-label>
-                              <input matInput formControlName="castrado">
-                            </mat-form-field>
+                        <div *ngIf="!enEdicion">
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field>
+                                <mat-label>Castrado</mat-label>
+                                <input matInput formControlName="castrado">
+                              </mat-form-field>
+                            </div>
+                            <div class="derecha">
+                              <mat-form-field>
+                                <mat-label>Conducta con niños</mat-label>
+                                <input matInput formControlName="conductaNiños">
+                              </mat-form-field>
+                            </div>
                           </div>
-                          <div *ngIf="enEdicion">
-                            <mat-form-field>
-                              <mat-label>Castrado</mat-label>
-                              <mat-select matInput formControlName="castradoPut" [(value)]="selected">
-                                <mat-option value="Sí">Sí</mat-option>
-                                <mat-option value="No">No</mat-option>
-                              </mat-select>
-                            </mat-form-field>
+
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field>
+                                <mat-label>Conducta con perros</mat-label>
+                                <input matInput formControlName="conductaPerros">
+                              </mat-form-field>
+                            </div>
+                            <div class="derecha">
+                              <mat-form-field>
+                                <mat-label>Conducta con gatos</mat-label>
+                                <input matInput formControlName="conductaGatos">
+                              </mat-form-field>
+                            </div>
                           </div>
-                          <div class="derecha">
-                            <mat-form-field>
-                              <mat-label>Conducta con niños</mat-label>
-                              <input matInput formControlName="conductaNiños">
-                            </mat-form-field>
+
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field class="ref">
+                                <mat-label>Descripción</mat-label>
+                                <textarea matInput formControlName="descripcion" maxlength="300"></textarea>
+                              </mat-form-field>
+                            </div>
                           </div>
                         </div>
 
-                        <div class="container-row1">
-                          <div>
-                            <mat-form-field>
-                              <mat-label>Conducta con perros</mat-label>
-                              <input matInput formControlName="conductaPerros">
-                            </mat-form-field>
+                        <div *ngIf="enEdicion">
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field>
+                                <mat-label>Castrado</mat-label>
+                                <mat-select matInput formControlName="castradoPut" [(value)]="mascota.castrado">
+                                  <mat-option value="Sí">Sí</mat-option>
+                                  <mat-option value="No">No</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="derecha">
+                              <mat-form-field>
+                                <mat-label>Conducta con niños</mat-label>
+                                <mat-select formControlName="conductaNiñosPut" [(value)]="selected">
+                                  <mat-option value="Buena">Buena</mat-option>
+                                  <mat-option value="Mala">Mala</mat-option>
+                                  <mat-option value="No se sabe">No se sabe</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
                           </div>
-                          <div class="derecha">
-                            <mat-form-field>
-                              <mat-label>Conducta con gatos</mat-label>
-                              <input matInput formControlName="conductaGatos">
-                            </mat-form-field>
+
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field>
+                                <mat-label>Conducta con perros</mat-label>
+                                <mat-select formControlName="conductaPerrosPut" [(value)]="mascota.conductaPerros">
+                                  <mat-option value="Buena">Buena</mat-option>
+                                  <mat-option value="Mala">Mala</mat-option>
+                                  <mat-option value="No se sabe">No se sabe</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="derecha">
+                              <mat-form-field>
+                                <mat-label>Conducta con gatos</mat-label>
+                                <mat-select formControlName="conductaGatosPut" [(value)]="mascota.conductaGatos">
+                                  <mat-option value="Buena">Buena</mat-option>
+                                  <mat-option value="Mala">Mala</mat-option>
+                                  <mat-option value="No se sabe">No se sabe</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
                           </div>
+
+
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field class="ref">
+                                <mat-label>Descripción</mat-label>
+                                <textarea matInput formControlName="descripcionPut" maxlength="300"></textarea>
+                              </mat-form-field>
+
+                            </div>
+                          </div>
+
+
                         </div>
 
                         <div class="container-row1">
-                          <div>
-                            <mat-form-field class="ref">
-                              <mat-label>Descripcion</mat-label>
-                              <textarea matInput formControlName="descripcion" maxlength="150"></textarea>
-                            </mat-form-field>
-                          </div>
-                        </div>
-
-
-                        <div class="container-row1" *ngIf="!enEdicion">
                           <div>
                             <mat-label style="color: #00000070"><u>Datos de vacunaciones:</u><span
                                 style="color: #00000070" class="example-margin" *ngIf="listaVacunas.length == 0">No
@@ -123,7 +176,7 @@
 
 
 
-                        <div class="example-full-width" *ngIf="listaVacunas.length > 0 && !enEdicion">
+                        <div class="example-full-width" *ngIf="listaVacunas.length > 0">
                           <table class="my-table" #tabla2>
                             <thead class="my-table headers">
                               <tr>
@@ -149,57 +202,57 @@
 
                             <form class="example-form" [formGroup]="SignupFormVac" *ngIf="SignupFormVac">
                               <div class="container-row1">
-                              <div class="izquierda">
-                                <mat-form-field class="example-full-width">
-                                  <mat-label>Nombre</mat-label>
-                                  <input matInput formControlName="nombre" class="form-control"
-                                    maxlength="30">
-                                </mat-form-field>
-                                <span class="help-block" *ngIf="((SignupFormVac.get('nombre').touched || 
+                                <div>
+                                  <mat-form-field>
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput formControlName="nombre" class="form-control" maxlength="30">
+                                  </mat-form-field>
+                                  <span class="help-block" *ngIf="((SignupFormVac.get('nombre').touched || 
                                            SignupFormVac.get('nombre').dirty) && SignupFormVac.get('nombre').errors)">
-                                  <span *ngIf="SignupFormVac.get('nombre').errors.maxlength">
-                                    <mat-error class="helpError">Ingrese como máximo 30
-                                      caracteres</mat-error>
+                                    <span *ngIf="SignupFormVac.get('nombre').errors.maxlength">
+                                      <mat-error class="helpError">Ingrese como máximo 30
+                                        caracteres</mat-error>
+                                    </span>
+                                    <span *ngIf="SignupFormVac.get('nombre').errors.pattern">
+                                      <h6 class="helpError">Formato del nombre no válido</h6>
+                                    </span>
                                   </span>
-                                  <span *ngIf="SignupFormVac.get('nombre').errors.pattern">
-                                    <h6 class="helpError">Formato del nombre no válido</h6>
+                                  <span class="help-block blank"
+                                    *ngIf="(validateFechaAplicacion() && !validateNombreVac())">
+                                    <span>
+                                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                                        -
+                                      </h6>
+                                    </span>
                                   </span>
-                                </span>
-                                <span class="help-block blank"
-                                  *ngIf="(validateFechaAplicacion() && !validateNombreVac())">
-                                  <span>
-                                    <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                                      -
-                                    </h6>
-                                  </span>
-                                </span>
-                              </div>
+                                </div>
 
 
-                              <div class="derecha">
-                                <mat-form-field class="example-full-width">
-                                  <mat-label>Fecha de aplicacion</mat-label>
-                                  <input matInput type="date" [(ngModel)]="vac.fechaAplicacion"
-                                    formControlName="fechaAplicacion" class="form-control">
-                                </mat-form-field>
-                                <span class="help-block blank"
-                                  *ngIf="(!validateFechaAplicacion() && validateNombreVac())">
-                                  <span>
-                                    <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                                      -
-                                    </h6>
+                                <div class="derecha">
+                                  <mat-form-field>
+                                    <mat-label>Fecha de aplicación</mat-label>
+                                    <input matInput type="date" [(ngModel)]="vac.fechaAplicacion"
+                                      formControlName="fechaAplicacion" class="form-control">
+                                  </mat-form-field>
+                                  <span class="help-block blank"
+                                    *ngIf="(!validateFechaAplicacion() && validateNombreVac())">
+                                    <span>
+                                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                                        -
+                                      </h6>
+                                    </span>
                                   </span>
-                                </span>
+                                </div>
                               </div>
-                            </div>
 
                               <div class="example-form">
-                                <button mat-button color="accent" type="button" id="btnVacuna" class="btnRegistrar"
-                                  (mouseover)="validateVacunas()" (click)="agregar()">Agregar</button>
+                                <button mat-button color="accent" type="button" id="btnVacuna" class="btnPeriodo"
+                                  style="text-align: center;" (mouseover)="validateVacunas()"
+                                  (click)="agregar()">Agregar</button>
                               </div>
 
 
-                              <div class="example-full-width" *ngIf="listaVacunas.length > 0">
+                              <div class="example-full-width" *ngIf="listaVacunasPut.length > 0">
                                 <div>
                                   <table class="my-table" #tabla2>
                                     <thead class="my-table headers">
@@ -208,7 +261,7 @@
                                       </tr>
                                     </thead>
                                     <tbody class="my-table body">
-                                      <tr *ngFor="let vacuna of listaVacunas">
+                                      <tr *ngFor="let vacuna of listaVacunasPut">
                                         <td>{{ vacuna.nombre }}</td>
                                         <td>{{ vacuna.fechaAplicacion | date:'dd/MM/yyyy'}}</td>
                                         <td (click)="borrarFila(vacuna)">🗑️</td>
@@ -222,8 +275,13 @@
                             </form>
                           </div>
                         </div>
-                        <button mat-button type="button" color="accent" class="btnPeriodo"
-                          (click)="editar()">{{boton}}</button>
+                        <div *ngIf="enEdicion">
+                          <p id="requer">(*)Campos obligatorios</p>
+                        </div>
+                        <div class="example-form">
+                          <button mat-button type="button" color="accent" class="btnPeriodo" style="margin-top: 3%;"
+                            (click)="editar()">{{boton}}</button>
+                        </div>
                       </div>
 
 

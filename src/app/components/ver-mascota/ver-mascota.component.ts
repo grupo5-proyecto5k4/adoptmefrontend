@@ -36,9 +36,10 @@ export class VerMascotaComponent implements OnInit {
   SignupFormVac: FormGroup;
   mascota: any;
   Titulo = "";
-  columnas = ['Nombre', 'Fecha de aplicacion'];
-  columnasEdit = ['Nombre', 'Fecha de aplicacion', 'Opciones'];
+  columnas = ['Nombre', 'Fecha de aplicación'];
+  columnasEdit = ['Nombre', 'Fecha de aplicación', 'Opciones'];
   listaVacunas: any = []; //aca se guardaran todas las vacunas
+  listaVacunasPut: any = []; //aca se guardaran todas las vacunas
   slideIndex = 0;
   fotos: any = [];
   fotoVisualizar: any = [];
@@ -114,37 +115,23 @@ export class VerMascotaComponent implements OnInit {
   }
 
   inicializarFormulario() {
-    if (this.enEdicion == false) {
-      this.ProfileForm = new FormGroup({
-        nombres: new FormControl({ value: this.mascota.nombreMascota, disabled: true }),
-        tamañoFinal: new FormControl({ value: this.mascota.tamañoFinal, disabled: true }),
-        sexo: new FormControl({ value: this.mascota.sexo, disabled: true }),
-        fechaNacimiento: new FormControl({ value: this.mascota.fechaNacimiento, disabled: true }),
-        raza: new FormControl({ value: this.mascota.raza, disabled: true }),
-        castrado: new FormControl({ value: this.mascota.castrado, disabled: true }),
-        castradoPut: new FormControl({ value: this.mascota.castrado, disabled: false }),
-        conductaGatos: new FormControl({ value: this.mascota.conductaGatos, disabled: true }),
-        conductaPerros: new FormControl({ value: this.mascota.conductaPerros, disabled: true }),
-        conductaNiños: new FormControl({ value: this.mascota.conductaNiños, disabled: true }),
-        descripcion: new FormControl({ value: this.mascota.descripcion, disabled: true }),
-      });
-    }
-    else if (this.enEdicion && this.mascota.responsableId == this.authservice.getCurrentUser()._id) {
-      this.selected = this.mascota.castrado;
-      this.ProfileForm = new FormGroup({
-        nombres: new FormControl({ value: this.mascota.nombreMascota, disabled: true }),
-        tamañoFinal: new FormControl({ value: this.mascota.tamañoFinal, disabled: true }),
-        sexo: new FormControl({ value: this.mascota.sexo, disabled: true }),
-        fechaNacimiento: new FormControl({ value: this.mascota.fechaNacimiento, disabled: true }),
-        raza: new FormControl({ value: this.mascota.raza, disabled: true }),
-        castrado: new FormControl({ value: this.mascota.castrado, disabled: true }),
-        castradoPut: new FormControl({ value: this.mascota.castrado, disabled: false }),
-        conductaGatos: new FormControl({ value: this.mascota.conductaGatos, disabled: true }),
-        conductaPerros: new FormControl({ value: this.mascota.conductaPerros, disabled: true }),
-        conductaNiños: new FormControl({ value: this.mascota.conductaNiños, disabled: true }),
-        descripcion: new FormControl({ value: this.mascota.descripcion, disabled: true }),
-      });
-    }
+    this.ProfileForm = new FormGroup({
+      nombres: new FormControl({ value: this.mascota.nombreMascota, disabled: true }),
+      tamañoFinal: new FormControl({ value: this.mascota.tamañoFinal, disabled: true }),
+      sexo: new FormControl({ value: this.mascota.sexo, disabled: true }),
+      fechaNacimiento: new FormControl({ value: this.mascota.fechaNacimiento, disabled: true }),
+      raza: new FormControl({ value: this.mascota.raza, disabled: true }),
+      castrado: new FormControl({ value: this.mascota.castrado, disabled: true }),
+      castradoPut: new FormControl({ value: this.mascota.castrado, disabled: false }),
+      conductaGatos: new FormControl({ value: this.mascota.conductaGatos, disabled: true }),
+      conductaPerros: new FormControl({ value: this.mascota.conductaPerros, disabled: true }),
+      conductaNiños: new FormControl({ value: this.mascota.conductaNiños, disabled: true }),
+      descripcion: new FormControl({ value: this.mascota.descripcion, disabled: true }),
+      conductaGatosPut: new FormControl({ value: this.mascota.conductaGatos, disabled: false }),
+      conductaPerrosPut: new FormControl({ value: this.mascota.conductaPerros, disabled: false }),
+      conductaNiñosPut: new FormControl({ value: this.mascota.conductaNiños, disabled: false }),
+      descripcionPut: new FormControl({ value: this.mascota.descripcion, disabled: false }, [Validators.required, Validators.maxLength(300), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
+    });
     this.SignupFormVac = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       fechaAplicacion: new FormControl('', Validators.required),
@@ -153,38 +140,53 @@ export class VerMascotaComponent implements OnInit {
 
 
   guardarCambios() {
+
+    /*
     let mascotaActualiza: Mascota = new Mascota();
     mascotaActualiza = this.mascota;
+    */
+
+    let mascotaActualiza: any = {};
+    mascotaActualiza.id_Animal = this.mascota._id;
+
     mascotaActualiza.castrado = this.ProfileForm.controls.castradoPut.value;
-    this.mascotaService.actualizarMascota(mascotaActualiza, this.authservice.getToken()).then(
-      (resp) => {
-        if (resp.value) {
-          let vacunasAnimal = [];
+    mascotaActualiza.conductaGatos = this.ProfileForm.controls.conductaGatosPut.value;
+    mascotaActualiza.conductaNiños = this.ProfileForm.controls.conductaNiñosPut.value;
+    mascotaActualiza.conductaPerros = this.ProfileForm.controls.conductaPerrosPut.value;
+    mascotaActualiza.descripcion = this.ProfileForm.controls.descripcionPut.value;
 
-          for (let i = 0; i < this.listaVacunas.length; i++) {
-            let nuevaVac: NuevaVacuna = new NuevaVacuna();
-            nuevaVac.nombreVacuna = this.listaVacunas[i].nombre;
-            nuevaVac.fechaAplicacion = this.listaVacunas[i].fechaAplicacion;
-            nuevaVac.id_Animal = this.mascota._id;
+    mascotaActualiza.castrado = this.ProfileForm.controls.castradoPut.value;
+    this.mascotaService.actualizarMascota(mascotaActualiza, this.authservice.getToken()).subscribe(
+      (resp: Data) => {
 
-            vacunasAnimal.push(nuevaVac);
-            console.log(vacunasAnimal);
-          }
+        this.mascota = resp;
+        console.log("mascota editada", this.mascota);
 
+        let vacunasAnimal = [];
 
-          this.http.post<NuevaVacuna>('https://adoptmebackend.herokuapp.com/vacunas/vacuna', vacunasAnimal)
-            .subscribe()
-          this.alertsService.confirmMessage("Se han actualizado los datos de la mascota correctamente").then((result) => window.location.href = '/mascotas')
+        for (let i = 0; i < this.listaVacunasPut.length; i++) {
+          let nuevaVac: NuevaVacuna = new NuevaVacuna();
+          nuevaVac.nombreVacuna = this.listaVacunasPut[i].nombre;
+          nuevaVac.fechaAplicacion = this.listaVacunasPut[i].fechaAplicacion;
+          nuevaVac.id_Animal = this.mascota._id;
+
+          vacunasAnimal.push(nuevaVac);
+          console.log(vacunasAnimal);
         }
-        else{
-          this.alertsService.errorMessage("No se han podido actualizar los datos de la mascota");
-        }
+
+        this.inicializarFormulario();
+        this.http.post<NuevaVacuna>('https://adoptmebackend.herokuapp.com/vacunas/vacuna', vacunasAnimal)
+          .subscribe()
+        this.alertsService.confirmMessage("Se han actualizado los datos de la mascota correctamente").then((result) => window.location.href = '/mascotas');
+        this.boton = "Editar";
+      },
+      () => {
+        this.alertsService.errorMessage("No se han podido actualizar los datos de la mascota");
       }
 
     );
 
 
-    this.boton = "Editar";
 
   }
 
@@ -195,7 +197,7 @@ export class VerMascotaComponent implements OnInit {
         fechaAplicacion: this.SignupFormVac.controls.fechaAplicacion.value,
       };
 
-      this.listaVacunas.push(
+      this.listaVacunasPut.push(
         object1
       );
     }
@@ -223,13 +225,13 @@ export class VerMascotaComponent implements OnInit {
 
   borrarFila(vacuna: NuevaVacuna) {
     let cantD = 0;
-    for (let i = 0; i < this.listaVacunas.length; i++) {
-      if (vacuna == this.listaVacunas[i]) {
+    for (let i = 0; i < this.listaVacunasPut.length; i++) {
+      if (vacuna == this.listaVacunasPut[i]) {
         cantD = i;
         break
       }
     }
-    this.listaVacunas.splice(cantD, 1);
+    this.listaVacunasPut.splice(cantD, 1);
   }
 
 

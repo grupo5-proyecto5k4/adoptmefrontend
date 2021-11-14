@@ -58,7 +58,9 @@ input:-webkit-autofill {
   color:#B80092;
   font-weight:bold;
   border: #fafafa;
-  background-color: #fafafa;
+  cursor: pointer;
+  background-color: transparent;
+  width: 100%;
 }
 
 
@@ -76,6 +78,11 @@ justify-content: center;
 
 .espacio{
   margin-top: 20px;
+}
+
+#requer{
+  text-align: left;
+  font-size: 12px;
 }
 
 .helpError {
@@ -96,6 +103,10 @@ justify-content: center;
   line-height: 36px;
   width: 36px;
   font-size: 150%;
+}
+
+.example-full-width {
+  width: 100%;
 }
 
 #btncuenta, #confirmar{
