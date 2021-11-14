@@ -1,3 +1,4 @@
+
 <div class="logout-container">
     <button mat-button type="button" color="accent" class="btnLogout" (click)="logOut()">Cerrar sesión</button>
 </div>
@@ -17,7 +18,15 @@
                </mat-form-field>
               <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched || 
               ProfileForm.get('nombres').dirty) && ProfileForm.get('nombres').errors)">
-              
+              <span *ngIf="ProfileForm.get('nombres').errors.required">
+                <h6 class="helpError">Campo requerido</h6>
+              </span>
+              <span *ngIf="ProfileForm.get('nombres').errors.maxlength">
+                <h6 class="helpError">Ingrese como máximo 30 caracteres</h6>
+              </span>
+              <span *ngIf="ProfileForm.get('nombres').errors.pattern">
+                <h6 class="helpError">Formato del apellido no válido</h6>
+              </span>
               </span> 
             </div>
 
@@ -125,7 +134,7 @@
         </div>
 
      
-        <button mat-button *ngIf="esconder" id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editar()">Editar</button>
+        <button mat-button style="margin-left: 230px;" *ngIf="esconder" id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editar()">Editar</button>
 
         <div class="centrado" *ngIf="editarDatos">
          <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelar()">Cancelar</button>
@@ -134,3 +143,5 @@
 
     </form>
 </div>
+
+

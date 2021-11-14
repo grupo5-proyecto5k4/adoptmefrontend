@@ -16,6 +16,8 @@ import {MatTableModule} from '@angular/material/table';
 import { ConsultaSeguimientosComponent } from './consulta-seguimientos/consulta-seguimientos.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 
 
@@ -33,7 +35,8 @@ import {MatSelectModule} from '@angular/material/select';
       MatCheckboxModule,
       MatTableModule,
       MatExpansionModule,
-      MatSelectModule
+      MatSelectModule,
+      MatAutocompleteModule
     ],
     providers:[],
     exports: [

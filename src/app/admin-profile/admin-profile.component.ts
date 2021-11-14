@@ -23,6 +23,7 @@ export class AdminProfileComponent implements OnInit {
   token:any;
   edadInvalida: Boolean = false;
   mensajeEdad: string = "";
+  nuevotoken: string;
 
   constructor(private editUser: SignupService, private authservice: AuthService, private router: Router, private alertsService: AlertsService, private localStorageService: LocalStorageService) {
 
@@ -148,20 +149,15 @@ export class AdminProfileComponent implements OnInit {
     
     this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
       (resp:Data) => {
-        localStorage.setItem('auth-token', resp.token);
-        this.currentUser= this.authservice.setUser(resp);
-        console.log(resp);
-         this.enEdicion=false;
-         this.editarDatos=false;
-         this.esconder=true;
+        localStorage.setItem('auth_token', resp.token);
+        this.currentUser=this.editUser.getUsuarioModificado(resp.token).subscribe((r)=>{
+          this.currentUser=this.authservice.setUser(r);
+          this.localStorageService.setProfile(r.tipoUsuario); 
+          this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( ()=>
+          window.location.href = "/perfiladmin");
+        });  
 
-        this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( (r)=>{
-         
-         window.location.href ="/perfiladmin";
-         // this.inicializarFormulario();
-        }
-        )
-      
+              
       },
       (err: any) => {
         this.alertsService.errorMessage(err.error.error).then((result) => {

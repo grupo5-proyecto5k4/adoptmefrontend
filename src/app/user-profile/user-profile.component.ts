@@ -171,19 +171,17 @@ guardar(){
   }
   
   particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
-  console.log(particularUser);
-  
   this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
     (resp:Data) => {
-      localStorage.setItem('auth-token', resp.token);
-      this.currentUser= this.authservice.setUser(resp);
-      this.enEdicion=false;
-        this.editarDatos=false;
-        this.esconder=true;
+      localStorage.setItem('auth_token', resp.token);
+      this.currentUser=this.editUser.getUsuarioModificado(resp.token).subscribe((r)=>{
+        this.currentUser=this.authservice.setUser(r);
+        this.localStorageService.setProfile(r.tipoUsuario); 
+        this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( ()=>
+        window.location.href = "/miperfil");
+      });  
 
-      this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then((result) => {
-         window.location.href ="/miperfil";
-      });
+  
     },
     (err: any) => {
       this.alertsService.errorMessage(err.error.error).then((result) => {

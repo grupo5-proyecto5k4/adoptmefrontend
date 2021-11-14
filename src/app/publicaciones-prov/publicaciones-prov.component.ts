@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { RegistroMascotasService } from 'src/services/registro-mascotas.service';
 import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
 import { FormControl, FormGroup } from '@angular/forms';
+import { BarriosService } from 'src/services/barrios.service';
+import {map, startWith} from 'rxjs/operators';
 
 export interface Pet {
   name: string;
@@ -44,15 +46,32 @@ export class PublicacionesProvComponent implements OnInit {
   gatoSeleccionado = false;
   filtroAplicado = false;
 
+  myControl = new FormControl();
+  selectedBarrio; 
+  filteredBarrios: Observable<string[]>;
+  barrios: string[] = [];
+  barriosBack;
+
   /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
   */
-  constructor(public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private BarriosService: BarriosService, public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+
+    this.BarriosService.getBarrios().subscribe(data => {
+      this.barriosBack = data;
+      for (let x = 0; x < this.barriosBack.length; x++){
+        this.barrios.push(this.barriosBack[x].nombre);
+      }
+      this.filteredBarrios = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
 
     this.iniciarForm();
 
@@ -73,7 +92,11 @@ export class PublicacionesProvComponent implements OnInit {
   }
 
 
-
+  _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.barrios.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  
   changeTipoAnimal(){
     if (this.FilterForm.controls.tipoMascota.value == 1){
       this.gatoSeleccionado = true;
@@ -87,9 +110,9 @@ export class PublicacionesProvComponent implements OnInit {
     this.FilterForm = new FormGroup({
       nombre: new FormControl(''),
       tipoMascota: new FormControl(''),
-      tamanoFinal: new FormControl(''),
+      tamanoFinal: new FormControl({value: '', disabled:true}),
       sexo: new FormControl(''),
-      barrio: new FormControl(''),
+      barrio: new FormControl('') 
     });
   }
 
@@ -127,6 +150,9 @@ export class PublicacionesProvComponent implements OnInit {
     }
   }
 
+  OnHumanSelected(SelectedHuman) {
+    this.selectedBarrio = SelectedHuman;
+  }
 
   async buscar() {
     this.filtroAplicado = true;
@@ -134,17 +160,23 @@ export class PublicacionesProvComponent implements OnInit {
     if (this.FilterForm.controls.nombre.value !== '') {
       filters.nombres = this.FilterForm.controls.nombre.value;
     }
-    if (this.FilterForm.controls.barrio.value !== '') {
-      filters.barrio = this.FilterForm.controls.barrio.value;
+    if (this.selectedBarrio !== '') {
+      filters.barrio = this.selectedBarrio;
     }
-    if (this.FilterForm.controls.tamanoFinal.value !== '') {
-      filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
-    }
+    
     if (this.FilterForm.controls.sexo.value !== '') {
       filters.sexo = this.FilterForm.controls.sexo.value;
     }
     if (this.FilterForm.controls.tipoMascota.value !== '') {
       filters.tipoMascota = this.FilterForm.controls.tipoMascota.value;
+    }
+    if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      if (this.FilterForm.controls.tipoMascota.value === 1){
+        filters.tamañoFinal = 'No aplica';
+      }
+        else {
+       filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
+      }
     }
 
     filters.estado = "Disponible Provisorio";
@@ -188,6 +220,16 @@ export class PublicacionesProvComponent implements OnInit {
       sms = "Adulto"
     }
     return sms
+  }
+
+  activarTamanio(){
+    this.FilterForm.controls['tamanoFinal'].setValue("");
+    this.FilterForm.controls.tamanoFinal.enable();
+  }
+
+  desactivarTamanio(){
+    this.FilterForm.controls['tamanoFinal'].setValue("No aplica");
+    this.FilterForm.controls.tamanoFinal.disable();
   }
 
   openMascota(mascota: Mascota) {

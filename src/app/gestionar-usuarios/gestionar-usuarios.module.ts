@@ -13,6 +13,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [GestionarUsuariosComponent],
@@ -30,6 +31,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCardModule,
     MatTabsModule, 
     MatPaginatorModule,
+    MatInputModule,
+    MatButtonModule
 
   ],
   entryComponents: [

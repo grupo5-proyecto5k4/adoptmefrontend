@@ -16,6 +16,9 @@
     margin-top: 5%;
     }
 
+    .example-full-width {
+        width: 100%;
+      }
 
   ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
@@ -28,6 +31,12 @@
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
     margin:3px;
+}
+
+.contenedor-imagen{
+    width: 80%;
+    height: auto;
+    overflow: hidden;
 }
   
 ::-webkit-scrollbar {
@@ -44,6 +53,13 @@ input:-webkit-autofill {
     color: #B80092,
 }
 
+.helpError {
+    color: #f44336; 
+    font-size: 10px;
+    text-align: center;
+  }
+
+
 .subtitulo{
     font-size: 200% !important;
     font-family: 'Times New Roman';
@@ -55,13 +71,20 @@ input:-webkit-autofill {
     color:#B80092;
     font-weight:bold;
     border: #fafafa;
-    background-color: #fafafa;
+    background-color: #fff5ed;
 }
 
 .logout-container{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.container-publicaciones{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-content: space-around;
 }
 
 #btncuenta{
@@ -81,7 +104,7 @@ input:-webkit-autofill {
 
 .txt-construction{
     margin-top: 25px;
-    text-align: justify;
+    //text-align: justify;
     width: 91%;
     padding: 40px 1px 1px 40px;
     line-height: 200%;

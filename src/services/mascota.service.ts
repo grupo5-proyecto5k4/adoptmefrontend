@@ -22,9 +22,11 @@ export class MascotaService {
     return this.httpClient.post<any[]>(this.api + '/vacunas/vacuna', listaVacunas);
   }
 
+
   actualizarMascota(mascota: any, token: string): Observable<any> {
     return this.httpClient.put<any[]>(this.api + '/animales/mascota/modificarMascota', mascota, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
+
 
   updateNotificacion(notificacion: Notificacion, token: string): Promise<any> {
     return this.httpClient.put(this.api + '/notificacion/' + notificacion._id, notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
@@ -32,5 +34,21 @@ export class MascotaService {
 
   async getVacunas(idMascota: string): Promise<any[]> {
     return this.httpClient.get<any[]>(this.api + '/vacunas/filtrarVacunaAnimal/' + idMascota).toPromise();
+  }
+
+  getSeguimientosAnimal(idMascota: string, token: string): Observable<any>  {
+    return this.httpClient.get<any[]>(this.api + '/seguimiento/consultaEstado/' + idMascota, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
+  actualizarSeguimiento(visita: any, token: string):  Observable <any>{
+    return this.httpClient.put(this.api + '/seguimiento/modificarSeguimiento/visita', visita, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
+  finalizarProvisorio(idAnimal: string, token: string, motivo: any): Observable <any>{
+    return this.httpClient.put(this.api +'/formulario/finProvisorio/'+idAnimal, motivo, { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
+  finalizarSeguimiento(idSolicitud: string, token: string): Observable <any>{
+    return this.httpClient.put(this.api + '/seguimiento/finalizar/seguimiento/'+ idSolicitud, "some-string", { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 }

@@ -53,6 +53,7 @@ export class FormularioPerroComponent implements OnInit {
   vac: any = {};
   nuevaVacuna: any = {};
   mensajeB = '💉 Registrar vacunaciones';
+  isfechaFuturaInvalida : Boolean = false;
 
   //Lista de archivos seleccionados
   selectedFiles: FileList;
@@ -150,6 +151,24 @@ export class FormularioPerroComponent implements OnInit {
     return (this.SignupForm.get('fechaNacimiento').touched && (this.SignupForm.controls.fechaNacimiento.value == ""));
   }
 
+  validatePastDate(){
+    let today = new Date();
+    let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
+    let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
+    if (difference < 0){
+      return true
+    } else return false;
+  }
+  
+  validateMaxEdad(){
+    let today = new Date();
+    let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
+    let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
+    if (difference > 365*27){
+      return true
+    } else return false;
+  }
+
   mostrarVacunas() {
     this.mensajeB = this.verTabla ? '💉 Registrar vacunaciones' : 'Cancelar carga de vacunas';
     this.verTabla = !this.verTabla;
@@ -216,6 +235,9 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   validateButton() {
+    if (this.animal === 1){
+      this.SignupForm.controls['tamaño'].setValue("No aplica");
+    }  
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
       document.getElementById("confirmar").classList.remove("buttonDisabled");
     } else {
@@ -224,7 +246,7 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   validateVacunas() {
-    if (this.SignupFormVac.valid) {
+    if (this.SignupFormVac.valid && this.SignupFormVac.controls.fechaAplicacion.value != ' ' && this.SignupFormVac.controls.nombre.value != ' ') {
       document.getElementById("btnVacuna").classList.remove("buttonDisabled");
     } else {
       document.getElementById("btnVacuna").classList.add("buttonDisabled");
@@ -232,7 +254,7 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   agregar() {
-    if (this.SignupFormVac.valid) {
+    if (this.SignupFormVac.valid && this.SignupFormVac.controls.fechaAplicacion.value != ' ' && this.SignupFormVac.controls.nombre.value != ' ') {
       const object1 = {
         nombre: this.SignupFormVac.controls.nombre.value,
         fechaAplicacion: this.SignupFormVac.controls.fechaAplicacion.value,
@@ -242,6 +264,9 @@ export class FormularioPerroComponent implements OnInit {
         object1
       );
     }
+    // LIMPIAR CAMPO VACUNA
+    this.SignupFormVac.controls['fechaAplicacion'].setValue(" ");
+    this.SignupFormVac.controls['nombre'].setValue(" ");
   }
 
 
@@ -260,10 +285,14 @@ export class FormularioPerroComponent implements OnInit {
     let today = new Date();
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
-    if (difference < 365) {
+    if (difference < 0 ){
+      this.mensajeEdad = "";
+    } else if (difference < 365) {
       this.mensajeEdad = "La mascota es cachorro"
-    } else {
+    } else if (difference > 365 || difference <= 365*30) {
       this.mensajeEdad = "La mascota es adulta"
+    } else if (difference > 365*27){
+      this.mensajeEdad = "";
     }
     this.edadInvalida = true;
   }
@@ -320,14 +349,16 @@ export class FormularioPerroComponent implements OnInit {
 
 
   registrarAnimal() {
-
+    if (this.animal === 1){
+      this.SignupForm.controls['tamaño'].setValue("No aplica");
+    }  
     if (this.SignupForm.valid && this.urls !== undefined && this.urls !== null) {
       this.isLoading = true;
       let mascota: Mascota = new Mascota();
       mascota.tipoMascota = this.data.tipoMascota;
       mascota.nombreMascota = this.SignupForm.controls.nombre.value;
       mascota.estado = this.SignupForm.controls.estado.value;
-      mascota.fechaNacimiento = (this.SignupForm.controls.fechaNacimiento.value).toLocaleString();;
+      mascota.fechaNacimiento = (this.SignupForm.controls.fechaNacimiento.value).toLocaleString();
       mascota.tamañoFinal = this.SignupForm.controls.tamaño.value;
       mascota.sexo = this.SignupForm.controls.sexo.value;
       mascota.raza = this.SignupForm.controls.raza.value;

@@ -101,7 +101,7 @@ export class RegistroMascotaComponent implements OnInit {
     this.FilterForm = new FormGroup({
       nombre: new FormControl(''),
       tipoMascota: new FormControl(''),
-      tamanoFinal: new FormControl(''),
+      tamanoFinal: new FormControl({value: '', disabled:true}),
       sexo: new FormControl(''),
       barrio: new FormControl(''),
     });
@@ -120,8 +120,13 @@ export class RegistroMascotaComponent implements OnInit {
       filters.barrio = this.FilterForm.controls.barrio.value;
     }
     if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      if (this.FilterForm.controls.tipoMascota.value === 1){
+        filters.tamañoFinal = 'No aplica';
+      }
+        else {
       filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
     }
+  }
     if (this.FilterForm.controls.sexo.value !== '') {
       filters.sexo = this.FilterForm.controls.sexo.value;
     }
@@ -154,7 +159,12 @@ export class RegistroMascotaComponent implements OnInit {
       filters.barrio = this.FilterForm.controls.barrio.value;
     }
     if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      if (this.FilterForm.controls.tipoMascota.value === 1){
+        filters.tamañoFinal = 'No aplica';
+      }
+        else {
       filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
+      }
     }
     if (this.FilterForm.controls.sexo.value !== '') {
       filters.sexo = this.FilterForm.controls.sexo.value;
@@ -196,8 +206,13 @@ export class RegistroMascotaComponent implements OnInit {
     this.filtroEnTenenciaAplicado = true;
     let filters: any = {};
     if (this.FilterForm.controls.tamanoFinal.value !== '') {
+      if (this.FilterForm.controls.tipoMascota.value === 1){
+        filters.tamañoFinal = 'No aplica';
+      }
+        else {
       filters.tamañoFinal = this.FilterForm.controls.tamanoFinal.value;
     }
+  }
     if (this.FilterForm.controls.sexo.value !== '') {
       filters.sexo = this.FilterForm.controls.sexo.value;
     }
@@ -209,7 +224,6 @@ export class RegistroMascotaComponent implements OnInit {
     filters.modelo = "Adopcion";
     this.registroMascotasService.filtrarMascotasEnTenencia(filters, this.auth.getToken()).subscribe(dataEnProvi => {
       this.mascotasUsuarioEnProvi = dataEnProvi;
-
       filters.modelo = "Provisorio";
       this.registroMascotasService.filtrarMascotasEnTenencia(filters, this.auth.getToken()).subscribe(dataAdoptado => {
 
@@ -266,6 +280,15 @@ export class RegistroMascotaComponent implements OnInit {
     }
   }
 
+  activarTamanio(){
+    this.FilterForm.controls['tamanoFinal'].setValue("");
+    this.FilterForm.controls.tamanoFinal.enable();
+  }
+
+  desactivarTamanio(){
+    this.FilterForm.controls['tamanoFinal'].setValue("No aplica");
+    this.FilterForm.controls.tamanoFinal.disable();
+  }
 
   openMascota(mascota: Mascota) {
     this.dialog.open(VerMascotaComponent, {
@@ -282,6 +305,7 @@ export class RegistroMascotaComponent implements OnInit {
     var dato = [].concat(dataEnProvi, dataAdoptado);
     this.mascotasEnTenencia = dato;
 
+    console.log("DATO", dato);
 
     if (dato.length > 0) {
       //Recorro mascotas

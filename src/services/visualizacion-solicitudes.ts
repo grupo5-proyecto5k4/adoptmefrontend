@@ -15,7 +15,7 @@ export class VisualizacionSolicitudesService {
     endpointGetSolicitudes='https://adoptmebackend.herokuapp.com/formulario/adopcion';
     endpointConfirmarSolicitud = 'https://adoptmebackend.herokuapp.com/formulario/actualizarEstado/Aprobado/'
     endpointRechazarSolicitud = 'https://adoptmebackend.herokuapp.com/formulario/actualizarEstado/Rechazado/'
-
+    //endpointPutSolicitud = 'https://adoptmebackend.herokuapp.com/formulario/actualizarEstado/:estado/:idSolicitud'
 
     constructor(private http: HttpClient) {}
 
@@ -31,12 +31,12 @@ export class VisualizacionSolicitudesService {
         return this.http.get((this.endpointGetSolicitudes+'/'+idSolictud)).toPromise();
     }
 
-    confirmarSolicitud(idSolicitud: string, token:string): Observable<any> {
-        return this.http.put<any>(this.endpointConfirmarSolicitud + idSolicitud, "some-string", { headers: new HttpHeaders().set('auth-token', `${token}`)});
+    confirmarSolicitud(solicitud, token:string): Observable<any> {
+        return this.http.put<any>(this.endpointConfirmarSolicitud + solicitud._id, solicitud, { headers: new HttpHeaders().set('auth-token', `${token}`)});
     }
 
-    rechazarSolicitud(idSolicitud: string, token:string): Observable<any> {
-        return this.http.put<any>(this.endpointRechazarSolicitud + idSolicitud, "some-string", { headers: new HttpHeaders().set('auth-token', `${token}`)});
+    rechazarSolicitud(solicitud, token:string): Observable<any> {
+        return this.http.put<any>(this.endpointRechazarSolicitud + solicitud._id, solicitud, { headers: new HttpHeaders().set('auth-token', `${token}`)});
 
     }
 
@@ -44,6 +44,7 @@ export class VisualizacionSolicitudesService {
         return this.http.get(('https://adoptmebackend.herokuapp.com/formulario/buscar/solicitudrealizada/'+tipoSolicitud), { headers: new HttpHeaders().set('auth-token', `${token}`)});
     }
 
+    /*
     actualizarSolicitudProvisorio(solicitud: FormularioProvisorio, token:string): Observable <FormularioProvisorio> {
         return this.http.put<FormularioProvisorio>('url', solicitud ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
       //AGREGAR LA URL DEL BACK
@@ -53,4 +54,5 @@ export class VisualizacionSolicitudesService {
         return this.http.put<FormularioAdopcion>('url', solicitud ,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
       //AGREGAR LA URL DEL BACK
     }
+    */
 }

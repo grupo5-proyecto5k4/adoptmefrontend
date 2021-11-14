@@ -21,6 +21,10 @@ import { ReportesCentroComponent } from './reportes-centro/reportes-centro.compo
 import { CenterProfileComponent } from './center-profile/center-profile.component';
 import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
 import { DonacionesComponent} from './donaciones/donaciones.component';
+import { ReportesAdminComponent } from './reportes-admin/reportes-admin.component';
+import { VisualizarAdopcionesComponent } from './visualizar-adopciones/visualizar-adopciones.component';
+import { VisualizarProvisoriosComponent } from './visualizar-provisorios/visualizar-provisorios.component';
+import { MascotasDisponiblesComponent } from './mascotas-disponibles/mascotas-disponibles.component';
 
 const routes: Routes = [
   {
@@ -55,12 +59,12 @@ const routes: Routes = [
     component: GestionarUsuariosComponent
   },
   {
-    path: 'gestionar-mascotas',
-    component: UnderConstructionComponent
+    path: 'visualizar-mascotas',
+    component: MascotasDisponiblesComponent
   },
   {
     path: 'visualizar-adopciones',
-    component: UnderConstructionComponent
+    component: VisualizarAdopcionesComponent
   },
   {
     path: 'miperfil',
@@ -72,7 +76,7 @@ const routes: Routes = [
   },
   {
     path: 'visualizar-provisorios',
-    component: UnderConstructionComponent
+    component: VisualizarProvisoriosComponent
   },
   {
     path: 'administrar-recomendaciones',
@@ -84,7 +88,7 @@ const routes: Routes = [
   },
   {
     path: 'reportes',
-    component: UnderConstructionComponent
+    component: ReportesAdminComponent
   },
   {
     path: 'opciones-de-registro',

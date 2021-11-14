@@ -28,8 +28,8 @@
                                 (change)="changeTipoAnimal()">
                                 <mat-label>Tipo de mascota</mat-label>
                                 <mat-select formControlName="tipoMascota">
-                                    <mat-option value="0">Perro</mat-option>
-                                    <mat-option value="1">Gato</mat-option>
+                                    <mat-option value="0" (click)="activarTamanio()">Perro</mat-option>
+                                    <mat-option value="1" (click)="desactivarTamanio()">Gato</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
@@ -61,7 +61,7 @@
                         <mat-card-title class="card-title">
                             <div class=primer-renglon>
                                 <div class="sin-overflow">{{pet.nombreMascota}}</div>
-                                <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>
+                                <!--<mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>-->
                             </div>
                         </mat-card-title>
                         <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
@@ -76,7 +76,7 @@
                         </div>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button (click)="openMascota(pet)">EDITAR</button>
+                        <button mat-button (click)="openMascota(pet)">Ver más</button>
                     </mat-card-actions>
                 </mat-card>
                 <div *ngIf="mascotasUsuario.length == 0 && !filtroDisponibleAplicado">
@@ -109,8 +109,8 @@
                                 (change)="changeTipoAnimal()">
                                 <mat-label>Tipo de mascota</mat-label>
                                 <mat-select formControlName="tipoMascota">
-                                    <mat-option value="0">Perro</mat-option>
-                                    <mat-option value="1">Gato</mat-option>
+                                    <mat-option value="0" (click)="activarTamanio()">Perro</mat-option>
+                                    <mat-option value="1" (click)="desactivarTamanio()">Gato</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
@@ -142,7 +142,7 @@
                         <mat-card-title class="card-title">
                             <div class=primer-renglon>
                                 <div class="sin-overflow">{{pet.nombreMascota}}</div>
-                                <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>
+                              <!--   <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>-->
                             </div>
                         </mat-card-title>
                         <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
@@ -157,7 +157,7 @@
                         </div>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button (click)="openMascota(pet)">EDITAR</button>
+                        <button mat-button (click)="openMascota(pet)">Ver más</button>
                     </mat-card-actions>
                 </mat-card>
                 <div *ngIf="mascotasUsuarioNoDisponibles.length == 0 && !filtroNoDisponibleAplicado">
@@ -187,8 +187,8 @@
                                 (change)="changeTipoAnimal()">
                                 <mat-label>Tipo de mascota</mat-label>
                                 <mat-select formControlName="tipoMascota">
-                                    <mat-option value="0">Perro</mat-option>
-                                    <mat-option value="1">Gato</mat-option>
+                                    <mat-option value="0" (click)="activarTamanio()">Perro</mat-option>
+                                    <mat-option value="1" (click)="desactivarTamanio()">Gato</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
@@ -220,7 +220,7 @@
                         <mat-card-title class="card-title">
                             <div class=primer-renglon>
                                 <div class="sin-overflow">{{pet.nombreMascota}}</div>
-                                <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle>
+                              <!--  <mat-slide-toggle ngModel name="enablePet"></mat-slide-toggle> -->
                             </div>
                         </mat-card-title>
                         <mat-card-subtitle>{{pet.sexo}}</mat-card-subtitle>
@@ -235,7 +235,7 @@
                         </div>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button>EDITAR</button>
+                        <button mat-button>Ver más</button>
                     </mat-card-actions>
                 </mat-card>
                 <div *ngIf="mascotasEnTenencia.length == 0 && !filtroEnTenenciaAplicado">

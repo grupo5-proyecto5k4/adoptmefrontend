@@ -13,7 +13,7 @@
       </div>
       <div>
         <mat-form-field class="example-full-width margenesFiltros filtro">
-          <mat-label>Centro rescatita / Responsable</mat-label>
+          <mat-label>Centro rescatista / Responsable</mat-label>
           <input matInput placeholder="Nombre" formControlName="nombre" class="form-control" maxlength="30">
         </mat-form-field>
       </div>
@@ -21,8 +21,8 @@
         <mat-form-field class="example-full-width margenesFiltros filtro" (change)="changeTipoAnimal()">
           <mat-label>Tipo de mascota</mat-label>
           <mat-select formControlName="tipoMascota">
-            <mat-option value="0">Perro</mat-option>
-            <mat-option value="1">Gato</mat-option>
+            <mat-option value="0" (click)="activarTamanio()">Perro</mat-option>
+            <mat-option value="1" (click)="desactivarTamanio()">Gato</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -36,9 +36,22 @@
       </div>
       <div>
         <mat-form-field class="example-full-width margenesFiltros filtro">
-          <mat-label>Barrio</mat-label>
-          <input matInput placeholder="Barrio" formControlName="barrio" class="form-control" maxlength="30">
-        </mat-form-field>
+            <mat-label>Barrio</mat-label>
+            <input type="text"
+                   placeholder="Seleccionar barrio"
+                   aria-label="Number"
+                   matInput
+                   name="barrio"
+                   [formControl]="myControl"
+                   [matAutocomplete]="auto"
+                   [(ngModel)]="SelectedHuman"
+                   >
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option (click)="OnHumanSelected(SelectedHuman)" *ngFor="let barrio of filteredBarrios | async" [value]="barrio">
+                {{barrio}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
       </div>
     </form>
   </div>

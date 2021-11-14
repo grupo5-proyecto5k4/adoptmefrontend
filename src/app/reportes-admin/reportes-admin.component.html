@@ -1,0 +1,76 @@
+<h1 class="titulo">Reportes y estadísticas</h1>
+<br>
+<br>
+<div class="container-fecha">
+
+    <mat-form-field appearance="outline">
+        <mat-label>Seleccionar periodo</mat-label>
+
+        <mat-date-range-input type="date" [rangePicker]="picker" [max]="today" [min]="yearAgo" [formGroup]="range">
+            <input matStartDate placeholder="Desde" formControlName="start" disabled [formControl]="today">
+            <input matEndDate placeholder="Hasta" formControlName="end" disabled [formControl]="today">
+        </mat-date-range-input>
+
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker disabled="false"></mat-date-range-picker>
+
+        <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+        <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+
+    </mat-form-field>
+
+    <div class="centrado" *ngIf="range.value.start && range.value.end">
+        <button mat-button type="button" color="accent" class="btnPeriodo"
+            (click)="generarReportes(range.value.start, range.value.end)">Generar reportes</button>
+    </div>
+</div>
+
+<div class="container-loading" *ngIf="reportesFlag">
+    <img class=logo src="../../../assets/images/loading.gif" />
+</div>
+
+
+<div class="container-reportes" *ngIf="reportesFlag === false">
+    <div class="subtitle">
+        <h2>¿Cuántos días transcurren desde que se recibe una solicitud de adopción y/o provisorio hasta que la misma es aceptada por ambas partes?</h2>
+        <h4>Este reporte nos muestra la cantidad de días que transcurren desde que un interesado en adoptar o brindar hogar provisorio realiza la solicitud, la misma sea aceptada por el responsable de la mascota, hasta la confirmación final por parte del interesado de que acepta al nuevo miembro de la familia.</h4>      
+    </div>
+
+    <div>
+        <div class="container-principal" *ngIf="flagNoData === 0">
+            <div class="container-grafico">
+                <h3>Tiempo mínimo</h3>
+                <div id="myChart">
+                    <canvas baseChart [datasets]="barChartDataMin" [labels]="barChartLabelsMin"
+                        [options]="barChartOptionsMin" [legend]="barChartLegendMin" [chartType]="barChartTypeMin">
+                    </canvas>
+                </div>
+            </div>
+
+            <div class="container-grafico">
+                <h3>Tiempo promedio</h3>
+                <div id="myChart">
+                    <canvas baseChart [datasets]="barChartDataProm" [labels]="barChartLabelsProm"
+                        [options]="barChartOptionsProm" [legend]="barChartLegendProm" [chartType]="barChartTypeProm">
+                    </canvas>
+                    <div>
+                        <p class="totales">Cantidad total de solicitudes de provisorio: {{cantidadTotalPromedioProvi}}</p>
+                        <p class="totales">Cantidad total de solicitudes de adopción: {{cantidadTotalPromedioAdopcion}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container-grafico">
+                <h3>Tiempo máximo</h3>
+                <div id="myChart">
+                    <canvas baseChart [datasets]="barChartDataMax" [labels]="barChartLabelsMax"
+                        [options]="barChartOptionsMax" [legend]="barChartLegendMax" [chartType]="barChartTypeMax">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="flagNoData === 1" class="sms">
+            <h4>No se han encontrado resultados para el período ingresado... </h4>
+        </div>
+    </div>
+</div>

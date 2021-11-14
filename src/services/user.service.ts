@@ -56,5 +56,27 @@ export class UserService {
     return this.httpClient.post<FormularioProvisorio>(this.api + '/formulario/adopcion', formulario, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
+  getCentrosRescatistasPendientesFiltrados(filters: any, token: string): Observable<any> {
+    const urlFiltered = new URL("https://adoptmebackend.herokuapp.com/centrosFiltro/filtroBarrioNombres")
+    if (filters.nombres) {
+      urlFiltered.searchParams.append("nombres", filters.nombres)
+  }
+  if (filters.barrio) {
+      urlFiltered.searchParams.append("barrio", filters.barrio)
+  }
+    return this.httpClient.get<any>(urlFiltered.toString(), { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
+  getUsuariosFiltrados(filters: any, token: string): Observable<any> {
+    const urlFiltered = new URL("https://adoptmebackend.herokuapp.com/particularFiltro/filtroNombresApellidos")
+    if (filters.nombres) {
+      urlFiltered.searchParams.append("nombres", filters.nombres)
+  }
+  if (filters.barrio) {
+      urlFiltered.searchParams.append("barrio", filters.barrio)
+  }
+    return this.httpClient.get<any>(urlFiltered.toString(), { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
+
   }
 
