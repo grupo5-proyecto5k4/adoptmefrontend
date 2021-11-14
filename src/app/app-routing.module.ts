@@ -25,6 +25,7 @@ import { ReportesAdminComponent } from './reportes-admin/reportes-admin.componen
 import { VisualizarAdopcionesComponent } from './visualizar-adopciones/visualizar-adopciones.component';
 import { VisualizarProvisoriosComponent } from './visualizar-provisorios/visualizar-provisorios.component';
 import { MascotasDisponiblesComponent } from './mascotas-disponibles/mascotas-disponibles.component';
+import {UserProfileModalComponent} from './components/user-profile-modal/user-profile-modal.component';
 
 const routes: Routes = [
   {
@@ -115,6 +116,8 @@ const routes: Routes = [
     path: 'micentro',
     component: CenterProfileComponent
   },
+  {path:'modCentroDonacion',
+  component:UserProfileModalComponent},
   {
     path: 'registrar-mascota',
     component: NuevaMascotaComponent

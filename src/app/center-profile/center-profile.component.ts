@@ -25,12 +25,18 @@ export class CenterProfileComponent implements OnInit {
   currentUser: any;
   enEdicion:boolean=false;
   editarDatos:boolean=false;
-  esconder:boolean=true;
+  esconder:boolean=false;
   selectedBarrio; 
   filteredBarrios: Observable<string[]>;
   barrios: string[] = [];
   barriosBack;
   myControl = new FormControl();
+  esconderContra: Boolean= false;
+  editarDatosPerfil: Boolean=true;
+  EditarContra: Boolean= false;
+  esconderBarrio: Boolean= true;
+  editarBarrio: Boolean= false;
+
 
   constructor(private BarriosService: BarriosService,private editUser: SignupService, private authservice: AuthService, private router: Router, private alertsService: AlertsService, private localStorageService: LocalStorageService) {
 
@@ -162,8 +168,8 @@ export class CenterProfileComponent implements OnInit {
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: false },[Validators.required, Validators.pattern('[0-9]{10,13}')]),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: false }),
         instagram: new FormControl({ value: this.currentUser.instagram, disabled: false }),
-        contrasenia: new FormControl({ value:'', disabled: false },[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
-        
+        //contrasenia: new FormControl({ value:'', disabled: false },[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
+        contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true }),
       });
 
     }
@@ -174,7 +180,12 @@ export class CenterProfileComponent implements OnInit {
 
     this.enEdicion=true;
     this.editarDatos=true;
-    this.esconder=false;
+    this.esconder=true;
+    this.esconderContra=false;
+    this.editarDatosPerfil=false;
+    this.EditarContra= false;
+    this.editarBarrio=true;
+    this.esconderBarrio=false;
 
     this.inicializarFormulario();
         
@@ -217,8 +228,73 @@ export class CenterProfileComponent implements OnInit {
   }
 
   cancelar(){
-    window.location.href = "/micentro";
+    this.enEdicion=false;
+    this.editarDatos=false;
+    this.esconder=false;
+    this.esconderContra=false;
+    this.editarDatosPerfil=true;
+    this.EditarContra= false;
+    this.editarBarrio=false;
+    this.esconderBarrio=true;
+
+    this.inicializarFormulario();
   }
+
+  editarContrasenia(){
+    this.enEdicion=true;
+    this.editarDatos=false;
+    this.esconder=false;
+    this.esconderContra=true;
+    this.editarDatosPerfil=false;
+    this.EditarContra= true;
+    this.editarBarrio=false;
+    this.esconderBarrio=true;
+
+    this.ProfileForm = new FormGroup({
+      nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
+      correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+      calle: new FormControl({ value: this.currentUser.Direccion.calle, disabled: true }),
+      altura: new FormControl({ value: this.currentUser.Direccion.numero, disabled: true }),
+      localidad: new FormControl({ value: this.currentUser.Direccion.localidad, disabled: true }),
+      barrio: new FormControl({ value: this.currentUser.Direccion.barrio, disabled: true }),
+      referencia: new FormControl({ value: this.currentUser.Direccion.referencia, disabled: true }),
+      banco: new FormControl({ value: this.currentUser.banco, disabled: true }),
+      cbu: new FormControl({ value: this.currentUser.cbu, disabled: true }),
+      alias: new FormControl({ value:this.currentUser.alias, disabled: true }),
+      numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
+      facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
+      instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
+      contrasenia: new FormControl({ value:'', disabled: false },[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')]),
+              
+    });
+  
+  }
+
+  guardarContra(){
+    let userContra: User= new User();
+    userContra.contrasenia= this.ProfileForm.controls.contrasenia.value;
+
+    this.editUser.editUser(userContra,this.authservice.getToken()).subscribe(
+      (resp:Data) => {
+        localStorage.setItem('auth_token', resp.token);
+        this.currentUser=this.editUser.getUsuarioModificado(resp.token).subscribe((r)=>{
+          this.currentUser=this.authservice.setUser(r);
+          this.localStorageService.setProfile(r.tipoUsuario); 
+          this.alertsService.confirmMessage("La contraseña ha sido modificada con exito!").then( ()=>
+          window.location.href = "/micentro");
+        });  
+
+      },
+      (err: any) => {
+        this.alertsService.errorMessage(err.error.error).then((result) => {
+         
+        }
+      )
+      }
+    )
+
+  }
+
 
   guardar(){
 
@@ -249,7 +325,7 @@ export class CenterProfileComponent implements OnInit {
       if (this.ProfileForm.controls.facebook.value !== "") {
         particularUser.facebook = this.ProfileForm.controls.facebook.value;
       }
-      particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
+    //  particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
 
       this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
         (resp:Data) => {
@@ -272,7 +348,5 @@ export class CenterProfileComponent implements OnInit {
 
     }
   }
-
-
 
 }

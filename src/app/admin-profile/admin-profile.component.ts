@@ -24,6 +24,9 @@ export class AdminProfileComponent implements OnInit {
   edadInvalida: Boolean = false;
   mensajeEdad: string = "";
   nuevotoken: string;
+  esconderContra: Boolean= false;
+  editarDatosPerfil: Boolean=true;
+  EditarContra: Boolean= false;
 
   constructor(private editUser: SignupService, private authservice: AuthService, private router: Router, private alertsService: AlertsService, private localStorageService: LocalStorageService) {
 
@@ -33,7 +36,7 @@ export class AdminProfileComponent implements OnInit {
 
     this.enEdicion=false;
     this.editarDatos=false;
-    this.esconder=true;
+    this.esconder=false;
     
 
     this.profile = this.localStorageService.getProfile();
@@ -80,7 +83,10 @@ export class AdminProfileComponent implements OnInit {
     
     this.enEdicion=false;
     this.editarDatos=false;
-    this.esconder=true;
+    this.esconder=false;
+    this.esconderContra=false;
+    this.editarDatosPerfil=true;
+    this.EditarContra= false;
 
     this.inicializarFormulario();
   }
@@ -89,10 +95,35 @@ export class AdminProfileComponent implements OnInit {
 
     this.enEdicion=true;
     this.editarDatos=true;
-    this.esconder=false;
+    this.esconder=true;
+    this.esconderContra=false;
+    this.editarDatosPerfil=false;
+    this.EditarContra= false;
   
     this.inicializarFormulario();
         
+  }
+
+  editarContrasenia(){
+    this.enEdicion=true;
+    this.editarDatos=false;
+    this.esconder=false;
+    this.esconderContra=true;
+    this.editarDatosPerfil=false;
+    this.EditarContra= true;
+
+    this.ProfileForm = new FormGroup({
+      nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
+      apellidos: new FormControl({ value: this.currentUser.apellidos, disabled: true }),
+      correoElectronico: new FormControl({ value: this.currentUser.correoElectronico, disabled: true }),
+      dni: new FormControl({ value: this.currentUser.dni, disabled: true }),
+      numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: true }),
+      fechaNacimiento: new FormControl({ value:this.currentUser.fechaNacimiento, disabled: true }),
+      facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
+      instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
+      contrasenia: new FormControl({ value: '', disabled: false },[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')])
+    });
+
   }
  
 
@@ -109,6 +140,7 @@ export class AdminProfileComponent implements OnInit {
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: true }),
         instagram: new FormControl({ value: this.currentUser.instagram, disabled: true }),
         contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
+
       });
   
     }
@@ -122,13 +154,37 @@ export class AdminProfileComponent implements OnInit {
         numeroContacto: new FormControl({ value: this.currentUser.numeroContacto, disabled: false },[Validators.required, Validators.pattern('[0-9]{10,13}')]),
         facebook: new FormControl({ value: this.currentUser.facebook, disabled: false }),
         instagram: new FormControl({ value: this.currentUser.instagram, disabled: false }),
-        contrasenia: new FormControl({ value: '', disabled: false },[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')])
+        contrasenia: new FormControl({ value: this.currentUser.pwd, disabled: true })
+        //contrasenia: new FormControl({ value: '', disabled: false },[Validators.required, Validators.pattern('^(?=.*[0-9])(?=.*[^A-Z]*[A-Z])(?=.*[^a-z]*[a-z])(?=.*[^0-9]*[0-9])[a-zA-Z0-9!@$.]{8,15}$')])
       });
   
     }
 
   }
 
+  guardarContra(){
+    let userContra: User= new User();
+    userContra.contrasenia= this.ProfileForm.controls.contrasenia.value;
+
+    this.editUser.editUser(userContra,this.authservice.getToken()).subscribe(
+      (resp:Data) => {
+        localStorage.setItem('auth_token', resp.token);
+        this.currentUser=this.editUser.getUsuarioModificado(resp.token).subscribe((r)=>{
+          this.currentUser=this.authservice.setUser(r);
+          this.localStorageService.setProfile(r.tipoUsuario); 
+          this.alertsService.confirmMessage("La contraseña ha sido modificada con exito!").then( ()=>
+          window.location.href = "/perfiladmin");
+        });  
+ 
+      },
+      (err: any) => {
+        this.alertsService.errorMessage(err.error.error).then((result) => {
+         
+        }
+      )
+      }
+    )
+  }
 
   guardar(){
 
@@ -144,7 +200,7 @@ export class AdminProfileComponent implements OnInit {
       particularUser.instagram = this.ProfileForm.controls.instagram.value;
     }
     
-    particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
+   // particularUser.contrasenia = this.ProfileForm.controls.contrasenia.value;
   
     
     this.editUser.editUser(particularUser,this.authservice.getToken()).subscribe(
@@ -156,8 +212,7 @@ export class AdminProfileComponent implements OnInit {
           this.alertsService.confirmMessage("Sus datos han sido modificados con exito!").then( ()=>
           window.location.href = "/perfiladmin");
         });  
-
-              
+ 
       },
       (err: any) => {
         this.alertsService.errorMessage(err.error.error).then((result) => {

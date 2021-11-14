@@ -88,12 +88,12 @@
             </mat-form-field>
         </div>
         <div class="derecha">
-          <mat-form-field *ngIf="esconder">
+          <mat-form-field *ngIf="esconderBarrio">
             <mat-label>Barrio</mat-label>
             <input matInput formControlName="barrio">
         </mat-form-field>
 
-          <mat-form-field class="example-full-width" *ngIf="editarDatos">
+          <mat-form-field class="example-full-width" *ngIf="editarBarrio">
             <mat-label>Barrio</mat-label>
             <input type="text"
                    placeholder="Seleccionar barrio"
@@ -227,12 +227,20 @@
               </div>
         </div>
 
-        <button mat-button style="margin-left: 230px;" *ngIf="esconder" id="btnEdit" type="button" color="accent" (click)="editar()">Editar</button>
+        <div class="centrado" *ngIf="editarDatosPerfil">
+          <button mat-button id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editar()">Editar perfil</button>
+          <button mat-button id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editarContrasenia()">Cambiar contraseña</button>
+       </div>
 
-        <div class="centrado" *ngIf="editarDatos">
-         <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" (click)="cancelar()">Cancelar</button>
-         <button mat-button type="button" color="accent" style="padding: 10px;" id="btnEdit" (click)="guardar()">Guardar Cambios</button>
+       <div class="centrado" *ngIf="EditarContra || (esconderContra==true)">
+         <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelar()">Cancelar</button>
+         <button mat-button type="button" color="accent" class="btnLogout" (click)="guardarContra()">Guardar Cambios</button>
         </div> 
+
+       <div class="centrado" *ngIf="editarDatos || (esconder==true)">
+        <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelar()">Cancelar</button>
+        <button mat-button type="button" color="accent" class="btnLogout" (click)="guardar()">Guardar Cambios</button>
+       </div> 
 
     </form>
 </div>
