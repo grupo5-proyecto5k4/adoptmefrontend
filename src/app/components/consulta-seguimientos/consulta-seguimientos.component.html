@@ -65,7 +65,10 @@
               <button mat-button type="button" style="margin-top: 2%; cursor: pointer; color: #f44336; " color="accent"
                 class="btnLogout" (click)="cancelarProceso()">{{proceso}}</button>
             </div>
-
+          </div>
+          <div class="logout-container container-publicaciones" *ngIf="puedeFinalizarSeguimiento()">
+            <button mat-button type="button" style="margin-top: 2%; cursor: pointer; color: #f44336; " color="accent"
+              class="btnLogout" (click)="finalizarSeguimiento()">Finalizar seguimiento</button>
           </div>
           <h4 *ngIf="seguimientos.length == 0" class="container-publicaciones" style="margin-top: 1%">No se han
             realizado seguimientos a la mascota hasta el momento... </h4>

@@ -42,4 +42,8 @@ export class MascotaService {
   finalizarProvisorio(idAnimal: string, token: string, motivo: any): Observable <any>{
     return this.httpClient.put('/seguimiento/modificarSeguimiento/'+idAnimal, motivo, { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
+
+  finalizarSeguimiento(idSolicitud: string, token: string): Observable <any>{
+    return this.httpClient.put(this.api + '/seguimiento/finalizar/seguimiento/'+ idSolicitud, "some-string", { headers: new HttpHeaders().set('auth-token', `${token}`) });
+  }
 }
