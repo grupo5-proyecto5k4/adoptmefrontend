@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 import { AlertsService } from 'src/utils/alerts.service';
 import { NotificacionService } from 'src/services/notificacion.service';
 import { FormularioProvisorio } from 'src/models/IFormularioProvisorio';
+import { DateAdapter } from '@angular/material/core';
 
 @Component({
   selector: 'app-visualizacion-solicitud-provi',
@@ -37,7 +38,9 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     reportesFlag: boolean = false;
     maxDate = new Date(new Date().setFullYear(new Date().getFullYear() + 1))
     // -----------------------
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialog: MatDialog, private notificacionService: NotificacionService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService, private alertsService: AlertsService) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dateAdapter: DateAdapter<Date>, public dialog: MatDialog, private notificacionService: NotificacionService, public visualizacionSolicitudesService: VisualizacionSolicitudesService, private auth: AuthService, private alertsService: AlertsService) {
+    this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
+  }
 
   ngOnInit(): void {
     var dataAnimal = this.data.solicitud.Animales;
@@ -170,7 +173,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       gastosCubiertos: new FormControl({ value: dataSolicitud.gastosCubiertosString, disabled: true }),
       tiempoTenencia: new FormControl({ value: dataSolicitud.tiempoTenenciaString, disabled: true }),
       frecuencia: new FormControl('', [Validators.required]),
-      fechaFinProvisorio: new FormControl({ value: dataSolicitud.fechaFinProvisorio}),
+      fechaFinProvisorio: new FormControl({ value: ''}, [Validators.required]),
       fechaFinProvisorioString: new FormControl({ value: dataSolicitud.fechaFinProvisorioString, disabled:true}),
       comentario: new FormControl(''),
       comentarioRespuesta: new FormControl({ value: this.dataSolicitud.observacionCancelacion, disabled:true}),
@@ -204,7 +207,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
     // ACEPTACIÓN POR PARTE DEL CENTRO/RESPONSABLE A LA SOLICITUD CARGADA POR EL SOLICITANTE
   async aceptarSolicitud() {
-    if (!this.seguimientoChecked || (this.seguimientoChecked && this.SolicitudForm.controls.frecuencia.value != '' && !this.validarFrecuencia())) {
+    if ((!this.seguimientoChecked && this.SolicitudForm.controls.fechaFinProvisorio.value !== '') || (this.seguimientoChecked && this.SolicitudForm.controls.fechaFinProvisorio.value !== '' && this.SolicitudForm.controls.frecuencia.value !== '' && !this.validarFrecuencia())) {
       this.isLoading = true;
       var solicitud: FormularioProvisorio = new FormularioProvisorio();
       solicitud._id = this.idSolicitud;
@@ -326,7 +329,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
   validateButton() {
     console.log("Formulario", this.SolicitudForm);
-    if ((this.SolicitudForm.controls.fechaFinProvisorio.value != undefined) || (this.SolicitudForm.controls.fechaFinProvisorio.value!= null )) {
+    if ((!this.seguimientoChecked && this.SolicitudForm.controls.fechaFinProvisorio.value !== '') || (this.seguimientoChecked && this.SolicitudForm.controls.fechaFinProvisorio.value !== '' && this.SolicitudForm.controls.frecuencia.value !== '' && !this.validarFrecuencia())) {
       document.getElementById("confirmar").classList.remove("buttonDisabled");
     } else {
       document.getElementById("confirmar").classList.add("buttonDisabled");

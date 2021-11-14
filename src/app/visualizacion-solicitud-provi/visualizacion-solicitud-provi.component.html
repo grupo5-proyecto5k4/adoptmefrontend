@@ -299,6 +299,12 @@
                                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                                     <mat-datepicker #picker></mat-datepicker>
                                                 </mat-form-field>
+                                                <span class="help-block" *ngIf="((SolicitudForm.get('fechaFinProvisorio').touched ||
+                                                SolicitudForm.get('fechaFinProvisorio').dirty) && SolicitudForm.get('fechaFinProvisorio').errors)">
+                                                         <span *ngIf="SolicitudForm.get('fechaFinProvisorio').errors.required">
+                                                             <h6 class="helpError">Campo requerido</h6>
+                                                         </span>
+                                                     </span>
                                             </div>
 
                                             <div class="margin" *ngIf="faltaAceptar()&&seguimientoSolicitud">
@@ -347,7 +353,7 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
-                                            <div class="container-row1" *ngIf="isFechaFinLoaded">
+                                            <div class="container-row1" *ngIf="isFechaFinLoaded && !faltaAceptar()">
                                                 <div>
                                                     <mat-form-field class="ref">
                                                         <mat-label>Fecha fin de provisorio
