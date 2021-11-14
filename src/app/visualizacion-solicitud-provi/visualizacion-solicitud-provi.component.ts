@@ -24,6 +24,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   seguimientoChecked = false;
   seguimientoSolicitud = false;
   observacionExplicacion;
+  isFechaFinLoaded = false;
   
     // Date picker ------------------
     today = new Date();
@@ -73,6 +74,9 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     }
 
     //camposBooleanos
+    if (dataSolicitud.fechaFinProvisorio != undefined || dataSolicitud.fechaFinProvisorio != null){
+      this.isFechaFinLoaded = true;
+    } 
 
     // Vivienda 0:casa/1:depto
     console.log("vivienda", dataSolicitud.vivienda)
