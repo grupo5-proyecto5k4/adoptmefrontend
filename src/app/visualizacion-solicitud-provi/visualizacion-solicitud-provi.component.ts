@@ -174,8 +174,8 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
       gastosCubiertos: new FormControl({ value: dataSolicitud.gastosCubiertosString, disabled: true }),
       tiempoTenencia: new FormControl({ value: dataSolicitud.tiempoTenenciaString, disabled: true }),
       frecuencia: new FormControl('', [Validators.required]),
-      fechaFinProvisorio: new FormControl({ value: ''}, [Validators.required]),
-      fechaFinProvisorioString: new FormControl({ value: dataSolicitud.fechaFinProvisorioString, disabled:true}),
+      fechaFinProvisorio: new FormControl('', [Validators.required]),
+      fechaFinProvisorioString: new FormControl({ value: dataSolicitud.fechaFinProvisorioString, disabled:true},[Validators.required]),
       comentario: new FormControl(''),
       comentarioRespuesta: new FormControl({ value: this.dataSolicitud.observacionCancelacion, disabled:true}),
       motivo: new FormControl(''),
@@ -279,6 +279,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     //var solicitud;
     //solicitud._id = this.idSolicitud;
     //console.log("confirmarSolicitud()", solicitud);
+    
     this.isLoading = true;
     let solicitud: FormularioProvisorio = new FormularioProvisorio();
     solicitud._id = this.idSolicitud;
@@ -292,6 +293,8 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
           this.isLoading = false;
         }
     })
+
+
   }
 
   SeguimientoChange() {

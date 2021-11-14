@@ -396,7 +396,7 @@
                                             style="margin-right: 3px;" type="button"
                                             (click)="rechazarSolicitudAprobada()">Rechazar</a>
                                         <a mat-raised-button class="button" id="btnRegistro" type="button"
-                                            (click)="confirmarSolicitud()" *ngIf="!isLoading" >Confirmar</a>
+                                            (click)="confirmarSolicitud()" *ngIf="!isLoading" (mouseover)="validateButton()" >Confirmar</a>
 
                                         <a mat-raised-button *ngIf="isLoading" class="button loading" type="button"
                                             id="btncuenta">
