@@ -1,18 +1,18 @@
-<app-navbar>
-<body>
+<app-navbar style="z-index: 2;">
+<body style="z-index: 3;">
         <!-- NAVBAR -->
         <landing *ngIf="isLandingPage()"></landing>
 
         <!-- ROUTER OUTLET -->
         <router-outlet></router-outlet>
         
-        <!-- FOOTER -->
-
-       <app-footer></app-footer>  
-        
-
+        <!-- FOOTER 
+  <app-footer ></app-footer>-->
     
 </body>
-       
+ 
+ 
 </app-navbar>
 
+
+ 

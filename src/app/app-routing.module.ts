@@ -8,9 +8,24 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { InicioSesionComponent } from './inicio-sesion/inicio-sesion.component';
 import { AdminConfigurationsComponent } from './pages/admin-configurations/admin-configurations.component';
 import { PublicacionesAdopComponent } from './publicaciones-adop/publicaciones-adop.component';
-import {RegistroMascotaComponent} from '../app/registro-mascota/registro-mascota.component';
 import { LeaftletPathComponent } from './leaftlet-path/leaftlet-path.component';
 import { HabilitarCentroRescatistaComponent } from './pages/habilitar-centros-rescatistas/habilitar-centros-rescatistas.component';
+import { AdminProfileComponent } from './admin-profile/admin-profile.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { RegistroMascotaComponent } from './registro-mascota/registro-mascota.component';
+import { PublicacionesProvComponent } from './publicaciones-prov/publicaciones-prov.component';
+import { AdministrarRecomendacionesComponent } from './pages/administrar-recomendaciones/administrar-recomendaciones.component';
+import {GestionarUsuariosComponent} from '../app/gestionar-usuarios/gestionar-usuarios.component';
+import { ListadoSolicitudesComponent } from './listado-solicitudes/listado-solicitudes.component';
+import { ReportesCentroComponent } from './reportes-centro/reportes-centro.component';
+import { CenterProfileComponent } from './center-profile/center-profile.component';
+import { NuevaMascotaComponent } from './nueva-mascota/nueva-mascota.component';
+import { DonacionesComponent} from './donaciones/donaciones.component';
+import { ReportesAdminComponent } from './reportes-admin/reportes-admin.component';
+import { VisualizarAdopcionesComponent } from './visualizar-adopciones/visualizar-adopciones.component';
+import { VisualizarProvisoriosComponent } from './visualizar-provisorios/visualizar-provisorios.component';
+import { MascotasDisponiblesComponent } from './mascotas-disponibles/mascotas-disponibles.component';
+import {UserProfileModalComponent} from './components/user-profile-modal/user-profile-modal.component';
 
 const routes: Routes = [
   {
@@ -18,19 +33,23 @@ const routes: Routes = [
     component: PublicacionesAdopComponent
   },
   {
-    
     path: 'provisorio',
-    component: UnderConstructionComponent
+    component: PublicacionesProvComponent
   },
   {path: 'inicio-sesion',
-    component:InicioSesionComponent},
+    component: InicioSesionComponent
+  },
   {
     path: 'mascotas',
     component: RegistroMascotaComponent
   },
   {
+    path: 'reportesCentro',
+    component: ReportesCentroComponent
+  },
+  {
     path: 'donaciones',
-    component: UnderConstructionComponent
+    component: DonacionesComponent
   },
   {
     path: 'configuraciones',
@@ -38,19 +57,31 @@ const routes: Routes = [
   },
   {
     path: 'gestionar-usuarios',
-    component: UnderConstructionComponent
+    component: GestionarUsuariosComponent
   },
   {
-    path: 'gestionar-mascotas',
-    component: UnderConstructionComponent
+    path: 'visualizar-mascotas',
+    component: MascotasDisponiblesComponent
   },
   {
     path: 'visualizar-adopciones',
-    component: UnderConstructionComponent
+    component: VisualizarAdopcionesComponent
+  },
+  {
+    path: 'miperfil',
+    component: UserProfileComponent
+  },
+  {
+    path: 'perfiladmin',
+    component: AdminProfileComponent
   },
   {
     path: 'visualizar-provisorios',
-    component: UnderConstructionComponent
+    component: VisualizarProvisoriosComponent
+  },
+  {
+    path: 'administrar-recomendaciones',
+    component: AdministrarRecomendacionesComponent
   },
   {
     path: 'habilitar-centros-rescatistas',
@@ -58,7 +89,7 @@ const routes: Routes = [
   },
   {
     path: 'reportes',
-    component: UnderConstructionComponent
+    component: ReportesAdminComponent
   },
   {
     path: 'opciones-de-registro',
@@ -72,10 +103,24 @@ const routes: Routes = [
     path: 'mapas',
     component: LeaftletPathComponent
   },
-
   {
+
     path: 'faqs',
     component: FaqsComponent
+  },
+  {
+    path: 'solicitudes',
+    component: ListadoSolicitudesComponent
+  },
+  {
+    path: 'micentro',
+    component: CenterProfileComponent
+  },
+  {path:'modCentroDonacion',
+  component:UserProfileModalComponent},
+  {
+    path: 'registrar-mascota',
+    component: NuevaMascotaComponent
   },
   {
     path: '', redirectTo: '/landing', pathMatch: 'full'
@@ -85,6 +130,9 @@ const routes: Routes = [
     path: '**',
     component: NotFoundComponent
   },
+
+
+  
 
 ];
 

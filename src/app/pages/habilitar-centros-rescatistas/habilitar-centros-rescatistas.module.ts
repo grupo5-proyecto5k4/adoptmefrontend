@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [HabilitarCentroRescatistaComponent],
@@ -30,6 +32,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatCardModule,
     MatTabsModule, 
     MatPaginatorModule,
+    MatInputModule,
+    MatButtonModule,
+    MatAutocompleteModule
 
   ],
   entryComponents: [

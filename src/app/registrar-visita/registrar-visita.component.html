@@ -1,0 +1,92 @@
+<mat-dialog-content class="dialog-content">
+
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <section id="cta4">
+                <div class="container">
+                    <header>
+                        <div class="card-container">
+                            <div class="lower-container">
+                                <div>
+                                    <h2 class="subtitulo">{{Titulo}}</h2>
+                                </div>
+
+                                <form class="example-form" [formGroup]="SignupForm" *ngIf="SignupForm">
+                                    <div>
+                                        <mat-form-field class="example-full-width">
+                                            <mat-label>*Descripción</mat-label>
+                                            <textarea matInput placeholder="Descripcion" rows="3" formControlName="descripcion"
+                                                class="form-control" maxlength="350"></textarea>
+                                        </mat-form-field>
+                                        <span class="help-block" *ngIf="((SignupForm.get('descripcion').touched ||
+                                  SignupForm.get('descripcion').dirty) && SignupForm.get('descripcion').errors)">
+                                            <span *ngIf="SignupForm.get('descripcion').errors.required">
+                                                <h6 class="helpError">Campo requerido</h6>
+                                            </span>
+                                            <span *ngIf="SignupForm.get('descripcion').errors.maxlength">
+                                                <mat-error class="helpError">Ingrese como máximo 350 caracteres
+                                                </mat-error>
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                   <!--   <div>
+
+                                      <mat-from-field class="example-full-width" (click)="cambiarEstadoInput()">
+                                            <div class="subirImagen" (click)="fileInput.click()">
+                                                <div>
+                                                    <label style="cursor: pointer;">📷 Seleccionar imágenes
+                                                        <button mat-raised-button
+                                                            accept="image/jpeg,image/jpg,image/png"
+                                                            style="display: none;"></button>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <input #fileInput type="file" hidden multiple (change)="selectFiles($event)"
+                                                formControlName="imagen" />
+                                            <span *ngIf="fileName"></span>
+                                            <br>
+                                            <h5 style="margin-bottom: 15px;">Sólo se pueden subir hasta 2 imágenes con
+                                                extensión jpeg, jpg y png.</h5>
+
+                                            <div class="margenes container-publicaciones" *ngIf="fileName">
+
+                                                <mat-card class="card-publicacion" *ngFor="let url of urls">
+                                                    <div style="width: 100%;height: auto;">
+                                                        <span class="cruz" (click)="clearImage(url)">x</span>
+                                                    </div>
+                                                    <div class="contenedor-imagen">
+                                                        <img mat-card-image [src]="url" class="imagen">
+                                                    </div>
+                                                </mat-card>
+                                            </div>
+
+                                        </mat-from-field>
+
+                                    </div>-->
+                                    <div>
+                                        <p id="requer">(*)Campos obligatorios</p>
+                                    </div>
+
+                                    <div id="botones">
+                                        <a mat-raised-button *ngIf="!isLoading" class="button cancelar btnRechazar"
+                                            type="button" mat-dialog-close>Cancelar</a>
+                                        <a mat-raised-button *ngIf="!isLoading" color="accent" class="button confirmar"
+                                            type="button" id="confirmar" (mouseover)="validateButton()"
+                                            (click)="registrarVisita()">Registrar</a>
+                                        <a mat-raised-button *ngIf="isLoading" color="accent" class="button loading"
+                                            type="button" id="btncuenta">
+                                            <img class=logo src="../../../assets/images/loading.gif" /></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+            </section>
+
+        </div>
+    </body>
+
+</mat-dialog-content>

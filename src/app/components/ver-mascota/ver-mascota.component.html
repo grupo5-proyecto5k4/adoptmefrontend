@@ -1,0 +1,326 @@
+<mat-dialog-content class="dialog-content">
+
+  <body class="is-preload">
+    <div id="page-wrapper">
+      <section id="cta4">
+        <div class="container">
+          <header>
+            <div class="card-container">
+              <input type=button id="btncerrar" style="margin: 10px;" name=boton value=X matDialogClose>
+              <div class="lower-container">
+                <div>
+                  <div>
+                    <h2 class="subtitulo">{{Titulo}}</h2>
+                  </div>
+                  <div class="centrado">
+                    <form [formGroup]="ProfileForm" class="example-form" *ngIf="ProfileForm">
+
+
+                      <div class="contenedor-imagen">
+                        <div *ngFor=" let foto of fotoVisualizar, index as id">
+
+                          <div>
+                            <img class="imagen" src="{{foto.path}}" style="width:100%">
+                          </div>
+                        </div>
+                        <div class="position">
+                          <div class="flecha izq">
+                            <a class="prev" (click)="plusSlides(-1)" *ngIf="fotos.length > 1">&#10094;</a>
+                          </div>
+                          <div class="flecha der">
+                            <a class="next" (click)="plusSlides(1)" *ngIf="fotos.length > 1">&#10095;</a>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Tamaño final</mat-label>
+                              <input matInput formControlName="tamañoFinal">
+                            </mat-form-field>
+                          </div>
+                          <div>
+                            <mat-form-field class="derecha">
+                              <mat-label>Raza</mat-label>
+                              <input matInput formControlName="raza">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div class="container-row1">
+                          <div>
+                            <mat-form-field>
+                              <mat-label>Sexo</mat-label>
+                              <input matInput formControlName="sexo">
+                            </mat-form-field>
+                          </div>
+                          <div class="derecha">
+                            <mat-form-field>
+                              <mat-label>Fecha de nacimiento estimada</mat-label>
+                              <input matInput formControlName="fechaNacimiento">
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div *ngIf="!enEdicion">
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field>
+                                <mat-label>Castrado</mat-label>
+                                <input matInput formControlName="castrado">
+                              </mat-form-field>
+                            </div>
+                            <div class="derecha">
+                              <mat-form-field>
+                                <mat-label>Conducta con niños</mat-label>
+                                <input matInput formControlName="conductaNiños">
+                              </mat-form-field>
+                            </div>
+                          </div>
+
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field>
+                                <mat-label>Conducta con perros</mat-label>
+                                <input matInput formControlName="conductaPerros">
+                              </mat-form-field>
+                            </div>
+                            <div class="derecha">
+                              <mat-form-field>
+                                <mat-label>Conducta con gatos</mat-label>
+                                <input matInput formControlName="conductaGatos">
+                              </mat-form-field>
+                            </div>
+                          </div>
+
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field class="ref">
+                                <mat-label>Descripción</mat-label>
+                                <textarea matInput formControlName="descripcion" maxlength="300"></textarea>
+                              </mat-form-field>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div *ngIf="enEdicion">
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field>
+                                <mat-label>Castrado</mat-label>
+                                <mat-select matInput formControlName="castradoPut" [(value)]="mascota.castrado">
+                                  <mat-option value="Sí">Sí</mat-option>
+                                  <mat-option value="No">No</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                            <div class="derecha">
+                              <mat-form-field>
+                                <mat-label>Conducta con niños</mat-label>
+                                <mat-select formControlName="conductaNiñosPut" [(value)]="selected">
+                                  <mat-option value="Buena">Buena</mat-option>
+                                  <mat-option value="Mala">Mala</mat-option>
+                                  <mat-option value="No se sabe">No se sabe</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                          </div>
+
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field>
+                                <mat-label>Conducta con perros</mat-label>
+                                <mat-select formControlName="conductaPerrosPut" [(value)]="mascota.conductaPerros">
+                                  <mat-option value="Buena">Buena</mat-option>
+                                  <mat-option value="Mala">Mala</mat-option>
+                                  <mat-option value="No se sabe">No se sabe</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+
+                            <div class="derecha">
+                              <mat-form-field>
+                                <mat-label>Conducta con gatos</mat-label>
+                                <mat-select formControlName="conductaGatosPut" [(value)]="mascota.conductaGatos">
+                                  <mat-option value="Buena">Buena</mat-option>
+                                  <mat-option value="Mala">Mala</mat-option>
+                                  <mat-option value="No se sabe">No se sabe</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                            </div>
+                          </div>
+
+
+                          <div class="container-row1">
+                            <div>
+                              <mat-form-field class="ref">
+                                <mat-label>Descripción</mat-label>
+                                <textarea matInput formControlName="descripcionPut" maxlength="300"></textarea>
+                              </mat-form-field>
+
+                            </div>
+                          </div>
+
+
+                        </div>
+
+                        <div class="container-row1">
+                          <div>
+                            <mat-label style="color: #00000070"><u>Datos de vacunaciones:</u><span
+                                style="color: #00000070" class="example-margin" *ngIf="listaVacunas.length == 0">No
+                                especificado</span></mat-label>
+                          </div>
+                        </div>
+
+
+
+                        <div class="example-full-width" *ngIf="listaVacunas.length > 0">
+                          <table class="my-table" #tabla2>
+                            <thead class="my-table headers">
+                              <tr>
+                                <th *ngFor="let column of columnas">{{column}}</th>
+                              </tr>
+                            </thead>
+                            <tbody class="my-table body">
+                              <tr *ngFor="let vacuna of listaVacunas">
+                                <td>{{ vacuna.nombreVacuna }}</td>
+                                <td>{{ vacuna.fechaAplicacion | date:'dd/MM/yyyy'}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div *ngIf="enEdicion">
+                          <div class="example-full-width" style="text-align: left; margin-bottom: 1%;
+                                    margin-top: 5%;">
+                            <mat-label style="width: 100%;">💉 Registrar vacunas (opcional):</mat-label>
+                          </div>
+
+                          <div>
+
+                            <form class="example-form" [formGroup]="SignupFormVac" *ngIf="SignupFormVac">
+                              <div class="container-row1">
+                                <div>
+                                  <mat-form-field>
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput formControlName="nombre" class="form-control" maxlength="30">
+                                  </mat-form-field>
+                                  <span class="help-block" *ngIf="((SignupFormVac.get('nombre').touched || 
+                                           SignupFormVac.get('nombre').dirty) && SignupFormVac.get('nombre').errors)">
+                                    <span *ngIf="SignupFormVac.get('nombre').errors.maxlength">
+                                      <mat-error class="helpError">Ingrese como máximo 30
+                                        caracteres</mat-error>
+                                    </span>
+                                    <span *ngIf="SignupFormVac.get('nombre').errors.pattern">
+                                      <h6 class="helpError">Formato del nombre no válido</h6>
+                                    </span>
+                                  </span>
+                                  <span class="help-block blank"
+                                    *ngIf="(validateFechaAplicacion() && !validateNombreVac())">
+                                    <span>
+                                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                                        -
+                                      </h6>
+                                    </span>
+                                  </span>
+                                </div>
+
+
+                                <div class="derecha">
+                                  <mat-form-field>
+                                    <mat-label>Fecha de aplicación</mat-label>
+                                    <input matInput type="date" [(ngModel)]="vac.fechaAplicacion"
+                                      formControlName="fechaAplicacion" class="form-control">
+                                  </mat-form-field>
+                                  <span class="help-block blank"
+                                    *ngIf="(!validateFechaAplicacion() && validateNombreVac())">
+                                    <span>
+                                      <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
+                                        -
+                                      </h6>
+                                    </span>
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div class="example-form">
+                                <button mat-button color="accent" type="button" id="btnVacuna" class="btnPeriodo"
+                                  style="text-align: center;" (mouseover)="validateVacunas()"
+                                  (click)="agregar()">Agregar</button>
+                              </div>
+
+
+                              <div class="example-full-width" *ngIf="listaVacunasPut.length > 0">
+                                <div>
+                                  <table class="my-table" #tabla2>
+                                    <thead class="my-table headers">
+                                      <tr>
+                                        <th *ngFor="let column of columnasEdit">{{column}}</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody class="my-table body">
+                                      <tr *ngFor="let vacuna of listaVacunasPut">
+                                        <td>{{ vacuna.nombre }}</td>
+                                        <td>{{ vacuna.fechaAplicacion | date:'dd/MM/yyyy'}}</td>
+                                        <td (click)="borrarFila(vacuna)">🗑️</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+
+                              </div>
+
+                            </form>
+                          </div>
+                        </div>
+                        <div *ngIf="enEdicion">
+                          <p id="requer">(*)Campos obligatorios</p>
+                        </div>
+                        <div class="example-form" *ngIf="esResponsableOAdmin()">
+                          <button mat-button type="button" color="accent" class="btnPeriodo" style="margin-top: 3%;"
+                            (click)="editar()">{{boton}}</button>
+                        </div>
+                      </div>
+
+
+
+                      <div class="container-row1" id="botones" *ngIf="esParticular()">
+                        <div style="margin-left:auto;margin-right: auto;">
+                          <a mat-raised-button style="padding: 10px;" class="button cancelar btnRechazar" type="button"
+                          *ngIf="accion === 0 || accion === 1" mat-dialog-close>Cancelar</a>
+                          <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
+                            style="padding: 10px; cursor: pointer;" (click)="openUserForm()" *ngIf="accion === 1">Adoptar</a>
+                          <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
+                            style="padding: 10px; cursor: pointer;" (click)="openProvisorioForm()" *ngIf="accion === 0">Ser
+                            Provisorio</a>
+                        </div>
+                      </div>
+
+                      <div class="container-row1" id="botones" *ngIf="esResponsableOAdmin()">
+                        <div style="margin-left:auto;margin-right: auto;">
+
+                            <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
+                            style="padding: 10px; cursor: pointer;" (click)="openSeguimientos()">Ver seguimiento</a>
+
+                        </div>
+                      </div>
+
+                      <div class="centrado espacio" *ngIf="indicarLogueo()">
+                        <h5 (click)="goToSesion()"><u class="example-margin-btn" *ngIf="accion === 1">Iniciá sesión para
+                            solicitar su adopción</u></h5>
+                        <h5 (click)="goToSesion()"><u class="example-margin-btn" *ngIf="accion === 0">Iniciá sesión para
+                            solicitar su provisorio</u></h5>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </header>
+        </div>
+      </section>
+    </div>
+  </body>
+</mat-dialog-content>

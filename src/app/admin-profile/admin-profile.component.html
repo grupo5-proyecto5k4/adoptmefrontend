@@ -1,0 +1,153 @@
+
+<div class="logout-container">
+    <button mat-button type="button" color="accent" class="btnLogout" (click)="logOut()">Cerrar sesión</button>
+</div>
+<h1 class="titulo">Mi Perfil</h1>
+<br>
+<br>
+
+<div class="centrado">
+    <form [formGroup]="ProfileForm" class="example-form" *ngIf="ProfileForm">
+
+        <div class="container-row1">    
+
+            <div>
+               <mat-form-field>
+                 <mat-label>Nombre</mat-label>
+                 <input matInput formControlName="nombres" maxlength="30">
+               </mat-form-field>
+              <span class="help-block" *ngIf="((ProfileForm.get('nombres').touched || 
+              ProfileForm.get('nombres').dirty) && ProfileForm.get('nombres').errors)">
+              <span *ngIf="ProfileForm.get('nombres').errors.required">
+                <h6 class="helpError">Campo requerido</h6>
+              </span>
+              <span *ngIf="ProfileForm.get('nombres').errors.maxlength">
+                <h6 class="helpError">Ingrese como máximo 30 caracteres</h6>
+              </span>
+              <span *ngIf="ProfileForm.get('nombres').errors.pattern">
+                <h6 class="helpError">Formato del apellido no válido</h6>
+              </span>
+              </span> 
+            </div>
+
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Apellido</mat-label>
+                    <input matInput formControlName="apellidos" maxlength="30">
+                </mat-form-field>
+                <span class="help-block" *ngIf="((ProfileForm.get('apellidos').touched ||
+                      ProfileForm.get('apellidos').dirty) && ProfileForm.get('apellidos').errors)">
+                        <span *ngIf="ProfileForm.get('apellidos').errors.required">
+                          <h6 class="helpError">Campo requerido</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('apellidos').errors.maxlength">
+                          <h6 class="helpError">Ingrese como máximo 30 caracteres</h6>
+                        </span>
+                        <span *ngIf="ProfileForm.get('apellidos').errors.pattern">
+                          <h6 class="helpError">Formato del apellido no válido</h6>
+                        </span>
+                      </span>
+                      
+            </div>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field>
+                    <mat-label>DNI</mat-label>
+                    <input matInput formControlName="dni">
+                </mat-form-field>
+            </div>
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput formControlName="fechaNacimiento">
+                </mat-form-field>
+                
+            </div>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field class="ref">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput formControlName="correoElectronico">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field>
+                    <mat-label>Instagram</mat-label>
+                    <input matInput formControlName="instagram"  maxlength="30">
+                </mat-form-field>
+            </div>
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Facebook</mat-label>
+                    <input matInput formControlName="facebook"  maxlength="30">
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="container-row1">
+            <div>
+                <mat-form-field>
+                    <mat-label>Número de contacto</mat-label>
+                    <input matInput formControlName="numeroContacto" maxlength="15">
+                </mat-form-field>
+                <span class="help-block" *ngIf="((ProfileForm.get('numeroContacto').touched ||
+                ProfileForm.get('numeroContacto').dirty) && ProfileForm.get('numeroContacto').errors)">
+                  <span *ngIf="ProfileForm.get('numeroContacto').errors.pattern">
+                    <h6 class="helpError">Ingrese valor numérico entre 10 y 13 dígitos</h6>
+                  </span>
+                </span>
+                
+            </div>
+            <div class="derecha">
+                <mat-form-field>
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="contrasenia">
+                </mat-form-field>
+                 
+                <span class="help-block" *ngIf="((ProfileForm.get('contrasenia').touched ||
+                ProfileForm.get('contrasenia').dirty) && ProfileForm.get('contrasenia').errors)">
+                    <span *ngIf="ProfileForm.get('contrasenia').errors.required">
+                      <h6 class="helpError">Campo requerido</h6>
+                    </span>
+                    <span *ngIf="ProfileForm.get('contrasenia').errors.pattern">
+                      <h6 class="helpError">La contraseña no cumple con los requisitos</h6>
+                    </span>
+                  </span>
+                 
+            </div>
+
+            <div class="tooldiv" *ngIf="editarDatos">
+                <label class="tool" mat-raised-button matTooltip="La contraseña debe contener: 
+            Entre 8 y 15 caracteres, al menos una mayúscula, una minúscula y un número"
+                  aria-label="Button that displays a tooltip when focused or hovered over">
+                  ℹ
+                </label>
+               
+              </div>
+        </div>
+
+        <div class="centrado" *ngIf="editarDatosPerfil">
+           <button mat-button id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editar()">Editar perfil</button>
+           <button mat-button id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editarContrasenia()">Cambiar contraseña</button>
+        </div>
+        <div class="centrado" *ngIf="EditarContra || (esconderContra==true)">
+          <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelar()">Cancelar</button>
+          <button mat-button type="button" color="accent" class="btnLogout" (click)="guardarContra()">Guardar Cambios</button>
+         </div> 
+
+        <div class="centrado" *ngIf="editarDatos || (esconder==true)">
+         <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelar()">Cancelar</button>
+         <button mat-button type="button" color="accent" class="btnLogout" (click)="guardar()">Guardar Cambios</button>
+        </div> 
+
+    </form>
+</div>
+
+

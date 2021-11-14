@@ -56,10 +56,19 @@ export class SignupParticularComponent implements OnInit {
   }
 
   CalculateAge() {
+
       const today: Date = new Date();
       const birthDate: Date = new Date(this.SignupForm.controls.birthDate.value);
       let age: number = today.getFullYear() - birthDate.getFullYear();
       const month: number = today.getMonth() - birthDate.getMonth();
+      console.log(today.getFullYear())
+      console.log(birthDate.getFullYear())
+
+      if(birthDate.getFullYear() > today.getFullYear()){
+        this.edadInvalida = true;
+        this.mensajeEdad = "Fecha no válida";
+      }else{
+
       if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
         age--;
       }
@@ -67,13 +76,14 @@ export class SignupParticularComponent implements OnInit {
         this.edadInvalida = true;
         this.mensajeEdad = "Debe ser mayor a 18 años";
       }
-      else if (age > 100){
+      else if (age > 100 ){
         this.edadInvalida = true;
         this.mensajeEdad = "Edad no válida";
       }
       else {
         this.edadInvalida = false;
       }
+    }
   }
 
 

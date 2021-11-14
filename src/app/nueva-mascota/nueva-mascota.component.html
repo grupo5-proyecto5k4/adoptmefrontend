@@ -1,0 +1,48 @@
+        <mat-dialog-content class="dialog-content">
+            <body class="is-preload">
+                <div id="page-wrapper">
+                    <section id="cta4">
+                        <header>
+                            <div class="card-container">
+                                <h3 class="subtitulo">{{Titulo}}</h3>
+                            </div>
+                            <div class="container">
+                                <div>
+                                    <mat-card class="registroPerro">
+                                        <mat-card-header>
+                                            <mat-card-title id="titGato">Registrar Perro</mat-card-title>
+                                        </mat-card-header>
+                                        <mat-card-content>
+                                            <p id="parraf">
+                                                Registrá un perro para que pueda ser adoptado o encuentre un hogar provisorio
+                                                dentro de la ciudad de Córdoba Capital.
+                                            </p>
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                            <label class="btRegistrar" style="margin-left: 5px;" (click)="signupAnimal(0)">Registrar</label>
+                                        </mat-card-actions>
+                                    </mat-card>
+
+                                    <mat-card class="registroGato">
+                                        <mat-card-header>
+                                        <mat-card-title id="titGato">Registrar Gato</mat-card-title> 
+                                        </mat-card-header>
+                                        <mat-card-content>
+                                            <p id="parraf">
+                                                Registrá un gato que pueda ser adoptado o encuentre un hogar provisorio
+                                                dentro de la ciudad de Córdoba Capital.
+                                            </p>
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                            <label class="btRegistrar" style="margin-left: 5px;" (click)="signupAnimal(1)">Registrar</label>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
+                            </div>
+                        </header>
+                    </section>
+                </div>
+            </body>
+        </mat-dialog-content>
+
+

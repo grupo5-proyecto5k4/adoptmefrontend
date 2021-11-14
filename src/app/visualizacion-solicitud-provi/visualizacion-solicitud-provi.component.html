@@ -1,0 +1,413 @@
+<mat-dialog-content class="dialog-content">
+
+    <body class="is-preload">
+        <div id="page-wrapper">
+            <section id="cta4">
+                <div class="container">
+                    <header>
+                        <div class="card-container">
+                            <input type=button id="btncruz" style="margin: 10px;" name=boton value=X matDialogClose>
+                            <div class="lower-container">
+                                <div>
+                                    <div>
+                                        <h2 class="subtitulo">Solicitud de provisorio</h2>
+                                    </div>
+
+                                    <div class="centrado">
+                                        <form [formGroup]="SolicitudForm" class="example-form" *ngIf="SolicitudForm">
+
+        
+                                                    <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Suspendido' && faltaRechazar()">
+                                                        <p class="estado">Solicitud Rechazada</p>
+                                                    </div>
+                                                    <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Suspendido' && faltaRechazar()">
+                                                        <p class="estadoText">¡Lo sentimos! Luego de analizar tu solicitud el responsable no cree que eres el indicado para brindar provisorio a esta mascota.</p>
+                                                    </div>
+        
+                                                    <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Aprobado Por Responsable' && faltaConfirmar()">
+                                                        <p class="estadoFeliz">Solicitud Aprobada</p>
+                                                    </div>
+                                                    <div class="estado-container" *ngIf="dataSolicitud.estadoId === 'Aprobado Por Responsable' && faltaConfirmar()">
+                                                        <p class="estadoText">¡Excelente! El responsable de la mascota te ha seleccionado para ser su provisorio. Luego de que confirmes tu decisión se contactará contigo para coordinar.</p>
+                                                    </div>
+        
+                                                    <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Aprobado Por Responsable'">
+                                                        <div>
+                                                            <mat-form-field class="ref">
+                                                                <mat-label>Respuesta del responsable</mat-label>
+                                                                <textarea class="colorcitoFeliz" matInput formControlName="comentarioRespuesta"
+                                                                    maxlength="150"></textarea>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+                                                    <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Suspendido'">
+                                                        <div>
+                                                            <mat-form-field class="ref">
+                                                                <mat-label>Respuesta del responsable</mat-label>
+                                                                <textarea class="colorcito" matInput formControlName="comentarioRespuesta"
+                                                                        maxlength="150"></textarea>
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+
+                                            <!--Mensajes escritos por el particular:-->
+                                            <div class="estado-container" *ngIf="rechazado()">
+                                                <p class="estado">Tenencia Rechazada</p>
+                                            </div>
+                                            <div class="estado-container" *ngIf="rechazado()">
+                                                <p class="estadoText">¡Lo sentimos! El solicitante ha decidido no continuar con el proceso de hogar provisorio.</p>
+                                            </div>
+
+                                            <div class="estado-container" *ngIf="confirmado()">
+                                                <p class="estadoFeliz">Tenencia Confirmada</p>
+                                            </div>
+                                            <div class="estado-container" *ngIf="confirmado()">
+                                                <p class="estadoText">¡Excelente! El solicitante ha confirmado brindar hogar provisorio. Recuerda contactarle para coordinar.</p>
+                                            </div>
+
+                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Aprobado'">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Respuesta del solicitante</mat-label>
+                                                        <textarea class="colorcitoFeliz" matInput formControlName="cancelacionMotivoSolicitante"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Suspendido por Solicitante'">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Respuesta del solicitante</mat-label>
+                                                        <textarea class="colorcitoFeliz" matInput formControlName="cancelacionMotivoSolicitante"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Nombre de la mascota</mat-label>
+                                                        <input matInput formControlName="nombreMascota">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Fecha de Solicitud</mat-label>
+                                                        <input matInput formControlName="fechaSolicitud">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <h2 class="centrado-titulo">Datos del solicitante</h2>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Solicitante</mat-label>
+                                                        <input matInput formControlName="nombreSolicitante">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <h3 class="centrado-titulo">Domicilio</h3>
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Calle</mat-label>
+                                                        <input matInput formControlName="calle">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Altura</mat-label>
+                                                        <input matInput formControlName="altura">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Localidad</mat-label>
+                                                        <input matInput formControlName="localidad">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Barrio</mat-label>
+                                                        <input matInput formControlName="barrio">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Referencia</mat-label>
+                                                        <textarea matInput formControlName="referencia"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <h3 class="centrado-titulo">Datos de contacto</h3>
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Teléfono</mat-label>
+                                                        <input matInput formControlName="telefono">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Correo electrónico</mat-label>
+                                                        <input matInput formControlName="email">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Facebook</mat-label>
+                                                        <input matInput formControlName="facebook">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Instagram</mat-label>
+                                                        <input matInput formControlName="instagram">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <h2 class="centrado-titulo">Respuestas del formulario</h2>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Hogar</mat-label>
+                                                        <input matInput formControlName="vivienda">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Familia de acuerdo con provisorio</mat-label>
+                                                        <input matInput formControlName="permiso">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Ingreso permitido de animales</mat-label>
+                                                        <input matInput formControlName="permiso">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Exteriores de vivienda</mat-label>
+                                                        <input matInput formControlName="espacioAbierto">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1"
+                                                *ngIf="data.solicitud.Solicitud.descripcionCercamiento != null">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Seguridad en exteriores</mat-label>
+                                                        <textarea matInput formControlName="descripcionCercamiento"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Otras mascotas en el hogar</mat-label>
+                                                        <input matInput formControlName="otraMascota">
+                                                    </mat-form-field>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="container-row1"
+                                                *ngIf="data.solicitud.Solicitud.descripcionOtraMascota != null">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Descripción mascotas del hogar</mat-label>
+                                                        <textarea matInput formControlName="descripcionOtraMascota"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Posee tiempo suficiente</mat-label>
+                                                        <input matInput formControlName="tiempoSuficiente">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Tiempo de provisorio</mat-label>
+                                                        <input matInput formControlName="tiempoTenencia">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1">
+
+                                                <div>
+                                                    <mat-form-field>
+                                                        <mat-label>Colaboración con gastos diarios</mat-label>
+                                                        <input matInput formControlName="gastosCubiertos">
+                                                    </mat-form-field>
+                                                </div>
+
+                                                <div class="derecha">
+                                                    <mat-form-field>
+                                                        <mat-label>Realización de Seguimiento</mat-label>
+                                                        <input matInput formControlName="seguimiento">
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <mat-form-field class="margin" *ngIf="faltaAceptar()">
+                                                    <mat-label>*Fecha de fin de provisorio</mat-label>
+                                                    <input matInput name="fechaFinProvisorio" formControlName="fechaFinProvisorio" [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                                <span class="help-block" *ngIf="((SolicitudForm.get('fechaFinProvisorio').touched ||
+                                                SolicitudForm.get('fechaFinProvisorio').dirty) && SolicitudForm.get('fechaFinProvisorio').errors)">
+                                                         <span *ngIf="SolicitudForm.get('fechaFinProvisorio').errors.required">
+                                                             <h6 class="helpError">Campo requerido</h6>
+                                                         </span>
+                                                     </span>
+                                            </div>
+
+                                            
+                                            <div class="margin" *ngIf="faltaAceptar()&&seguimientoSolicitud">
+                                                <section>
+                                                    <div class="passwordRequirement" style="margin-bottom: 15px;">
+                                                        <mat-checkbox style="margin-bottom: 2px !important;"
+                                                            (change)="SeguimientoChange()"></mat-checkbox>
+                                                        <a class="example-margin">Realizar seguimiento</a>
+                                                    </div>
+                                                </section>
+
+                                                <div style="width: 100%;" *ngIf="seguimientoChecked">
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>*¿Con qué frecuencia desea realizar el seguimiento?
+                                                        </mat-label>
+                                                        <mat-select formControlName="frecuencia">
+                                                            <mat-option value="3">Cada 3 días</mat-option>
+                                                            <mat-option value="7">Cada 1 semana</mat-option>
+                                                            <mat-option value="14">Cada 2 semanas</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                    <span class="help-block"
+                                                        *ngIf="((SolicitudForm.get('frecuencia').touched ||
+                                                SolicitudForm.get('frecuencia').dirty) && SolicitudForm.get('frecuencia').errors)">
+                                                        <span *ngIf="SolicitudForm.get('frecuencia').errors.required">
+                                                            <h6 class="helpError">Campo requerido</h6>
+                                                        </span>
+                                                    </span>
+                                                    <span class="help-block" *ngIf="validarFrecuencia()">
+                                                        <h6 class="helpError">La frecuencia del seguimiento debe ser menor al plazo del provisorio</h6>
+                                                    </span>
+                                                    <div id="passwordRequirement">
+                                                        <div>
+                                                            <p id="requer">(*)Campos obligatorios</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="container-row1" *ngIf="!faltaAceptar()">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Frecuencia con la que se realizará el seguimiento
+                                                        </mat-label>
+                                                        <textarea matInput formControlName="frecuencia"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="container-row1" *ngIf="isFechaFinLoaded && !faltaAceptar()">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Fecha fin de provisorio
+                                                        </mat-label>
+                                                        <textarea matInput formControlName="fechaFinProvisorioString"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                            <div class="container-btn" *ngIf="faltaAceptar()">
+                                                <mat-form-field class="ref">
+                                                    <mat-label>Enviar comentario junto a tu decisión</mat-label>
+                                                    <textarea matInput formControlName="comentario"
+                                                        maxlength="150"></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="container-btn" *ngIf="faltaConfirmar()">
+                                                <mat-form-field class="ref">
+                                                    <mat-label>Enviar comentario junto a tu decisión</mat-label>
+                                                    <textarea matInput formControlName="motivo"
+                                                        maxlength="150"></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="container-btn" *ngIf="faltaAceptar()">
+                                        <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading"
+                                            style="margin-right: 3px;" type="button"
+                                            (click)="rechazarSolicitud()" (mouseover)="validateButton()">Rechazar</a>
+                                        <a mat-raised-button class="button" id="btnRegistro" type="button"
+                                            (click)="aceptarSolicitud()" *ngIf="!isLoading" (mouseover)="validateButton()">Aceptar</a>
+
+                                        <a mat-raised-button *ngIf="isLoading" class="button loading" type="button"
+                                            id="btncuenta">
+                                            <img class=logo src="../../assets/images/loading.gif" /></a>
+                                    </div>
+                                    <div class="container-btn" *ngIf="faltaConfirmar()">
+                                        <a mat-raised-button class="button btnRechazar" *ngIf="!isLoading"
+                                            style="margin-right: 3px;" type="button"
+                                            (click)="rechazarSolicitudAprobada()">Rechazar</a>
+                                        <a mat-raised-button class="button" id="btnRegistro" type="button"
+                                            (click)="confirmarSolicitud()" *ngIf="!isLoading" >Confirmar</a>
+
+                                        <a mat-raised-button *ngIf="isLoading" class="button loading" type="button"
+                                            id="btncuenta">
+                                            <img class=logo src="../../assets/images/loading.gif" /></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+                </div>
+            </section>
+        </div>
+    </body>
+</mat-dialog-content>
