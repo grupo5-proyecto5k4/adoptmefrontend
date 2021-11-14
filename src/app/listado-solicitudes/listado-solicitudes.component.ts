@@ -52,7 +52,7 @@ export class ListadoSolicitudesComponent implements OnInit {
         } else if (estado === "Suspendido"){
           this.solicitudes[x].estado = "Rechazada por responsable";
         } else if (estado === "Bloqueado"){
-          this.solicitudesProvi[x].estado = "Suspendida";
+          this.solicitudes[x].estado = "Suspendida";
         }
       
 
@@ -110,7 +110,7 @@ export class ListadoSolicitudesComponent implements OnInit {
         } else if (estado === "Aprobado"){
           this.solicitudesRealizadasAdop[x].estado = "Exitosa";
         } else if (estado === "Bloqueado"){
-          this.solicitudesProvi[x].estado = "En análisis";
+          this.solicitudesRealizadasAdop[x].estado = "En análisis";
         } 
       }
     })
@@ -138,7 +138,7 @@ export class ListadoSolicitudesComponent implements OnInit {
         } else if (estado === "Aprobado"){
           this.solicitudesRealizadasProv[x].estado = "Exitosa";
         } else if (estado === "Bloqueado"){
-          this.solicitudesProvi[x].estado = "En análisis";
+          this.solicitudesRealizadasProv[x].estado = "En análisis";
         } 
       }
     })
