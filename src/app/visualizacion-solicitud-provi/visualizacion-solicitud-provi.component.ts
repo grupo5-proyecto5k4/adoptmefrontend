@@ -42,6 +42,7 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
   }
 
+  
   ngOnInit(): void {
     var dataAnimal = this.data.solicitud.Animales;
     var dataSolicitud = this.data.solicitud.Solicitud;
