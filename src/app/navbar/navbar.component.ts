@@ -108,6 +108,11 @@ export class NavbarComponent {
 
       let solicitud = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
 
+      //Formato fecha de creación de solicitud
+      var date = solicitud.Solicitud.fechaCreacion.substring(0, 10);
+      var [yyyy, mm, dd] = date.split("-");
+      var revdate = `${dd}-${mm}-${yyyy}`;
+      solicitud.fechaSolicitud = revdate;
       this.dialog.open(VisualizacionSolicitudComponent, {
         data: {
           solicitud: solicitud,
@@ -115,6 +120,12 @@ export class NavbarComponent {
       });
     } else if (notificacion.objetoAMostrar == "Provisorio") {
       let solicitudProvi = await this.visualizarService.getSolicitud(notificacion.objetoAMostrarId);
+
+      //Formato fecha de creación de solicitud
+      var date = solicitudProvi.Solicitud.fechaCreacion.substring(0, 10);
+      var [yyyy, mm, dd] = date.split("-");
+      var revdate = `${dd}-${mm}-${yyyy}`;
+      solicitudProvi.fechaSolicitud = revdate;
 
       this.dialog.open(VisualizacionSolicitudProviComponent, {
         data: {

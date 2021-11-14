@@ -23,7 +23,8 @@ interface IFormularioAdopcion {
     accionImpedimento: string;
     composicionFamilia: string;
     cadaCuanto?: number;
-    observacion?: string; 
+    observacion?: string;
+    motivo?: string; 
     }
   
     export class FormularioAdopcion implements IFormularioAdopcion {
@@ -50,6 +51,7 @@ interface IFormularioAdopcion {
       composicionFamilia: string;
       cadaCuanto?: number;
       observacion?: string;
+      motivo?: string; 
     
       constructor() {
         };

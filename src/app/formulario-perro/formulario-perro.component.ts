@@ -38,6 +38,7 @@ export class FormularioPerroComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo = "";
 
+  
   private animal: number;
   public loading: boolean;
   SignupFormVac: FormGroup;
@@ -54,6 +55,8 @@ export class FormularioPerroComponent implements OnInit {
   nuevaVacuna: any = {};
   mensajeB = '💉 Registrar vacunaciones';
   isfechaFuturaInvalida : Boolean = false;
+  PastDate = false;
+  MaxEdad = false;
 
   //Lista de archivos seleccionados
   selectedFiles: FileList;
@@ -156,8 +159,9 @@ export class FormularioPerroComponent implements OnInit {
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
     if (difference < 0){
-      return true
-    } else return false;
+      this.PastDate = true;
+      this.edadInvalida = false;
+    } else  this.PastDate = false;
   }
   
   validateMaxEdad(){
@@ -165,8 +169,9 @@ export class FormularioPerroComponent implements OnInit {
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
     if (difference > 365*27){
-      return true
-    } else return false;
+      this.MaxEdad = true;
+      this.edadInvalida = false;
+    } else this.MaxEdad = false;
   }
 
   mostrarVacunas() {
@@ -282,19 +287,41 @@ export class FormularioPerroComponent implements OnInit {
   }
 
   CalculateAge() {
+    //validamos la funcion past date
     let today = new Date();
     let fechaNacimientoFormato = new Date(this.SignupForm.controls.fechaNacimiento.value);
     let difference = (today.getTime() - fechaNacimientoFormato.getTime()) / (1000 * 60 * 60 * 24);
-    if (difference < 0 ){
+
+   //validamos la funcion max edad
+
+   //calculamos si es cachorro o adulto
+    if (difference < 0 && this.validateFechaNacimiento()){
       this.mensajeEdad = "";
-    } else if (difference < 365) {
+      this.PastDate = true;
+      this.MaxEdad = false;
+      this.edadInvalida = false;
+    } else if (difference >= 0 && difference < 365) {
       this.mensajeEdad = "La mascota es cachorro"
-    } else if (difference > 365 || difference <= 365*30) {
-      this.mensajeEdad = "La mascota es adulta"
-    } else if (difference > 365*27){
+      this.MaxEdad = false;
+      this.PastDate = false;
+      this.edadInvalida = true;
+    } else if (difference > 365 && difference <= 365*30) {
+      this.edadInvalida = true;
+      this.mensajeEdad = "La mascota es adulta";
+      this.MaxEdad = false;
+      this.PastDate = false;
+    } else if (difference > 365*30){
       this.mensajeEdad = "";
+      this.edadInvalida = false;
+      this.MaxEdad = true;
+      this.PastDate = false;
     }
-    this.edadInvalida = true;
+    else{
+      this.mensajeEdad = "";
+      this.edadInvalida = false;
+      this.MaxEdad = false;
+      this.PastDate = false;
+    }
   }
 
 

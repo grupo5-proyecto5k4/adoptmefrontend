@@ -49,13 +49,12 @@
                                             </span>
                                         </span>
                                         <span class="help-block blank" *ngIf="edadInvalida">
-                                            <h5 class="helpError" style="color: rgb(255, 250, 250) !important;">-</h5>
+                                            <h5 class="helpError" style="color: rgb(255, 250, 250) !important;">-Edad inva</h5>
                                         </span>
-                                        <span class="help-block blank"
-                                            *ngIf="(!validateSexo() && validateFechaNacimiento())">
+                                        <span class="help-block" *ngIf="PastDate || MaxEdad">
                                             <span>
                                                 <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
-                                                    -
+                                                    edades
                                                 </h6>
                                             </span>
                                         </span>
@@ -73,13 +72,14 @@
                                             </span>
                                         </span>
 
-                                        <span class="help-block" *ngIf="validatePastDate()">
+                                        <span class="help-block" *ngIf="PastDate && !validateSexo()">
                                             <span>
                                                 <h6 class="helpError">Fecha de nacimiento no debe superar a la actual</h6>
                                             </span>
                                         </span>
+                                        
 
-                                        <span class="help-block" *ngIf="validateMaxEdad()">
+                                        <span class="help-block" *ngIf="MaxEdad && !validateSexo()">
                                             <span>
                                                 <h6 class="helpError">Opss.. ¿Seguro tu animalito es tan viejo?</h6>
                                             </span>
@@ -89,7 +89,7 @@
                                             <h5>{{mensajeEdad}}</h5>
                                         </span>
                                         <span class="help-block blank"
-                                            *ngIf="(!validateFechaNacimiento() && validateSexo())">
+                                            *ngIf="(!MaxEdad && !PastDate && validateSexo())">
                                             <span>
                                                 <h6 class="helpError" style="color: rgb(255, 250, 250) !important;">
                                                     -

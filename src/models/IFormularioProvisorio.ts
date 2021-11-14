@@ -21,6 +21,7 @@ interface IFormularioProvisorio {
     cadaCuanto?: number;
     fechaFinProvisorio: Date;
     observacion?: string;
+    motivo?: string; 
     }
   
     export class FormularioProvisorio implements IFormularioProvisorio {
@@ -45,6 +46,7 @@ interface IFormularioProvisorio {
       cadaCuanto?: number;
       fechaFinProvisorio: Date;
       observacion?: string;
+      motivo?: string; 
     
       constructor() {
         };

@@ -95,13 +95,14 @@ export class ConsultaSeguimientosComponent implements OnInit {
   }
 
   registrarVisita(seguim: any) {
-    console.log(seguim)
-    this.dialog.open(RegistrarVisitaComponent, {
+    let dialogRef = this.dialog.open(RegistrarVisitaComponent, {
       data: {
         seguimiento: seguim,
       }
     });
-
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    })
   }
 
   // Next/previous controls
@@ -144,4 +145,19 @@ export class ConsultaSeguimientosComponent implements OnInit {
     }
   }
 
+  puedeFinalizarSeguimiento(){
+    var idSeguimientoActual = this.seguimientos.length - 1;
+    if (this.seguimientos[idSeguimientoActual].estadoId == "Iniciado"){
+      return true
+    } else return false;
+  }
+
+  finalizarSeguimiento(){
+    var idSeguimientoActual = this.seguimientos.length - 1;
+
+    this.mascotaService.finalizarSeguimiento(this.seguimientos[idSeguimientoActual].SolicitudId, this.authService.getToken()).subscribe(data =>
+      {
+        console.log("Respuesta", data);
+      })
+  }
 }

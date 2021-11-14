@@ -85,7 +85,11 @@
                 <canvas baseChart [datasets]="barChartDataPerro" [labels]="barChartLabelsPerro"
                     [options]="pieChartPerrosAdoptados" [legend]="barChartLegendPerro" [chartType]="barChartPerros">
                 </canvas>
+                <div>
+                    <p class="totales">Cantidad total de perros adoptados: {{perrosTotal}}</p>
+                </div>
             </div>
+
             <div id="myChart" *ngIf="!mostrarReportePerro()">
                 <h4>No se encuentran resultados para el periodo seleccionado</h4>
             </div>
@@ -97,7 +101,11 @@
                 <canvas baseChart [datasets]="barChartDataGato" [labels]="barChartLabelsGato"
                     [options]="pieChartGatosAdoptados" [legend]="barChartLegendGato" [chartType]="barChartGatos">
                 </canvas>
+                <div>
+                    <p class="totales">Cantidad total de gatos adoptados: {{gatosTotal}}</p>
+                </div>
             </div>
+            
             <div id="myChart" *ngIf="!mostrarReporteGato()">
                 <h4>No se encuentran resultados para el periodo seleccionado</h4>
             </div>

@@ -39,12 +39,50 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
+
                                             <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Suspendido'">
                                                 <div>
                                                     <mat-form-field class="ref">
                                                         <mat-label>Respuesta del responsable</mat-label>
                                                         <textarea class="colorcito" matInput formControlName="comentarioRespuesta"
                                                                 maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+
+                                            
+                                            <!--Mensajes escritos por el particular:-->
+                                            <div class="estado-container" *ngIf="rechazado()">
+                                                <p class="estado">Tenencia Rechazada</p>
+                                            </div>
+                                            <div class="estado-container" *ngIf="rechazado()">
+                                                <p class="estadoText">¡Lo sentimos! El solicitante ha decidido no continuar con el proceso de adopción.</p>
+                                            </div>
+
+                                            <div class="estado-container" *ngIf="confirmado()">
+                                                <p class="estadoFeliz">Tenencia Confirmada</p>
+                                            </div>
+                                            <div class="estado-container" *ngIf="confirmado()">
+                                                <p class="estadoText">¡Excelente! El solicitante ha confirmado la adopción. Recuerda contactarle para coordinar.</p>
+                                            </div>
+
+                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Aprobado'">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Respuesta del solicitante</mat-label>
+                                                        <textarea class="colorcitoFeliz" matInput formControlName="cancelacionMotivoSolicitante"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Aprobado' && dataSolicitud.estadoId === 'Suspendido por Solicitante'">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Respuesta del solicitante</mat-label>
+                                                        <textarea class="colorcitoFeliz" matInput formControlName="cancelacionMotivoSolicitante"
+                                                            maxlength="150"></textarea>
                                                     </mat-form-field>
                                                 </div>
                                             </div>
@@ -337,6 +375,13 @@
                                                 <mat-form-field class="ref">
                                                     <mat-label>Enviar comentario junto a tu decisión</mat-label>
                                                     <textarea matInput formControlName="comentario"
+                                                        maxlength="150"></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="container-btn" *ngIf="faltaConfirmar()">
+                                                <mat-form-field class="ref">
+                                                    <mat-label>Enviar comentario junto a tu decisión</mat-label>
+                                                    <textarea matInput formControlName="motivo"
                                                         maxlength="150"></textarea>
                                                 </mat-form-field>
                                             </div>
