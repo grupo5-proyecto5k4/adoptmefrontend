@@ -23,7 +23,6 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
   dataAnimal: any;
   seguimientoChecked = false;
   seguimientoSolicitud = false;
-  isFechaFinLoaded = false;
   observacionExplicacion;
   
     // Date picker ------------------
@@ -46,18 +45,18 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     this.dataSolicitud = dataSolicitud;
     this.dataAnimal = dataAnimal;
     this.dataSolicitante = dataSolicitante;
-    console.log(this.dataSolicitud)
-    console.log(this.dataSolicitante)
-    console.log(this.dataAnimal)
 
-    // Formato fecha   
+
+    if (this.dataSolicitud.estadoId != "Abierta"){
+          // Formato fecha   
     var date = this.dataSolicitud.fechaFinProvisorio.substring(0, 10);
     var [yyyy, mm, dd] = date.split("-");
     var revdate = `${dd}-${mm}-${yyyy}`;
     this.dataSolicitud.fechaFinProvisorioString = revdate;
+    } 
+
     //SolicitudId
     this.idSolicitud = this.data.solicitud.Solicitud._id;
-
     //camposOpcionales
     if (dataSolicitud.Direccion.numero == null) {
       this.data.solicitud.Solicitud.Direccion.numero = "No especificado"
@@ -75,9 +74,6 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
 
     //camposBooleanos
 
-    if (dataSolicitud.fechaFinProvisorio != undefined || dataSolicitud.fechaFinProvisorio != null){
-      this.isFechaFinLoaded = true;
-    } 
     // Vivienda 0:casa/1:depto
     console.log("vivienda", dataSolicitud.vivienda)
     if (dataSolicitud.vivienda === 0) {
@@ -268,7 +264,6 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
         }
     })
   }
-
 
   async confirmarSolicitud() {
     //var solicitud;
