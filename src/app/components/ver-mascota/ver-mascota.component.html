@@ -278,7 +278,7 @@
                         <div *ngIf="enEdicion">
                           <p id="requer">(*)Campos obligatorios</p>
                         </div>
-                        <div class="example-form">
+                        <div class="example-form" *ngIf="esResponsableOAdmin()">
                           <button mat-button type="button" color="accent" class="btnPeriodo" style="margin-top: 3%;"
                             (click)="editar()">{{boton}}</button>
                         </div>
@@ -289,14 +289,12 @@
                       <div class="container-row1" id="botones" *ngIf="esParticular()">
                         <div style="margin-left:auto;margin-right: auto;">
                           <a mat-raised-button style="padding: 10px;" class="button cancelar btnRechazar" type="button"
-                            mat-dialog-close>Cancelar</a>
+                          *ngIf="accion === 0 || accion === 1" mat-dialog-close>Cancelar</a>
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
                             style="padding: 10px; cursor: pointer;" (click)="openUserForm()" *ngIf="accion === 1">Adoptar</a>
                           <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
                             style="padding: 10px; cursor: pointer;" (click)="openProvisorioForm()" *ngIf="accion === 0">Ser
                             Provisorio</a>
-                          <a mat-raised-button color="accent" class="button confirmar" type="button" id="confirmar"
-                            style="padding: 10px;" (click)="openSeguimientos()">Ver seguimiento</a>
                         </div>
                       </div>
 
