@@ -53,6 +53,10 @@ export class ReportesCentroComponent implements OnInit {
   flagNoData: number = 0;
   reporteProvisorio: any;
 
+  //Reporte Mica
+  gatosTotal;
+  perrosTotal;
+
   public pieChartPerrosAdoptados: ChartOptions;
   public barChartLabelsPerro: Label[] = ['Adoptante fue su provisorio', 'Adoptante no le dió provisorio'];
   public barChartPerros: ChartType = 'doughnut';
@@ -200,6 +204,8 @@ export class ReportesCentroComponent implements OnInit {
 
     await this.reporteService.getReporteProvisoriosAdoptados(desdeBack, hastaBack, this.authService.getToken()).subscribe(dataReporteProvi => {
       this.reporteProvisorio = dataReporteProvi;
+      this.perrosTotal = this.reporteProvisorio[0].totalPerrosAdoptados;
+      this.gatosTotal = this.reporteProvisorio[1].totalGatosAdoptados;
       this.cargarReporteProvisorio();
       console.log('perros: '+ this.reporteProvisorio[0].perrosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosCachorrosAdoptadosPorOtro, this.reporteProvisorio[0].perrosAdultosAdoptadosPorOtro)
       console.log('gatos: '+this.reporteProvisorio[1].gatosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosCachorrosAdoptadosPorOtro, this.reporteProvisorio[1].gatosAdultosAdoptadosPorOtro)
