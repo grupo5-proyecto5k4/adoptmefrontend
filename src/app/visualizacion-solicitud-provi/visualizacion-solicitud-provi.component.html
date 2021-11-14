@@ -50,6 +50,43 @@
                                                         </div>
                                                     </div>
 
+
+                                            <!--Mensajes escritos por el particular:-->
+                                            <div class="estado-container" *ngIf="rechazado()">
+                                                <p class="estado">Tenencia Rechazada</p>
+                                            </div>
+                                            <div class="estado-container" *ngIf="rechazado()">
+                                                <p class="estadoText">¡Lo sentimos! El solicitante ha decidido no continuar con el proceso de hogar provisorio.</p>
+                                            </div>
+
+                                            <div class="estado-container" *ngIf="confirmado()">
+                                                <p class="estadoFeliz">Tenencia Confirmada</p>
+                                            </div>
+                                            <div class="estado-container" *ngIf="confirmado()">
+                                                <p class="estadoText">¡Excelente! El solicitante ha confirmado brindar hogar provisorio. Recuerda contactarle para coordinar.</p>
+                                            </div>
+
+                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Aprobado'">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Respuesta del solicitante</mat-label>
+                                                        <textarea class="colorcitoFeliz" matInput formControlName="cancelacionMotivoSolicitante"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Aprobado' && dataSolicitud.estadoId === 'Suspendido por Solicitante'">
+                                                <div>
+                                                    <mat-form-field class="ref">
+                                                        <mat-label>Respuesta del solicitante</mat-label>
+                                                        <textarea class="colorcitoFeliz" matInput formControlName="cancelacionMotivoSolicitante"
+                                                            maxlength="150"></textarea>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+
+
                                             <div class="container-row1">
                                                 <div>
                                                     <mat-form-field>
@@ -262,8 +299,15 @@
                                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                                     <mat-datepicker #picker></mat-datepicker>
                                                 </mat-form-field>
+                                                <span class="help-block" *ngIf="((SolicitudForm.get('fechaFinProvisorio').touched ||
+                                                SolicitudForm.get('fechaFinProvisorio').dirty) && SolicitudForm.get('fechaFinProvisorio').errors)">
+                                                         <span *ngIf="SolicitudForm.get('fechaFinProvisorio').errors.required">
+                                                             <h6 class="helpError">Campo requerido</h6>
+                                                         </span>
+                                                     </span>
                                             </div>
 
+                                            
                                             <div class="margin" *ngIf="faltaAceptar()&&seguimientoSolicitud">
                                                 <section>
                                                     <div class="passwordRequirement" style="margin-bottom: 15px;">
@@ -310,7 +354,7 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
-                                            <div class="container-row1" *ngIf="isFechaFinLoaded">
+                                            <div class="container-row1" *ngIf="isFechaFinLoaded && !faltaAceptar()">
                                                 <div>
                                                     <mat-form-field class="ref">
                                                         <mat-label>Fecha fin de provisorio
@@ -318,6 +362,13 @@
                                                         <textarea matInput formControlName="fechaFinProvisorioString"></textarea>
                                                     </mat-form-field>
                                                 </div>
+                                            </div>
+                                            <div class="container-btn" *ngIf="faltaConfirmar()">
+                                                <mat-form-field class="ref">
+                                                    <mat-label>Enviar comentario junto a tu decisión</mat-label>
+                                                    <textarea matInput formControlName="motivo"
+                                                        maxlength="150"></textarea>
+                                                </mat-form-field>
                                             </div>
                                         </form>
                                     </div>

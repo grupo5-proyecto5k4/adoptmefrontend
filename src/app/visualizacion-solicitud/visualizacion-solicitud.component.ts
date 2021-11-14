@@ -154,7 +154,9 @@ export class VisualizacionSolicitudComponent implements OnInit {
       accionImpedimento: new FormControl({ value: dataSolicitud.accionImpedimento, disabled: true }),
       frecuencia: new FormControl('', [Validators.required]),
       comentario: new FormControl(''),
-      comentarioRespuesta: new FormControl({ value: this.dataSolicitud.observacionCancelacion, disabled:true})
+      comentarioRespuesta: new FormControl({ value: this.dataSolicitud.observacionCancelacion, disabled:true}),
+      motivo: new FormControl(''),
+      cancelacionMotivoSolicitante: new FormControl({ value: this.dataSolicitud.cancelacionMotivoSolicitante, disabled:true})
     });
 
     let frecuencia = 'No se realizará seguimiento';
@@ -182,13 +184,14 @@ export class VisualizacionSolicitudComponent implements OnInit {
       let solicitud: FormularioAdopcion = new FormularioAdopcion();
       solicitud._id = this.idSolicitud;
       solicitud.observacion = this.SolicitudForm.controls.comentario.value;
+      solicitud.motivo = this.SolicitudForm.controls.motivo.value;
       if (this.seguimientoChecked){
         solicitud.cadaCuanto = this.SolicitudForm.controls.frecuencia.value;
         //this.visualizacionSolicitudesService.actualizarSolicitudAdopcion(solicitud, this.auth.getToken()).subscribe(async soli => { })
       }
       this.visualizacionSolicitudesService.confirmarSolicitud(solicitud, this.auth.getToken()).subscribe(async dataProvi => {
         this.data = dataProvi;
-        this.notificacionService.notificarConfirmacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken())
+        this.notificacionService.notificarConfirmacionAdopcionAParticular(this.dataAnimal.nombreMascota, solicitud._id, this.dataSolicitud.solicitanteId, this.auth.getToken())
         this.alertsService.confirmMessage("La solicitud ha sido aceptada").then((result) => window.location.href = '/solicitudes')
           , () => {
             this.alertsService.errorMessage("En estos momentos no se puede aceptar la solicitud");
@@ -207,7 +210,7 @@ export class VisualizacionSolicitudComponent implements OnInit {
     
     this.visualizacionSolicitudesService.rechazarSolicitud(solicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      this.notificacionService.notificarCancelacionAdopcionAParticular(this.dataAnimal.nombreMascota, this.idSolicitud, this.dataSolicitud.solicitanteId, this.auth.getToken());
+      this.notificacionService.notificarCancelacionAdopcionAParticular(this.dataAnimal.nombreMascota, solicitud._id, this.dataSolicitud.solicitanteId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')
         , () => {
           this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
@@ -236,6 +239,14 @@ export class VisualizacionSolicitudComponent implements OnInit {
     return (this.dataSolicitud.estadoId == 'Aprobado Por Responsable' && this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
   }
 
+  confirmado() {
+    return (this.dataSolicitud.estadoId == 'Aprobado' && this.auth.getCurrentUser()._id == this.dataAnimal.responsableId)
+  }
+
+  rechazado() {
+    return (this.dataSolicitud.estadoId == 'Suspendido por Solicitante' && this.auth.getCurrentUser()._id == this.dataAnimal.responsableId)
+  }
+
   faltaRechazar() {
     return (this.auth.getCurrentUser()._id == this.dataSolicitud.solicitanteId)
   }
@@ -246,9 +257,12 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   async confirmarSolicitud() {
     this.isLoading = true;
+    let solicitud: FormularioAdopcion = new FormularioAdopcion();
+    solicitud._id = this.idSolicitud;
+    solicitud.motivo = this.SolicitudForm.controls.motivo.value;
     this.visualizacionSolicitudesService.confirmarSolicitud(this.dataSolicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId, this.auth.getToken());
+      this.notificacionService.notificarConfirmacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, solicitud._id, this.dataSolicitud.responsableId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido confirmada").then((result) => window.location.href = '/solicitudes')
         , () => {
           this.alertsService.errorMessage("En estos momentos no se puede confirmar la solicitud");
@@ -259,9 +273,12 @@ export class VisualizacionSolicitudComponent implements OnInit {
 
   async rechazarSolicitudAprobada() {
     this.isLoading = true;
-    this.visualizacionSolicitudesService.rechazarSolicitud(this.idSolicitud, this.auth.getToken()).subscribe(dataProvi => {
+    let solicitud: FormularioAdopcion = new FormularioAdopcion();
+    solicitud._id = this.idSolicitud;
+    solicitud.motivo = this.SolicitudForm.controls.motivo.value;
+    this.visualizacionSolicitudesService.rechazarSolicitud(solicitud, this.auth.getToken()).subscribe(dataProvi => {
       this.data = dataProvi;
-      this.notificacionService.notificarCancelacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, this.idSolicitud, this.dataSolicitud.responsableId, this.auth.getToken());
+      this.notificacionService.notificarCancelacionAdopcionACentro(this.dataAnimal.nombreMascota, this.dataSolicitante.nombre + ' ' + this.dataSolicitante.apellido, solicitud._id, this.dataSolicitud.responsableId, this.auth.getToken());
       this.alertsService.confirmMessage("La solicitud ha sido rechazada").then((result) => window.location.href = '/solicitudes')
         , () => {
           this.alertsService.errorMessage("En estos momentos no se puede rechazar la solicitud");
