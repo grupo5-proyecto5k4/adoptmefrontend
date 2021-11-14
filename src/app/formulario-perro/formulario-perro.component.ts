@@ -38,6 +38,7 @@ export class FormularioPerroComponent implements OnInit {
   SignupForm: FormGroup;
   Titulo = "";
 
+  
   private animal: number;
   public loading: boolean;
   SignupFormVac: FormGroup;
