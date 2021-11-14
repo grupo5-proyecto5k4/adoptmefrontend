@@ -24,6 +24,7 @@ export class ConsultaSeguimientosComponent implements OnInit {
   slideIndex = 0;
   SignupForm: FormGroup;
   motivoVisible = false;
+  puedeFinalizarSeguimiento: Boolean = true;
 
   constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private alertService: AlertsService, private visualizarService: VisualizacionSolicitudesService, private mascotaService: MascotaService, private notificacionService: NotificacionService, private authService: AuthService) { }
 
@@ -33,11 +34,18 @@ export class ConsultaSeguimientosComponent implements OnInit {
 
     this.mascotaService.getSeguimientosAnimal(this.mascota._id, this.authService.getToken()).subscribe(seguimiento => {
       this.seguimientos = seguimiento;
+      var idSeguimientoActual = this.seguimientos.length - 1;
+    if (this.seguimientos[idSeguimientoActual].estadoId == "Iniciado"){
+      this.puedeFinalizarSeguimiento = true;
+    } else this.puedeFinalizarSeguimiento = false;
+  
     });
 
     if (this.mascota.estado == "En provisorio") {
       this.proceso = "Finalizar provisorio"
     }
+
+    
 
     this.SignupForm = new FormGroup({
       observacion: new FormControl('', [Validators.required, Validators.maxLength(300)]),
@@ -145,19 +153,21 @@ export class ConsultaSeguimientosComponent implements OnInit {
     }
   }
 
-  puedeFinalizarSeguimiento(){
-    var idSeguimientoActual = this.seguimientos.length - 1;
-    if (this.seguimientos[idSeguimientoActual].estadoId == "Iniciado"){
-      return true
-    } else return false;
-  }
-
   finalizarSeguimiento(){
     var idSeguimientoActual = this.seguimientos.length - 1;
+      this.alertService.questionMessage('¿Desea finalizar el seguimiento de ' + this.mascota.nombreMascota + '?', "Finalizar seguimiento", "Finalizar", "Cancelar")
+        .then((result) => {
+          if (result.value) {
+            this.mascotaService.finalizarSeguimiento(this.seguimientos[idSeguimientoActual].SolicitudId, this.authService.getToken()).subscribe(data =>
+              {
+                console.log("Seguimiento", data);
+                this.alertService.confirmMessage("El seguimiento de " + this.mascota.nombreMascota + " ha sido finalizado")
+                this.ngOnInit();
+                this.puedeFinalizarSeguimiento = false;
+              })
+          }
+        })
+    }
 
-    this.mascotaService.finalizarSeguimiento(this.seguimientos[idSeguimientoActual].SolicitudId, this.authService.getToken()).subscribe(data =>
-      {
-        console.log("Respuesta", data);
-      })
-  }
+
 }
