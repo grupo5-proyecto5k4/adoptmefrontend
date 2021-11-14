@@ -163,7 +163,12 @@ export class VerMascotaComponent implements OnInit {
   }
 
   esResponsableOAdmin(){
-    return ((this.localStorageService.getUser()._id === this.data.mascota.responsableId)||(this.localStorageService.getProfile() == "0"));
+    // Si es nulo no hay usuario logueado, no verá seguimientos
+    if (this.localStorageService.getUser() === null) {
+      return false;
+    } else {
+      return ((this.localStorageService.getUser()._id === this.data.mascota.responsableId)||(this.localStorageService.getProfile() == "0"));
+    }
   }
 
   esParticular(){
