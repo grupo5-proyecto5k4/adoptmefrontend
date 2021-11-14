@@ -76,7 +76,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Aprobado' && dataSolicitud.estadoId === 'Suspendido por Solicitante'">
+                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Suspendido por Solicitante'">
                                                 <div>
                                                     <mat-form-field class="ref">
                                                         <mat-label>Respuesta del solicitante</mat-label>
@@ -362,6 +362,13 @@
                                                         <textarea matInput formControlName="fechaFinProvisorioString"></textarea>
                                                     </mat-form-field>
                                                 </div>
+                                            </div>
+                                            <div class="container-btn" *ngIf="faltaAceptar()">
+                                                <mat-form-field class="ref">
+                                                    <mat-label>Enviar comentario junto a tu decisión</mat-label>
+                                                    <textarea matInput formControlName="comentario"
+                                                        maxlength="150"></textarea>
+                                                </mat-form-field>
                                             </div>
                                             <div class="container-btn" *ngIf="faltaConfirmar()">
                                                 <mat-form-field class="ref">
