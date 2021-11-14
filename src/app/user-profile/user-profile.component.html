@@ -6,7 +6,7 @@
 <br>
 
 <div class="centrado">
-    <form [formGroup]="ProfileForm" class="example-form" *ngIf="currentUser">
+    <form [formGroup]="ProfileForm" class="example-form" *ngIf="ProfileForm">
 
         <div class="container-row1">
             <div>
@@ -175,6 +175,7 @@
           <button mat-button id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editar()">Editar perfil</button>
           <button mat-button id="btnEditar" type="button" color="accent" class="btnLogout" (click)="editarContrasenia()">Cambiar contraseña</button>
        </div>
+
        <div class="centrado" *ngIf="EditarContra || (esconderContra==true)">
          <button mat-button type="button" color="accent" class="btnLogout" (click)="cancelar()">Cancelar</button>
          <button mat-button type="button" color="accent" class="btnLogout" (click)="guardarContra()">Guardar Cambios</button>
