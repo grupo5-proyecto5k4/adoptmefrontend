@@ -71,6 +71,7 @@
                                 <mat-label>Castrado</mat-label>
                                 <input matInput formControlName="castrado">
                               </mat-form-field>
+                              
                             </div>
                             <div class="derecha">
                               <mat-form-field>
@@ -115,6 +116,12 @@
                                   <mat-option value="No">No</mat-option>
                                 </mat-select>
                               </mat-form-field>
+                              <span class="help-block" *ngIf="((ProfileForm.get('castradoPut').touched ||
+                              ProfileForm.get('castradoPut').dirty) && ProfileForm.get('castradoPut').errors)">
+                                            <span *ngIf="ProfileForm.get('castradoPut').errors.required">
+                                                <h6 class="helpError">Campo requerido</h6>
+                                            </span>
+                                        </span>                                  
                             </div>
                             <div class="derecha">
                               <mat-form-field>
@@ -125,6 +132,12 @@
                                   <mat-option value="No se sabe">No se sabe</mat-option>
                                 </mat-select>
                               </mat-form-field>
+                              <span class="help-block" *ngIf="((ProfileForm.get('conductaNiñosPut').touched ||
+                              ProfileForm.get('conductaNiñosPut').dirty) && ProfileForm.get('conductaNiñosPut').errors)">
+                                            <span *ngIf="ProfileForm.get('conductaNiñosPut').errors.required">
+                                                <h6 class="helpError">Campo requerido</h6>
+                                            </span>
+                                        </span> 
                             </div>
                           </div>
 
@@ -138,6 +151,12 @@
                                   <mat-option value="No se sabe">No se sabe</mat-option>
                                 </mat-select>
                               </mat-form-field>
+                              <span class="help-block" *ngIf="((ProfileForm.get('conductaPerrosPut').touched ||
+                              ProfileForm.get('conductaPerrosPut').dirty) && ProfileForm.get('conductaPerrosPut').errors)">
+                                            <span *ngIf="ProfileForm.get('conductaPerrosPut').errors.required">
+                                                <h6 class="helpError">Campo requerido</h6>
+                                            </span>
+                                        </span> 
                             </div>
 
                             <div class="derecha">
@@ -149,6 +168,12 @@
                                   <mat-option value="No se sabe">No se sabe</mat-option>
                                 </mat-select>
                               </mat-form-field>
+                              <span class="help-block" *ngIf="((ProfileForm.get('conductaGatosPut').touched ||
+                              ProfileForm.get('conductaGatosPut').dirty) && ProfileForm.get('conductaGatosPut').errors)">
+                                            <span *ngIf="ProfileForm.get('conductaGatosPut').errors.required">
+                                                <h6 class="helpError">Campo requerido</h6>
+                                            </span>
+                                        </span> 
                             </div>
                           </div>
 
@@ -159,7 +184,16 @@
                                 <mat-label>Descripción</mat-label>
                                 <textarea matInput formControlName="descripcionPut" maxlength="300"></textarea>
                               </mat-form-field>
-
+                              <span class="help-block" *ngIf="((ProfileForm.get('descripcionPut').touched ||
+                              ProfileForm.get('descripcionPut').dirty) && ProfileForm.get('descripcionPut').errors)">
+                                            <span *ngIf="ProfileForm.get('descripcionPut').errors.required">
+                                                <h6 class="helpError">Campo requerido</h6>
+                                            </span>
+                                            <span *ngIf="ProfileForm.get('descripcionPut').errors.maxlength">
+                                                <mat-error class="helpError">Ingrese como máximo 300 caracteres
+                                                </mat-error>
+                                            </span>
+                                        </span>
                             </div>
                           </div>
 
@@ -215,6 +249,9 @@
                                     </span>
                                     <span *ngIf="SignupFormVac.get('nombre').errors.pattern">
                                       <h6 class="helpError">Formato del nombre no válido</h6>
+                                    </span>
+                                    <span *ngIf="SignupFormVac.get('nombre').errors.required">
+                                      <mat-error class="helpError">Campo requerido</mat-error>
                                     </span>
                                   </span>
                                   <span class="help-block blank"

@@ -196,7 +196,7 @@ export class UserProfileModalComponent implements OnInit {
 
   guardar(){
 
-    if(this.currentUser.tipoUsuario==2){
+    if(this.currentUser.tipoUsuario==2 && this.ProfileForm.controls.banco.value !== '' && this.ProfileForm.controls.cbu.value !== '' && this.ProfileForm.controls.alias.value !== ''){
       
       let donaciones: Donacion=new Donacion();
       donaciones.id_Centro=this.currentUser._id;

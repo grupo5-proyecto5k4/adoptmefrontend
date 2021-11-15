@@ -156,7 +156,7 @@
                           <span class="help-block" *ngIf="((ProfileForm.get('cbu').touched ||
                       ProfileForm.get('cbu').dirty) && ProfileForm.get('cbu').errors)">
                           <span *ngIf="ProfileForm.get('cbu').errors.required">
-                            <h6 class="helpError">Campo requerido</h6>
+                            <h6 class="helpError" >Campo requerido</h6>
                           </span>
                           <span *ngIf="ProfileForm.get('cbu').errors.maxlength">
                             <mat-error class="helpError">Ingrese como máximo 22 caracteres</mat-error>

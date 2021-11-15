@@ -123,19 +123,20 @@ export class VerMascotaComponent implements OnInit {
       fechaNacimiento: new FormControl({ value: this.fechaNacimientoVisualizada, disabled: true }),
       raza: new FormControl({ value: this.mascota.raza, disabled: true }),
       castrado: new FormControl({ value: this.mascota.castrado, disabled: true }),
-      castradoPut: new FormControl({ value: this.mascota.castrado, disabled: false }),
+      castradoPut: new FormControl({ value: this.mascota.castrado, disabled: false },[Validators.required]),
       conductaGatos: new FormControl({ value: this.mascota.conductaGatos, disabled: true }),
       conductaPerros: new FormControl({ value: this.mascota.conductaPerros, disabled: true }),
       conductaNiños: new FormControl({ value: this.mascota.conductaNiños, disabled: true }),
       descripcion: new FormControl({ value: this.mascota.descripcion, disabled: true }),
-      conductaGatosPut: new FormControl({ value: this.mascota.conductaGatos, disabled: false }),
-      conductaPerrosPut: new FormControl({ value: this.mascota.conductaPerros, disabled: false }),
-      conductaNiñosPut: new FormControl({ value: this.mascota.conductaNiños, disabled: false }),
+      conductaGatosPut: new FormControl({ value: this.mascota.conductaGatos, disabled: false}, [Validators.required]),
+      conductaPerrosPut: new FormControl({ value: this.mascota.conductaPerros, disabled: false },[Validators.required]),
+      conductaNiñosPut: new FormControl({ value: this.mascota.conductaNiños, disabled: false },[Validators.required]),
       descripcionPut: new FormControl({ value: this.mascota.descripcion, disabled: false }, [Validators.required, Validators.maxLength(300), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú.,;: ]*$')]),
     });
     this.SignupFormVac = new FormGroup({
       nombre: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^[a-zA-Z-ñÑÁÉÍÓÚáéíóú. ]*$')]),
       fechaAplicacion: new FormControl('', Validators.required),
+
     });
   }
 
@@ -146,6 +147,8 @@ export class VerMascotaComponent implements OnInit {
     let mascotaActualiza: Mascota = new Mascota();
     mascotaActualiza = this.mascota;
     */
+    if(this.ProfileForm.controls.castradoPut.value !== '' && this.ProfileForm.controls.conductaGatosPut.value !== '' &&  this.ProfileForm.controls.conductaNiñosPut.value !== ''
+    && this.ProfileForm.controls.conductaPerrosPut.value !== '' && this.ProfileForm.controls.descripcionPut.value !== '' && this.listaVacunasPut.length !== 0){ 
 
     let mascotaActualiza: any = {};
     mascotaActualiza.id_Animal = this.mascota._id;
@@ -187,9 +190,14 @@ export class VerMascotaComponent implements OnInit {
 
     );
 
+    }else{
+      this.enEdicion = !this.enEdicion;
+      this.alertsService.errorMessage("Debe completar todos los campos requeridos");
 
+    }
 
   }
+
 
   agregar() {
     if (this.SignupFormVac.valid) {
