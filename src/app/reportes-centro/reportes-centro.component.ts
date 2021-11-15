@@ -37,6 +37,9 @@ export class ReportesCentroComponent implements OnInit {
   minimoPerroAdulto: any;
   promedioPerroAdulto: any;
   maximoPerroAdulto: any;
+  totalperrosadulto: any;
+  totalperroscachorro: any;
+  totalperros: any;
 
   minimoGatoCachorro: any;
   promedioGatoCachorro: any;
@@ -44,6 +47,9 @@ export class ReportesCentroComponent implements OnInit {
   minimoGatoAdulto: any;
   promedioGatoAdulto: any;
   maximoGatoAdulto: any;
+  totalgatosadulto: any;
+  totalgatoschorro: any;
+  totalgatos: any;
 
   minimos:any;
   promedios:any;
@@ -73,7 +79,17 @@ export class ReportesCentroComponent implements OnInit {
   public barChartOptionsMin: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{}] },
+    scales: { xAxes: [{}], yAxes: [{
+      ticks: {
+        beginAtZero: true,
+        stepSize: 1,
+        min: 0
+      },
+      scaleLabel: {
+        display: true,
+        labelString: 'Días'
+      }
+    }] },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -91,7 +107,17 @@ export class ReportesCentroComponent implements OnInit {
     public barChartOptionsProm: ChartOptions = {
       responsive: true,
       // We use these empty structures as placeholders for dynamic theming.
-      scales: { xAxes: [{}], yAxes: [{}] },
+      scales: { xAxes: [{}], yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1,
+          min: 0
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Días'
+        }
+      }] },
       plugins: {
         datalabels: {
           anchor: 'end',
@@ -116,7 +142,17 @@ export class ReportesCentroComponent implements OnInit {
 
       responsive: true,
       // We use these empty structures as placeholders for dynamic theming.
-      scales: { xAxes: [{}], yAxes: [{}] },
+      scales: { xAxes: [{}], yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1,
+          min: 0
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Días'
+        }
+      }] },
       plugins: {
         datalabels: {
           anchor: 'end',
@@ -234,18 +270,22 @@ export class ReportesCentroComponent implements OnInit {
             this.minimoPerroCachorro = jsonTiempos[x].minimo;
             this.promedioPerroCachorro = jsonTiempos[x].promedio;
             this.maximoPerroCachorro = jsonTiempos[x].maximo;
+            this.totalperroscachorro = jsonTiempos[x].total;
           } else if (jsonTiempos[x].categoria === "perroAdulto"){
             this.minimoPerroAdulto = jsonTiempos[x].minimo;
             this.promedioPerroAdulto = jsonTiempos[x].promedio;
             this.maximoPerroAdulto = jsonTiempos[x].maximo;
+            this.totalperrosadulto = jsonTiempos[x].total;
           } else if (jsonTiempos[x].categoria === "gatoCachorro") {
             this.minimoGatoCachorro = jsonTiempos[x].minimo;
             this.promedioGatoCachorro = jsonTiempos[x].promedio;
             this.maximoGatoCachorro = jsonTiempos[x].maximo;
+            this.totalgatoschorro = jsonTiempos[x].total;
           } else if (jsonTiempos[x].categoria === "gatoAdulto"){
             this.minimoGatoAdulto = jsonTiempos[x].minimo;
             this.promedioGatoAdulto = jsonTiempos[x].promedio;
             this.maximoGatoAdulto = jsonTiempos[x].maximo;
+            this.totalgatosadulto = jsonTiempos[x].total;
           }
         }
     
