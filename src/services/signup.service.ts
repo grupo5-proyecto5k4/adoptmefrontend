@@ -40,5 +40,9 @@ export class SignupService {
     return this.httpClient.get(this.urlEdit,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
+  getCentro(idcentro:string, token:string): Promise<any> {
+    return this.httpClient.get('https://adoptmebackend.herokuapp.com/buscar/CentroRescatista/' + idcentro,{ headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
+}
+
   }
 

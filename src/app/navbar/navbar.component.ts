@@ -17,6 +17,7 @@ import { VisualizacionSolicitudComponent } from '../visualizacion-solicitud/visu
 import { VisualizacionSolicitudProviComponent } from '../visualizacion-solicitud-provi/visualizacion-solicitud-provi.component';
 import { RegistroMascotasService } from 'src/services/registro-mascotas.service';
 import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
+import { SignupService } from 'src/services/signup.service';
 
 
 
@@ -42,7 +43,7 @@ export class NavbarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private dialog: MatDialog, private notificacionService: NotificacionService, private registroMascotasService: RegistroMascotasService,private visualizarService: VisualizacionSolicitudesService, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
+  constructor(private breakpointObserver: BreakpointObserver, private userService: SignupService, private dialog: MatDialog, private notificacionService: NotificacionService, private registroMascotasService: RegistroMascotasService,private visualizarService: VisualizacionSolicitudesService, private authservice: AuthService, private alertsService: AlertsService, private router: Router, private localStorageService: LocalStorageService) {
     this.profile = this.localStorageService.getProfile();
     if (this.isLogued()) {
       this.currentUser = this.authservice.getCurrentUser();

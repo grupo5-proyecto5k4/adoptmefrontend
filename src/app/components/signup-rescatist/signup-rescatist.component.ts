@@ -10,6 +10,8 @@ import { Address } from 'src/models/IAddress';
 import {map, startWith} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { BarriosService } from 'src/services/barrios.service';
+import { NotificacionService } from 'src/services/notificacion.service';
+import { Data } from '@angular/router';
 @Component({
   selector: 'app-signup-rescatist',
   templateUrl: './signup-rescatist.component.html',
@@ -28,7 +30,7 @@ export class SignupRescatistComponent implements OnInit {
 
 
 
-  constructor(private SignupService: SignupService, private BarriosService : BarriosService, private alertsService: AlertsService, private dialogref: MatDialogRef<SignupRescatistComponent>) { }
+  constructor(private SignupService: SignupService,private notificacionService: NotificacionService, private BarriosService : BarriosService, private alertsService: AlertsService, private dialogref: MatDialogRef<SignupRescatistComponent>) { }
 
   ngOnInit() {
     this.BarriosService.getBarrios().subscribe(data => {
@@ -131,17 +133,17 @@ validateButton() {
         particularUser.contrasenia = this.SignupForm.controls.password.value;
         //Acá seteamos al usuario la dirección creada anteriormente
         particularUser.Direccion = userAddress;
-              this.SignupService.registerUser(particularUser).subscribe({
-        complete: () => {
+              this.SignupService.registerUser(particularUser).subscribe((resp: Data) => {
+          this.notificacionService.notificarCentroPendienteHabilitacion(particularUser.nombres,resp._id)
           this.alertsService.confirmMessage("Su cuenta ha sido registrada y será verificada a la brevedad").then((result) => window.location.href = '/');
         },
-        error: (err: any) => {
-          this.alertsService.errorMessage(err.error.error).then((result) => {
+         (error) => {
+          this.alertsService.errorMessage(error.error).then((result) => {
             this.isLoading = false;
           }
         )
         }
-      })
+      )
       }
     }
 

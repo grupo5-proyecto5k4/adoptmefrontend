@@ -149,6 +149,16 @@ export class NotificacionService {
     return this.httpClient.post<Notificacion>(this.api + '/notificacion', notificacion, { headers: new HttpHeaders().set('auth-token', `${token}`) }).toPromise();
   }
 
+  notificarCentroPendienteHabilitacion(nombreCentro: string, objetoId: string): Promise <any>{
+    let notificacion: Notificacion = new Notificacion();
+    notificacion.nombreNotificacion = "Habilitación pendiente";
+    notificacion.descripcion = nombreCentro+" está pendiente de habilitación. Dirijase a configuraciones";
+    notificacion.objetoAMostrar = "Usuario";
+    notificacion.objetoAMostrarId = objetoId;
+    notificacion.tipoNotificacion = "usuarioAdmin";
+    return this.httpClient.post<Notificacion>(this.api + '/notificacionAdmin', notificacion).toPromise();
+  }
+
 
   /*
   updateAccount(user: User, token:string): Observable <any> {
