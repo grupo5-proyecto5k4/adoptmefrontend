@@ -83,7 +83,13 @@ export class ConsultaSeguimientosComponent implements OnInit {
       this.mascotaService.finalizarProvisorio(this.mascota._id, this.authService.getToken(), body).subscribe(respuesta => {
         this.solicitanteId = respuesta._id;
         this.enviarNotificacionDeBaja();
-        this.alertService.confirmMessage("El provisorio de " + this.mascota.nombreMascota + " ha sido finalizado")
+        this.alertService.confirmMessage("El provisorio de " + this.mascota.nombreMascota + " ha sido finalizado").then(result => {
+          if (result.value) {
+            this.motivoVisible = false;
+            this.mascota.estado = "Disponible";
+            this.ngOnInit();
+          }
+        })
       });
 
     }
