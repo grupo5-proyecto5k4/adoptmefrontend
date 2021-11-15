@@ -16,6 +16,8 @@ import { AuthService } from 'src/app/auth.service';
 import { NotificacionService } from 'src/services/notificacion.service';
 import { ifStmt } from '@angular/compiler/src/output/output_ast';
 import { Donacion } from 'src/models/IDonacion';
+import { LocalStorageService } from 'src/services/local-storage.service';
+
 
 
 @Component({
@@ -30,18 +32,24 @@ export class UserProfileModalComponent implements OnInit {
   Titulo = "Perfil de usuario"
   enEdicion:boolean=false;
   editarDatos:boolean=false;
-  esconder:boolean=true;
+  esconder:boolean=false;
   edadInvalida: Boolean = false;
   mensajeEdad: string = "";
+  esconderCentro:Boolean=false;
 
-  constructor(private editUser: SignupService, private authservice: AuthService, @Inject(MAT_DIALOG_DATA) public data: any, private alertsService: AlertsService, private router: Router) {
+  constructor(private localStorageService: LocalStorageService,private editUser: SignupService, private authservice: AuthService, @Inject(MAT_DIALOG_DATA) public data: any, private alertsService: AlertsService, private router: Router) {
 
   }
 
   ngOnInit() {
     //obtengo el usuario
     this.currentUser = this.data.User;
-    console.log(this.currentUser)
+    console.log('daots: ',this.currentUser)
+   
+    if(this.currentUser.tipoUsuario==2){
+      this.esconder=true;
+      this.esconderCentro=true;
+    }
    
     //en base al perfil, los datos que se visualizan
     //particular:
@@ -115,7 +123,7 @@ export class UserProfileModalComponent implements OnInit {
       });
     }
 
-    if(this.enEdicion==true && this.currentUser.tipoUsuario==2){
+    if(this.enEdicion==true && (this.currentUser.tipoUsuario==2)){
 
       this.ProfileForm = new FormGroup({
         nombres: new FormControl({ value: this.currentUser.nombres, disabled: true }),
@@ -191,85 +199,30 @@ export class UserProfileModalComponent implements OnInit {
     if(this.currentUser.tipoUsuario==2){
       
       let donaciones: Donacion=new Donacion();
-      donaciones._id=this.currentUser._id;
+      donaciones.id_Centro=this.currentUser._id;
       donaciones.cbu=this.ProfileForm.controls.cbu.value;
       donaciones.alias=this.ProfileForm.controls.alias.value;
       donaciones.banco=this.ProfileForm.controls.banco.value;
+       
+          this.editUser.editCentro(donaciones,this.authservice.getToken()).subscribe((r)=>{
+           this.currentUser.banco=r.banco;
+           this.currentUser.cbu=r.cbu;
+           this.currentUser.alias=r.alias;
           
-      this.editUser.editCentro(donaciones,this.authservice.getToken()).subscribe({
-        complete: () => {
-          this.alertsService.confirmMessage("Los datos bancarios del centro rescatista han sido modificados con exito!").then((result) => {
-            this.enEdicion=!this.enEdicion;
-            this.editarDatos=!this.editarDatos;
-            this.esconder=!this.esconder;
-            this.currentUser = this.data.User;
-        
-            //en base al perfil, los datos que se visualizan
-            //particular:
-            if (this.currentUser.facebook == null) {
-              this.currentUser.facebook = "No especificado"
-            };
-            if (this.currentUser.instagram == null) {
-              this.currentUser.instagram = "No especificado"
-            };
-        
-            if (this.currentUser.banco == null) {
-              this.currentUser.banco = "No especificado"
-            };
-        
-            if (this.currentUser.cbu == null) {
-              this.currentUser.cbu = "No especificado"
-            };
-        
-            if (this.currentUser.alias == null) {
-              this.currentUser.alias = "No especificado"
-            };
-            
-            // Formato fecha  
-            if (this.currentUser.fechaNacimiento !== null && this.currentUser.fechaNacimiento !== undefined) {
-            var date = this.currentUser.fechaNacimiento.substring(0, 10);
-           var [yyyy, mm, dd] = date.split("-");
-            var revdate = `${dd}-${mm}-${yyyy}`;
-            this.currentUser.fechaNacimiento = revdate;
-            }
-        
-            this.currentUser.pwd = "********";
-                   
-            this.inicializarFormulario(); 
-        
-            if (this.currentUser.Direccion !== undefined){
-              this.ProfileForm.controls['calle'].setValue(this.currentUser.Direccion.calle);
-              if (this.currentUser.Direccion.numero == undefined){
-                this.currentUser.Direccion.numero = "s/n";
+            this.alertsService.confirmMessage("Los datos bancarios del centro rescatista han sido modificados con exito!").then( 
+              ()=>{
+                window.location.href = "/gestionar-usuarios";
+               
               }
-              this.ProfileForm.controls['altura'].setValue(this.currentUser.Direccion.numero);
-              this.ProfileForm.controls['localidad'].setValue(this.currentUser.Direccion.localidad);
-              this.ProfileForm.controls['barrio'].setValue(this.currentUser.Direccion.barrio);
-              if (this.currentUser.Direccion.referencia == undefined){
-                this.currentUser.Direccion.referencia = "No especificado";
-              }
-              this.ProfileForm.controls['referencia'].setValue(this.currentUser.Direccion.referencia);
-            }
-        
-            if (this.currentUser.dni !== undefined) {
-              this.ProfileForm.controls['dni'].setValue(this.currentUser.dni);
-              this.ProfileForm.controls['fechaNacimiento'].setValue(this.currentUser.fechaNacimiento);
-              }      
             
-          });
-        },
-        error: (err: any) => {
-          this.alertsService.errorMessage(err.error.error).then((result) => {
-           
-          }
-        )
+            );
+            
+          }); 
+    
         }
-      })
-      
-    } 
-
-   }   
-
+        
+    }
+   
 }
     
       

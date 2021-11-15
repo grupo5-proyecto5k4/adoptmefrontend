@@ -13,7 +13,8 @@ export class SignupService {
  
   urlEdit='https://adoptmebackend.herokuapp.com/user/modificacionPerfil';
   urlEditCentro='https://adoptmebackend.herokuapp.com/user/modificacion/centrorescatista/';
-  
+  urlGetCentro='https://adoptmebackend.herokuapp.com/buscar/CentroRescatista/';
+
   constructor(private httpClient: HttpClient) {}
  
   registerUser(request: User): Observable<User> {
@@ -33,7 +34,7 @@ export class SignupService {
     }
 
     getCentrosDonaciones(idcentro:string, token:string): Observable<any> {
-      return this.httpClient.get(this.urlEditCentro + idcentro,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
+      return this.httpClient.get(this.urlGetCentro + idcentro,{ headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
 
   getUsuarioModificado(token:string):Observable<any>{
