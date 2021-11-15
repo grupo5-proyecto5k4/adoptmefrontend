@@ -37,6 +37,8 @@ export class PublicacionesAdopComponent implements OnInit {
   filteredBarrios: Observable<string[]>;
   barrios: string[] = [];
   barriosBack;
+
+  SelectedHuman = '';
   /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
@@ -191,6 +193,8 @@ export class PublicacionesAdopComponent implements OnInit {
 
   clean() {
     this.iniciarForm();
+    this.SelectedHuman = '';
+    this.selectedBarrio = '';
   }
 
   openMascota(mascota: Mascota){
