@@ -294,7 +294,7 @@ export class RegistroMascotaComponent implements OnInit {
     this.dialog.open(VerMascotaComponent, {
       data: {
         mascota: mascota,
-        accion: 0
+        accion: 5
       }
     })
   }

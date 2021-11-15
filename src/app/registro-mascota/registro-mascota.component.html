@@ -235,7 +235,7 @@
                         </div>
                     </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button>Ver más</button>
+                        <button mat-button (click)="openMascota(pet)">Ver más</button>
                     </mat-card-actions>
                 </mat-card>
                 <div *ngIf="mascotasEnTenencia.length == 0 && !filtroEnTenenciaAplicado">
