@@ -71,9 +71,6 @@ export class UserService {
     const urlFiltered = new URL("https://adoptmebackend.herokuapp.com/particularFiltro/filtroNombresApellidos")
     if (filters.nombres) {
       urlFiltered.searchParams.append("nombres", filters.nombres)
-  }
-  if (filters.barrio) {
-      urlFiltered.searchParams.append("barrio", filters.barrio)
   } if (filters.estado) {
       urlFiltered.searchParams.append("estado", filters.estado)
   }

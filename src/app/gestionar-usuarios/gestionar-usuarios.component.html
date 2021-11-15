@@ -14,14 +14,17 @@
                         <input matInput placeholder="Nombre" formControlName="nombre" class="form-control" maxlength="30">
                       </mat-form-field>
                     </div>
-                    <div>
-                      <mat-form-field class="example-full-width margenesFiltros filtro">
-                        <mat-label>Barrio</mat-label>
-                        <input matInput placeholder="Barrio" formControlName="barrio" class="form-control" maxlength="30">
-                      </mat-form-field>
-                    </div>
-                  </form>
+                <div>
+                  <mat-form-field class="example-full-width margenesFiltros filtro">
+                    <mat-label>Estado</mat-label>
+                    <mat-select formControlName="estadoTT">
+                      <mat-option value="Activo">Activo</mat-option>
+                      <mat-option value="Bloqueado">Bloqueado</mat-option>
+                    </mat-select>
+                  </mat-form-field>
                 </div>
+              </form>
+            </div>
                 <div class="botones">
                   <a mat-raised-button color="accent" class="button confirmado" style="color: #ffffff; background-color: rgb(133 131 131 / 83%);" type="button" id="confirmado"
                   (click)="clean()">Limpiar</a>
