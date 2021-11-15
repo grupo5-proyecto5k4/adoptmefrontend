@@ -7,6 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Mascota } from 'src/models/IMascota';
 import { VerMascotaComponent } from '../components/ver-mascota/ver-mascota.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { BarriosService } from 'src/services/barrios.service';
+import {map, startWith} from 'rxjs/operators';
 export interface Pet {
   name: string;
   age: number;
@@ -30,15 +32,35 @@ export class VisualizarAdopcionesComponent implements OnInit {
   filtroAplicado = false;
   countNoDisponibles = 0;
 
+  myControl = new FormControl();
+  selectedBarrio; 
+  filteredBarrios: Observable<string[]>;
+  barrios: string[] = [];
+  barriosBack;
+
+  SelectedHuman = '';
+
   /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
   dataSource: MatTableDataSource<Pet> = new MatTableDataSource<Pet>(DATA);
 */
-  constructor(public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private BarriosService: BarriosService, public registroMascotasService: RegistroMascotasService, private dialog: MatDialog, private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+
+    this.BarriosService.getBarrios().subscribe(data => {
+      this.barriosBack = data;
+      for (let x = 0; x < this.barriosBack.length; x++){
+        this.barrios.push(this.barriosBack[x].nombre);
+      }
+      this.filteredBarrios = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value)),
+      );
+    });
+    this.iniciarForm();
 
     this.iniciarForm();
     /*
@@ -66,6 +88,15 @@ export class VisualizarAdopcionesComponent implements OnInit {
       this.gatoSeleccionado = false;
     }
   }
+
+  _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.barrios.filter(option => option.toLowerCase().includes(filterValue));
+  }
+  OnHumanSelected(SelectedHuman) {
+    this.selectedBarrio = SelectedHuman;
+  }
+  
 
   iniciarForm(){
     this.FilterForm = new FormGroup({
@@ -118,6 +149,8 @@ export class VisualizarAdopcionesComponent implements OnInit {
     }
     if (this.FilterForm.controls.sexo.value !== '') {
       filters.sexo = this.FilterForm.controls.sexo.value;
+    } if (this.selectedBarrio !== '') {
+      filters.barrio = this.selectedBarrio;
     }
     if (this.FilterForm.controls.tipoMascota.value !== '') {
       filters.tipoMascota = this.FilterForm.controls.tipoMascota.value;
@@ -141,6 +174,8 @@ export class VisualizarAdopcionesComponent implements OnInit {
 
   clean() {
     this.iniciarForm();
+    this.SelectedHuman = '';
+    this.selectedBarrio = '';
   }
 
   openMascota(mascota: Mascota){

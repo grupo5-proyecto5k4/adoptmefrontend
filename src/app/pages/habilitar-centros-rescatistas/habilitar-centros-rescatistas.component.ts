@@ -41,6 +41,8 @@ export class HabilitarCentroRescatistaComponent {
   barrios: string[] = [];
   barriosBack;
 
+  SelectedHuman = '';
+
   constructor(private BarriosService: BarriosService, private dialog: MatDialog, private userService: UserService, private alertsService: AlertsService, private authService: AuthService, private router: Router) { }
 
   async ngOnInit() {
@@ -166,6 +168,8 @@ export class HabilitarCentroRescatistaComponent {
 
   clean() {
     this.iniciarForm();
+    this.SelectedHuman = '';
+    this.selectedBarrio = '';
   }
 
 

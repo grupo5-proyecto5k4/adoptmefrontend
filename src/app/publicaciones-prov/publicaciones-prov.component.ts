@@ -52,6 +52,8 @@ export class PublicacionesProvComponent implements OnInit {
   barrios: string[] = [];
   barriosBack;
 
+  SelectedHuman = '';
+
   /*
   @ViewChild(MatPaginator) paginator: MatPaginator;
   obs: Observable<any>;
@@ -201,6 +203,8 @@ export class PublicacionesProvComponent implements OnInit {
 
   clean() {
     this.iniciarForm();
+    this.SelectedHuman = '';
+    this.selectedBarrio = '';
   }
   /*
   ngOnDestroy() {
