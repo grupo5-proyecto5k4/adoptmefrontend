@@ -363,7 +363,7 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
-                                            <div class="container-btn" *ngIf="faltaAceptar()">
+                                            <div class="container-btn" *ngIf="faltaAceptar() && (!seguimientoChecked)">
                                                 <mat-form-field class="ref">
                                                     <mat-label>Enviar comentario junto a tu decisión</mat-label>
                                                     <textarea matInput formControlName="comentario"
