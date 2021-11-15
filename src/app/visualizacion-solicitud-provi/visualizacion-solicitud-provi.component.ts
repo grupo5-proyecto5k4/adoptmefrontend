@@ -51,14 +51,17 @@ export class VisualizacionSolicitudProviComponent implements OnInit {
     this.dataAnimal = dataAnimal;
     this.dataSolicitante = dataSolicitante;
 
+    if (dataSolicitud.fechaFinProvisorio != undefined || dataSolicitud.fechaFinProvisorio != null){
+      if (this.dataSolicitud.estadoId != "Abierta" || this.dataSolicitud.estadoId != "Suspendido" ){
+        // Formato fecha   
+        var date = this.dataSolicitud.fechaFinProvisorio.substring(0, 10);
+        var [yyyy, mm, dd] = date.split("-");
+        var revdate = `${dd}-${mm}-${yyyy}`;
+        this.dataSolicitud.fechaFinProvisorioString = revdate;
+        } 
 
-    if (this.dataSolicitud.estadoId != "Abierta"){
-          // Formato fecha   
-    var date = this.dataSolicitud.fechaFinProvisorio.substring(0, 10);
-    var [yyyy, mm, dd] = date.split("-");
-    var revdate = `${dd}-${mm}-${yyyy}`;
-    this.dataSolicitud.fechaFinProvisorioString = revdate;
-    } 
+    }
+
 
     //SolicitudId
     this.idSolicitud = this.data.solicitud.Solicitud._id;
