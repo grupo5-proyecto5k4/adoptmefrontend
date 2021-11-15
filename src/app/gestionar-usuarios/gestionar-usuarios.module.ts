@@ -14,6 +14,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [GestionarUsuariosComponent],
@@ -32,7 +33,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatTabsModule, 
     MatPaginatorModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatSelectModule
 
   ],
   entryComponents: [
