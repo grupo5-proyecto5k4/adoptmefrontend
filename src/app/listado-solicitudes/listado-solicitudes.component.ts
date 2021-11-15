@@ -113,8 +113,10 @@ export class ListadoSolicitudesComponent implements OnInit {
           this.solicitudesRealizadasAdop[x].estado = "Exitosa";
         } else if (estado === "Bloqueado"){
           this.solicitudesRealizadasAdop[x].estado = "En análisis";
-        } 
-      }
+        } else if (estado === "Suspendido"){
+          this.solicitudesRealizadasAdop[x].estado = "Rechazada";
+        }
+        }
     })
 
     this.visualizacionSolicitudesService.getSolicitudesRealizadas('Provisorio', this.auth.getToken()).subscribe(dataRealizadasProv => {
@@ -141,7 +143,9 @@ export class ListadoSolicitudesComponent implements OnInit {
           this.solicitudesRealizadasProv[x].estado = "Exitosa";
         } else if (estado === "Bloqueado"){
           this.solicitudesRealizadasProv[x].estado = "En análisis";
-        } 
+        } else if (estado === "Suspendido"){
+          this.solicitudesRealizadasProv[x].estado = "Rechazada";
+        }
       }
     })
   }
