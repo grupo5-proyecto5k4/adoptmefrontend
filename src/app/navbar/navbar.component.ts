@@ -139,7 +139,7 @@ export class NavbarComponent {
       this.dialog.open(VerMascotaComponent, {
         data: {
           mascota: mascota,
-          accion: 0
+          accion: 5
         }
       });
     }
