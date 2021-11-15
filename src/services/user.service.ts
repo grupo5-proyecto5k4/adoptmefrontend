@@ -74,6 +74,8 @@ export class UserService {
   }
   if (filters.barrio) {
       urlFiltered.searchParams.append("barrio", filters.barrio)
+  } if (filters.estado) {
+      urlFiltered.searchParams.append("estado", filters.estado)
   }
     return this.httpClient.get<any>(urlFiltered.toString(), { headers: new HttpHeaders().set('auth-token', `${token}`) });
   }
