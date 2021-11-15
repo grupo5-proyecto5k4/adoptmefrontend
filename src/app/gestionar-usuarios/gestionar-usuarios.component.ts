@@ -183,32 +183,41 @@ export class GestionarUsuariosComponent {
       if (this.FilterForm.controls.nombre.value !== '') {
         filters.nombres = this.FilterForm.controls.nombre.value;
       }
-      if (this.FilterForm.controls.barrio.value !== '') {
-        filters.barrio = this.FilterForm.controls.barrio.value;
-      }
-      filters.estado = "Activo";
-      this.userService.getUsuariosFiltrados(filters, this.authService.getToken()).subscribe(activos => {
-        this.UsuariosActivos = activos;     
-              // "En adopcion y en provisorio"
-      });
-      filters.estado = "Bloqueado";
-      this.userService.getUsuariosFiltrados(filters, this.authService.getToken()).subscribe(bloqueados => {
-        this.UsuariosBloq= bloqueados;     
+      console.log("this.FilterForm.controls.estadoTT.value", this.FilterForm.controls.estadoTT.value);
+      if (this.FilterForm.controls.estadoTT.value === 'Activo') {    
+        filters.estado = "Activo";
+        this.userService.getUsuariosFiltrados(filters, this.authService.getToken()).subscribe(activos => {
+          this.UsuariosActivos = activos;   
+          this.UsuariosBloq = []; 
+                // "En adopcion y en provisorio"
+        });
+      } else if (this.FilterForm.controls.estadoTT.value === 'Bloqueado') {
+        filters.estado = "Bloqueado";
+        this.userService.getUsuariosFiltrados(filters, this.authService.getToken()).subscribe(bloqueados => {
+        this.UsuariosBloq= bloqueados; 
+        this.UsuariosActivos = [];  
       }) 
+    } else {
+      filters.estado = "Activo";
+        this.userService.getUsuariosFiltrados(filters, this.authService.getToken()).subscribe(activos => {
+          this.UsuariosActivos = activos;    
+                // "En adopcion y en provisorio"
+        });
+        filters.estado = "Bloqueado";
+        this.userService.getUsuariosFiltrados(filters, this.authService.getToken()).subscribe(bloqueados => {
+        this.UsuariosBloq= bloqueados;   
+      }) 
+    }
     }
   
     clean() {
       this.iniciarForm();
     }
   
-  
     iniciarForm() {
       this.FilterForm = new FormGroup({
         nombre: new FormControl(''),
-        tipoMascota: new FormControl(''),
-        tamanoFinal: new FormControl(''),
-        sexo: new FormControl(''),
-        barrio: new FormControl(''),
+        estadoTT: new FormControl('')
       });
     }
 }
