@@ -81,7 +81,7 @@ export class ConsultaSeguimientosComponent implements OnInit {
       let body: any = {};
       body.observacion = this.SignupForm.controls.observacion.value;
       this.mascotaService.finalizarProvisorio(this.mascota._id, this.authService.getToken(), body).subscribe(respuesta => {
-        this.solicitanteId = respuesta._id;
+        this.solicitanteId = respuesta;
         this.enviarNotificacionDeBaja();
         this.alertService.confirmMessage("El provisorio de " + this.mascota.nombreMascota + " ha sido finalizado").then(result => {
           if (result.value) {
