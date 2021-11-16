@@ -85,6 +85,30 @@ export class RegistroMascotasService {
         return this.http.get<any>(urlFiltered.toString());
     }
 
+    getMascotasFiltradasAdmin(filters: any): Observable<any> {
+        const urlFiltered = new URL('https://adoptmebackend.herokuapp.com/animales/filtrosMascota/filtroAnimalCentroRescAdmin')
+        if (filters.nombres) {
+            urlFiltered.searchParams.append("nombres", filters.nombres)
+        }
+        if (filters.barrio) {
+            urlFiltered.searchParams.append("barrio", filters.barrio)
+        }
+        if (filters.sexo) {
+            urlFiltered.searchParams.append("sexo", filters.sexo)
+        }
+        if (filters.tipoMascota) {
+            urlFiltered.searchParams.append("tipoMascota", filters.tipoMascota)
+        }
+        if (filters.tamañoFinal) {
+            urlFiltered.searchParams.append("tamañoFinal", filters.tamañoFinal)
+        }
+        if (filters.estado) {
+            urlFiltered.searchParams.append("estado", filters.estado)
+        }
+
+        return this.http.get<any>(urlFiltered.toString());
+    }
+
 
     getMascotasPropiasFiltradas(filters: any, token: string): Observable<any> {
         return this.filtrar(filters, 'https://adoptmebackend.herokuapp.com/animales/filtrosMascota/filtroAnimal', token)
