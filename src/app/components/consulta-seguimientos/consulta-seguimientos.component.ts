@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { RegistrarVisitaComponent } from 'src/app/registrar-visita/registrar-visita.component';
 import { MascotaService } from 'src/services/mascota.service';
@@ -26,7 +27,7 @@ export class ConsultaSeguimientosComponent implements OnInit {
   motivoVisible = false;
   puedeFinalizarSeguimiento: Boolean = true;
 
-  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private alertService: AlertsService, private visualizarService: VisualizacionSolicitudesService, private mascotaService: MascotaService, private notificacionService: NotificacionService, private authService: AuthService) { }
+  constructor(public dialog: MatDialog, @Inject(MAT_DIALOG_DATA) public data: any, private router: Router, private alertService: AlertsService, private visualizarService: VisualizacionSolicitudesService, private mascotaService: MascotaService, private notificacionService: NotificacionService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.accion = this.data.accion;
@@ -76,7 +77,6 @@ export class ConsultaSeguimientosComponent implements OnInit {
   }
 
   async cancelarProceso() {
-    console.log("valido?", this.SignupForm.valid)
     if (this.SignupForm.valid) {
       let body: any = {};
       body.observacion = this.SignupForm.controls.observacion.value;
@@ -87,7 +87,8 @@ export class ConsultaSeguimientosComponent implements OnInit {
           if (result.value) {
             this.motivoVisible = false;
             this.mascota.estado = "Disponible";
-            this.ngOnInit();
+            window.scrollTo(0, 0);
+            this.router.navigate(['/mascotas']);
           }
         })
       });
