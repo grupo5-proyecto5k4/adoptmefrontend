@@ -31,7 +31,7 @@
                                                         <p class="estadoText">¡Excelente! El responsable de la mascota te ha seleccionado para ser su provisorio. Luego de que confirmes tu decisión se contactará contigo para coordinar.</p>
                                                     </div>
         
-                                                    <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Aprobado Por Responsable'">
+                                                <!--    <div class="container-row1" *ngIf="(faltaConfirmar() || faltaRechazar()) && (dataSolicitud.observacionCancelacion != null) && dataSolicitud.estadoId === 'Aprobado Por Responsable'">
                                                         <div>
                                                             <mat-form-field class="ref">
                                                                 <mat-label>Respuesta del responsable</mat-label>
@@ -48,7 +48,7 @@
                                                                         maxlength="150"></textarea>
                                                             </mat-form-field>
                                                         </div>
-                                                    </div>
+                                                    </div>-->
 
 
                                             <!--Mensajes escritos por el particular:-->
@@ -66,7 +66,7 @@
                                                 <p class="estadoText">¡Excelente! El solicitante ha confirmado brindar hogar provisorio. Recuerda contactarle para coordinar.</p>
                                             </div>
 
-                                            <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Aprobado'">
+                                       <!--    <div class="container-row1" *ngIf="(confirmado() || rechazado()) && (dataSolicitud.cancelacionMotivoSolicitante != null) && dataSolicitud.estadoId === 'Aprobado'">
                                                 <div>
                                                     <mat-form-field class="ref">
                                                         <mat-label>Respuesta del solicitante</mat-label>
@@ -84,7 +84,7 @@
                                                             maxlength="150"></textarea>
                                                     </mat-form-field>
                                                 </div>
-                                            </div>
+                                            </div>--> 
 
 
                                             <div class="container-row1">
@@ -364,7 +364,7 @@
                                                     </mat-form-field>
                                                 </div>
                                             </div>
-                                            <div class="container-btn" *ngIf="faltaAceptar() && (!seguimientoChecked)">
+                                        <!--    <div class="container-btn" *ngIf="faltaAceptar() && (!seguimientoChecked)">
                                                 <mat-form-field class="ref">
                                                     <mat-label>Enviar comentario junto a tu decisión</mat-label>
                                                     <textarea matInput formControlName="comentario"
@@ -377,7 +377,7 @@
                                                     <textarea matInput formControlName="motivo"
                                                         maxlength="150"></textarea>
                                                 </mat-form-field>
-                                            </div>
+                                            </div>-->
                                         </form>
                                     </div>
 
