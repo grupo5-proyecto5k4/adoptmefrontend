@@ -357,7 +357,7 @@ export class ReportesCentroComponent implements OnInit {
     }
   };
 
-  this.barChartLabelsPerro  = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otro provisorio', 'Adultos adoptados por otro provisorio'];
+  this.barChartLabelsPerro  = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otra persona', 'Adultos adoptados por otra persona'];
   this.barChartPerros = 'doughnut';
   this.barChartLegendPerro = false;
   this.barChartDataPerro = [
@@ -378,7 +378,7 @@ export class ReportesCentroComponent implements OnInit {
     }
   };
 
-  this.barChartLabelsGato = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otro provisorio', 'Adultos adoptados por otro provisorio'];
+  this.barChartLabelsGato = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otra persona', 'Adultos adoptados por otra persona'];
   this.barChartGatos = 'doughnut';
   this.barChartLegendGato = false;
   this.barChartDataGato = [
