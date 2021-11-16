@@ -299,16 +299,10 @@ export class ReportesCentroComponent implements OnInit {
     
         var minimosPositivos = [];
         for (let x = 0; x < this.minimos.length; x++){
-          if (this.minimos[x].data != 0){
             minimosPositivos.push(this.minimos[x]);
-          }
+          
         }
         this.barChartDataMin = minimosPositivos;
-    
-        if (this.barChartDataMin.length === 0){
-          this.flagNoData = 1;
-        }
-    
     
         this.promedios = [
           { data: [this.promedioPerroCachorro], label: 'Perros cachorros', backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1"},
@@ -324,6 +318,10 @@ export class ReportesCentroComponent implements OnInit {
           }
         }
         this.barChartDataProm = promediosPositivos;
+
+        if (this.barChartDataProm.length === 0){
+          this.flagNoData = 1;
+        }
     
         this.maximos = [
           { data: [this.maximoPerroCachorro], label: 'Perros cachorros', backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1"},
