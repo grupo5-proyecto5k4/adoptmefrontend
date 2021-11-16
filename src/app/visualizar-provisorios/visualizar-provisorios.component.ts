@@ -157,7 +157,7 @@ export class VisualizarProvisoriosComponent implements OnInit {
     }
 
     filters.estado = "En provisorio";
-    this.registroMascotasService.getMascotasFiltradas(filters).subscribe(dataOne => {
+    this.registroMascotasService.getMascotasFiltradasAdmin(filters).subscribe(dataOne => {
       console.log(dataOne);
       this.unirMascotas(dataOne);
     },
