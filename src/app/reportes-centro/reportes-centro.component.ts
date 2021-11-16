@@ -28,7 +28,8 @@ export class ReportesCentroComponent implements OnInit {
 
   // validations
   reportesFlag: boolean = false;
-  yearAgo = new Date(new Date().setFullYear(new Date().getFullYear() - 1))
+  yearAgo = new Date(new Date().setMonth(new Date().getMonth() - 3));
+  
   // -----------------------
 
   minimoPerroCachorro: number;
