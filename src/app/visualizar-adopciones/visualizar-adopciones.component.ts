@@ -157,7 +157,7 @@ export class VisualizarAdopcionesComponent implements OnInit {
     }
 
     filters.estado = "Adoptado";
-    this.registroMascotasService.getMascotasFiltradas(filters).subscribe(dataOne => {
+    this.registroMascotasService.getMascotasFiltradasAdmin(filters).subscribe(dataOne => {
       console.log(dataOne);
       this.unirMascotas(dataOne);
     },
