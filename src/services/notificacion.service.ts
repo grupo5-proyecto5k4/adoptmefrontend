@@ -132,7 +132,7 @@ export class NotificacionService {
   notificarConfirmacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Confirmacion de provisorio";
-    notificacion.descripcion = nombreSolicitante+" ha confirmado la adopción de "+nombreMascota;
+    notificacion.descripcion = nombreSolicitante+" ha confirmado el provisorio de "+nombreMascota;
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
@@ -142,7 +142,7 @@ export class NotificacionService {
   notificarCancelacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
     notificacion.nombreNotificacion = "Cancelación de provisorio";
-    notificacion.descripcion = nombreSolicitante+" ha cancelado la adopción de "+nombreMascota;
+    notificacion.descripcion = nombreSolicitante+" ha cancelado el provisorio de "+nombreMascota;
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
     notificacion.remitenteId = remitente;
