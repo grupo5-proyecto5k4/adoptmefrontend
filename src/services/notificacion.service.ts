@@ -111,7 +111,7 @@ export class NotificacionService {
 
   notificarConfirmacionAdopcionACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Confirmacion de adopción";
+    notificacion.nombreNotificacion = "Confirmación de adopción";
     notificacion.descripcion = nombreSolicitante+" ha confirmado la adopción de "+nombreMascota;
     notificacion.objetoAMostrar = "Adopcion";
     notificacion.objetoAMostrarId = objetoId;
@@ -131,7 +131,7 @@ export class NotificacionService {
 
   notificarConfirmacionProvisorioACentro(nombreMascota: string, nombreSolicitante:string, objetoId: string, remitente:string, token:string): Promise <any>{
     let notificacion: Notificacion = new Notificacion();
-    notificacion.nombreNotificacion = "Confirmacion de provisorio";
+    notificacion.nombreNotificacion = "Confirmación de provisorio";
     notificacion.descripcion = nombreSolicitante+" ha confirmado el provisorio de "+nombreMascota;
     notificacion.objetoAMostrar = "Provisorio";
     notificacion.objetoAMostrarId = objetoId;
