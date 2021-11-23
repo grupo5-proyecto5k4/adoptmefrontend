@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ReportesService} from 'src/services/reportes.service';
+import { ReportesService } from 'src/services/reportes.service';
 import { AuthService } from '../auth.service';
 import { DateAdapter } from '@angular/material/core';
 
@@ -29,7 +29,7 @@ export class ReportesCentroComponent implements OnInit {
   // validations
   reportesFlag: boolean = false;
   yearAgo = new Date(new Date().setMonth(new Date().getMonth() - 3));
-  
+
   // -----------------------
 
   minimoPerroCachorro: number;
@@ -52,9 +52,9 @@ export class ReportesCentroComponent implements OnInit {
   totalgatoschorro: any;
   totalgatos: any;
 
-  minimos:any;
-  promedios:any;
-  maximos:any;
+  minimos: any;
+  promedios: any;
+  maximos: any;
   graficoPerro: any = { perrosCachorrosAdoptadosPorSuProvisorio: 0, perrosAdultosAdoptadosPorSuProvisorio: 0, perrosCachorrosAdoptadosPorOtro: 0, perrosAdultosAdoptadosPorOtro: 0, totalPerrosAdoptados: 0 }
   graficoGato: any = { gatosCachorrosAdoptadosPorSuProvisorio: 0, gatosAdultosAdoptadosPorSuProvisorio: 0, gatosCachorrosAdoptadosPorOtro: 0, gatosAdultosAdoptadosPorOtro: 0, totalGatosAdoptados: 0 }
   flagNoData: number = 0;
@@ -80,17 +80,19 @@ export class ReportesCentroComponent implements OnInit {
   public barChartOptionsMin: ChartOptions = {
     responsive: true,
     // We use these empty structures as placeholders for dynamic theming.
-    scales: { xAxes: [{}], yAxes: [{
-      ticks: {
-        beginAtZero: true,
-        stepSize: 1,
-        min: 0
-      },
-      scaleLabel: {
-        display: true,
-        labelString: 'Días'
-      }
-    }] },
+    scales: {
+      xAxes: [{}], yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1,
+          min: 0
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Días'
+        }
+      }]
+    },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -104,11 +106,12 @@ export class ReportesCentroComponent implements OnInit {
   public barChartLegendMin = true;
   public barChartDataMin: ChartDataSets[];
 
-    // Gráfico de tiempos promedios
-    public barChartOptionsProm: ChartOptions = {
-      responsive: true,
-      // We use these empty structures as placeholders for dynamic theming.
-      scales: { xAxes: [{}], yAxes: [{
+  // Gráfico de tiempos promedios
+  public barChartOptionsProm: ChartOptions = {
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      xAxes: [{}], yAxes: [{
         ticks: {
           beginAtZero: true,
           stepSize: 1,
@@ -118,32 +121,34 @@ export class ReportesCentroComponent implements OnInit {
           display: true,
           labelString: 'Días'
         }
-      }] },
-      plugins: {
-        datalabels: {
-          anchor: 'end',
-          align: 'end',
-        }
+      }]
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
       }
-    };
-    public barChartLabelsProm: Label[];
-    public barChartTypeProm: ChartType = 'bar';
-    public barChartLegendProm = true;
-  
-    public barChartDataProm: ChartDataSets[] = [
-      { data: [65], label: 'Perros cachorros' },
-      { data: [28], label: 'Perros adultos' },
-      { data: [0], label: 'Gatos cachorros' },
-      { data: [27], label: 'Gatos adultos' }
-    ];
+    }
+  };
+  public barChartLabelsProm: Label[];
+  public barChartTypeProm: ChartType = 'bar';
+  public barChartLegendProm = true;
+
+  public barChartDataProm: ChartDataSets[] = [
+    { data: [65], label: 'Perros cachorros' },
+    { data: [28], label: 'Perros adultos' },
+    { data: [0], label: 'Gatos cachorros' },
+    { data: [27], label: 'Gatos adultos' }
+  ];
 
 
-    // Gráfico de tiempos máximos
-    public barChartOptionsMax: ChartOptions = {
+  // Gráfico de tiempos máximos
+  public barChartOptionsMax: ChartOptions = {
 
-      responsive: true,
-      // We use these empty structures as placeholders for dynamic theming.
-      scales: { xAxes: [{}], yAxes: [{
+    responsive: true,
+    // We use these empty structures as placeholders for dynamic theming.
+    scales: {
+      xAxes: [{}], yAxes: [{
         ticks: {
           beginAtZero: true,
           stepSize: 1,
@@ -153,29 +158,30 @@ export class ReportesCentroComponent implements OnInit {
           display: true,
           labelString: 'Días'
         }
-      }] },
-      plugins: {
-        datalabels: {
-          anchor: 'end',
-          align: 'end',
-        }
-      }      
-    };
-    public barChartLabelsMax: Label[];
-    public barChartTypeMax: ChartType = 'bar';
-    public barChartLegendMax = true;
-  
-    public barChartDataMax: ChartDataSets[] = [
-      { data: [65], label: 'Perros cachorros', backgroundColor: "red" },
-      { data: [28], label: 'Perros adultos', backgroundColor: "purple" },
-      { data: [30], label: 'Gatos cachorros', backgroundColor: "blue" },
-      { data: [27], label: 'Gatos adultos', backgroundColor: "#222222", }
-    ];
+      }]
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+      }
+    }
+  };
+  public barChartLabelsMax: Label[];
+  public barChartTypeMax: ChartType = 'bar';
+  public barChartLegendMax = true;
+
+  public barChartDataMax: ChartDataSets[] = [
+    { data: [65], label: 'Perros cachorros', backgroundColor: "red" },
+    { data: [28], label: 'Perros adultos', backgroundColor: "purple" },
+    { data: [30], label: 'Gatos cachorros', backgroundColor: "blue" },
+    { data: [27], label: 'Gatos adultos', backgroundColor: "#222222", }
+  ];
 
 
   constructor(private dateAdapter: DateAdapter<Date>, private reporteService: ReportesService, private authService: AuthService) {
     this.dateAdapter.setLocale('en-GB'); //dd/MM/yyyy
-   }
+  }
 
   ngOnInit(): void {
 
@@ -189,44 +195,44 @@ export class ReportesCentroComponent implements OnInit {
 
     //Datos para el grafico de mascotas adoptadas
     var jsonMascotas = [{
-      "tipoMascota":"0",
-      "perrosCachorrosAdoptadosPorSuProvisorio":4,
-      "perrosAdultosAdoptadosPorSuProvisorio":10,
-      "perrosCachorrosAdoptadosPorOtro":5,
-      "perrosAdultosAdoptadosPorOtro":5,
-      "totalPerrosAdoptados":24
-      },
-      {
-        "tipoMascota":"1",
-        "gatosCachorrosAdoptadosPorSuProvisorio":15,
-        "gatosAdultosAdoptadosPorSuProvisorio":12,
-        "gatosCachorrosAdoptadosPorOtro":8,
-        "gatosAdultosAdoptadosPorOtro":2,
-        "totalGatosAdoptados":37
-        },
-      ]
+      "tipoMascota": "0",
+      "perrosCachorrosAdoptadosPorSuProvisorio": 4,
+      "perrosAdultosAdoptadosPorSuProvisorio": 10,
+      "perrosCachorrosAdoptadosPorOtro": 5,
+      "perrosAdultosAdoptadosPorOtro": 5,
+      "totalPerrosAdoptados": 24
+    },
+    {
+      "tipoMascota": "1",
+      "gatosCachorrosAdoptadosPorSuProvisorio": 15,
+      "gatosAdultosAdoptadosPorSuProvisorio": 12,
+      "gatosCachorrosAdoptadosPorOtro": 8,
+      "gatosAdultosAdoptadosPorOtro": 2,
+      "totalGatosAdoptados": 37
+    },
+    ]
 
 
-      for (let x = 0; x < jsonMascotas.length; x++){
-        if (jsonMascotas[x].tipoMascota === "0"){
-          this.graficoPerro.perrosCachorrosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosCachorrosAdoptadosPorSuProvisorio;
-          this.graficoPerro.perrosAdultosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosAdultosAdoptadosPorSuProvisorio;
-          this.graficoPerro.perrosCachorrosAdoptadosPorOtro = jsonMascotas[x].perrosCachorrosAdoptadosPorOtro;
-          this.graficoPerro.perrosAdultosAdoptadosPorOtro = jsonMascotas[x].perrosAdultosAdoptadosPorOtro;
-          this.graficoPerro.totalPerrosAdoptados = jsonMascotas[x].totalPerrosAdoptados;
-        } else if (jsonMascotas[x].tipoMascota === "1"){
-          this.graficoGato.gatosCachorrosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosCachorrosAdoptadosPorSuProvisorio;
-          this.graficoGato.gatosAdultosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosAdultosAdoptadosPorSuProvisorio;
-          this.graficoGato.gatosCachorrosAdoptadosPorOtro = jsonMascotas[x].gatosCachorrosAdoptadosPorOtro;
-          this.graficoGato.gatosAdultosAdoptadosPorOtro = jsonMascotas[x].gatosAdultosAdoptadosPorOtro;
-          this.graficoGato.totalGatosAdoptados = jsonMascotas[x].totalGatosAdoptados;
-        }
+    for (let x = 0; x < jsonMascotas.length; x++) {
+      if (jsonMascotas[x].tipoMascota === "0") {
+        this.graficoPerro.perrosCachorrosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosCachorrosAdoptadosPorSuProvisorio;
+        this.graficoPerro.perrosAdultosAdoptadosPorSuProvisorio = jsonMascotas[x].perrosAdultosAdoptadosPorSuProvisorio;
+        this.graficoPerro.perrosCachorrosAdoptadosPorOtro = jsonMascotas[x].perrosCachorrosAdoptadosPorOtro;
+        this.graficoPerro.perrosAdultosAdoptadosPorOtro = jsonMascotas[x].perrosAdultosAdoptadosPorOtro;
+        this.graficoPerro.totalPerrosAdoptados = jsonMascotas[x].totalPerrosAdoptados;
+      } else if (jsonMascotas[x].tipoMascota === "1") {
+        this.graficoGato.gatosCachorrosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosCachorrosAdoptadosPorSuProvisorio;
+        this.graficoGato.gatosAdultosAdoptadosPorSuProvisorio = jsonMascotas[x].gatosAdultosAdoptadosPorSuProvisorio;
+        this.graficoGato.gatosCachorrosAdoptadosPorOtro = jsonMascotas[x].gatosCachorrosAdoptadosPorOtro;
+        this.graficoGato.gatosAdultosAdoptadosPorOtro = jsonMascotas[x].gatosAdultosAdoptadosPorOtro;
+        this.graficoGato.totalGatosAdoptados = jsonMascotas[x].totalGatosAdoptados;
       }
+    }
 
-    
+
   }
 
-  async generarReportes(desde, hasta){
+  async generarReportes(desde, hasta) {
     this.reportesFlag = true;
     var desdeBack = this.convertEnviarBack(desde);
     var hastaBack = this.convertEnviarBack(hasta);
@@ -244,8 +250,8 @@ export class ReportesCentroComponent implements OnInit {
       this.perrosTotal = this.reporteProvisorio[0].totalPerrosAdoptados;
       this.gatosTotal = this.reporteProvisorio[1].totalGatosAdoptados;
       this.cargarReporteProvisorio();
-      console.log('perros: '+ this.reporteProvisorio[0].perrosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosCachorrosAdoptadosPorOtro, this.reporteProvisorio[0].perrosAdultosAdoptadosPorOtro)
-      console.log('gatos: '+this.reporteProvisorio[1].gatosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosCachorrosAdoptadosPorOtro, this.reporteProvisorio[1].gatosAdultosAdoptadosPorOtro)
+      console.log('perros: ' + this.reporteProvisorio[0].perrosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosCachorrosAdoptadosPorOtro, this.reporteProvisorio[0].perrosAdultosAdoptadosPorOtro)
+      console.log('gatos: ' + this.reporteProvisorio[1].gatosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosCachorrosAdoptadosPorOtro, this.reporteProvisorio[1].gatosAdultosAdoptadosPorOtro)
     })
     err => {
       console.log('ERROR...')
@@ -261,131 +267,172 @@ export class ReportesCentroComponent implements OnInit {
     return (date.getFullYear().toString() + mnth + day)
   }
 
-  reporteTiempoAdopcion(jsonData){
+  reporteTiempoAdopcion(jsonData) {
     this.flagNoData = 0;
     var jsonTiempos = jsonData
-        // FUNCION -> que le mando el json.
-      
-        for (let x = 0; x < jsonTiempos.length; x++){
-          if (jsonTiempos[x].categoria === "perroCachorro"){
-            this.minimoPerroCachorro = jsonTiempos[x].minimo;
-            this.promedioPerroCachorro = jsonTiempos[x].promedio;
-            this.maximoPerroCachorro = jsonTiempos[x].maximo;
-            this.totalperroscachorro = jsonTiempos[x].total;
-          } else if (jsonTiempos[x].categoria === "perroAdulto"){
-            this.minimoPerroAdulto = jsonTiempos[x].minimo;
-            this.promedioPerroAdulto = jsonTiempos[x].promedio;
-            this.maximoPerroAdulto = jsonTiempos[x].maximo;
-            this.totalperrosadulto = jsonTiempos[x].total;
-          } else if (jsonTiempos[x].categoria === "gatoCachorro") {
-            this.minimoGatoCachorro = jsonTiempos[x].minimo;
-            this.promedioGatoCachorro = jsonTiempos[x].promedio;
-            this.maximoGatoCachorro = jsonTiempos[x].maximo;
-            this.totalgatoschorro = jsonTiempos[x].total;
-          } else if (jsonTiempos[x].categoria === "gatoAdulto"){
-            this.minimoGatoAdulto = jsonTiempos[x].minimo;
-            this.promedioGatoAdulto = jsonTiempos[x].promedio;
-            this.maximoGatoAdulto = jsonTiempos[x].maximo;
-            this.totalgatosadulto = jsonTiempos[x].total;
-          }
-        }
-    
-        this.minimos = [
-          { data: [this.minimoPerroCachorro], label: "Perros cachorros", backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1"},
-          { data: [this.minimoPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089"},
-          { data: [this.minimoGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC"},
-          { data: [this.minimoGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88"}
-        ];
-    
-        var minimosPositivos = [];
-        for (let x = 0; x < this.minimos.length; x++){
-            minimosPositivos.push(this.minimos[x]);
-          
-        }
-        this.barChartDataMin = minimosPositivos;
-    
-        this.promedios = [
-          { data: [this.promedioPerroCachorro], label: 'Perros cachorros', backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1"},
-          { data: [this.promedioPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089"},
-          { data: [this.promedioGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC"},
-          { data: [this.promedioGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88"}
-        ];
-    
-        var promediosPositivos = [];
-        for (let x = 0; x < this.promedios.length; x++){
-          if (this.promedios[x].data != 0){
-            promediosPositivos.push(this.promedios[x]);
-          }
-        }
-        this.barChartDataProm = promediosPositivos;
+    // FUNCION -> que le mando el json.
 
-        if (this.barChartDataProm.length === 0){
-          this.flagNoData = 1;
-        }
-    
-        this.maximos = [
-          { data: [this.maximoPerroCachorro], label: 'Perros cachorros', backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1"},
-          { data: [this.maximoPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089"},
-          { data: [this.maximoGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC"},
-          { data: [this.maximoGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88"}
-        ];
-    
-        var maximosPositivos = [];
-        for (let x = 0; x < this.maximos.length; x++){
-          if (this.maximos[x].data != 0){
-            maximosPositivos.push(this.maximos[x]);
-          }
-        }
+    for (let x = 0; x < jsonTiempos.length; x++) {
+      if (jsonTiempos[x].categoria === "perroCachorro") {
+        this.minimoPerroCachorro = jsonTiempos[x].minimo;
+        this.promedioPerroCachorro = jsonTiempos[x].promedio;
+        this.maximoPerroCachorro = jsonTiempos[x].maximo;
+        this.totalperroscachorro = jsonTiempos[x].total;
+      } else if (jsonTiempos[x].categoria === "perroAdulto") {
+        this.minimoPerroAdulto = jsonTiempos[x].minimo;
+        this.promedioPerroAdulto = jsonTiempos[x].promedio;
+        this.maximoPerroAdulto = jsonTiempos[x].maximo;
+        this.totalperrosadulto = jsonTiempos[x].total;
+      } else if (jsonTiempos[x].categoria === "gatoCachorro") {
+        this.minimoGatoCachorro = jsonTiempos[x].minimo;
+        this.promedioGatoCachorro = jsonTiempos[x].promedio;
+        this.maximoGatoCachorro = jsonTiempos[x].maximo;
+        this.totalgatoschorro = jsonTiempos[x].total;
+      } else if (jsonTiempos[x].categoria === "gatoAdulto") {
+        this.minimoGatoAdulto = jsonTiempos[x].minimo;
+        this.promedioGatoAdulto = jsonTiempos[x].promedio;
+        this.maximoGatoAdulto = jsonTiempos[x].maximo;
+        this.totalgatosadulto = jsonTiempos[x].total;
+      }
+    }
 
-        console.log("MAXIMOS", maximosPositivos);
-        this.barChartDataMax = maximosPositivos;
-    
+    this.minimos = [
+      { data: [this.minimoPerroCachorro], label: "Perros cachorros", backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1" },
+      { data: [this.minimoPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089" },
+      { data: [this.minimoGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC" },
+      { data: [this.minimoGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88" }
+    ];
+
+    var minimosPositivos = [];
+    for (let x = 0; x < this.minimos.length; x++) {
+      minimosPositivos.push(this.minimos[x]);
+
+    }
+    this.barChartDataMin = minimosPositivos;
+
+    this.promedios = [
+      { data: [this.promedioPerroCachorro], label: 'Perros cachorros', backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1" },
+      { data: [this.promedioPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089" },
+      { data: [this.promedioGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC" },
+      { data: [this.promedioGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88" }
+    ];
+
+    var promediosPositivos = [];
+    for (let x = 0; x < this.promedios.length; x++) {
+      if (this.promedios[x].data != 0) {
+        promediosPositivos.push(this.promedios[x]);
+      }
+    }
+    this.barChartDataProm = promediosPositivos;
+
+    if (this.barChartDataProm.length === 0) {
+      this.flagNoData = 1;
+    }
+
+    this.maximos = [
+      { data: [this.maximoPerroCachorro], label: 'Perros cachorros', backgroundColor: "#C50FA1", hoverBackgroundColor: "#C50FA1" },
+      { data: [this.maximoPerroAdulto], label: 'Perros adultos', backgroundColor: "#990089", hoverBackgroundColor: "#990089" },
+      { data: [this.maximoGatoCachorro], label: 'Gatos cachorros', backgroundColor: "#D996CC", hoverBackgroundColor: "#D996CC" },
+      { data: [this.maximoGatoAdulto], label: 'Gatos adultos', backgroundColor: "#CA6B88", hoverBackgroundColor: "#CA6B88" }
+    ];
+
+    var maximosPositivos = [];
+    for (let x = 0; x < this.maximos.length; x++) {
+      if (this.maximos[x].data != 0) {
+        maximosPositivos.push(this.maximos[x]);
+      }
+    }
+
+    console.log("MAXIMOS", maximosPositivos);
+    this.barChartDataMax = maximosPositivos;
+
   }
 
-  cargarReporteProvisorio(){
+  cargarReporteProvisorio() {
     // Gráfico de Perros que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
 
-  this.pieChartPerrosAdoptados = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    plugins: {
-      datalabels: {
-        color: "black",
-        anchor: 'end',
-        align: 'end',
+    this.pieChartPerrosAdoptados = {
+      responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      plugins: {
+        datalabels: {
+          color: "black",
+          anchor: 'end',
+          align: 'end',
+        }
       }
-    }
-  };
+    };
 
-  this.barChartLabelsPerro  = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otra persona', 'Adultos adoptados por otra persona'];
-  this.barChartPerros = 'doughnut';
-  this.barChartLegendPerro = false;
-  this.barChartDataPerro = [
-    { data: [this.reporteProvisorio[0].perrosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosCachorrosAdoptadosPorOtro, this.reporteProvisorio[0].perrosAdultosAdoptadosPorOtro] },
-  ];
+    this.barChartLabelsPerro = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otra persona', 'Adultos adoptados por otra persona'];
+    this.barChartPerros = 'doughnut';
+    this.barChartLegendPerro = false;
+    this.barChartDataPerro = [
+      { data: [this.reporteProvisorio[0].perrosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[0].perrosCachorrosAdoptadosPorOtro, this.reporteProvisorio[0].perrosAdultosAdoptadosPorOtro],
+        backgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#D996CC",
+        ],
+        hoverBackgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#D996CC",
+        ] },
+    ];
 
 
 
-  // Gráfico de Gatos que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
-  this.pieChartGatosAdoptados = {
-    responsive: true,
-    // We use these empty structures as placeholders for dynamic theming.
-    plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
+    // Gráfico de Gatos que habiendo estado en provisorio fueron adoptados por la misma persona que les dió provisorio alguna vez
+    this.pieChartGatosAdoptados = {
+      responsive: true,
+      // We use these empty structures as placeholders for dynamic theming.
+      plugins: {
+        datalabels: {
+          anchor: 'end',
+          align: 'end',
+        }
       }
-    }
-  };
+    };
 
-  this.barChartLabelsGato = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otra persona', 'Adultos adoptados por otra persona'];
-  this.barChartGatos = 'doughnut';
-  this.barChartLegendGato = false;
-  this.barChartDataGato = [
-    { data: [this.reporteProvisorio[1].gatosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosCachorrosAdoptadosPorOtro, this.reporteProvisorio[1].gatosAdultosAdoptadosPorOtro] },
-  ];
+    this.barChartLabelsGato = ['Cachorros adoptados por su provisorio', 'Adultos adoptados por su provisorio', 'Cachorros adoptados por otra persona', 'Adultos adoptados por otra persona'];
+    this.barChartGatos = 'doughnut';
+    this.barChartLegendGato = false;
+    this.barChartDataGato = [
+      {
+        data: [this.reporteProvisorio[1].gatosCachorrosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosAdultosAdoptadosPorSuProvisorio, this.reporteProvisorio[1].gatosCachorrosAdoptadosPorOtro, this.reporteProvisorio[1].gatosAdultosAdoptadosPorOtro],
+        backgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#D996CC",
+        ],
+        hoverBackgroundColor: [
+          "#FF6384",
+          "#36A2EB",
+          "#FFCE56",
+          "#D996CC",
+        ]
+      },
+
+    ];
   }
 
+  /*
+  {
+            data: [300, 50, 100],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }*/
 
   // events
   public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
@@ -396,11 +443,11 @@ export class ReportesCentroComponent implements OnInit {
     console.log(event, active);
   }
 
-  mostrarReportePerro(){
+  mostrarReportePerro() {
     return (this.reporteProvisorio[0].totalPerrosAdoptados > 0)
   }
-  
-  mostrarReporteGato(){
+
+  mostrarReporteGato() {
     return (this.reporteProvisorio[1].totalGatosAdoptados > 0)
   }
 
